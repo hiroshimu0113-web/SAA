@@ -39,3 +39,7 @@ python materials/scripts/render-audio-page.py
 ## 検証
 
 生成スクリプトは音声の非無音・有限値と295〜305秒の長さを確認します。`ffprobe`でMP3形式・長さ、ffmpegでデコード・音量を検査します。ブラウザー検証はビルド後、`materials/`で `CHROME_PATH=/usr/bin/chromium node scripts/audio-browser-check.mjs` を実行します。機械的な再生検証と、人が聞いた際の自然さの評価は別です。声質・発音全体の聴取評価とiPhone実機確認はユーザーフィードバック待ちです。
+
+## 声の比較版
+
+前回の声が高く鋭いという試聴結果に基づき、[比較版と再生成手順](COMPARISON.md)を追加。公開ページは `public/audio/comparison.html`。声の選択後に5分版へ反映する。

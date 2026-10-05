@@ -71,3 +71,11 @@
 - 検証：17テスト成功、グラフ生成と保存ファイルの一致確認、型検査・ビルド成功。モバイル相当の検索、前提への移動、回答基準表示、キーボード操作、12章の表示、320px幅を確認。
 - 次の制作は `knowledge/EXPANSION_PLAN.md` の順：14単位の独立レビュー → 条件を変えた転移問題 → 先行2章の残り → VPC等。型の完成を全教材の完成としない。
 - 公開URL：https://hiroshimu0113-web.github.io/SAA/knowledge/index.html 。`7cbf350`をmainへ反映し、Actions実行37327612847で17テスト・knowledge:check・ビルド・配信成功。公開HTML・グラフJSON・Service Worker・既存音声をHTTPSで取得し、ローカル成果物とのSHA256一致を確認。
+
+## A-P2 声質改善の比較版（2026-10-06 JST）
+
+- 状態：比較音声作成・ローカル検証完了、公開確認と本人の試聴待ち。AivisSpeechは接続制限でブロック。
+- ユーザー試聴で前回のMei音声が高く鋭いとの評価。VOICEVOX 0.25.2で青山龍星ノーマル／しっとり、波音リツノーマルを合成。従来音声の抜粋を含む4種類を同じ台本・同程度の音量で比較。
+- 成果物：public/audio/comparison.html、compare-*.mp3、comparison.json。約29〜33秒。再生成と調査結果はaudio/COMPARISON.md、同梱規約はVOICEVOX_LICENSE.md。
+- 検証：MP3デコード・長さ・音量成功。17テスト、knowledge:check、型検査とビルド成功。Chromiumモバイル相当で4音声の再生、同時再生防止、320px幅、台本、オフライン・Range応答成功。既存5分版の再生試験も成功。新しい音声の聴取品質は未評価。
+- 次：公開URL確認→本人の声の選択→5分版へ反映。AivisSpeechモデル取得先と規約参照先の追加設定案を保存済み。保存と環境への適用・公開は別。

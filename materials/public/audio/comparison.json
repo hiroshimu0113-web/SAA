@@ -1,0 +1,44 @@
+{
+  "engine": "VOICEVOX Engine 0.25.2",
+  "text": "一つ目のサービスは、EC2です。クラウド上で使える仮想サーバーで、写真を加工するプログラムを動かします。工房でいえば、作業する人と道具を置く作業場です。ただし、作業場を用意しただけでは、完成品の保管方法は決まりません。特に、インスタンスストアという一時的な保存領域は、サーバーの停止や終了などでデータを失います。失いたくない完成写真を、そこだけに置かないことが大切です。",
+  "settings": {
+    "speedScale": 0.95,
+    "intonationScale": 0.9,
+    "pitchScale": 0,
+    "loudness_target_lufs": -18
+  },
+  "samples": [
+    {
+      "name": "aoyama-normal",
+      "label": "青山龍星・ノーマル",
+      "speaker": 13,
+      "file": "compare-aoyama-normal.mp3",
+      "duration_seconds": 32.0,
+      "sha256": "931756814441efd3e8e8063a3ab0d240cfb78610f3d43b5bd0d3dfd834ff5015"
+    },
+    {
+      "name": "aoyama-soft",
+      "label": "青山龍星・しっとり",
+      "speaker": 84,
+      "file": "compare-aoyama-soft.mp3",
+      "duration_seconds": 33.28,
+      "sha256": "ef565b92e4eca10d1e5a0b82ace8580bb221571506dc66d4f5b66a940c859609"
+    },
+    {
+      "name": "ritsu-normal",
+      "label": "波音リツ・ノーマル",
+      "speaker": 9,
+      "file": "compare-ritsu-normal.mp3",
+      "duration_seconds": 32.731429,
+      "sha256": "cddaf6b7401d19f0df154db6a4a020497fe8757cd3bc53bb3738bf08dccd068d"
+    },
+    {
+      "name": "mei-original",
+      "label": "前回の声（Mei）",
+      "speaker": null,
+      "file": "compare-mei-original.mp3",
+      "duration_seconds": 29.283265,
+      "sha256": "f3cad4d08dc2c6bef1efb1d7378b4d15e23f41c8022fa5e402970051d120d03d"
+    }
+  ]
+}
