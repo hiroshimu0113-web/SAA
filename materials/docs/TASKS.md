@@ -509,5 +509,5 @@
 - 前提: G-P1、GitHub Pagesの有効化。ユーザーの公開許可は取得済み。
 - 成果物: .github/workflows/deploy.yml、公開URL、IPHONE_CHECK.md。
 - 完了条件: Pages配信成功、公開URL確認、iPhoneで全3ミッションと途中再開。
-- 検証結果: Pages未作成。連携APIでの設定が403。ユーザーへSource=GitHub Actionsの設定手順を案内。
+- 検証結果: mainへfd57057をpush済み。Actions実行37318975242でもインストール・13テスト・ビルド成功。configure-pagesはPages未作成のNot Foundで失敗、deployは未実行。連携APIでの設定は403。ユーザーへSource=GitHub Actionsの設定手順を案内。
 - 引き継ぎ: 設定完了後にワークフローと公開URLを再確認。実機未確認のままiPhone受入完了にしない。

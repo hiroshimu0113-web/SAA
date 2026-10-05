@@ -28,11 +28,11 @@
 
 ## 公開と実機の状態
 
-GitHub APIでSAAが非公開、Pages未作成であることを確認。Pages参照・作成APIは `Resource not accessible by integration`（403）。ユーザーへSettings → Pages → SourceをGitHub Actionsにする手順を案内済み。公開成功と実際のiPhone受入は未確認。無料でPagesを利用できない場合でも、有料契約や元リポジトリの公開変更を勝手に行わない。
+GitHub APIでSAAが非公開、Pages未作成であることを確認。Pages参照・作成APIは `Resource not accessible by integration`（403）。ユーザーへSettings → Pages → SourceをGitHub Actionsにする手順を案内済み。実装は `fd57057` としてmainへpush済み。[GitHub Actions実行37318975242](https://github.com/hiroshimu0113-web/SAA/actions/runs/37318975242)でもインストール・13テスト・ビルド成功。`actions/configure-pages` がPages未作成のNot Foundで失敗し、deployは未実行。公開成功と実際のiPhone受入は未確認。無料でPagesを利用できない場合でも、有料契約や元リポジトリの公開変更を勝手に行わない。
 
 ## 残作業と次の着手点
 
-1. Pagesの設定後、配信ワークフローの実行結果と公開HTTPS URLのアプリを確認。
+1. PagesのSourceをGitHub Actionsに設定後、失敗した上記実行の「Re-run all jobs」、またはActionsの「Deploy SAA learning app」→「Run workflow」で再実行。配信結果と公開HTTPS URLのアプリを確認。
 2. iPhoneのSafari／ホーム画面でゲーム全3ミッションと途中再開を確認。[IPHONE_CHECK.md](IPHONE_CHECK.md)参照。
 3. 実機の文字量・操作感に基づき試作を改善。
 4. 全教材の監査、模試、本格ゲームは別途継続。試作完成をG1〜G5全体の完成としない。
