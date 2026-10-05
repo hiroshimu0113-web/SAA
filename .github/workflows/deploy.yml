@@ -25,8 +25,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-          cache-dependency-path: materials/pnpm-lock.yaml
+      # Resolve the store inside materials so pnpm-workspace.yaml is respected.
+      - name: Locate pnpm store
+        id: pnpm-store
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: ${{ runner.os }}-${{ runner.arch }}-pnpm-11-${{ hashFiles('materials/pnpm-lock.yaml', 'materials/pnpm-workspace.yaml') }}
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm build

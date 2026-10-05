@@ -3,7 +3,8 @@ import { preview } from 'vite';
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
 
-const server = await preview({ base: '/SAA/', preview: { host: '127.0.0.1', port: 4187, strictPort: true } });
+const base = process.env.APP_URL || 'http://127.0.0.1:4187/SAA/';
+const server = process.env.APP_URL ? null : await preview({ base: '/SAA/', preview: { host: '127.0.0.1', port: 4187, strictPort: true } });
 let browser;
 try {
   browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined });
@@ -11,7 +12,7 @@ try {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('http://127.0.0.1:4187/SAA/');
+  await page.goto(base);
   const nav = name => page.getByRole('navigation').getByRole('button', { name, exact: true }).click();
   const openGame = () => page.getByRole('button', { name: '設計クエストを遊ぶ →', exact: true }).click();
   const choose = async name => page.getByRole('button', { name, exact: false }).click();
@@ -66,5 +67,5 @@ try {
   console.log('PASS: /SAA/ subpath; mobile card selection; failed design/retry; all 3 missions; stars; offline reload/resume; completion persistence; lesson link; reset/cancel; 320px layout. Chromium emulation, not physical iPhone.');
 } finally {
   await browser?.close();
-  await new Promise(resolve => server.httpServer.close(resolve));
+  if (server) await new Promise(resolve => server.httpServer.close(resolve));
 }
