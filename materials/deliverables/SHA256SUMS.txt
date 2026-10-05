@@ -1,0 +1,4 @@
+f71aa3be03fc59d5c02aee98719e02953bf2dd66c6ed73e05abea5b0ddd2a1da  SAA-starter.epub
+7abb0232c8a04d263a64d1d82d2a27a63589bf4cfc8a683e17f6c1136a883091  SAA-starter.html
+96c4d3b0ccfde2464c2d500fa303c08b7d52afd6edb562dfb1e63b29f51710e9  SAA-starter-app.zip
+a93f8f9c13e2afd725d932c3eb380aa2fb54b1b51bd5453d77f22bcdd551771e  SAA-project-source.zip

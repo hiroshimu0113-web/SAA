@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "questionId": "q001",
+      "selected": [
+        "a"
+      ],
+      "correct": false,
+      "unsure": true,
+      "at": "2026-10-04T19:18:59.252Z"
+    }
+  ],
+  "bookmarks": [
+    "ch01-l01"
+  ],
+  "readLessons": [
+    "ch01-l01"
+  ],
+  "exam": null,
+  "game": null
+}
