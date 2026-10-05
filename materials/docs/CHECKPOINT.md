@@ -94,6 +94,6 @@
 
 - 本人の5分版評価：波音リツの高さはよいが、年齢感とこもりが気になる。次は高音化よりモデル固有の声質を比較する。
 - 成果物：public/audio/female-comparison.html、female-comparison.json、compare-hau/himari/sora.mp3。雨晴はう33.57秒、冥鳴ひまり32.73秒、九州そら52.17秒。比較用に波音リツ32.73秒も掲載。同じ台本と合成設定（速さ0.95・抑揚0.9・音高0）、音量のみ正規化。各モデルの自然な話速・高さは異なる。
-- 検証：3音声の全体デコード成功、-18.44〜-18.46 LUFS、ピーク-2.43dBTP以下。17テスト、knowledge:check、型検査・ビルド成功。聴取評価は本人待ち。
+- 検証：3音声の全体デコード成功、-18.44〜-18.46 LUFS、ピーク-2.43dBTP以下。17テスト、knowledge:check、型検査・ビルド成功。Chromiumモバイル相当で4音声の再生・同時再生防止・320px・台本・オフライン・Range応答成功。聴取評価は本人待ち。
 - 同梱利用条件を確認・転記し、クレジットと規約リンク付き。有料APIなし。5分版は選択まで波音リツを保持。
-- 再生成：scripts/generate-female-comparison.py。次：比較試聴で声を選択→5分版反映。公開確認は追記。
+- 再生成：scripts/generate-female-comparison.py。次：比較試聴で声を選択→5分版反映。公開確認済み：`a524b82`をmainへ反映。Actions実行37337563651成功。https://hiroshimu0113-web.github.io/SAA/audio/female-comparison.html 。公開7ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。
