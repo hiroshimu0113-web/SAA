@@ -43,3 +43,11 @@ APIはローカル専用。公開ページは生成済みMP3を配信するた�
 ## 試聴結果
 
 ユーザーは3番の波音リツ・ノーマルが「一番マシ」「もう少し若い感じがあるといいが妥協点」と回答。暫定採用であり、声質に満足済みとは扱わない。5分版は同じpitchScale 0で制作し、若さの改善希望は次の声選びに残す。
+
+## 追加の女性音声候補
+
+5分版を聞いた本人は、波音リツの高さはよいが、年齢感とこもりが気になると評価。雨晴はう(style 10)、冥鳴ひまり(14)、九州そら(16)のノーマルを追加比較。若さ・明瞭さは候補選定の意図であり、聴取確認済みの品質ではない。
+
+`public/audio/female-comparison.html` に同じEC2の説明を収録し、波音リツの既存抜粋も併記。speedScale 0.95、intonationScale 0.9、pitchScale 0、2パス音量正規化。モデル固有の高さは異なる。追加の音程調整・EQ加工なし。5分版は選択待ちで波音リツを保持。
+
+再生成：ローカルVOICEVOX起動後に `python scripts/generate-female-comparison.py`。ビルド後の検証：`FEMALE_COMPARISON=1 CHROME_PATH=/usr/bin/chromium node scripts/voice-comparison-browser-check.mjs`。モデル同梱の規約を確認・転記し、各プレーヤーにクレジットと詳細規約リンクを記載。有料APIなし。

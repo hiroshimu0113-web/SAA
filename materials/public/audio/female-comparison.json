@@ -1,0 +1,44 @@
+{
+  "engine": "VOICEVOX Engine 0.25.2",
+  "text": "一つ目のサービスは、EC2です。クラウド上で使える仮想サーバーで、写真を加工するプログラムを動かします。工房でいえば、作業する人と道具を置く作業場です。ただし、作業場を用意しただけでは、完成品の保管方法は決まりません。特に、インスタンスストアという一時的な保存領域は、サーバーの停止や終了などでデータを失います。失いたくない完成写真を、そこだけに置かないことが大切です。",
+  "settings": {
+    "speedScale": 0.95,
+    "intonationScale": 0.9,
+    "pitchScale": 0
+  },
+  "samples": [
+    {
+      "name": "雨晴はう",
+      "speaker": 10,
+      "file": "compare-hau.mp3",
+      "duration_seconds": 33.567347,
+      "sha256": "17b9675ef49195d6138d1b8c7aff0e7699ff7ef89c16d63b1027747d6f94f8cc",
+      "terms": "https://amehau.com/?page_id=225"
+    },
+    {
+      "name": "冥鳴ひまり",
+      "speaker": 14,
+      "file": "compare-himari.mp3",
+      "duration_seconds": 32.731429,
+      "sha256": "94e5f22c078e8ffd2c42ba6fab62d0e7a4f5bbf6f39877fea7c5d9c9605776a2",
+      "terms": "https://meimeihimari.wixsite.com/himari/terms-of-use"
+    },
+    {
+      "name": "九州そら",
+      "speaker": 16,
+      "file": "compare-sora.mp3",
+      "duration_seconds": 52.166531,
+      "sha256": "3cbc249e5dbe4a500a4d8b8b7d2098a397a3ee933418cdbbacff0d4e2ef07fd5",
+      "terms": "https://zunko.jp/con_ongen_kiyaku.html"
+    },
+    {
+      "name": "波音リツ（現在の声・比較用）",
+      "label": "波音リツ・ノーマル",
+      "speaker": 9,
+      "file": "compare-ritsu-normal.mp3",
+      "duration_seconds": 32.731429,
+      "sha256": "cddaf6b7401d19f0df154db6a4a020497fe8757cd3bc53bb3738bf08dccd068d",
+      "terms": "https://canon-voice.com/kiyaku.html"
+    }
+  ]
+}

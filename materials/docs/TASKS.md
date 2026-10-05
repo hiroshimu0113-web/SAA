@@ -549,3 +549,11 @@
 - 成果物：public/audio/photo-studio-ritsu-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。旧音声と旧時刻情報sample-mei.jsonは保持。生成手順はaudio/README.md。
 - 検証：300.15秒、-18.45 LUFS、-2.40 dBTP、全体デコード成功。17テスト・knowledge:check・型検査とビルド成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。比較版の再生試験も成功。`3982a31`をmainに反映し、Actions実行37336673197で配信成功。公開プレーヤー・新音声・時刻情報・比較ページ・Service Workerの5ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。公開URL：https://hiroshimu0113-web.github.io/SAA/audio/index.html 。
 - 次：波音リツ5分版の試聴評価。若い声への希望は将来の候補比較に残す。30分版は未制作。
+
+## A-P4 若めの女性音声候補
+
+- 本人の5分版評価：波音リツの高さはよいが、年齢感とこもりが気になる。次は高音化よりモデル固有の声質を比較する。
+- 成果物：public/audio/female-comparison.html、female-comparison.json、compare-hau/himari/sora.mp3。雨晴はう33.57秒、冥鳴ひまり32.73秒、九州そら52.17秒。比較用に波音リツ32.73秒も掲載。同じ台本と合成設定（速さ0.95・抑揚0.9・音高0）、音量のみ正規化。各モデルの自然な話速・高さは異なる。
+- 検証：3音声の全体デコード成功、-18.44〜-18.46 LUFS、ピーク-2.43dBTP以下。17テスト、knowledge:check、型検査・ビルド成功。聴取評価は本人待ち。
+- 同梱利用条件を確認・転記し、クレジットと規約リンク付き。有料APIなし。5分版は選択まで波音リツを保持。
+- 再生成：scripts/generate-female-comparison.py。次：比較試聴で声を選択→5分版反映。公開確認は追記。

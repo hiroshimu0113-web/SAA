@@ -30,7 +30,7 @@ VOICEVOX Engine 0.25.2の同梱資料から転記。2026-10-06 JST確認。詳�
 「VOICEVOX:青山龍星」とクレジットを記載すれば、商用・非商用で利用可能です。
 ただし企業が携わる形で利用する場合は、「ななはぴ(https://v.seventhh.com/contact/)」に対し事前確認を取る必要があります。
 
-利用規約の詳細は以下をご確認ください。  
+利用規約の詳細は以下をご確認ください。
 https://www.virvoxproject.com/voicevoxの利用規約
 
 
@@ -39,5 +39,29 @@ https://www.virvoxproject.com/voicevoxの利用規約
 波音リツの音声ライブラリを用いて生成した音声は、
 「VOICEVOX:波音リツ」とクレジットを記載すれば、商用・非商用で利用可能です。
 
-利用規約の詳細は以下をご確認ください。  
+利用規約の詳細は以下をご確認ください。
 http://canon-voice.com/kiyaku.html
+
+## 雨晴はう
+
+雨晴はうの音声ライブラリを用いて生成した音声は、
+「VOICEVOX:雨晴はう」とクレジットを記載すれば、商用・非商用で利用可能です。
+
+利用規約の詳細は以下をご確認ください。
+https://amehau.com/?page_id=225
+
+## 冥鳴ひまり
+
+冥鳴ひまりの音声ライブラリを用いて生成した音声は、
+「VOICEVOX:冥鳴ひまり」とクレジットを記載すれば、商用・非商用で利用可能です。
+
+利用規約の詳細は以下をご確認ください。
+https://meimeihimari.wixsite.com/himari/terms-of-use
+
+## 九州そら
+
+九州そらの音声ライブラリを用いて生成した音声は、
+「VOICEVOX:九州そら」とクレジットを記載すれば、商用・非商用で利用可能です。
+
+利用規約の詳細は以下をご確認ください。
+https://zunko.jp/con_ongen_kiyaku.html
