@@ -1,36 +1,42 @@
-# SAAへの道
+# SAAへの道：教材・アプリ
 
-iPhoneで学ぶ日本語のAWS SAA-C03学習PWA。教材と履歴を端末に保存し、オフラインで読書・演習・復習できます。
+このディレクトリが開発の作業場所です。[リポジトリ全体の案内](../README.md)から学習・開発・配信の入口へ進めます。
 
-**現在は先行学習版（2章6レッスン・20問・用語21件）です。** 12章200問の原稿は制作途中として保存し、内容監査が未完了の部分はアプリに公開していません。模擬試験とゲームは未完成です。
+- 先行教材：2章6レッスン・20問・用語21件。
+- 設計クエスト：8枚のAWSカードと3ミッションの試作。ホームの「設計クエストを遊ぶ」から開始。
+- 監査待ち：12章36レッスン・通常200問の全体原稿。模試130問は未作成。
 
-すぐに読むには `deliverables/SAA-starter.epub` または `SAA-starter.html`。Windowsで採点付きアプリを使うには `Start-Learning.cmd` を起動し、表示されたURLを開いてください。詳しくは [利用手順](deliverables/使い方.md) を参照してください。
+## 学習と進捗
+
+[学習ガイド](docs/STUDY_GUIDE.md) / [学習記録](docs/STUDY_LOG.md) / [ゲームの遊び方](docs/GAME_PROTOTYPE.md) / [現在の状況](docs/CHECKPOINT.md)
+
+`deliverables/` のEPUB・HTML・ZIPは移行時点の先行版で、新しいゲームは含みません。電子書籍には自動採点と回答履歴がありません。過去の配布手順は [使い方](deliverables/使い方.md)、復元した資料の説明は [移行記録](docs/MIGRATION.md)にあります。
 
 ## 開発
 
-Node.js 22以降、pnpm 11を使用します。
+Node.js 24、pnpm 11.19.0で検証済み。リポジトリのルートから `cd materials` して実行します。
 
 ```sh
-pnpm install
-pnpm dev
+pnpm install --frozen-lockfile
 pnpm test
 pnpm build
-pnpm preview
+pnpm dev
 ```
 
-開発サーバーではService Workerを登録しません。オフライン検証にはビルド後のプレビューを使います。`dist/` が公開成果物です。
+ビルドしたPWAの確認は `pnpm start` または `pnpm preview`。開発サーバーはService Workerを登録しません。`Start-Learning.cmd` はWindows用で、Node.jsと作成済みの `dist/` が必要です。ソースから使う場合は先に上記のインストール・ビルドを行ってください。
 
-## iPhoneへの導入
+```sh
+CHROME_PATH=/usr/bin/chromium node scripts/game-browser-check.mjs
+CHROME_PATH=/usr/bin/chromium node scripts/browser-check.mjs
+CHROME_PATH=/usr/bin/chromium node scripts/update-check.mjs
+```
 
-1. HTTPSの公開URLをSafariで開きます。
-2. 共有メニューから「ホーム画面に追加」を選びます。
-3. 追加したアイコンからオンラインで開き、設定でオフライン保存を実行します。
-4. 準備完了後、機内モードでアプリを終了・再起動して教材と問題を開きます。
+Chromeの場所は環境に合わせます。既存のブラウザーテストは `artifacts/` の画像・サンプルを上書きするため、移行時のファイルを保存してから実行してください。ビルドとService Worker試験は同時に実行しません。
 
-サイトデータ削除やストレージ不足で端末内の保存内容を失うことがあります。設定から学習履歴のバックアップを「ファイル」に保存してください。出典リンクを開くには通信が必要ですが、解説本文は保存されています。
+## iPhoneと公開
 
-## GitHub Pages
+GitHub Pagesには、リポジトリルートの `.github/workflows/deploy.yml` を使用します。`materials/.github/` は元ZIPから復元した旧配置の参考用で、GitHub Actionsから実行されません。
 
-ワークフローを同梱しています。公開リポジトリの `main` にpushし、Settings → Pages → SourceをGitHub Actionsにすると配信できます。公開先アカウントとURLはユーザー環境に依存するため、未配信の状態を公開済みとは扱いません。進捗と検証結果は [タスク台帳](docs/TASKS.md) を参照してください。
+PagesのHTTPS URLをSafariで開き、共有 →「ホーム画面に追加」。オンラインでホーム画面から起動して「設定」で教材を保存した後、機内モードで再起動します。[実機チェック](docs/IPHONE_CHECK.md)を参照してください。端末のサイトデータ削除に備え、「設定」でJSONバックアップを保存します。
 
-教材・問題は独自作成であり、AWS公式問題ではありません。仕様の根拠と確認日はアプリの各教材に表示します。
+教材・問題は独自作成であり、AWS公式問題ではありません。ゲームの設計ポイントは実料金ではありません。
