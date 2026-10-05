@@ -70,4 +70,4 @@
 - 14単位の監査状態はすべてdraft。本人の理解度はunassessed。既存教材の公開状態とは分離。学習者の実績は作成していない。
 - 検証：17テスト成功、グラフ生成と保存ファイルの一致確認、型検査・ビルド成功。モバイル相当の検索、前提への移動、回答基準表示、キーボード操作、12章の表示、320px幅を確認。
 - 次の制作は `knowledge/EXPANSION_PLAN.md` の順：14単位の独立レビュー → 条件を変えた転移問題 → 先行2章の残り → VPC等。型の完成を全教材の完成としない。
-- 公開の結果は追記する。
+- 公開URL：https://hiroshimu0113-web.github.io/SAA/knowledge/index.html 。`7cbf350`をmainへ反映し、Actions実行37327612847で17テスト・knowledge:check・ビルド・配信成功。公開HTML・グラフJSON・Service Worker・既存音声をHTTPSで取得し、ローカル成果物とのSHA256一致を確認。
