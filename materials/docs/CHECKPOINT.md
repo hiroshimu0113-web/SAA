@@ -81,3 +81,11 @@
 - 次：公開URL確認→本人の声の選択→5分版へ反映。AivisSpeechモデル取得先と規約参照先の追加設定案を保存済み。保存と環境への適用・公開は別。
 
 - A-P2公開確認：`6b13102`をmainへ反映。Actions実行37335729840でテスト・ビルド・Pages配信成功。https://hiroshimu0113-web.github.io/SAA/audio/comparison.html 。公開HTML・JSON・4音声・既存プレーヤー・Service Workerの計8ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。
+
+## A-P3 波音リツ版の5分教材
+
+- ユーザーが3番・波音リツノーマルを暫定選択。「もう少し若い感じがあるといいが妥協点」との評価を保持。声質に満足済みとは扱わない。
+- VOICEVOX 0.25.2、style 9、pitchScale 0、speedScale 0.95、intonationScale 0.9で既存台本を再合成。有料APIなし。5分に合わせ音程を保った1.1039倍のテンポ補正。確認問題後の7秒は維持。
+- 成果物：public/audio/photo-studio-ritsu-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。旧音声と旧時刻情報sample-mei.jsonは保持。生成手順はaudio/README.md。
+- 検証：300.15秒、-18.45 LUFS、-2.40 dBTP、全体デコード成功。17テスト・knowledge:check・型検査とビルド成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。比較版の再生試験も成功。公開確認は追記予定。
+- 次：波音リツ5分版の試聴評価。若い声への希望は将来の候補比較に残す。30分版は未制作。
