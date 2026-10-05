@@ -27,7 +27,7 @@ try {
   await page.waitForFunction(()=>document.querySelector('audio').currentTime>200);
   await page.locator('audio').evaluate(a=>a.pause());
   for (const [range,status,length] of [['bytes=0-99',206,100],['bytes=-128',206,128],['bytes=999999999-',416,0]]) {
-    const actual=await page.evaluate(async range=>{const r=await fetch('photo-studio-ritsu-5min.mp3',{headers:{Range:range}});return {status:r.status,length:(await r.arrayBuffer()).byteLength,contentRange:r.headers.get('content-range')}},range);
+    const actual=await page.evaluate(async range=>{const r=await fetch('photo-studio-himari-5min.mp3',{headers:{Range:range}});return {status:r.status,length:(await r.arrayBuffer()).byteLength,contentRange:r.headers.get('content-range')}},range);
     assert.equal(actual.status,status);assert.equal(actual.length,length);assert.ok(actual.contentRange);
   }
   await page.getByText('音声と同じ台本を読む',{exact:true}).click();

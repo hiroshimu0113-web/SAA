@@ -23,10 +23,10 @@ with tempfile.TemporaryDirectory(prefix='saa-audio-') as directory:
         for term, reading in pronunciations.items():
             spoken = spoken.replace(term, reading)
         base = 'http://127.0.0.1:50021/'
-        request = urllib.request.Request(base + 'audio_query?' + urllib.parse.urlencode({'speaker': 9, 'text': spoken}), method='POST')
+        request = urllib.request.Request(base + 'audio_query?' + urllib.parse.urlencode({'speaker': 14, 'text': spoken}), method='POST')
         query = json.load(urllib.request.urlopen(request, timeout=60))
         query.update(speedScale=0.95, intonationScale=0.9, pitchScale=0, outputSamplingRate=44100)
-        request = urllib.request.Request(base + 'synthesis?speaker=9', data=json.dumps(query).encode(), headers={'Content-Type': 'application/json'})
+        request = urllib.request.Request(base + 'synthesis?speaker=14', data=json.dumps(query).encode(), headers={'Content-Type': 'application/json'})
         with urllib.request.urlopen(request, timeout=240) as response:
             (work / f'raw-{i}.wav').write_bytes(response.read())
         wave, sample_rate = sf.read(work / f'raw-{i}.wav')
@@ -47,18 +47,18 @@ with tempfile.TemporaryDirectory(prefix='saa-audio-') as directory:
         combined.extend([wave, np.zeros(round(sample_rate * segment['pause_after']))])
         cursor += len(wave) / sample_rate + segment['pause_after']
     sf.write(work / 'combined.wav', np.concatenate(combined), sample_rate, subtype='PCM_16')
-    destination = out / 'photo-studio-ritsu-5min.mp3'
-    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', str(work / 'combined.wav'), '-af', 'loudnorm=I=-18:TP=-2:LRA=7', '-ar', '44100', '-ac', '1', '-codec:a', 'libmp3lame', '-b:a', '128k', '-metadata', f"title={spec['title']}", '-metadata', 'artist=SAAへの道 / VOICEVOX:波音リツ', '-metadata', 'comment=VOICEVOX:波音リツ / ノーマル; tempo and loudness adjusted.', str(destination)], check=True)
+    destination = out / 'photo-studio-himari-5min.mp3'
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-y', '-i', str(work / 'combined.wav'), '-af', 'loudnorm=I=-18:TP=-2:LRA=7', '-ar', '44100', '-ac', '1', '-codec:a', 'libmp3lame', '-b:a', '128k', '-metadata', f"title={spec['title']}", '-metadata', 'artist=SAAへの道 / VOICEVOX:冥鳴ひまり', '-metadata', 'comment=VOICEVOX:冥鳴ひまり / ノーマル; tempo and loudness adjusted.', str(destination)], check=True)
     probe = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-show_format', '-show_streams', '-of', 'json', str(destination)]))
     duration = float(probe['format']['duration'])
     assert 295 <= duration <= 305, duration
-    metadata = {'title': spec['title'], 'duration_seconds': duration, 'tempo_factor': factor, 'voice': 'VOICEVOX:波音リツ / ノーマル / Engine 0.25.2', 'sha256': hashlib.sha256(destination.read_bytes()).hexdigest(), 'synthesis_settings': {'speaker': 9, 'speedScale': 0.95, 'intonationScale': 0.9, 'pitchScale': 0}, 'segments': timeline}
-    (out / 'sample-ritsu.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n')
+    metadata = {'title': spec['title'], 'duration_seconds': duration, 'tempo_factor': factor, 'voice': 'VOICEVOX:冥鳴ひまり / ノーマル / Engine 0.25.2', 'sha256': hashlib.sha256(destination.read_bytes()).hexdigest(), 'synthesis_settings': {'speaker': 14, 'speedScale': 0.95, 'intonationScale': 0.9, 'pitchScale': 0}, 'segments': timeline}
+    (out / 'sample-01.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n')
     transcript = '# ' + spec['title'] + '\n\n合成音声による約5分の学習サンプル。音声と同じ内容の台本です。\n\n'
     for segment in timeline:
         second = round(segment['start_seconds'])
         transcript += f"## {second // 60:02}:{second % 60:02} {segment['title']}\n\n{segment['text']}\n\n"
         if segment['pause_after'] >= 7:
             transcript += '（考える時間：7秒）\n\n'
-    (ROOT / 'audio/TRANSCRIPT-ritsu.md').write_text(transcript)
+    (ROOT / 'audio/TRANSCRIPT.md').write_text(transcript)
     print(json.dumps({k: v for k, v in metadata.items() if k != 'segments'}, ensure_ascii=False, indent=2))

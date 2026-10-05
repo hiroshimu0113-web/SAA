@@ -9,34 +9,34 @@
 <p class="eyebrow">SAA AUDIO NOTE / SAMPLE 01</p>
 <h1>写真工房で覚える、<br>3つの役割。</h1>
 <p class="intro">処理する場所。完成写真を残す場所。必要な権限。<br>EC2・S3・IAMロールを、耳からつなぐ5分間。</p>
-<section class="player" aria-label="音声サンプルの再生"><h2>5分の音声サンプル</h2><p>VOICEVOX:波音リツ（ノーマル） · BGMなし · 確認問題2問<br>問題の後には、7秒の考える時間があります。</p>
-<audio id="audio" controls preload="metadata" src="photo-studio-ritsu-5min.mp3" aria-label="写真工房で覚えるEC2・S3・IAMロール">音声を再生できない場合は、下のMP3リンクを開いてください。</audio>
-<div class="options"><label>再生速度 <select id="speed"><option value="0.85">0.85倍</option><option value="1" selected>1倍</option><option value="1.15">1.15倍</option><option value="1.25">1.25倍</option></select></label><a class="download" href="photo-studio-ritsu-5min.mp3" download>MP3を開く・保存</a></div>
+<section class="player" aria-label="音声サンプルの再生"><h2>5分の音声サンプル</h2><p>VOICEVOX:冥鳴ひまり（ノーマル） · BGMなし · 確認問題2問<br>問題の後には、7秒の考える時間があります。</p>
+<audio id="audio" controls preload="metadata" src="photo-studio-himari-5min.mp3" aria-label="写真工房で覚えるEC2・S3・IAMロール">音声を再生できない場合は、下のMP3リンクを開いてください。</audio>
+<div class="options"><label>再生速度 <select id="speed"><option value="0.85">0.85倍</option><option value="1" selected>1倍</option><option value="1.15">1.15倍</option><option value="1.25">1.25倍</option></select></label><a class="download" href="photo-studio-himari-5min.mp3" download>MP3を開く・保存</a></div>
 <p id="status" role="status"></p></section>
 <p class="note">iPhoneで持ち歩く場合は、MP3を開いて共有メニューから「ファイルに保存」。再生と保存の操作はブラウザーによって異なります。自動再生はしません。</p>
 <h2>好きなところから聞く</h2><ol id="chapters"><li><button type="button" data-time="0.0"><time>00:00</time><span>今日のゴール</span></button></li>
-<li><button type="button" data-time="24.839"><time>00:25</time><span>小さな写真工房</span></button></li>
-<li><button type="button" data-time="51.026"><time>00:51</time><span>EC2は作業場</span></button></li>
-<li><button type="button" data-time="82.157"><time>01:22</time><span>S3は完成写真の保管先</span></button></li>
-<li><button type="button" data-time="118.602"><time>01:59</time><span>IAMロールは必要な権限を使う仕組み</span></button></li>
-<li><button type="button" data-time="155.587"><time>02:36</time><span>最小権限でつなぐ</span></button></li>
-<li><button type="button" data-time="186.297"><time>03:06</time><span>確認問題1</span></button></li>
-<li><button type="button" data-time="211.44"><time>03:31</time><span>問題1の答え</span></button></li>
-<li><button type="button" data-time="241.007"><time>04:01</time><span>確認問題2</span></button></li>
-<li><button type="button" data-time="265.772"><time>04:26</time><span>問題2の答えとまとめ</span></button></li></ol>
+<li><button type="button" data-time="24.398"><time>00:24</time><span>小さな写真工房</span></button></li>
+<li><button type="button" data-time="50.446"><time>00:50</time><span>EC2は作業場</span></button></li>
+<li><button type="button" data-time="81.327"><time>01:21</time><span>S3は完成写真の保管先</span></button></li>
+<li><button type="button" data-time="117.801"><time>01:58</time><span>IAMロールは必要な権限を使う仕組み</span></button></li>
+<li><button type="button" data-time="155.202"><time>02:35</time><span>最小権限でつなぐ</span></button></li>
+<li><button type="button" data-time="185.914"><time>03:06</time><span>確認問題1</span></button></li>
+<li><button type="button" data-time="211.04"><time>03:31</time><span>問題1の答え</span></button></li>
+<li><button type="button" data-time="240.438"><time>04:00</time><span>確認問題2</span></button></li>
+<li><button type="button" data-time="265.506"><time>04:26</time><span>問題2の答えとまとめ</span></button></li></ol>
 <details><summary>音声と同じ台本を読む</summary><div class="transcript"><section><h3>00:00 今日のゴール</h3><p>SAAへの道。五分で学ぶ、写真工房のクラウド設計。今日は、処理する場所、データを残す場所、そしてアクセスの権限。この三つを分けて考えます。サービス名を丸暗記するより、何を担当するのかを、思い浮かべてみてください。最後に、短い確認問題を二つ出します。画面は見なくても大丈夫です。</p></section>
-<section><h3>00:25 小さな写真工房</h3><p>あなたは、小さな写真工房の設計担当です。お客様から届いた写真を加工して、完成した写真を保存します。今回は、加工するサーバーを一台用意します。大切な条件は二つ。サーバーを削除しても、完成写真を残すこと。そして、プログラムに固定のアクセスキーを書き込まないことです。まずはこの条件だけに集中しましょう。</p></section>
-<section><h3>00:51 EC2は作業場</h3><p>一つ目のサービスは、EC2です。クラウド上で使える仮想サーバーで、写真を加工するプログラムを動かします。工房でいえば、作業する人と道具を置く作業場です。ただし、作業場を用意しただけでは、完成品の保管方法は決まりません。特に、インスタンスストアという一時的な保存領域は、サーバーの停止や終了などでデータを失います。失いたくない完成写真を、そこだけに置かないことが大切です。</p></section>
-<section><h3>01:22 S3は完成写真の保管先</h3><p>二つ目は、S3です。写真などのデータを、オブジェクトとして保存するサービスです。工房でいえば、完成品をしまう保管庫。EC2で加工した写真を、S3のバケットへ保存します。バケットは、データを入れる入れ物だと考えてください。EC2とS3は別のリソースなので、EC2を終了したことだけで、S3の写真が消えるわけではありません。ただし、誰でも写真を見られる設定にしてよいわけではありません。今回は非公開にして、必要なアクセスだけを許可します。</p></section>
-<section><h3>01:59 IAMロールは必要な権限を使う仕組み</h3><p>ここで、EC2のプログラムは、どうやってS3に写真を保存するのでしょうか。三つ目の、IAMロールが登場します。ロールは、必要な権限をまとめた役割です。EC2に適切なロールを割り当てると、その上のプログラムは、一時的な認証情報を使って、許可された操作を行えます。工房なら、担当の仕事に必要な部屋へ入れる、期限付きの入館証に近いイメージです。ロールそのものが入館証なのではなく、役割に応じた一時的な認証情報を使える仕組み、と覚えましょう。</p></section>
-<section><h3>02:36 最小権限でつなぐ</h3><p>プログラムに長く使えるアクセスキーを直接書くと、ソースコードと一緒に漏れる心配があります。そこで、EC2のロールを使います。そして、ロールを付ければ何でもできる、という設定にはしません。今回なら、保存先のバケットへ写真を書き込むなど、必要な操作に絞ります。これが最小権限です。処理はEC2、保存はS3、必要な権限はIAMロール。三つの担当がつながりました。</p></section>
+<section><h3>00:24 小さな写真工房</h3><p>あなたは、小さな写真工房の設計担当です。お客様から届いた写真を加工して、完成した写真を保存します。今回は、加工するサーバーを一台用意します。大切な条件は二つ。サーバーを削除しても、完成写真を残すこと。そして、プログラムに固定のアクセスキーを書き込まないことです。まずはこの条件だけに集中しましょう。</p></section>
+<section><h3>00:50 EC2は作業場</h3><p>一つ目のサービスは、EC2です。クラウド上で使える仮想サーバーで、写真を加工するプログラムを動かします。工房でいえば、作業する人と道具を置く作業場です。ただし、作業場を用意しただけでは、完成品の保管方法は決まりません。特に、インスタンスストアという一時的な保存領域は、サーバーの停止や終了などでデータを失います。失いたくない完成写真を、そこだけに置かないことが大切です。</p></section>
+<section><h3>01:21 S3は完成写真の保管先</h3><p>二つ目は、S3です。写真などのデータを、オブジェクトとして保存するサービスです。工房でいえば、完成品をしまう保管庫。EC2で加工した写真を、S3のバケットへ保存します。バケットは、データを入れる入れ物だと考えてください。EC2とS3は別のリソースなので、EC2を終了したことだけで、S3の写真が消えるわけではありません。ただし、誰でも写真を見られる設定にしてよいわけではありません。今回は非公開にして、必要なアクセスだけを許可します。</p></section>
+<section><h3>01:58 IAMロールは必要な権限を使う仕組み</h3><p>ここで、EC2のプログラムは、どうやってS3に写真を保存するのでしょうか。三つ目の、IAMロールが登場します。ロールは、必要な権限をまとめた役割です。EC2に適切なロールを割り当てると、その上のプログラムは、一時的な認証情報を使って、許可された操作を行えます。工房なら、担当の仕事に必要な部屋へ入れる、期限付きの入館証に近いイメージです。ロールそのものが入館証なのではなく、役割に応じた一時的な認証情報を使える仕組み、と覚えましょう。</p></section>
+<section><h3>02:35 最小権限でつなぐ</h3><p>プログラムに長く使えるアクセスキーを直接書くと、ソースコードと一緒に漏れる心配があります。そこで、EC2のロールを使います。そして、ロールを付ければ何でもできる、という設定にはしません。今回なら、保存先のバケットへ写真を書き込むなど、必要な操作に絞ります。これが最小権限です。処理はEC2、保存はS3、必要な権限はIAMロール。三つの担当がつながりました。</p></section>
 <section><h3>03:06 確認問題1</h3><p>では、確認問題です。EC2を削除した後も完成写真を残したい。写真を置く先として、今回の条件に合うのはどちらでしょう。一番、EC2のインスタンスストアだけに置く。二番、S3へ保存する。理由も一緒に考えてみてください。</p><p class="note">（考える時間：7秒）</p></section>
 <section><h3>03:31 問題1の答え</h3><p>答えは二番、S3です。今回の条件は、処理するサーバーの終了と、完成写真の保存を切り離すことでした。インスタンスストアだけでは、その条件を満たせません。サービス名ではなく、失ってはいけないものは何か、と考えると選びやすくなります。なお、S3に置けば誤削除まで自動で防げる、という意味ではありません。必要に応じて、バージョニングなども別に設計します。</p></section>
-<section><h3>04:01 確認問題2</h3><p>もう一問です。EC2上のプログラムからS3へ安全にアクセスしたい。基本として選ぶのはどちらでしょう。一番、プログラムに固定のアクセスキーを書き込む。二番、必要な権限を設定したIAMロールをEC2に割り当てる。少し考えてみましょう。</p><p class="note">（考える時間：7秒）</p></section>
+<section><h3>04:00 確認問題2</h3><p>もう一問です。EC2上のプログラムからS3へ安全にアクセスしたい。基本として選ぶのはどちらでしょう。一番、プログラムに固定のアクセスキーを書き込む。二番、必要な権限を設定したIAMロールをEC2に割り当てる。少し考えてみましょう。</p><p class="note">（考える時間：7秒）</p></section>
 <section><h3>04:26 問題2の答えとまとめ</h3><p>答えは二番、IAMロールです。一時的な認証情報を使い、必要な操作だけを許可します。今日のまとめです。EC2は作業場。S3は完成写真の保管先。IAMロールは必要な権限を使う仕組み。問題を読むときは、どこで処理するか、何を残すか、誰に何を許すか。この三つを順番に考えてください。次にゲームを開いたら、写真工房の最初のミッションで、この三枚のカードを探してみましょう。五分のサンプルは、ここまでです。</p></section></div></details>
 <h2>聞いた後の振り返り</h2><p>声は聞きやすいですか？ 速さはどうですか？<br>「なぜそのサービスを選ぶか」を説明できそうでしょうか。</p><p class="note">このサンプルのフィードバックを、30分版の声・テンポ・説明の量に反映します。独自教材であり、AWS公式教材ではありません。</p>
 <details><summary>根拠にしたAWS公式資料</summary><ul class="sources"><li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">EC2でIAMロールを利用する</a></li><li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html">EC2インスタンスストア</a></li><li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3の概要</a></li></ul><p class="note">2026-10-05確認。外部の公式資料を読むには通信が必要です。</p></details>
-<footer class="credits">音声：VOICEVOX:波音リツ（ノーマル）。無料のローカル合成で制作し、テンポ・音量を調整しています。実在人物の録音ではありません。<a href="https://canon-voice.com/kiyaku.html">波音リツの利用規約</a>。再利用時もクレジットと各音声の規約を守ってください。<a href="comparison.html">ほかの声との比較</a></footer>
+<footer class="credits">音声：VOICEVOX:冥鳴ひまり（ノーマル）。無料のローカル合成で制作し、テンポ・音量を調整しています。実在人物の録音ではありません。<a href="https://meimeihimari.wixsite.com/himari/terms-of-use">冥鳴ひまりの利用規約</a>。再利用時もクレジットと各音声の規約を守ってください。<a href="comparison.html">ほかの声との比較</a></footer>
 </main><script>
 const audio=document.getElementById('audio'),status=document.getElementById('status');
 document.getElementById('speed').addEventListener('change',e=>{audio.playbackRate=Number(e.target.value)});

@@ -557,3 +557,11 @@
 - 検証：3音声の全体デコード成功、-18.44〜-18.46 LUFS、ピーク-2.43dBTP以下。17テスト、knowledge:check、型検査・ビルド成功。Chromiumモバイル相当で4音声の再生・同時再生防止・320px・台本・オフライン・Range応答成功。聴取評価は本人待ち。
 - 同梱利用条件を確認・転記し、クレジットと規約リンク付き。有料APIなし。5分版は選択まで波音リツを保持。
 - 再生成：scripts/generate-female-comparison.py。次：比較試聴で声を選択→5分版反映。公開確認済み：`a524b82`をmainへ反映。Actions実行37337563651成功。https://hiroshimu0113-web.github.io/SAA/audio/female-comparison.html 。公開7ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。
+
+## A-P5 冥鳴ひまりを採用
+
+- ユーザーが追加比較の2番・冥鳴ひまりを「一番声質が好き。このコで行きましょう」と選択。今後の教材音声はVOICEVOX:冥鳴ひまり・ノーマル（style 14）を基本とする。
+- 比較版と同じpitchScale 0、intonationScale 0.9、speedScale 0.95で既存5分台本を合成。5分へのテンポ補正と問題後7秒の思考時間を維持。有料APIなし。
+- 成果物：public/audio/photo-studio-himari-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。波音リツの旧音声と時刻情報sample-ritsu.jsonを保持。生成はscripts/generate-himari-audio.py。
+- 17テストとknowledge:check成功。型検査・ビルド成功。音声300.12秒、-18.31 LUFS、-2.41 dBTP、全体デコード成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。公開確認は追記。
+- 次：5分全体の発音・テンポの試聴評価。30分版は未制作。

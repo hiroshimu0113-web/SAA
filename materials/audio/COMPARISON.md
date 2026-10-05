@@ -51,3 +51,7 @@ APIはローカル専用。公開ページは生成済みMP3を配信するた�
 `public/audio/female-comparison.html` に同じEC2の説明を収録し、波音リツの既存抜粋も併記。speedScale 0.95、intonationScale 0.9、pitchScale 0、2パス音量正規化。モデル固有の高さは異なる。追加の音程調整・EQ加工なし。5分版は選択待ちで波音リツを保持。
 
 再生成：ローカルVOICEVOX起動後に `python scripts/generate-female-comparison.py`。ビルド後の検証：`FEMALE_COMPARISON=1 CHROME_PATH=/usr/bin/chromium node scripts/voice-comparison-browser-check.mjs`。モデル同梱の規約を確認・転記し、各プレーヤーにクレジットと詳細規約リンクを記載。有料APIなし。
+
+## 採用する声の決定
+
+ユーザーが追加比較の2番・冥鳴ひまりについて「一番声質が好き。このコで行きましょう」と選択。今後の音声教材の基本はVOICEVOX:冥鳴ひまり（ノーマル、style 14）。比較版と同じpitchScale 0・intonationScale 0.9を維持して5分版へ反映。若さを求める別候補探しはいったん完了。
