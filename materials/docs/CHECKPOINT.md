@@ -74,8 +74,10 @@
 
 ## A-P2 声質改善の比較版（2026-10-06 JST）
 
-- 状態：比較音声作成・ローカル検証完了、公開確認と本人の試聴待ち。AivisSpeechは接続制限でブロック。
+- 状態：比較音声作成・ローカル検証・公開確認完了、本人の試聴待ち。AivisSpeechは接続制限でブロック。
 - ユーザー試聴で前回のMei音声が高く鋭いとの評価。VOICEVOX 0.25.2で青山龍星ノーマル／しっとり、波音リツノーマルを合成。従来音声の抜粋を含む4種類を同じ台本・同程度の音量で比較。
 - 成果物：public/audio/comparison.html、compare-*.mp3、comparison.json。約29〜33秒。再生成と調査結果はaudio/COMPARISON.md、同梱規約はVOICEVOX_LICENSE.md。
 - 検証：MP3デコード・長さ・音量成功。17テスト、knowledge:check、型検査とビルド成功。Chromiumモバイル相当で4音声の再生、同時再生防止、320px幅、台本、オフライン・Range応答成功。既存5分版の再生試験も成功。新しい音声の聴取品質は未評価。
 - 次：公開URL確認→本人の声の選択→5分版へ反映。AivisSpeechモデル取得先と規約参照先の追加設定案を保存済み。保存と環境への適用・公開は別。
+
+- A-P2公開確認：`6b13102`をmainへ反映。Actions実行37335729840でテスト・ビルド・Pages配信成功。https://hiroshimu0113-web.github.io/SAA/audio/comparison.html 。公開HTML・JSON・4音声・既存プレーヤー・Service Workerの計8ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。
