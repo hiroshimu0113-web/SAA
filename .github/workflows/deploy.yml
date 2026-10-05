@@ -35,6 +35,7 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-pnpm-11-${{ hashFiles('materials/pnpm-lock.yaml', 'materials/pnpm-workspace.yaml') }}
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
+      - run: pnpm knowledge:check
       - run: pnpm build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

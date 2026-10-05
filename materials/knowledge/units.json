@@ -1,0 +1,659 @@
+{
+  "schema_version": 1,
+  "units": [
+    {
+      "id": "ec2",
+      "title": "EC2の役割",
+      "group": "processing",
+      "objective": "処理する場所と完成データの保管先を分けて説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [],
+      "misconceptions": [
+        "EC2を用意すればデータの保護方法も決まる。"
+      ],
+      "checks": [
+        {
+          "id": "ec2-explain",
+          "level": "explain",
+          "prompt": "EC2とS3は写真工房で何を担当する？",
+          "expected_points": [
+            "EC2はプログラムの実行",
+            "完成写真の保存方法は別に設計"
+          ]
+        },
+        {
+          "id": "ec2-apply",
+          "level": "apply",
+          "prompt": "加工サーバーを削除する前に、完成写真の扱いをどう決める？",
+          "expected_points": [
+            "完成写真をサーバーに依存しない保存先へ移す",
+            "一時データと永続データを区別する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l03"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "instance-store",
+      "title": "インスタンスストアの寿命",
+      "group": "processing",
+      "objective": "停止・終了で失って困るデータを一時領域だけに置かない。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "ec2"
+      ],
+      "misconceptions": [
+        "EC2を再起動しても停止しても保存領域の扱いは同じ。"
+      ],
+      "checks": [
+        {
+          "id": "instance-store-explain",
+          "level": "explain",
+          "prompt": "インスタンスストアを唯一の保管先にしない理由は？",
+          "expected_points": [
+            "停止・終了などでデータを失う",
+            "再生成できる一時データに適する"
+          ]
+        },
+        {
+          "id": "instance-store-apply",
+          "level": "apply",
+          "prompt": "加工中間ファイルと納品済み写真をどこへ置く？",
+          "expected_points": [
+            "再生成可能な中間ファイルは一時領域の候補",
+            "納品写真はS3など別の永続保存先へ"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l03"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "durability",
+      "title": "耐久性とデータの保全",
+      "group": "storage",
+      "objective": "今使えることと、保存データを失わないことを区別する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [],
+      "misconceptions": [
+        "複製があるだけで誤削除も防げる。"
+      ],
+      "checks": [
+        {
+          "id": "durability-explain",
+          "level": "explain",
+          "prompt": "耐久性と可用性は何が違う？",
+          "expected_points": [
+            "耐久性はデータを失いにくい性質",
+            "可用性は必要時に利用できる性質"
+          ]
+        },
+        {
+          "id": "durability-apply",
+          "level": "apply",
+          "prompt": "誤って写真を上書きした場合、複製だけで十分？",
+          "expected_points": [
+            "誤操作も反映される可能性を考える",
+            "バージョニングやバックアップと復元手順を検討する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l03"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "S3の保存とアクセス",
+      "group": "storage",
+      "objective": "EC2から独立したオブジェクト保存と、アクセス制御を説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "durability"
+      ],
+      "misconceptions": [
+        "S3に保存すると誰からでもアクセスできる必要がある。"
+      ],
+      "checks": [
+        {
+          "id": "s3-explain",
+          "level": "explain",
+          "prompt": "バケットとオブジェクトは何？",
+          "expected_points": [
+            "バケットはオブジェクトを入れる入れ物",
+            "オブジェクトは写真などのデータ"
+          ]
+        },
+        {
+          "id": "s3-apply",
+          "level": "apply",
+          "prompt": "写真をEC2終了後も残し、担当者だけに見せたい。どうする？",
+          "expected_points": [
+            "写真をS3へ保存する",
+            "非公開を基本に必要なアクセスだけを許可する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l03"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "region",
+      "title": "リージョンの選定",
+      "group": "resilience",
+      "objective": "地理・データ所在・サービス提供状況でリージョンを選ぶ。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [],
+      "misconceptions": [
+        "別リージョンへデータは自動的に複製される。"
+      ],
+      "checks": [
+        {
+          "id": "region-explain",
+          "level": "explain",
+          "prompt": "リージョンを選ぶとき何を確認する？",
+          "expected_points": [
+            "利用者との距離・遅延",
+            "データ所在の要件とサービスの提供状況"
+          ]
+        },
+        {
+          "id": "region-apply",
+          "level": "apply",
+          "prompt": "特定地域にデータを置く制約と低遅延がある。何から絞る？",
+          "expected_points": [
+            "まず必須の所在要件を満たす",
+            "その候補で遅延と利用サービスを比較する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "az",
+      "title": "AZと障害の範囲",
+      "group": "resilience",
+      "objective": "同一AZの台数増加と複数AZへの分散の違いを説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "region"
+      ],
+      "misconceptions": [
+        "同じAZのEC2を2台にすればAZ障害に耐えられる。"
+      ],
+      "checks": [
+        {
+          "id": "az-explain",
+          "level": "explain",
+          "prompt": "AZはリージョンとどう関係する？",
+          "expected_points": [
+            "リージョン内の独立した場所",
+            "障害に備えるには配置するAZを分ける"
+          ]
+        },
+        {
+          "id": "az-apply",
+          "level": "apply",
+          "prompt": "1つのAZの停止に備えたい。EC2を増やすだけでよい？",
+          "expected_points": [
+            "同じAZへ増やすだけでは不足",
+            "異なるAZへの配置と切り替えが必要"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "availability",
+      "title": "可用性と切り替え",
+      "group": "resilience",
+      "objective": "冗長化と正常な処理先への切り替えを組み合わせる。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "az",
+        "ec2"
+      ],
+      "misconceptions": [
+        "台数を増やせば切り替え設計は不要。"
+      ],
+      "checks": [
+        {
+          "id": "availability-explain",
+          "level": "explain",
+          "prompt": "冗長化だけでは足りないのはなぜ？",
+          "expected_points": [
+            "使える代替先へ処理を送る必要がある",
+            "データやセッションの状態も考える"
+          ]
+        },
+        {
+          "id": "availability-apply",
+          "level": "apply",
+          "prompt": "別AZのEC2があっても利用者が失敗し続ける。何を確認する？",
+          "expected_points": [
+            "正常先へ振り分ける仕組み",
+            "特定サーバーへ閉じ込めた状態や再試行"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch01-l01",
+        "ch01-l03"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "alb",
+      "title": "ALBと正常なターゲット",
+      "group": "resilience",
+      "objective": "ステートレスなHTTPサービスで正常なEC2へ振り分ける構成を説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "availability"
+      ],
+      "misconceptions": [
+        "ALBがあればどんな障害でも全リクエストが無停止になる。"
+      ],
+      "checks": [
+        {
+          "id": "alb-explain",
+          "level": "explain",
+          "prompt": "ALBとEC2を複数AZにする狙いは？",
+          "expected_points": [
+            "複数の処理先を用意する",
+            "ヘルスチェックと正常先への振り分けを行う"
+          ]
+        },
+        {
+          "id": "alb-apply",
+          "level": "apply",
+          "prompt": "AZ障害でも新しいHTTP要求を受けたい。何を組み合わせる？",
+          "expected_points": [
+            "複数AZのALBとEC2",
+            "状態の外部化と必要な再試行も設計する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch04-l02"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/GAME_PROTOTYPE.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "authentication",
+      "title": "認証の役割",
+      "group": "security",
+      "objective": "誰であるかの確認と、実行できる操作の判断を分ける。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [],
+      "misconceptions": [
+        "ログインできれば全操作が許可される。"
+      ],
+      "checks": [
+        {
+          "id": "authentication-explain",
+          "level": "explain",
+          "prompt": "認証と認可の違いを説明して。",
+          "expected_points": [
+            "認証は誰であるかを確認",
+            "認可は何を実行できるかを判断"
+          ]
+        },
+        {
+          "id": "authentication-apply",
+          "level": "apply",
+          "prompt": "MFAでログインできた人がS3を読めない。必ず認証の故障？",
+          "expected_points": [
+            "認証後の権限で拒否され得る",
+            "認証とアクセス許可を分けて調べる"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "authorization",
+      "title": "認可とアクセス許可",
+      "group": "security",
+      "objective": "認証済みでも操作対象と操作内容の許可が必要だと説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "authentication"
+      ],
+      "misconceptions": [
+        "認証成功がすべてのリソースへのアクセス許可になる。"
+      ],
+      "checks": [
+        {
+          "id": "authorization-explain",
+          "level": "explain",
+          "prompt": "アクセス許可では何を決める？",
+          "expected_points": [
+            "どの対象にどの操作を許可するか",
+            "必要な条件や制約も考える"
+          ]
+        },
+        {
+          "id": "authorization-apply",
+          "level": "apply",
+          "prompt": "写真は読めるが消せない担当者を作りたい。何を分ける？",
+          "expected_points": [
+            "読み取りと削除の操作を分ける",
+            "担当対象への必要なアクセスに限定する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l02"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "temporary-credentials",
+      "title": "一時認証情報",
+      "group": "security",
+      "objective": "長期キーを埋め込まず、有効期限付き認証情報を使う理由を説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "authentication"
+      ],
+      "misconceptions": [
+        "有効期限があればどんな権限を付けても安全。"
+      ],
+      "checks": [
+        {
+          "id": "temporary-credentials-explain",
+          "level": "explain",
+          "prompt": "一時認証情報を使う利点と限界は？",
+          "expected_points": [
+            "長期キーの配布・管理を減らせる",
+            "有効期限とは別に権限を絞る必要がある"
+          ]
+        },
+        {
+          "id": "temporary-credentials-apply",
+          "level": "apply",
+          "prompt": "EC2のソースコードに固定キーがある。基本方針をどう変える？",
+          "expected_points": [
+            "EC2のロールを通じて一時認証情報を使う",
+            "必要なS3操作だけ許可する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "iam-role",
+      "title": "IAMロール",
+      "group": "security",
+      "objective": "引き受けられる主体と、引き受けた後の権限を区別する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "temporary-credentials",
+        "authorization"
+      ],
+      "misconceptions": [
+        "ロールそのものがパスワードやアクセスキーである。"
+      ],
+      "checks": [
+        {
+          "id": "iam-role-explain",
+          "level": "explain",
+          "prompt": "ロールの信頼ポリシーと権限ポリシーの役割は？",
+          "expected_points": [
+            "信頼ポリシーは誰が引き受けられるか",
+            "権限ポリシーは何を実行できるか"
+          ]
+        },
+        {
+          "id": "iam-role-apply",
+          "level": "apply",
+          "prompt": "写真加工EC2からS3へ保存する構成を説明して。",
+          "expected_points": [
+            "適切なロールをEC2へ割り当てる",
+            "一時認証情報を使い保存先への必要な操作だけ許可する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "least-privilege",
+      "title": "最小権限",
+      "group": "security",
+      "objective": "必要な対象・操作・条件に権限を絞る。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "authorization",
+        "iam-role"
+      ],
+      "misconceptions": [
+        "動くように管理者権限を付けたらそのままでよい。"
+      ],
+      "checks": [
+        {
+          "id": "least-privilege-explain",
+          "level": "explain",
+          "prompt": "最小権限で絞る軸を挙げて。",
+          "expected_points": [
+            "Actionで操作、Resourceで対象を絞る",
+            "必要に応じConditionで条件を絞る"
+          ]
+        },
+        {
+          "id": "least-privilege-apply",
+          "level": "apply",
+          "prompt": "特定バケットへの写真保存だけが必要。全S3操作を許可する？",
+          "expected_points": [
+            "必要な保存操作と対象に絞る",
+            "読み取りや削除など不要な権限を与えない"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l02"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    },
+    {
+      "id": "mfa",
+      "title": "MFAと認証の強化",
+      "group": "security",
+      "objective": "MFAは認証を強化し、操作権限の代わりにはならないと説明する。",
+      "estimated_minutes": 5,
+      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "prerequisites": [
+        "authentication"
+      ],
+      "misconceptions": [
+        "MFAを有効化すれば最小権限を設計しなくてよい。"
+      ],
+      "checks": [
+        {
+          "id": "mfa-explain",
+          "level": "explain",
+          "prompt": "MFAと最小権限は何を守る？",
+          "expected_points": [
+            "MFAは認証を強化",
+            "最小権限は許可する操作と対象を制限"
+          ]
+        },
+        {
+          "id": "mfa-apply",
+          "level": "apply",
+          "prompt": "従業員へ写真の管理を任せる。どちらを使う？",
+          "expected_points": [
+            "フェデレーション等の認証側でMFAを要求",
+            "適切なロールで必要最小限の権限を使う"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch02-l01"
+      ],
+      "review": {
+        "status": "draft",
+        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
+        "source_document": "docs/STARTER_REVIEW.md"
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "条件を1つ変えた転移問題を追加する",
+        "境界条件と公式根拠を照合してから公開教材へ反映する"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 # SAA学習プロジェクトの作業ルール
 
 - 日本語で回答する。
+- 教材拡充の前に `knowledge/README.md`、`knowledge/INVENTORY.md`、`knowledge/EXPANSION_PLAN.md` を確認する。正本は `knowledge/units.json` と `relations.json`。変更後は `pnpm knowledge:export` と `pnpm knowledge:check`。教材の監査状態と本人の理解度を混同しない。
 - 原計画と最新の状態は `docs/PROJECT.md`、`docs/TASKS.md`、`docs/CHECKPOINT.md` を確認する。
 
 ## 利用上限に備えた中断・報告

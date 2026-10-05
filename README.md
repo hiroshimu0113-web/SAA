@@ -9,6 +9,7 @@ AWS Certified Solutions Architect – Associate（SAA-C03）を、日本語の�
 - **5分の音声サンプル**：[写真工房で覚える、EC2・S3・IAMロール](https://hiroshimu0113-web.github.io/SAA/audio/index.html)。合成音声・確認問題2問・台本付き。
 - **ゲーム**：学習アプリのホームから「設計クエストを遊ぶ」。8枚のカード・3ミッション、目安5〜10分の試作です。
 - **教材を読む**：[先行版HTML](materials/deliverables/SAA-starter.html)をダウンロードしてブラウザーで開くか、[EPUB](materials/deliverables/SAA-starter.epub)をiPhoneの「ブック」に取り込みます。
+- **理解のつながりを見る**：[ナレッジグラフ](https://hiroshimu0113-web.github.io/SAA/knowledge/index.html)。14概念の型と、前提・確認方法・関連教材をたどれます。
 - **学習を続ける**：[学習ガイド](materials/docs/STUDY_GUIDE.md)と[学習記録](materials/docs/STUDY_LOG.md)を使います。
 - **次の作業を確認する**：[現在のチェックポイント](materials/docs/CHECKPOINT.md)、[タスク台帳](materials/docs/TASKS.md)を参照します。
 

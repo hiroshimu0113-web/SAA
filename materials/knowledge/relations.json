@@ -1,0 +1,32 @@
+[
+  {
+    "from": "availability",
+    "to": "durability",
+    "type": "contrast_with",
+    "reason": "今利用できることと、データを失いにくいことを区別する。"
+  },
+  {
+    "from": "authentication",
+    "to": "authorization",
+    "type": "contrast_with",
+    "reason": "主体の確認と、操作の許可を区別する。"
+  },
+  {
+    "from": "ec2",
+    "to": "s3",
+    "type": "used_with",
+    "reason": "写真の加工と完成品の保存を分ける。"
+  },
+  {
+    "from": "iam-role",
+    "to": "s3",
+    "type": "used_with",
+    "reason": "ロールに設定された権限でS3へのアクセスを制御する。"
+  },
+  {
+    "from": "mfa",
+    "to": "least-privilege",
+    "type": "used_with",
+    "reason": "認証の強化とアクセス許可の制限を組み合わせる。"
+  }
+]
