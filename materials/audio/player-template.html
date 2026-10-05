@@ -9,16 +9,16 @@
 <p class="eyebrow">SAA AUDIO NOTE / SAMPLE 01</p>
 <h1>写真工房で覚える、<br>3つの役割。</h1>
 <p class="intro">処理する場所。完成写真を残す場所。必要な権限。<br>EC2・S3・IAMロールを、耳からつなぐ5分間。</p>
-<section class="player" aria-label="音声サンプルの再生"><h2>5分の音声サンプル</h2><p>VOICEVOX:冥鳴ひまり（ノーマル） · BGMなし · 確認問題2問<br>問題の後には、7秒の考える時間があります。</p>
-<audio id="audio" controls preload="metadata" src="photo-studio-himari-5min.mp3" aria-label="写真工房で覚えるEC2・S3・IAMロール">音声を再生できない場合は、下のMP3リンクを開いてください。</audio>
-<div class="options"><label>再生速度 <select id="speed"><option value="0.85">0.85倍</option><option value="1" selected>1倍</option><option value="1.15">1.15倍</option><option value="1.25">1.25倍</option></select></label><a class="download" href="photo-studio-himari-5min.mp3" download>MP3を開く・保存</a></div>
+<section class="player" aria-label="音声サンプルの再生"><h2>5分の音声サンプル</h2><p>調整版：声を少し低くし、合成後の速度補正を外しました。</p><p>VOICEVOX:冥鳴ひまり（ノーマル） · BGMなし · 確認問題2問<br>問題の後には、7秒の考える時間があります。</p>
+<audio id="audio" controls preload="metadata" src="photo-studio-himari-v2-5min.mp3" aria-label="写真工房で覚えるEC2・S3・IAMロール">音声を再生できない場合は、下のMP3リンクを開いてください。</audio>
+<div class="options"><label>再生速度 <select id="speed"><option value="0.85">0.85倍</option><option value="1" selected>1倍</option><option value="1.15">1.15倍</option><option value="1.25">1.25倍</option></select></label><a class="download" href="photo-studio-himari-v2-5min.mp3" download>MP3を開く・保存</a></div>
 <p id="status" role="status"></p></section>
 <p class="note">iPhoneで持ち歩く場合は、MP3を開いて共有メニューから「ファイルに保存」。再生と保存の操作はブラウザーによって異なります。自動再生はしません。</p>
 <h2>好きなところから聞く</h2><ol id="chapters">{{CHAPTERS}}</ol>
 <details><summary>音声と同じ台本を読む</summary><div class="transcript">{{TRANSCRIPT}}</div></details>
 <h2>聞いた後の振り返り</h2><p>声は聞きやすいですか？ 速さはどうですか？<br>「なぜそのサービスを選ぶか」を説明できそうでしょうか。</p><p class="note">このサンプルのフィードバックを、30分版の声・テンポ・説明の量に反映します。独自教材であり、AWS公式教材ではありません。</p>
 <details><summary>根拠にしたAWS公式資料</summary><ul class="sources"><li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">EC2でIAMロールを利用する</a></li><li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html">EC2インスタンスストア</a></li><li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3の概要</a></li></ul><p class="note">2026-10-05確認。外部の公式資料を読むには通信が必要です。</p></details>
-<footer class="credits">音声：VOICEVOX:冥鳴ひまり（ノーマル）。無料のローカル合成で制作し、テンポ・音量を調整しています。実在人物の録音ではありません。<a href="https://meimeihimari.wixsite.com/himari/terms-of-use">冥鳴ひまりの利用規約</a>。再利用時もクレジットと各音声の規約を守ってください。<a href="comparison.html">ほかの声との比較</a></footer>
+<p><a href="photo-studio-himari-5min.mp3">調整前の冥鳴ひまり版を聴く</a></p><footer class="credits">音声：VOICEVOX:冥鳴ひまり（ノーマル）。無料のローカル合成で制作し、高さを少し下げ、音量を調整しています。合成後の速度補正はしていません。実在人物の録音ではありません。<a href="https://meimeihimari.wixsite.com/himari/terms-of-use">冥鳴ひまりの利用規約</a>。再利用時もクレジットと各音声の規約を守ってください。<a href="comparison.html">ほかの声との比較</a></footer>
 </main><script>
 const audio=document.getElementById('audio'),status=document.getElementById('status');
 document.getElementById('speed').addEventListener('change',e=>{audio.playbackRate=Number(e.target.value)});

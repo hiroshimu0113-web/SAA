@@ -565,3 +565,10 @@
 - 成果物：public/audio/photo-studio-himari-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。波音リツの旧音声と時刻情報sample-ritsu.jsonを保持。生成はscripts/generate-himari-audio.py。
 - 17テストとknowledge:check成功。型検査・ビルド成功。音声300.12秒、-18.31 LUFS、-2.41 dBTP、全体デコード成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。`46dd748`をmainに反映、Actions実行37338895323で配信成功。公開5ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。公開URL：https://hiroshimu0113-web.github.io/SAA/audio/index.html 。
 - 次：5分全体の発音・テンポの試聴評価。30分版は未制作。
+
+## A-P6 冥鳴ひまりの滑らかさ・高さの調整
+
+- 本人から「音がカクカクする」「もう少し高さを抑えて」との評価。声のモデルは維持。
+- pitchScaleを0から-0.03へ。合成後のatempo 1.11355を撤去し、モデル側のspeedScale 1.05で生成。カクカク感の原因は未確定で、改善の聴取確認は本人待ち。文字・台本・問題後7秒は維持。
+- 新音声：public/audio/photo-studio-himari-v2-5min.mp3。旧音声・sample-himari-v1.jsonを保持し、プレーヤーに旧版比較リンクを追加。5分ぴったりへの引き伸ばし・短縮は行わない。
+- 検証：302.00秒、-18.27 LUFS、-2.45 dBTP、全体デコード成功。17テスト・knowledge:check・型検査・ビルド成功。Chromiumモバイル相当で再生・章移動・速度変更・320px・台本・オフライン・Range応答成功。公開確認は追記。次：本人の再試聴で滑らかさと高さを確認。

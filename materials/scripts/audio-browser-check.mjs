@@ -15,7 +15,7 @@ try {
   await page.goto('http://127.0.0.1:4189/SAA/audio/');
   await page.getByRole('heading',{name:/写真工房で覚える、\s*3つの役割。/}).waitFor();
   await page.waitForFunction(()=>Number.isFinite(document.querySelector('audio').duration));
-  const duration=await page.locator('audio').evaluate(a=>a.duration);assert.ok(duration>295&&duration<305);
+  const duration=await page.locator('audio').evaluate(a=>a.duration);assert.ok(duration>285&&duration<320);
   assert.equal(await page.locator('audio').evaluate(a=>a.paused),true,'no autoplay');
   assert.equal(await page.locator('#chapters button').count(),10);
   await page.locator('audio').evaluate(a=>{a.muted=true});
@@ -27,7 +27,7 @@ try {
   await page.waitForFunction(()=>document.querySelector('audio').currentTime>200);
   await page.locator('audio').evaluate(a=>a.pause());
   for (const [range,status,length] of [['bytes=0-99',206,100],['bytes=-128',206,128],['bytes=999999999-',416,0]]) {
-    const actual=await page.evaluate(async range=>{const r=await fetch('photo-studio-himari-5min.mp3',{headers:{Range:range}});return {status:r.status,length:(await r.arrayBuffer()).byteLength,contentRange:r.headers.get('content-range')}},range);
+    const actual=await page.evaluate(async range=>{const r=await fetch('photo-studio-himari-v2-5min.mp3',{headers:{Range:range}});return {status:r.status,length:(await r.arrayBuffer()).byteLength,contentRange:r.headers.get('content-range')}},range);
     assert.equal(actual.status,status);assert.equal(actual.length,length);assert.ok(actual.contentRange);
   }
   await page.getByText('音声と同じ台本を読む',{exact:true}).click();
