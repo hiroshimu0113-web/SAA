@@ -504,10 +504,10 @@
 
 ## G-P2 iPhoneへの試作配信と受入
 
-- 状態: ブロック（Pages設定待ち）
+- 状態: 検証待ち（配信成功、iPhone実機受入待ち）
 - ゴール: 公開HTTPS URLからiPhoneでゲームをプレイできる。
 - 前提: G-P1、GitHub Pagesの有効化。ユーザーの公開許可は取得済み。
 - 成果物: .github/workflows/deploy.yml、公開URL、IPHONE_CHECK.md。
 - 完了条件: Pages配信成功、公開URL確認、iPhoneで全3ミッションと途中再開。
-- 検証結果: mainへfd57057をpush済み。Actions実行37318975242でもインストール・13テスト・ビルド成功。configure-pagesはPages未作成のNot Foundで失敗、deployは未実行。連携APIでの設定は403。ユーザーへSource=GitHub Actionsの設定手順を案内。
-- 引き継ぎ: 設定完了後にワークフローと公開URLを再確認。実機未確認のままiPhone受入完了にしない。
+- 検証結果: ユーザーのPages有効化後、キャッシュの保存先不一致を3976bc2で修正。Actions実行37320530772で13テスト・ビルド・キャッシュ保存・配信成功。公開URLは https://hiroshimu0113-web.github.io/SAA/ 。公開7ファイルのSHA256がローカル検証済みビルドと一致。公開URLのChromium直接検証は環境CAの制約で未実施。詳しくはCHECKPOINT.md。
+- 引き継ぎ: 公開URLでiPhone受入を実施。実機未確認のままiPhone受入完了にしない。

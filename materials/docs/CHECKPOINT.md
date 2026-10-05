@@ -28,11 +28,19 @@
 
 ## 公開と実機の状態
 
-GitHub APIでSAAが非公開、Pages未作成であることを確認。Pages参照・作成APIは `Resource not accessible by integration`（403）。ユーザーへSettings → Pages → SourceをGitHub Actionsにする手順を案内済み。実装は `fd57057` としてmainへpush済み。[GitHub Actions実行37318975242](https://github.com/hiroshimu0113-web/SAA/actions/runs/37318975242)でもインストール・13テスト・ビルド成功。`actions/configure-pages` がPages未作成のNot Foundで失敗し、deployは未実行。公開成功と実際のiPhone受入は未確認。無料でPagesを利用できない場合でも、有料契約や元リポジトリの公開変更を勝手に行わない。
+公開URL：**https://hiroshimu0113-web.github.io/SAA/**
+
+ユーザー側でリポジトリ公開・Pages有効化後、旧実行の2回目はビルド・成果物アップロードまで成功し、setup-nodeのキャッシュ保存で失敗していました。ロックファイル不足ではなく、リポジトリ直下で検出したpnpm storeと、materials/pnpm-workspace.yamlが指定するstoreDirの不一致が原因です。
+
+`3976bc2` で自動キャッシュを置き換え、materials内で `pnpm store path --silent` を実行して実際の保存先をactions/cacheへ渡すよう修正。[Actions実行37320530772](https://github.com/hiroshimu0113-web/SAA/actions/runs/37320530772)は13テスト・ビルド・キャッシュ保存・Pages配信まで全て成功。npmのロックファイルは追加していません。
+
+公開URLと全7ファイルをTLS検証有効のまま取得し、検証済みローカルビルドとのSHA256一致を確認。同じ内容のローカル配信で、モバイル相当の全ミッション・再挑戦・保存・オフライン再開を再検証しました。
+
+公開URLへのChromium直接接続はクラウド環境のCA未登録で失敗。OSで信頼済みの環境CAをChromiumにも永続登録する操作は、今後のTLS信頼範囲を広げるとの理由で自動承認レビューに拒否され、実施していません。証明書検証を無効化せず、HTTPS取得と配信ファイル一致確認で代替しています。実際のiPhone受入は未確認です。
 
 ## 残作業と次の着手点
 
-1. PagesのSourceをGitHub Actionsに設定後、失敗した上記実行の「Re-run all jobs」、またはActionsの「Deploy SAA learning app」→「Run workflow」で再実行。配信結果と公開HTTPS URLのアプリを確認。
+1. 公開URLをiPhoneのSafariで開き、ホームの「設計クエストを遊ぶ」へ進む。
 2. iPhoneのSafari／ホーム画面でゲーム全3ミッションと途中再開を確認。[IPHONE_CHECK.md](IPHONE_CHECK.md)参照。
 3. 実機の文字量・操作感に基づき試作を改善。
 4. 全教材の監査、模試、本格ゲームは別途継続。試作完成をG1〜G5全体の完成としない。
