@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#163b36"><title>写真工房で覚える3つの役割 | SAAへの道</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3eb;color:#193a35;font-family:system-ui,-apple-system,sans-serif;line-height:1.85}main{max-width:740px;margin:auto;padding:28px 22px 56px}a{color:#275e52;text-underline-offset:4px}.back{font-size:14px}.eyebrow{font-size:11px;letter-spacing:2px;font-weight:700;margin-top:36px}h1{font-size:clamp(28px,6vw,42px);line-height:1.45;letter-spacing:-.04em;margin:12px 0 20px}.intro{color:#4d6259}.player{background:#163b36;color:#f3f3dd;padding:24px;border-radius:22px;margin:28px 0}.player h2{font-size:18px;margin:0 0 12px}.player p{font-size:13px;color:#d2e3d3}.player a{color:#ccf0c1}audio{display:block;width:100%;margin:18px 0}.options{display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:14px}select{min-height:44px;font:inherit;border:1px solid #a8c6ad;border-radius:8px;padding:4px 10px;background:#f5f5e8;color:#193a35}.download{display:inline-block;padding:10px 0;min-height:44px}h2{font-size:22px}#chapters{list-style:none;padding:0;display:grid;gap:8px}#chapters button{display:flex;gap:14px;align-items:baseline;width:100%;min-height:48px;padding:12px 16px;border:1px solid #d7ddd0;border-radius:12px;text-align:left;background:#fffef8;color:#193a35;font:inherit;cursor:pointer}#chapters time{font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums;color:#426d5c}details{margin:30px 0;border-top:1px solid #cbd5c8;padding-top:20px}summary{cursor:pointer;font-weight:700;min-height:44px}h3{font-size:17px}.transcript section{border-top:1px solid #dce0d7;padding-top:16px;margin-top:20px}.note{font-size:13px;color:#54665b}.sources{font-size:13px;padding-left:20px}.credits{font-size:12px;color:#52645a;margin-top:36px;padding-top:20px;border-top:1px solid #cbd5c8}:focus-visible{outline:3px solid #b78126;outline-offset:4px}#status:empty{display:none}
+</style></head><body><main>
+<a class="back" href="../">← 学習アプリ・ゲームへ</a>
+<p class="eyebrow">SAA AUDIO NOTE / SAMPLE 01</p>
+<h1>写真工房で覚える、<br>3つの役割。</h1>
+<p class="intro">処理する場所。完成写真を残す場所。必要な権限。<br>EC2・S3・IAMロールを、耳からつなぐ5分間。</p>
+<section class="player" aria-label="音声サンプルの再生"><h2>5分の音声サンプル</h2><p>合成音声 · BGMなし · 確認問題2問<br>問題の後には、7秒の考える時間があります。</p>
+<audio id="audio" controls preload="metadata" src="photo-studio-5min.mp3" aria-label="写真工房で覚えるEC2・S3・IAMロール">音声を再生できない場合は、下のMP3リンクを開いてください。</audio>
+<div class="options"><label>再生速度 <select id="speed"><option value="0.85">0.85倍</option><option value="1" selected>1倍</option><option value="1.15">1.15倍</option><option value="1.25">1.25倍</option></select></label><a class="download" href="photo-studio-5min.mp3" download>MP3を開く・保存</a></div>
+<p id="status" role="status"></p></section>
+<p class="note">iPhoneで持ち歩く場合は、MP3を開いて共有メニューから「ファイルに保存」。再生と保存の操作はブラウザーによって異なります。自動再生はしません。</p>
+<h2>好きなところから聞く</h2><ol id="chapters">{{CHAPTERS}}</ol>
+<details><summary>音声と同じ台本を読む</summary><div class="transcript">{{TRANSCRIPT}}</div></details>
+<h2>聞いた後の振り返り</h2><p>声は聞きやすいですか？ 速さはどうですか？<br>「なぜそのサービスを選ぶか」を説明できそうでしょうか。</p><p class="note">このサンプルのフィードバックを、30分版の声・テンポ・説明の量に反映します。独自教材であり、AWS公式教材ではありません。</p>
+<details><summary>根拠にしたAWS公式資料</summary><ul class="sources"><li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html">EC2でIAMロールを利用する</a></li><li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html">EC2インスタンスストア</a></li><li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html">Amazon S3の概要</a></li></ul><p class="note">2026-10-05確認。外部の公式資料を読むには通信が必要です。</p></details>
+<footer class="credits">音声：HTS Voice “Mei” / MMDAgent Project Team、名古屋工業大学（Copyright © 2009–2013）。<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>。pyopenjtalkで合成し、テンポ・音量を調整しています。実在人物の録音ではありません。<a href="https://github.com/hiroshimu0113-web/SAA/blob/main/materials/audio/VOICE_LICENSE.txt">音声モデルのライセンス</a></footer>
+</main><script>
+const audio=document.getElementById('audio'),status=document.getElementById('status');
+document.getElementById('speed').addEventListener('change',e=>{audio.playbackRate=Number(e.target.value)});
+document.querySelectorAll('[data-time]').forEach(button=>button.addEventListener('click',async()=>{try{audio.currentTime=Number(button.dataset.time);await audio.play();status.textContent=''}catch{status.textContent='プレーヤーの再生ボタンを押してください。'}}));
+audio.addEventListener('error',()=>{status.textContent='音声を読み込めませんでした。通信を確認するか、MP3リンクから開いてください。'});
+</script></body></html>

@@ -1,0 +1,6 @@
+cffi==2.1.1
+numpy==2.5.3
+pycparser==3.0
+pyopenjtalk==0.4.1
+soundfile==0.13.1
+tqdm==4.70.1

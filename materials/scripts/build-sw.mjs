@@ -16,7 +16,21 @@ async function verify(){const c=await caches.open(CACHE);const entries=await Pro
 self.addEventListener('install',event=>event.waitUntil((async()=>{try{const cache=await caches.open(CACHE);await cache.addAll(ASSETS.map(url=>new Request(url,{cache:'reload'})));if(!await verify())throw new Error('incomplete');}catch(e){await caches.delete(CACHE);throw e;}})()));
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 self.addEventListener('message',event=>{if(event.data?.type==='ACTIVATE'){self.skipWaiting();return;}event.waitUntil((async()=>{try{if(event.data?.type==='REPAIR'){const c=await caches.open(CACHE);const missing=[];for(const url of ASSETS){if(!await c.match(url))missing.push(new Request(url,{cache:'reload'}));}await c.addAll(missing);}event.ports[0]?.postMessage({ok:await verify(),version:VERSION});}catch(e){event.ports[0]?.postMessage({ok:false,version:VERSION});}})());});
-self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||!req.url.startsWith(self.registration.scope))return;event.respondWith((async()=>{const c=await caches.open(CACHE);const hit=await c.match(req,{ignoreVary:true});if(hit)return hit;if(req.mode==='navigate'){const shell=await c.match(ROOT);if(shell)return shell;}return fetch(req);})());});
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET'||!req.url.startsWith(self.registration.scope))return;event.respondWith((async()=>{const c=await caches.open(CACHE);const hit=await c.match(req,{ignoreVary:true});if(hit){
+  const range=req.headers.get('range');
+  if(range&&new URL(req.url).pathname.endsWith('.mp3')){
+    const match=/^bytes=(\\d*)-(\\d*)$/.exec(range);
+    if(match&&(match[1]||match[2])){
+      const data=await hit.arrayBuffer();const size=data.byteLength;
+      const start=match[1]?Number(match[1]):Math.max(0,size-Number(match[2]));
+      const end=match[1]?(match[2]?Math.min(Number(match[2]),size-1):size-1):size-1;
+      if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start>=size||end<start)return new Response(null,{status:416,headers:{'Content-Range':'bytes */'+size}});
+      const headers=new Headers(hit.headers);headers.set('Content-Range','bytes '+start+'-'+end+'/'+size);headers.set('Content-Length',String(end-start+1));headers.set('Accept-Ranges','bytes');
+      return new Response(data.slice(start,end+1),{status:206,headers});
+    }
+  }
+  return hit;
+}if(req.mode==='navigate'){const url=new URL(req.url);if(url.pathname.endsWith('/')){url.pathname+='index.html';const page=await c.match(url.href);if(page)return page;}const shell=await c.match(ROOT);if(shell)return shell;}return fetch(req);})());});
 `;
 await writeFile('dist/sw.js', sw);
 console.log(`Offline package: ${assets.length} files, version ${version}`);

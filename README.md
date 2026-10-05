@@ -6,6 +6,7 @@ AWS Certified Solutions Architect – Associate（SAA-C03）を、日本語の�
 
 **[学習アプリ・設計クエストを開く](https://hiroshimu0113-web.github.io/SAA/)** — iPhoneのSafariで開き、ホームの「設計クエストを遊ぶ」を選びます。
 
+- **5分の音声サンプル**：[写真工房で覚える、EC2・S3・IAMロール](https://hiroshimu0113-web.github.io/SAA/audio/index.html)。合成音声・確認問題2問・台本付き。
 - **ゲーム**：学習アプリのホームから「設計クエストを遊ぶ」。8枚のカード・3ミッション、目安5〜10分の試作です。
 - **教材を読む**：[先行版HTML](materials/deliverables/SAA-starter.html)をダウンロードしてブラウザーで開くか、[EPUB](materials/deliverables/SAA-starter.epub)をiPhoneの「ブック」に取り込みます。
 - **学習を続ける**：[学習ガイド](materials/docs/STUDY_GUIDE.md)と[学習記録](materials/docs/STUDY_LOG.md)を使います。
