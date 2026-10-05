@@ -1,0 +1,19 @@
+{
+  "name": "saa-learning-quest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build && node scripts/build-sw.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "tsx --test tests/*.test.ts",
+    "check": "tsc --noEmit",
+    "test:browser": "node scripts/browser-check.mjs",
+    "book": "tsx scripts/export-book.ts && node scripts/check-book.mjs",
+    "content:status": "tsx scripts/full-content-status.ts",
+    "start": "node scripts/serve.mjs"
+  },
+  "dependencies": { "react": "^19.1.0", "react-dom": "^19.1.0" },
+  "devDependencies": { "@types/react": "^19.1.0", "@types/react-dom": "^19.1.0", "@types/node": "^22.0.0", "typescript": "^5.8.0", "vite": "^6.3.0", "tsx": "^4.19.0", "fake-indexeddb": "^6.0.0", "@playwright/test": "^1.51.0" }
+}
