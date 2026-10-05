@@ -547,5 +547,5 @@
 - ユーザーが3番・波音リツノーマルを暫定選択。「もう少し若い感じがあるといいが妥協点」との評価を保持。声質に満足済みとは扱わない。
 - VOICEVOX 0.25.2、style 9、pitchScale 0、speedScale 0.95、intonationScale 0.9で既存台本を再合成。有料APIなし。5分に合わせ音程を保った1.1039倍のテンポ補正。確認問題後の7秒は維持。
 - 成果物：public/audio/photo-studio-ritsu-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。旧音声と旧時刻情報sample-mei.jsonは保持。生成手順はaudio/README.md。
-- 検証：300.15秒、-18.45 LUFS、-2.40 dBTP、全体デコード成功。17テスト・knowledge:check・型検査とビルド成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。比較版の再生試験も成功。公開確認は追記予定。
+- 検証：300.15秒、-18.45 LUFS、-2.40 dBTP、全体デコード成功。17テスト・knowledge:check・型検査とビルド成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。比較版の再生試験も成功。`3982a31`をmainに反映し、Actions実行37336673197で配信成功。公開プレーヤー・新音声・時刻情報・比較ページ・Service Workerの5ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。公開URL：https://hiroshimu0113-web.github.io/SAA/audio/index.html 。
 - 次：波音リツ5分版の試聴評価。若い声への希望は将来の候補比較に残す。30分版は未制作。
