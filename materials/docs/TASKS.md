@@ -563,5 +563,5 @@
 - ユーザーが追加比較の2番・冥鳴ひまりを「一番声質が好き。このコで行きましょう」と選択。今後の教材音声はVOICEVOX:冥鳴ひまり・ノーマル（style 14）を基本とする。
 - 比較版と同じpitchScale 0、intonationScale 0.9、speedScale 0.95で既存5分台本を合成。5分へのテンポ補正と問題後7秒の思考時間を維持。有料APIなし。
 - 成果物：public/audio/photo-studio-himari-5min.mp3、sample-01.json、index.html、audio/TRANSCRIPT.md。波音リツの旧音声と時刻情報sample-ritsu.jsonを保持。生成はscripts/generate-himari-audio.py。
-- 17テストとknowledge:check成功。型検査・ビルド成功。音声300.12秒、-18.31 LUFS、-2.41 dBTP、全体デコード成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。公開確認は追記。
+- 17テストとknowledge:check成功。型検査・ビルド成功。音声300.12秒、-18.31 LUFS、-2.41 dBTP、全体デコード成功。Chromiumモバイル相当で再生・速度変更・章移動・台本・320px・オフライン・Range応答成功。`46dd748`をmainに反映、Actions実行37338895323で配信成功。公開5ファイルをTLS検証付きで取得し、検証済みdistとのSHA256一致を確認。公開URL：https://hiroshimu0113-web.github.io/SAA/audio/index.html 。
 - 次：5分全体の発音・テンポの試聴評価。30分版は未制作。
