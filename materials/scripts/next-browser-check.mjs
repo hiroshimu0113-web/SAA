@@ -33,7 +33,7 @@ try{
   await page.evaluate(async ({key,seed})=>{const {newRun}=await import('./engine.mjs');localStorage.setItem(key,JSON.stringify(newRun(seed)));},{key,seed});await page.reload();await page.locator('.route-map').waitFor();
   for(let moves=0;moves<600;moves++){
    const action=await page.evaluate(async key=>{
-    const s=JSON.parse(localStorage.getItem(key)),{cardValues,intent}=await import('./engine.mjs');
+    const s=JSON.parse(localStorage.getItem(key)),{cardValues,intent,QUIZZES}=await import('./engine.mjs');
     if(['won','lost'].includes(s.phase))return {done:s.phase};
     if(s.phase==='map')return {selector:'[data-action="node"][data-lane="'+[0,0,1,0,1,1,0,0][s.floor]+'"]:not(:disabled)'};
     if(s.phase==='battle'){
@@ -43,7 +43,7 @@ try{
     }
     if(s.phase==='reward'){const rank=['optimize','redundant','balance','burst','restore','reserve','quarantine','parallel','reversal','cache','isolate','detour','overload','foresight','analysis','probe','patch','retry'];const id=[...s.reward].sort((a,b)=>rank.indexOf(a)-rank.indexOf(b))[0];return {selector:'[data-action="reward"][data-id="'+id+'"]'};}
     if(s.phase==='rest'){const c=s.deck.find(c=>!c.plus&&['burst','optimize','redundant','balance'].includes(c.id))||s.deck.find(c=>!c.plus&&c.id==='strike');return {selector:s.hp<44||!c?'[data-action="heal"]':'[data-action="upgrade"][data-uid="'+c.uid+'"]'};}
-    if(s.phase==='event')return {selector:s.hp>45?'[data-action="risk"]':'[data-action="safe"]'};
+    if(s.phase==='event'){const q=s.quiz,id=q.ids[q.step];return {selector:q.result?'[data-action="quiz-leave"]':q.answers.length>q.step?'[data-action="quiz-next"]':'[data-action="quiz-answer"][data-choice="'+QUIZZES[id].answer+'"]'};}
     if(s.phase==='shop')return {selector:s.gold>=35&&s.stock.length?'[data-action="buy"][data-id="'+s.stock[0]+'"]':'[data-action="leave"]'};
    },key);
    if(action.done){if(action.done==='won'){await page.screenshot({path:'artifacts/tower-victory-mobile.png',fullPage:true});}break;}

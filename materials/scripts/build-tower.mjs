@@ -12,4 +12,5 @@ await writeFile('dist/tower/index.html',html);
 // Fresh path avoids previously cached index.html; saves remain on the same origin.
 await writeFile('dist/tower/play.html',html);
 await writeFile('dist/tower/strategy.html',html);
+await writeFile('dist/tower/quiz.html',html);
 console.log('Tower: single-page Safari 14 bundle; no external module required at startup.');

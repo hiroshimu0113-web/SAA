@@ -1,7 +1,7 @@
 
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {CARDS,ENEMIES,ROUTES,newRun,act,intent,parseRun,cardValues} from '../public/tower/engine.mjs';
+import {QUIZZES,CARDS,ENEMIES,ROUTES,newRun,act,intent,parseRun,cardValues} from '../public/tower/engine.mjs';
 function start(seed=1){return act(newRun(seed),{type:'node',lane:0});}
 function roundTrip(s){assert.deepEqual(parseRun(JSON.stringify(s)),s);}
 test('tower: deterministic draw, card conservation, invalid actions and energy',()=>{
@@ -52,7 +52,7 @@ test('tower: complete seeded runs cover rewards, routes, rests, shop, events, wi
    else if(s.phase==='reward'){const rank=['optimize','redundant','balance','burst','restore','reserve','quarantine','parallel','reversal','cache','isolate','detour','overload','foresight','analysis','probe','patch','retry'];s=take(s,{type:'reward',id:[...s.reward].sort((a,b)=>rank.indexOf(a)-rank.indexOf(b))[0]});}
    else if(s.phase==='rest'){const c=s.deck.find(c=>!c.plus&&['burst','optimize','redundant','balance'].includes(c.id))||s.deck.find(c=>!c.plus&&c.id==='strike');s=take(s,s.hp<44||!c?{type:'heal'}:{type:'upgrade',uid:c.uid});}
    else if(s.phase==='shop'){if(s.gold>=35&&s.stock.length)s=take(s,{type:'buy',id:s.stock[0]});else s=take(s,{type:'leave'});}
-   else if(s.phase==='event')s=take(s,{type:'event',choice:s.hp>45?'risk':'safe'});
+   else if(s.phase==='event'){const q=s.quiz,id=q.ids[q.step];s=take(s,q.result?{type:'quiz-leave'}:q.answers.length>q.step?{type:'quiz-next',questionId:id}:{type:'quiz-answer',questionId:id,choice:seed%3===0?(QUIZZES[id].answer+1)%3:QUIZZES[id].answer});}
   }
   assert.ok(['won','lost'].includes(s.phase),'run did not terminate');
   if(s.phase==='won')wins++;else losses++;

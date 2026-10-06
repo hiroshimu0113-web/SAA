@@ -1,3 +1,5 @@
+import {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
+export {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 
 export const CARDS={
  strike:{name:'切り分け',cost:1,kind:'attack',damage:6,upDamage:3,text:'6ダメージ。'},
@@ -38,7 +40,7 @@ export const RELICS={
  ember:{name:'演算の火種',text:'各戦闘の開始時に強化＋1。'}
 };
 export const ROUTES=[['battle','battle'],['event','battle'],['elite','shop'],['rest','battle'],['battle','event'],['elite','shop'],['rest','rest'],['boss']];
-export const NODE_NAMES={battle:'戦闘',elite:'強敵',rest:'休息',shop:'交換所',event:'探索',boss:'ボス'};
+export const NODE_NAMES={battle:'戦闘',elite:'強敵',rest:'休息',shop:'交換所',event:'クイズ',boss:'ボス'};
 const rewardPool=Object.keys(CARDS).filter(x=>!['strike','guard'].includes(x));
 const clone=x=>JSON.parse(JSON.stringify(x));
 const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
@@ -48,7 +50,7 @@ function log(s,t){s.log=[...s.log,t].slice(-5);}
 function heal(s,n){s.hp=Math.min(s.maxHp,s.hp+n);}
 function add(s,id){s.deck.push({uid:s.nextId++,id,plus:false});}
 export function newRun(seed=Date.now()){
- const s={version:1,seed:seed>>>0,rng:seed>>>0,nextId:0,hp:72,maxHp:72,gold:60,floor:0,phase:'map',deck:[],relics:['lantern'],history:[],log:['観測灯を携えて、尖塔へ。'],battle:null,reward:[],stock:[],removed:false};
+ const s={version:2,seed:seed>>>0,rng:seed>>>0,nextId:0,hp:72,maxHp:72,gold:60,floor:0,phase:'map',deck:[],relics:['lantern'],history:[],log:['観測灯を携えて、尖塔へ。'],battle:null,reward:[],stock:[],removed:false,quiz:null};
  for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
 }
 export function cardValues(card){const d=CARDS[card.id],v={...d};if(card.plus)for(const k of ['damage','block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);return v;}
@@ -59,13 +61,14 @@ function startBattle(s,id){
 }
 export function intent(s){if(!s.battle)return null;const b=s.battle,[type,value]=ENEMIES[b.enemy].pattern[(b.turn-1)%ENEMIES[b.enemy].pattern.length];return {type,value:type==='attack'?Math.floor((value+b.strength)*(b.weak>0?.75:1)):value};}
 function win(s){const elite=s.battle.enemy==='elite',boss=s.battle.enemy==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=shuffle(s,rewardPool).slice(0,3);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
-function complete(s){s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
+function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
+function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
 export function act(state,action){
  const s=clone(state),a=action,b=s.battle;
  if(a.type==='node'&&s.phase==='map'&&Number.isInteger(a.lane)&&ROUTES[s.floor]?.[a.lane]){
   const type=ROUTES[s.floor][a.lane];s.history.push({floor:s.floor,lane:a.lane,type});s.floor++;log(s,s.floor+'階：'+NODE_NAMES[type]);
   if(['battle','elite','boss'].includes(type)){const id=type==='battle'?['noise','surge','leak','timeout','storm','deadlock'][Math.floor(rnd(s)*6)]:type;startBattle(s,id);}
-  else{s.phase=type;s.removed=false;if(type==='shop')s.stock=shuffle(s,rewardPool).slice(0,3);}return s;
+  else{s.phase=type;s.battle=null;s.removed=false;if(type==='event')startQuiz(s);if(type==='shop')s.stock=shuffle(s,rewardPool).slice(0,3);}return s;
  }
  if(a.type==='play'&&s.phase==='battle'){
   const index=b.hand.indexOf(a.uid),card=s.deck.find(c=>c.uid===a.uid);if(index<0||!card)return state;const d=cardValues(card);if(d.cost>b.energy)return state;
@@ -93,8 +96,21 @@ export function act(state,action){
   if(a.type==='upgrade'){const c=s.deck.find(c=>c.uid===a.uid&&!c.plus);if(!c)return state;c.plus=true;log(s,CARDS[c.id].name+'を強化。');complete(s);return s;}
  }
  if(s.phase==='event'){
-  if(a.type==='event'&&a.choice==='risk'&&s.hp>8){s.hp-=8;s.gold+=42;log(s,'廃棄サーバーを探索。HP−8、42コイン獲得。');complete(s);return s;}
-  if(a.type==='event'&&a.choice==='safe'){heal(s,7);log(s,'安全な経路でHPを7回復。');complete(s);return s;}
+  const q=s.quiz;
+  if(!q)return state;
+  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){q.answers.push(a.choice);return s;}
+  if(a.type==='quiz-next'&&q.step<2&&q.answers.length===q.step+1&&a.questionId===q.ids[q.step]){
+   q.step++;
+   if(q.step===2){
+    const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:0};
+    if(correct===2){const relic=shuffle(s,Object.keys(RELICS).filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else{q.result.gold=QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
+    if(correct===1){q.result.gold=QUIZ_RULES.coins;s.gold+=q.result.gold;}
+    if(correct===0){q.result.damage=Math.min(s.hp,QUIZ_RULES.damage);s.hp-=q.result.damage;}
+    log(s,'クイズ '+correct+'/2問正解。'+(q.result.relic?'遺物「'+RELICS[q.result.relic].name+'」を獲得。':q.result.gold?q.result.gold+'コイン獲得。':'HP −'+q.result.damage+'。'));
+    if(s.hp===0){s.phase='lost';log(s,'クイズのダメージで力尽きた。');}
+   }return s;
+  }
+  if(a.type==='quiz-leave'&&q.result){complete(s);return s;}
  }
  if(s.phase==='shop'){
   if(a.type==='buy'&&s.stock.includes(a.id)&&s.gold>=35){s.gold-=35;add(s,a.id);s.stock=s.stock.filter(x=>x!==a.id);log(s,CARDS[a.id].name+'を購入。');return s;}
@@ -105,14 +121,22 @@ export function act(state,action){
 }
 export function parseRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
- if(!s||s.version!==1||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.hp,72)||s.maxHp!==72||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
+ if(!s||![1,2].includes(s.version)||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.hp,72)||s.maxHp!==72||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
  if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
  for(const [name,allowed,max] of [['relics',Object.keys(RELICS),4],['reward',rewardPool,3],['stock',rewardPool,3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
  if(!Array.isArray(s.history)||s.history.length!==s.floor||!s.history.every((h,i)=>h.floor===i&&num(h.lane,1)&&ROUTES[i][h.lane]===h.type)||!Array.isArray(s.log)||s.log.length>5||!s.log.every(t=>typeof t==='string'&&t.length<200)||typeof s.removed!=='boolean')throw Error('進行記録が不正です。');
  if(s.phase==='map'&&s.floor>=8)throw Error('ルートが不正です。');
  if(s.phase==='lost'&&s.hp!==0||s.phase!=='lost'&&s.hp===0)throw Error('HPが不正です。');
+ if(s.quiz===undefined){if(s.version!==1)throw Error('クイズ保存形式が不正です。');s.quiz=null;if(s.phase==='event')startQuiz(s);}
+ const q=s.quiz;
+ if(q!==null){
+  if(!['event','lost'].includes(s.phase)||s.history[s.history.length-1]?.type!=='event'||!Array.isArray(q.ids)||q.ids.length!==2||new Set(q.ids).size!==2||!q.ids.every(id=>owns(QUIZZES,id))||!Array.isArray(q.answers)||!num(q.step,2)||q.answers.length<q.step||q.answers.length>Math.min(2,q.step+1)||!q.answers.every((v,i)=>num(v,QUIZZES[q.ids[i]].options.length-1)))throw Error('クイズの記録が不正です。');
+  if(q.step<2&&q.result!==null||q.step===2&&!q.result)throw Error('クイズ結果が不正です。');
+  if(q.result){const r=q.result,n=quizScore(q);if(r.correct!==n||!num(r.gold)||!num(r.damage,8))throw Error('クイズ採点が不正です。');if(n===2?(r.damage!==0||(r.relic===null?r.gold!==60:!owns(RELICS,r.relic)||!s.relics.includes(r.relic)||r.gold!==0)):n===1?(r.relic!==null||r.gold!==30||r.damage!==0):(r.relic!==null||r.gold!==0||r.damage<1))throw Error('クイズ報酬が不正です。');}
+ }else if(s.phase==='event')throw Error('クイズがありません。');
+ const quizLost=s.phase==='lost'&&q?.result?.correct===0&&q.step===2&&s.battle===null;
  const b=s.battle;
- if(['battle','reward','won','lost'].includes(s.phase)){
+ if(['battle','reward','won','lost'].includes(s.phase)&&!quizLost){
   if(!b||!owns(ENEMIES,b.enemy)||b.maxHp!==ENEMIES[b.enemy].hp||!num(b.hp,b.maxHp))throw Error('敵が不正です。');
   for(const k of ['block','strength','weak','turn','playerBlock','playerStrength','armor','energy'])if(!num(b[k]))throw Error('戦闘の数値が不正です。');
   if(b.turn<1)throw Error('ターンが不正です。');
@@ -121,5 +145,5 @@ export function parseRun(raw){
   if(s.phase==='battle'&&b.hp===0||['reward','won'].includes(s.phase)&&b.hp!==0)throw Error('敵HPが不正です。');
   if(s.phase==='won'&&(b.enemy!=='boss'||s.floor!==8))throw Error('クリア状態が不正です。');
  } else if(b!==null)throw Error('戦闘外の記録が不正です。');
- return s;
+ s.version=2;return s;
 }
