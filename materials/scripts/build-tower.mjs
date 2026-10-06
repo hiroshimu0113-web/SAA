@@ -14,3 +14,5 @@ await writeFile('dist/tower/play.html',html);
 await writeFile('dist/tower/strategy.html',html);
 await writeFile('dist/tower/quiz.html',html);
 console.log('Tower: single-page Safari 14 bundle; no external module required at startup.');
+
+await writeFile('dist/tower/battle.html',html);

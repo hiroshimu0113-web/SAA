@@ -8,7 +8,7 @@ export async function checkCombatEffects(browser,base){
  const original=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));await p.getByRole('button',{name:'演出を試す',exact:true}).tap();await p.locator('.combat-toast').waitFor();assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),original);
  await p.locator('.combat-toast').waitFor({state:'detached',timeout:5000});
  async function setup(id='strike',block=0,energy=3){const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerBlock=block;s.battle.energy=energy;s.hp=50;s.deck.find(c=>c.uid===s.battle.hand[0]).id=id;await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();}
- await setup();await p.evaluate(()=>window.scrollTo(0,document.querySelector('.hand').getBoundingClientRect().top+scrollY-80));
+ await setup();await p.evaluate(()=>window.scrollTo(0,document.querySelector('.hand').getBoundingClientRect().top+scrollY+10));
  assert.ok(await p.locator('.arena').evaluate(e=>e.getBoundingClientRect().bottom<0),'reproduce arena above viewport');
  await p.locator('.hand .card').first().tap();const toast=await p.locator('.combat-toast').boundingBox();assert.ok(toast.y>=0&&toast.y+toast.height<844,'result remains visible');assert.equal(await p.locator('.fx-hit').innerText(),'−6');assert.equal(await p.locator('.enemy').evaluate(e=>getComputedStyle(e).animationName),'fx-impact');assert.equal(await p.locator('.combat-fx').evaluate(e=>getComputedStyle(e).pointerEvents),'none');
  await p.screenshot({path:'artifacts/combat-hit.png'});
