@@ -74,3 +74,5 @@
 - https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html
 - https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
 - https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html
+
+- 公開完了：c0cc2ffa72dfbb7cf8a2ab7d566fc2f87246494c、Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37453592441 は33テスト・build・WebKit・deploy成功。公開HTTPSのChromeで3役成立、予告枠、長押し条件、通知の非重複/消去、途中再開、二重報酬防止、オフライン成立、既存操作を確認。入口 https://hiroshimu0113-web.github.io/SAA/tower/combo.html 。iPhone実機の操作感と役の難易度は未検証。次は実プレイで成立頻度と説明の分かりやすさを評価。
