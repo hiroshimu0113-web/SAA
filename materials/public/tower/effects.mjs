@@ -1,3 +1,4 @@
+import {triggeredCombos} from './combos.mjs';
 import {cardValues,intent} from './engine.mjs';
 // Presentation only: derive outcomes from the committed before/after states.
 export function combatEffects(before,after,action){
@@ -9,7 +10,7 @@ export function combatEffects(before,after,action){
   const d=cardValues(c),hits=d.hits||1;
   if(d.damage){
    const loss=b.hp-n.hp,blocked=Math.max(0,b.block-n.block);
-   if(loss)add('enemy','hit',loss,'−'+loss+(hits>1?' / '+hits+' HIT':''));
+   if(loss)add('enemy','hit',loss,'−'+loss+(hits>1&&!triggeredCombos(before,after).length?' / '+hits+' HIT':''));
    if(blocked)add('enemy','guard',blocked,'防御 '+blocked);
   }
   if(n.playerBlock>b.playerBlock)add('player','shield',n.playerBlock-b.playerBlock,'◇ ＋'+(n.playerBlock-b.playerBlock));

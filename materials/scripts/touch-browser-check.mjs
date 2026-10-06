@@ -1,3 +1,4 @@
+import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
 import {checkQuizAndHud,quizOfflineRoundtrip} from './quiz-browser-check.mjs';
 import {checkStrategy} from './strategy-browser-check.mjs';
 import {checkCombatEffects} from './effects-browser-check.mjs';
@@ -52,11 +53,13 @@ try{
  await p.reload();await p.locator('.hand').waitFor();
  await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await quizOfflineRoundtrip(p);
+ await checkComboOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
  await checkQuizAndHud(browser,base);
+ await checkCombos(browser,base);
  // Deliberately stop the inline application: loader must offer recovery, not hang.
  const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/index.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
  await q.goto(base+'tower/index.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();

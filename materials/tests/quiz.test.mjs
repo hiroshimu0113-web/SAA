@@ -10,8 +10,8 @@ test('quiz: lethal damage, all-relic fallback, partial resume and old event migr
  let s=enter();s.hp=4;s=finish(s,0);assert.equal(s.phase,'lost');assert.equal(s.hp,0);assert.equal(s.quiz.result.damage,4);round(s);
  s=enter();s.relics=Object.keys(RELICS);const gold=s.gold;s=finish(s,2);assert.equal(s.gold,gold+60);assert.equal(s.relics.length,4);round(s);
  s=enter();const id=s.quiz.ids[0];s=act(s,{type:'quiz-answer',questionId:id,choice:QUIZZES[id].answer});const loaded=parseRun(JSON.stringify(s));assert.equal(loaded.quiz.answers.length,1);assert.deepEqual(loaded.quiz.ids,s.quiz.ids);
- const old=enter();old.version=1;delete old.quiz;const migrated=parseRun(JSON.stringify(old));assert.equal(migrated.version,2);assert.equal(migrated.quiz.answers.length,0);assert.equal(migrated.hp,old.hp);assert.deepEqual(parseRun(JSON.stringify(old)),migrated);
- const battle=act(newRun(1),{type:'node',lane:0});battle.version=1;delete battle.quiz;assert.equal(parseRun(JSON.stringify(battle)).version,2);
+ const old=enter();old.version=1;delete old.quiz;const migrated=parseRun(JSON.stringify(old));assert.equal(migrated.version,3);assert.equal(migrated.quiz.answers.length,0);assert.equal(migrated.hp,old.hp);assert.deepEqual(parseRun(JSON.stringify(old)),migrated);
+ const battle=act(newRun(1),{type:'node',lane:0});battle.version=1;delete battle.quiz;assert.equal(parseRun(JSON.stringify(battle)).version,3);
 });
 test('quiz: reject corrupt questions, answers, scores and stale question actions',()=>{
  for(const mutate of [s=>s.quiz.ids[1]=s.quiz.ids[0],s=>s.quiz.ids[0]='bad',s=>s.quiz.answers=[99],s=>s.quiz.step=2]){const s=enter();mutate(s);assert.throws(()=>parseRun(JSON.stringify(s)));}

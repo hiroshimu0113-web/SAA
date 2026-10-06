@@ -1,3 +1,4 @@
+import {COMBOS,triggeredCombos} from './combos.mjs';
 import {cardValues,act,intent} from './engine.mjs';
 import {combatEffects} from './effects.mjs';
 export function lifetime(c){const d=cardValues(c);return d.kind==='power'?'この戦闘中、効果が続く':d.block?'使用時に防御を得る。次の自分のターンにリセット':'使用時に効果を解決する';}
@@ -6,11 +7,13 @@ export function turnForecast(s){if(s?.phase!=='battle')return '';const i=intent(
 export function inspectPlay(s,c){
  if(s?.phase!=='battle'||!s.battle.hand.includes(c.uid)||cardValues(c).cost>s.battle.energy)return null;
  const action={type:'play',uid:c.uid},next=act(s,action),effects=combatEffects(s,next,action),d=cardValues(c);
+ const roles=triggeredCombos(s,next);
  const lines=effects.map(f=>(f.side==='enemy'?'敵：':'自分：')+f.label);
+ for(const id of roles)lines.push('役「'+COMBOS[id].name+'」成立：'+COMBOS[id].label);
  if(d.draw&&next.phase==='battle')lines.push('手札に '+Math.max(0,next.battle.hand.length-s.battle.hand.length+1)+'枚補充');
  if(next.phase==='lost')lines.push('自分のHPが0になり、この冒険は終了');
  const hit=effects.find(f=>f.side==='enemy'&&f.kind==='hit');
- const brief=d.damage?'敵HP −'+(hit?.value||0):d.block?'防御 ＋'+d.block:d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:'手札を補充';
+ const brief=d.damage?'敵HP −'+(hit?.value||0):d.block?'防御 ＋'+(next.battle.playerBlock-s.battle.playerBlock):d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:'手札を補充';
  return {lines,brief,nextPhase:next.phase};
 }
 export function synergyHints(s,c){
