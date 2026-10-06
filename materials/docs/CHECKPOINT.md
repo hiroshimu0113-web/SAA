@@ -205,3 +205,5 @@
 - 実装：strategy.mjsで戦略表示を分離。プレビューは既存actを複製状態へ適用し、保存・乱数を変えず実処理と一致。カード追加・数値調整は今回行わない。
 - 検証：27テスト・ビルド成功。Chromeで320px、強化＋2の2回攻撃／防御3に対し実HP減少9、相性表示、遺物の指操作、エナジー不足、保存不変、既存長押し・演出・オフラインとボス撃破まで成功。詳細と報酬画面を目視確認。
 - 新入口 tower/strategy.html を生成して旧キャッシュとの混同を避ける。保存記録は共有。WebKitと公開確認はこれから。次はユーザーのiPhoneで表示と戦略の分かりやすさを確認。教材・音声は変更なし。
+
+- 公開完了：4bdd7ffe0d3e1dc7e291ee19dd42c15c8fc3584e、Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37422556125 成功。WebKitと公開HTTPSのChromeで戦略ガイド・相性・予測・320px・セーブ不変・既存タッチ／演出／オフラインを確認。新入口 https://hiroshimu0113-web.github.io/SAA/tower/strategy.html 。今回のiPhone実機操作感と実ユーザーの戦略理解への効果は未検証。次はプレイで報酬選びとカード順の判断に役立つか確認。
