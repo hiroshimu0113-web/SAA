@@ -374,6 +374,127 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "authentication-caller-identity",
+      "title": "要求に使われた主体の確認",
+      "premise": "EC2アプリがどの主体でAWSへ要求しているか調べる。",
+      "constraints": [
+        "認証情報は有効でSTSへの通信は正常。GetCallerIdentityの固有の性質を扱い、一般のDeny評価へ拡張しない。"
+      ],
+      "questions": [
+        {
+          "id": "auth-caller-account",
+          "objective": "主体情報と操作許可を区別する。",
+          "prompt": "GetCallerIdentityがAccountとArnを返した。この応答から確認できるものは？",
+          "options": [
+            {
+              "id": "auth-caller-account-a",
+              "text": "呼び出しに使われた主体と、その主体を所有・包含するアカウント",
+              "explanation": "呼び出しに使ったIAMユーザーまたはロールの情報です。操作権限の判断は別です。"
+            },
+            {
+              "id": "auth-caller-account-b",
+              "text": "S3の全操作が許可されること",
+              "explanation": "主体の情報が返るだけで、S3の操作許可を証明しません。"
+            },
+            {
+              "id": "auth-caller-account-c",
+              "text": "その主体のシークレットアクセスキー",
+              "explanation": "返されたARNは主体の識別子で、シークレットアクセスキーではありません。"
+            }
+          ],
+          "correct_option_id": "auth-caller-account-a",
+          "runtime_option_order": [
+            "auth-caller-account-a",
+            "auth-caller-account-b",
+            "auth-caller-account-c"
+          ],
+          "rationale": "呼び出しに使ったIAMユーザーまたはロールの情報です。操作権限の判断は別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go"
+          ]
+        },
+        {
+          "id": "auth-caller-deny",
+          "objective": "API固有の限定例外を一般化しない。",
+          "prompt": "有効な認証情報と正常な通信は維持。IDポリシーでsts:GetCallerIdentityを明示的Denyした場合、このAPIの公式説明に合うものは？",
+          "options": [
+            {
+              "id": "auth-caller-deny-a",
+              "text": "必ず主体情報を返せなくなる",
+              "explanation": "GetCallerIdentityは権限不要で、当該Denyがあっても主体情報を得られると公式説明にあります。"
+            },
+            {
+              "id": "auth-caller-deny-b",
+              "text": "主体情報を得られるという固有の性質があり、他の操作にもDenyを無視できるとは言えない",
+              "explanation": "このAPIに限った性質です。一般の対象サービスのDeny評価と混同しません。"
+            },
+            {
+              "id": "auth-caller-deny-c",
+              "text": "GetCallerIdentityが成功すればS3の明示的Denyも無効になる",
+              "explanation": "API固有の例外を、S3などの操作許可へ一般化してはいけません。"
+            }
+          ],
+          "correct_option_id": "auth-caller-deny-b",
+          "runtime_option_order": [
+            "auth-caller-deny-a",
+            "auth-caller-deny-b",
+            "auth-caller-deny-c"
+          ],
+          "rationale": "このAPIに限った性質です。一般の対象サービスのDeny評価と混同しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "返されたAccountが意図したアカウントと異なる。",
+        "answer": "実際に選ばれた認証情報プロバイダーや先行する固定キー設定を調べる。",
+        "reason": "S3の操作権限を増やしても要求主体の選択そのものは変わらない。"
+      },
+      "unit_ids": [
+        "authentication"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch04",
+        "ch10"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go",
+          "claim": "APIで使われたIAMユーザーまたはロールのAccount/Arnを返す。操作権限不要で、当該操作を明示的にDenyしても主体情報を得られるという限定例外。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+          "claim": "別プロバイダーが先に解決されるとEC2ロールが自動選択されない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+          "claim": "MFA認証操作と、ユーザーに基づく権限を持つ一時認証情報を区別する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

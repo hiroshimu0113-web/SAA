@@ -3525,6 +3525,272 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-authentication-caller-identity",
+      "title": "認証：要求に使われた主体を確認する",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "誰であるかの確認と、実行できる操作の判断を分ける。",
+      "unit_ids": [
+        "authentication"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/authentication.md",
+          "locator": "認証：要求に使われた主体を確認する"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Identity and Access Management",
+        "AWS Security Token Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "認証情報は有効でSTSへの通信は正常。GetCallerIdentityの固有の性質を扱い、一般のDeny評価へ拡張しない。"
+      ],
+      "limitations": [
+        "主体情報の確認と認可の区別、GetCallerIdentity固有の権限不要の性質。全認証方式やIAM評価全体は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "ログインできれば全操作が許可される。",
+        "GetCallerIdentity成功がS3の操作許可を証明する。",
+        "GetCallerIdentityの例外を一般のDeny評価へ広げる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/authentication.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "EC2アプリがどの主体でAWSへ要求しているか調べる。",
+        "counterexample": "主体確認APIが成功しても、別操作の許可は確認できない。",
+        "comparison": {
+          "path": "knowledge/lessons/authentication.md",
+          "locator": "比較"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-authentication-caller-identity",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go",
+          "claim": "APIで使われたIAMユーザーまたはロールのAccount/Arnを返す。操作権限不要で、当該操作を明示的にDenyしても主体情報を得られるという限定例外。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+          "claim": "別プロバイダーが先に解決されるとEC2ロールが自動選択されない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+          "claim": "MFA認証操作と、ユーザーに基づく権限を持つ一時認証情報を区別する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/authentication.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "GetCallerIdentity成功がS3の操作許可を証明する。",
+          "GetCallerIdentityの例外を一般のDeny評価へ広げる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-authentication-caller-identity",
+      "title": "要求に使われた主体の確認",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "authentication"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "authentication-caller-identity"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Identity and Access Management",
+        "AWS Security Token Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "認証情報は有効でSTSへの通信は正常。GetCallerIdentityの固有の性質を扱い、一般のDeny評価へ拡張しない。"
+      ],
+      "limitations": [
+        "主体情報の確認と認可の区別、GetCallerIdentity固有の権限不要の性質。全認証方式やIAM評価全体は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "ログインできれば全操作が許可される。",
+        "GetCallerIdentity成功がS3の操作許可を証明する。",
+        "GetCallerIdentityの例外を一般のDeny評価へ広げる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authentication-caller-identity.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authentication-caller-identity.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authentication-caller-identity.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authentication-caller-identity.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go",
+          "claim": "APIで使われたIAMユーザーまたはロールのAccount/Arnを返す。操作権限不要で、当該操作を明示的にDenyしても主体情報を得られるという限定例外。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+          "claim": "別プロバイダーが先に解決されるとEC2ロールが自動選択されない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+          "claim": "MFA認証操作と、ユーザーに基づく権限を持つ一時認証情報を区別する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/authentication.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "GetCallerIdentity成功がS3の操作許可を証明する。",
+          "GetCallerIdentityの例外を一般のDeny評価へ広げる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "auth-caller-account, auth-caller-deny"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

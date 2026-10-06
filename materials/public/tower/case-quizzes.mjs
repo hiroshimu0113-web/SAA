@@ -89,6 +89,36 @@ export const CASE_QUIZZES={
       "PutObject許可だけで、その要求に付随するタグ設定も自動的に許可されるわけではありません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+  },
+  "auth-caller-account": {
+    "prompt": "EC2アプリがどの主体でAWSへ要求しているか調べる。 GetCallerIdentityがAccountとArnを返した。この応答から確認できるものは？",
+    "options": [
+      "呼び出しに使われた主体と、その主体を所有・包含するアカウント",
+      "S3の全操作が許可されること",
+      "その主体のシークレットアクセスキー"
+    ],
+    "answer": 0,
+    "reasons": [
+      "呼び出しに使ったIAMユーザーまたはロールの情報です。操作権限の判断は別です。",
+      "主体の情報が返るだけで、S3の操作許可を証明しません。",
+      "返されたARNは主体の識別子で、シークレットアクセスキーではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go"
+  },
+  "auth-caller-deny": {
+    "prompt": "EC2アプリがどの主体でAWSへ要求しているか調べる。 有効な認証情報と正常な通信は維持。IDポリシーでsts:GetCallerIdentityを明示的Denyした場合、このAPIの公式説明に合うものは？",
+    "options": [
+      "必ず主体情報を返せなくなる",
+      "主体情報を得られるという固有の性質があり、他の操作にもDenyを無視できるとは言えない",
+      "GetCallerIdentityが成功すればS3の明示的Denyも無効になる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "GetCallerIdentityは権限不要で、当該Denyがあっても主体情報を得られると公式説明にあります。",
+      "このAPIに限った性質です。一般の対象サービスのDeny評価と混同しません。",
+      "API固有の例外を、S3などの操作許可へ一般化してはいけません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -103,5 +133,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "auth-photo-version",
     "auth-photo-tags"
+  ],
+  [
+    "auth-caller-account",
+    "auth-caller-deny"
   ]
 ];

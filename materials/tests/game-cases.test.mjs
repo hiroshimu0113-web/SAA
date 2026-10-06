@@ -17,7 +17,9 @@ test('cases: export only reviewed pairs, choose in order, resume after every ans
  assert.deepEqual(QUIZ_CASE_PAIRS,cases.filter(c=>c.content_status==='reviewed').map(c=>c.questions.map(q=>q.id)));
  const seen=new Set();
  for(let seed=1;seed<=120;seed++){
-  let s=enter(seed);const pair=s.quiz.ids.join(',');seen.add(pair);
+  // Spread deterministic seeds across the 32-bit space; small consecutive seeds
+  // can share the same early xorshift/shuffle choices as the case pool grows.
+  let s=enter((seed*2654435761)>>>0);const pair=s.quiz.ids.join(',');seen.add(pair);
   assert.ok(s.quiz.ids.every(id=>LEGACY_QUIZ_IDS.includes(id))||QUIZ_CASE_PAIRS.some(p=>p.join(',')===pair),'mixed or reordered case');
   for(const id of s.quiz.ids){
    s=act(s,{type:'quiz-answer',questionId:id,choice:QUIZZES[id].answer});assert.deepEqual(parseRun(JSON.stringify(s)),s);

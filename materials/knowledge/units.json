@@ -379,10 +379,12 @@
       "group": "security",
       "objective": "誰であるかの確認と、実行できる操作の判断を分ける。",
       "estimated_minutes": 5,
-      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "scope": "主体情報の確認と認可の区別、GetCallerIdentity固有の権限不要の性質。全認証方式やIAM評価全体は範囲外。",
       "prerequisites": [],
       "misconceptions": [
-        "ログインできれば全操作が許可される。"
+        "ログインできれば全操作が許可される。",
+        "GetCallerIdentity成功がS3の操作許可を証明する。",
+        "GetCallerIdentityの例外を一般のDeny評価へ広げる。"
       ],
       "checks": [
         {
@@ -391,7 +393,8 @@
           "prompt": "認証と認可の違いを説明して。",
           "expected_points": [
             "認証は誰であるかを確認",
-            "認可は何を実行できるかを判断"
+            "認可は何を実行できるかを判断",
+            "GetCallerIdentityで要求に使った主体とアカウントを調べられる"
           ]
         },
         {
@@ -400,7 +403,8 @@
           "prompt": "MFAでログインできた人がS3を読めない。必ず認証の故障？",
           "expected_points": [
             "認証後の権限で拒否され得る",
-            "認証とアクセス許可を分けて調べる"
+            "認証とアクセス許可、通信条件を分けて調べる",
+            "MFA成功や主体確認だけでS3成功を保証しない"
           ]
         }
       ],
@@ -408,14 +412,34 @@
         "ch02-l01"
       ],
       "review": {
-        "status": "draft",
-        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-        "source_document": "docs/STARTER_REVIEW.md"
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/authentication.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go",
+            "claim": "APIで使われたIAMユーザーまたはロールのAccount/Arnを返す。操作権限不要で、当該操作を明示的にDenyしても主体情報を得られるという限定例外。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+            "claim": "別プロバイダーが先に解決されるとEC2ロールが自動選択されない。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+            "claim": "MFA認証操作と、ユーザーに基づく権限を持つ一時認証情報を区別する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
       },
       "learner_state": "unassessed",
       "next_enrichment": [
-        "条件を1つ変えた転移問題を追加する",
-        "境界条件と公式根拠を照合してから公開教材へ反映する"
+        "フェデレーションとサービス主体の認証方式を別単位で扱う",
+        "実環境の認証情報選択試験と別担当者の独立レビュー"
       ]
     },
     {
