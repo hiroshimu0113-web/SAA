@@ -1485,6 +1485,128 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "sqs-visibility-receipt",
+      "title": "SQSの延長時計と最新受信ハンドル",
+      "premise": "SQS Standardキューのワーカーが、写真加工のメッセージを受信し処理する。",
+      "constraints": [
+        "時刻・期間・識別子は架空例。可視性の変更は上限内で成功、保持期限切れやDLQ等はこの例で起こらない。",
+        "第1問は変更後の期限だけ、第2問は別の再受信後の削除識別子を問う。"
+      ],
+      "questions": [
+        {
+          "id": "sqs-change-from-now",
+          "objective": "変更時刻を期間の起点にする。",
+          "prompt": "0秒に受信し、20秒の時点でChangeMessageVisibility(60秒)が成功した。追加の変更・削除はない。変更後の不可視期限は、起点0秒から何秒の時点？",
+          "options": [
+            {
+              "id": "sqs-change-from-now-a",
+              "text": "60秒。受信時刻から指定秒数を数える",
+              "explanation": "変更要求の時刻から数えるため、受信時刻を起点にした60秒ではありません。"
+            },
+            {
+              "id": "sqs-change-from-now-b",
+              "text": "80秒。変更した20秒から60秒を数える",
+              "explanation": "20+60=80です。これは架空の時計の計算でAWSの性能保証ではありません。"
+            },
+            {
+              "id": "sqs-change-from-now-c",
+              "text": "もとの期限にさらに60秒を加えた時点",
+              "explanation": "指定値は変更時点からの新しい期間です。以前の期限へ単に加算しません。"
+            }
+          ],
+          "correct_option_id": "sqs-change-from-now-b",
+          "runtime_option_order": [
+            "sqs-change-from-now-a",
+            "sqs-change-from-now-b",
+            "sqs-change-from-now-c"
+          ],
+          "rationale": "20+60=80です。これは架空の時計の計算でAWSの性能保証ではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ChangeMessageVisibility.go"
+          ]
+        },
+        {
+          "id": "sqs-new-receipt-handle",
+          "objective": "最新受信ハンドルを削除へ使う。",
+          "prompt": "別の同じメッセージを2回受信した。MessageId=Mは同じ、初回のReceiptHandle=H1、最新はH2。最新の受信分の処理が成功した。DeleteMessageに使うのは？",
+          "options": [
+            {
+              "id": "sqs-new-receipt-handle-a",
+              "text": "MessageId=M",
+              "explanation": "メッセージのIDと受信ハンドルは別です。DeleteMessageはMessageIdを指定する操作ではありません。"
+            },
+            {
+              "id": "sqs-new-receipt-handle-b",
+              "text": "初回ReceiptHandle=H1",
+              "explanation": "古いハンドルでは成功応答でも削除されない場合があります。最新受信の値を使います。"
+            },
+            {
+              "id": "sqs-new-receipt-handle-c",
+              "text": "最新ReceiptHandle=H2",
+              "explanation": "最新受信のReceiptHandleを使います。Standardでの再受信に備える冪等処理も別に必要です。"
+            }
+          ],
+          "correct_option_id": "sqs-new-receipt-handle-c",
+          "runtime_option_order": [
+            "sqs-new-receipt-handle-a",
+            "sqs-new-receipt-handle-b",
+            "sqs-new-receipt-handle-c"
+          ],
+          "rationale": "最新受信のReceiptHandleを使います。Standardでの再受信に備える冪等処理も別に必要です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の変更が成功した直後にワーカーが停止する。ほかの変更・削除はなく、復旧担当者は再処理を急ぎたい。",
+        "answer": "長い不可視期間が再処理を遅らせる代償を考え、処理時間と失敗時の再処理要件に合う設定・復旧手順を設計する。",
+        "reason": "長ければ長いほど常に良いのではない。成功前の削除を再処理対策にすると、未完了作業を失う。"
+      },
+      "unit_ids": [
+        "visibility-timeout"
+      ],
+      "chapter_ids": [
+        "ch08",
+        "ch09",
+        "ch11"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+          "claim": "受信後の一時不可視、削除/延長されないと再可視化。短い/長い時間の代償。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ChangeMessageVisibility.go",
+          "claim": "指定秒数は変更要求から数える。特定メッセージの変更は次回受信へ引き継がず、本来のタイムアウトへ戻る。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+          "claim": "削除はMessageIdではなく最新ReceiptHandle。古いハンドルだと成功応答でも未削除の場合。Standardでは削除後再受信もあり冪等性が必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

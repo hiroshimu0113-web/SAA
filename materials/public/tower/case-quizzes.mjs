@@ -359,6 +359,36 @@ export const CASE_QUIZZES={
       "多くの設定を持っていても、既定のグループや配置が適用される条件があります。完全一致や接続成功を保証しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go"
+  },
+  "sqs-change-from-now": {
+    "prompt": "SQS Standardキューのワーカーが、写真加工のメッセージを受信し処理する。 0秒に受信し、20秒の時点でChangeMessageVisibility(60秒)が成功した。追加の変更・削除はない。変更後の不可視期限は、起点0秒から何秒の時点？",
+    "options": [
+      "60秒。受信時刻から指定秒数を数える",
+      "80秒。変更した20秒から60秒を数える",
+      "もとの期限にさらに60秒を加えた時点"
+    ],
+    "answer": 1,
+    "reasons": [
+      "変更要求の時刻から数えるため、受信時刻を起点にした60秒ではありません。",
+      "20+60=80です。これは架空の時計の計算でAWSの性能保証ではありません。",
+      "指定値は変更時点からの新しい期間です。以前の期限へ単に加算しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ChangeMessageVisibility.go"
+  },
+  "sqs-new-receipt-handle": {
+    "prompt": "SQS Standardキューのワーカーが、写真加工のメッセージを受信し処理する。 別の同じメッセージを2回受信した。MessageId=Mは同じ、初回のReceiptHandle=H1、最新はH2。最新の受信分の処理が成功した。DeleteMessageに使うのは？",
+    "options": [
+      "MessageId=M",
+      "初回ReceiptHandle=H1",
+      "最新ReceiptHandle=H2"
+    ],
+    "answer": 2,
+    "reasons": [
+      "メッセージのIDと受信ハンドルは別です。DeleteMessageはMessageIdを指定する操作ではありません。",
+      "古いハンドルでは成功応答でも削除されない場合があります。最新受信の値を使います。",
+      "最新受信のReceiptHandleを使います。Standardでの再受信に備える冪等処理も別に必要です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -409,5 +439,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "rds-pitr-restore-time",
     "rds-pitr-new-target"
+  ],
+  [
+    "sqs-change-from-now",
+    "sqs-new-receipt-handle"
   ]
 ];

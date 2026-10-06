@@ -212,7 +212,8 @@
         "candidate-lambda-concurrency",
         "candidate-step-functions",
         "candidate-task-role",
-        "candidate-temporary-credentials"
+        "candidate-temporary-credentials",
+        "candidate-visibility-timeout"
       ]
     },
     {
@@ -285,6 +286,7 @@
         "candidate-restore-test",
         "candidate-rpo",
         "candidate-rto",
+        "candidate-visibility-timeout",
         "candidate-warm-standby"
       ]
     },
@@ -4452,9 +4454,11 @@
     {
       "id": "candidate-visibility-timeout",
       "concept_id": "visibility-timeout",
-      "title": "visibility-timeout",
+      "title": "SQSの可視性延長と受信ハンドル",
       "related_chapter_ids": [
-        "ch09"
+        "ch08",
+        "ch09",
+        "ch11"
       ],
       "material_refs": [
         {
@@ -4464,16 +4468,21 @@
         {
           "node_id": "question:q137",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch09-l01",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-visibility-timeout-receipt"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

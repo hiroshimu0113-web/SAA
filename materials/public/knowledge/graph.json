@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 15,
-    "rubric_checks": 30
+    "detailed_units": 16,
+    "rubric_checks": 32
   },
   "nodes": [
     {
@@ -2037,9 +2037,78 @@
     {
       "id": "concept:visibility-timeout",
       "kind": "concept",
-      "title": "visibility-timeout",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "SQSの可視性延長と受信ハンドル",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "visibility-timeout",
+        "title": "SQSの可視性延長と受信ハンドル",
+        "group": "coordination",
+        "objective": "可視性変更の起点と、削除に使う最新の受信ハンドルを説明する。",
+        "estimated_minutes": 7,
+        "scope": "SQS Standardの特定受信の可視性変更・削除ハンドル。FIFO/DLQ/保持やin-flightの全定量設計は範囲外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "受信した時点でメッセージは削除される。",
+          "MessageIdをDeleteMessageへ渡せばよい。",
+          "ChangeMessageVisibilityの秒数は最初の受信から数える。",
+          "変更した可視性は次の受信にも必ず引き継がれる。"
+        ],
+        "checks": [
+          {
+            "id": "visibility-timeout-explain",
+            "level": "explain",
+            "prompt": "可視性の変更はいつから数え、次の受信にどう作用する？",
+            "expected_points": [
+              "受信は削除ではなく一時不可視にする",
+              "変更値は変更時刻から数え、次回受信へ固定しない",
+              "ReceiptHandleは受信ごとに変わる"
+            ]
+          },
+          {
+            "id": "visibility-timeout-apply",
+            "level": "apply",
+            "prompt": "同じメッセージを再受信し処理した。何を使って削除する？",
+            "expected_points": [
+              "最新ReceiptHandleで成功後の削除を行う",
+              "処理時間と失敗時の再処理遅延を比較する",
+              "Standardの再受信に備え冪等性を設計する"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch09-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+          "source_document": "knowledge/lessons/visibility-timeout.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+              "claim": "受信後の一時不可視、削除/延長されないと再可視化。短い/長い時間の代償。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ChangeMessageVisibility.go",
+              "claim": "指定秒数は変更要求から数える。特定メッセージの変更は次回受信へ引き継がず、本来のタイムアウトへ戻る。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+              "claim": "削除はMessageIdではなく最新ReceiptHandle。古いハンドルだと成功応答でも未削除の場合。Standardでは削除後再受信もあり冪等性が必要。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "DB確定と削除の間の障害に対する冪等処理を具体化する。",
+          "FIFOグループ/DLQ/保持期間と可視性を比較する。"
+        ]
+      }
     },
     {
       "id": "concept:vpc",
@@ -8674,6 +8743,11 @@
     {
       "from": "concept:point-in-time-recovery",
       "to": "lesson:ch06-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:visibility-timeout",
+      "to": "lesson:ch09-l01",
       "type": "unit_reference"
     },
     {
