@@ -495,6 +495,121 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "mfa-api-session",
+      "title": "IAMユーザーのMFA付きAPI認証",
+      "premise": "IAMユーザーがMFAを要求するAPI利用経路を設計する。",
+      "constraints": [
+        "有効なIAMユーザーの長期認証情報、登録済みの対応MFAデバイス、正常なSTS通信がある。",
+        "第2問は別の要求として長期キーで直接AssumeRoleする。第1問で取得したセッションは使用しない。"
+      ],
+      "questions": [
+        {
+          "id": "mfa-session-token",
+          "objective": "API認証でMFA情報を提示する経路を選ぶ。",
+          "prompt": "MFAで認証された一時認証情報をGetSessionTokenで取得する。IAMユーザーの長期キーを使い、MFAデバイスがある。適切な要求は？",
+          "options": [
+            {
+              "id": "mfa-session-token-a",
+              "text": "MFAデバイスの識別子と正しいコードを指定する",
+              "explanation": "GetSessionTokenに対応するMFA情報を提示します。長期認証情報とデバイスを用意した前提です。"
+            },
+            {
+              "id": "mfa-session-token-b",
+              "text": "デバイスは登録済みなので誤ったコードでもよい",
+              "explanation": "誤ったMFAコードは拒否されます。登録だけで今回の認証条件を満たすわけではありません。"
+            },
+            {
+              "id": "mfa-session-token-c",
+              "text": "s3:*を追加すればMFAコードの代わりになる",
+              "explanation": "S3操作の許可はMFAによる認証の代わりにはなりません。"
+            }
+          ],
+          "correct_option_id": "mfa-session-token-a",
+          "runtime_option_order": [
+            "mfa-session-token-a",
+            "mfa-session-token-b",
+            "mfa-session-token-c"
+          ],
+          "rationale": "GetSessionTokenに対応するMFA情報を提示します。長期認証情報とデバイスを用意した前提です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go"
+          ]
+        },
+        {
+          "id": "mfa-role-condition",
+          "objective": "登録と実際の要求条件を区別する。",
+          "prompt": "別の要求としてIAMユーザーの長期キーで直接AssumeRoleする。通信・引き受け元の許可・信頼する主体は正しいが、信頼がMFAを要求し、MFA情報は提示していない。結果の説明は？",
+          "options": [
+            {
+              "id": "mfa-role-condition-a",
+              "text": "デバイス登録済みなら要求にMFA情報がなくても必ず成功する",
+              "explanation": "登録と、実際の引き受け要求でMFA条件を満たすことは別です。"
+            },
+            {
+              "id": "mfa-role-condition-b",
+              "text": "必要なMFA認証条件を満たさないため拒否される",
+              "explanation": "信頼のMFA条件を満たす情報が必要です。既存のMFA付きセッションを使わない前提を明示しています。"
+            },
+            {
+              "id": "mfa-role-condition-c",
+              "text": "ロールへS3全操作を許可すればMFA条件を通過できる",
+              "explanation": "S3操作の権限を増やしても、引き受け時のMFA条件不足を解消しません。"
+            }
+          ],
+          "correct_option_id": "mfa-role-condition-b",
+          "runtime_option_order": [
+            "mfa-role-condition-a",
+            "mfa-role-condition-b",
+            "mfa-role-condition-c"
+          ],
+          "rationale": "信頼のMFA条件を満たす情報が必要です。既存のMFA付きセッションを使わない前提を明示しています。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "正しいMFA情報でGetSessionTokenに成功するが、元ユーザーは対象写真の削除を許可されていない。",
+        "answer": "MFAは削除許可を追加しない。必要な対象操作の認可を別に確認する。",
+        "reason": "GetSessionTokenで得る権限は元のIAMユーザーの権限に基づく。"
+      },
+      "unit_ids": [
+        "mfa"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch10"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+          "claim": "IAMユーザーの長期認証情報とMFA情報で認証する。誤ったコードは拒否。返される権限は元ユーザーに基づく。IAM/STS操作の制約とルート利用非推奨がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "信頼ポリシーがMFAを要求する場合、必要なMFA条件を満たさないAssumeRoleは拒否される。SerialNumberとTokenCodeで情報を渡す。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

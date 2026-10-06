@@ -249,6 +249,7 @@
         "candidate-inspector",
         "candidate-kms",
         "candidate-macie",
+        "candidate-mfa",
         "candidate-secrets-manager",
         "candidate-shield",
         "candidate-temporary-credentials",
@@ -2575,7 +2576,8 @@
       "concept_id": "mfa",
       "title": "MFAと認証の強化",
       "related_chapter_ids": [
-        "ch02"
+        "ch02",
+        "ch10"
       ],
       "material_refs": [
         {
@@ -2591,14 +2593,15 @@
           "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "draft",
+      "classification_ids": [
+        "concept-mfa-api-conditions"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

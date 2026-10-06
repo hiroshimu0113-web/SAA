@@ -119,6 +119,36 @@ export const CASE_QUIZZES={
       "API固有の例外を、S3などの操作許可へ一般化してはいけません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetCallerIdentity.go"
+  },
+  "mfa-session-token": {
+    "prompt": "IAMユーザーがMFAを要求するAPI利用経路を設計する。 MFAで認証された一時認証情報をGetSessionTokenで取得する。IAMユーザーの長期キーを使い、MFAデバイスがある。適切な要求は？",
+    "options": [
+      "MFAデバイスの識別子と正しいコードを指定する",
+      "デバイスは登録済みなので誤ったコードでもよい",
+      "s3:*を追加すればMFAコードの代わりになる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "GetSessionTokenに対応するMFA情報を提示します。長期認証情報とデバイスを用意した前提です。",
+      "誤ったMFAコードは拒否されます。登録だけで今回の認証条件を満たすわけではありません。",
+      "S3操作の許可はMFAによる認証の代わりにはなりません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go"
+  },
+  "mfa-role-condition": {
+    "prompt": "IAMユーザーがMFAを要求するAPI利用経路を設計する。 別の要求としてIAMユーザーの長期キーで直接AssumeRoleする。通信・引き受け元の許可・信頼する主体は正しいが、信頼がMFAを要求し、MFA情報は提示していない。結果の説明は？",
+    "options": [
+      "デバイス登録済みなら要求にMFA情報がなくても必ず成功する",
+      "必要なMFA認証条件を満たさないため拒否される",
+      "ロールへS3全操作を許可すればMFA条件を通過できる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "登録と、実際の引き受け要求でMFA条件を満たすことは別です。",
+      "信頼のMFA条件を満たす情報が必要です。既存のMFA付きセッションを使わない前提を明示しています。",
+      "S3操作の権限を増やしても、引き受け時のMFA条件不足を解消しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -137,5 +167,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "auth-caller-account",
     "auth-caller-deny"
+  ],
+  [
+    "mfa-session-token",
+    "mfa-role-condition"
   ]
 ];

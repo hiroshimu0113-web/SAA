@@ -722,12 +722,14 @@
       "group": "security",
       "objective": "MFAは認証を強化し、操作権限の代わりにはならないと説明する。",
       "estimated_minutes": 5,
-      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "scope": "IAMユーザーのGetSessionToken/AssumeRoleのMFA条件。フェデレーション設定・方式比較・全ポリシー評価は範囲外。",
       "prerequisites": [
         "authentication"
       ],
       "misconceptions": [
-        "MFAを有効化すれば最小権限を設計しなくてよい。"
+        "MFAを有効化すれば最小権限を設計しなくてよい。",
+        "MFA登録だけですべてのAPI要求にMFAが必須になる。",
+        "MFA成功で元の主体が持たない操作権限を得られる。"
       ],
       "checks": [
         {
@@ -735,8 +737,9 @@
           "level": "explain",
           "prompt": "MFAと最小権限は何を守る？",
           "expected_points": [
-            "MFAは認証を強化",
-            "最小権限は許可する操作と対象を制限"
+            "MFAは認証を強化する",
+            "最小権限は許可する操作と対象を制限する",
+            "MFAの登録と実際のAPI要求が認証条件を満たすことは別"
           ]
         },
         {
@@ -744,8 +747,9 @@
           "level": "apply",
           "prompt": "従業員へ写真の管理を任せる。どちらを使う？",
           "expected_points": [
-            "フェデレーション等の認証側でMFAを要求",
-            "適切なロールで必要最小限の権限を使う"
+            "利用する認証経路で必要なMFA条件を要求する",
+            "適切なロールで必要な対象と操作だけを許可する",
+            "API利用ならGetSessionTokenやAssumeRoleの前提と認証条件を確認する"
           ]
         }
       ],
@@ -753,14 +757,28 @@
         "ch02-l01"
       ],
       "review": {
-        "status": "draft",
-        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-        "source_document": "docs/STARTER_REVIEW.md"
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/mfa.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_GetSessionToken.go",
+            "claim": "IAMユーザーの長期認証情報とMFA情報で認証する。誤ったコードは拒否。返される権限は元ユーザーに基づく。IAM/STS操作の制約とルート利用非推奨がある。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+            "claim": "信頼ポリシーがMFAを要求する場合、必要なMFA条件を満たさないAssumeRoleは拒否される。SerialNumberとTokenCodeで情報を渡す。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
       },
       "learner_state": "unassessed",
       "next_enrichment": [
-        "条件を1つ変えた転移問題を追加する",
-        "境界条件と公式根拠を照合してから公開教材へ反映する"
+        "フェデレーション/Identity CenterのMFA設定を公式資料で別確認",
+        "実験と別担当者レビュー"
       ]
     }
   ]
