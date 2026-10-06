@@ -79,7 +79,12 @@
           "checked_on": "2026-10-06",
           "summary": "作成後の別工程で、公式SDKの固定コミット、条件、全誤答理由、条件変更を照合。同一担当の確認で別担当の独立監査ではない。"
         }
-      ]
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     },
     {
       "id": "iam-role-upload",
@@ -171,7 +176,108 @@
           "checked_on": "2026-10-06",
           "summary": "作成後の別工程で公式SDK固定版へ照合。引き受けと操作の段階、クロスアカウント条件、全誤答理由を確認。同一担当で別担当の独立監査ではない。"
         }
-      ]
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
+    },
+    {
+      "id": "authorization-photo-conditions",
+      "title": "写真保管庫の版指定とタグ付き保存",
+      "unit_ids": [
+        "authorization"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch05",
+        "ch10"
+      ],
+      "premise": "担当者がS3の汎用バケットにある写真の読み取りと保存を行う。",
+      "constraints": [
+        "認証情報は有効で通信は正常。ディレクトリバケットではない。",
+        "SSE-KMSとACL指定はなく、ほかの許可や明示的Denyはない。対象写真の指定バージョンは存在する。"
+      ],
+      "questions": [
+        {
+          "id": "auth-photo-version",
+          "prompt": "認証と通信は正常。対象にs3:GetObjectだけ許可され、ほかの許可やDeny・KMS制約はない。存在する特定versionIdを指定して読む要求に不足する許可は？",
+          "options": [
+            "s3:GetObjectVersion",
+            "s3:PutObjectTagging",
+            "許可は不足しない。GetObjectですべての版を読める"
+          ],
+          "answer": 0,
+          "reasons": [
+            "特定versionIdを指定するGetObjectにはGetObjectVersionが必要です。この場合GetObjectも必須とはしません。",
+            "タグ付き保存に関係する許可で、特定版の読み取りを許可しません。",
+            "versionIdの指定で必要許可が変わります。現在のGetObject許可だけでは要件を満たしません。"
+          ],
+          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go"
+        },
+        {
+          "id": "auth-photo-tags",
+          "prompt": "今度は同じ汎用バケットへの保存。対象にs3:PutObjectを許可済み。KMS/ACL/ほかの許可やDenyはなく、PutObject要求でタグ集合も指定する。追加で必要な許可は？",
+          "options": [
+            "s3:GetObjectVersion",
+            "s3:PutObjectTagging",
+            "追加の許可は不要。保存許可はタグ設定も必ず含む"
+          ],
+          "answer": 1,
+          "reasons": [
+            "特定版の読み取り用で、保存時のタグ設定を許可しません。",
+            "PutObjectでタグ集合を設定する要求にはPutObjectTaggingも必要です。指定条件に合わせて許可を確認します。",
+            "PutObject許可だけで、その要求に付随するタグ設定も自動的に許可されるわけではありません。"
+          ],
+          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+        }
+      ],
+      "variant": {
+        "condition": "第1問の読取でversionIdを指定せず、ほかの条件を保持する。",
+        "answer": "この設問の許可条件ではGetObjectで対象の読取を許可できる。",
+        "reason": "versionIdなしの要求ではGetObject許可を確認する。要求条件を変えたため必要許可も変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "汎用バケットのGetObjectはversionIdなしならGetObject、特定versionIdを指定するならGetObjectVersion許可が必要。後者にGetObjectは必須ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "PutObjectはPutObject許可を必要とし、タグ集合指定ではPutObjectTagging、ACL変更ではPutObjectAcl許可も必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "削除はDeleteObject/特定版のDeleteObjectVersion許可を確認する。読取許可は代替しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "認証情報の取得と実行操作の権限は別に扱い、セッションの権限は制限される。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK Permissions節を照合。汎用バケット・暗号化等の条件、versionId/タグの必要許可、全誤答理由を確認。別担当者の独立監査ではない。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

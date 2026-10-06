@@ -424,12 +424,14 @@
       "group": "security",
       "objective": "認証済みでも操作対象と操作内容の許可が必要だと説明する。",
       "estimated_minutes": 5,
-      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "scope": "認証と認可の区別、汎用S3バケットの操作とversionId/タグ指定で変わる必要許可。IAM評価全体は範囲外。",
       "prerequisites": [
         "authentication"
       ],
       "misconceptions": [
-        "認証成功がすべてのリソースへのアクセス許可になる。"
+        "認証成功がすべてのリソースへのアクセス許可になる。",
+        "GetObjectの許可があれば特定versionIdの読取も必ず許可される。",
+        "PutObjectの許可があれば、同じ要求にタグやACLを付ける許可も不要。"
       ],
       "checks": [
         {
@@ -438,7 +440,9 @@
           "prompt": "アクセス許可では何を決める？",
           "expected_points": [
             "どの対象にどの操作を許可するか",
-            "必要な条件や制約も考える"
+            "必要な条件や制約も考える",
+            "versionIdやタグなど要求の条件で必要許可が変わる",
+            "ネットワークや暗号化の要件は別に確認する"
           ]
         },
         {
@@ -447,7 +451,9 @@
           "prompt": "写真は読めるが消せない担当者を作りたい。何を分ける？",
           "expected_points": [
             "読み取りと削除の操作を分ける",
-            "担当対象への必要なアクセスに限定する"
+            "担当対象への必要なアクセスに限定する",
+            "GetObjectとDeleteObjectは別の許可である",
+            "他ポリシーの許可・Denyも含む評価全体を確認する"
           ]
         }
       ],
@@ -455,14 +461,40 @@
         "ch02-l02"
       ],
       "review": {
-        "status": "draft",
-        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-        "source_document": "docs/STARTER_REVIEW.md"
+        "status": "reviewed",
+        "basis": "補足本文と2問ケースを作成後に公式SDKのPermissions節で確認。同一担当の別工程。独立監査・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/authorization.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+            "claim": "汎用バケットのGetObjectはversionIdなしならGetObject、特定versionIdを指定するならGetObjectVersion許可が必要。後者にGetObjectは必須ではない。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+            "claim": "PutObjectはPutObject許可を必要とし、タグ集合指定ではPutObjectTagging、ACL変更ではPutObjectAcl許可も必要。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+            "claim": "削除はDeleteObject/特定版のDeleteObjectVersion許可を確認する。読取許可は代替しない。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+            "claim": "認証情報の取得と実行操作の権限は別に扱い、セッションの権限は制限される。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
       },
       "learner_state": "unassessed",
       "next_enrichment": [
-        "条件を1つ変えた転移問題を追加する",
-        "境界条件と公式根拠を照合してから公開教材へ反映する"
+        "SCP・境界・リソースポリシー等の評価全体との接続",
+        "バージョニング時の削除結果とObject Lockの判断を別単位で扱う"
       ]
     },
     {

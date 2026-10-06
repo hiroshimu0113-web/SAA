@@ -1,5 +1,5 @@
 import {checkDebuffs,checkDebuffOffline} from './debuff-browser-check.mjs';
-import {checkCases} from './case-browser-check.mjs';
+import {checkCases,checkCasesOffline} from './case-browser-check.mjs';
 import {checkFlavor} from './flavor-browser-check.mjs';
 import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
 import {checkQuizAndHud,quizOfflineRoundtrip} from './quiz-browser-check.mjs';
@@ -56,6 +56,7 @@ try{
  await p.reload();await p.locator('.hand').waitFor();
  await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await quizOfflineRoundtrip(p);
+ await checkCasesOffline(p);
  await checkComboOffline(p);
  await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);

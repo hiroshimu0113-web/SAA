@@ -28,7 +28,7 @@ for(const d of decks){const subset=cards.filter((c:any)=>d.card_candidate_ids.in
 md+=`\n重複しない候補素材：${cards.length}。確認・分類済み：${cards.filter((c:any)=>c.candidate_status==='reviewed_material').length}。現行ゲームは別集合の20カード・3役です。候補は全て効果未設計で、その20枚を本表へ自動的に重ねません。章をまたぐ件数は合計してユニーク候補数としません。\n\n## テーマごとの判断と代償\n\n`;
 for(const d of decks)md+=`- ${d.chapter_id}：${d.decision} ${d.tradeoff}\n`;
 md+='\n## 共有と未完了\n\n';for(const s of plan.shared_concepts)md+=`- ${s.concept_id}：${s.chapter_ids.join(', ')}。${s.reason}\n`;
-md+='\n- 名称だけでカード化や内容確認を確定しない。候補JSONに参照・状態・未解決事項を保持する。\n- まず前回の未完了である残り12単位の確認、役に対応する実システムの分類を進める。AWS現行資料が必要な内容は取得制約も記録する。\n';
+md+=`\n- 名称だけでカード化や内容確認を確定しない。候補JSONに参照・状態・未解決事項を保持する。\n- まず前回の未完了である残り${concepts.filter((c:any)=>c.unit&&c.unit.review.status!=='reviewed').length}単位の確認、役に対応する実システムの分類を進める。AWS現行資料が必要な内容は取得制約も記録する。\n`;
 for(const p of plan.separate_proposals)md+='- '+p+'\n';
 md+='\n更新：pnpm decks:update。照合：pnpm decks:check。知識正本変更後は先にknowledge:export、分類変更後はdecks:updateとprogress:updateを実行する。\n';
 for(const [path,text] of [['knowledge/deck-candidates.json',JSON.stringify(result,null,2)+'\n'],['knowledge/DECK_CANDIDATES.md',md]]){

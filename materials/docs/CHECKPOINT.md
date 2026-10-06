@@ -359,3 +359,14 @@
 - 保存：単位1 f05a958、単位2 cff1ba8はGitHubのcodex/content-expansion-20261006へ送信成功。main/Pages未反映。単位3も検証後このブランチへ保存。
 - 利用残量：開始時・各区切りで取得手段なし、不明。
 - 次：確認待ちの前提authorizationの操作別許可を公式SDK API説明で照合する。現行資料が必要なALB/インスタンスストアの監査と3役に対応する実システム分類は取得制約を残して後続へ引き継ぐ。
+
+
+## 2026-10-06 教材拡充・単位4：認可の操作条件（今回の最終保存）
+- 完了：既存authorizationへknowledge/lessons/authorization.mdの本文、汎用S3のversionId指定/タグ付きPutObject/読取と削除の比較、成立条件・限界・条件変更を追加。AWS公式SDK固定版のGetObject/PutObject/DeleteObject/AssumeRole説明へ照合。
+- 分類：concept-authorization-request-conditionsはカード素材候補、case-authorization-photo-conditionsは連続2問をローカル取り込み済み。別担当者の独立監査、実AWSアカウント実験、本人理解評価は未実施。
+- 最終数量：14知識単位のうち確認済み3/確認待ち11。分類29件（概念23/役3/ケース3）、取り込み済み26件。12テーマ、ユニーク素材候補155件、そのうち確認・分類済みカード素材3件。新カード効果0、現行20カード/3役を保持。新3ケース6問、既存4問と合わせゲーム問題10問。通常教材200問とは別の正本で重複計上しない。
+- 検証：47テスト・型検査/ビルド成功。knowledge:check、classification:check、game-content:check、decks:check、progress:update/check、git diff --check成功。Chromiumの既存操作/長押し/3役/5デバフ/強化/旧保存/保存互換性/320px/オフライン成功。全3ケースの両回答・結果をそれぞれオフライン再開し、再実行と二重報酬なし。知識地図の確認済み表示と公式根拠リンクを320pxで確認し、画面も目視確認。
+- 公開管理：ケース正本のreleaseはunpublished。GitHubブランチへの保存とPages公開確認を別管理。公開URLの取得がプロキシ403のためmain/Pagesへ未反映。今回のWebKit取得もDomain forbidden、実機iPhone・公開後確認は未実施。過去の公開検証を今回の証拠へ流用しない。
+- GitHub保存先：codex/content-expansion-20261006。単位1 f05a958、単位2 cff1ba8、単位3 d7f444bを送信済み。今回の単位4も検証済み変更としてコミット/送信し、最終結果を追記する。
+- 次の着手点：前提authenticationの内容確認と分類、残り11単位の確認。3役に対応する実システム、条件付きビルド/カード効果、20枚目標の不足を継続。現行AWS資料・Pages/WebKit取得制約の解消後に必要な再照合、main反映、公開確認を行う。新キャラクター/デッキ選択画面/大きな構成盤面は別提案に保持。
+- 利用残量：開始時と4単位の区切り・最終保存時とも取得可能なツールなし。不明であり、ゼロ/無制限/90%未満とは判断しない。

@@ -122,6 +122,7 @@
       "target_cards": 20,
       "card_candidate_ids": [
         "candidate-archive",
+        "candidate-authorization",
         "candidate-ebs",
         "candidate-ebs-snapshot",
         "candidate-efs",
@@ -237,6 +238,7 @@
       "title": "暗号化・保護・監視",
       "target_cards": 20,
       "card_candidate_ids": [
+        "candidate-authorization",
         "candidate-aws-config",
         "candidate-cloudtrail",
         "candidate-cloudwatch",
@@ -534,7 +536,9 @@
       "concept_id": "authorization",
       "title": "認可とアクセス許可",
       "related_chapter_ids": [
-        "ch02"
+        "ch02",
+        "ch05",
+        "ch10"
       ],
       "material_refs": [
         {
@@ -542,14 +546,15 @@
           "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "draft",
+      "classification_ids": [
+        "concept-authorization-request-conditions"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

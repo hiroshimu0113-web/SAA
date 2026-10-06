@@ -59,6 +59,36 @@ export const CASE_QUIZZES={
       "引き受け成功はS3書き込み許可を意味しません。必要な対象・操作の許可を確認します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+  },
+  "auth-photo-version": {
+    "prompt": "担当者がS3の汎用バケットにある写真の読み取りと保存を行う。 認証と通信は正常。対象にs3:GetObjectだけ許可され、ほかの許可やDeny・KMS制約はない。存在する特定versionIdを指定して読む要求に不足する許可は？",
+    "options": [
+      "s3:GetObjectVersion",
+      "s3:PutObjectTagging",
+      "許可は不足しない。GetObjectですべての版を読める"
+    ],
+    "answer": 0,
+    "reasons": [
+      "特定versionIdを指定するGetObjectにはGetObjectVersionが必要です。この場合GetObjectも必須とはしません。",
+      "タグ付き保存に関係する許可で、特定版の読み取りを許可しません。",
+      "versionIdの指定で必要許可が変わります。現在のGetObject許可だけでは要件を満たしません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go"
+  },
+  "auth-photo-tags": {
+    "prompt": "担当者がS3の汎用バケットにある写真の読み取りと保存を行う。 今度は同じ汎用バケットへの保存。対象にs3:PutObjectを許可済み。KMS/ACL/ほかの許可やDenyはなく、PutObject要求でタグ集合も指定する。追加で必要な許可は？",
+    "options": [
+      "s3:GetObjectVersion",
+      "s3:PutObjectTagging",
+      "追加の許可は不要。保存許可はタグ設定も必ず含む"
+    ],
+    "answer": 1,
+    "reasons": [
+      "特定版の読み取り用で、保存時のタグ設定を許可しません。",
+      "PutObjectでタグ集合を設定する要求にはPutObjectTaggingも必要です。指定条件に合わせて許可を確認します。",
+      "PutObject許可だけで、その要求に付随するタグ設定も自動的に許可されるわけではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -69,5 +99,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "role-upload-trust",
     "role-upload-permission"
+  ],
+  [
+    "auth-photo-version",
+    "auth-photo-tags"
   ]
 ];

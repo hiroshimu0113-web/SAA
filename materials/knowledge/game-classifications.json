@@ -3227,6 +3227,286 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-authorization-request-conditions",
+      "title": "認可と要求条件別の許可",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "認証済みという性質と、対象・操作・要求条件の認可を原理として区別する。",
+      "objective": "認証済みでも操作対象と操作内容の許可が必要だと説明する。",
+      "unit_ids": [
+        "authorization"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/authorization.md",
+          "locator": "認可：操作と要求条件に必要な許可を選ぶ"
+        }
+      ],
+      "domains": [
+        "security",
+        "storage"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Identity and Access Management",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "認証を理解する。"
+      ],
+      "conditions": [
+        "認証情報は有効で通信は正常。ディレクトリバケットではない。",
+        "SSE-KMSとACL指定はなく、ほかの許可や明示的Denyはない。対象写真の指定バージョンは存在する。"
+      ],
+      "limitations": [
+        "汎用バケットの限定条件。KMS・Object Lock・全ポリシー評価を含む成功保証ではない。"
+      ],
+      "misconceptions": [
+        "認証成功がすべてのリソースへのアクセス許可になる。",
+        "GetObjectの許可があれば特定versionIdの読取も必ず許可される。",
+        "PutObjectの許可があれば、同じ要求にタグやACLを付ける許可も不要。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/authorization.md",
+          "locator": "仕組みと判断順"
+        },
+        "applicable_when": "対象と要求条件に対応する許可を判断する。",
+        "counterexample": "GetObjectだけで特定版を読めるとは限らず、PutObjectだけでタグ集合指定も許可されない。",
+        "comparison": {
+          "path": "knowledge/lessons/authorization.md",
+          "locator": "比較・条件・限界"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-authorization-photo-conditions",
+          "reason": "要求の条件を変えた必要許可を問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "汎用バケットのGetObjectはversionIdなしならGetObject、特定versionIdを指定するならGetObjectVersion許可が必要。後者にGetObjectは必須ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "PutObjectはPutObject許可を必要とし、タグ集合指定ではPutObjectTagging、ACL変更ではPutObjectAcl許可も必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "削除はDeleteObject/特定版のDeleteObjectVersion許可を確認する。読取許可は代替しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "認証情報の取得と実行操作の権限は別に扱い、セッションの権限は制限される。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "概念の判断目標、固定語彙、実在する本文・単位を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK Permissions節を照合。汎用バケット・暗号化等の条件、versionId/タグの必要許可、全誤答理由を確認。別担当者の独立監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "操作と条件を満たす許可を選ぶカード候補。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/authorization.md",
+          "locator": "仕組みと判断順"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "認証成功やAPI名だけで要求を許可できると誤認する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード効果・条件付き役は未設計。"
+      ]
+    },
+    {
+      "id": "case-authorization-photo-conditions",
+      "title": "写真保管庫の版指定とタグ付き保存",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ写真保管庫で要求の版指定とタグ指定が必要許可を変える2問ケース。",
+      "objective": "要求条件に対応する読取またはタグ付与許可を選び、誤答理由を説明する。",
+      "unit_ids": [
+        "authorization"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "authorization-photo-conditions"
+        }
+      ],
+      "domains": [
+        "security",
+        "storage"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Identity and Access Management",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "認証を理解する。"
+      ],
+      "conditions": [
+        "認証情報は有効で通信は正常。ディレクトリバケットではない。",
+        "SSE-KMSとACL指定はなく、ほかの許可や明示的Denyはない。対象写真の指定バージョンは存在する。"
+      ],
+      "limitations": [
+        "汎用バケットの限定条件。KMS・Object Lock・全ポリシー評価を含む成功保証ではない。"
+      ],
+      "misconceptions": [
+        "認証成功がすべてのリソースへのアクセス許可になる。",
+        "GetObjectの許可があれば特定versionIdの読取も必ず許可される。",
+        "PutObjectの許可があれば、同じ要求にタグやACLを付ける許可も不要。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authorization-photo-conditions.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authorization-photo-conditions.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authorization-photo-conditions.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "authorization-photo-conditions.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "汎用バケットのGetObjectはversionIdなしならGetObject、特定versionIdを指定するならGetObjectVersion許可が必要。後者にGetObjectは必須ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "PutObjectはPutObject許可を必要とし、タグ集合指定ではPutObjectTagging、ACL変更ではPutObjectAcl許可も必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "削除はDeleteObject/特定版のDeleteObjectVersion許可を確認する。読取許可は代替しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "認証情報の取得と実行操作の権限は別に扱い、セッションの権限は制限される。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "概念の判断目標、固定語彙、実在する本文・単位を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK Permissions節を照合。汎用バケット・暗号化等の条件、versionId/タグの必要許可、全誤答理由を確認。別担当者の独立監査ではない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "47テスト、ビルド、Chromiumの320pxで全3ケース6問・全解説・途中/結果再開・重複報酬防止、3ケースそれぞれのオフライン回答と再開、旧保存と既存操作を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問ケースとして知識の間へ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/authorization.md",
+          "locator": "仕組みと判断順"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "認証成功やAPI名だけで要求を許可できると誤認する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "auth-photo-version, auth-photo-tags"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

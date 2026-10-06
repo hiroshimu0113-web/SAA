@@ -29,7 +29,7 @@ let md=`# 教材制作の進捗表
 | 模試2 | ${questions.filter(q=>q.exam==='mock2').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock2').length}問を公開 |
 | 細分化した知識単位 | ${units.length}単位 | 確認済み${reviewed}、確認待ち${units.length-reviewed} |
 | ゲーム利用の分類 | ${items.length}件 | 取り込み済み${items.filter(i=>i.import_status==='imported').length}件（教材全体の分類完了ではない） |
-| 連続2問ケース | ${cases.length}件 / ${cases.reduce((n:number,c:any)=>n+c.questions.length,0)}問 | 確認済み${cases.filter((c:any)=>c.content_status==='reviewed').length}件。既存の通常200問とは別の正本 |
+| 連続2問ケース | ${cases.length}件 / ${cases.reduce((n:number,c:any)=>n+c.questions.length,0)}問 | 確認済み${cases.filter((c:any)=>c.content_status==='reviewed').length}件、Pages公開確認済み${cases.filter((c:any)=>c.release.status==='published').length}件。既存の通常200問とは別の正本 |
 | テーマ別デッキ案 | ${catalog.decks.length}案 | 選択画面・新キャラクターは未実装 |
 | カード候補素材（共有・重複除外） | ${catalog.cards.length}件 | 確認・分類済み${catalog.cards.filter((c:any)=>c.candidate_status==='reviewed_material').length}、新カード効果実装0 |
 

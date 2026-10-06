@@ -9,6 +9,8 @@ for(const c of source.cases){
  assert.ok(!ids.has(c.id),'duplicate case ID');ids.add(c.id);
  assert.ok(c.premise?.trim()&&c.constraints.length&&c.variant?.condition&&c.variant?.answer&&c.variant?.reason);
  assert.equal(c.questions.length,2,'a case needs two questions');
+ assert.ok(['unpublished','published'].includes(c.release?.status),'case publication status required');
+ if(c.release.status==='published')assert.ok(c.release.deployment_ref&&c.release.checked_on,'publication verification required');
  assert.ok(['draft','reviewed'].includes(c.content_status));
  if(c.content_status!=='reviewed')continue;
  assert.ok(classifications.some(i=>i.kind==='case'&&i.classification_status==='reviewed'&&i.content_status==='reviewed'&&['ready','imported'].includes(i.import_status)&&i.material_refs.some(r=>r.path==='knowledge/game-cases.json'&&r.locator===c.id)),'case lacks reviewed and ready classification');

@@ -13,7 +13,7 @@
 | 細分化した知識と確認問題 | [units.json](../knowledge/units.json) | 1単位1目標で蓄積し、確認待ちと確認済みを区別する |
 | 知識同士の関係 | [relations.json](../knowledge/relations.json) | 前提・比較・組み合わせを記録する |
 | 詳細単位の補足本文 | [lessons](../knowledge/lessons/) | units.jsonのIDから参照する正本。作成後の内容確認と本人理解を区別する |
-| ゲーム用の連続2問ケース | [game-cases.json](../knowledge/game-cases.json) | 状況・条件・全誤答理由・条件変更を保管。確認済みだけgame-content:exportでゲーム用データへ生成する |
+| ゲーム用の連続2問ケース | [game-cases.json](../knowledge/game-cases.json) | 状況・条件・全誤答理由・条件変更を保管。確認済みだけgame-content:exportでゲーム用データへ生成。releaseでPages公開確認と配信参照を別管理する |
 | カード等へ再利用する分類 | [game-classifications.json](../knowledge/game-classifications.json) | 用語・概念・システム・役・ビルド・ケースを記録し、本文の保管先へ参照をつなぐ |
 | 12章のテーマ別デッキ計画 | [deck-plan.json](../knowledge/deck-plan.json) | 判断方針・代償・共有章・大きな追加の別提案。decks:updateで候補JSONとDECK_CANDIDATES.mdを生成する |
 | 出典と内容確認 | 教材のsources、単位のreview、[CONTENT_REVIEW.md](CONTENT_REVIEW.md)、[STARTER_REVIEW.md](STARTER_REVIEW.md) | 対象範囲・根拠・確認者を残す。過去の確認を新原稿へ流用しない |
