@@ -28,3 +28,5 @@ await writeFile('dist/tower/flavor.html',html);
 await writeFile('dist/tower/ui.html',html);
 
 await writeFile('dist/tower/debuff.html',html);
+
+await writeFile('dist/tower/foes.html',html);

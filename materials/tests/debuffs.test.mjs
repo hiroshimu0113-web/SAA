@@ -16,7 +16,7 @@ test('debuffs: five types, player access, enemy tier restrictions and no weak ca
  assert.deepEqual(new Set(Object.values(CARDS).flatMap(c=>c.debuff?[c.debuff.id]:[])),new Set(Object.keys(DEBUFFS)));
  for(const [id,e] of Object.entries(ENEMIES)){
   const kinds=new Set(e.pattern.filter(a=>a[0]==='debuff').map(a=>a[2]));
-  assert.equal(kinds.size,id==='elite'?1:id==='boss'?3:0);
+  if(e.tier==='boss')assert.ok(kinds.size>=2&&kinds.size<=3);else assert.equal(kinds.size,e.tier==='elite'?1:0);
   for(const k of kinds)assert.ok(DEBUFFS[k]);
  }
  assert.ok(Object.values(CARDS).every(c=>!('weak'in c)));

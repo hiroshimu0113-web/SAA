@@ -26,15 +26,21 @@ export const CARDS={
  quarantine:{name:'封じ込め',cost:2,kind:'attack',damage:10,debuff:{id:'overload',amount:3},upDamage:5,text:'10ダメージ。敵に過負荷3。'}
 };
 export const ENEMIES={
- noise:{name:'ノイズの群れ',hp:32,glyph:'✺',pattern:[['attack',7],['guard',7],['attack',10]]},
- surge:{name:'負荷の奔流',hp:38,glyph:'≋',pattern:[['buff',2],['attack',8],['attack',12]]},
- leak:{name:'メモリの亡霊',hp:35,glyph:'♧',pattern:[['attack',6],['attack',6],['attack',13]]},
- timeout:{name:'時切れの番人',hp:42,glyph:'⌛',pattern:[['guard',10],['attack',13],['buff',3]]},
- storm:{name:'再試行の嵐',hp:45,glyph:'ϟ',pattern:[['attack',9],['buff',2],['attack',14]]},
- deadlock:{name:'膠着の双環',hp:47,glyph:'∞',pattern:[['attack',10],['guard',12],['attack',14]]},
- elite:{name:'断絶の騎士',hp:65,glyph:'⛨',pattern:[['debuff',2,'misconfig'],['attack',15],['attack',19],['guard',12]]},
- boss:{name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay'],['attack',13],['debuff',3,'burn'],['guard',18],['debuff',2,'overload'],['attack',24]]}
+ noise:{tier:'battle',name:'ノイズの群れ',hp:32,glyph:'✺',pattern:[['attack',7],['guard',7],['attack',10]]},
+ surge:{tier:'battle',name:'負荷の奔流',hp:38,glyph:'≋',pattern:[['buff',2],['attack',8],['attack',12]]},
+ leak:{tier:'battle',name:'メモリの亡霊',hp:35,glyph:'♧',pattern:[['attack',6],['attack',6],['attack',13]]},
+ timeout:{tier:'battle',name:'時切れの番人',hp:42,glyph:'⌛',pattern:[['guard',10],['attack',13],['buff',3]]},
+ storm:{tier:'battle',name:'再試行の嵐',hp:45,glyph:'ϟ',pattern:[['attack',9],['buff',2],['attack',14]]},
+ deadlock:{tier:'battle',name:'膠着の双環',hp:47,glyph:'∞',pattern:[['attack',10],['guard',12],['attack',14]]},
+ elite:{tier:'elite',name:'断絶の騎士',hp:65,glyph:'⛨',pattern:[['debuff',2,'misconfig'],['attack',15],['attack',19],['guard',12]]},
+ elite_fire:{tier:'elite',name:'炎上の番人',hp:65,glyph:'♨',pattern:[['debuff',3,'burn'],['attack',14],['guard',12],['attack',18]]},
+ elite_drain:{tier:'elite',name:'枯渇の収集者',hp:65,glyph:'◈',pattern:[['debuff',2,'depletion'],['attack',15],['guard',10],['attack',19]]},
+ boss:{tier:'boss',name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay'],['attack',13],['debuff',3,'burn'],['guard',18],['debuff',2,'overload'],['attack',24]]},
+ boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion'],['attack',16],['debuff',2,'misconfig'],['attack',18],['guard',18],['attack',22]]},
+ boss_stagnation:{tier:'boss',name:'停滞の支配者',hp:125,glyph:'⌛',pattern:[['debuff',2,'overload'],['attack',16],['debuff',1,'delay'],['guard',18],['attack',22],['attack',14]]}
 };
+export const ENEMY_POOLS=Object.fromEntries(['battle','elite','boss'].map(tier=>[tier,Object.keys(ENEMIES).filter(id=>ENEMIES[id].tier===tier)]));
+export const enemyDebuffTypes=id=>[...new Set(ENEMIES[id].pattern.filter(a=>a[0]==='debuff').map(a=>a[2]))];
 export const RELICS={
  lantern:{name:'観測灯',text:'各戦闘の最初のターンに1枚多く引く。'},
  shell:{name:'耐障害の殻',text:'各戦闘の開始時に8ブロック。'},
@@ -87,14 +93,14 @@ function burn(s,side){
 }
 function lose(s){s.phase='lost';log(s,'冒険はここまで。');}
 
-function win(s){const elite=s.battle.enemy==='elite',boss=s.battle.enemy==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=shuffle(s,rewardPool).slice(0,3);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
+function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=shuffle(s,rewardPool).slice(0,3);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
 function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
 export function act(state,action){
  const s=clone(state),a=action,b=s.battle;
  if(a.type==='node'&&s.phase==='map'&&Number.isInteger(a.lane)&&ROUTES[s.floor]?.[a.lane]){
   const type=ROUTES[s.floor][a.lane];s.history.push({floor:s.floor,lane:a.lane,type});s.floor++;log(s,s.floor+'階：'+NODE_NAMES[type]);
-  if(['battle','elite','boss'].includes(type)){const id=type==='battle'?['noise','surge','leak','timeout','storm','deadlock'][Math.floor(rnd(s)*6)]:type;startBattle(s,id);}
+  if(['battle','elite','boss'].includes(type)){const pool=ENEMY_POOLS[type],id=pool[Math.floor(rnd(s)*pool.length)];startBattle(s,id);}
   else{s.phase=type;s.battle=null;s.removed=false;if(type==='event')startQuiz(s);if(type==='shop')s.stock=shuffle(s,rewardPool).slice(0,3);}return s;
  }
  if(a.type==='play'&&s.phase==='battle'){
@@ -225,7 +231,7 @@ export function parseRun(raw){
   const piles=['hand','draw','discard','exhaust'];if(!piles.every(p=>Array.isArray(b[p])))throw Error('山札が不正です。');
   const ids=piles.flatMap(p=>b[p]);if(ids.length!==s.deck.length||new Set(ids).size!==ids.length||!ids.every(id=>s.deck.some(c=>c.uid===id))||b.hand.length>10)throw Error('カードの所在が不正です。');
   if(s.phase==='battle'&&b.hp===0||['reward','won'].includes(s.phase)&&b.hp!==0)throw Error('敵HPが不正です。');
-  if(s.phase==='won'&&(b.enemy!=='boss'||s.floor!==8))throw Error('クリア状態が不正です。');
+  if(s.phase==='won'&&(ENEMIES[b.enemy].tier!=='boss'||s.floor!==8))throw Error('クリア状態が不正です。');
  } else if(b!==null)throw Error('戦闘外の記録が不正です。');
  s.version=4;return s;
 }
