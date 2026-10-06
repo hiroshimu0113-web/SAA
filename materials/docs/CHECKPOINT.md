@@ -344,3 +344,7 @@
 - 固有レリックは報酬から除外。通常レリックの効果とは加算。デッキ・HP・所持金は共通。教材本文・分類の変更なし。
 - 完了：54テスト・ビルド・Chrome/WebKitの主人公3種、320px戦闘表示、再開、初期化取消、既存操作・オフライン検証成功。実装 e719e59、[Actions 37548438390](https://github.com/hiroshimu0113-web/SAA/actions/runs/37548438390) build/deploy成功。公開HTML・engine・Service WorkerのSHA256がローカルと一致。
 - 新入口 https://hiroshimu0113-web.github.io/SAA/tower/heroes.html 。次は実機で3職種の操作感・バランスを評価。
+
+## 主人公の外見3種（2026-10-07）
+- SE＝青・端末、SRE＝緑・盾、クラウドアーキテクト＝金・ローブと杖。シルエットと色を分け、足元に職種名を表示。軽量なインラインSVGでオフライン対応。旧セーブは従来の外見を維持。
+- 能力や保存形式の変更なし。ビルド成功、ブラウザー検証・公開確認中。新入口 tower/models.html。
