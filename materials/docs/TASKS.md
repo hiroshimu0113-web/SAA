@@ -764,3 +764,6 @@
 - ローカルChromeで既存操作と新デバフ、320px、両者の遅延/2回行動、状態長押し、旧保存移行、オフライン途中再開を確認。予告画面を目視確認。WebKitと公開確認はこれから。
 
 - 初回CI（37463815417）はWebKitのcontext.setOffline(true)後の再読込で内部エラー。既存のWebKit手順と同様にサーバー停止を使う共通オフライン検証へ移し、遅延2回行動の再開・二重実行防止を確認する。アプリ本体の変更なし。公開はCI再検証後。
+
+- 公開完了：ecf809d2e74fc6baa3973aefc7d2c2aac9002e9e。Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37464310652 で43テスト・knowledge:check・build・WebKit・deploy成功。公開HTTPSのChromeでも全既存操作と5種デバフ、両者の遅延/2回行動、320px、旧保存移行、オフライン途中再開・二重実行防止を確認。
+- 更新入口：https://hiroshimu0113-web.github.io/SAA/tower/debuff.html 。実機iPhoneの操作感と数値バランスは未検証。次は実機試遊で強敵/ボスの難易度とデバフカードの使い分けを評価する。
