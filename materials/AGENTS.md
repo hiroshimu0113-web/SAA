@@ -1,6 +1,8 @@
 # SAA学習プロジェクトの作業ルール
 
 - 日本語で回答する。
+- 教材の収集・新規作成・内容改訂では、最初に `docs/CONTENT_CLASSIFICATION_GUIDE.md` を読み、用語・概念・システム・ビルド・ケースを分類する。`knowledge/game-classifications.json` に分類理由、タグ、元教材/単位の参照、出典、ゲーム利用案、保留事項を記録する。単純な誤字修正は分類の新設不要。教材の完成報告には分類IDと監査/取り込み状態を含める。
+- ゲーム用タグを既存 `knowledge/units.json` へ無断追加せず、上記台帳で管理する。分類済み・内容監査済み・ゲーム実装済み・本人理解済みを区別する。
 - 教材拡充の前に `knowledge/README.md`、`knowledge/INVENTORY.md`、`knowledge/EXPANSION_PLAN.md` を確認する。正本は `knowledge/units.json` と `relations.json`。変更後は `pnpm knowledge:export` と `pnpm knowledge:check`。教材の監査状態と本人の理解度を混同しない。
 - 原計画と最新の状態は `docs/PROJECT.md`、`docs/TASKS.md`、`docs/CHECKPOINT.md` を確認する。
 
