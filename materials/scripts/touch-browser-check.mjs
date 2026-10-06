@@ -16,27 +16,30 @@ try{
  await c.route('**/tower/*.mjs',route=>route.abort());
  await p.goto(base+'tower/index.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).tap();
  await p.locator('.current [data-action=node]').first().tap();const before=await p.evaluate(k=>localStorage.getItem(k),key);
- await p.locator('.hand .card').first().tap();await p.locator('.card-preview').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before,'select must not spend energy');
- await p.locator('.card-preview .card').dispatchEvent('pointerdown',{clientX:100,clientY:500});await p.locator('.card-preview .card').dispatchEvent('pointermove',{clientX:100,clientY:450});await p.locator('.card-preview .card').dispatchEvent('pointerup',{clientX:100,clientY:450});await p.locator('.card-preview .card').dispatchEvent('click');assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before);
- const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(compact.width<=100&&expanded.width>=compact.width*2&&expanded.height>compact.height);
- await p.getByRole('button',{name:'戻す',exact:true}).tap();assert.equal(await p.locator('.card-preview').count(),0);
+
+ const readSave=()=>p.evaluate(k=>localStorage.getItem(k),key);
+ const touchSession=kind==='chromium'?await c.newCDPSession(p):null;
+ async function holdCard(){const card=p.locator('.hand .card').first();await card.scrollIntoViewIfNeeded();const box=await card.boundingBox();if(touchSession)await touchSession.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+box.width/2,y:box.y+box.height/2}]});else{await p.mouse.move(box.x+box.width/2,box.y+box.height/2);await p.mouse.down();}await p.waitForTimeout(550);await p.locator('.card-preview').waitFor();if(touchSession)await touchSession.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});else await p.mouse.up();await p.waitForTimeout(550);}
+ await holdCard();assert.equal(await readSave(),before,'long press and release must not play');
+ const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(compact.width<=100&&expanded.width>=compact.width*2);
+ await p.locator('.card-preview .card').tap();assert.equal(await readSave(),before,'detail is read-only');
+ await p.getByRole('button',{name:'閉じる',exact:true}).tap();assert.equal(await p.locator('.card-preview').count(),0);
  await p.getByRole('button',{name:'次の手札へ',exact:true}).tap();await p.waitForFunction(()=>document.querySelector('.hand').scrollLeft>50);
- assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before);
- // A moved pointer cannot become an accidental card tap.
- await p.locator('.hand .card').last().scrollIntoViewIfNeeded();
- await p.locator('.hand .card').last().dispatchEvent('pointerdown',{clientX:250,clientY:500,pointerId:1,pointerType:'touch'});
- await p.locator('.hand .card').last().dispatchEvent('pointermove',{clientX:90,clientY:501,pointerId:1,pointerType:'touch'});
- await p.locator('.hand .card').last().dispatchEvent('pointerup',{clientX:90,clientY:501,pointerId:1,pointerType:'touch'});
- await p.locator('.hand .card').last().dispatchEvent('click');assert.equal(await p.locator('.card-preview').count(),0);
- await p.waitForTimeout(400);
- await p.locator('.hand .card').first().tap();await p.getByRole('button',{name:'このカードを使う',exact:true}).tap();
- assert.notEqual(await p.evaluate(k=>localStorage.getItem(k),key),before);assert.equal(await p.locator('.card-preview').count(),0);
- const saved=await p.evaluate(k=>localStorage.getItem(k),key);await p.reload();await p.locator('.hand').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),saved);
- await p.evaluate(({key,saved})=>{const s=JSON.parse(saved);s.battle.energy=0;localStorage.setItem(key,JSON.stringify(s));},{key,saved});await p.reload();await p.locator('.hand .card').first().tap();assert.ok(await p.locator('.card-preview .card').isDisabled());await p.locator('.card-preview .card').dispatchEvent('click');assert.equal(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).battle.energy,key),0);await p.evaluate(({key,saved})=>localStorage.setItem(key,saved),{key,saved});await p.reload();
+ const last=p.locator('.hand .card').last();await last.scrollIntoViewIfNeeded();
+ await last.dispatchEvent('pointerdown',{clientX:250,clientY:500,pointerId:1,pointerType:'touch',button:0});
+ await last.dispatchEvent('pointermove',{clientX:90,clientY:501,pointerId:1,pointerType:'touch'});
+ await p.waitForTimeout(550);assert.equal(await p.locator('.card-preview').count(),0,'swipe cancels hold');
+ await last.dispatchEvent('pointerup',{clientX:90,clientY:501,pointerId:1,pointerType:'touch'});await last.dispatchEvent('click');assert.equal(await readSave(),before,'swipe must not play');
+ await p.waitForTimeout(550);
+ await last.dispatchEvent('pointerdown',{clientX:100,clientY:500,pointerId:1,pointerType:'touch',button:0});await last.dispatchEvent('pointercancel',{pointerId:1});await p.waitForTimeout(550);assert.equal(await p.locator('.card-preview').count(),0);
+ await p.locator('.hand .card').first().tap();
+ const saved=await readSave(),old=JSON.parse(before),played=JSON.parse(saved);assert.equal(played.battle.hand.length,old.battle.hand.length-1);assert.equal(played.battle.energy,old.battle.energy-1);assert.equal(await p.locator('.card-preview').count(),0);
+ await p.reload();await p.locator('.hand').waitFor();assert.equal(await readSave(),saved);
+ await p.evaluate(({key,saved})=>{const s=JSON.parse(saved);s.battle.energy=0;localStorage.setItem(key,JSON.stringify(s));},{key,saved});await p.reload();const empty=await readSave();await p.locator('.hand .card').first().tap();assert.equal(await readSave(),empty);await holdCard();assert.equal(await readSave(),empty);await p.getByRole('button',{name:'閉じる',exact:true}).tap();
+ await p.evaluate(({key,saved})=>localStorage.setItem(key,saved),{key,saved});await p.reload();
  await p.setViewportSize({width:320,height:740});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  const small=await p.locator('.end-turn').boundingBox();assert.ok(small.width>=44&&small.height>=44);
- await p.locator('.hand .card').first().tap();await p.screenshot({path:'artifacts/touch-'+kind+'-mobile.png',fullPage:true});
- await p.getByRole('button',{name:'戻す',exact:true}).tap();
+ await holdCard();await p.screenshot({path:'artifacts/touch-'+kind+'-mobile.png',fullPage:true});await p.getByRole('button',{name:'閉じる',exact:true}).tap();
  await c.unroute('**/tower/*.mjs');console.log('Touch interactions passed; checking offline.');
  await p.getByRole('button',{name:'オフライン保存を確認',exact:true}).tap();await p.getByRole('status').filter({hasText:'オフライン保存を確認しました'}).waitFor({timeout:45000});
  await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
@@ -48,5 +51,5 @@ try{
  // Deliberately stop the inline application: loader must offer recovery, not hang.
  const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/index.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
  await q.goto(base+'tower/index.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();
- console.log('PASS '+kind+': Safari-compatible bundled startup, module requests blocked, select/cancel/use, swipe guard, hand navigation, 320px targets, persistence, offline query navigation, visible boot recovery.');
+ console.log('PASS '+kind+': Safari-compatible bundled startup, module requests blocked, single-tap play, long-press read-only details, cancellation, swipe guard, hand navigation, 320px targets, persistence, offline query navigation, visible boot recovery.');
 }finally{await browser.close();if(server)await server.httpServer.close();}

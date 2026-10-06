@@ -39,3 +39,6 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .card-preview .card strong{font-size:22px;margin-bottom:16px}
 .card-preview .card .effect{font-size:17px;line-height:1.8}
 .card-preview p{text-align:center;font-size:14px;margin:12px 0}.card-preview>button[data-action=cancel-card]{min-width:140px}
+
+/* Long-press details never play the card. */
+.hand .card{-webkit-touch-callout:none}.card-preview .card{cursor:default}.card-preview>button[data-action=cancel-card]{min-width:140px}
