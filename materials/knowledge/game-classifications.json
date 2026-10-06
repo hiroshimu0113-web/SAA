@@ -1,4 +1,2567 @@
 {
   "schema_version": 1,
-  "items": []
+  "items": [
+    {
+      "id": "concept-strike-metaphor",
+      "title": "切り分けの比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "切り分けの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.strike"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.strike"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "切り分けそのものが障害を修復するとは限りません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.strike.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "切り分けそのものが障害を修復するとは限りません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-incident-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "指標を他の情報と照合し、問題の箇所を絞り込みます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.strike.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.strike.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.strike.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "切り分けそのものが障害を修復するとは限りません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.strike"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-guard-metaphor",
+      "title": "防壁の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "防壁の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.guard"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.guard"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.guard.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-incident-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "運用上の対応は、利用者や事業への影響を基準に優先します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.guard.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.guard.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.guard.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.guard"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-probe-metaphor",
+      "title": "観測の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "観測の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.probe"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.probe"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "監視を置くだけで障害が解消するわけではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.probe.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "監視を置くだけで障害が解消するわけではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-incident-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "part_of",
+          "target_id": "combo-balancing-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "データを集めるだけでなく、基準値や変化を読み取ることが重要です。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.probe.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.probe.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.probe.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "監視を置くだけで障害が解消するわけではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.probe"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-burst-metaphor",
+      "title": "集中処理の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "集中処理の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.burst"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.burst"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.burst.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
+          "claim": "ワークロードの要件に合わせ、資源の種類や大きさを選びます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.burst.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.burst.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.burst.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.burst"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-parallel-metaphor",
+      "title": "並列処理の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "並列処理の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.parallel"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.parallel"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.parallel.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-balancing-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "複数の小さな資源へ処理を分散し、共通の障害点を避ける考え方があります。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.parallel.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.parallel.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.parallel.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.parallel"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-retry-metaphor",
+      "title": "再試行の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "再試行の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.retry"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.retry"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "実際の再試行が無料・無制限・常に安全という意味ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.retry.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "実際の再試行が無料・無制限・常に安全という意味ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/hiroshimu0113-web/SAA/blob/main/materials/public/tower/engine.mjs",
+          "claim": "このカードは0エナジーで攻撃できます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "AWS機能を主張せず、既存ゲームエンジンのルールと照合。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.retry.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.retry.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.retry.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "実際の再試行が無料・無制限・常に安全という意味ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.retry"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-reserve-metaphor",
+      "title": "予備容量の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "予備容量の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reserve"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.reserve"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "予備容量の確保だけで、すべての障害に耐えられるわけではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reserve.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "予備容量の確保だけで、すべての障害に耐えられるわけではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "需要と使用量を監視し、必要な容量を考えます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reserve.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reserve.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reserve.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "予備容量の確保だけで、すべての障害に耐えられるわけではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.reserve"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-restore-metaphor",
+      "title": "復旧手順の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "復旧手順の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.restore"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.restore"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "HP回復量は現実の復旧時間やデータ復元量を表しません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.restore.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "HP回復量は現実の復旧時間やデータ復元量を表しません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "復旧手順は、障害を想定して実際に試験します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.restore.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.restore.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.restore.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "HP回復量は現実の復旧時間やデータ復元量を表しません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.restore"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-foresight-metaphor",
+      "title": "先読みの比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "先読みの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.foresight"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.foresight"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.foresight.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "平常時の指標を基準に、変化を捉えます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.foresight.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.foresight.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.foresight.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.foresight"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-isolate-metaphor",
+      "title": "隔離の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "隔離の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.isolate"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.isolate"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "弱体のターン数は現実の障害隔離時間ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.isolate.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "弱体のターン数は現実の障害隔離時間ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "共通の障害点を避け、単一障害の影響を小さくする設計を考えます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.isolate.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.isolate.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.isolate.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "弱体のターン数は現実の障害隔離時間ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.isolate"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-detour-metaphor",
+      "title": "迂回の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "迂回の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.detour"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.detour"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.detour.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "障害を回避・修復する復旧の手順を設計し、試験します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.detour.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.detour.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.detour.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.detour"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-analysis-metaphor",
+      "title": "ログ分析の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "ログ分析の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.analysis"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.analysis"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "ログがあるだけで原因を断定できるわけではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.analysis.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "ログがあるだけで原因を断定できるわけではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-caching-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "ログや指標を調査と原因分析に利用します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.analysis.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.analysis.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.analysis.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "ログがあるだけで原因を断定できるわけではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.analysis"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-overload-metaphor",
+      "title": "過負荷試験の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "過負荷試験の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.overload"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.overload"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.overload.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
+          "claim": "性能試験で基準を作り、負荷をかけたときの指標を確認します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.overload.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.overload.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.overload.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.overload"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-redundant-metaphor",
+      "title": "冗長構成の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "冗長構成の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.redundant"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.redundant"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.redundant.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "資源を複数に分ける際は、共通の障害点も確認します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.redundant.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.redundant.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.redundant.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.redundant"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-optimize-metaphor",
+      "title": "最適化の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "最適化の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.optimize"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.optimize"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "強化値は実際の性能改善率ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.optimize.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "強化値は実際の性能改善率ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-caching-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
+          "claim": "指標を観察し、ワークロードに合う改善を選びます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.optimize.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.optimize.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.optimize.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "強化値は実際の性能改善率ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.optimize"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-cache-metaphor",
+      "title": "キャッシュの比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "キャッシュの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.cache"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.cache"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.cache.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-caching-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
+          "claim": "キャッシュの効果や性能を監視し、使い方を見直します。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.cache.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.cache.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.cache.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.cache"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-patch-metaphor",
+      "title": "緊急パッチの比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "緊急パッチの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.patch"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.patch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "緊急パッチのブロック値は、脆弱性の解消度を表しません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.patch.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "緊急パッチのブロック値は、脆弱性の解消度を表しません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "インフラの変更は自動化し、その変更自体も追跡・レビューします。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.patch.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.patch.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.patch.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "緊急パッチのブロック値は、脆弱性の解消度を表しません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.patch"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-balance-metaphor",
+      "title": "負荷分散の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "負荷分散の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.balance"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.balance"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "攻撃と防御を同時に得るのはゲーム固有の効果です。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.balance.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "攻撃と防御を同時に得るのはゲーム固有の効果です。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [
+        {
+          "type": "part_of",
+          "target_id": "combo-balancing-role",
+          "reason": "このカードを含む3種類で役を構成する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "リクエストを複数の資源へ分散する考え方です。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.balance.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.balance.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.balance.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "攻撃と防御を同時に得るのはゲーム固有の効果です。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.balance"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-reversal-metaphor",
+      "title": "逆転の一手の比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "逆転の一手の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reversal"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.reversal"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reversal.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/hiroshimu0113-web/SAA/blob/main/materials/public/tower/engine.mjs",
+          "claim": "このカードは、使用時のブロックを攻撃に加えます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "AWS機能を主張せず、既存ゲームエンジンのルールと照合。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reversal.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reversal.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.reversal.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.reversal"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-quarantine-metaphor",
+      "title": "封じ込めの比喩と補足",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
+      "objective": "封じ込めの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.quarantine"
+        },
+        {
+          "path": "public/tower/engine.mjs",
+          "locator": "CARDS.quarantine"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "カードの効果は架空のゲームルールとして読む。"
+      ],
+      "limitations": [
+        "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの性能や保証と同一視する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.quarantine.note"
+        },
+        "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
+        "counterexample": "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。",
+        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
+          "claim": "一つの障害が全体へ与える影響を小さくすることを考えます。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式無料資料の記述と短い補足を照合。フレーバーは創作文として区別。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
+        "flavor_text": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.quarantine.flavor"
+        },
+        "mechanism_note": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.quarantine.note"
+        },
+        "metaphor_limit": {
+          "path": "public/tower/flavor.mjs",
+          "locator": "FLAVOR.quarantine.limit"
+        },
+        "simplifications": [
+          "短い比喩と補足であり、具体的なAWS設定手順ではない。"
+        ],
+        "mislearning_risks": [
+          "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.quarantine"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "combo-incident-role",
+      "title": "インシデント対応",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
+      "objective": "インシデント対応のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.incident"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "同一ターンに異なる指定3種類を使用。順不同。"
+      ],
+      "limitations": [
+        "3枚は実AWSの必要十分条件ではない。"
+      ],
+      "misconceptions": [
+        "役の成立だけで実AWS構成が完成する。"
+      ],
+      "content": {
+        "card_ids": [
+          "probe",
+          "strike",
+          "guard"
+        ],
+        "real_world_relation": {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.incident.lesson"
+        },
+        "trigger": "同一ターンに指定の3種類すべてを使用",
+        "reward": "ブロック ＋5",
+        "repeat_limit": "各役1ターン1回",
+        "reset": "次ターンと次戦闘",
+        "system_refs": [],
+        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
+          "claim": "観測して状況を把握し、原因を切り分け、影響を抑えるという運用の考え方です。AWSではメトリクスと調査用のプレイブック等を使います。この3枚だけで対応が完結するという意味ではありません。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式資料と既存の役の補足を再照合し、実際の必要十分条件ではないことを確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "既存役を独立した主分類として登録。",
+        "flavor_text": null,
+        "mechanism_note": null,
+        "metaphor_limit": null,
+        "simplifications": [],
+        "mislearning_risks": [],
+        "implementation_refs": [
+          {
+            "path": "public/tower/combos.mjs",
+            "locator": "COMBOS.incident"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": [
+        "対応するsystem分類レコードは今後収集。"
+      ]
+    },
+    {
+      "id": "combo-balancing-role",
+      "title": "負荷分散構成",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
+      "objective": "負荷分散構成のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.balancing"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "同一ターンに異なる指定3種類を使用。順不同。"
+      ],
+      "limitations": [
+        "3枚は実AWSの必要十分条件ではない。"
+      ],
+      "misconceptions": [
+        "役の成立だけで実AWS構成が完成する。"
+      ],
+      "content": {
+        "card_ids": [
+          "balance",
+          "parallel",
+          "probe"
+        ],
+        "real_world_relation": {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.balancing.lesson"
+        },
+        "trigger": "同一ターンに指定の3種類すべてを使用",
+        "reward": "追加攻撃 3",
+        "repeat_limit": "各役1ターン1回",
+        "reset": "次ターンと次戦闘",
+        "system_refs": [],
+        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html",
+          "claim": "ALBは登録されたターゲットへリクエストを振り分け、ヘルスチェックで状態を確認します。分散先と正常性の確認をカードで表現しています。実際にはリスナー、ターゲットグループ、ネットワーク等の設定も必要です。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式資料と既存の役の補足を再照合し、実際の必要十分条件ではないことを確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "既存役を独立した主分類として登録。",
+        "flavor_text": null,
+        "mechanism_note": null,
+        "metaphor_limit": null,
+        "simplifications": [],
+        "mislearning_risks": [],
+        "implementation_refs": [
+          {
+            "path": "public/tower/combos.mjs",
+            "locator": "COMBOS.balancing"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": [
+        "対応するsystem分類レコードは今後収集。"
+      ]
+    },
+    {
+      "id": "combo-caching-role",
+      "title": "キャッシュ活用",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
+      "objective": "キャッシュ活用のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.caching"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "同一ターンに異なる指定3種類を使用。順不同。"
+      ],
+      "limitations": [
+        "3枚は実AWSの必要十分条件ではない。"
+      ],
+      "misconceptions": [
+        "役の成立だけで実AWS構成が完成する。"
+      ],
+      "content": {
+        "card_ids": [
+          "analysis",
+          "cache",
+          "optimize"
+        ],
+        "real_world_relation": {
+          "path": "public/tower/combos.mjs",
+          "locator": "COMBOS.caching.lesson"
+        },
+        "trigger": "同一ターンに指定の3種類すべてを使用",
+        "reward": "エナジー ＋1",
+        "repeat_limit": "各役1ターン1回",
+        "reset": "次ターンと次戦闘",
+        "system_refs": [],
+        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
+          "claim": "キャッシュは置くだけでなく、ヒット率や性能を調べて使い方を改善します。ElastiCacheの指標を監視し、ワークロードに合う戦略を選ぶ考え方です。エナジー回復はゲーム上の報酬です。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類・用途・実在する参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "公式資料と既存の役の補足を再照合し、実際の必要十分条件ではないことを確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        }
+      ],
+      "game_design": {
+        "proposal": "既存役を独立した主分類として登録。",
+        "flavor_text": null,
+        "mechanism_note": null,
+        "metaphor_limit": null,
+        "simplifications": [],
+        "mislearning_risks": [],
+        "implementation_refs": [
+          {
+            "path": "public/tower/combos.mjs",
+            "locator": "COMBOS.caching"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": [
+        "対応するsystem分類レコードは今後収集。"
+      ]
+    }
+  ]
 }

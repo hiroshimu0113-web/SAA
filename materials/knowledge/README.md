@@ -4,7 +4,7 @@
 
 ## ゲーム利用を見据えた教材分類
 
-教材の収集・作成・内容改訂前に [分類ガイド](../docs/CONTENT_CLASSIFICATION_GUIDE.md) を読み、[収集台帳](game-classifications.json) へ記録します。主分類は用語・概念・システム・ビルド・ケース。ゲーム用途やキャラ系統は別のタグです。既存の units.json と relations.json の契約は維持し、台帳はゲームへ直接読み込む形式ではありません。既存教材の一括分類とインポーターは未実施です。
+教材の収集・作成・内容改訂前に [分類ガイド](../docs/CONTENT_CLASSIFICATION_GUIDE.md) を読み、[収集台帳](game-classifications.json) へ記録します。主分類は用語・概念・システム・役・ビルド・ケース。ゲーム用途やキャラ系統は別のタグです。既存の units.json と relations.json の契約は維持し、台帳はゲームへ直接読み込む形式ではありません。既存教材の一括分類とインポーターは未実施です。
 
 ## 入口
 

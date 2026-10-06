@@ -56,6 +56,10 @@ export function newRun(seed=Date.now()){
 }
 export function cardValues(card){const d=CARDS[card.id],v={...d};if(card.plus)for(const k of ['damage','block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);return v;}
 export function describe(card){const d=cardValues(card),parts=[];if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.weak)parts.push('弱体'+d.weak+'ターン');if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}
+export function upgradeChanges(card){
+ const before=cardValues({...card,plus:false}),after=cardValues({...card,plus:true}),labels={damage:before.hits?'1回のダメージ':'ダメージ',block:'ブロック',heal:'HP回復',draw:'ドロー枚数',energy:'獲得エナジー',armor:'毎ターン防御',strength:'強化'};
+ return Object.keys(labels).filter(k=>(before[k]||0)!==(after[k]||0)).map(k=>labels[k]+' '+(before[k]||0)+' → '+(after[k]||0));
+}
 function draw(s,n){const b=s.battle;for(let i=0;i<n;i++){if(!b.draw.length){b.draw=shuffle(s,b.discard);b.discard=[];}if(!b.draw.length||b.hand.length>=10)break;b.hand.push(b.draw.pop());}}
 function startBattle(s,id){
  const e=ENEMIES[id];s.phase='battle';s.battle={enemy:id,hp:e.hp,maxHp:e.hp,block:0,strength:0,weak:0,turn:1,playerBlock:s.relics.includes('shell')?8:0,playerStrength:s.relics.includes('ember')?1:0,armor:0,energy:3,comboPlayed:[],comboDone:[],hand:[],draw:shuffle(s,s.deck.map(c=>c.uid)),discard:[],exhaust:[]};draw(s,s.relics.includes('lantern')?6:5);log(s,e.name+'が現れた。');
@@ -102,7 +106,7 @@ export function act(state,action){
  if(a.type==='reward'&&s.phase==='reward'&&(a.id===null||s.reward.includes(a.id))){if(a.id){add(s,a.id);log(s,CARDS[a.id].name+'をデッキに追加。');}complete(s);return s;}
  if(s.phase==='rest'){
   if(a.type==='heal'){heal(s,22);log(s,'休息でHPを22回復。');complete(s);return s;}
-  if(a.type==='upgrade'){const c=s.deck.find(c=>c.uid===a.uid&&!c.plus);if(!c)return state;c.plus=true;log(s,CARDS[c.id].name+'を強化。');complete(s);return s;}
+  if(a.type==='upgrade'){const c=s.deck.find(c=>c.uid===a.uid&&!c.plus);if(!c)return state;c.plus=true;log(s,CARDS[c.id].name+'を強化：'+upgradeChanges(c).join(' / ')+'。');complete(s);return s;}
  }
  if(s.phase==='event'){
   const q=s.quiz;

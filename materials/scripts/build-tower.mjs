@@ -22,3 +22,5 @@ await writeFile('dist/tower/left.html',html);
 await writeFile('dist/tower/hand.html',html);
 
 await writeFile('dist/tower/combo.html',html);
+
+await writeFile('dist/tower/flavor.html',html);

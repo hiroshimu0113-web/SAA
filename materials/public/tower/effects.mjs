@@ -14,7 +14,7 @@ export function combatEffects(before,after,action){
    if(blocked)add('enemy','guard',blocked,'防御 '+blocked);
   }
   if(n.playerBlock>b.playerBlock)add('player','shield',n.playerBlock-b.playerBlock,'◇ ＋'+(n.playerBlock-b.playerBlock));
-  if(d.strength||d.armor||d.energy)add('player','power',0,d.strength?'攻撃力 UP':d.armor?'持続防御 UP':'⚡ ＋'+d.energy);
+  if(d.strength||d.armor||d.energy)add('player','power',0,d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御 ＋'+d.armor:'⚡ ＋'+d.energy);
   if(d.weak)add('enemy','weak',d.weak,'弱体 ＋'+d.weak);
  }else{
   const i=intent(before);
@@ -23,7 +23,7 @@ export function combatEffects(before,after,action){
    if(blocked)add('player','guard',blocked,(blocked===i.value?'完全ガード ':'防御 ')+blocked);
   }
   if(i.type==='guard')add('enemy','shield',i.value,'◇ ＋'+i.value);
-  if(i.type==='buff')add('enemy','power',i.value,'攻撃力 UP');
+  if(i.type==='buff')add('enemy','power',i.value,'攻撃力 ＋'+i.value);
   if(after.phase==='battle'&&n.armor)add('player','shield',n.armor,'◇ ＋'+n.armor);
  }
  if(after.hp<before.hp)add('player','hit',before.hp-after.hp,'−'+(before.hp-after.hp));

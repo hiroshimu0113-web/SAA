@@ -76,3 +76,11 @@
 - https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html
 
 - 公開完了：c0cc2ffa72dfbb7cf8a2ab7d566fc2f87246494c、Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37453592441 は33テスト・build・WebKit・deploy成功。公開HTTPSのChromeで3役成立、予告枠、長押し条件、通知の非重複/消去、途中再開、二重報酬防止、オフライン成立、既存操作を確認。入口 https://hiroshimu0113-web.github.io/SAA/tower/combo.html 。iPhone実機の操作感と役の難易度は未検証。次は実プレイで成立頻度と説明の分かりやすさを評価。
+
+## 2026-10-06 役分類とフレーバーと強化内容表示
+- 分類ガイドを版2へ更新し、役comboを独立した第6主分類に追加。システム/役/ビルドの違い、役の必須項目、効果/フレーバー/仕組みの補足/比喩の限界の分離を定義。materials/AGENTS.mdとknowledge/README.mdも更新。
+- 全20カードへ創作フレーバーと短い補足・比喩の限界を追加。手札の長押し詳細だけに表示。18枚の補足は無料AWS公式資料を照合、再試行/逆転の一手はゲーム内ルールの説明として区別。カードの性能は変更しない。
+- 収集台帳へconcept-各カードID-metaphorの20件、combo-incident-role/combo-balancing-role/combo-caching-roleの3件を登録。本文はflavor.mjs/combos.mjsを参照。分類・補足内容は今回の範囲でレビュー済み、実装参照と確認記録を付与。既存知識単位/教材全体の監査や本人の理解評価へ波及させない。役に対応するsystemレコードの収集は今後。
+- 休息の強化カードに変化量を事前表示。強化後に結果欄を表示し、閉じるか次の操作まで残す。行動ログにも変化量を保存し、再読み込み後も確認可能。1回あたりのダメージや複数効果を区別し、エンジン値から生成。戦闘中の強化も攻撃力＋2等の数値を表示。
+- 検証：35テスト、ビルド、knowledge:check成功。23分類レコードの一意性・種類・実在ファイル/関係参照を確認。Chromeで320px、フレーバー/補足/比喩の限界、閲覧による保存不変、強化前後の7→10攻撃/4→6ブロック、閉じる、保存ログ、既存タップ/役/クイズ/オフライン成功。詳細と強化結果の画面を目視確認。
+- 新入口tower/flavor.html。WebKit/公開確認はこれから。次は公開版とiPhoneの読みやすさを確認し、分類済み補足を体系的な教材へ育てる。ゲームの記録・カード数値・1秒演出は維持。
