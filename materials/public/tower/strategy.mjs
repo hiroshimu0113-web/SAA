@@ -12,8 +12,7 @@ export function inspectPlay(s,c){
  for(const id of roles)lines.push('役「'+COMBOS[id].name+'」成立：'+COMBOS[id].label);
  if(d.draw&&next.phase==='battle')lines.push('手札に '+Math.max(0,next.battle.hand.length-s.battle.hand.length+1)+'枚補充');
  if(next.phase==='lost')lines.push('自分のHPが0になり、この冒険は終了');
- const hit=effects.find(f=>f.side==='enemy'&&f.kind==='hit');
- const brief=d.damage?'敵HP −'+(hit?.value||0):d.block?'防御 ＋'+(next.battle.playerBlock-s.battle.playerBlock):d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:'手札を補充';
+ const brief=d.damage?'AT ＋'+(d.damage+s.battle.playerStrength+(d.strength||0)+(d.perBlock?s.battle.playerBlock+(d.block||0):0))+(d.hits?' ×'+d.hits:''):d.block?'防御 ＋'+(next.battle.playerBlock-s.battle.playerBlock):d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:'手札を補充';
  return {lines,brief,nextPhase:next.phase};
 }
 export function synergyHints(s,c){

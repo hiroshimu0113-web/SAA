@@ -7,7 +7,9 @@ test('live card forecasts reuse combat resolution without changing saves or RNG'
  for(const id of Object.keys(CARDS))for(const plus of [false,true]){
   const s=start(),uid=s.battle.hand[0],c=s.deck.find(c=>c.uid===uid);c.id=id;c.plus=plus;s.hp=50;s.battle.block=5;s.battle.playerBlock=8;s.battle.playerStrength=2;
   const raw=JSON.stringify(s),p=inspectPlay(s,c),n=act(s,{type:'play',uid});assert.equal(JSON.stringify(s),raw);assert.equal(p.nextPhase,n.phase);
-  if(cardValues(c).damage)assert.equal(p.brief,'敵HP −'+(s.battle.hp-n.battle.hp));
+  if(cardValues(c).damage)assert.match(p.brief,/^AT ＋[0-9]+( ×[0-9]+)?$/);
+  if(id==='strike'&&!plus)assert.equal(p.brief,'AT ＋8');
+  if(id==='parallel'&&!plus)assert.equal(p.brief,'AT ＋6 ×2');
  }
  const s=start();s.battle.energy=0;assert.equal(playableCount(s),0);assert.equal(inspectPlay(s,s.deck.find(c=>c.uid===s.battle.hand[0])),null);
  s.deck.find(c=>c.uid===s.battle.hand[0]).id='retry';assert.equal(playableCount(s),1);

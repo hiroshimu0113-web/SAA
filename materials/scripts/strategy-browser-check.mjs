@@ -19,7 +19,7 @@ export async function checkStrategy(browser,base){
   assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);await p.screenshot({path:'artifacts/status-'+side+'.png'});await p.getByRole('button',{name:'閉じる',exact:true}).tap();
  }
  await p.locator('[data-status="enemy"]').focus();await p.keyboard.press('Enter');await p.locator('.status-dialog[open]').waitFor();await p.keyboard.press('Escape');assert.equal(await p.locator('.status-dialog[open]').count(),0);
-assert.equal(await p.locator('.hand .card-summary').first().innerText(),'敵HP −9');
+assert.equal(await p.locator('.hand .card-summary').first().innerText(),'AT ＋6 ×2');
  await p.locator('.relic-details summary').tap();await p.getByText('観測灯',{exact:true}).waitFor();assert.match(await p.locator('.relic-details').innerText(),/最初のターン/);
  await p.locator('.hand .card').first().focus();await p.keyboard.press('Shift+F10');assert.match(await p.locator('.card-plan').innerText(),/敵：−9/);assert.match(await p.locator('.card-plan').innerText(),/各ヒット/);assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);
  assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'artifacts/strategy-detail.png',fullPage:true});await p.getByRole('button',{name:'閉じる',exact:true}).tap();await p.locator('.hand .card').first().tap();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.hp),23);

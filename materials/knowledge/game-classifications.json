@@ -85,14 +85,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.strike.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.strike.note"
@@ -201,14 +203,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.guard.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.guard.note"
@@ -322,14 +326,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.probe.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.probe.note"
@@ -432,14 +438,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.burst.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.burst.note"
@@ -548,14 +556,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.parallel.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.parallel.note"
@@ -658,14 +668,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.retry.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.retry.note"
@@ -768,14 +780,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reserve.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.reserve.note"
@@ -878,14 +892,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.restore.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.restore.note"
@@ -988,14 +1004,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.foresight.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.foresight.note"
@@ -1098,14 +1116,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.isolate.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.isolate.note"
@@ -1208,14 +1228,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.detour.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.detour.note"
@@ -1324,14 +1346,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.analysis.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.analysis.note"
@@ -1434,14 +1458,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.overload.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.overload.note"
@@ -1544,14 +1570,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.redundant.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.redundant.note"
@@ -1660,14 +1688,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.optimize.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.optimize.note"
@@ -1776,14 +1806,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.cache.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.cache.note"
@@ -1886,14 +1918,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.patch.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.patch.note"
@@ -2002,14 +2036,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.balance.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.balance.note"
@@ -2112,14 +2148,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reversal.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.reversal.note"
@@ -2222,14 +2260,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
-        "flavor_text": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.quarantine.flavor"
-        },
         "mechanism_note": {
           "path": "public/tower/flavor.mjs",
           "locator": "FLAVOR.quarantine.note"
@@ -2340,7 +2380,6 @@
       ],
       "game_design": {
         "proposal": "既存役を独立した主分類として登録。",
-        "flavor_text": null,
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
@@ -2443,7 +2482,6 @@
       ],
       "game_design": {
         "proposal": "既存役を独立した主分類として登録。",
-        "flavor_text": null,
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
@@ -2546,7 +2584,6 @@
       ],
       "game_design": {
         "proposal": "既存役を独立した主分類として登録。",
-        "flavor_text": null,
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
