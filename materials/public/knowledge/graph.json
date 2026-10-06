@@ -35,37 +35,41 @@
       "id": "concept:alb",
       "kind": "concept",
       "title": "ALBと正常なターゲット",
-      "detail_status": "draft_unit",
+      "detail_status": "reviewed_unit",
       "unit": {
         "id": "alb",
         "title": "ALBと正常なターゲット",
         "group": "resilience",
         "objective": "ステートレスなHTTPサービスで正常なEC2へ振り分ける構成を説明する。",
         "estimated_minutes": 5,
-        "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+        "scope": "HTTP/HTTPS・EC2ターゲットの流れ、連続失敗判定と異常時ルーティング。通常AZのサブネット条件を含む。データ層を含むAZ障害対策の実験は範囲外。",
         "prerequisites": [
           "availability"
         ],
         "misconceptions": [
-          "ALBがあればどんな障害でも全リクエストが無停止になる。"
+          "ALBがあればどんな障害でも全リクエストが無停止になる。",
+          "ALBは異常なターゲットへ絶対に送らない。",
+          "正常数が0のときだけ異常時ルーティングになる。"
         ],
         "checks": [
           {
             "id": "alb-explain",
             "level": "explain",
-            "prompt": "ALBとEC2を複数AZにする狙いは？",
+            "prompt": "ALBの振り分けとヘルスチェックはどう連携する？",
             "expected_points": [
-              "複数の処理先を用意する",
-              "ヘルスチェックと正常先への振り分けを行う"
+              "リスナー、forward、ターゲットグループ、EC2の役割を区別する",
+              "連続失敗しきい値と周期的な判定を説明する",
+              "通常の正常先への振り分けと異常時ルーティングの例外を区別する"
             ]
           },
           {
             "id": "alb-apply",
             "level": "apply",
-            "prompt": "AZ障害でも新しいHTTP要求を受けたい。何を組み合わせる？",
+            "prompt": "正常数が異常時ルーティングの下限を下回ったとき、どう判断する？",
             "expected_points": [
-              "複数AZのALBとEC2",
-              "状態の外部化と必要な再試行も設計する"
+              "通常AZのALBと複数の処理先、残存容量や状態の扱いを分けて確認する",
+              "全異常時の設定下限と正常数を比較する",
+              "ALBの転送を無停止やアプリ修復の保証にしない"
             ]
           }
         ],
@@ -73,14 +77,40 @@
           "ch04-l02"
         ],
         "review": {
-          "status": "draft",
-          "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-          "source_document": "docs/GAME_PROTOTYPE.md"
+          "status": "reviewed",
+          "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+          "source_document": "knowledge/lessons/alb.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+              "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+              "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+              "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+              "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "条件を1つ変えた転移問題を追加する",
-          "境界条件と公式根拠を照合してから公開教材へ反映する"
+          "可用性単位の確認後、状態の扱い・残存容量・再試行を含むAZ障害ケースを別に設計する。",
+          "DNSフェイルオーバーとクロスゾーンの条件を現行公式ガイドで追加確認する。"
         ]
       }
     },

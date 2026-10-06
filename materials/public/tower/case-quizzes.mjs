@@ -179,6 +179,36 @@ export const CASE_QUIZZES={
       "シミュレーションと実行の範囲を区別し、実環境でも必要な許可・拒否の結果を確認します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_SimulatePrincipalPolicy.go"
+  },
+  "alb-consecutive-failures": {
+    "prompt": "通常のリージョンAZにあるALBのHTTPリスナーから単一グループのEC2へ転送する。 登録済みで正常だったEC2について、UnhealthyThresholdCountを3に設定した。ヘルスチェック判定の説明として適切なものは？",
+    "options": [
+      "業務の要求が1回失敗すると必ず即時に異常になる",
+      "ヘルスチェックの連続失敗が3回に達すると異常と判定する。周期とタイムアウトも関係する",
+      "EC2ターゲットのヘルスチェックを無効にして要求を成功させられる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "業務要求とヘルスチェックを混同しています。1回の要求失敗が連続失敗3回に相当するわけではありません。",
+      "設定した連続失敗回数が判定条件です。周期やタイムアウトがあるので、障害検出と即時・無停止の保証を区別します。",
+      "インスタンス型のターゲットではヘルスチェックを無効化できません。無効化してもアプリの障害を修復する理由にはなりません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go"
+  },
+  "alb-all-unhealthy": {
+    "prompt": "通常のリージョンAZにあるALBのHTTPリスナーから単一グループのEC2へ転送する。 新しい要求がALBへ到達している。全AZの全登録EC2が異常で、異常時ルーティングの正常数下限は既定1、割合はoff。転送の振る舞いは？",
+    "options": [
+      "異常先も含む全ターゲットへ送る。アプリの成功は保証されない",
+      "ヘルスチェックがあるので必ず全要求を拒否し、異常先へは一切送らない",
+      "ALBが停止したアプリを自動修復してから送る"
+    ],
+    "answer": 0,
+    "reasons": [
+      "正常数0が下限1を下回るため、異常先も含めて送る動きになります。転送を試みることと処理成功は別です。",
+      "異常時ルーティングのしきい値による例外を無視しています。「異常先へ絶対に送らない」はこの条件で誤りです。",
+      "ルーティングの設定はアプリ修復の設定ではありません。全異常がそのまま成功へ変わる保証はありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -205,5 +235,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "least-photo-policy",
     "least-photo-simulation"
+  ],
+  [
+    "alb-consecutive-failures",
+    "alb-all-unhealthy"
   ]
 ];

@@ -2070,8 +2070,8 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "リクエストを複数の資源へ分散する考え方です。",
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
           "checked_on": "2026-10-06",
           "reviewer": "Codex"
         }
@@ -2102,6 +2102,18 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ALBの正常先への分散と異常時ルーティングの例外を固定版の公式SDKで再確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromium全操作で3役、詳細補足、320px、保存再開、オフライン、既存効果を確認。内容用検査で全7ケースと確認済み知識地図を確認。役の3種類・報酬・保存形式を維持。未公開。"
         }
       ],
       "game_design": {
@@ -2518,14 +2530,34 @@
         "reward": "追加攻撃 3",
         "repeat_limit": "各役1ターン1回",
         "reset": "次ターンと次戦闘",
-        "system_refs": [],
+        "system_refs": [
+          "system-alb-target-health-flow"
+        ],
         "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html",
-          "claim": "ALBは登録されたターゲットへリクエストを振り分け、ヘルスチェックで状態を確認します。分散先と正常性の確認をカードで表現しています。実際にはリスナー、ターゲットグループ、ネットワーク等の設定も必要です。",
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+          "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+          "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+          "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
           "checked_on": "2026-10-06",
           "reviewer": "Codex"
         }
@@ -2550,6 +2582,18 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "現行公式SDKでリスナー・ヘルスチェック・異常時ルーティングを再照合。対応systemの参照を追加。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromium全操作で3役、詳細補足、320px、保存再開、オフライン、既存効果を確認。内容用検査で全7ケースと確認済み知識地図を確認。役の3種類・報酬・保存形式を維持。未公開。"
         }
       ],
       "game_design": {
@@ -2566,9 +2610,7 @@
         ]
       },
       "import_status": "imported",
-      "open_questions": [
-        "対応するsystem分類レコードは今後収集。"
-      ]
+      "open_questions": []
     },
     {
       "id": "combo-caching-role",
@@ -4318,6 +4360,459 @@
           {
             "path": "public/tower/engine.mjs",
             "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-alb-health-routing",
+      "title": "ALB：振り分けとヘルスチェックの条件",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "ステートレスなHTTPサービスで正常なEC2へ振り分ける構成を説明する。",
+      "unit_ids": [
+        "alb"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "ALB：振り分けとヘルスチェックの条件"
+        }
+      ],
+      "domains": [
+        "networking",
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "route",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Elastic Load Balancing",
+        "Amazon EC2"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "可用性と切り替え"
+      ],
+      "conditions": [
+        "ネットワーク到達性、登録、forward設定は整っている。初期登録中・drainingや重み付き複数グループは扱わない。",
+        "第1問は健康判定、第2問は全AZの全ターゲットが異常のときの新規要求を扱う。"
+      ],
+      "limitations": [
+        "HTTP/HTTPS・EC2ターゲットの流れ、連続失敗判定と異常時ルーティング。通常AZのサブネット条件を含む。データ層を含むAZ障害対策の実験は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "ALBがあればどんな障害でも全リクエストが無停止になる。",
+        "ALBは異常なターゲットへ絶対に送らない。",
+        "正常数が0のときだけ異常時ルーティングになる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "applicable_when": "通常のリージョンAZにあるALBのHTTPリスナーから単一グループのEC2へ転送する。",
+        "counterexample": "異常時ルーティングの下限を下回れば異常先にも送る。",
+        "comparison": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-alb-health-routing",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+          "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+          "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+          "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "ALBは異常なターゲットへ絶対に送らない。",
+          "正常数が0のときだけ異常時ルーティングになる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-alb-health-routing",
+      "title": "ALBのヘルスチェックと全異常時の動き",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "alb"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "alb-health-routing"
+        }
+      ],
+      "domains": [
+        "networking",
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "route",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Elastic Load Balancing",
+        "Amazon EC2"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "可用性と切り替え"
+      ],
+      "conditions": [
+        "ネットワーク到達性、登録、forward設定は整っている。初期登録中・drainingや重み付き複数グループは扱わない。",
+        "第1問は健康判定、第2問は全AZの全ターゲットが異常のときの新規要求を扱う。"
+      ],
+      "limitations": [
+        "HTTP/HTTPS・EC2ターゲットの流れ、連続失敗判定と異常時ルーティング。通常AZのサブネット条件を含む。データ層を含むAZ障害対策の実験は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "ALBがあればどんな障害でも全リクエストが無停止になる。",
+        "ALBは異常なターゲットへ絶対に送らない。",
+        "正常数が0のときだけ異常時ルーティングになる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "alb-health-routing.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "alb-health-routing.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "alb-health-routing.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "alb-health-routing.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+          "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+          "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+          "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "ALBは異常なターゲットへ絶対に送らない。",
+          "正常数が0のときだけ異常時ルーティングになる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "alb-consecutive-failures, alb-all-unhealthy"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "system-alb-target-health-flow",
+      "title": "ALBの転送と正常性判定の連携",
+      "aliases": [],
+      "kind": "system",
+      "classification_reason": "リスナー、ターゲットグループ、EC2と正常性確認の流れ・依存条件・異常時を追う教材。",
+      "objective": "要求の転送と周期的な状態判定、異常時ルーティングを要素間の連携として説明する。",
+      "unit_ids": [
+        "alb"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "ALB：振り分けとヘルスチェックの条件"
+        }
+      ],
+      "domains": [
+        "networking",
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "route",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Elastic Load Balancing",
+        "Amazon EC2"
+      ],
+      "game_targets": [
+        "combo",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "可用性と切り替え"
+      ],
+      "conditions": [
+        "ネットワーク到達性、登録、forward設定は整っている。初期登録中・drainingや重み付き複数グループは扱わない。",
+        "第1問は健康判定、第2問は全AZの全ターゲットが異常のときの新規要求を扱う。"
+      ],
+      "limitations": [
+        "HTTP/HTTPS・EC2ターゲットの流れ、連続失敗判定と異常時ルーティング。通常AZのサブネット条件を含む。データ層を含むAZ障害対策の実験は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "ALBがあればどんな障害でも全リクエストが無停止になる。",
+        "ALBは異常なターゲットへ絶対に送らない。",
+        "正常数が0のときだけ異常時ルーティングになる。"
+      ],
+      "content": {
+        "components": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "用語と要素"
+        },
+        "input": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "flow": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "output": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "dependencies": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "依存条件と異常時の動き"
+        },
+        "failure_behavior": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "依存条件と異常時の動き"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-alb-health-routing",
+          "reason": "連続失敗と全異常時の動きで理解を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+          "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+          "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+          "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromium全操作で3役、詳細補足、320px、保存再開、オフライン、既存効果を確認。内容用検査で全7ケースと確認済み知識地図を確認。役の3種類・報酬・保存形式を維持。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "既存の負荷分散構成の役とbalanceの補足へ、実際の流れと全異常時の例外を反映する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/alb.md",
+          "locator": "仕組み・入力と出力"
+        },
+        "metaphor_limit": "報酬は架空の追加攻撃3。ALBの性能や障害復旧の数値ではない。",
+        "simplifications": [
+          "ゲームの3枚は実AWSの必要十分条件ではない。正常数やネットワークをシミュレートしていない。"
+        ],
+        "mislearning_risks": [
+          "ALBは異常なターゲットへ絶対に送らない。",
+          "正常数が0のときだけ異常時ルーティングになる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/combos.mjs",
+            "locator": "COMBOS.balancing.lesson"
+          },
+          {
+            "path": "public/tower/flavor.mjs",
+            "locator": "FLAVOR.balance.note"
           }
         ]
       },

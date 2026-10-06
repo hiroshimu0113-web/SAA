@@ -732,6 +732,134 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "alb-health-routing",
+      "title": "ALBのヘルスチェックと全異常時の動き",
+      "premise": "通常のリージョンAZにあるALBのHTTPリスナーから単一グループのEC2へ転送する。",
+      "constraints": [
+        "ネットワーク到達性、登録、forward設定は整っている。初期登録中・drainingや重み付き複数グループは扱わない。",
+        "第1問は健康判定、第2問は全AZの全ターゲットが異常のときの新規要求を扱う。"
+      ],
+      "questions": [
+        {
+          "id": "alb-consecutive-failures",
+          "objective": "連続失敗しきい値と周期的な判定を説明する。",
+          "prompt": "登録済みで正常だったEC2について、UnhealthyThresholdCountを3に設定した。ヘルスチェック判定の説明として適切なものは？",
+          "options": [
+            {
+              "id": "alb-consecutive-failures-a",
+              "text": "業務の要求が1回失敗すると必ず即時に異常になる",
+              "explanation": "業務要求とヘルスチェックを混同しています。1回の要求失敗が連続失敗3回に相当するわけではありません。"
+            },
+            {
+              "id": "alb-consecutive-failures-b",
+              "text": "ヘルスチェックの連続失敗が3回に達すると異常と判定する。周期とタイムアウトも関係する",
+              "explanation": "設定した連続失敗回数が判定条件です。周期やタイムアウトがあるので、障害検出と即時・無停止の保証を区別します。"
+            },
+            {
+              "id": "alb-consecutive-failures-c",
+              "text": "EC2ターゲットのヘルスチェックを無効にして要求を成功させられる",
+              "explanation": "インスタンス型のターゲットではヘルスチェックを無効化できません。無効化してもアプリの障害を修復する理由にはなりません。"
+            }
+          ],
+          "correct_option_id": "alb-consecutive-failures-b",
+          "runtime_option_order": [
+            "alb-consecutive-failures-a",
+            "alb-consecutive-failures-b",
+            "alb-consecutive-failures-c"
+          ],
+          "rationale": "設定した連続失敗回数が判定条件です。周期やタイムアウトがあるので、障害検出と即時・無停止の保証を区別します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go"
+          ]
+        },
+        {
+          "id": "alb-all-unhealthy",
+          "objective": "異常時ルーティングの例外を適用する。",
+          "prompt": "新しい要求がALBへ到達している。全AZの全登録EC2が異常で、異常時ルーティングの正常数下限は既定1、割合はoff。転送の振る舞いは？",
+          "options": [
+            {
+              "id": "alb-all-unhealthy-a",
+              "text": "異常先も含む全ターゲットへ送る。アプリの成功は保証されない",
+              "explanation": "正常数0が下限1を下回るため、異常先も含めて送る動きになります。転送を試みることと処理成功は別です。"
+            },
+            {
+              "id": "alb-all-unhealthy-b",
+              "text": "ヘルスチェックがあるので必ず全要求を拒否し、異常先へは一切送らない",
+              "explanation": "異常時ルーティングのしきい値による例外を無視しています。「異常先へ絶対に送らない」はこの条件で誤りです。"
+            },
+            {
+              "id": "alb-all-unhealthy-c",
+              "text": "ALBが停止したアプリを自動修復してから送る",
+              "explanation": "ルーティングの設定はアプリ修復の設定ではありません。全異常がそのまま成功へ変わる保証はありません。"
+            }
+          ],
+          "correct_option_id": "alb-all-unhealthy-a",
+          "runtime_option_order": [
+            "alb-all-unhealthy-a",
+            "alb-all-unhealthy-b",
+            "alb-all-unhealthy-c"
+          ],
+          "rationale": "正常数0が下限1を下回るため、異常先も含めて送る動きになります。転送を試みることと処理成功は別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "同じ評価範囲で正常数下限を3に設定し、正常数が2へ減る。割合はoff。",
+        "answer": "正常が残っていても下限を下回るため、異常先も含めたルーティングが起こる。",
+        "reason": "判定は全異常という名称ではなく、正常数と設定しきい値の比較で決まる。"
+      },
+      "unit_ids": [
+        "alb"
+      ],
+      "chapter_ids": [
+        "ch03",
+        "ch04",
+        "ch10"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateListener.go",
+          "claim": "リスナーの既定アクション、待ち受けポート・プロトコル。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateTargetGroup.go",
+          "claim": "インスタンスの常時ヘルスチェック、周期、パス、ポートと連続失敗しきい値。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go",
+          "claim": "forwardアクション、正常数の下限を下回ると異常先を含めて送る。異常時ルーティングの数の既定1、割合の既定off。DNSフェイルオーバーは別属性。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/api_op_CreateLoadBalancer.go",
+          "claim": "通常AZのALBには2以上のAZのサブネット。Outposts・Local Zonesには別条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

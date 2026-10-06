@@ -85,9 +85,9 @@ export const FLAVOR={
     "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
   },
   "balance": {
-    "note": "リクエストを複数の資源へ分散する考え方です。",
+    "note": "リクエストを複数の処理先へ分散する考え方です。ALBは正常性を確認しますが、正常数が設定した下限を下回ると異常先にも送ります。",
     "limit": "攻撃と防御を同時に得るのはゲーム固有の効果です。",
-    "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go"
   },
   "reversal": {
     "note": "このカードは、使用時のブロックを攻撃に加えます。",
