@@ -36,7 +36,9 @@ try{
  await p.getByRole('button',{name:'戻す',exact:true}).tap();
  await c.unroute('**/tower/*.mjs');console.log('Touch interactions passed; checking offline.');
  await p.getByRole('button',{name:'オフライン保存を確認',exact:true}).tap();await p.getByRole('status').filter({hasText:'オフライン保存を確認しました'}).waitFor({timeout:45000});
- await c.setOffline(true);await p.reload();await p.locator('.hand').waitFor();
+ await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
+ if(kind==='webkit')await c.route('**/*',route=>route.abort('internetdisconnected'));else await c.setOffline(true);
+ await p.reload();await p.locator('.hand').waitFor();
  await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  // Deliberately stop the inline application: loader must offer recovery, not hang.
