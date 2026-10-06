@@ -1,4 +1,4 @@
-import {checkDebuffs} from './debuff-browser-check.mjs';
+import {checkDebuffs,checkDebuffOffline} from './debuff-browser-check.mjs';
 import {checkFlavor} from './flavor-browser-check.mjs';
 import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
 import {checkQuizAndHud,quizOfflineRoundtrip} from './quiz-browser-check.mjs';
@@ -56,6 +56,7 @@ try{
  await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await quizOfflineRoundtrip(p);
  await checkComboOffline(p);
+ await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
  await checkCombatEffects(browser,base);

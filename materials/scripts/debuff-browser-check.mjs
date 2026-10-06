@@ -16,11 +16,22 @@ export async function checkDebuffs(browser,base){
   await p.evaluate(()=>window.scrollTo(0,0));await p.screenshot({path:'artifacts/player-double-action.png'});await p.locator('.end-turn').tap();assert.equal((await read()).battle.playerDebuffs.delay,0);assert.match(await p.locator('.debuff-strip').innerText(),/炎上 3/);
   await p.locator('[data-status="player"]').focus();await p.keyboard.press('Enter');const text=await p.locator('.status-dialog').innerText();for(const word of ['炎上','過負荷','遅延','枯渇','設定不備'])assert.ok(text.includes(word));assert.ok(!text.includes('弱体'));await p.getByRole('button',{name:'閉じる',exact:true}).tap();
   let s=battle('noise');s.battle.enemyDebuffs.delay=1;await setup(s);await p.locator('.end-turn').tap();assert.match(await p.locator('.intent').innerText(),/2回行動.*攻撃 7.*防御 7/);await p.evaluate(()=>window.scrollTo(0,0));await p.locator('.combat-toast').waitFor({state:'detached'});await p.screenshot({path:'artifacts/enemy-double-action.png'});
-  // Resume a pending double action while offline; no extra skip or duplicated action.
-  await p.evaluate(async()=>{await navigator.serviceWorker.register('../sw.js');await navigator.serviceWorker.ready;});await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));await c.setOffline(true);await p.reload();await p.locator('.end-turn').tap();assert.equal((await read()).hp,65);assert.equal((await read()).battle.enemyStep,2);await c.setOffline(false);
+  // Reload the pending action; offline coverage uses the shared server-stop harness.
+  await p.reload();await p.locator('.end-turn').tap();assert.equal((await read()).hp,65);assert.equal((await read()).battle.enemyStep,2);
   s=battle('elite');await setup(s);await p.locator('.end-turn').tap();assert.match(await p.locator('.debuff-strip').innerText(),/設定不備 2/);assert.match(await p.locator('.intent').innerText(),/攻撃 18/);
   assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   s=battle('noise');s.version=3;s.battle.weak=2;delete s.battle.enemyDebuffs;delete s.battle.playerDebuffs;delete s.battle.enemyStep;delete s.battle.playerActions;delete s.battle.events;await setup(s);assert.match(await p.locator('.debuff-strip').innerText(),/過負荷 2/);assert.ok(!(await p.locator('#game').innerText()).includes('弱体'));await p.locator('.end-turn').tap();assert.equal((await read()).version,4);
-  console.log('PASS debuffs: boss/elite warnings, player skip + two windows, five status explanations, enemy ordered double action, offline resume, legacy migration and 320px.');
+  console.log('PASS debuffs: boss/elite warnings, player skip + two windows, five status explanations, enemy ordered double action, reload, legacy migration and 320px.');
  }finally{await c.close();}
+}
+
+export async function checkDebuffOffline(p){
+ const old=await p.evaluate(k=>localStorage.getItem(k),key),s=battle('noise');s.battle.enemyDebuffs.delay=2;
+ await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();
+ assert.match(await p.locator('.intent').innerText(),/2回行動.*攻撃 7.*防御 7/);
+ await p.locator('.end-turn').tap();const after=await p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
+ assert.equal(after.hp,65);assert.equal(after.battle.enemyStep,2);assert.equal(after.battle.enemyDebuffs.delay,0);
+ await p.reload();assert.equal(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).battle.enemyStep,key),2);
+ await p.evaluate(({key,old})=>localStorage.setItem(key,old),{key,old});await p.reload();
+ console.log('PASS offline debuff pending double action, exact resolution and no replay.');
 }
