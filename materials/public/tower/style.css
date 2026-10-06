@@ -61,8 +61,8 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 
 /* Visible feedback also follows the player while they scroll through the hand. */
 .game-tools{display:flex;gap:12px;justify-content:space-between;align-items:center;padding-bottom:12px;color:#c1d3db;font-size:12px}.game-tools button{padding:8px 14px;font-size:13px}
-.combat-toast{position:fixed;z-index:100;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:350px;padding:14px 18px;border:2px solid #cfbc8c;border-radius:16px;background:#101d2b;box-shadow:0 8px 28px #0009;pointer-events:none;font-size:22px;font-weight:800;text-align:center;line-height:1.55;animation:none}
-.combat-toast>strong{display:block;font-size:12px;color:#d1dce2;margin-bottom:5px}.toast-hit{color:#ffb0aa}.toast-guard,.toast-shield{color:#9ee5ff}.toast-heal{color:#a0f5c0}.toast-power,.toast-finish{color:#ffe0a0}.toast-weak{color:#dab9ff}
+.combat-toast{position:fixed;z-index:100;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:260px;padding:8px 12px;border:1px solid #cfbc8c;border-radius:12px;background:#101d2b;box-shadow:0 8px 28px #0009;pointer-events:none;font-size:18px;font-weight:800;text-align:center;line-height:1.4;animation:none}
+.combat-toast>strong{display:block;font-size:11px;color:#d1dce2;margin-bottom:3px}.toast-hit{color:#ffb0aa}.toast-guard,.toast-shield{color:#9ee5ff}.toast-heal{color:#a0f5c0}.toast-power,.toast-finish{color:#ffe0a0}.toast-weak{color:#dab9ff}
 .fx-event{font-size:clamp(22px,6vw,30px);animation-duration:1.8s}.react-hit{animation-duration:.45s}.react-guard:after,.react-shield:after{animation-duration:.9s}
 @keyframes toast-reveal{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.combat-toast{animation:none}}

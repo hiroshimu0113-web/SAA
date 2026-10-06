@@ -50,6 +50,6 @@ export function showCombatEffects(root,effects,demo=false){
  // The fixed result remains visible even when the arena is above the viewport.
  const targets=[...stage.querySelectorAll('[class*="react-"]')];
  const cleanup=()=>{layer.remove();info.remove();for(const el of targets)for(const name of [...el.classList])if(name.startsWith('react-'))el.classList.remove(name);};
- const timer=setTimeout(cleanup,2000);clearEffects=()=>{clearTimeout(timer);cleanup();};
+ const timer=setTimeout(cleanup,1400);clearEffects=()=>{clearTimeout(timer);cleanup();};
 
 }
