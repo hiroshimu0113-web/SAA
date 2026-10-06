@@ -18,3 +18,5 @@ console.log('Tower: single-page Safari 14 bundle; no external module required at
 await writeFile('dist/tower/battle.html',html);
 
 await writeFile('dist/tower/left.html',html);
+
+await writeFile('dist/tower/hand.html',html);
