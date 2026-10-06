@@ -8,7 +8,7 @@ import { validateUnits, validateGraph, type Unit, type Relation } from './knowle
 
 const root=new URL('../',import.meta.url);
 const read=(path:string)=>readFile(new URL(path,root),'utf8');
-const save=async(path:string,text:string)=>{if(process.argv.includes('--check')){if(await read(path)!==text)throw new Error('Stale generated file: '+path);}else await writeFile(new URL(path,root),text);};
+const save=async(path:string,text:string)=>{if(process.argv.includes('--check')){if((await read(path)).replace(/\r\n/g,'\n')!==text)throw new Error('Stale generated file: '+path);}else await writeFile(new URL(path,root),text);};
 const document=JSON.parse(await read('knowledge/units.json'));
 assert.equal(document.schema_version,1,'Unsupported units schema version');
 const units:Unit[]=document.units;

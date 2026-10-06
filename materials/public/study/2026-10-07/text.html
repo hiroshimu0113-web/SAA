@@ -1,0 +1,31 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第1回テキスト：リージョンとAZ | SAA学習ノート</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f3ed;color:#203835;font:17px/1.9 system-ui,sans-serif}main{max-width:760px;margin:auto;padding:28px 20px 70px}h1{font-size:clamp(27px,6vw,38px);line-height:1.4}h2{font-size:23px;margin-top:38px}h3{font-size:19px}a{color:#096c65;overflow-wrap:anywhere}nav{display:flex;gap:18px;flex-wrap:wrap}section,.box,details{background:white;padding:20px;border:1px solid #d3dfd8;border-radius:12px;margin:20px 0}summary{cursor:pointer;color:#12645c;font-weight:700;min-height:44px}li{margin:10px 0}pre{white-space:pre-wrap;font:15px/1.9 monospace;background:#e7efeb;padding:18px;border-radius:10px}.meta{color:#56726a;font-size:14px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid #ccd8d0;text-align:left;padding:10px;vertical-align:top}p{overflow-wrap:anywhere}@media print{body{background:white}nav{display:none}section,details{break-inside:avoid}details>*{display:block}main{padding:0}}</style><main><nav><a href="../../../index.html">学習ホーム</a><a href="text.html">テキスト</a><a href="questions.html">問題集</a></nav>
+<p class="meta">2026年10月7日分 · 学習ガイド第1回 · 本文10分＋問題10分＋振り返り5分</p>
+<h1>リージョンとAZ<br>「台数」と「置き場所」を分けて考える</h1>
+<p>今日の目標は、<strong>同じAZにサーバーを増やす場合と、複数AZへ分ける場合の違い</strong>を、自分の言葉で説明することです。初回向けの教材なので前提知識は不要です。</p>
+<section><h2>1．写真工房が2台の機械を買ったら</h2><p>写真を加工する機械が1台だけなら、その機械の故障で作業が止まります。同じ工房に2台置けば、片方が故障しても残りで作業を続けられそうです。でも、工房全体が停電すると2台とも止まります。</p><p>そこで別の工房にも1台置きます。片方の工房が使えなくても、もう片方で処理できる可能性が生まれます。ただし、お客さんの注文をそちらへ送ること、必要な写真を取り出せること、残った機械に十分な処理能力があることも必要です。</p><p><strong>増やすだけでなく、何がまとめて止まるかを考える。</strong>これが今日の判断の出発点です。</p></section>
+<h2>2．正式な言葉に置き換える</h2><ul><li><strong>リージョン</strong>：AWSの地理的な区分。東京や大阪などが例です。</li><li><strong>アベイラビリティーゾーン（AZ）</strong>：1つのリージョン内にある、障害の影響を分離するための場所。1つ以上のデータセンターで構成されます。</li><li><strong>EC2</strong>：プログラムを動かす仮想サーバー。ここでは工房の「加工機械」に相当します。</li><li><strong>可用性</strong>：必要なときにサービスを利用できる性質です。</li></ul>
+<p>工房のたとえは、同じ場所に集中させる危険を考えるためのものです。<strong>「AZ＝建物1棟」ではありません。</strong>AZ間は電源などの障害を分離するように設計され、低遅延のネットワークでつながっています。それでも「複数AZなら何があっても絶対に止まらない」という意味ではありません。</p>
+<h2>3．図で比べる</h2><pre aria-label="同じAZへの集中と別AZへの分散">同じリージョン
+  構成A：AZ-a [ EC2① / EC2② ]
+         → AZ-aの障害で両方に影響
+
+  構成B：AZ-a [ EC2① ]
+         AZ-b [ EC2② ]
+         → 片方のAZが停止しても、
+           別AZに処理先が残る</pre>
+<table><thead><tr><th>変更</th><th>対処したいこと</th><th>残る課題</th></tr></thead><tbody><tr><td>同じAZで台数を増やす</td><td>個別サーバーの故障や処理量の増加</td><td>そのAZ全体の障害</td></tr><tr><td>複数AZに分散する</td><td>1つのAZの障害</td><td>正常先への振り分け、データ、容量</td></tr><tr><td>別リージョンにも備える</td><td>リージョン全体が使えない場合の復旧</td><td>複製、切り替え、復旧時間などの別設計</td></tr></tbody></table>
+<p>「台数を増やす」は処理能力と冗長化の話、「別AZへ分散する」は共通の障害でまとめて失う範囲を小さくする話です。どちらが必要かは要件で決めます。</p>
+<h2>4．分けただけで利用を続けられる？</h2><p>利用者が停止したEC2へアクセスし続けるなら、別AZに元気なEC2があっても使えません。Webサービスでは、<strong>Application Load Balancer（ALB）</strong>が入口になり、複数の処理先へHTTP要求を振り分ける構成が候補です。ヘルスチェックは、処理先が応答するかを定期的に調べる仕組みです。</p>
+<pre aria-label="正常なAZへ振り分ける構成">利用者
+  ↓ HTTP要求
+複数AZで構成したALB
+  ├─ AZ-a：EC2① × 障害
+  └─ AZ-b：EC2② ○ 正常 → 処理
+
+必要条件：
+・EC2②でも同じ処理ができる
+・必要なデータをEC2②から使える
+・EC2②側に必要な処理能力がある</pre>
+<p>正常なターゲットが残り、適切な設定があれば、ALBは異常なターゲットを振り分け先から外します。検出には時間がかかり、処理中の要求が失敗することもあります。全ターゲットが異常になった場合には、ALBが全ターゲットへ振り分ける例外（フェイルオープン）もあります。「ALBを置けば必ず成功する」とは覚えません。</p><p>EC2①にしかないデータやログイン状態が必要なら、EC2②へ要求を送るだけでは処理できません。データや状態の置き場所も設計します。具体的な保存サービスの使い分けは、今後のレッスンで扱います。</p>
+<h2>5．条件が変われば、判断も変える</h2><section><h3>ケースA：AZ障害に備える</h3><p>「1つのAZが停止しても、新しい注文を受け付けたい」。同じAZへ10台置くより、別AZにも処理先を置き、注文の振り分けとデータ利用を成立させることが要点です。</p><h3>ケースB：処理量だけが増えた</h3><p>「AZ障害は今回の要件に含めず、同時処理を増やしたい」。同じAZ内の台数増加も候補になります。AZ分散の必要性を、処理能力の不足と混同しません。</p><h3>ケースC：リージョン全体が停止した</h3><p>同じリージョン内の複数AZだけでは、この条件を満たせません。別リージョンでの復旧、データの複製、利用者の切り替えなどを検討する範囲になります。</p></section>
+<h2>6．自分の言葉で1分説明</h2><p>「同じAZに2台あれば十分？」と聞かれたら、<strong>どの障害に備えるか／どこへ配置するか／処理をどう続けるか</strong>の3点で答えてください。</p><p class="box"><a href="questions.html">問題集へ進む → 全7問</a></p><p class="meta">学習ガイドと理解の地図の region → az → availability を中心に構成。本人の学習実績は未確認のため第1回として用意しています。教材と問題は独自作成です。</p><h2>公式出典</h2><p class="meta">2026年10月6日確認。外部リンクの閲覧には通信が必要です。</p><ol><li><a href="https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html">AWS Regions and Availability Zones</a>：リージョン・AZの定義と配置。</li><li><a href="https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html">AWS Fault Isolation Boundaries — Availability Zones</a>：AZ間の障害分離。</li><li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html">Application Load Balancerの概要</a>：HTTP要求の振り分け。</li><li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html">ALBのヘルスチェック</a>：異常検出と全ターゲット異常時の例外。</li></ol></main></html>
