@@ -1123,6 +1123,135 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "durability-photo-history",
+      "title": "写真の過去版とアーカイブ復元",
+      "premise": "S3へ保存した正しい写真の保持と、必要な時刻に利用できる条件を点検する。",
+      "constraints": [
+        "汎用バケット。第1問は書き込み前からバージョニング有効、過去版は残存・読取り可能、version ID既知。",
+        "第2問はS3 Glacier Flexible Retrievalの既存オブジェクトが復元未完了。許可/ネットワークは整っている。"
+      ],
+      "questions": [
+        {
+          "id": "durability-previous-version",
+          "objective": "上書き前の残る版を回復候補にする。",
+          "prompt": "書き込み前からバージョニングが有効なS3で、写真を誤って上書きした。正しい過去版が残り、そのversion IDと読取り許可もある。正しい内容の回復に向けた適切な最初の対応は？",
+          "options": [
+            {
+              "id": "durability-previous-version-a",
+              "text": "キーが同じなので過去内容は必ずすべて失われたと判断する",
+              "explanation": "有効バージョニングと残る過去版という条件を無視しています。同じキーでも版を指定できます。"
+            },
+            {
+              "id": "durability-previous-version-b",
+              "text": "記録した過去版のversion IDを指定して取り出し、内容を確認する",
+              "explanation": "既知の過去版を取得して確認できます。必要に応じて意図する最新内容へ戻す手順は別に検証します。"
+            },
+            {
+              "id": "durability-previous-version-c",
+              "text": "複製があるという理由だけで何もせず以前の内容へ戻るのを待つ",
+              "explanation": "複製と版の履歴は別です。誤操作が自動で取り消される保証はありません。"
+            }
+          ],
+          "correct_option_id": "durability-previous-version-b",
+          "runtime_option_order": [
+            "durability-previous-version-a",
+            "durability-previous-version-b",
+            "durability-previous-version-c"
+          ],
+          "rationale": "既知の過去版を取得して確認できます。必要に応じて意図する最新内容へ戻す手順は別に検証します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+          ]
+        },
+        {
+          "id": "durability-archive-unavailable",
+          "objective": "保持と直ちに読めることを区別する。",
+          "prompt": "別の写真オブジェクトはS3 Glacier Flexible Retrievalに存在し、まだ復元していない。GetObjectがInvalidObjectStateを返した。許可/ネットワークは整っている。この条件で適切な判断は？",
+          "options": [
+            {
+              "id": "durability-archive-unavailable-a",
+              "text": "読み取れないので保存データが永久に消えた証拠である",
+              "explanation": "このエラーはアーカイブ復元が必要な条件で起こります。保存データ喪失と同じ証拠にはなりません。"
+            },
+            {
+              "id": "durability-archive-unavailable-b",
+              "text": "GetObjectを繰り返すだけで必ず即時に読める",
+              "explanation": "このクラスは読取り前に復元が必要です。GetObjectの反復だけではその手順を満たしません。"
+            },
+            {
+              "id": "durability-archive-unavailable-c",
+              "text": "保存と即時利用を区別し、RestoreObjectを開始して利用可能になるまで待つ",
+              "explanation": "保存されていることと即時の読取りは別です。復元の時間と業務要件も比較します。"
+            }
+          ],
+          "correct_option_id": "durability-archive-unavailable-c",
+          "runtime_option_order": [
+            "durability-archive-unavailable-a",
+            "durability-archive-unavailable-b",
+            "durability-archive-unavailable-c"
+          ],
+          "rationale": "保存されていることと即時の読取りは別です。復元の時間と業務要件も比較します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の正しい過去版が、version ID指定の許可されたDeleteObjectで永久削除済みになり、ほかのコピーもない。",
+        "answer": "バージョニングが有効という理由だけで、その削除済み版から復元できるとは判断できない。",
+        "reason": "版保持は特定版の永久削除防止ではない。単にdelete markerを置いた状態とは異なる。"
+      },
+      "unit_ids": [
+        "durability"
+      ],
+      "chapter_ids": [
+        "ch01",
+        "ch05",
+        "ch10",
+        "ch11"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "同一オブジェクト書き込み時の上書きと、有効バージョニング時の固有version ID・各版保持。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "特定版読取りの必要許可。アーカイブクラスの対象は復元前にInvalidObjectStateとなる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "バージョニング有効でもversion ID指定で特定版を永久削除できる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go",
+          "claim": "Glacier Flexible Retrieval/Deep Archiveは復元開始と一時コピー利用可能までの待機が必要。RestoreObject許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

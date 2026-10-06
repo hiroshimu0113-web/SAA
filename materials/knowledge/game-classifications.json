@@ -5400,6 +5400,286 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-durability-history-recovery",
+      "title": "耐久性：データの保持と今の利用可否を区別する",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "今使えることと、保存データを失わないことを区別する。",
+      "unit_ids": [
+        "durability"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "耐久性：データの保持と今の利用可否を区別する"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "availability"
+      ],
+      "service_names": [
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "汎用バケット。第1問は書き込み前からバージョニング有効、過去版は残存・読取り可能、version ID既知。",
+        "第2問はS3 Glacier Flexible Retrievalの既存オブジェクトが復元未完了。許可/ネットワークは整っている。"
+      ],
+      "limitations": [
+        "汎用S3の上書き履歴とアーカイブ復元で、耐久性/可用性の入門の違いと回復条件を確認。全クラスの数値/SLA/AZ数は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "複製があるだけで誤削除も防げる。",
+        "バージョニング有効なら過去版は永久削除できない。",
+        "GetObjectで今読めないことはデータの永久喪失の証拠である。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "S3へ保存した正しい写真の保持と、必要な時刻に利用できる条件を点検する。",
+        "counterexample": "アーカイブが残っていても復元前に直ちに読めるとは限らない。",
+        "comparison": {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-durability-photo-history",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "同一オブジェクト書き込み時の上書きと、有効バージョニング時の固有version ID・各版保持。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "特定版読取りの必要許可。アーカイブクラスの対象は復元前にInvalidObjectStateとなる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "バージョニング有効でもversion ID指定で特定版を永久削除できる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go",
+          "claim": "Glacier Flexible Retrieval/Deep Archiveは復元開始と一時コピー利用可能までの待機が必要。RestoreObject許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "バージョニング有効なら過去版は永久削除できない。",
+          "GetObjectで今読めないことはデータの永久喪失の証拠である。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-durability-photo-history",
+      "title": "写真の過去版とアーカイブ復元",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "durability"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "durability-photo-history"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "availability"
+      ],
+      "service_names": [
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "汎用バケット。第1問は書き込み前からバージョニング有効、過去版は残存・読取り可能、version ID既知。",
+        "第2問はS3 Glacier Flexible Retrievalの既存オブジェクトが復元未完了。許可/ネットワークは整っている。"
+      ],
+      "limitations": [
+        "汎用S3の上書き履歴とアーカイブ復元で、耐久性/可用性の入門の違いと回復条件を確認。全クラスの数値/SLA/AZ数は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "複製があるだけで誤削除も防げる。",
+        "バージョニング有効なら過去版は永久削除できない。",
+        "GetObjectで今読めないことはデータの永久喪失の証拠である。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "durability-photo-history.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "durability-photo-history.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "durability-photo-history.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "durability-photo-history.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "同一オブジェクト書き込み時の上書きと、有効バージョニング時の固有version ID・各版保持。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "特定版読取りの必要許可。アーカイブクラスの対象は復元前にInvalidObjectStateとなる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "バージョニング有効でもversion ID指定で特定版を永久削除できる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go",
+          "claim": "Glacier Flexible Retrieval/Deep Archiveは復元開始と一時コピー利用可能までの待機が必要。RestoreObject許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "バージョニング有効なら過去版は永久削除できない。",
+          "GetObjectで今読めないことはデータの永久喪失の証拠である。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "durability-previous-version, durability-archive-unavailable"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

@@ -125,6 +125,7 @@
       "card_candidate_ids": [
         "candidate-archive",
         "candidate-authorization",
+        "candidate-durability",
         "candidate-ebs",
         "candidate-ebs-snapshot",
         "candidate-ec2",
@@ -248,6 +249,7 @@
         "candidate-aws-config",
         "candidate-cloudtrail",
         "candidate-cloudwatch",
+        "candidate-durability",
         "candidate-guardduty",
         "candidate-iam-role",
         "candidate-inspector",
@@ -275,6 +277,7 @@
         "candidate-cdc",
         "candidate-datasync",
         "candidate-dms",
+        "candidate-durability",
         "candidate-migration",
         "candidate-pilot-light",
         "candidate-replication",
@@ -1356,7 +1359,10 @@
       "concept_id": "durability",
       "title": "耐久性とデータの保全",
       "related_chapter_ids": [
-        "ch01"
+        "ch01",
+        "ch05",
+        "ch10",
+        "ch11"
       ],
       "material_refs": [
         {
@@ -1368,14 +1374,15 @@
           "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "draft",
+      "classification_ids": [
+        "concept-durability-history-recovery"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

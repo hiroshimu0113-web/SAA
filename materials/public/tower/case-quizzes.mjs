@@ -269,6 +269,36 @@ export const CASE_QUIZZES={
       "設定要求の予防と既存設定の修正を区別しています。他のBPA設定によるアクセス制限も別に確認します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go"
+  },
+  "durability-previous-version": {
+    "prompt": "S3へ保存した正しい写真の保持と、必要な時刻に利用できる条件を点検する。 書き込み前からバージョニングが有効なS3で、写真を誤って上書きした。正しい過去版が残り、そのversion IDと読取り許可もある。正しい内容の回復に向けた適切な最初の対応は？",
+    "options": [
+      "キーが同じなので過去内容は必ずすべて失われたと判断する",
+      "記録した過去版のversion IDを指定して取り出し、内容を確認する",
+      "複製があるという理由だけで何もせず以前の内容へ戻るのを待つ"
+    ],
+    "answer": 1,
+    "reasons": [
+      "有効バージョニングと残る過去版という条件を無視しています。同じキーでも版を指定できます。",
+      "既知の過去版を取得して確認できます。必要に応じて意図する最新内容へ戻す手順は別に検証します。",
+      "複製と版の履歴は別です。誤操作が自動で取り消される保証はありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+  },
+  "durability-archive-unavailable": {
+    "prompt": "S3へ保存した正しい写真の保持と、必要な時刻に利用できる条件を点検する。 別の写真オブジェクトはS3 Glacier Flexible Retrievalに存在し、まだ復元していない。GetObjectがInvalidObjectStateを返した。許可/ネットワークは整っている。この条件で適切な判断は？",
+    "options": [
+      "読み取れないので保存データが永久に消えた証拠である",
+      "GetObjectを繰り返すだけで必ず即時に読める",
+      "保存と即時利用を区別し、RestoreObjectを開始して利用可能になるまで待つ"
+    ],
+    "answer": 2,
+    "reasons": [
+      "このエラーはアーカイブ復元が必要な条件で起こります。保存データ喪失と同じ証拠にはなりません。",
+      "このクラスは読取り前に復元が必要です。GetObjectの反復だけではその手順を満たしません。",
+      "保存されていることと即時の読取りは別です。復元の時間と業務要件も比較します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -307,5 +337,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "s3-account-public-block",
     "s3-existing-public-policy"
+  ],
+  [
+    "durability-previous-version",
+    "durability-archive-unavailable"
   ]
 ];

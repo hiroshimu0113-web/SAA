@@ -596,17 +596,19 @@
       "id": "concept:durability",
       "kind": "concept",
       "title": "耐久性とデータの保全",
-      "detail_status": "draft_unit",
+      "detail_status": "reviewed_unit",
       "unit": {
         "id": "durability",
         "title": "耐久性とデータの保全",
         "group": "storage",
         "objective": "今使えることと、保存データを失わないことを区別する。",
         "estimated_minutes": 5,
-        "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+        "scope": "汎用S3の上書き履歴とアーカイブ復元で、耐久性/可用性の入門の違いと回復条件を確認。全クラスの数値/SLA/AZ数は範囲外。",
         "prerequisites": [],
         "misconceptions": [
-          "複製があるだけで誤削除も防げる。"
+          "複製があるだけで誤削除も防げる。",
+          "バージョニング有効なら過去版は永久削除できない。",
+          "GetObjectで今読めないことはデータの永久喪失の証拠である。"
         ],
         "checks": [
           {
@@ -614,8 +616,9 @@
             "level": "explain",
             "prompt": "耐久性と可用性は何が違う？",
             "expected_points": [
-              "耐久性はデータを失いにくい性質",
-              "可用性は必要時に利用できる性質"
+              "耐久性は保存データを失いにくい性質、可用性は必要時に利用できる性質",
+              "アーカイブが残ることと復元未完了で読めないことを区別する",
+              "履歴保持と削除防止は別の条件"
             ]
           },
           {
@@ -623,8 +626,9 @@
             "level": "apply",
             "prompt": "誤って写真を上書きした場合、複製だけで十分？",
             "expected_points": [
-              "誤操作も反映される可能性を考える",
-              "バージョニングやバックアップと復元手順を検討する"
+              "複製だけを上書き前の回復根拠にしない",
+              "残る版と必要な権限、復元手順を確認する",
+              "特定版の永久削除とアーカイブ復元時間を別に考える"
             ]
           }
         ],
@@ -632,14 +636,40 @@
           "ch01-l03"
         ],
         "review": {
-          "status": "draft",
-          "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-          "source_document": "docs/STARTER_REVIEW.md"
+          "status": "reviewed",
+          "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+          "source_document": "knowledge/lessons/durability.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+              "claim": "同一オブジェクト書き込み時の上書きと、有効バージョニング時の固有version ID・各版保持。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+              "claim": "特定版読取りの必要許可。アーカイブクラスの対象は復元前にInvalidObjectStateとなる。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+              "claim": "バージョニング有効でもversion ID指定で特定版を永久削除できる。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go",
+              "claim": "Glacier Flexible Retrieval/Deep Archiveは復元開始と一時コピー利用可能までの待機が必要。RestoreObject許可。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "条件を1つ変えた転移問題を追加する",
-          "境界条件と公式根拠を照合してから公開教材へ反映する"
+          "数値上の耐久性と可用性、クラス別AZ数を現行公式資料で確認する。",
+          "Object Lock・バックアップと復元試験へ展開する。"
         ]
       }
     },
