@@ -1,3 +1,4 @@
+import {combatEffects,showCombatEffects} from './effects.mjs';
 
 import {CARDS,ENEMIES,RELICS,ROUTES,NODE_NAMES,newRun,act,intent,describe,parseRun,cardValues} from './engine.mjs';
 const KEY='saa-tower-run-v1',root=document.querySelector('#game');
@@ -73,7 +74,7 @@ root.addEventListener('click',async e=>{
  if(!state)return;
  if(type==='play'&&state.phase==='battle'){const c=state.deck.find(c=>c.uid===uid);if(c&&cardValues(c).cost>state.battle.energy){notice='エナジーが足りません。長押しでカードの詳細を確認できます。';render();return;}}
  const actions={node:{type,lane:Number(el.dataset.lane)},play:{type,uid},end:{type},reward:{type,id},skip:{type:'reward',id:null},heal:{type},upgrade:{type,uid},buy:{type,id},remove:{type,uid},leave:{type},risk:{type:'event',choice:'risk'},safe:{type:'event',choice:'safe'}};
- if(actions[type]){next=act(state,actions[type]);if(next!==state){state=next;selectedUid=null;notice='';save();render();if(type==='node'||['reward','skip','heal','upgrade','leave','risk','safe'].includes(type))window.scrollTo({top:0,behavior:'auto'});}}
+ if(actions[type]){next=act(state,actions[type]);if(next!==state){const fx=combatEffects(state,next,actions[type]);state=next;selectedUid=null;notice='';save();render();showCombatEffects(root,fx);if(type==='node'||['reward','skip','heal','upgrade','leave','risk','safe'].includes(type))window.scrollTo({top:0,behavior:'auto'});}}
 });
 root.addEventListener('change',async e=>{
  if(e.target.id!=='import')return;const f=e.target.files?.[0];if(!f)return;

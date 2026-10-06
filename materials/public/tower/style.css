@@ -42,3 +42,19 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 
 /* Long-press details never play the card. */
 .hand .card{-webkit-touch-callout:none}.card-preview .card{cursor:default}.card-preview>button[data-action=cancel-card]{min-width:140px}
+
+/* Short, non-blocking combat feedback. */
+.scene,.enemy{position:relative}.combat-fx{position:absolute;inset:0;pointer-events:none;z-index:8;overflow:hidden;border-radius:14px}
+.fx-event{position:absolute;top:calc(20% + var(--row)*32px);font-size:clamp(16px,4.5vw,23px);font-weight:900;white-space:nowrap;text-shadow:0 2px 5px #000,0 0 12px currentColor;animation:fx-float 1.05s ease-out both;line-height:1.5}
+.fx-player{left:5%}.fx-enemy{right:5%}.fx-hit{color:#ff9b96}.fx-guard,.fx-shield{color:#a1e7ff}.fx-heal{color:#91f2bb}.fx-power,.fx-finish{color:#ffdb83}.fx-weak{color:#d8b8ff}
+.fx-hit:before{content:'';position:absolute;width:62px;height:4px;background:#ffe2c3;left:50%;top:34px;box-shadow:0 0 14px #ffad7d;animation:fx-slash .28s ease-out both;transform-origin:center}
+.react-hit{animation:fx-impact .3s ease-out}.react-guard:after,.react-shield:after{content:'◇';position:absolute;inset:-12px;display:grid;place-items:center;font-size:115px;color:#8bdcff;border:2px solid #8bdcff;border-radius:50%;box-shadow:0 0 20px #7cdaff88,inset 0 0 18px #7cdaff55;pointer-events:none;animation:fx-barrier .55s ease-out both}
+.react-heal{animation:fx-heal .65s ease-out}.react-power{animation:fx-power .6s ease-out}.react-finish{animation:fx-impact .3s ease-out}
+.combat-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@keyframes fx-float{0%{opacity:0;transform:translateY(12px) scale(.9)}15%,65%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-25px)}}
+@keyframes fx-impact{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px);filter:brightness(1.7)}45%{transform:translateX(6px)}70%{transform:translateX(-3px)}}
+@keyframes fx-slash{0%{opacity:0;transform:rotate(-40deg) scaleX(.2)}40%{opacity:1;transform:rotate(-40deg) scaleX(1.2)}100%{opacity:0;transform:rotate(-40deg) scaleX(1.5)}}
+@keyframes fx-barrier{0%{opacity:0;transform:scale(.7)}30%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+@keyframes fx-heal{35%{filter:drop-shadow(0 0 18px #81efb0)}}
+@keyframes fx-power{35%{filter:drop-shadow(0 0 18px #ffd276)}}
+@media(prefers-reduced-motion:reduce){.fx-event{animation:none;opacity:1}.fx-hit:before{display:none}[class*="react-"]{animation:none!important}.react-guard:after,.react-shield:after{animation:none;opacity:.5}}
