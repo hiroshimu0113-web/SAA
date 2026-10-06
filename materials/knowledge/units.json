@@ -1129,6 +1129,69 @@
         "ヘルスチェック付き/weighted aliasの0の扱いを現行公式資料で追加確認する。",
         "DNS委任・別ルーティングポリシー・移行観測と切替の実験へ展開する。"
       ]
+    },
+    {
+      "id": "gsi",
+      "title": "GSIのキー検索と読み取り整合性",
+      "group": "storage",
+      "objective": "GSI一覧検索と、主キーが既知の更新直後確認を分けて選ぶ。",
+      "estimated_minutes": 7,
+      "scope": "単一リージョンDynamoDBのGSI Queryと主キーが既知のGetItem。グローバルテーブル/複数項目トランザクション/全容量設計は範囲外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "GSIにConsistentRead=trueを指定すれば最新値を保証できる。",
+        "GSIに出なければテーブルへの更新も必ず失敗した。",
+        "GSIから取得した項目を再読取りすれば、GSIにない新項目も必ず発見できる。"
+      ],
+      "checks": [
+        {
+          "id": "gsi-explain",
+          "level": "explain",
+          "prompt": "GSIとGetItemはどのキーと整合性で読む？",
+          "expected_points": [
+            "GSIは違うキーでの検索先",
+            "GSIは結果整合性のみ",
+            "完全な主キーでテーブルの強整合GetItemを選べる"
+          ]
+        },
+        {
+          "id": "gsi-apply",
+          "level": "apply",
+          "prompt": "更新成功後の既知注文の状態を確認したい。何を選ぶ？",
+          "expected_points": [
+            "一覧に許される反映遅延を確認",
+            "更新後の1項目は完全な主キーと整合性を指定",
+            "GSI反映遅延と更新失敗を区別"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch06-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/gsi.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+            "claim": "Queryは対象のパーティションキーの単一値が必要。GSIは結果整合性のみ、trueではValidationException。テーブル/LSIは強整合を選択可能。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go",
+            "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "Queryのフィルター・ページングと読み取り容量を追加確認する。",
+        "GSI投影とキー分散、最新一覧のデータモデルを別に設計する。"
+      ]
     }
   ]
 }

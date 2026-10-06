@@ -206,6 +206,7 @@
         "candidate-ecs",
         "candidate-eks",
         "candidate-fargate",
+        "candidate-gsi",
         "candidate-iam-role",
         "candidate-idempotency",
         "candidate-lambda",
@@ -305,6 +306,7 @@
         "candidate-ec2",
         "candidate-firehose",
         "candidate-glue",
+        "candidate-gsi",
         "candidate-kinesis",
         "candidate-lake-formation",
         "candidate-opensearch",
@@ -2021,9 +2023,11 @@
     {
       "id": "candidate-gsi",
       "concept_id": "gsi",
-      "title": "gsi",
+      "title": "GSIのキー検索と読み取り整合性",
       "related_chapter_ids": [
-        "ch06"
+        "ch06",
+        "ch08",
+        "ch12"
       ],
       "material_refs": [
         {
@@ -2033,16 +2037,21 @@
         {
           "node_id": "question:q092",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch06-l02",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-gsi-query-consistency"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

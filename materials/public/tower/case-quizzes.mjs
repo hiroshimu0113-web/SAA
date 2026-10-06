@@ -419,6 +419,36 @@ export const CASE_QUIZZES={
       "旧という役割を自動判定する設定ではありません。旧だけを優先する根拠がありません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go"
+  },
+  "gsi-customer-query": {
+    "prompt": "単一リージョンDynamoDBの注文テーブルは注文IDだけが主キーで、顧客IDをキーにしたGSIがある。 顧客IDから注文一覧が必要で、一時的な反映遅延を許容する。適切な使い方は？",
+    "options": [
+      "顧客IDのGSIをQueryし、強整合指定を付けずに結果整合性を扱う",
+      "GSIへConsistentRead=trueを指定して必ず最新一覧を得る",
+      "顧客IDだけをテーブルのGetItemへ渡す"
+    ],
+    "answer": 0,
+    "reasons": [
+      "GSIのキーによる一覧と、許容する整合性が一致します。まだ反映されない項目を考慮します。",
+      "GSIのQueryは強整合をサポートしません。trueではValidationExceptionとなります。",
+      "テーブルの主キーは注文IDです。GetItemは完全な主キーが必要で、顧客別一覧検索ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go"
+  },
+  "gsi-order-latest": {
+    "prompt": "単一リージョンDynamoDBの注文テーブルは注文IDだけが主キーで、顧客IDをキーにしたGSIがある。 別の既知注文IDの更新が成功した。単一リージョンでその後ほかの更新はなく、更新後の状態を直ちに確認したい。適切な読取りは？",
+    "options": [
+      "GSIへ強整合Queryを指定する",
+      "注文IDでテーブルへGetItemし、ConsistentRead=trueを指定する",
+      "GSIに出るかどうかだけで更新成功を判定する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "GSIへの強整合Queryはサポートされません。",
+      "完全な主キーが既知なのでテーブルの強整合GetItemを選べます。複数操作の原子性とは別です。",
+      "GSIは結果整合性です。反映遅延だけから、既に成功した更新の失敗を判断しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -477,5 +507,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "route53-dns-share",
     "route53-all-zero"
+  ],
+  [
+    "gsi-customer-query",
+    "gsi-order-latest"
   ]
 ];

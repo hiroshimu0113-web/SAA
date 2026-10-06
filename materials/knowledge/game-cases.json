@@ -1723,6 +1723,122 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "dynamodb-gsi-order-read",
+      "title": "注文の顧客別一覧と更新直後の状態確認",
+      "premise": "単一リージョンDynamoDBの注文テーブルは注文IDだけが主キーで、顧客IDをキーにしたGSIがある。",
+      "constraints": [
+        "第1問は顧客別一覧で一時的な遅延を許容。第2問は完全な主キーが既知の1項目を更新成功後に確認し、ほかの更新はない。",
+        "グローバルテーブルや複数項目のトランザクションは対象外。"
+      ],
+      "questions": [
+        {
+          "id": "gsi-customer-query",
+          "objective": "一覧のアクセスパターンとGSIの整合性を選ぶ。",
+          "prompt": "顧客IDから注文一覧が必要で、一時的な反映遅延を許容する。適切な使い方は？",
+          "options": [
+            {
+              "id": "gsi-customer-query-a",
+              "text": "顧客IDのGSIをQueryし、強整合指定を付けずに結果整合性を扱う",
+              "explanation": "GSIのキーによる一覧と、許容する整合性が一致します。まだ反映されない項目を考慮します。"
+            },
+            {
+              "id": "gsi-customer-query-b",
+              "text": "GSIへConsistentRead=trueを指定して必ず最新一覧を得る",
+              "explanation": "GSIのQueryは強整合をサポートしません。trueではValidationExceptionとなります。"
+            },
+            {
+              "id": "gsi-customer-query-c",
+              "text": "顧客IDだけをテーブルのGetItemへ渡す",
+              "explanation": "テーブルの主キーは注文IDです。GetItemは完全な主キーが必要で、顧客別一覧検索ではありません。"
+            }
+          ],
+          "correct_option_id": "gsi-customer-query-a",
+          "runtime_option_order": [
+            "gsi-customer-query-a",
+            "gsi-customer-query-b",
+            "gsi-customer-query-c"
+          ],
+          "rationale": "GSIのキーによる一覧と、許容する整合性が一致します。まだ反映されない項目を考慮します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go"
+          ]
+        },
+        {
+          "id": "gsi-order-latest",
+          "objective": "既知キーの最新確認をテーブルで行う。",
+          "prompt": "別の既知注文IDの更新が成功した。単一リージョンでその後ほかの更新はなく、更新後の状態を直ちに確認したい。適切な読取りは？",
+          "options": [
+            {
+              "id": "gsi-order-latest-a",
+              "text": "GSIへ強整合Queryを指定する",
+              "explanation": "GSIへの強整合Queryはサポートされません。"
+            },
+            {
+              "id": "gsi-order-latest-b",
+              "text": "注文IDでテーブルへGetItemし、ConsistentRead=trueを指定する",
+              "explanation": "完全な主キーが既知なのでテーブルの強整合GetItemを選べます。複数操作の原子性とは別です。"
+            },
+            {
+              "id": "gsi-order-latest-c",
+              "text": "GSIに出るかどうかだけで更新成功を判定する",
+              "explanation": "GSIは結果整合性です。反映遅延だけから、既に成功した更新の失敗を判断しません。"
+            }
+          ],
+          "correct_option_id": "gsi-order-latest-b",
+          "runtime_option_order": [
+            "gsi-order-latest-a",
+            "gsi-order-latest-b",
+            "gsi-order-latest-c"
+          ],
+          "rationale": "完全な主キーが既知なのでテーブルの強整合GetItemを選べます。複数操作の原子性とは別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "注文IDが未知で、顧客別の最新一覧を欠落なく直ちに取得することが必須になる。",
+        "answer": "GSIへのtrue指定や、GSIに出た項目だけの再読取りではこの要件を保証できない。キー/データモデル/一覧の整合性要件を設計し直す。",
+        "reason": "既知キーの1項目確認とは違い、GSIに未反映の項目を発見する条件が残る。"
+      },
+      "unit_ids": [
+        "gsi"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch08",
+        "ch12"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+          "claim": "Queryは対象のパーティションキーの単一値が必要。GSIは結果整合性のみ、trueではValidationException。テーブル/LSIは強整合を選択可能。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go",
+          "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

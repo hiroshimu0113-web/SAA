@@ -6617,6 +6617,258 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-gsi-query-consistency",
+      "title": "DynamoDB：GSI検索と最新値の読取りを分ける",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "GSI一覧検索と、主キーが既知の更新直後確認を分けて選ぶ。",
+      "unit_ids": [
+        "gsi"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "DynamoDB：GSI検索と最新値の読取りを分ける"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "store",
+        "process"
+      ],
+      "concerns": [
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon DynamoDB"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "第1問は顧客別一覧で一時的な遅延を許容。第2問は完全な主キーが既知の1項目を更新成功後に確認し、ほかの更新はない。",
+        "グローバルテーブルや複数項目のトランザクションは対象外。"
+      ],
+      "limitations": [
+        "単一リージョンDynamoDBのGSI Queryと主キーが既知のGetItem。グローバルテーブル/複数項目トランザクション/全容量設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "GSIにConsistentRead=trueを指定すれば最新値を保証できる。",
+        "GSIに出なければテーブルへの更新も必ず失敗した。",
+        "GSIから取得した項目を再読取りすれば、GSIにない新項目も必ず発見できる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "単一リージョンDynamoDBの注文テーブルは注文IDだけが主キーで、顧客IDをキーにしたGSIがある。",
+        "counterexample": "GSIが最新一覧を直ちに返すという要件は、強整合指定で解決できない。",
+        "comparison": {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-dynamodb-gsi-order-read",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+          "claim": "Queryは対象のパーティションキーの単一値が必要。GSIは結果整合性のみ、trueではValidationException。テーブル/LSIは強整合を選択可能。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go",
+          "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "GSIから取得した項目を再読取りすれば、GSIにない新項目も必ず発見できる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-dynamodb-gsi-order-read",
+      "title": "注文の顧客別一覧と更新直後の状態確認",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "gsi"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-gsi-order-read"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "store",
+        "process"
+      ],
+      "concerns": [
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon DynamoDB"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "第1問は顧客別一覧で一時的な遅延を許容。第2問は完全な主キーが既知の1項目を更新成功後に確認し、ほかの更新はない。",
+        "グローバルテーブルや複数項目のトランザクションは対象外。"
+      ],
+      "limitations": [
+        "単一リージョンDynamoDBのGSI Queryと主キーが既知のGetItem。グローバルテーブル/複数項目トランザクション/全容量設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "GSIにConsistentRead=trueを指定すれば最新値を保証できる。",
+        "GSIに出なければテーブルへの更新も必ず失敗した。",
+        "GSIから取得した項目を再読取りすれば、GSIにない新項目も必ず発見できる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-gsi-order-read.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-gsi-order-read.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-gsi-order-read.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-gsi-order-read.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+          "claim": "Queryは対象のパーティションキーの単一値が必要。GSIは結果整合性のみ、trueではValidationException。テーブル/LSIは強整合を選択可能。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go",
+          "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "GSIから取得した項目を再読取りすれば、GSIにない新項目も必ず発見できる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "gsi-customer-query, gsi-order-latest"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
