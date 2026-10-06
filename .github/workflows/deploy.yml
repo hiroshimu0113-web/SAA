@@ -44,7 +44,10 @@ jobs:
         env:
           BROWSER: webkit
       - name: Verify learning catalogue updates in Safari
-        run: node scripts/catalog-browser-check.mjs
+        run: >-
+          node --input-type=module -e
+          "try { await import('./scripts/catalog-browser-check.mjs'); }
+          catch (error) { console.log('::error::' + String(error.stack).replaceAll('%', '%25').replaceAll('\n', '%0A').replaceAll('\r', '%0D')); process.exitCode = 1; }"
         env:
           BROWSER: webkit
       - uses: actions/configure-pages@v5
