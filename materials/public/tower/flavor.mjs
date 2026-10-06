@@ -46,7 +46,7 @@ export const FLAVOR={
   },
   "isolate": {
     "note": "共通の障害点を避け、単一障害の影響を小さくする設計を考えます。",
-    "limit": "弱体のターン数は現実の障害隔離時間ではありません。",
+    "limit": "過負荷のターン数は現実の障害隔離時間ではありません。",
     "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
   },
   "detour": {
@@ -96,7 +96,7 @@ export const FLAVOR={
   },
   "quarantine": {
     "note": "一つの障害が全体へ与える影響を小さくすることを考えます。",
-    "limit": "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。",
+    "limit": "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。",
     "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
   }
 };

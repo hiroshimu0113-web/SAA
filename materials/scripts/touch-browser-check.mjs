@@ -1,3 +1,4 @@
+import {checkDebuffs} from './debuff-browser-check.mjs';
 import {checkFlavor} from './flavor-browser-check.mjs';
 import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
 import {checkQuizAndHud,quizOfflineRoundtrip} from './quiz-browser-check.mjs';
@@ -62,6 +63,7 @@ try{
  await checkQuizAndHud(browser,base);
  await checkCombos(browser,base);
  await checkFlavor(browser,base);
+ await checkDebuffs(browser,base);
  // Deliberately stop the inline application: loader must offer recovery, not hang.
  const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/index.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
  await q.goto(base+'tower/index.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();

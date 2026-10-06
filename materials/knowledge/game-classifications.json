@@ -444,6 +444,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -460,14 +466,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。"
+          "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.burst"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "炎上3"
       },
       "import_status": "imported",
       "open_questions": []
@@ -1073,7 +1085,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "弱体のターン数は現実の障害隔離時間ではありません。"
+        "過負荷のターン数は現実の障害隔離時間ではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1084,7 +1096,7 @@
           "locator": "FLAVOR.isolate.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "弱体のターン数は現実の障害隔離時間ではありません。",
+        "counterexample": "過負荷のターン数は現実の障害隔離時間ではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [],
@@ -1122,6 +1134,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -1138,14 +1156,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "弱体のターン数は現実の障害隔離時間ではありません。"
+          "弱体のターン数は現実の障害隔離時間ではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.isolate"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "過負荷2"
       },
       "import_status": "imported",
       "open_questions": []
@@ -1234,6 +1258,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -1250,14 +1280,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。"
+          "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.detour"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "遅延1・戦闘中除外"
       },
       "import_status": "imported",
       "open_questions": []
@@ -1352,6 +1388,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -1368,14 +1410,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "ログがあるだけで原因を断定できるわけではありません。"
+          "ログがあるだけで原因を断定できるわけではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.analysis"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "設定不備2"
       },
       "import_status": "imported",
       "open_questions": []
@@ -1464,6 +1512,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -1480,14 +1534,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。"
+          "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.overload"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "枯渇2"
       },
       "import_status": "imported",
       "open_questions": []
@@ -2217,7 +2277,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。"
+        "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -2228,7 +2288,7 @@
           "locator": "FLAVOR.quarantine.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。",
+        "counterexample": "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [],
@@ -2266,6 +2326,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
         }
       ],
       "game_design": {
@@ -2282,14 +2348,20 @@
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。"
+          "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。",
+          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.quarantine"
+          },
+          {
+            "path": "public/tower/debuffs.mjs",
+            "locator": "DEBUFFS"
           }
-        ]
+        ],
+        "debuff_rule": "過負荷3"
       },
       "import_status": "imported",
       "open_questions": []

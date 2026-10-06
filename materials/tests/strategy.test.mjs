@@ -16,7 +16,7 @@ test('live card forecasts reuse combat resolution without changing saves or RNG'
 });
 test('forecasts, synergy and three effect lifetimes match actual rules',()=>{
  const s=start();s.battle.enemy='noise';s.battle.playerBlock=3;assert.match(turnForecast(s),/HP −4/);
- s.battle.weak=1;assert.match(turnForecast(s),/HP −2/);
+ s.battle.enemyDebuffs.overload=1;assert.match(turnForecast(s),/HP −2/);
  s.deck[0].id='optimize';assert.ok(synergyHints(s,{id:'parallel',plus:false})[0].includes('各ヒット'));
  s.deck[1].id='reversal';assert.ok(synergyHints(s,{id:'guard',plus:false})[0].includes('逆転'));
  assert.match(lifetime({id:'redundant'}),/この戦闘中/);

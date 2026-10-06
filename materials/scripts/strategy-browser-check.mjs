@@ -3,7 +3,7 @@ import {newRun,act} from '../public/tower/engine.mjs';
 export async function checkStrategy(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
- await p.goto(base+'tower/strategy.html');const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerStrength=2;s.battle.weak=2;s.battle.armor=3;s.battle.block=3;s.deck.find(c=>c.uid===s.battle.hand[0]).id='parallel';s.deck.find(c=>c.uid===s.battle.hand[1]).id='optimize';
+ await p.goto(base+'tower/strategy.html');const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerStrength=2;s.battle.enemyDebuffs.overload=2;s.battle.armor=3;s.battle.block=3;s.deck.find(c=>c.uid===s.battle.hand[0]).id='parallel';s.deck.find(c=>c.uid===s.battle.hand[1]).id='optimize';
  const raw=JSON.stringify(s);await p.evaluate(raw=>localStorage.setItem('saa-tower-run-v1',raw),raw);await p.reload();await p.evaluate(()=>window.scrollTo(0,0));
  assert.equal(await p.locator('.strategy-panel,.battle-bar,.turn-forecast,.playable-count').count(),0);
  const hand=await p.locator('.hand').boundingBox();assert.ok(hand.y>0&&hand.y<400,'hand should be visible without scrolling');
@@ -15,7 +15,7 @@ export async function checkStrategy(browser,base){
   if(touch)await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y}]});else{await p.mouse.move(x,y);await p.mouse.down();}
   await p.waitForTimeout(550);await p.locator('.status-dialog[open]').waitFor();
   if(touch)await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});else await p.mouse.up();
-  await p.waitForTimeout(550);const text=await p.locator('.status-dialog').innerText();assert.match(text,side==='enemy'?/弱体\s+2/:/毎ターン防御\s+3/);
+  await p.waitForTimeout(550);const text=await p.locator('.status-dialog').innerText();assert.match(text,side==='enemy'?/過負荷\s+2/:/毎ターン防御\s+3/);
   assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);await p.screenshot({path:'artifacts/status-'+side+'.png'});await p.getByRole('button',{name:'閉じる',exact:true}).tap();
  }
  await p.locator('[data-status="enemy"]').focus();await p.keyboard.press('Enter');await p.locator('.status-dialog[open]').waitFor();await p.keyboard.press('Escape');assert.equal(await p.locator('.status-dialog[open]').count(),0);

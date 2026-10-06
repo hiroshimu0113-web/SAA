@@ -16,14 +16,14 @@ test('tower: enemy intent, block lifetime and weakness have exact numerical effe
  let s=start();s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=ENEMIES.noise.hp;s.battle.playerBlock=5;
  assert.deepEqual(intent(s),{type:'attack',value:7});s=act(s,{type:'end'});assert.equal(s.hp,70);assert.equal(s.battle.playerBlock,0);
  assert.deepEqual(intent(s),{type:'guard',value:7});s=act(s,{type:'end'});assert.equal(s.battle.block,7);
- s.battle.weak=2;assert.equal(intent(s).value,7);s=act(s,{type:'end'});assert.equal(s.hp,63);assert.equal(s.battle.weak,1);assert.equal(s.battle.block,0);
+ s.battle.enemyDebuffs.overload=2;assert.equal(intent(s).value,7);s=act(s,{type:'end'});assert.equal(s.hp,63);assert.equal(s.battle.enemyDebuffs.overload,1);assert.equal(s.battle.block,0);
 });
 test('tower: all 20 cards execute, upgrades, exhaustion and self-damage defeat',()=>{
  assert.equal(Object.keys(CARDS).length,20);
  for(const id of Object.keys(CARDS)){
   let s=start();s.deck[0]={uid:0,id,plus:true};s.battle.hand=s.deck.map(c=>c.uid);s.battle.draw=[];s.battle.energy=3;
   const d=cardValues(s.deck[0]);s=act(s,{type:'play',uid:0});roundTrip(s);
-  assert.ok(d.damage||d.block||d.draw||d.heal||d.energy||d.armor||d.strength||d.weak);
+  assert.ok(d.damage||d.block||d.draw||d.heal||d.energy||d.armor||d.strength||d.debuff);
   if(d.exhaust)assert.ok(s.battle.exhaust.includes(0));assert.ok(s.battle.hand.length<=10);
  }
  let s=start();s.deck[0].id='overload';s.battle.hand=[0];s.battle.draw=s.deck.slice(1).map(c=>c.uid);s.hp=3;s=act(s,{type:'play',uid:0});assert.equal(s.phase,'lost');roundTrip(s);
@@ -38,7 +38,7 @@ test('tower: save rejects corrupt piles and forged result; invalid JSON cannot r
 function take(s,a){const next=act(s,a);roundTrip(next);return next;}
 function choice(s){
  const b=s.battle,hit=intent(s).type==='attack'?intent(s).value:0;
- return b.hand.map(uid=>{const card=s.deck.find(c=>c.uid===uid),v=cardValues(card);let score=(v.damage||0)*(v.hits||1)+(v.block?Math.min(v.block,Math.max(0,hit-b.playerBlock))*1.2:0)+(v.draw||0)*3+(v.energy||0)*9+(v.strength||0)*7+(v.armor||0)*7+(v.weak||0)*2+Math.min(v.heal||0,72-s.hp)-(v.self||0)*1.5;
+ return b.hand.map(uid=>{const card=s.deck.find(c=>c.uid===uid),v=cardValues(card);let score=(v.damage||0)*(v.hits||1)+(v.block?Math.min(v.block,Math.max(0,hit-b.playerBlock))*1.2:0)+(v.draw||0)*3+(v.energy||0)*9+(v.strength||0)*7+(v.armor||0)*7+(v.debuff?.amount||0)*2+Math.min(v.heal||0,72-s.hp)-(v.self||0)*1.5;
  if((v.damage||0)+b.playerStrength>=b.hp+b.block)score+=100;
  return {uid,score,cost:v.cost};}).filter(x=>x.cost<=b.energy).sort((a,b)=>b.score-a.score)[0];
 }

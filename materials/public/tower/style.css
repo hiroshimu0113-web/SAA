@@ -46,7 +46,7 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 /* Short, non-blocking combat feedback. */
 .scene,.enemy{position:relative}.combat-fx{position:absolute;inset:0;pointer-events:none;z-index:8;overflow:hidden;border-radius:14px}
 .fx-event{position:absolute;top:calc(20% + var(--row)*32px);font-size:clamp(16px,4.5vw,23px);font-weight:900;white-space:nowrap;text-shadow:0 2px 5px #000,0 0 12px currentColor;animation:fx-float 1.05s ease-out both;line-height:1.5}
-.fx-player{left:5%}.fx-enemy{right:5%}.fx-hit{color:#ff9b96}.fx-guard,.fx-shield{color:#a1e7ff}.fx-heal{color:#91f2bb}.fx-power,.fx-finish{color:#ffdb83}.fx-weak{color:#d8b8ff}
+.fx-player{left:5%}.fx-enemy{right:5%}.fx-hit{color:#ff9b96}.fx-guard,.fx-shield{color:#a1e7ff}.fx-heal{color:#91f2bb}.fx-power,.fx-finish{color:#ffdb83}
 .fx-hit:before{content:'';position:absolute;width:62px;height:4px;background:#ffe2c3;left:50%;top:34px;box-shadow:0 0 14px #ffad7d;animation:fx-slash .28s ease-out both;transform-origin:center}
 .react-hit{animation:fx-impact .3s ease-out}.react-guard:after,.react-shield:after{content:'◇';position:absolute;inset:-12px;display:grid;place-items:center;font-size:115px;color:#8bdcff;border:2px solid #8bdcff;border-radius:50%;box-shadow:0 0 20px #7cdaff88,inset 0 0 18px #7cdaff55;pointer-events:none;animation:fx-barrier .55s ease-out both}
 .react-heal{animation:fx-heal .65s ease-out}.react-power{animation:fx-power .6s ease-out}.react-finish{animation:fx-impact .3s ease-out}
@@ -62,7 +62,7 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 /* Visible feedback also follows the player while they scroll through the hand. */
 .game-tools{display:flex;gap:12px;justify-content:space-between;align-items:center;padding-bottom:12px;color:#c1d3db;font-size:12px}.game-tools button{padding:8px 14px;font-size:13px}
 .combat-toast{position:fixed;z-index:100;top:calc(12px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:calc(100% - 48px);max-width:260px;padding:8px 12px;border:1px solid #cfbc8c;border-radius:12px;background:#101d2b;box-shadow:0 8px 28px #0009;pointer-events:none;font-size:18px;font-weight:800;text-align:center;line-height:1.4;animation:none}
-.combat-toast>strong{display:block;font-size:11px;color:#d1dce2;margin-bottom:3px}.toast-hit{color:#ffb0aa}.toast-guard,.toast-shield{color:#9ee5ff}.toast-heal{color:#a0f5c0}.toast-power,.toast-finish{color:#ffe0a0}.toast-weak{color:#dab9ff}
+.combat-toast>strong{display:block;font-size:11px;color:#d1dce2;margin-bottom:3px}.toast-hit{color:#ffb0aa}.toast-guard,.toast-shield{color:#9ee5ff}.toast-heal{color:#a0f5c0}.toast-power,.toast-finish{color:#ffe0a0}
 .fx-event{font-size:clamp(22px,6vw,30px);animation-duration:1.8s}.react-hit{animation-duration:.45s}.react-guard:after,.react-shield:after{animation-duration:.9s}
 @keyframes toast-reveal{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.combat-toast{animation:none}}
@@ -90,3 +90,5 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .flavor-detail{border-top:1px solid #526574;margin-top:16px;padding-top:10px}.flavor-detail h3{font-size:14px}.flavor-detail p{font-size:13px}.flavor-detail a{display:inline-block;min-height:44px;padding:10px 0}.upgrade-preview{display:block;border-top:1px solid #b89860;margin-top:12px;padding-top:8px;font-size:12px;line-height:1.8;color:#ffe09a}.upgrade-result{border:1px solid #d2b574;background:#293025;border-radius:12px;padding:16px;margin:10px 0 20px}.upgrade-result h2{font-size:19px;margin-top:0}.upgrade-result li{line-height:1.8;color:#ffe09a}.upgrade-result p{font-size:13px}.upgrade-result button{min-width:100px}
 
 .in-map .run-header{position:sticky;top:0;z-index:50;background:#142330;padding:calc(10px + env(safe-area-inset-top)) 8px 10px;box-shadow:0 3px 12px #0006}.in-map{scroll-padding-top:100px}
+
+.debuff-strip{display:flex;flex-wrap:wrap;gap:3px 10px;margin:4px 0;color:#edc0b4;font-size:12px;line-height:1.6}.debuff-strip span{display:inline-block;margin-right:8px}.delay-notice{padding:10px;border:1px solid #b89a67;border-radius:8px;color:#ffe3a0;font-size:13px;line-height:1.6}.in-battle .intent{max-width:55%;overflow-wrap:anywhere}.status-debuffs p{border-top:1px solid #526574;padding-top:10px}.fx-debuff{color:#deb5ef}.toast-debuff{color:#e6bcff}

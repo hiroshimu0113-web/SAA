@@ -23,6 +23,6 @@ test('roles: effects, attack block absorption, lethal win, simultaneous roles an
 });
 test('roles: invalid plays do not count, preview is pure, legacy migration and corrupt saves',()=>{
  let s=setup(COMBOS.incident.cards);s.battle.comboPlayed=['probe','strike'];s.battle.energy=0;assert.equal(play(s,'guard'),s);s.battle.energy=1;assert.deepEqual(comboReady(s.battle,'guard'),['incident']);const raw=JSON.stringify(s),card=s.deck.find(c=>c.id==='guard');assert.match(inspectPlay(s,card).lines.join(' '),/インシデント対応/);assert.equal(JSON.stringify(s),raw);
- const old=setup(COMBOS.incident.cards);old.version=2;delete old.battle.comboPlayed;delete old.battle.comboDone;const migrated=parseRun(JSON.stringify(old));assert.equal(migrated.version,3);assert.deepEqual(migrated.battle.comboPlayed,[]);
+ const old=setup(COMBOS.incident.cards);old.version=2;delete old.battle.comboPlayed;delete old.battle.comboDone;const migrated=parseRun(JSON.stringify(old));assert.equal(migrated.version,4);assert.deepEqual(migrated.battle.comboPlayed,[]);
  for(const mutate of [b=>delete b.comboPlayed,b=>b.comboPlayed=['bad'],b=>b.comboPlayed=['probe','probe'],b=>b.comboDone=['incident'],b=>b.comboDone=['bad']]){const x=setup(COMBOS.incident.cards);mutate(x.battle);assert.throws(()=>parseRun(JSON.stringify(x)));}
 });
