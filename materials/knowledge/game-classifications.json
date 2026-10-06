@@ -7011,6 +7011,285 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-idempotency-commit-boundary",
+      "title": "SQS再配信と業務更新の冪等性",
+      "aliases": [
+        "冪等性",
+        "業務重複防止"
+      ],
+      "kind": "concept",
+      "classification_reason": "サービス名ではなく、再実行で結果を変えない仕組みと確定境界を扱う概念。",
+      "objective": "業務更新と処理済み記録を原子的に確定し、削除前の停止でも二重更新を防ぐ。",
+      "unit_ids": [
+        "idempotency"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/idempotency.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "integration"
+      ],
+      "capabilities": [
+        "coordinate",
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Queue Service",
+        "Amazon DynamoDB"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "可視性タイムアウト"
+      ],
+      "conditions": [
+        "処理済み記録と業務更新は異なる項目で、トランザクションの制約を満たす。",
+        "業務キーと操作内容を保持し、重複確認時には意図した操作との一致を確認する。"
+      ],
+      "limitations": [
+        "標準SQSと同じアカウント・リージョンのDynamoDB。業務更新はトランザクション内で完結。外部決済APIの原子性は保証しない。"
+      ],
+      "misconceptions": [
+        "メッセージ削除が成功すれば再配信は絶対にない。",
+        "受信ハンドルは永続的な業務識別子になる。",
+        "ClientRequestTokenだけで何日後の再実行も防げる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/idempotency.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "標準SQSから注文操作を受信する。業務更新は同一アカウント・リージョンのDynamoDB内で完結し、外部決済APIは呼ばない。",
+        "counterexample": "外部請求をDynamoDBトランザクションに含めたつもりでも原子性は保証されない。",
+        "comparison": {
+          "path": "knowledge/lessons/idempotency.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-sqs-dynamodb-commit-gap",
+          "reason": "削除前停止と短期トークンの境界をケースで確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+          "claim": "SQSは受信ごとに新しいReceiptHandleを発行し、削除には最新ハンドルが必要。標準キューでは削除後もまれに再受信があるため、アプリケーションに冪等性が必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+          "claim": "同じアカウント・リージョン内の異なる項目への条件付きPutとUpdateを原子的に実行できる。全成功または全失敗。ClientRequestTokenの同一リクエスト保証は最初の完了後10分間で、以後は新規として扱う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_PutItem.go",
+          "claim": "主キー属性へのattribute_not_exists条件で既存項目の上書きを防げる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の冪等性素材を概念として詳述し、複数章で共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの削除ハンドル・トランザクション原子性・条件付き書込み・10分間の境界と各誤答を照合。同一担当の別工程確認であり、独立監査と実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "カード詳細の説明候補として共有する。新しい数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/idempotency.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はAWSの実行保証や料金を表さない。",
+        "simplifications": [
+          "同じアカウント・リージョンのDynamoDB内で業務更新が完結する。"
+        ],
+        "mislearning_risks": [
+          "メッセージ削除が成功すれば再配信は絶対にない。",
+          "受信ハンドルは永続的な業務識別子になる。",
+          "ClientRequestTokenだけで何日後の再実行も防げる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード効果は実務の条件を反映する設計・検証待ち。"
+      ]
+    },
+    {
+      "id": "case-sqs-dynamodb-commit-gap",
+      "title": "注文更新の確定とSQS削除の隙間",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "停止位置と保証期間を明示した独立2問で構成と対応を選ぶケース。",
+      "objective": "業務更新と処理済み記録を原子的に確定し、削除前の停止でも二重更新を防ぐ。",
+      "unit_ids": [
+        "idempotency"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dynamodb-commit-gap"
+        }
+      ],
+      "domains": [
+        "database",
+        "integration"
+      ],
+      "capabilities": [
+        "coordinate",
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Queue Service",
+        "Amazon DynamoDB"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "可視性タイムアウト"
+      ],
+      "conditions": [
+        "処理済み記録と業務更新は異なる項目で、トランザクションの制約を満たす。",
+        "業務キーと操作内容を保持し、重複確認時には意図した操作との一致を確認する。"
+      ],
+      "limitations": [
+        "標準SQSと同じアカウント・リージョンのDynamoDB。業務更新はトランザクション内で完結。外部決済APIの原子性は保証しない。"
+      ],
+      "misconceptions": [
+        "メッセージ削除が成功すれば再配信は絶対にない。",
+        "受信ハンドルは永続的な業務識別子になる。",
+        "ClientRequestTokenだけで何日後の再実行も防げる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dynamodb-commit-gap.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dynamodb-commit-gap.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dynamodb-commit-gap.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dynamodb-commit-gap.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+          "claim": "SQSは受信ごとに新しいReceiptHandleを発行し、削除には最新ハンドルが必要。標準キューでは削除後もまれに再受信があるため、アプリケーションに冪等性が必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+          "claim": "同じアカウント・リージョン内の異なる項目への条件付きPutとUpdateを原子的に実行できる。全成功または全失敗。ClientRequestTokenの同一リクエスト保証は最初の完了後10分間で、以後は新規として扱う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_PutItem.go",
+          "claim": "主キー属性へのattribute_not_exists条件で既存項目の上書きを防げる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の冪等性素材を概念として詳述し、複数章で共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの削除ハンドル・トランザクション原子性・条件付き書込み・10分間の境界と各誤答を照合。同一担当の別工程確認であり、独立監査と実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・ビルド成功。Chromiumで全17ケースの両問・解説・320px表示・回答/結果再開・オフライン・報酬重複防止と知識地図の確認状態/根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問として取り込み、説明と保存互換性を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/idempotency.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はAWSの実行保証や料金を表さない。",
+        "simplifications": [
+          "同じアカウント・リージョンのDynamoDB内で業務更新が完結する。"
+        ],
+        "mislearning_risks": [
+          "メッセージ削除が成功すれば再配信は絶対にない。",
+          "受信ハンドルは永続的な業務識別子になる。",
+          "ClientRequestTokenだけで何日後の再実行も防げる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "sqs-commit-before-delete, dynamodb-token-window"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

@@ -479,6 +479,36 @@ export const CASE_QUIZZES={
       "同じ読取り条件の比較では、フィルターは返す量を変えても既に読んだ容量を減らしません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go"
+  },
+  "sqs-commit-before-delete": {
+    "prompt": "標準SQSから注文操作を受信する。業務更新は同一アカウント・リージョンのDynamoDB内で完結し、外部決済APIは呼ばない。 ワーカーが業務更新の確定後、メッセージ削除前に停止した。再配信でも二重更新を防ぐ設計は？記録と業務更新は異なる項目で、同じDynamoDBトランザクションに含められる。",
+    "options": [
+      "ワーカーのメモリにだけ処理済み注文IDを保存する",
+      "安定した業務キーの条件付き処理済み記録と業務更新を原子的に確定し、成功確認後に削除する",
+      "先にSQSメッセージを削除してから業務更新する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "停止すると記録が失われ、再配信時に二重更新を防げません。",
+      "再配信時は記録の条件が重複更新を阻止します。失敗理由と既存記録の操作一致を確認してから削除します。",
+      "削除後に停止すると、まだ実行していない業務を失う危険があります。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go"
+  },
+  "dynamodb-token-window": {
+    "prompt": "標準SQSから注文操作を受信する。業務更新は同一アカウント・リージョンのDynamoDB内で完結し、外部決済APIは呼ばない。 別の構成で、処理済み記録や条件はなく、TransactWriteItemsで注文カウンターを加算する。初回完了15分後に同じClientRequestTokenと同じ内容で再実行した場合の説明は？",
+    "options": [
+      "同じトークンなら何日後でも再加算は起きない",
+      "受信のReceiptHandleを保存すれば業務IDとして永久に重複を防げる",
+      "10分間を超えて新規要求として扱われ、再加算し得る。業務キーの条件付き記録などが必要"
+    ],
+    "answer": 2,
+    "reasons": [
+      "同一要求の保証は初回完了後10分間です。永久の業務重複防止ではありません。",
+      "ReceiptHandleは受信ごとに変わる削除用の値で、安定した業務キーではありません。",
+      "トークンだけの短期保証を超えています。長期の再配信には永続的な重複防止を設計します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -545,5 +575,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "query-empty-page-key",
     "query-filter-capacity"
+  ],
+  [
+    "sqs-commit-before-delete",
+    "dynamodb-token-window"
   ]
 ];

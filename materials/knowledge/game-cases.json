@@ -1949,6 +1949,131 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "sqs-dynamodb-commit-gap",
+      "title": "注文更新の確定とSQS削除の隙間",
+      "premise": "標準SQSから注文操作を受信する。業務更新は同一アカウント・リージョンのDynamoDB内で完結し、外部決済APIは呼ばない。",
+      "unit_ids": [
+        "idempotency"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch08",
+        "ch09"
+      ],
+      "constraints": [
+        "処理済み記録と業務更新は異なる項目で、トランザクションの制約を満たす。",
+        "業務キーと操作内容を保持し、重複確認時には意図した操作との一致を確認する。"
+      ],
+      "questions": [
+        {
+          "id": "sqs-commit-before-delete",
+          "objective": "業務更新と記録の原子的確定を選ぶ。",
+          "prompt": "ワーカーが業務更新の確定後、メッセージ削除前に停止した。再配信でも二重更新を防ぐ設計は？記録と業務更新は異なる項目で、同じDynamoDBトランザクションに含められる。",
+          "options": [
+            {
+              "id": "sqs-commit-before-delete-a",
+              "text": "ワーカーのメモリにだけ処理済み注文IDを保存する",
+              "explanation": "停止すると記録が失われ、再配信時に二重更新を防げません。"
+            },
+            {
+              "id": "sqs-commit-before-delete-b",
+              "text": "安定した業務キーの条件付き処理済み記録と業務更新を原子的に確定し、成功確認後に削除する",
+              "explanation": "再配信時は記録の条件が重複更新を阻止します。失敗理由と既存記録の操作一致を確認してから削除します。"
+            },
+            {
+              "id": "sqs-commit-before-delete-c",
+              "text": "先にSQSメッセージを削除してから業務更新する",
+              "explanation": "削除後に停止すると、まだ実行していない業務を失う危険があります。"
+            }
+          ],
+          "correct_option_id": "sqs-commit-before-delete-b",
+          "runtime_option_order": [
+            "sqs-commit-before-delete-a",
+            "sqs-commit-before-delete-b",
+            "sqs-commit-before-delete-c"
+          ],
+          "rationale": "再配信時は記録の条件が重複更新を阻止します。失敗理由と既存記録の操作一致を確認してから削除します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_PutItem.go"
+          ]
+        },
+        {
+          "id": "dynamodb-token-window",
+          "objective": "10分間のAPI冪等性と長期の業務重複防止を分ける。",
+          "prompt": "別の構成で、処理済み記録や条件はなく、TransactWriteItemsで注文カウンターを加算する。初回完了15分後に同じClientRequestTokenと同じ内容で再実行した場合の説明は？",
+          "options": [
+            {
+              "id": "dynamodb-token-window-a",
+              "text": "同じトークンなら何日後でも再加算は起きない",
+              "explanation": "同一要求の保証は初回完了後10分間です。永久の業務重複防止ではありません。"
+            },
+            {
+              "id": "dynamodb-token-window-b",
+              "text": "受信のReceiptHandleを保存すれば業務IDとして永久に重複を防げる",
+              "explanation": "ReceiptHandleは受信ごとに変わる削除用の値で、安定した業務キーではありません。"
+            },
+            {
+              "id": "dynamodb-token-window-c",
+              "text": "10分間を超えて新規要求として扱われ、再加算し得る。業務キーの条件付き記録などが必要",
+              "explanation": "トークンだけの短期保証を超えています。長期の再配信には永続的な重複防止を設計します。"
+            }
+          ],
+          "correct_option_id": "dynamodb-token-window-c",
+          "runtime_option_order": [
+            "dynamodb-token-window-a",
+            "dynamodb-token-window-b",
+            "dynamodb-token-window-c"
+          ],
+          "rationale": "トークンだけの短期保証を超えています。長期の再配信には永続的な重複防止を設計します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "業務処理がDynamoDBの更新に加えて外部決済APIへの請求も行う。",
+        "answer": "DynamoDBのトランザクションだけで請求の二重実行まで保証せず、送信先の冪等キーやoutboxなどの設計を別途検討する。",
+        "reason": "外部APIの副作用はDynamoDBトランザクションの原子的な範囲外。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+          "claim": "SQSは受信ごとに新しいReceiptHandleを発行し、削除には最新ハンドルが必要。標準キューでは削除後もまれに再受信があるため、アプリケーションに冪等性が必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+          "claim": "同じアカウント・リージョン内の異なる項目への条件付きPutとUpdateを原子的に実行できる。全成功または全失敗。ClientRequestTokenの同一リクエスト保証は最初の完了後10分間で、以後は新規として扱う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_PutItem.go",
+          "claim": "主キー属性へのattribute_not_exists条件で既存項目の上書きを防げる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの削除ハンドル・トランザクション原子性・条件付き書込み・10分間の境界と各誤答を照合。同一担当の別工程確認であり、独立監査と実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

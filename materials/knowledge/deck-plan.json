@@ -203,6 +203,15 @@
         "ch12"
       ],
       "reason": "同じ確認済み教材を複数章へ共有し、章ごとの言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "idempotency",
+      "chapter_ids": [
+        "ch06",
+        "ch08",
+        "ch09"
+      ],
+      "reason": "同じ業務重複防止の教材を共有し、章ごとの重複カードを増やさない。"
     }
   ],
   "separate_proposals": [

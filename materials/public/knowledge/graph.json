@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 18,
-    "rubric_checks": 36
+    "detailed_units": 19,
+    "rubric_checks": 38
   },
   "nodes": [
     {
@@ -1093,9 +1093,80 @@
     {
       "id": "concept:idempotency",
       "kind": "concept",
-      "title": "idempotency",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "SQS再配信と業務更新の冪等性",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "idempotency",
+        "title": "SQS再配信と業務更新の冪等性",
+        "group": "coordination",
+        "objective": "業務更新と処理済み記録を原子的に確定し、削除前の停止でも二重更新を防ぐ。",
+        "estimated_minutes": 8,
+        "scope": "標準SQSと同じアカウント・リージョンのDynamoDB。業務更新はトランザクション内で完結。外部決済APIの原子性は保証しない。",
+        "prerequisites": [
+          "visibility-timeout"
+        ],
+        "misconceptions": [
+          "メッセージ削除が成功すれば再配信は絶対にない。",
+          "受信ハンドルは永続的な業務識別子になる。",
+          "ClientRequestTokenだけで何日後の再実行も防げる。"
+        ],
+        "checks": [
+          {
+            "id": "idempotency-explain",
+            "level": "explain",
+            "prompt": "処理確定後、SQS削除前に停止したとき何が起きる？",
+            "expected_points": [
+              "再配信を想定する",
+              "業務IDをキーにした処理済み記録と業務更新を同じトランザクションで確定する",
+              "ReceiptHandleは受信ごとに変わる"
+            ]
+          },
+          {
+            "id": "idempotency-apply",
+            "level": "apply",
+            "prompt": "初回完了15分後に同じリクエストトークンで再実行しても安全？",
+            "expected_points": [
+              "10分間の保証を超えて新規扱いとなる",
+              "業務IDの条件付き記録など別の重複防止が必要",
+              "条件失敗の理由を確認せず未処理メッセージを捨てない"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch08-l01",
+          "ch09-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDKの削除ハンドル・トランザクション原子性・条件付き書込み・10分間の境界と各誤答を照合。同一担当の別工程確認であり、独立監査と実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/idempotency.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go",
+              "claim": "SQSは受信ごとに新しいReceiptHandleを発行し、削除には最新ハンドルが必要。標準キューでは削除後もまれに再受信があるため、アプリケーションに冪等性が必要。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go",
+              "claim": "同じアカウント・リージョン内の異なる項目への条件付きPutとUpdateを原子的に実行できる。全成功または全失敗。ClientRequestTokenの同一リクエスト保証は最初の完了後10分間で、以後は新規として扱う。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_PutItem.go",
+              "claim": "主キー属性へのattribute_not_exists条件で既存項目の上書きを防げる。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "外部副作用とoutbox、送信先の冪等キーの扱いを別単位で検討する。",
+          "保持期間・再処理・実AWSの競合と障害時挙動を検証する。"
+        ]
+      }
     },
     {
       "id": "concept:identity-center",
@@ -8888,6 +8959,21 @@
     {
       "from": "concept:gsi",
       "to": "lesson:ch06-l02",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:visibility-timeout",
+      "to": "concept:idempotency",
+      "type": "learn_before"
+    },
+    {
+      "from": "concept:idempotency",
+      "to": "lesson:ch08-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:idempotency",
+      "to": "lesson:ch09-l01",
       "type": "unit_reference"
     },
     {
