@@ -18,7 +18,7 @@ try{
  await page.goto(base+'tower/index.html');await page.getByRole('button',{name:'冒険を始める',exact:true}).click();
  await page.screenshot({path:'artifacts/tower-map-mobile.png',fullPage:true});
  await page.locator('.current [data-action=node]').first().click();
- await page.locator('.hand .card:not(:disabled)').first().click();
+ await page.locator('.hand .card:not(:disabled)').first().click();await page.getByRole('button',{name:'このカードを使う',exact:true}).click();
  const saved=await page.evaluate(k=>localStorage.getItem(k),key);await page.reload();await page.locator('.hand').waitFor();assert.equal(await page.evaluate(k=>localStorage.getItem(k),key),saved);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/tower-battle-mobile.png',fullPage:true});
  await page.getByRole('button',{name:'ターン終了',exact:true}).click();assert.ok((await page.locator('.battle-meta').innerText()).includes('TURN 2'));
@@ -39,7 +39,7 @@ try{
     if(s.phase==='battle'){
      const b=s.battle,i=intent(s),hit=i.type==='attack'?i.value:0;
      const pick=b.hand.map(uid=>{const c=s.deck.find(c=>c.uid===uid),v=cardValues(c);let score=(v.damage||0)*(v.hits||1)+Math.min(v.block||0,Math.max(0,hit-b.playerBlock))*1.2+(v.draw||0)*3+(v.energy||0)*9+(v.strength||0)*7+(v.armor||0)*7+(v.weak||0)*2+Math.min(v.heal||0,72-s.hp)-(v.self||0)*1.5;if((v.damage||0)+b.playerStrength>=b.hp+b.block)score+=100;return {uid,score,cost:v.cost};}).filter(c=>c.cost<=b.energy).sort((a,b)=>b.score-a.score)[0];
-     return {selector:pick?'[data-action="play"][data-uid="'+pick.uid+'"]':'[data-action="end"]'};
+     return {selector:pick?'[data-action="select"][data-uid="'+pick.uid+'"]':'[data-action="end"]'};
     }
     if(s.phase==='reward'){const rank=['optimize','redundant','balance','burst','restore','reserve','quarantine','parallel','reversal','cache','isolate','detour','overload','foresight','analysis','probe','patch','retry'];const id=[...s.reward].sort((a,b)=>rank.indexOf(a)-rank.indexOf(b))[0];return {selector:'[data-action="reward"][data-id="'+id+'"]'};}
     if(s.phase==='rest'){const c=s.deck.find(c=>!c.plus&&['burst','optimize','redundant','balance'].includes(c.id))||s.deck.find(c=>!c.plus&&c.id==='strike');return {selector:s.hp<44||!c?'[data-action="heal"]':'[data-action="upgrade"][data-uid="'+c.uid+'"]'};}
@@ -47,7 +47,7 @@ try{
     if(s.phase==='shop')return {selector:s.gold>=35&&s.stock.length?'[data-action="buy"][data-id="'+s.stock[0]+'"]':'[data-action="leave"]'};
    },key);
    if(action.done){if(action.done==='won'){await page.screenshot({path:'artifacts/tower-victory-mobile.png',fullPage:true});}break;}
-   await page.locator(action.selector).click();
+   await page.locator(action.selector).click();if(action.selector.includes('select'))await page.getByRole('button',{name:'このカードを使う',exact:true}).click();
   }
   const result=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).phase,key);
   if(result==='won'){console.log('PASS: full UI victory, seed',seed);break;}if(seed===4)throw Error('No full UI win');

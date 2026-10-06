@@ -40,7 +40,8 @@ export const RELICS={
 export const ROUTES=[['battle','battle'],['event','battle'],['elite','shop'],['rest','battle'],['battle','event'],['elite','shop'],['rest','rest'],['boss']];
 export const NODE_NAMES={battle:'戦闘',elite:'強敵',rest:'休息',shop:'交換所',event:'探索',boss:'ボス'};
 const rewardPool=Object.keys(CARDS).filter(x=>!['strike','guard'].includes(x));
-const clone=x=>structuredClone(x);
+const clone=x=>JSON.parse(JSON.stringify(x));
+const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 function rnd(s){s.rng=(Math.imul(s.rng,1664525)+1013904223)>>>0;return s.rng/4294967296;}
 function shuffle(s,arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd(s)*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function log(s,t){s.log=[...s.log,t].slice(-5);}
@@ -105,14 +106,14 @@ export function act(state,action){
 export function parseRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
  if(!s||s.version!==1||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.hp,72)||s.maxHp!==72||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
- if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&Object.hasOwn(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
+ if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
  for(const [name,allowed,max] of [['relics',Object.keys(RELICS),4],['reward',rewardPool,3],['stock',rewardPool,3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
  if(!Array.isArray(s.history)||s.history.length!==s.floor||!s.history.every((h,i)=>h.floor===i&&num(h.lane,1)&&ROUTES[i][h.lane]===h.type)||!Array.isArray(s.log)||s.log.length>5||!s.log.every(t=>typeof t==='string'&&t.length<200)||typeof s.removed!=='boolean')throw Error('進行記録が不正です。');
  if(s.phase==='map'&&s.floor>=8)throw Error('ルートが不正です。');
  if(s.phase==='lost'&&s.hp!==0||s.phase!=='lost'&&s.hp===0)throw Error('HPが不正です。');
  const b=s.battle;
  if(['battle','reward','won','lost'].includes(s.phase)){
-  if(!b||!Object.hasOwn(ENEMIES,b.enemy)||b.maxHp!==ENEMIES[b.enemy].hp||!num(b.hp,b.maxHp))throw Error('敵が不正です。');
+  if(!b||!owns(ENEMIES,b.enemy)||b.maxHp!==ENEMIES[b.enemy].hp||!num(b.hp,b.maxHp))throw Error('敵が不正です。');
   for(const k of ['block','strength','weak','turn','playerBlock','playerStrength','armor','energy'])if(!num(b[k]))throw Error('戦闘の数値が不正です。');
   if(b.turn<1)throw Error('ターンが不正です。');
   const piles=['hand','draw','discard','exhaust'];if(!piles.every(p=>Array.isArray(b[p])))throw Error('山札が不正です。');

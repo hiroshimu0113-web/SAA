@@ -37,6 +37,12 @@ jobs:
       - run: pnpm test
       - run: pnpm knowledge:check
       - run: pnpm build
+      - name: Install WebKit for Safari regression tests
+        run: pnpm exec playwright install --with-deps webkit
+      - name: Verify touch controls and Safari startup
+        run: node scripts/touch-browser-check.mjs
+        env:
+          BROWSER: webkit
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
