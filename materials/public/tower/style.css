@@ -22,3 +22,20 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 #startup{max-width:600px;margin:25px auto;padding:20px;font:17px/1.8 system-ui}
 #startup-error{border:1px solid #b57b67;border-radius:12px;padding:16px}
 #startup a,#startup button{display:inline-block;padding:14px;margin:8px 0;min-height:48px}
+
+/* Compact hand and a second tap on the enlarged card. */
+.hand{gap:8px}
+.hand .card{flex:0 0 98px;min-height:136px;padding:9px 6px;border-radius:10px}
+.hand .card .cost{width:24px;height:24px;line-height:24px;left:6px;top:6px;font-size:14px}
+.hand .card .kind{font-size:9px}
+.hand .card .sigil{font-size:28px;margin:12px 0 4px}
+.hand .card strong{font-size:12px;margin-bottom:4px;line-height:1.5}
+.hand .card .effect{display:none}
+.card-preview{display:flex;flex-direction:column;align-items:center;background:transparent;border:0;padding:12px 0;margin:0}
+.card-preview .card{flex:none;width:min(240px,100%);min-height:300px;padding:22px 18px;border-width:2px;box-shadow:0 8px 28px #0006;touch-action:pan-y}
+.card-preview .card .cost{width:36px;height:36px;line-height:36px;font-size:21px;left:12px;top:12px}
+.card-preview .card .kind{font-size:13px}
+.card-preview .card .sigil{font-size:64px;margin:18px 0 12px}
+.card-preview .card strong{font-size:22px;margin-bottom:16px}
+.card-preview .card .effect{font-size:17px;line-height:1.8}
+.card-preview p{text-align:center;font-size:14px;margin:12px 0}.card-preview>button[data-action=cancel-card]{min-width:140px}

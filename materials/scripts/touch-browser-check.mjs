@@ -17,6 +17,8 @@ try{
  await p.goto(base+'tower/index.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).tap();
  await p.locator('.current [data-action=node]').first().tap();const before=await p.evaluate(k=>localStorage.getItem(k),key);
  await p.locator('.hand .card').first().tap();await p.locator('.card-preview').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before,'select must not spend energy');
+ await p.locator('.card-preview .card').dispatchEvent('pointerdown',{clientX:100,clientY:500});await p.locator('.card-preview .card').dispatchEvent('pointermove',{clientX:100,clientY:450});await p.locator('.card-preview .card').dispatchEvent('pointerup',{clientX:100,clientY:450});await p.locator('.card-preview .card').dispatchEvent('click');assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before);
+ const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(compact.width<=100&&expanded.width>=compact.width*2&&expanded.height>compact.height);
  await p.getByRole('button',{name:'戻す',exact:true}).tap();assert.equal(await p.locator('.card-preview').count(),0);
  await p.getByRole('button',{name:'次の手札へ',exact:true}).tap();await p.waitForFunction(()=>document.querySelector('.hand').scrollLeft>50);
  assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),before);
@@ -30,6 +32,7 @@ try{
  await p.locator('.hand .card').first().tap();await p.getByRole('button',{name:'このカードを使う',exact:true}).tap();
  assert.notEqual(await p.evaluate(k=>localStorage.getItem(k),key),before);assert.equal(await p.locator('.card-preview').count(),0);
  const saved=await p.evaluate(k=>localStorage.getItem(k),key);await p.reload();await p.locator('.hand').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),saved);
+ await p.evaluate(({key,saved})=>{const s=JSON.parse(saved);s.battle.energy=0;localStorage.setItem(key,JSON.stringify(s));},{key,saved});await p.reload();await p.locator('.hand .card').first().tap();assert.ok(await p.locator('.card-preview .card').isDisabled());await p.locator('.card-preview .card').dispatchEvent('click');assert.equal(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).battle.energy,key),0);await p.evaluate(({key,saved})=>localStorage.setItem(key,saved),{key,saved});await p.reload();
  await p.setViewportSize({width:320,height:740});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  const small=await p.locator('.end-turn').boundingBox();assert.ok(small.width>=44&&small.height>=44);
  await p.locator('.hand .card').first().tap();await p.screenshot({path:'artifacts/touch-'+kind+'-mobile.png',fullPage:true});
