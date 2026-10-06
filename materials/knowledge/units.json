@@ -1417,6 +1417,71 @@
         "接続追跡と戻り通信の詳細を現行公式根拠で確認する。",
         "複数SG・クロスVPC・中継機器を通る参照条件を別に扱う。"
       ]
+    },
+    {
+      "id": "network-acl",
+      "title": "NACLの方向別ルールとプロトコル指定",
+      "group": "security",
+      "objective": "受信/送信を分けて番号順に調べ、TCPポート限定と全プロトコルを区別する。",
+      "estimated_minutes": 7,
+      "scope": "NACLのIPv4ルールと評価順・Protocol/PortRange。競合ルールの最初一致判定、戻り通信のポート設計、IPv6/ICMP、デフォルトACL全体は別途確認。",
+      "prerequisites": [
+        "security-group"
+      ],
+      "misconceptions": [
+        "受信と送信の番号は同じリストに混ぜて評価する。",
+        "大きいルール番号が先に評価される。",
+        "Protocol=-1でもPortRangeを443にすればTCP 443だけを許可できる。"
+      ],
+      "checks": [
+        {
+          "id": "network-acl-explain",
+          "level": "explain",
+          "prompt": "NACLの方向と番号、許可/拒否は何を表す？",
+          "expected_points": [
+            "サブネットの受信/送信は独立したリスト",
+            "方向ごとに番号昇順で評価",
+            "CIDR・プロトコル・ポートと許可/拒否を確認"
+          ]
+        },
+        {
+          "id": "network-acl-apply",
+          "level": "apply",
+          "prompt": "TCP 443だけを許可するIPv4ルールでProtocol=-1を使ってよい？",
+          "expected_points": [
+            "-1は全プロトコルでポート範囲による限定にならない",
+            "TCPの6と443を指定する",
+            "対象CIDRと方向を確認"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch03-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/network-acl.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+            "claim": "NACLの受信と送信は独立した番号付きルール。番号の昇順に評価し、関連サブネット境界のパケットを許可/拒否する。Egressは送信方向の指定。Protocol=-1は全プロトコルでポート指定に関係なく全ポートを対象とする。TCPは6、UDPは17。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go",
+            "claim": "NetworkAclEntryは方向・IPv4/IPv6 CIDR・プロトコル・TCP/UDPポート範囲・許可/拒否・番号を持つ。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "NACLの最初一致、ステートレスな戻りとエフェメラルポートを現行公式文書で確認する。",
+        "IPv6/ICMPとデフォルト/カスタムACLの違いを別単位で扱う。"
+      ]
     }
   ]
 }

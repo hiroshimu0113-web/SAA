@@ -7845,6 +7845,266 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-network-acl-permission-boundary",
+      "title": "NACLの方向別ルールとプロトコル指定",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "設定の名称ではなく、許可条件と制御の境界を説明・適用する概念。",
+      "objective": "受信/送信を分けて番号順に調べ、TCPポート限定と全プロトコルを区別する。",
+      "unit_ids": [
+        "network-acl"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/network-acl.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "networking",
+        "security"
+      ],
+      "capabilities": [
+        "route",
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Virtual Private Cloud"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "security-group"
+      ],
+      "conditions": [
+        "受信と送信の独立したルールリストを対象とする。",
+        "競合する複数の一致ルールの最終許可判定ではなく、評価順と1つの許可ルールの対象範囲を問う。"
+      ],
+      "limitations": [
+        "NACLのIPv4ルールと評価順・Protocol/PortRange。競合ルールの最初一致判定、戻り通信のポート設計、IPv6/ICMP、デフォルトACL全体は別途確認。"
+      ],
+      "misconceptions": [
+        "受信と送信の番号は同じリストに混ぜて評価する。",
+        "大きいルール番号が先に評価される。",
+        "Protocol=-1でもPortRangeを443にすればTCP 443だけを許可できる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/network-acl.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "ネットワーク担当が、関連サブネットのNACLでIPv4通信を確認する。",
+        "counterexample": "第2問で必要な通信がTCP 443ではなくUDP 443へ変わる。 UDPのProtocol=17と必要なポート範囲・CIDR・方向を確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/network-acl.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-nacl-direction-protocol",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+          "claim": "NACLの受信と送信は独立した番号付きルール。番号の昇順に評価し、関連サブネット境界のパケットを許可/拒否する。Egressは送信方向の指定。Protocol=-1は全プロトコルでポート指定に関係なく全ポートを対象とする。TCPは6、UDPは17。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go",
+          "claim": "NetworkAclEntryは方向・IPv4/IPv6 CIDR・プロトコル・TCP/UDPポート範囲・許可/拒否・番号を持つ。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/network-acl.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの防御値はAWSの通信許可や安全性の保証を表さない。",
+        "simplifications": [
+          "NACLのIPv4ルールと評価順・Protocol/PortRange。競合ルールの最初一致判定、戻り通信のポート設計、IPv6/ICMP、デフォルトACL全体は別途確認。"
+        ],
+        "mislearning_risks": [
+          "受信と送信の番号は同じリストに混ぜて評価する。",
+          "大きいルール番号が先に評価される。",
+          "Protocol=-1でもPortRangeを443にすればTCP 443だけを許可できる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-nacl-direction-protocol",
+      "title": "NACLのルールレビュー",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "受信/送信を分けて番号順に調べ、TCPポート限定と全プロトコルを区別する。",
+      "unit_ids": [
+        "network-acl"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "nacl-direction-protocol"
+        }
+      ],
+      "domains": [
+        "networking",
+        "security"
+      ],
+      "capabilities": [
+        "route",
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Virtual Private Cloud"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "security-group"
+      ],
+      "conditions": [
+        "受信と送信の独立したルールリストを対象とする。",
+        "競合する複数の一致ルールの最終許可判定ではなく、評価順と1つの許可ルールの対象範囲を問う。"
+      ],
+      "limitations": [
+        "NACLのIPv4ルールと評価順・Protocol/PortRange。競合ルールの最初一致判定、戻り通信のポート設計、IPv6/ICMP、デフォルトACL全体は別途確認。"
+      ],
+      "misconceptions": [
+        "受信と送信の番号は同じリストに混ぜて評価する。",
+        "大きいルール番号が先に評価される。",
+        "Protocol=-1でもPortRangeを443にすればTCP 443だけを許可できる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "nacl-direction-protocol.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "nacl-direction-protocol.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "nacl-direction-protocol.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "nacl-direction-protocol.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+          "claim": "NACLの受信と送信は独立した番号付きルール。番号の昇順に評価し、関連サブネット境界のパケットを許可/拒否する。Egressは送信方向の指定。Protocol=-1は全プロトコルでポート指定に関係なく全ポートを対象とする。TCPは6、UDPは17。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go",
+          "claim": "NetworkAclEntryは方向・IPv4/IPv6 CIDR・プロトコル・TCP/UDPポート範囲・許可/拒否・番号を持つ。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/network-acl.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの防御値はAWSの通信許可や安全性の保証を表さない。",
+        "simplifications": [
+          "NACLのIPv4ルールと評価順・Protocol/PortRange。競合ルールの最初一致判定、戻り通信のポート設計、IPv6/ICMP、デフォルトACL全体は別途確認。"
+        ],
+        "mislearning_risks": [
+          "受信と送信の番号は同じリストに混ぜて評価する。",
+          "大きいルール番号が先に評価される。",
+          "Protocol=-1でもPortRangeを443にすればTCP 443だけを許可できる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "nacl-direction-order, nacl-all-protocol-port"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

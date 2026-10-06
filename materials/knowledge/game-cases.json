@@ -2329,6 +2329,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "nacl-direction-protocol",
+      "title": "NACLのルールレビュー",
+      "premise": "ネットワーク担当が、関連サブネットのNACLでIPv4通信を確認する。",
+      "unit_ids": [
+        "network-acl"
+      ],
+      "chapter_ids": [
+        "ch03",
+        "ch10"
+      ],
+      "constraints": [
+        "受信と送信の独立したルールリストを対象とする。",
+        "競合する複数の一致ルールの最終許可判定ではなく、評価順と1つの許可ルールの対象範囲を問う。"
+      ],
+      "questions": [
+        {
+          "id": "nacl-direction-order",
+          "objective": "方向を選んで番号順に読む。",
+          "prompt": "関連サブネットに入るIPv4パケットをNACLで調べる。受信ルールは番号100と200、送信ルールは番号50と150。受信パケットについて評価するリストと順番は？ここでは許可/拒否の結果ではなく評価順だけを問う。",
+          "options": [
+            {
+              "id": "nacl-direction-order-a",
+              "text": "受信100と200を番号の昇順に調べる。送信50/150は別方向のリスト",
+              "explanation": "受信と送信には独立したルール群があります。受信側の番号を昇順に読むので、別方向の50を混ぜません。"
+            },
+            {
+              "id": "nacl-direction-order-b",
+              "text": "受信と送信を混ぜて50、100、150、200の順に調べる",
+              "explanation": "方向別リストを混同しています。送信番号が小さくても受信評価へ混ぜません。"
+            },
+            {
+              "id": "nacl-direction-order-c",
+              "text": "受信200から100へ、番号の降順に調べる",
+              "explanation": "NACLは番号の昇順です。追加した日時や大きい番号順ではありません。"
+            }
+          ],
+          "correct_option_id": "nacl-direction-order-a",
+          "runtime_option_order": [
+            "nacl-direction-order-a",
+            "nacl-direction-order-b",
+            "nacl-direction-order-c"
+          ],
+          "rationale": "受信と送信には独立したルール群があります。受信側の番号を昇順に読むので、別方向の50を混ぜません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go"
+          ]
+        },
+        {
+          "id": "nacl-all-protocol-port",
+          "objective": "全プロトコル指定とポート制限の関係を区別する。",
+          "prompt": "あるIPv4受信許可ルールをTCP 443だけに限定したい。競合するルールはない。設定案はProtocol=-1、PortRange=443〜443。この設定案をどう直す？",
+          "options": [
+            {
+              "id": "nacl-all-protocol-port-a",
+              "text": "443を指定してあるので、このままでTCP 443だけに限定できる",
+              "explanation": "Protocol=-1は全プロトコルで、指定したポート範囲に関係なく全ポートを対象にします。"
+            },
+            {
+              "id": "nacl-all-protocol-port-b",
+              "text": "Protocol=6（TCP）と443〜443を指定し、CIDRと方向も確認する",
+              "explanation": "TCPを指定したうえでポートを限定します。全プロトコルの-1との違いを確認します。"
+            },
+            {
+              "id": "nacl-all-protocol-port-c",
+              "text": "送信方向のルール番号を変えれば、受信の-1がTCPだけに変わる",
+              "explanation": "別方向の番号変更は、この受信ルールのプロトコル指定を変更しません。"
+            }
+          ],
+          "correct_option_id": "nacl-all-protocol-port-b",
+          "runtime_option_order": [
+            "nacl-all-protocol-port-a",
+            "nacl-all-protocol-port-b",
+            "nacl-all-protocol-port-c"
+          ],
+          "rationale": "TCPを指定したうえでポートを限定します。全プロトコルの-1との違いを確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問で必要な通信がTCP 443ではなくUDP 443へ変わる。",
+        "answer": "UDPのProtocol=17と必要なポート範囲・CIDR・方向を確認する。",
+        "reason": "同じポート番号でもTCPとUDPは別プロトコル。TCPの6ではUDPを指定していない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+          "claim": "NACLの受信と送信は独立した番号付きルール。番号の昇順に評価し、関連サブネット境界のパケットを許可/拒否する。Egressは送信方向の指定。Protocol=-1は全プロトコルでポート指定に関係なく全ポートを対象とする。TCPは6、UDPは17。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/types/types.go",
+          "claim": "NetworkAclEntryは方向・IPv4/IPv6 CIDR・プロトコル・TCP/UDPポート範囲・許可/拒否・番号を持つ。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

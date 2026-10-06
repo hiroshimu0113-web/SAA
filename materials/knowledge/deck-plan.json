@@ -229,6 +229,14 @@
         "ch06"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "network-acl",
+      "chapter_ids": [
+        "ch03",
+        "ch10"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [

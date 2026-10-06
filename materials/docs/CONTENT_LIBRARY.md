@@ -41,3 +41,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 両単位の原稿・内容確認・分類は完了。ケースの取り込み状態は分類台帳、公開状態はgame-cases.jsonのreleaseを参照。カード効果は設計待ち。
 
 - [SG参照と新規接続の許可境界](../knowledge/lessons/security-group.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [NACLの方向別ルールとプロトコル指定](../knowledge/lessons/network-acl.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

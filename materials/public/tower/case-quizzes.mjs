@@ -569,6 +569,36 @@ export const CASE_QUIZZES={
       "SG参照だけでネットワーク到達性を保証しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go"
+  },
+  "nacl-direction-order": {
+    "prompt": "ネットワーク担当が、関連サブネットのNACLでIPv4通信を確認する。 関連サブネットに入るIPv4パケットをNACLで調べる。受信ルールは番号100と200、送信ルールは番号50と150。受信パケットについて評価するリストと順番は？ここでは許可/拒否の結果ではなく評価順だけを問う。",
+    "options": [
+      "受信100と200を番号の昇順に調べる。送信50/150は別方向のリスト",
+      "受信と送信を混ぜて50、100、150、200の順に調べる",
+      "受信200から100へ、番号の降順に調べる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "受信と送信には独立したルール群があります。受信側の番号を昇順に読むので、別方向の50を混ぜません。",
+      "方向別リストを混同しています。送信番号が小さくても受信評価へ混ぜません。",
+      "NACLは番号の昇順です。追加した日時や大きい番号順ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go"
+  },
+  "nacl-all-protocol-port": {
+    "prompt": "ネットワーク担当が、関連サブネットのNACLでIPv4通信を確認する。 あるIPv4受信許可ルールをTCP 443だけに限定したい。競合するルールはない。設定案はProtocol=-1、PortRange=443〜443。この設定案をどう直す？",
+    "options": [
+      "443を指定してあるので、このままでTCP 443だけに限定できる",
+      "Protocol=6（TCP）と443〜443を指定し、CIDRと方向も確認する",
+      "送信方向のルール番号を変えれば、受信の-1がTCPだけに変わる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "Protocol=-1は全プロトコルで、指定したポート範囲に関係なく全ポートを対象にします。",
+      "TCPを指定したうえでポートを限定します。全プロトコルの-1との違いを確認します。",
+      "別方向の番号変更は、この受信ルールのプロトコル指定を変更しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -647,5 +677,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "sg-db-peer-permission",
     "sg-reference-not-route"
+  ],
+  [
+    "nacl-direction-order",
+    "nacl-all-protocol-port"
   ]
 ];
