@@ -14,7 +14,9 @@
     "content:status": "tsx scripts/full-content-status.ts",
     "start": "node scripts/serve.mjs",
     "knowledge:export": "tsx scripts/export-knowledge.ts",
-    "knowledge:check": "tsx scripts/export-knowledge.ts --check"
+    "knowledge:check": "tsx scripts/export-knowledge.ts --check",
+    "progress:update": "tsx scripts/export-progress.ts",
+    "progress:check": "tsx scripts/export-progress.ts --check"
   },
   "dependencies": {
     "react": "^19.1.0",

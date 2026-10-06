@@ -320,3 +320,12 @@
 
 - 完了：45テスト、Chrome/WebKitの既存操作と6種類すべての固有デバフ表示/保存再開を確認。Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37465289352 build/deploy成功（96def37ce6e75b785c6cb0dadb73baaef3cd15d8）。公開HTTPSのChromeでも全6種の能力表示、遅延、旧保存移行、320pxを確認。
 - 更新入口 https://hiroshimu0113-web.github.io/SAA/tower/foes.html 。実機iPhoneの操作感と敵別バランスは未検証。次は実プレイで特性差と難易度を評価。
+
+
+## 2026-10-06 教材保管と制作進捗の入口
+- ゲーム開発は本日終了というユーザー指示に従い、教材の保管・進捗管理のみ整備。既存のsrc/content、knowledge、deliverables、audioを保持し、本文の重複コピーや配布物の上書きは行わない。
+- docs/CONTENT_LIBRARY.mdに正本・公開版・分類・監査・配布物の保管先と更新手順を整理。docs/CONTENT_PROGRESS.mdに全体/章別/分類別の進捗を生成。
+- 現状：12章36レッスン200問の原稿、公開2章6レッスン20問。模試は各0/65問。詳細知識14単位は全て確認待ち、ゲーム分類23件。制作済み・確認済み・公開済み・本人の理解を混同しない。
+- scripts/export-progress.tsとprogress:update/progress:checkを追加。教材・公開範囲・分類を更新した際の再生成/整合確認をmaterials/AGENTS.mdへ必須化。READMEとknowledge/READMEから入口をリンク。
+- 検証：進捗生成と再照合、既存content:statusとの数値照合、knowledge:check（407ノード/609辺）、新規資料の相対リンク、git diff --check成功。ゲーム本体・教材本文・監査状態・分類データは変更なし。
+- 次：後続エージェントは保管ガイド/進捗/分類ガイドを確認して教材を拡充し、正本と進捗を一緒に更新する。既存14単位のレビュー、公開前原稿の整備が未完了。
