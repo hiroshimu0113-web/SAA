@@ -45,3 +45,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [NACLの方向別ルールとプロトコル指定](../knowledge/lessons/network-acl.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [ルートの最長プレフィックス一致](../knowledge/lessons/route.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [KMS鍵素材の更新と旧暗号文の復号](../knowledge/lessons/kms.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

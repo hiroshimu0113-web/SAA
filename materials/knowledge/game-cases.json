@@ -2563,6 +2563,153 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "kms-rotation-lifecycle",
+      "title": "鍵素材の更新と復号の継続",
+      "premise": "KMSの鍵素材の更新方法と状態を、鍵そのものの無効化や資格情報更新と区別する。",
+      "unit_ids": [
+        "kms"
+      ],
+      "chapter_ids": [
+        "ch05",
+        "ch10",
+        "ch11"
+      ],
+      "constraints": [
+        "設問はAWS生成の顧客管理・対称暗号化鍵。鍵は有効で必要な権限がある。",
+        "KMSを使う暗号操作を扱い、既に取得してキャッシュした平文鍵の使用は対象外。"
+      ],
+      "questions": [
+        {
+          "id": "kms-old-material-read",
+          "objective": "旧暗号文の復号と鍵素材更新を区別する。",
+          "prompt": "AWS生成の対称暗号化鍵を使い、自動更新が完了した。鍵は有効で、必要な復号権限があり、暗号文と必要な条件は保持している。旧鍵素材がNON_CURRENTになった説明は？外部キャッシュの平文鍵は使わずKMSで復号する。",
+          "options": [
+            {
+              "id": "kms-old-material-read-a",
+              "text": "旧素材は直ちに復号にも使えなくなるので、復号のために鍵を無効化する",
+              "explanation": "NON_CURRENTは復号用です。鍵を無効化するとKMSの暗号操作を妨げます。"
+            },
+            {
+              "id": "kms-old-material-read-b",
+              "text": "旧素材は復号用に扱われる。更新しただけで古い暗号文が復号不能になったとは判断しない",
+              "explanation": "CURRENTは暗号化と復号、NON_CURRENTは復号用です。鍵の状態・権限・暗号文条件も別に確認します。"
+            },
+            {
+              "id": "kms-old-material-read-c",
+              "text": "鍵素材の更新はDBパスワードの変更でもあるため、DBの認証情報だけを直す",
+              "explanation": "鍵素材の更新とDB資格情報の更新は異なる作業です。"
+            }
+          ],
+          "correct_option_id": "kms-old-material-read-b",
+          "runtime_option_order": [
+            "kms-old-material-read-a",
+            "kms-old-material-read-b",
+            "kms-old-material-read-c"
+          ],
+          "rationale": "CURRENTは暗号化と復号、NON_CURRENTは復号用です。鍵の状態・権限・暗号文条件も別に確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_EnableKeyRotation.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/types/types.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_DisableKey.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_GetKeyRotationStatus.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_ListKeyRotations.go"
+          ]
+        },
+        {
+          "id": "kms-ondemand-schedule",
+          "objective": "オンデマンド更新と既存予定を区別する。",
+          "prompt": "別の有効なAWS生成・顧客管理の対称暗号化鍵には、次回自動更新の予定がある。対応条件を満たすRotateKeyOnDemandを成功させた。今ある自動更新予定の扱いは？",
+          "options": [
+            {
+              "id": "kms-ondemand-schedule-a",
+              "text": "オンデマンド更新で既存の自動更新予定が消える",
+              "explanation": "オンデマンド更新は既存の自動更新スケジュールを変更しません。"
+            },
+            {
+              "id": "kms-ondemand-schedule-b",
+              "text": "必ず実行日から365日後へ次回予定が変更される",
+              "explanation": "既存予定は維持されます。指定周期や既存予定を無視して365日へリセットしません。"
+            },
+            {
+              "id": "kms-ondemand-schedule-c",
+              "text": "既存の自動更新予定は変わらない。状態と完了履歴は対応APIで確認する",
+              "explanation": "即時の鍵素材更新と定期更新は別です。開始/進行状態と完了履歴を区別します。"
+            }
+          ],
+          "correct_option_id": "kms-ondemand-schedule-c",
+          "runtime_option_order": [
+            "kms-ondemand-schedule-a",
+            "kms-ondemand-schedule-b",
+            "kms-ondemand-schedule-c"
+          ],
+          "rationale": "即時の鍵素材更新と定期更新は別です。開始/進行状態と完了履歴を区別します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_GetKeyRotationStatus.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_ListKeyRotations.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問のKMS鍵そのものを無効化する。",
+        "answer": "旧素材が復号用でも、その無効なKMS鍵による暗号操作はできない。鍵状態と無効化理由を確認する。",
+        "reason": "素材のCURRENT/NON_CURRENTと、鍵全体が利用可能かどうかは別の条件。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_EnableKeyRotation.go",
+          "claim": "自動更新は対称暗号化鍵に対応し、非対称/HMAC/インポート鍵素材/カスタムキーストアは対象外。顧客管理鍵の既定周期365日。AWS管理鍵の周期を利用者は設定しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go",
+          "claim": "対応する顧客管理の対称暗号化鍵は自動更新の有無に関係なくオンデマンド更新でき、既存の自動更新予定は変わらない。非対称/HMAC/カスタムキーストアは対象外。インポートした対称鍵素材には追加のインポート条件がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/types/types.go",
+          "claim": "RotationsListEntryのCURRENT鍵素材は暗号化/復号に、NON_CURRENTは復号だけに使用する。両状態は自動/オンデマンド更新対応鍵に適用。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_DisableKey.go",
+          "claim": "KMS鍵の無効化は、その鍵を暗号操作に使用することを一時的に禁止する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_GetKeyRotationStatus.go",
+          "claim": "自動更新の有効状態・周期・次回予定と進行中オンデマンド更新を確認できる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_ListKeyRotations.go",
+          "claim": "指定KMS鍵の鍵素材に関する情報と完了した更新の詳細を取得する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

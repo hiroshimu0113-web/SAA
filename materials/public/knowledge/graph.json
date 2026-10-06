@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 23,
-    "rubric_checks": 46
+    "detailed_units": 24,
+    "rubric_checks": 48
   },
   "nodes": [
     {
@@ -1331,9 +1331,96 @@
     {
       "id": "concept:kms",
       "kind": "concept",
-      "title": "kms",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "KMS鍵素材の更新と旧暗号文の復号",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "kms",
+        "title": "KMS鍵素材の更新と旧暗号文の復号",
+        "group": "security",
+        "objective": "鍵素材の更新・鍵の無効化・既存暗号文の復号を分け、更新方法と対象条件を選ぶ。",
+        "estimated_minutes": 8,
+        "scope": "AWS生成の顧客管理・対称暗号化鍵が中心。インポート/非対称/HMAC/カスタムキーストアは対応差だけ。鍵削除、外部データ再暗号化、SSE-KMS全体の権限評価は未確認。",
+        "prerequisites": [],
+        "misconceptions": [
+          "鍵素材を更新すると旧素材は復号にも使えなくなる。",
+          "オンデマンド更新で自動更新の予定を必ずリセットする。",
+          "KMS鍵の更新でDBパスワードも変わる。"
+        ],
+        "checks": [
+          {
+            "id": "kms-explain",
+            "level": "explain",
+            "prompt": "CURRENTとNON_CURRENTの鍵素材は何に使う？",
+            "expected_points": [
+              "CURRENTは暗号化と復号",
+              "NON_CURRENTは復号用",
+              "鍵の無効化と素材の更新は別"
+            ]
+          },
+          {
+            "id": "kms-apply",
+            "level": "apply",
+            "prompt": "オンデマンド更新後の予定と監査はどう確認する？",
+            "expected_points": [
+              "既存自動更新予定は維持",
+              "GetKeyRotationStatusで設定と進行を確認",
+              "ListKeyRotationsで完了履歴を確認",
+              "鍵種別/素材の生成元/キーストアを確認"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch10-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/kms.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_EnableKeyRotation.go",
+              "claim": "自動更新は対称暗号化鍵に対応し、非対称/HMAC/インポート鍵素材/カスタムキーストアは対象外。顧客管理鍵の既定周期365日。AWS管理鍵の周期を利用者は設定しない。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go",
+              "claim": "対応する顧客管理の対称暗号化鍵は自動更新の有無に関係なくオンデマンド更新でき、既存の自動更新予定は変わらない。非対称/HMAC/カスタムキーストアは対象外。インポートした対称鍵素材には追加のインポート条件がある。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/types/types.go",
+              "claim": "RotationsListEntryのCURRENT鍵素材は暗号化/復号に、NON_CURRENTは復号だけに使用する。両状態は自動/オンデマンド更新対応鍵に適用。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_DisableKey.go",
+              "claim": "KMS鍵の無効化は、その鍵を暗号操作に使用することを一時的に禁止する。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_GetKeyRotationStatus.go",
+              "claim": "自動更新の有効状態・周期・次回予定と進行中オンデマンド更新を確認できる。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_ListKeyRotations.go",
+              "claim": "指定KMS鍵の鍵素材に関する情報と完了した更新の詳細を取得する。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "エンベロープ暗号化とReEncryptの対象形式・保護鍵移行を別単位で確認する。",
+          "削除待ち/無効化/キャッシュ鍵とSSE-KMSの権限境界を別に検証する。"
+        ]
+      }
     },
     {
       "id": "concept:lake-formation",
@@ -9275,6 +9362,11 @@
     {
       "from": "concept:route",
       "to": "lesson:ch03-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:kms",
+      "to": "lesson:ch10-l01",
       "type": "unit_reference"
     },
     {

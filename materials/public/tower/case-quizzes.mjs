@@ -629,6 +629,36 @@ export const CASE_QUIZZES={
       "ルート変更後の一致対象を調べ直します。選択した経路があってもSG/NACLや待受は別の条件です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go"
+  },
+  "kms-old-material-read": {
+    "prompt": "KMSの鍵素材の更新方法と状態を、鍵そのものの無効化や資格情報更新と区別する。 AWS生成の対称暗号化鍵を使い、自動更新が完了した。鍵は有効で、必要な復号権限があり、暗号文と必要な条件は保持している。旧鍵素材がNON_CURRENTになった説明は？外部キャッシュの平文鍵は使わずKMSで復号する。",
+    "options": [
+      "旧素材は直ちに復号にも使えなくなるので、復号のために鍵を無効化する",
+      "旧素材は復号用に扱われる。更新しただけで古い暗号文が復号不能になったとは判断しない",
+      "鍵素材の更新はDBパスワードの変更でもあるため、DBの認証情報だけを直す"
+    ],
+    "answer": 1,
+    "reasons": [
+      "NON_CURRENTは復号用です。鍵を無効化するとKMSの暗号操作を妨げます。",
+      "CURRENTは暗号化と復号、NON_CURRENTは復号用です。鍵の状態・権限・暗号文条件も別に確認します。",
+      "鍵素材の更新とDB資格情報の更新は異なる作業です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_EnableKeyRotation.go"
+  },
+  "kms-ondemand-schedule": {
+    "prompt": "KMSの鍵素材の更新方法と状態を、鍵そのものの無効化や資格情報更新と区別する。 別の有効なAWS生成・顧客管理の対称暗号化鍵には、次回自動更新の予定がある。対応条件を満たすRotateKeyOnDemandを成功させた。今ある自動更新予定の扱いは？",
+    "options": [
+      "オンデマンド更新で既存の自動更新予定が消える",
+      "必ず実行日から365日後へ次回予定が変更される",
+      "既存の自動更新予定は変わらない。状態と完了履歴は対応APIで確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "オンデマンド更新は既存の自動更新スケジュールを変更しません。",
+      "既存予定は維持されます。指定周期や既存予定を無視して365日へリセットしません。",
+      "即時の鍵素材更新と定期更新は別です。開始/進行状態と完了履歴を区別します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -715,5 +745,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "route-prefix-choice",
     "route-specific-removed"
+  ],
+  [
+    "kms-old-material-read",
+    "kms-ondemand-schedule"
   ]
 ];
