@@ -674,13 +674,15 @@
       "group": "security",
       "objective": "必要な対象・操作・条件に権限を絞る。",
       "estimated_minutes": 5,
-      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "scope": "必要な対象・操作・条件を限定する原理と、ポリシーシミュレーターの検証範囲。全IAM評価と実AWS試験は範囲外。",
       "prerequisites": [
         "authorization",
         "iam-role"
       ],
       "misconceptions": [
-        "動くように管理者権限を付けたらそのままでよい。"
+        "動くように管理者権限を付けたらそのままでよい。",
+        "シミュレーターのAllowは実際の保存完了を意味する。",
+        "Actionを絞れば全リソースへ許可しても業務の最小権限になる。"
       ],
       "checks": [
         {
@@ -689,7 +691,8 @@
           "prompt": "最小権限で絞る軸を挙げて。",
           "expected_points": [
             "Actionで操作、Resourceで対象を絞る",
-            "必要に応じConditionで条件を絞る"
+            "必要に応じConditionで要求条件を絞る",
+            "シミュレーションと実環境での検証を区別する"
           ]
         },
         {
@@ -698,7 +701,8 @@
           "prompt": "特定バケットへの写真保存だけが必要。全S3操作を許可する？",
           "expected_points": [
             "必要な保存操作と対象に絞る",
-            "読み取りや削除など不要な権限を与えない"
+            "読み取りや削除など不要な権限を与えない",
+            "タグ/ACL/暗号化等の要求条件を読んで必要許可を判断する"
           ]
         }
       ],
@@ -706,14 +710,34 @@
         "ch02-l02"
       ],
       "review": {
-        "status": "draft",
-        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-        "source_document": "docs/STARTER_REVIEW.md"
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/least-privilege.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_SimulatePrincipalPolicy.go",
+            "claim": "主体のポリシー、API操作、リソース、コンテキスト値をシミュレートする。APIを実行せず、存在しないリソースも評価できる。実環境と結果が異なる場合がある。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+            "claim": "汎用S3保存にはPutObject許可、タグ/ACL指定時には追加の対応許可が必要。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+            "claim": "セッションポリシーはロールのIDベースポリシーと共通する範囲へ許可を制限する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
       },
       "learner_state": "unassessed",
       "next_enrichment": [
-        "条件を1つ変えた転移問題を追加する",
-        "境界条件と公式根拠を照合してから公開教材へ反映する"
+        "ポリシー生成/アクセス分析と実環境の許可・拒否試験",
+        "SCP/アクセス許可境界/リソースポリシー等との全評価へ接続"
       ]
     },
     {

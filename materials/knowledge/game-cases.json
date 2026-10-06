@@ -610,6 +610,128 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "least-privilege-photo-simulation",
+      "title": "写真保存の最小権限と検証範囲",
+      "premise": "写真加工アプリは指定した汎用S3バケットのoutputs/配下へ保存する。",
+      "constraints": [
+        "タグ/ACL指定、SSE-KMS、ほかの許可やDenyはなく、対象と操作の限定比較を行う。",
+        "シミュレーターと実AWSでの実行結果を区別する。架空のバケット名を実環境の検証としない。"
+      ],
+      "questions": [
+        {
+          "id": "least-photo-policy",
+          "objective": "必要な対象と操作へ許可を絞る。",
+          "prompt": "保存だけが必要で、タグ/ACL/SSE-KMS等の追加条件はない。この3案で不要な許可を最も少なくするものは？",
+          "options": [
+            {
+              "id": "least-photo-policy-a",
+              "text": "s3:*を指定バケット全体へ許可する",
+              "explanation": "業務に不要な読み取りや削除などの操作を含めます。対象の限定だけでは操作を絞れていません。"
+            },
+            {
+              "id": "least-photo-policy-b",
+              "text": "s3:PutObjectを指定バケットのoutputs/配下のオブジェクトだけへ許可する",
+              "explanation": "必要な保存操作と業務対象の両方を限定しています。追加条件がない比較の前提です。"
+            },
+            {
+              "id": "least-photo-policy-c",
+              "text": "s3:PutObjectを全バケットの全オブジェクトへ許可する",
+              "explanation": "操作は絞れても業務外の保存先まで許可します。対象も限定する必要があります。"
+            }
+          ],
+          "correct_option_id": "least-photo-policy-b",
+          "runtime_option_order": [
+            "least-photo-policy-a",
+            "least-photo-policy-b",
+            "least-photo-policy-c"
+          ],
+          "rationale": "必要な保存操作と業務対象の両方を限定しています。追加条件がない比較の前提です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+          ]
+        },
+        {
+          "id": "least-photo-simulation",
+          "objective": "許可評価のシミュレーションと実行を区別する。",
+          "prompt": "SimulatePrincipalPolicyが入力した保存操作と対象についてAllowを返した。まだ実環境ではAPIを実行していない。この結果の適切な扱いは？",
+          "options": [
+            {
+              "id": "least-photo-simulation-a",
+              "text": "写真の保存が実際に完了した証拠である",
+              "explanation": "この操作はAPIを実行しません。Allowは実際の保存完了を示しません。"
+            },
+            {
+              "id": "least-photo-simulation-b",
+              "text": "存在しないリソースもシミュレートできるので、本番の全要求の成功も保証される",
+              "explanation": "実環境と結果が異なる場合があります。存在しないリソースの評価も、存在や到達性を保証しません。"
+            },
+            {
+              "id": "least-photo-simulation-c",
+              "text": "入力したポリシー判断の結果であり、API実行や実環境での期待結果は別に確認する",
+              "explanation": "シミュレーションと実行の範囲を区別し、実環境でも必要な許可・拒否の結果を確認します。"
+            }
+          ],
+          "correct_option_id": "least-photo-simulation-c",
+          "runtime_option_order": [
+            "least-photo-simulation-a",
+            "least-photo-simulation-b",
+            "least-photo-simulation-c"
+          ],
+          "rationale": "シミュレーションと実行の範囲を区別し、実環境でも必要な許可・拒否の結果を確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_SimulatePrincipalPolicy.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "アプリの保存要求へタグ集合の指定を追加する。",
+        "answer": "PutObjectTagging等の対応許可を見直し、対象は業務の保存先に絞ったまま検証する。",
+        "reason": "必要な要求条件が増えたが、全S3操作や全バケットへの許可が必要になったわけではない。"
+      },
+      "unit_ids": [
+        "least-privilege"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch05",
+        "ch10"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_SimulatePrincipalPolicy.go",
+          "claim": "主体のポリシー、API操作、リソース、コンテキスト値をシミュレートする。APIを実行せず、存在しないリソースも評価できる。実環境と結果が異なる場合がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "汎用S3保存にはPutObject許可、タグ/ACL指定時には追加の対応許可が必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "セッションポリシーはロールのIDベースポリシーと共通する範囲へ許可を制限する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

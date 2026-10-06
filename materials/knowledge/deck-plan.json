@@ -121,6 +121,15 @@
         "ch10"
       ],
       "reason": "同じ確認済み教材を複数章へ共有し、章ごとの言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "least-privilege",
+      "chapter_ids": [
+        "ch02",
+        "ch05",
+        "ch10"
+      ],
+      "reason": "同じ確認済み教材を複数章へ共有し、章ごとの言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [

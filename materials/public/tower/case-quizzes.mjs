@@ -149,6 +149,36 @@ export const CASE_QUIZZES={
       "S3操作の権限を増やしても、引き受け時のMFA条件不足を解消しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+  },
+  "least-photo-policy": {
+    "prompt": "写真加工アプリは指定した汎用S3バケットのoutputs/配下へ保存する。 保存だけが必要で、タグ/ACL/SSE-KMS等の追加条件はない。この3案で不要な許可を最も少なくするものは？",
+    "options": [
+      "s3:*を指定バケット全体へ許可する",
+      "s3:PutObjectを指定バケットのoutputs/配下のオブジェクトだけへ許可する",
+      "s3:PutObjectを全バケットの全オブジェクトへ許可する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "業務に不要な読み取りや削除などの操作を含めます。対象の限定だけでは操作を絞れていません。",
+      "必要な保存操作と業務対象の両方を限定しています。追加条件がない比較の前提です。",
+      "操作は絞れても業務外の保存先まで許可します。対象も限定する必要があります。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+  },
+  "least-photo-simulation": {
+    "prompt": "写真加工アプリは指定した汎用S3バケットのoutputs/配下へ保存する。 SimulatePrincipalPolicyが入力した保存操作と対象についてAllowを返した。まだ実環境ではAPIを実行していない。この結果の適切な扱いは？",
+    "options": [
+      "写真の保存が実際に完了した証拠である",
+      "存在しないリソースもシミュレートできるので、本番の全要求の成功も保証される",
+      "入力したポリシー判断の結果であり、API実行や実環境での期待結果は別に確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "この操作はAPIを実行しません。Allowは実際の保存完了を示しません。",
+      "実環境と結果が異なる場合があります。存在しないリソースの評価も、存在や到達性を保証しません。",
+      "シミュレーションと実行の範囲を区別し、実環境でも必要な許可・拒否の結果を確認します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_SimulatePrincipalPolicy.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -171,5 +201,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "mfa-session-token",
     "mfa-role-condition"
+  ],
+  [
+    "least-photo-policy",
+    "least-photo-simulation"
   ]
 ];

@@ -57,7 +57,12 @@ test('tower: complete seeded runs cover rewards, routes, rests, shop, events, wi
   assert.ok(['won','lost'].includes(s.phase),'run did not terminate');
   if(s.phase==='won')wins++;else losses++;
  }
- console.log('Seeded policy results:',{wins,losses,seen:[...seen]});assert.ok(wins>0,'No winning seeded runs');assert.ok(losses>0);for(const p of ['map','battle','reward','rest','shop','event'])assert.ok(seen.has(p));
+ console.log('Seeded policy results:',{wins,losses,seen:[...seen]});assert.ok(wins>0,'No winning seeded runs');for(const p of ['map','battle','reward','rest','shop','event'])assert.ok(seen.has(p));
+ // Cover defeat deliberately, rather than assuming a random quiz pool must
+ // make the automatic strategy lose within this particular 40-seed sample.
+ let doomed=start();doomed.hp=1;
+ for(let turns=0;turns<10&&doomed.phase==='battle';turns++)doomed=take(doomed,{type:'end'});
+ assert.equal(doomed.phase,'lost');assert.equal(doomed.hp,0);roundTrip(doomed);
 });
 
 test('tower: purchases, one-time removal, rest upgrades and elite rewards survive restore',()=>{
