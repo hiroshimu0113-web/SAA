@@ -684,3 +684,6 @@
 - 自分・敵の約0.45秒長押しで、HP/ブロック/強化、敵の弱体、自分の毎ターン防御などを閲覧。閉じる/ Escape対応、Enterでも開ける。閲覧では保存や戦闘を変更しない。1タップ使用・長押しカード詳細は維持。
 - 検証途中：30テストとビルド成功。ブラウザー・公開結果は追記予定。新入口tower/battle.html。次はChrome/WebKitと公開版を確認し、実機の文字量と手札位置を評価。
 - 今後のコンボ/ビルドの設計原則をTOWER.mdに記録。今回は構成盤面そのものは実装しない。
+
+- 完了検証：30テストとビルド、Chrome/WebKitで320pxの手札表示、状態の長押し/短いタップの区別、敵の弱体2/自分の毎ターン防御3、閲覧時の保存不変、閉じる/Enter/Escape、既存タップ/カード長押し/演出/クイズ/オフラインに成功。画面と敵状態パネルを目視確認。
+- 公開：48bae1164d32043fc6b9dda939ad9dd9bf22be44、Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37437808498 のbuild/deploy成功。公開HTTPSで同検証成功、新入口 https://hiroshimu0113-web.github.io/SAA/tower/battle.html はHTTP200と機能の同梱を確認。iPhone実機での操作感は未検証。次は実機の手札位置と長押しの使いやすさを評価。将来のコンボ設計はTOWER.mdの承認済み原則を参照。
