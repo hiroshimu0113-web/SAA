@@ -134,3 +134,14 @@
 - 画像：artifacts/next-text-mobile.png、next-questions-mobile.png、tower-map-mobile.png、tower-battle-mobile.png、tower-victory-mobile.png。教材本文とゲームのマップ／戦闘を目視確認。
 - 未確認：iPhone Safari実機、長期の難易度・操作感。ゲームは1キャラクター・単体敵戦闘・1幕相当。複数幕などを含む製品完成版とは扱わない。
 - 公開前確認：git diff --check 成功。公開結果は後で確認し、未成功なら完了とは報告しない。
+
+## 公開確認（2026-10-06 12時前 JST）
+
+- 完了：コミット `23fec9eb08edd5a0b72eb58a17d9b91b8b4c6fab` をmainへ反映。[Actions 37406143241](https://github.com/hiroshimu0113-web/SAA/actions/runs/37406143241) はテスト・knowledge:check・ビルド・Pages配信すべてsuccess。
+- 次回テキスト：https://hiroshimu0113-web.github.io/SAA/study/2026-10-07/text.html
+- 問題集7問：https://hiroshimu0113-web.github.io/SAA/study/2026-10-07/questions.html
+- 独立ゲーム：https://hiroshimu0113-web.github.io/SAA/tower/index.html
+- HTTPSで教材2ページ、ゲームHTML・engine.mjs・app.mjs・CSSの計6ファイルを取得。改行コードをLFにそろえた全内容・SHA256がローカル検証済みdistと一致。JSモジュールの配信Content-Typeはtext/javascript。証明書検証は有効。
+- 18時の期限前に公開を確認。Chromeモバイル相当で検証済み、iPhone実機確認は未実施。ゲームは今回の独立した1幕試作であり、本家相当の全規模の完成を意味しない。
+- 利用：ホームに表示されない場合は「設定→更新を確認・適用」。オンラインでオフライン保存を確認してから通信を切る。ゲームのバックアップはゲーム画面、教材の履歴は学習ホームの設定から別々に保存。
+- 次の開発：実プレイで難易度・手札の操作感を確認し、必要に応じて分岐の継続性・敵の編成・複数幕を拡充。教材の次の回は責任共有モデル。音声はユーザーの再開指示まで凍結。
