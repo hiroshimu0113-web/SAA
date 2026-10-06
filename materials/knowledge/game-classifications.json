@@ -6686,6 +6686,11 @@
           "type": "assessed_by",
           "target_id": "case-dynamodb-gsi-order-read",
           "reason": "限定条件と条件変更を2問で問う。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-dynamodb-query-filter-pages",
+          "reason": "GSI一覧検索の終了と容量を追加確認する。"
         }
       ],
       "sources": [
@@ -6698,6 +6703,12 @@
         {
           "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go",
           "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+          "claim": "Queryは読取り後にフィルターを適用。空ItemsでもLastEvaluatedKeyがあり得る。次のExclusiveStartKeyに継続キーを渡す。終了は継続キーが空のとき。容量は返した量でなく読んだ項目サイズに基づきフィルター有無で同じ。",
           "checked_on": "2026-10-07",
           "reviewer": "Codex"
         }
@@ -6716,6 +6727,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "本文とケース作成後に公式Queryの空ページ/継続キー/容量と全誤答を別工程で照合。同一担当、独立監査・AWS実験未実施。"
         }
       ],
       "game_design": {
@@ -6860,6 +6877,131 @@
           {
             "path": "public/tower/case-quizzes.mjs",
             "locator": "gsi-customer-query, gsi-order-latest"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "case-dynamodb-query-filter-pages",
+      "title": "顧客注文の空ページとフィルター容量",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "空ページでも継続キーを確認し、後段フィルターと読取り容量を分ける。",
+      "unit_ids": [
+        "gsi"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-query-filter-pages"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "store",
+        "process"
+      ],
+      "concerns": [
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon DynamoDB"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "状態はGSIへ投影済み。キー条件は顧客IDへ正しく指定。ページング以外のエラーや権限不足はない。",
+        "同じ対象・サイズ・読取り条件のフィルター有無を比較する。数値例は架空で、実AWSの容量測定ではない。"
+      ],
+      "limitations": [
+        "単一リージョンのGSI Query。厳密な価格/容量の実測と一覧の完全な整合性は対象外。"
+      ],
+      "misconceptions": [
+        "空Itemsなら検索は必ず終端。",
+        "フィルターで返す件数を減らせば読んだ容量も減る。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-query-filter-pages.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-query-filter-pages.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-query-filter-pages.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dynamodb-query-filter-pages.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+          "claim": "Queryは読取り後にフィルターを適用。空ItemsでもLastEvaluatedKeyがあり得る。次のExclusiveStartKeyに継続キーを渡す。終了は継続キーが空のとき。容量は返した量でなく読んだ項目サイズに基づきフィルター有無で同じ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "条件付きの独立2問をcaseに分類し、既存gsi単位と素材へ対応。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "本文とケース作成後に公式Queryの空ページ/継続キー/容量と全誤答を別工程で照合。同一担当、独立監査・AWS実験未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/gsi.md",
+          "locator": "Queryの空ページ・継続キー・フィルター容量"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "空Itemsなら検索は必ず終端。",
+          "フィルターで返す件数を減らせば読んだ容量も減る。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "query-empty-page-key, query-filter-capacity"
           },
           {
             "path": "public/tower/engine.mjs",

@@ -449,6 +449,36 @@ export const CASE_QUIZZES={
       "GSIは結果整合性です。反映遅延だけから、既に成功した更新の失敗を判断しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_GetItem.go"
+  },
+  "query-empty-page-key": {
+    "prompt": "顧客IDをGSIキーにした注文一覧のQueryに、非キー属性の状態フィルターを付ける。 QueryのあるページはItemsが空で、LastEvaluatedKeyは空でない。条件に合う全結果を取得するための対応は？",
+    "options": [
+      "注文は0件と確定し、この時点で終了する",
+      "キーをExclusiveStartKeyへ渡して同じQueryを続ける。次のページに一致項目が必ずあるとは限らない",
+      "同じページを継続キーなしで無限に読み直す"
+    ],
+    "answer": 1,
+    "reasons": [
+      "このページのフィルター結果が空でも検索の終了とは限りません。",
+      "継続キーを次へ渡します。キーの存在だけで次ページに一致項目があることまで保証しません。",
+      "継続キーを使わない再実行では先へ進めません。ページングを実装します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go"
+  },
+  "query-filter-capacity": {
+    "prompt": "顧客IDをGSIキーにした注文一覧のQueryに、非キー属性の状態フィルターを付ける。 別のQueryは100項目を評価し、状態フィルター後は2項目を返した。同じ対象/サイズ/読取り条件でフィルターなしと比較すると、容量の説明は？",
+    "options": [
+      "2項目だけ返したので評価した100項目の容量は課金対象外になる",
+      "フィルターを使うと読取り容量を必ず0にできる",
+      "容量は読んだ対象のサイズに基づく。返した2項目だけで算定せず、フィルター有無で同じ"
+    ],
+    "answer": 2,
+    "reasons": [
+      "結果を絞る前に読んでいます。返した件数だけで容量を算定しません。",
+      "フィルターはQueryの読取り後の処理で、容量を0にする機能ではありません。",
+      "同じ読取り条件の比較では、フィルターは返す量を変えても既に読んだ容量を減らしません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -511,5 +541,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "gsi-customer-query",
     "gsi-order-latest"
+  ],
+  [
+    "query-empty-page-key",
+    "query-filter-capacity"
   ]
 ];

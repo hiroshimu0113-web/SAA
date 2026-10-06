@@ -39,6 +39,16 @@ flowchart LR
 
 正本 `game-cases.json` の `dynamodb-gsi-order-read`。第1問は顧客別一覧のGSIと結果整合性、第2問は成功した更新後の既知注文の確認。全選択肢へ不適合なキー/整合性の理由を付ける。転移問いは完全な主キーが未知で、顧客別の最新一覧が必須へ変更し、GSIへの強整合指定では要件を満たせないと考える。
 
+## Queryの空ページ・継続キー・フィルター容量
+
+QueryはLimitの評価項目数または最大1MBまで読み、その後にFilterExpressionを適用する。Itemsが空でもLastEvaluatedKeyがあれば終端とは限らない。その値を次の要求のExclusiveStartKeyへ渡し、同じキー/索引/条件で続ける。継続キーがあるだけで次ページに一致項目があると断定しない。継続キーが空になったときにページングの終端を判断する。
+
+FilterExpressionやProjectionExpressionで返す内容を減らしても、同じ対象サイズ・読取り条件では読取り容量は減らない。容量は返した結果だけでなく、読んだ対象のサイズと読取り条件に基づく。Countはフィルター後、ScannedCountは評価した数。両方の意味を分け、必要ならReturnConsumedCapacityで容量の情報を取得する。単位あたりの価格・上限や厳密な課金額の実測はここで行っていない。
+
+FilterExpressionにはパーティション/ソートキー条件を移さず、KeyConditionExpressionで指定する。大量に捨てる検索なら、必要なアクセスパターンとキー/索引を再検討する。ページングを最後まで行うことはGSIの結果整合性を強整合へ変えることではない。更新中の全ページを同一時点のスナップショットとみなさない。
+
+追加ケースdynamodb-query-filter-pagesは空ページの継続と、100項目を評価し2項目を返す架空の比較を扱う。2026-10-07、下記公式Queryを作成後に同一担当の別工程で照合。独立監査・AWS容量測定は未実施。既存のGSIカード素材を分割せず共有する。
+
 ## 分類とゲーム
 
 concept-gsi-query-consistencyは概念、case-dynamodb-gsi-order-readはケース。ch06/ch08/ch12で共有し、既存155素材のGSIを詳細化する。新カード効果は未設計で、一覧検索と最新確認を同じ万能効果へまとめない。

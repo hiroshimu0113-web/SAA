@@ -974,13 +974,19 @@
               "claim": "GetItemはテーブルの完全な主キーで読む。既定結果整合性、ConsistentRead=trueで最新更新値を確認。",
               "checked_on": "2026-10-07",
               "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_Query.go",
+              "claim": "Queryは読取り後にフィルターを適用。空ItemsでもLastEvaluatedKeyがあり得る。次のExclusiveStartKeyに継続キーを渡す。終了は継続キーが空のとき。容量は返した量でなく読んだ項目サイズに基づきフィルター有無で同じ。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
             }
           ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "Queryのフィルター・ページングと読み取り容量を追加確認する。",
-          "GSI投影とキー分散、最新一覧のデータモデルを別に設計する。"
+          "GSIの投影とキー分散、容量設計を具体化する。",
+          "最新一覧のデータモデルと実AWSの容量測定を検証する。"
         ]
       }
     },
