@@ -5175,6 +5175,11 @@
           "type": "assessed_by",
           "target_id": "case-s3-public-access-layers",
           "reason": "限定条件と条件変更を2問で問う。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-s3-delete-version-state",
+          "reason": "保存・保持の条件を、削除の版と状態から追加確認する。"
         }
       ],
       "sources": [
@@ -5470,6 +5475,11 @@
           "type": "assessed_by",
           "target_id": "case-durability-photo-history",
           "reason": "限定条件と条件変更を2問で問う。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-s3-delete-version-state",
+          "reason": "保存・保持の条件を、削除の版と状態から追加確認する。"
         }
       ],
       "sources": [
@@ -5671,6 +5681,143 @@
           {
             "path": "public/tower/case-quizzes.mjs",
             "locator": "durability-previous-version, durability-archive-unavailable"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "case-s3-delete-version-state",
+      "title": "S3のdelete markerとバージョニング停止中の削除",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "有効/停止中/null版の条件からversionIdなし削除の作用を説明する。",
+      "unit_ids": [
+        "s3",
+        "durability"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-delete-version-state"
+        },
+        {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "delete markerと停止中の条件"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "availability"
+      ],
+      "service_names": [
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "DeleteObjectにversionIdを付けない。削除は許可され成功、Object Lock/MFA Delete/ライフサイクル等の別作用はない。",
+        "第1問はバージョニング有効、第2問は停止中。状態と既存版をそれぞれ明記する。"
+      ],
+      "limitations": [
+        "汎用バケットのDeleteObject、versionIdなしの単一削除の比較。Object Lock/MFA Deleteやライフサイクル等の作用は範囲外。"
+      ],
+      "misconceptions": [
+        "versionIdなし削除は有効/停止中を問わず常にすべてのデータ版を永久削除する。",
+        "停止中でもnull版は必ず保持される。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-delete-version-state.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-delete-version-state.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-delete-version-state.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-delete-version-state.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "有効バージョニングではversionIdなし削除でdelete markerを追加。停止中はnull版があれば削除してmarkerを追加、null版なしなら他の非null版を削除しない。特定版指定は永久削除。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "現在版がdelete markerなら削除されたように扱う。存在するデータ版をversionIdで指定して読む許可は別に必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "条件付きの2問・転移問いをcaseに分類、既存確認済みs3/durabilityの補足へ関連付け。素材カードを分割せず既存候補を共有。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後に公式SDKの有効/停止中/null版有無と全誤答理由を別工程で確認。同一担当で独立監査・AWS実験未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件別の連続2問として取り込む。既存カード素材を重複作成しない。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/durability.md",
+          "locator": "delete markerと停止中の条件"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "versionIdなし削除は有効/停止中を問わず常にすべてのデータ版を永久削除する。",
+          "停止中でもnull版は必ず保持される。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "s3-delete-marker-enabled, s3-delete-null-suspended"
           },
           {
             "path": "public/tower/engine.mjs",

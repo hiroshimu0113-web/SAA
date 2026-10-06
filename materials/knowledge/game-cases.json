@@ -1252,6 +1252,124 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "s3-delete-version-state",
+      "title": "S3のdelete markerとバージョニング停止中の削除",
+      "premise": "汎用S3の写真を削除する要求が、どの版へ作用するか確認する。",
+      "unit_ids": [
+        "s3",
+        "durability"
+      ],
+      "chapter_ids": [
+        "ch01",
+        "ch05",
+        "ch10",
+        "ch11"
+      ],
+      "constraints": [
+        "DeleteObjectにversionIdを付けない。削除は許可され成功、Object Lock/MFA Delete/ライフサイクル等の別作用はない。",
+        "第1問はバージョニング有効、第2問は停止中。状態と既存版をそれぞれ明記する。"
+      ],
+      "questions": [
+        {
+          "id": "s3-delete-marker-enabled",
+          "objective": "有効バージョニングのdelete markerを説明する。",
+          "prompt": "バージョニング有効の写真キーに、データ版v1とv2が残っている。versionIdを付けずにDeleteObjectを実行し成功した。この操作の作用は？",
+          "options": [
+            {
+              "id": "s3-delete-marker-enabled-a",
+              "text": "v1とv2を両方永久削除する",
+              "explanation": "versionIdなしの削除では、有効バージョニングの既存データ版を両方永久削除する動きではありません。"
+            },
+            {
+              "id": "s3-delete-marker-enabled-b",
+              "text": "delete markerを現在版として追加し、v1とv2はこの操作では永久削除しない",
+              "explanation": "通常の現在版読取りは削除されたように扱いますが、残るデータ版とdelete markerを区別します。"
+            },
+            {
+              "id": "s3-delete-marker-enabled-c",
+              "text": "正しい写真へ内容を自動で書き戻す",
+              "explanation": "markerは削除状態を表すもので、内容を正しい過去版へ書き戻す処理ではありません。"
+            }
+          ],
+          "correct_option_id": "s3-delete-marker-enabled-b",
+          "runtime_option_order": [
+            "s3-delete-marker-enabled-a",
+            "s3-delete-marker-enabled-b",
+            "s3-delete-marker-enabled-c"
+          ],
+          "rationale": "通常の現在版読取りは削除されたように扱いますが、残るデータ版とdelete markerを区別します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go"
+          ]
+        },
+        {
+          "id": "s3-delete-null-suspended",
+          "objective": "停止中のnull版の削除を区別する。",
+          "prompt": "別の写真キーはバージョニング停止中で、nullのversion IDのデータ版と非null版v1がある。versionIdなしのDeleteObjectが成功した。この操作の作用は？",
+          "options": [
+            {
+              "id": "s3-delete-null-suspended-a",
+              "text": "停止中でもnull版とv1の両方を必ず保持し、markerだけ追加する",
+              "explanation": "停止中はnull版があればそれを削除します。有効時の説明をそのまま流用できません。"
+            },
+            {
+              "id": "s3-delete-null-suspended-b",
+              "text": "null版もv1も、すべて永久削除する",
+              "explanation": "null版の削除と非null版の扱いを混同しています。この要求はv1のversionIdを指定していません。"
+            },
+            {
+              "id": "s3-delete-null-suspended-c",
+              "text": "null版を削除してdelete markerを追加する。非null版v1はこの操作では削除しない",
+              "explanation": "停止中の既存null版という条件に応じて作用が変わります。非null版の保持と現在の削除状態を分けます。"
+            }
+          ],
+          "correct_option_id": "s3-delete-null-suspended-c",
+          "runtime_option_order": [
+            "s3-delete-null-suspended-a",
+            "s3-delete-null-suspended-b",
+            "s3-delete-null-suspended-c"
+          ],
+          "rationale": "停止中の既存null版という条件に応じて作用が変わります。非null版の保持と現在の削除状態を分けます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問の停止中のキーにnull版がなく、残るデータ版は非nullのv1とv2だけに変える。",
+        "answer": "versionIdなしの削除はdelete markerを追加し、この操作でv1/v2を削除しない。",
+        "reason": "停止中でも、削除対象になる既存null版がない場合は既存非null版の削除とはならない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
+          "claim": "有効バージョニングではversionIdなし削除でdelete markerを追加。停止中はnull版があれば削除してmarkerを追加、null版なしなら他の非null版を削除しない。特定版指定は永久削除。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "現在版がdelete markerなら削除されたように扱う。存在するデータ版をversionIdで指定して読む許可は別に必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後に公式SDKの有効/停止中/null版有無と全誤答理由を別工程で確認。同一担当で独立監査・AWS実験未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

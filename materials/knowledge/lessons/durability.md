@@ -33,6 +33,14 @@ S3 Glacier Flexible RetrievalやS3 Glacier Deep Archiveでは、読取り前にR
 
 転移問いでは正しい過去版を永久削除し、ほかのコピーもない条件へ変更する。バージョニングを有効にしたという履歴だけから復元可能とは判断できなくなる。この例と、単にdelete markerを置く削除を混同しない。
 
+## delete markerと停止中の条件
+
+Delete markerは削除状態を表す版で、写真のデータそのものではない。有効バージョニングでversionIdなしのDeleteObjectが成功すると、markerが現在版になり、過去のデータ版はその要求では永久削除されない。現在版がmarkerなら通常のGetObjectは削除されたように扱う。残る特定データ版の読取りには存在とversion IDと許可を確認する。
+
+バージョニング停止中では、既存のnullのversion IDのデータ版があれば、それを削除してmarkerを追加する。null版がなく非null版だけなら、その要求でデータ版を削除せずmarkerを追加する。停止中を「過去版が必ず残る」または「全版が消える」と覚えず、状態・null版の有無・要求のversionIdを追う。
+
+追加ケース `s3-delete-version-state` は有効時と停止中で同じversionIdなし要求を比較し、null版の有無を変えた転移問いを保持する。根拠は以下のDeleteObject/GetObjectの固定版。2026-10-06、Codexが作成後に状態ごとの分岐と全誤答を別工程で確認。同一担当の確認、独立監査・実AWS実験未実施。新カード素材を分割して枚数を増やさない。
+
 ## 分類とゲーム
 
 `concept-durability-history-recovery` は保持と利用可否の概念、`case-durability-photo-history` は2問ケース。ch01・ch05・ch10・ch11へ共有する。新カード効果は未設計。回復カードの数字をAWSの復旧時間に読み替えない。

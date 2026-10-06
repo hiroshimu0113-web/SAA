@@ -654,7 +654,7 @@
             },
             {
               "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go",
-              "claim": "バージョニング有効でもversion ID指定で特定版を永久削除できる。",
+              "claim": "有効バージョニングではversionIdなし削除でdelete markerを追加。停止中はnull版があれば削除してmarkerを追加、null版なしなら他の非null版を削除しない。特定版指定は永久削除。",
               "checked_on": "2026-10-06",
               "reviewer": "Codex"
             },
@@ -792,7 +792,7 @@
         "learner_state": "unassessed",
         "next_enrichment": [
           "インスタンスストアの停止・再起動等の寿命を現行公式資料で追加確認する。",
-          "S3の保存と必要アクセスを次の単位で確認する。"
+          "S3単位と接続した保存・権限の実AWS試験を設計し検証する。"
         ]
       }
     },
@@ -1695,7 +1695,7 @@
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "耐久性、上書き/削除保護、ストレージクラスを別単位で確認する。",
+          "耐久性の数値・クラス別条件と削除保護の全設計を追加確認する。",
           "クロスアカウント・SSE-KMS・全ポリシー評価を追加する。"
         ]
       }

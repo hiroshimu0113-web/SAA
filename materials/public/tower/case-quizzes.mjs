@@ -299,6 +299,36 @@ export const CASE_QUIZZES={
       "保存されていることと即時の読取りは別です。復元の時間と業務要件も比較します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_RestoreObject.go"
+  },
+  "s3-delete-marker-enabled": {
+    "prompt": "汎用S3の写真を削除する要求が、どの版へ作用するか確認する。 バージョニング有効の写真キーに、データ版v1とv2が残っている。versionIdを付けずにDeleteObjectを実行し成功した。この操作の作用は？",
+    "options": [
+      "v1とv2を両方永久削除する",
+      "delete markerを現在版として追加し、v1とv2はこの操作では永久削除しない",
+      "正しい写真へ内容を自動で書き戻す"
+    ],
+    "answer": 1,
+    "reasons": [
+      "versionIdなしの削除では、有効バージョニングの既存データ版を両方永久削除する動きではありません。",
+      "通常の現在版読取りは削除されたように扱いますが、残るデータ版とdelete markerを区別します。",
+      "markerは削除状態を表すもので、内容を正しい過去版へ書き戻す処理ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go"
+  },
+  "s3-delete-null-suspended": {
+    "prompt": "汎用S3の写真を削除する要求が、どの版へ作用するか確認する。 別の写真キーはバージョニング停止中で、nullのversion IDのデータ版と非null版v1がある。versionIdなしのDeleteObjectが成功した。この操作の作用は？",
+    "options": [
+      "停止中でもnull版とv1の両方を必ず保持し、markerだけ追加する",
+      "null版もv1も、すべて永久削除する",
+      "null版を削除してdelete markerを追加する。非null版v1はこの操作では削除しない"
+    ],
+    "answer": 2,
+    "reasons": [
+      "停止中はnull版があればそれを削除します。有効時の説明をそのまま流用できません。",
+      "null版の削除と非null版の扱いを混同しています。この要求はv1のversionIdを指定していません。",
+      "停止中の既存null版という条件に応じて作用が変わります。非null版の保持と現在の削除状態を分けます。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -341,5 +371,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "durability-previous-version",
     "durability-archive-unavailable"
+  ],
+  [
+    "s3-delete-marker-enabled",
+    "s3-delete-null-suspended"
   ]
 ];
