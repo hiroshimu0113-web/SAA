@@ -336,5 +336,5 @@
 - 「教材からカード・クイズを更新」ボタンで公開済みカタログを取得。途中の冒険は問題・正解を含むスナップショットを保持し、更新分は次の冒険から採用。旧セーブ、バックアップ、オフライン、取得失敗時の保持に対応。
 - `pnpm test` / `pnpm build` がカタログを自動生成。追加担当者の手順は [GAME_CONTENT_UPDATE.md](GAME_CONTENT_UPDATE.md)。任意のPDFやHTMLの自動解釈ではなく、公開教材データと構造化補足から生成する。
 - 未公開原稿180問と複数選択q020は対象外。分類台帳は69件。新規・変更説明は独立監査済みとはせずdraft、ゲーム取り込み済みはimportedとして記録。
-- ローカル50テスト、ビルド、教材・進捗整合性検査成功。Chromiumで既存操作・旧セーブ・320px・更新・途中クイズ保持・次回反映・オフライン検証成功。WebKitはCIで検証予定。
-- 公開準備中。新しい入口: https://hiroshimu0113-web.github.io/SAA/tower/learning.html
+- ローカル50テスト、ビルド、教材・進捗整合性検査成功。Chromiumで既存操作・旧セーブ・320px・更新・途中クイズ保持・次回反映・オフライン検証成功。WebKitもCIで既存操作・教材更新・途中保存・オフライン検証成功。
+- 公開完了（実装 `7fb67a6`、[Actions 37494930475](https://github.com/hiroshimu0113-web/SAA/actions/runs/37494930475) 成功）。公開HTML・カタログ・Service WorkerがローカルビルドとSHA256一致。Safariのオフライン更新時にService Workerの通信失敗が未処理エラーとなる問題も修正。新しい入口: https://hiroshimu0113-web.github.io/SAA/tower/learning.html
