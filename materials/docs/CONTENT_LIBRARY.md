@@ -32,3 +32,10 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 5. `pnpm progress:update`と`pnpm progress:check`で進捗表を更新し、CHECKPOINTとTASKSに作業を記録する。GitHubにも保存したか、ローカルのみかを報告する。
 
 次回の教材拡充は[EXPANSION_PLAN.md](../knowledge/EXPANSION_PLAN.md)に従い、まずCHECKPOINTに残る確認待ち・取り込み待ちを優先し、公式根拠を取得できる不足範囲を細分化します。新しい原稿を増やす作業と、既存原稿を公開できる品質へ整える作業を分けて計画します。
+
+## 今回詳述した共有教材
+
+- [SQS再配信と業務更新の冪等性](../knowledge/lessons/idempotency.md)：第6/8/9章で共有。確定後・削除前の停止と10分間のトークン保証を扱う。
+- [DLQの隔離と再投入](../knowledge/lessons/dlq.md)：第9/11章で共有。移動元・先・固定レート・送信元の適用条件を扱う。
+
+両単位の原稿・内容確認・分類は完了。ケースの取り込み状態は分類台帳、公開状態はgame-cases.jsonのreleaseを参照。カード効果は設計待ち。

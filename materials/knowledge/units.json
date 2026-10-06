@@ -1270,6 +1270,72 @@
         "外部副作用とoutbox、送信先の冪等キーの扱いを別単位で検討する。",
         "保持期間・再処理・実AWSの競合と障害時挙動を検証する。"
       ]
+    },
+    {
+      "id": "dlq",
+      "title": "DLQの隔離と負荷を抑えた再投入",
+      "group": "coordination",
+      "objective": "隔離と再投入を分け、元キュー・移動レート・適用対象を確認して復旧する。",
+      "estimated_minutes": 7,
+      "scope": "SQS標準キューのDLQとStartMessageMoveTask。IAM/KMSの詳細権限設計とFIFOの順序保証は別途確認。",
+      "prerequisites": [
+        "idempotency"
+      ],
+      "misconceptions": [
+        "DLQへの移動は業務処理の成功を意味する。",
+        "移動レート省略で低速の一定レートになる。",
+        "Lambda由来のDLQにもSQSの同じ再投入APIを使える。"
+      ],
+      "checks": [
+        {
+          "id": "dlq-explain",
+          "level": "explain",
+          "prompt": "隔離用のRedrivePolicyと再投入タスクはどう違う？",
+          "expected_points": [
+            "受信回数超過で隔離する設定と、隔離済みデータを移動する操作を分ける",
+            "DLQ到着は処理成功ではない",
+            "移動レートは業務処理能力の保証ではない"
+          ]
+        },
+        {
+          "id": "dlq-apply",
+          "level": "apply",
+          "prompt": "修正確認済みのSQS由来DLQを負荷に配慮して戻したい。何を指定する？",
+          "expected_points": [
+            "移動元SourceArnにDLQを指定",
+            "DestinationArn省略なら各元キュー",
+            "固定レートを設定し通常流入と下流余力を監視",
+            "再投入でも冪等性を維持"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch09-l03"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDKの隔離ポリシー・移動元/先・移動レート・対象外条件と全選択肢を照合。同一担当の別工程確認、独立監査とAWS実験は未実施。",
+        "source_document": "knowledge/lessons/dlq.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_SetQueueAttributes.go",
+            "claim": "RedrivePolicyは隔離先とmaxReceiveCountを指定し、受信回数が閾値を超えたメッセージをDLQへ移動。RedriveAllowPolicyは隔離先として使える送信元を制限。標準/FIFOは同じ種別のDLQが必要。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go",
+            "claim": "移動元は他のSQSキューのDLQ。DestinationArn省略時は各元キューへ戻る。固定移動レートを指定可能、最大500件/秒。省略時は滞留量で変動。各キューの同時移動タスクは1つ。Lambda/SNS由来DLQは対象外。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "IAM/KMS権限と暗号化したDLQの再投入を別単位で確認する。",
+        "標準/FIFOの保持時刻・保持期間・順序制約を公式根拠で詳述する。"
+      ]
     }
   ]
 }

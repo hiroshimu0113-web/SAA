@@ -7290,6 +7290,269 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-dlq-redrive-boundary",
+      "title": "DLQの隔離と負荷を抑えた再投入",
+      "aliases": [
+        "デッドレターキュー",
+        "再投入"
+      ],
+      "kind": "concept",
+      "classification_reason": "隔離と再投入の条件・限界を区別する概念。",
+      "objective": "隔離と再投入を分け、元キュー・移動レート・適用対象を確認して復旧する。",
+      "unit_ids": [
+        "dlq"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/dlq.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "integration",
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "冪等性"
+      ],
+      "conditions": [
+        "第1問はSQS標準キュー由来の標準DLQ。必要な権限はあり、同時に実行中の移動タスクはない。",
+        "通常流入を含めた下流余力を監視し、固定レートから慎重に開始する。"
+      ],
+      "limitations": [
+        "SQS標準キューのDLQとStartMessageMoveTask。IAM/KMSの詳細権限設計とFIFOの順序保証は別途確認。"
+      ],
+      "misconceptions": [
+        "DLQへの移動は業務処理の成功を意味する。",
+        "移動レート省略で低速の一定レートになる。",
+        "Lambda由来のDLQにもSQSの同じ再投入APIを使える。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/dlq.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "SQS由来DLQを原因修正後に再投入する。",
+        "counterexample": "送信元がLambdaのDLQには同じ移動APIは適用できない。",
+        "comparison": {
+          "path": "knowledge/lessons/dlq.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-sqs-dlq-controlled-redrive",
+          "reason": "再投入設定と送信元条件をケースで確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_SetQueueAttributes.go",
+          "claim": "RedrivePolicyは隔離先とmaxReceiveCountを指定し、受信回数が閾値を超えたメッセージをDLQへ移動。RedriveAllowPolicyは隔離先として使える送信元を制限。標準/FIFOは同じ種別のDLQが必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go",
+          "claim": "移動元は他のSQSキューのDLQ。DestinationArn省略時は各元キューへ戻る。固定移動レートを指定可能、最大500件/秒。省略時は滞留量で変動。各キューの同時移動タスクは1つ。Lambda/SNS由来DLQは対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存dlq素材を詳述し第9/11章で共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの隔離ポリシー・移動元/先・移動レート・対象外条件と全選択肢を照合。同一担当の別工程確認、独立監査とAWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "カード詳細の説明候補として共有する。新しい数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/dlq.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はAWSの実行保証や料金を表さない。",
+        "simplifications": [
+          "SQS標準キュー。権限と同時タスクの前提を設問に明示。"
+        ],
+        "mislearning_risks": [
+          "DLQへの移動は業務処理の成功を意味する。",
+          "移動レート省略で低速の一定レートになる。",
+          "Lambda由来のDLQにもSQSの同じ再投入APIを使える。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード効果は実務の条件を反映する設計・検証待ち。"
+      ]
+    },
+    {
+      "id": "case-sqs-dlq-controlled-redrive",
+      "title": "修正済み注文のDLQ再投入",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "移動元と送信元を区別する独立2問のケース。",
+      "objective": "隔離と再投入を分け、元キュー・移動レート・適用対象を確認して復旧する。",
+      "unit_ids": [
+        "dlq"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dlq-controlled-redrive"
+        }
+      ],
+      "domains": [
+        "integration",
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "冪等性"
+      ],
+      "conditions": [
+        "第1問はSQS標準キュー由来の標準DLQ。必要な権限はあり、同時に実行中の移動タスクはない。",
+        "通常流入を含めた下流余力を監視し、固定レートから慎重に開始する。"
+      ],
+      "limitations": [
+        "SQS標準キューのDLQとStartMessageMoveTask。IAM/KMSの詳細権限設計とFIFOの順序保証は別途確認。"
+      ],
+      "misconceptions": [
+        "DLQへの移動は業務処理の成功を意味する。",
+        "移動レート省略で低速の一定レートになる。",
+        "Lambda由来のDLQにもSQSの同じ再投入APIを使える。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dlq-controlled-redrive.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dlq-controlled-redrive.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dlq-controlled-redrive.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sqs-dlq-controlled-redrive.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_SetQueueAttributes.go",
+          "claim": "RedrivePolicyは隔離先とmaxReceiveCountを指定し、受信回数が閾値を超えたメッセージをDLQへ移動。RedriveAllowPolicyは隔離先として使える送信元を制限。標準/FIFOは同じ種別のDLQが必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go",
+          "claim": "移動元は他のSQSキューのDLQ。DestinationArn省略時は各元キューへ戻る。固定移動レートを指定可能、最大500件/秒。省略時は滞留量で変動。各キューの同時移動タスクは1つ。Lambda/SNS由来DLQは対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存dlq素材を詳述し第9/11章で共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの隔離ポリシー・移動元/先・移動レート・対象外条件と全選択肢を照合。同一担当の別工程確認、独立監査とAWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全18ケースの両問・全解説・320px・回答/結果再開・オフラインと報酬重複防止、知識地図の確認状態/根拠を検証。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問として取り込み、説明と保存互換性を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/dlq.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はAWSの実行保証や料金を表さない。",
+        "simplifications": [
+          "SQS標準キュー。権限と同時タスクの前提を設問に明示。"
+        ],
+        "mislearning_risks": [
+          "DLQへの移動は業務処理の成功を意味する。",
+          "移動レート省略で低速の一定レートになる。",
+          "Lambda由来のDLQにもSQSの同じ再投入APIを使える。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "dlq-source-rate, dlq-nonsqs-origin"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

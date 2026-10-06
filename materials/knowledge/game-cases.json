@@ -2074,6 +2074,121 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "sqs-dlq-controlled-redrive",
+      "title": "修正済み注文のDLQ再投入",
+      "premise": "注文の解析バグを修正し、代表データで確認した。再実行の重複対策も維持する。",
+      "unit_ids": [
+        "dlq"
+      ],
+      "chapter_ids": [
+        "ch09",
+        "ch11"
+      ],
+      "constraints": [
+        "第1問はSQS標準キュー由来の標準DLQ。必要な権限はあり、同時に実行中の移動タスクはない。",
+        "通常流入を含めた下流余力を監視し、固定レートから慎重に開始する。"
+      ],
+      "questions": [
+        {
+          "id": "dlq-source-rate",
+          "objective": "再投入の移動元・先とレートを選ぶ。",
+          "prompt": "SQS標準キュー由来の標準DLQで、必要な権限があり実行中タスクはない。各元キューへ戻し、下流余力を監視しながら固定レートで開始したい。StartMessageMoveTaskの設定は？",
+          "options": [
+            {
+              "id": "dlq-source-rate-a",
+              "text": "SourceArnにDLQ、DestinationArnは省略、固定移動レートを指定する",
+              "explanation": "省略した移動先は各元キューです。移動レートを指定し、通常流入と処理状況も監視します。"
+            },
+            {
+              "id": "dlq-source-rate-b",
+              "text": "SourceArnに元キューを指定し、レートを省略すれば必ず低速の一定レートになる",
+              "explanation": "移動元はDLQです。レート省略時は滞留量に応じて変動し、低速一定を保証しません。"
+            },
+            {
+              "id": "dlq-source-rate-c",
+              "text": "DLQ到着を処理成功とみなし、業務更新を確認せず注文を完了扱いする",
+              "explanation": "DLQは隔離先であり、業務処理はまだ成功していません。"
+            }
+          ],
+          "correct_option_id": "dlq-source-rate-a",
+          "runtime_option_order": [
+            "dlq-source-rate-a",
+            "dlq-source-rate-b",
+            "dlq-source-rate-c"
+          ],
+          "rationale": "省略した移動先は各元キューです。移動レートを指定し、通常流入と処理状況も監視します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go"
+          ]
+        },
+        {
+          "id": "dlq-nonsqs-origin",
+          "objective": "APIの適用対象を区別する。",
+          "prompt": "別のSQSキューには、SQSを送信元としないLambda関数由来の失敗イベントがDLQとして蓄積している。必要な権限を付ければStartMessageMoveTaskで戻せる？",
+          "options": [
+            {
+              "id": "dlq-nonsqs-origin-a",
+              "text": "権限さえあれば、どんな送信元のDLQにも使える",
+              "explanation": "権限とは別にAPIの適用対象制約があります。"
+            },
+            {
+              "id": "dlq-nonsqs-origin-b",
+              "text": "このAPIは他のSQSキュー由来のDLQが対象。Lambda由来は別の再処理方法を確認する",
+              "explanation": "格納先がSQSでも送信元がLambdaなら、このAPIの対象ではありません。"
+            },
+            {
+              "id": "dlq-nonsqs-origin-c",
+              "text": "移動レートを下げれば送信元の制約はなくなる",
+              "explanation": "レート指定は移動速度の設定で、対象外の送信元を対象に変えません。"
+            }
+          ],
+          "correct_option_id": "dlq-nonsqs-origin-b",
+          "runtime_option_order": [
+            "dlq-nonsqs-origin-a",
+            "dlq-nonsqs-origin-b",
+            "dlq-nonsqs-origin-c"
+          ],
+          "rationale": "格納先がSQSでも送信元がLambdaなら、このAPIの対象ではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問で解析バグの修正確認がまだ終わっていない。",
+        "answer": "再投入を開始せず、失敗原因と修正後の処理を先に確認する。",
+        "reason": "移動するだけでは処理原因は解消せず、再失敗と負荷増加を招く。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_SetQueueAttributes.go",
+          "claim": "RedrivePolicyは隔離先とmaxReceiveCountを指定し、受信回数が閾値を超えたメッセージをDLQへ移動。RedriveAllowPolicyは隔離先として使える送信元を制限。標準/FIFOは同じ種別のDLQが必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go",
+          "claim": "移動元は他のSQSキューのDLQ。DestinationArn省略時は各元キューへ戻る。固定移動レートを指定可能、最大500件/秒。省略時は滞留量で変動。各キューの同時移動タスクは1つ。Lambda/SNS由来DLQは対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDKの隔離ポリシー・移動元/先・移動レート・対象外条件と全選択肢を照合。同一担当の別工程確認、独立監査とAWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

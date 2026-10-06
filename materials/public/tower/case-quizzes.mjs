@@ -509,6 +509,36 @@ export const CASE_QUIZZES={
       "トークンだけの短期保証を超えています。長期の再配信には永続的な重複防止を設計します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/dynamodb/api_op_TransactWriteItems.go"
+  },
+  "dlq-source-rate": {
+    "prompt": "注文の解析バグを修正し、代表データで確認した。再実行の重複対策も維持する。 SQS標準キュー由来の標準DLQで、必要な権限があり実行中タスクはない。各元キューへ戻し、下流余力を監視しながら固定レートで開始したい。StartMessageMoveTaskの設定は？",
+    "options": [
+      "SourceArnにDLQ、DestinationArnは省略、固定移動レートを指定する",
+      "SourceArnに元キューを指定し、レートを省略すれば必ず低速の一定レートになる",
+      "DLQ到着を処理成功とみなし、業務更新を確認せず注文を完了扱いする"
+    ],
+    "answer": 0,
+    "reasons": [
+      "省略した移動先は各元キューです。移動レートを指定し、通常流入と処理状況も監視します。",
+      "移動元はDLQです。レート省略時は滞留量に応じて変動し、低速一定を保証しません。",
+      "DLQは隔離先であり、業務処理はまだ成功していません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go"
+  },
+  "dlq-nonsqs-origin": {
+    "prompt": "注文の解析バグを修正し、代表データで確認した。再実行の重複対策も維持する。 別のSQSキューには、SQSを送信元としないLambda関数由来の失敗イベントがDLQとして蓄積している。必要な権限を付ければStartMessageMoveTaskで戻せる？",
+    "options": [
+      "権限さえあれば、どんな送信元のDLQにも使える",
+      "このAPIは他のSQSキュー由来のDLQが対象。Lambda由来は別の再処理方法を確認する",
+      "移動レートを下げれば送信元の制約はなくなる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "権限とは別にAPIの適用対象制約があります。",
+      "格納先がSQSでも送信元がLambdaなら、このAPIの対象ではありません。",
+      "レート指定は移動速度の設定で、対象外の送信元を対象に変えません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -579,5 +609,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "sqs-commit-before-delete",
     "dynamodb-token-window"
+  ],
+  [
+    "dlq-source-rate",
+    "dlq-nonsqs-origin"
   ]
 ];
