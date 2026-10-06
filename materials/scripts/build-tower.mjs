@@ -9,4 +9,6 @@ let html=await readFile('public/tower/index.html','utf8');
 html=html.replace('<link rel="stylesheet" href="./style.css">','<style>'+css+'</style>').replace('<script type="module" src="./app.mjs"></script>','');
 html=html.replace('</body>','<script>'+js+'</script></body>');
 await writeFile('dist/tower/index.html',html);
+// Fresh path avoids previously cached index.html; saves remain on the same origin.
+await writeFile('dist/tower/play.html',html);
 console.log('Tower: single-page Safari 14 bundle; no external module required at startup.');

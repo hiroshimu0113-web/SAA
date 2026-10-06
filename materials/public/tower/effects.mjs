@@ -30,9 +30,11 @@ export function combatEffects(before,after,action){
  if(n.hp===0&&b.hp>0)add('enemy','finish',0,'撃破！');
  return out;
 }
-export function showCombatEffects(root,effects){
+let clearEffects=()=>{};
+export function showCombatEffects(root,effects,demo=false){
  if(!effects.length)return;
- const stage=root.querySelector('.arena')||root.querySelector('.scene');if(!stage)return;
+ const stage=root.querySelector('.arena')||root.querySelector('.scene')||root;
+ clearEffects();
  const layer=document.createElement('div');layer.className='combat-fx';layer.setAttribute('aria-hidden','true');
  const counts={player:0,enemy:0};
  for(const fx of effects){
@@ -41,7 +43,13 @@ export function showCombatEffects(root,effects){
   if(target){target.classList.add('react-'+fx.kind);}
  }
  stage.append(layer);
- const info=document.createElement('p');info.className='combat-announcement';info.setAttribute('role','status');info.textContent=effects.map(fx=>(fx.side==='enemy'?'敵：':'自分：')+fx.label).join('、');stage.append(info);
- // Remove only these nodes: rapid taps never cancel or postpone game actions.
- setTimeout(()=>{layer.remove();info.remove();for(const el of stage.querySelectorAll('[class*="react-"]'))for(const name of [...el.classList])if(name.startsWith('react-'))el.classList.remove(name);},1100);
+ const info=document.createElement('div');info.className='combat-toast';info.setAttribute('role','status');
+ const heading=document.createElement('strong');heading.textContent=demo?'演出テスト（記録は変わりません）':'戦闘結果';info.append(heading);
+ for(const fx of effects){const row=document.createElement('div');row.className='toast-'+fx.kind;row.textContent=(fx.side==='enemy'?'敵：':'自分：')+fx.label;info.append(row);}
+ root.append(info);
+ // The fixed result remains visible even when the arena is above the viewport.
+ const targets=[...stage.querySelectorAll('[class*="react-"]')];
+ const cleanup=()=>{layer.remove();info.remove();for(const el of targets)for(const name of [...el.classList])if(name.startsWith('react-'))el.classList.remove(name);};
+ const timer=setTimeout(cleanup,2000);clearEffects=()=>{clearTimeout(timer);cleanup();};
+
 }
