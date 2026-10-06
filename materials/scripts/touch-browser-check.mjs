@@ -18,7 +18,9 @@ try{
  await c.addInitScript(()=>{window.structuredClone=undefined;Object.hasOwn=undefined;});
  await c.route('**/tower/*.mjs',route=>route.abort());
  await p.goto(base+'tower/index.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).tap();
- await p.locator('.current [data-action=node]').first().tap();const before=await p.evaluate(k=>localStorage.getItem(k),key);
+ await p.locator('.current [data-action=node]').first().tap();
+ // Use a non-draw card so the touch assertion is independent of the random opening hand.
+ await p.evaluate(k=>{const s=JSON.parse(localStorage.getItem(k));s.deck.find(c=>c.uid===s.battle.hand[0]).id='strike';localStorage.setItem(k,JSON.stringify(s));},key);await p.reload();await p.locator('.hand').waitFor();const before=await p.evaluate(k=>localStorage.getItem(k),key);
 
  const readSave=()=>p.evaluate(k=>localStorage.getItem(k),key);
  const touchSession=kind==='chromium'?await c.newCDPSession(p):null;
