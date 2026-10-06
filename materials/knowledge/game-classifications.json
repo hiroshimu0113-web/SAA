@@ -8661,6 +8661,278 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-secret-version-refresh",
+      "title": "シークレットの現在版と更新後の再取得",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "現在版と取得済み値、設定テストと本更新の条件を区別する概念。",
+      "objective": "シークレットの版・非同期更新・アプリの保持値を分け、更新後の取得と接続を確認する。",
+      "unit_ids": [
+        "secrets-manager"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/secrets-manager.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "security",
+        "operations"
+      ],
+      "capabilities": [
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Secrets Manager"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "kms"
+      ],
+      "conditions": [
+        "第1問はDB更新とAWSCURRENTの移動成功が確認済み。取得権限と経路は正常。",
+        "第2問はLambda更新関数と新しいcron設定を使い、既存rate/日数予定の例外を除外する。"
+      ],
+      "limitations": [
+        "Lambda更新関数を使うシークレットの版/取得とRotateImmediately。DB資格情報は更新成功・接続確認済みの前提。4段階関数の詳細、単一/交互ユーザー戦略、マネージド更新全般は対象外。"
+      ],
+      "misconceptions": [
+        "AWSCURRENTを動かすとアプリのメモリも自動で書き換わる。",
+        "RotateImmediately=falseは何も実行しない。",
+        "AWSPREVIOUSへラベルを戻せばDB側も必ず旧パスワードへ戻る。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/secrets-manager.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "Secrets Managerの更新・版の選択と、アプリが取得して保持する資格情報を分けて確認する。",
+        "counterexample": "第1問でAWSCURRENTは新しい版だが、DBが新しい資格情報を受け付けることをまだ確認できていない。 再取得だけで解決すると決めず、更新関数とDB側の状態・接続を確認して復旧方針を決める。",
+        "comparison": {
+          "path": "knowledge/lessons/secrets-manager.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-secret-version-refresh",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go",
+          "claim": "バージョンID/ステージを省略するとAWSCURRENTを返す。AWSPREVIOUSの取得を指定できる。キャッシュは速度/費用を改善する。顧客管理KMS鍵で保護したシークレットにはGetSecretValueに加えてkms:Decryptが必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_UpdateSecretVersionStage.go",
+          "claim": "AWSCURRENTラベルを移すと、移動前のバージョンへAWSPREVIOUSが移る。ラベル操作はシークレットのバージョンを追跡する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go",
+          "claim": "更新は非同期。RotateImmediately省略時はtrue。falseならLambdaのtestSecretで設定を検証しAWSPENDING版を作成/除去。既存rate/日数設定の予定更新が残る場合がある。AWSPENDINGがAWSCURRENTと異なる版に残ると後続更新は進行中としてエラーになる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/secrets-manager.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬や防御値は資格情報の同期・更新成功・アクセス許可を保証しない。",
+        "simplifications": [
+          "Lambda更新関数を使うシークレットの版/取得とRotateImmediately。DB資格情報は更新成功・接続確認済みの前提。4段階関数の詳細、単一/交互ユーザー戦略、マネージド更新全般は対象外。"
+        ],
+        "mislearning_risks": [
+          "AWSCURRENTを動かすとアプリのメモリも自動で書き換わる。",
+          "RotateImmediately=falseは何も実行しない。",
+          "AWSPREVIOUSへラベルを戻せばDB側も必ず旧パスワードへ戻る。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-secret-version-refresh",
+      "title": "資格情報更新後の接続と設定テスト",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "シークレットの版・非同期更新・アプリの保持値を分け、更新後の取得と接続を確認する。",
+      "unit_ids": [
+        "secrets-manager"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "secret-version-refresh"
+        }
+      ],
+      "domains": [
+        "security",
+        "operations"
+      ],
+      "capabilities": [
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Secrets Manager"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "kms"
+      ],
+      "conditions": [
+        "第1問はDB更新とAWSCURRENTの移動成功が確認済み。取得権限と経路は正常。",
+        "第2問はLambda更新関数と新しいcron設定を使い、既存rate/日数予定の例外を除外する。"
+      ],
+      "limitations": [
+        "Lambda更新関数を使うシークレットの版/取得とRotateImmediately。DB資格情報は更新成功・接続確認済みの前提。4段階関数の詳細、単一/交互ユーザー戦略、マネージド更新全般は対象外。"
+      ],
+      "misconceptions": [
+        "AWSCURRENTを動かすとアプリのメモリも自動で書き換わる。",
+        "RotateImmediately=falseは何も実行しない。",
+        "AWSPREVIOUSへラベルを戻せばDB側も必ず旧パスワードへ戻る。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "secret-version-refresh.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "secret-version-refresh.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "secret-version-refresh.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "secret-version-refresh.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go",
+          "claim": "バージョンID/ステージを省略するとAWSCURRENTを返す。AWSPREVIOUSの取得を指定できる。キャッシュは速度/費用を改善する。顧客管理KMS鍵で保護したシークレットにはGetSecretValueに加えてkms:Decryptが必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_UpdateSecretVersionStage.go",
+          "claim": "AWSCURRENTラベルを移すと、移動前のバージョンへAWSPREVIOUSが移る。ラベル操作はシークレットのバージョンを追跡する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go",
+          "claim": "更新は非同期。RotateImmediately省略時はtrue。falseならLambdaのtestSecretで設定を検証しAWSPENDING版を作成/除去。既存rate/日数設定の予定更新が残る場合がある。AWSPENDINGがAWSCURRENTと異なる版に残ると後続更新は進行中としてエラーになる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/secrets-manager.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬や防御値は資格情報の同期・更新成功・アクセス許可を保証しない。",
+        "simplifications": [
+          "Lambda更新関数を使うシークレットの版/取得とRotateImmediately。DB資格情報は更新成功・接続確認済みの前提。4段階関数の詳細、単一/交互ユーザー戦略、マネージド更新全般は対象外。"
+        ],
+        "mislearning_risks": [
+          "AWSCURRENTを動かすとアプリのメモリも自動で書き換わる。",
+          "RotateImmediately=falseは何も実行しない。",
+          "AWSPREVIOUSへラベルを戻せばDB側も必ず旧パスワードへ戻る。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "secret-current-cache, secret-test-not-noop"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

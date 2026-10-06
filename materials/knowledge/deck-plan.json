@@ -254,6 +254,14 @@
         "ch11"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "secrets-manager",
+      "chapter_ids": [
+        "ch08",
+        "ch10"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [

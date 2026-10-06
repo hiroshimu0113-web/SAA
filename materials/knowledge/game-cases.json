@@ -2710,6 +2710,129 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "secret-version-refresh",
+      "title": "資格情報更新後の接続と設定テスト",
+      "premise": "Secrets Managerの更新・版の選択と、アプリが取得して保持する資格情報を分けて確認する。",
+      "unit_ids": [
+        "secrets-manager"
+      ],
+      "chapter_ids": [
+        "ch08",
+        "ch10"
+      ],
+      "constraints": [
+        "第1問はDB更新とAWSCURRENTの移動成功が確認済み。取得権限と経路は正常。",
+        "第2問はLambda更新関数と新しいcron設定を使い、既存rate/日数予定の例外を除外する。"
+      ],
+      "questions": [
+        {
+          "id": "secret-current-cache",
+          "objective": "現在版の取得とアプリの保持値を分ける。",
+          "prompt": "更新が正常完了し、DBは新しい認証情報を受け付け、AWSCURRENTは新しい版へ移動済み。アプリは起動時取得した旧パスワードをメモリに保持したままで、新規接続が失敗する。必要な取得/KMS権限はある。適切な対応は？",
+          "options": [
+            {
+              "id": "secret-current-cache-a",
+              "text": "AWSCURRENTになればアプリのメモリも自動で書き換わるので永久に再取得しない",
+              "explanation": "ステージはサーバー側の版選択です。取得済みのアプリ内の値が自動更新される保証ではありません。"
+            },
+            {
+              "id": "secret-current-cache-b",
+              "text": "更新方針に従いキャッシュを再取得し、AWSCURRENTの情報で接続を確認する",
+              "explanation": "キャッシュと現在版を分けて管理します。取得と接続を確認し、旧値を使い続けない設計にします。"
+            },
+            {
+              "id": "secret-current-cache-c",
+              "text": "KMSの鍵素材を更新すれば、メモリ内のDBパスワードも新しい値になる",
+              "explanation": "暗号鍵素材の更新はアプリが保持する資格情報の更新ではありません。"
+            }
+          ],
+          "correct_option_id": "secret-current-cache-b",
+          "runtime_option_order": [
+            "secret-current-cache-a",
+            "secret-current-cache-b",
+            "secret-current-cache-c"
+          ],
+          "rationale": "キャッシュと現在版を分けて管理します。取得と接続を確認し、旧値を使い続けない設計にします。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_UpdateSecretVersionStage.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go"
+          ]
+        },
+        {
+          "id": "secret-test-not-noop",
+          "objective": "即時更新なしの設定検証を区別する。",
+          "prompt": "別のシークレットで、Lambda更新関数を使う新しいcronスケジュールを設定し、RotateImmediately=falseを指定する。必要な権限と関数への到達性があり、既存のrate/日数設定による予定はない。この呼出しは何をする？",
+          "options": [
+            {
+              "id": "secret-test-not-noop-a",
+              "text": "次回予定まで何も実行せず、設定の検証もしない",
+              "explanation": "falseでもtestSecretによる更新設定のテストを実行します。完全な無操作ではありません。"
+            },
+            {
+              "id": "secret-test-not-noop-b",
+              "text": "falseでも必ず今すぐ本更新を行い、すべての資格情報を変更する",
+              "explanation": "即時の本更新を待つ指定と、設定検証のtestSecretを区別します。"
+            },
+            {
+              "id": "secret-test-not-noop-c",
+              "text": "次回更新を待つ設定としつつtestSecretで検証し、テスト用AWSPENDING版を作成・除去する",
+              "explanation": "falseでも設定をテストします。テストと予定された更新本体を混同しません。"
+            }
+          ],
+          "correct_option_id": "secret-test-not-noop-c",
+          "runtime_option_order": [
+            "secret-test-not-noop-a",
+            "secret-test-not-noop-b",
+            "secret-test-not-noop-c"
+          ],
+          "rationale": "falseでも設定をテストします。テストと予定された更新本体を混同しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問でAWSCURRENTは新しい版だが、DBが新しい資格情報を受け付けることをまだ確認できていない。",
+        "answer": "再取得だけで解決すると決めず、更新関数とDB側の状態・接続を確認して復旧方針を決める。",
+        "reason": "ラベルの現在版と、外部DBが受け付ける資格情報の一致は別の確認条件。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go",
+          "claim": "バージョンID/ステージを省略するとAWSCURRENTを返す。AWSPREVIOUSの取得を指定できる。キャッシュは速度/費用を改善する。顧客管理KMS鍵で保護したシークレットにはGetSecretValueに加えてkms:Decryptが必要。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_UpdateSecretVersionStage.go",
+          "claim": "AWSCURRENTラベルを移すと、移動前のバージョンへAWSPREVIOUSが移る。ラベル操作はシークレットのバージョンを追跡する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go",
+          "claim": "更新は非同期。RotateImmediately省略時はtrue。falseならLambdaのtestSecretで設定を検証しAWSPENDING版を作成/除去。既存rate/日数設定の予定更新が残る場合がある。AWSPENDINGがAWSCURRENTと異なる版に残ると後続更新は進行中としてエラーになる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

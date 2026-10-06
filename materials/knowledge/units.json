@@ -1633,6 +1633,77 @@
         "エンベロープ暗号化とReEncryptの対象形式・保護鍵移行を別単位で確認する。",
         "削除待ち/無効化/キャッシュ鍵とSSE-KMSの権限境界を別に検証する。"
       ]
+    },
+    {
+      "id": "secrets-manager",
+      "title": "シークレットの現在版と更新後の再取得",
+      "group": "security",
+      "objective": "シークレットの版・非同期更新・アプリの保持値を分け、更新後の取得と接続を確認する。",
+      "estimated_minutes": 8,
+      "scope": "Lambda更新関数を使うシークレットの版/取得とRotateImmediately。DB資格情報は更新成功・接続確認済みの前提。4段階関数の詳細、単一/交互ユーザー戦略、マネージド更新全般は対象外。",
+      "prerequisites": [
+        "kms"
+      ],
+      "misconceptions": [
+        "AWSCURRENTを動かすとアプリのメモリも自動で書き換わる。",
+        "RotateImmediately=falseは何も実行しない。",
+        "AWSPREVIOUSへラベルを戻せばDB側も必ず旧パスワードへ戻る。"
+      ],
+      "checks": [
+        {
+          "id": "secrets-manager-explain",
+          "level": "explain",
+          "prompt": "現在版のラベルと取得済みキャッシュはどう違う？",
+          "expected_points": [
+            "指定なしの取得はAWSCURRENT",
+            "ラベル移動は版選択でアプリのメモリを自動変更しない",
+            "キャッシュを更新する方針と接続確認が必要"
+          ]
+        },
+        {
+          "id": "secrets-manager-apply",
+          "level": "apply",
+          "prompt": "即時更新を待たせたい場合、falseにしたのでテストも行わない？",
+          "expected_points": [
+            "testSecretによる設定テストは行う",
+            "本更新は非同期で完了確認が必要",
+            "既存スケジュールによる予定が残る例外を確認"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch10-l01"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/secrets-manager.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go",
+            "claim": "バージョンID/ステージを省略するとAWSCURRENTを返す。AWSPREVIOUSの取得を指定できる。キャッシュは速度/費用を改善する。顧客管理KMS鍵で保護したシークレットにはGetSecretValueに加えてkms:Decryptが必要。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_UpdateSecretVersionStage.go",
+            "claim": "AWSCURRENTラベルを移すと、移動前のバージョンへAWSPREVIOUSが移る。ラベル操作はシークレットのバージョンを追跡する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go",
+            "claim": "更新は非同期。RotateImmediately省略時はtrue。falseならLambdaのtestSecretで設定を検証しAWSPENDING版を作成/除去。既存rate/日数設定の予定更新が残る場合がある。AWSPENDINGがAWSCURRENTと異なる版に残ると後続更新は進行中としてエラーになる。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "更新関数の4段階とDB側の単一/交互ユーザー戦略を公式テンプレートから確認する。",
+        "アプリのキャッシュ/接続プール、IAM/KMS権限と障害復旧を具体化する。"
+      ]
     }
   ]
 }

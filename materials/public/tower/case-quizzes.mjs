@@ -659,6 +659,36 @@ export const CASE_QUIZZES={
       "即時の鍵素材更新と定期更新は別です。開始/進行状態と完了履歴を区別します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/kms/api_op_RotateKeyOnDemand.go"
+  },
+  "secret-current-cache": {
+    "prompt": "Secrets Managerの更新・版の選択と、アプリが取得して保持する資格情報を分けて確認する。 更新が正常完了し、DBは新しい認証情報を受け付け、AWSCURRENTは新しい版へ移動済み。アプリは起動時取得した旧パスワードをメモリに保持したままで、新規接続が失敗する。必要な取得/KMS権限はある。適切な対応は？",
+    "options": [
+      "AWSCURRENTになればアプリのメモリも自動で書き換わるので永久に再取得しない",
+      "更新方針に従いキャッシュを再取得し、AWSCURRENTの情報で接続を確認する",
+      "KMSの鍵素材を更新すれば、メモリ内のDBパスワードも新しい値になる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "ステージはサーバー側の版選択です。取得済みのアプリ内の値が自動更新される保証ではありません。",
+      "キャッシュと現在版を分けて管理します。取得と接続を確認し、旧値を使い続けない設計にします。",
+      "暗号鍵素材の更新はアプリが保持する資格情報の更新ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_GetSecretValue.go"
+  },
+  "secret-test-not-noop": {
+    "prompt": "Secrets Managerの更新・版の選択と、アプリが取得して保持する資格情報を分けて確認する。 別のシークレットで、Lambda更新関数を使う新しいcronスケジュールを設定し、RotateImmediately=falseを指定する。必要な権限と関数への到達性があり、既存のrate/日数設定による予定はない。この呼出しは何をする？",
+    "options": [
+      "次回予定まで何も実行せず、設定の検証もしない",
+      "falseでも必ず今すぐ本更新を行い、すべての資格情報を変更する",
+      "次回更新を待つ設定としつつtestSecretで検証し、テスト用AWSPENDING版を作成・除去する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "falseでもtestSecretによる更新設定のテストを実行します。完全な無操作ではありません。",
+      "即時の本更新を待つ指定と、設定検証のtestSecretを区別します。",
+      "falseでも設定をテストします。テストと予定された更新本体を混同しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -749,5 +779,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "kms-old-material-read",
     "kms-ondemand-schedule"
+  ],
+  [
+    "secret-current-cache",
+    "secret-test-not-noop"
   ]
 ];
