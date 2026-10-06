@@ -14,7 +14,7 @@ export async function checkCombatEffects(browser,base){
  await setup('strike',3);await p.locator('.end-turn').tap();assert.equal(await p.locator('.fx-guard').innerText(),'防御 3');assert.equal(await p.locator('.fx-hit').innerText(),'−4');
  await setup('restore');await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.fx-heal').innerText(),'回復 ＋7');
  await setup('strike',0,0);await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.combat-fx').count(),0);
- await p.emulateMedia({reducedMotion:'reduce'});await setup();await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.enemy').evaluate(e=>getComputedStyle(e).animationName),'none');assert.equal(await p.locator('.fx-hit').innerText(),'−6');await p.waitForTimeout(1200);assert.equal(await p.locator('.combat-fx').count(),0);
+ await p.emulateMedia({reducedMotion:'reduce'});await setup();await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.enemy').evaluate(e=>getComputedStyle(e).animationName),'none');assert.equal(await p.locator('.fx-hit').innerText(),'−6');await p.locator('.combat-fx').waitFor({state:'detached',timeout:5000});assert.equal(await p.locator('.combat-fx').count(),0);
  console.log('PASS combat effects: hit, shield, full/partial guard, healing, rapid taps, no effect for invalid play, reduced motion and cleanup.');
  }finally{await c.close();}
 }
