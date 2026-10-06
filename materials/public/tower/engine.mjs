@@ -21,7 +21,16 @@ export const ENEMIES={
 };
 export const ENEMY_POOLS=Object.fromEntries(['battle','elite','boss'].map(tier=>[tier,Object.keys(ENEMIES).filter(id=>ENEMIES[id].tier===tier)]));
 export const enemyDebuffTypes=id=>[...new Set(ENEMIES[id].pattern.filter(a=>a[0]==='debuff').map(a=>a[2]))];
+export const HEROES={
+ se:{name:'SE',title:'システムエンジニア',relic:'blueprint'},
+ sre:{name:'SRE',title:'サイト信頼性エンジニア',relic:'runbook'},
+ architect:{name:'クラウドアーキテクト',title:'クラウドアーキテクト',relic:'capacity'}
+};
+export const REWARD_RELICS=['lantern','shell','spring','ember'];
 export const RELICS={
+ blueprint:{name:'設計の青写真',text:'各戦闘の開始時に2枚追加で引く。'},
+ runbook:{name:'復旧手順書',text:'戦闘勝利時にHPを6回復（最大HPまで）。'},
+ capacity:{name:'拡張の余力',text:'各戦闘の開始時にエナジー＋1（最初のターンのみ）。'},
  lantern:{name:'観測灯',text:'各戦闘の最初のターンに1枚多く引く。'},
  shell:{name:'耐障害の殻',text:'各戦闘の開始時に8ブロック。'},
  spring:{name:'復旧の泉',text:'戦闘勝利時にHPを4回復。'},
@@ -40,6 +49,7 @@ function add(s,id){s.deck.push({uid:s.nextId++,id,plus:false});}
 export function newRun(seed=Date.now(),catalog=null){
  activateCatalog(catalog);
  const s={version:4,seed:seed>>>0,rng:seed>>>0,nextId:0,hp:72,maxHp:72,gold:60,floor:0,phase:'map',deck:[],relics:['lantern'],history:[],log:['観測灯を携えて、尖塔へ。'],battle:null,reward:[],stock:[],removed:false,quiz:null};
+ const heroIds=Object.keys(HEROES);s.hero=heroIds[(seed>>>0)%heroIds.length];s.relics=[HEROES[s.hero].relic];s.log=[HEROES[s.hero].name+'として、尖塔へ。'];
  if(catalog)s.learningCatalog=JSON.parse(JSON.stringify(catalog));
  for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
 }
@@ -51,7 +61,7 @@ export function upgradeChanges(card){
 }
 function draw(s,n){const b=s.battle;for(let i=0;i<n;i++){if(!b.draw.length){b.draw=shuffle(s,b.discard);b.discard=[];}if(!b.draw.length||b.hand.length>=10)break;b.hand.push(b.draw.pop());}}
 function startBattle(s,id){
- const e=ENEMIES[id];s.phase='battle';s.battle={enemy:id,hp:e.hp,maxHp:e.hp,block:0,strength:0,enemyDebuffs:emptyDebuffs(),playerDebuffs:emptyDebuffs(),enemyStep:0,playerActions:1,events:[],turn:1,playerBlock:s.relics.includes('shell')?8:0,playerStrength:s.relics.includes('ember')?1:0,armor:0,energy:3,comboPlayed:[],comboDone:[],hand:[],draw:shuffle(s,s.deck.map(c=>c.uid)),discard:[],exhaust:[]};draw(s,s.relics.includes('lantern')?6:5);log(s,e.name+'が現れた。');
+ const e=ENEMIES[id];s.phase='battle';s.battle={enemy:id,hp:e.hp,maxHp:e.hp,block:0,strength:0,enemyDebuffs:emptyDebuffs(),playerDebuffs:emptyDebuffs(),enemyStep:0,playerActions:1,events:[],turn:1,playerBlock:s.relics.includes('shell')?8:0,playerStrength:s.relics.includes('ember')?1:0,armor:0,energy:3+(s.relics.includes('capacity')?1:0),comboPlayed:[],comboDone:[],hand:[],draw:shuffle(s,s.deck.map(c=>c.uid)),discard:[],exhaust:[]};draw(s,5+(s.relics.includes('lantern')?1:0)+(s.relics.includes('blueprint')?2:0));log(s,e.name+'が現れた。');
 }
 export function intentActions(s){
  if(!s.battle)return [];
@@ -76,7 +86,7 @@ function burn(s,side){
 function lose(s){s.phase='lost';log(s,'冒険はここまで。');}
 
 function offers(s){const pool=rewardPool(),study=pool.filter(id=>id.startsWith('study-'));if(!study.length)return shuffle(s,pool).slice(0,3);return shuffle(s,[...shuffle(s,pool.filter(id=>!id.startsWith('study-'))).slice(0,2),shuffle(s,study)[0]]);}
-function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=offers(s);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
+function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(s.relics.includes('runbook'))heal(s,6);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=offers(s);if(elite){const relic=shuffle(s,REWARD_RELICS.filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
 function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
 export function act(state,action){
@@ -161,7 +171,7 @@ export function act(state,action){
    q.step++;
    if(q.step===2){
     const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:0};
-    if(correct===2){const relic=shuffle(s,Object.keys(RELICS).filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else{q.result.gold=QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
+    if(correct===2){const relic=shuffle(s,REWARD_RELICS.filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else{q.result.gold=QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
     if(correct===1){q.result.gold=QUIZ_RULES.coins;s.gold+=q.result.gold;}
     if(correct===0){q.result.damage=Math.min(s.hp,QUIZ_RULES.damage);s.hp-=q.result.damage;}
     log(s,'クイズ '+correct+'/2問正解。'+(q.result.relic?'遺物「'+RELICS[q.result.relic].name+'」を獲得。':q.result.gold?q.result.gold+'コイン獲得。':'HP −'+q.result.damage+'。'));
@@ -185,7 +195,8 @@ function validateRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
  if(!s||![1,2,3,4].includes(s.version)||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.hp,72)||s.maxHp!==72||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
  if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
- for(const [name,allowed,max] of [['relics',Object.keys(RELICS),4],['reward',rewardPool(),3],['stock',rewardPool(),3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
+ for(const [name,allowed,max] of [['relics',Object.keys(RELICS),5],['reward',rewardPool(),3],['stock',rewardPool(),3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
+ if(owns(s,'hero')&&(!owns(HEROES,s.hero)||!s.relics.includes(HEROES[s.hero].relic)||s.relics.some(r=>!REWARD_RELICS.includes(r)&&r!==HEROES[s.hero].relic)))throw Error('主人公の記録が不正です。');
  if(!Array.isArray(s.history)||s.history.length!==s.floor||!s.history.every((h,i)=>h.floor===i&&num(h.lane,1)&&ROUTES[i][h.lane]===h.type)||!Array.isArray(s.log)||s.log.length>5||!s.log.every(t=>typeof t==='string'&&t.length<200)||typeof s.removed!=='boolean')throw Error('進行記録が不正です。');
  if(s.phase==='map'&&s.floor>=8)throw Error('ルートが不正です。');
  if(s.phase==='lost'&&s.hp!==0||s.phase!=='lost'&&s.hp===0)throw Error('HPが不正です。');

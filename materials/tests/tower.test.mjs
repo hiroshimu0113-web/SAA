@@ -5,7 +5,7 @@ import {QUIZZES,CARDS,ENEMIES,ROUTES,newRun,act,intent,parseRun,cardValues} from
 function start(seed=1){return act(newRun(seed),{type:'node',lane:0});}
 function roundTrip(s){assert.deepEqual(parseRun(JSON.stringify(s)),s);}
 test('tower: deterministic draw, card conservation, invalid actions and energy',()=>{
- let s=start();roundTrip(s);assert.deepEqual(s,start());assert.equal(s.battle.hand.length,6);
+ let s=start();roundTrip(s);assert.deepEqual(s,start());assert.equal(s.battle.hand.length,5);
  assert.equal(act(s,{type:'node',lane:0}),s);assert.equal(act(s,{type:'play',uid:999}),s);
  for(let t=0;t<12&&s.phase==='battle';t++){
   for(const uid of [...s.battle.hand]){s=act(s,{type:'play',uid});roundTrip(s);if(s.phase!=='battle')break;assert.ok(s.battle.energy>=0);}

@@ -94,3 +94,5 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .debuff-strip{display:flex;flex-wrap:wrap;gap:3px 10px;margin:4px 0;color:#edc0b4;font-size:12px;line-height:1.6}.debuff-strip span{display:inline-block;margin-right:8px}.delay-notice{padding:10px;border:1px solid #b89a67;border-radius:8px;color:#ffe3a0;font-size:13px;line-height:1.6}.in-battle .intent{max-width:55%;overflow-wrap:anywhere}.status-debuffs p{border-top:1px solid #526574;padding-top:10px}.fx-debuff{color:#deb5ef}.toast-debuff{color:#e6bcff}
 
 .catalog-panel{margin:24px 0;padding:16px;border:1px solid #72604b;border-radius:12px;overflow-wrap:anywhere}.catalog-panel h2{font-size:18px}.catalog-panel p{font-size:13px}.catalog-panel button{min-height:44px}.learning-cards>section{border-top:1px solid #72604b;padding:12px 0}.learning-cards h3{font-size:16px}
+
+.hero-profile{padding:12px 16px;border-left:3px solid #65d6c5;border-radius:8px;background:#162b36;line-height:1.7;overflow-wrap:anywhere}.hero-profile strong{color:#8de8d8}.hero-profile small{color:#c3d6e0}

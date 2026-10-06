@@ -32,3 +32,5 @@ await writeFile('dist/tower/debuff.html',html);
 await writeFile('dist/tower/foes.html',html);
 
 await writeFile('dist/tower/learning.html',html);
+
+await writeFile('dist/tower/heroes.html',html);

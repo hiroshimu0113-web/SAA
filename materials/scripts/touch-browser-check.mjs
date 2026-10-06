@@ -1,3 +1,4 @@
+import {checkHeroes} from './heroes-browser-check.mjs';
 import {checkDebuffs,checkDebuffOffline} from './debuff-browser-check.mjs';
 import {checkFlavor} from './flavor-browser-check.mjs';
 import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
@@ -59,6 +60,7 @@ try{
  await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
+ await checkHeroes(browser,base);
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
  await checkQuizAndHud(browser,base);
