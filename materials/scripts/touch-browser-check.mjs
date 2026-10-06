@@ -1,4 +1,5 @@
 import {checkDebuffs,checkDebuffOffline} from './debuff-browser-check.mjs';
+import {checkCases} from './case-browser-check.mjs';
 import {checkFlavor} from './flavor-browser-check.mjs';
 import {checkCombos,checkComboOffline} from './combo-browser-check.mjs';
 import {checkQuizAndHud,quizOfflineRoundtrip} from './quiz-browser-check.mjs';
@@ -62,6 +63,7 @@ try{
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
  await checkQuizAndHud(browser,base);
+ await checkCases(browser,base);
  await checkCombos(browser,base);
  await checkFlavor(browser,base);
  await checkDebuffs(browser,base);

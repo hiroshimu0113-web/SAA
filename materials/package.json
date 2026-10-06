@@ -16,7 +16,9 @@
     "knowledge:export": "tsx scripts/export-knowledge.ts",
     "knowledge:check": "tsx scripts/export-knowledge.ts --check",
     "progress:update": "tsx scripts/export-progress.ts",
-    "progress:check": "tsx scripts/export-progress.ts --check"
+    "progress:check": "tsx scripts/export-progress.ts --check",
+    "game-content:export": "node scripts/export-game-content.mjs",
+    "game-content:check": "node scripts/export-game-content.mjs --check"
   },
   "dependencies": {
     "react": "^19.1.0",

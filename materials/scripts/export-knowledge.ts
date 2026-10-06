@@ -23,7 +23,7 @@ const publishedQuestionIds=new Set(publishedQuestions.map(q=>q.id));
 const nodes:any[]=[];const edges:{from:string;to:string;type:string}[]=[];
 const edge=(from:string,to:string,type:string)=>edges.push({from,to,type});
 const allConcepts=[...new Set([...lessons.flatMap(l=>l.conceptIds),...questions.flatMap(q=>q.conceptIds),...units.map(u=>u.id)])].sort();
-for(const id of allConcepts){const unit=units.find(u=>u.id===id);nodes.push({id:'concept:'+id,kind:'concept',title:unit?.title??terms.find(t=>t.id===id)?.name??id,detail_status:unit?'draft_unit':'inventory_only',unit:unit??null});}
+for(const id of allConcepts){const unit=units.find(u=>u.id===id);nodes.push({id:'concept:'+id,kind:'concept',title:unit?.title??terms.find(t=>t.id===id)?.name??id,detail_status:unit?(unit.review.status==='reviewed'?'reviewed_unit':'draft_unit'):'inventory_only',unit:unit??null});}
 for(const chapter of chapters){
   const path='src/content/'+(Number(chapter.id.slice(2))<=6?'part1.ts':'part2.ts');
   nodes.push({id:'chapter:'+chapter.id,kind:'chapter',title:chapter.title,source_file:path});

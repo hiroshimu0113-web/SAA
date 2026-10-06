@@ -789,3 +789,14 @@
 - scripts/export-progress.tsとprogress:update/progress:checkを追加。教材・公開範囲・分類を更新した際の再生成/整合確認をmaterials/AGENTS.mdへ必須化。READMEとknowledge/READMEから入口をリンク。
 - 検証：進捗生成と再照合、既存content:statusとの数値照合、knowledge:check（407ノード/609辺）、新規資料の相対リンク、git diff --check成功。ゲーム本体・教材本文・監査状態・分類データは変更なし。
 - 次：後続エージェントは保管ガイド/進捗/分類ガイドを確認して教材を拡充し、正本と進捗を一緒に更新する。既存14単位のレビュー、公開前原稿の整備が未完了。
+
+
+## 2026-10-06 教材拡充・単位1：一時認証情報
+- 完了：既存temporary-credentialsを拡充し、knowledge/lessons/temporary-credentials.mdへ本文を保存。作成後の別工程で内容確認。同一担当の確認であり別担当の独立監査・本人理解評価ではない。
+- 分類：concept-temporary-credentials-scopeはカード候補、case-temporary-credentials-photoは2問ケース取り込み済み。元の単位を重複作成しない。
+- 根拠：無料のAWS公式SDK固定コミット2ba0e390。更新停止済みAWSユーザーガイドだけでは現行内容の監査を完了しない。現行docs.aws.amazon.comはプロキシ403で取得不可。
+- 実装：確認済みケースのみ生成するgame-content:export/check、ケース単位の抽選と順番維持。旧4問のID/正解順と保存v4を保持。知識地図の確認状態・根拠表示を更新。
+- 検証：47テスト、ビルド、knowledge:check、progress:check、game-content:check、Chromiumの320pxで新ケースの全解説/途中再開/報酬重複防止成功。ブラウザー試験の誤ったDOM参照を修正して再実行成功。
+- 保存：単位ごとにGitへコミット。公開HTTPSはネットワークポリシー403、GitHub CLI認証は失敗。送信・公開は別途結果を記録する。
+- 利用残量：取得可能なツール/情報がなく開始時・区切りとも不明。推測しない。
+- 次：前提の一時認証情報の確認後、IAMロールの信頼と権限を内容確認・分類・ケースへ展開。その後12章の共有候補を整理。

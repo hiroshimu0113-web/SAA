@@ -1,6 +1,6 @@
 import {DEBUFFS,emptyDebuffs,applyDebuff,attackAmount,blockAmount,decayDebuffs} from './debuffs.mjs';
 import {COMBOS} from './combos.mjs';
-import {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
+import {QUIZZES,QUIZ_RULES,quizScore,LEGACY_QUIZ_IDS,QUIZ_CASE_PAIRS} from './quiz.mjs';
 export {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 
 export const CARDS={
@@ -94,7 +94,10 @@ function burn(s,side){
 function lose(s){s.phase='lost';log(s,'冒険はここまで。');}
 
 function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=shuffle(s,rewardPool).slice(0,3);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
-function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
+function startQuiz(s){
+ const cases=[null,...QUIZ_CASE_PAIRS],pair=shuffle(s,cases)[0];
+ s.quiz={ids:pair?[...pair]:shuffle(s,LEGACY_QUIZ_IDS).slice(0,2),answers:[],step:0,result:null};
+}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
 export function act(state,action){
  const s=clone(state),a=action,b=s.battle;

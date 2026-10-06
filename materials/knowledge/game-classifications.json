@@ -2671,6 +2671,274 @@
       "open_questions": [
         "対応するsystem分類レコードは今後収集。"
       ]
+    },
+    {
+      "id": "concept-temporary-credentials-scope",
+      "title": "一時認証情報の期限と権限",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "期限と権限の原理を理解する。",
+      "objective": "長期キーを埋め込まず、有効期限付き認証情報を使う理由を説明する。",
+      "unit_ids": [
+        "temporary-credentials"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "一時認証情報：期限と権限を分ける"
+        },
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Security Token Service",
+        "AWS Identity and Access Management",
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "認証と認可を区別する。"
+      ],
+      "conditions": [
+        "EC2のロールとインスタンスプロファイルは用意済み。IMDSとS3への通信経路は正常。",
+        "SDKで先行する別の認証情報設定はない。第2問のアクセスは記載の許可だけで判断し、他の許可やDenyはない。"
+      ],
+      "limitations": [
+        "権限評価全体は範囲外。期限だけで最小権限や漏えい防止は保証されない。"
+      ],
+      "misconceptions": [
+        "有効期限があればどんな権限を付けても安全。",
+        "一時認証情報もアクセスキーIDとシークレットの2項目だけでよい。",
+        "EC2へロールを付ければ、先行する固定キー設定があってもSDKは必ずロールを選ぶ。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "実行環境に応じた認証情報取得を使い、許可された操作だけを行う。",
+        "counterexample": "有効期限内のGetObject許可ではDeleteObjectを許可できない。",
+        "comparison": {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "比較"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-temporary-credentials-photo",
+          "reason": "取得経路と期限・権限の区別を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "AssumeRoleはキーID、シークレット、トークンの一時認証情報を返す。期限と権限は別で、セッションポリシーはロールの権限を拡張しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+          "claim": "EC2ロールの認証情報はIMDS経由。認証情報探索で他プロバイダーが先に選ばれればロールが自動選択されない。プロバイダーとキャッシュを区別する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類、固定語彙、本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で、公式SDKの固定コミット、条件、全誤答理由、条件変更を照合。同一担当の確認で別担当の独立監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "認証情報のカード候補と2問ケース。効果の設計は保留。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "短命なら任意の操作ができるという誤解。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カードの効果・組合せは未設計。"
+      ]
+    },
+    {
+      "id": "case-temporary-credentials-photo",
+      "title": "写真加工EC2の認証情報と操作権限",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ写真加工の状況から取得方法と操作可否を判断する2問ケース。",
+      "objective": "固定キーを避けた取得方法を選び、期限内でも未許可の操作をできない理由を説明する。",
+      "unit_ids": [
+        "temporary-credentials"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "一時認証情報：期限と権限を分ける"
+        },
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Security Token Service",
+        "AWS Identity and Access Management",
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "認証と認可を区別する。"
+      ],
+      "conditions": [
+        "EC2のロールとインスタンスプロファイルは用意済み。IMDSとS3への通信経路は正常。",
+        "SDKで先行する別の認証情報設定はない。第2問のアクセスは記載の許可だけで判断し、他の許可やDenyはない。"
+      ],
+      "limitations": [
+        "権限評価全体は範囲外。期限だけで最小権限や漏えい防止は保証されない。"
+      ],
+      "misconceptions": [
+        "有効期限があればどんな権限を付けても安全。",
+        "一時認証情報もアクセスキーIDとシークレットの2項目だけでよい。",
+        "EC2へロールを付ければ、先行する固定キー設定があってもSDKは必ずロールを選ぶ。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "temporary-credentials-photo.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "AssumeRoleはキーID、シークレット、トークンの一時認証情報を返す。期限と権限は別で、セッションポリシーはロールの権限を拡張しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+          "claim": "EC2ロールの認証情報はIMDS経由。認証情報探索で他プロバイダーが先に選ばれればロールが自動選択されない。プロバイダーとキャッシュを区別する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "主分類、固定語彙、本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で、公式SDKの固定コミット、条件、全誤答理由、条件変更を照合。同一担当の確認で別担当の独立監査ではない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "47テスト、game-content:check、ビルド、Chromium 320pxの連続2問・全解説・回答途中再開・結果再開成功。旧問題のID/正解順と保存v4を保持。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "知識の間に連続2問として取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/temporary-credentials.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "短命なら任意の操作ができるという誤解。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "temp-photo-provider, temp-photo-permission"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

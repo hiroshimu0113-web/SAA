@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+const root=new URL('../',import.meta.url);
+const source=JSON.parse(await readFile(new URL('knowledge/game-cases.json',root),'utf8'));
+assert.equal(source.schema_version,1);
+const quizzes={},pairs=[],ids=new Set();
+for(const c of source.cases){
+ assert.ok(!ids.has(c.id),'duplicate case ID');ids.add(c.id);
+ assert.ok(c.premise?.trim()&&c.constraints.length&&c.variant?.condition&&c.variant?.answer&&c.variant?.reason);
+ assert.equal(c.questions.length,2,'a case needs two questions');
+ assert.ok(['draft','reviewed'].includes(c.content_status));
+ if(c.content_status!=='reviewed')continue;
+ assert.ok(c.sources.length&&c.review_notes.some(n=>n.scope==='content'&&n.checked_on&&n.reviewer));
+ const pair=[];
+ for(const q of c.questions){
+  assert.match(q.id,/^[a-z][a-z0-9-]*$/);assert.ok(!Object.hasOwn(quizzes,q.id),'duplicate quiz ID');
+  assert.ok(q.prompt.trim()&&q.options.length>=2&&q.options.every(x=>x.trim()));
+  assert.ok(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length);
+  assert.equal(q.reasons.length,q.options.length);assert.ok(q.reasons.every(x=>x.trim()));
+  assert.ok(c.sources.some(s=>s.url===q.source&&s.checked_on&&s.claim&&s.reviewer),'unreviewed source');
+  quizzes[q.id]={prompt:c.premise+' '+q.prompt,options:q.options,answer:q.answer,reasons:q.reasons,source:q.source};pair.push(q.id);
+ }
+ pairs.push(pair);
+}
+const output='// Generated from knowledge/game-cases.json; do not edit.\nexport const CASE_QUIZZES='+JSON.stringify(quizzes,null,2)+';\nexport const QUIZ_CASE_PAIRS='+JSON.stringify(pairs,null,2)+';\n';
+const path=new URL('public/tower/case-quizzes.mjs',root);
+if(process.argv.includes('--check'))assert.equal(await readFile(path,'utf8'),output,'stale game case export');
+else await writeFile(path,output);
+console.log(`Game cases: ${pairs.length} reviewed cases / ${Object.keys(quizzes).length} questions`);

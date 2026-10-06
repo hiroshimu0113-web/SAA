@@ -1616,19 +1616,21 @@
       "id": "concept:temporary-credentials",
       "kind": "concept",
       "title": "一時認証情報",
-      "detail_status": "draft_unit",
+      "detail_status": "reviewed_unit",
       "unit": {
         "id": "temporary-credentials",
         "title": "一時認証情報",
         "group": "security",
         "objective": "長期キーを埋め込まず、有効期限付き認証情報を使う理由を説明する。",
         "estimated_minutes": 5,
-        "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+        "scope": "一時認証情報の構成、EC2の取得経路、期限と権限の区別。全ポリシー評価や漏えい時の失効操作は範囲外。",
         "prerequisites": [
           "authentication"
         ],
         "misconceptions": [
-          "有効期限があればどんな権限を付けても安全。"
+          "有効期限があればどんな権限を付けても安全。",
+          "一時認証情報もアクセスキーIDとシークレットの2項目だけでよい。",
+          "EC2へロールを付ければ、先行する固定キー設定があってもSDKは必ずロールを選ぶ。"
         ],
         "checks": [
           {
@@ -1637,7 +1639,9 @@
             "prompt": "一時認証情報を使う利点と限界は？",
             "expected_points": [
               "長期キーの配布・管理を減らせる",
-              "有効期限とは別に権限を絞る必要がある"
+              "有効期限とは別に権限を絞る必要がある",
+              "アクセスキーID・シークレットアクセスキー・セッショントークンを含む",
+              "期限切れに備え取得と更新の経路を設計する"
             ]
           },
           {
@@ -1646,7 +1650,9 @@
             "prompt": "EC2のソースコードに固定キーがある。基本方針をどう変える？",
             "expected_points": [
               "EC2のロールを通じて一時認証情報を使う",
-              "必要なS3操作だけ許可する"
+              "必要なS3操作だけ許可する",
+              "IMDSへ到達できるSDKのEC2ロール認証情報プロバイダーを利用する",
+              "認証情報探索で固定キー等が先に選ばれないか確認する"
             ]
           }
         ],
@@ -1654,14 +1660,28 @@
           "ch02-l01"
         ],
         "review": {
-          "status": "draft",
-          "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-          "source_document": "docs/STARTER_REVIEW.md"
+          "status": "reviewed",
+          "basis": "本文とケース作成後の内容確認。公式SDKのAPI説明に照合。別担当者の独立監査と本人理解確認は未実施。",
+          "source_document": "knowledge/lessons/temporary-credentials.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+              "claim": "AssumeRoleはキーID、シークレット、トークンの一時認証情報を返す。期限と権限は別で、セッションポリシーはロールの権限を拡張しない。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go",
+              "claim": "EC2ロールの認証情報はIMDS経由。認証情報探索で他プロバイダーが先に選ばれればロールが自動選択されない。プロバイダーとキャッシュを区別する。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "条件を1つ変えた転移問題を追加する",
-          "境界条件と公式根拠を照合してから公開教材へ反映する"
+          "SCP・リソースポリシー・明示的Denyを含む評価全体との接続",
+          "実AWS環境の設定や更新失敗の実験は未実施"
         ]
       }
     },
