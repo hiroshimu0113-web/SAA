@@ -223,7 +223,7 @@
 
 既存の `knowledge/units.schema.json` は未知の項目を許可しないため、タグを `units.json` に直接足さない。新たな知識単位が必要なら既存の手順で追加し、そのIDを台帳から参照する。生成物の `public/knowledge/graph.json` や棚卸しを手で書き換えない。
 
-台帳は現時点でJSON Schemaや専用の自動検査を持たない。更新時はJSONとして読めること、IDの一意性、固定語彙、参照先、分類別項目、レビュー証跡を確認する。`pnpm knowledge:check` は既存知識データの検査であり、この台帳の合格証明ではない。
+台帳は専用JSON Schemaを持たないが、`pnpm classification:check` でJSON、IDの一意性、固定語彙、単位・ファイル・関係参照、分類別項目、レビュー/取り込み証跡を検査する。本文の正確性やlocatorの意味は担当者が確認する。`pnpm knowledge:check` は既存知識データの検査であり、この台帳の合格証明ではない。
 
 分類だけならゲームへの取り込み・配信変更は不要。知識正本を変えた場合は既存手順の `pnpm knowledge:export` と `pnpm knowledge:check`、実装を変えた場合は該当するテストとブラウザー検証を実施する。
 

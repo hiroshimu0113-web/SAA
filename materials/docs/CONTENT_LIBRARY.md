@@ -15,6 +15,7 @@
 | 詳細単位の補足本文 | [lessons](../knowledge/lessons/) | units.jsonのIDから参照する正本。作成後の内容確認と本人理解を区別する |
 | ゲーム用の連続2問ケース | [game-cases.json](../knowledge/game-cases.json) | 状況・条件・全誤答理由・条件変更を保管。確認済みだけgame-content:exportでゲーム用データへ生成する |
 | カード等へ再利用する分類 | [game-classifications.json](../knowledge/game-classifications.json) | 用語・概念・システム・役・ビルド・ケースを記録し、本文の保管先へ参照をつなぐ |
+| 12章のテーマ別デッキ計画 | [deck-plan.json](../knowledge/deck-plan.json) | 判断方針・代償・共有章・大きな追加の別提案。decks:updateで候補JSONとDECK_CANDIDATES.mdを生成する |
 | 出典と内容確認 | 教材のsources、単位のreview、[CONTENT_REVIEW.md](CONTENT_REVIEW.md)、[STARTER_REVIEW.md](STARTER_REVIEW.md) | 対象範囲・根拠・確認者を残す。過去の確認を新原稿へ流用しない |
 | 元の配布物 | [deliverables](../deliverables/) | 元ZIP・EPUB等を保管。通常の改訂では上書きしない |
 | 音声台本と公開音声 | [audio](../audio/)・[public/audio](../public/audio/) | 現時点の成果物を保持。今回の教材拡充とは別に管理する |

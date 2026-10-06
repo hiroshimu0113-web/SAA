@@ -1,0 +1,4594 @@
+{
+  "schema_version": 1,
+  "notes": [
+    "素材候補は完成カードではない。inventory_seedは既存の未監査タグを棚卸しした段階。",
+    "同じ概念は1候補を共有し、関連章を記録する。言い換えや薄い分割で20枚へ合わせない。",
+    "新カードはすべて効果未設計。現行20カードとは別の候補集合で、選択画面と新キャラクターは未実装。"
+  ],
+  "decks": [
+    {
+      "chapter_id": "ch01",
+      "theme": "責任分界と障害範囲",
+      "decision": "誰が管理するか、何を失うか、どの障害範囲を分けるかを判断する。",
+      "tradeoff": "複数配置だけでデータ保全や残存容量を保証しない。",
+      "title": "AWSの全体像",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-availability",
+        "candidate-az",
+        "candidate-durability",
+        "candidate-ec2",
+        "candidate-instance-store",
+        "candidate-rds",
+        "candidate-region",
+        "candidate-s3",
+        "candidate-scaling",
+        "candidate-shared-responsibility",
+        "candidate-spot"
+      ]
+    },
+    {
+      "chapter_id": "ch02",
+      "theme": "必要なアクセスだけを委任する",
+      "decision": "認証、信頼、許可、権限上限を分けてアクセスを設計する。",
+      "tradeoff": "短命な認証情報でも過大な権限と漏えいのリスクは残る。",
+      "title": "IAMとアクセス制御",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-abac",
+        "candidate-access-analyzer",
+        "candidate-authentication",
+        "candidate-authorization",
+        "candidate-block-public-access",
+        "candidate-cognito",
+        "candidate-cognito-identity",
+        "candidate-cross-account",
+        "candidate-explicit-deny",
+        "candidate-external-id",
+        "candidate-iam-role",
+        "candidate-identity-center",
+        "candidate-implicit-deny",
+        "candidate-least-privilege",
+        "candidate-mfa",
+        "candidate-permissions-boundary",
+        "candidate-resource-policy",
+        "candidate-root",
+        "candidate-scp",
+        "candidate-temporary-credentials"
+      ]
+    },
+    {
+      "chapter_id": "ch03",
+      "theme": "通信経路と到達制御",
+      "decision": "宛先、経路、名前解決、通信許可のどこが不足するかを判断する。",
+      "tradeoff": "経路の追加は権限付与やパケット許可を代替しない。",
+      "title": "VPCとネットワーク",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-cidr",
+        "candidate-direct-connect",
+        "candidate-endpoint-policy",
+        "candidate-ipv6-egress",
+        "candidate-longest-prefix",
+        "candidate-nat-gateway",
+        "candidate-network-acl",
+        "candidate-peering",
+        "candidate-private-link",
+        "candidate-public-subnet",
+        "candidate-route",
+        "candidate-security-group",
+        "candidate-session-manager",
+        "candidate-site-to-site-vpn",
+        "candidate-subnet",
+        "candidate-transit-gateway",
+        "candidate-vpc",
+        "candidate-vpc-endpoint",
+        "candidate-vpc-flow-logs"
+      ]
+    },
+    {
+      "chapter_id": "ch04",
+      "theme": "負荷変動と正常な処理先",
+      "decision": "負荷分散、容量確保、伸縮、購入方式を要件に合わせる。",
+      "tradeoff": "台数とAZ分散、残存容量、検知と復旧を別に設計する。",
+      "title": "EC2・負荷分散・Auto Scaling",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-alb",
+        "candidate-ami",
+        "candidate-auto-scaling",
+        "candidate-capacity-reservation",
+        "candidate-ec2",
+        "candidate-health-check",
+        "candidate-iam-role",
+        "candidate-instance-store",
+        "candidate-nlb",
+        "candidate-placement-group",
+        "candidate-savings-plans",
+        "candidate-scheduled-scaling",
+        "candidate-spot",
+        "candidate-stateless",
+        "candidate-target-tracking",
+        "candidate-temporary-credentials",
+        "candidate-warm-pool"
+      ]
+    },
+    {
+      "chapter_id": "ch05",
+      "theme": "データの寿命と保存要件",
+      "decision": "アクセス方式、寿命、復元時間、IO要件で保存先を選ぶ。",
+      "tradeoff": "低単価だけで取り出し時間、費用、可用性を満たすとは限らない。",
+      "title": "ストレージを選ぶ",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-archive",
+        "candidate-ebs",
+        "candidate-ebs-snapshot",
+        "candidate-efs",
+        "candidate-fsx-windows",
+        "candidate-gp3",
+        "candidate-intelligent-tiering",
+        "candidate-lifecycle",
+        "candidate-multipart-upload",
+        "candidate-noncurrent-version",
+        "candidate-object-lock",
+        "candidate-presigned-url",
+        "candidate-provisioned-iops",
+        "candidate-s3",
+        "candidate-s3-consistency",
+        "candidate-s3-encryption",
+        "candidate-s3-replication",
+        "candidate-standard-ia",
+        "candidate-storage-class",
+        "candidate-transfer-acceleration",
+        "candidate-versioning"
+      ]
+    },
+    {
+      "chapter_id": "ch06",
+      "theme": "整合性と読み取り負荷",
+      "decision": "DBのデータモデル、読み取り拡張、キャッシュ、障害時の動きを区別する。",
+      "tradeoff": "キャッシュの高速化と正本の整合性、スタンバイと読取レプリカを混同しない。",
+      "title": "データベースとキャッシュ",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-aurora-replica",
+        "candidate-cache",
+        "candidate-consistency",
+        "candidate-dax",
+        "candidate-dynamodb",
+        "candidate-dynamodb-on-demand",
+        "candidate-dynamodb-transactions",
+        "candidate-dynamodb-ttl",
+        "candidate-global-tables",
+        "candidate-gsi",
+        "candidate-partition-key",
+        "candidate-point-in-time-recovery",
+        "candidate-rds-multi-az",
+        "candidate-rds-proxy",
+        "candidate-rds-standby",
+        "candidate-read-replica"
+      ]
+    },
+    {
+      "chapter_id": "ch07",
+      "theme": "名前解決と利用者への配信",
+      "decision": "DNS、CDN、グローバルな経路を利用者とコンテンツの条件に合わせる。",
+      "tradeoff": "キャッシュやDNSの反映時間、オリジン保護、動的通信の条件が残る。",
+      "title": "名前解決と世界への配信",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-cache-key",
+        "candidate-cloudfront",
+        "candidate-cloudfront-oac",
+        "candidate-dns-ttl",
+        "candidate-global-accelerator",
+        "candidate-route53",
+        "candidate-signed-url"
+      ]
+    },
+    {
+      "chapter_id": "ch08",
+      "theme": "実行環境と運用負担",
+      "decision": "実行時間、状態、接続、管理負担からサーバーレスとコンテナを選ぶ。",
+      "tradeoff": "マネージド化しても権限、制約、失敗時の再実行設計は必要。",
+      "title": "サーバーレスとコンテナ",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-api-gateway",
+        "candidate-ecr",
+        "candidate-ecs",
+        "candidate-eks",
+        "candidate-fargate",
+        "candidate-iam-role",
+        "candidate-idempotency",
+        "candidate-lambda",
+        "candidate-lambda-concurrency",
+        "candidate-step-functions",
+        "candidate-task-role",
+        "candidate-temporary-credentials"
+      ]
+    },
+    {
+      "chapter_id": "ch09",
+      "theme": "非同期処理と再実行",
+      "decision": "キュー、配信、順序、再試行、冪等性をメッセージ特性で選ぶ。",
+      "tradeoff": "疎結合は重複処理や遅延を自動的に解消しない。",
+      "title": "疎結合とメッセージ",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-claim-check",
+        "candidate-dlq",
+        "candidate-eventbridge",
+        "candidate-fanout",
+        "candidate-fifo",
+        "candidate-idempotency",
+        "candidate-queue-scaling",
+        "candidate-sns",
+        "candidate-sqs",
+        "candidate-visibility-timeout"
+      ]
+    },
+    {
+      "chapter_id": "ch10",
+      "theme": "保護と調査可能性",
+      "decision": "暗号化、鍵、検出、防御、監査を脅威と運用要件に合わせる。",
+      "tradeoff": "検出、予防、記録、復旧は相互の代わりにならない。",
+      "title": "暗号化・保護・監視",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-aws-config",
+        "candidate-cloudtrail",
+        "candidate-cloudwatch",
+        "candidate-guardduty",
+        "candidate-iam-role",
+        "candidate-inspector",
+        "candidate-kms",
+        "candidate-macie",
+        "candidate-secrets-manager",
+        "candidate-shield",
+        "candidate-temporary-credentials",
+        "candidate-tls",
+        "candidate-waf"
+      ]
+    },
+    {
+      "chapter_id": "ch11",
+      "theme": "復旧目標と移行制約",
+      "decision": "RTO/RPOとデータ量、回線、復旧先容量から復旧と移行方法を選ぶ。",
+      "tradeoff": "低い維持費と短い復旧時間・データ損失を同時に保証できない。",
+      "title": "災害復旧と移行",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-backup",
+        "candidate-cdc",
+        "candidate-datasync",
+        "candidate-dms",
+        "candidate-migration",
+        "candidate-pilot-light",
+        "candidate-replication",
+        "candidate-restore-test",
+        "candidate-rpo",
+        "candidate-rto",
+        "candidate-warm-standby"
+      ]
+    },
+    {
+      "chapter_id": "ch12",
+      "theme": "条件を満たす性能と費用",
+      "decision": "負荷特性と予算を基に計測し、分析・性能・費用の構成を比較する。",
+      "tradeoff": "常に全部盛りを最適解とせず、維持費と運用負担を含める。",
+      "title": "性能・コスト・分析の総合設計",
+      "target_cards": 20,
+      "card_candidate_ids": [
+        "candidate-athena",
+        "candidate-cache",
+        "candidate-cost-optimization",
+        "candidate-firehose",
+        "candidate-glue",
+        "candidate-kinesis",
+        "candidate-lake-formation",
+        "candidate-opensearch",
+        "candidate-performance",
+        "candidate-redshift",
+        "candidate-savings-plans",
+        "candidate-scaling",
+        "candidate-spot"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "candidate-abac",
+      "concept_id": "abac",
+      "title": "abac",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q022",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-access-analyzer",
+      "concept_id": "access-analyzer",
+      "title": "access-analyzer",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q023",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-alb",
+      "concept_id": "alb",
+      "title": "ALBと正常なターゲット",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q051",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch04-l02",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ami",
+      "concept_id": "ami",
+      "title": "ami",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q060",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-api-gateway",
+      "concept_id": "api-gateway",
+      "title": "api-gateway",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q126",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q127",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-archive",
+      "concept_id": "archive",
+      "title": "archive",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q075",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-athena",
+      "concept_id": "athena",
+      "title": "athena",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q193",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q194",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-aurora-replica",
+      "concept_id": "aurora-replica",
+      "title": "aurora-replica",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q099",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-authentication",
+      "concept_id": "authentication",
+      "title": "認証の役割",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-authorization",
+      "concept_id": "authorization",
+      "title": "認可とアクセス許可",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l02",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-auto-scaling",
+      "concept_id": "auto-scaling",
+      "title": "auto-scaling",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q065",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-availability",
+      "concept_id": "availability",
+      "title": "可用性と切り替え",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q007",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch01-l01",
+          "relation": "unit_reference"
+        },
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-aws-config",
+      "concept_id": "aws-config",
+      "title": "aws-config",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q163",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q170",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-az",
+      "concept_id": "az",
+      "title": "AZと障害の範囲",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q001",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q010",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch01-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-backup",
+      "concept_id": "backup",
+      "title": "backup",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q173",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q178",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q184",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q185",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-block-public-access",
+      "concept_id": "block-public-access",
+      "title": "block-public-access",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q028",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cache",
+      "concept_id": "cache",
+      "title": "cache",
+      "related_chapter_ids": [
+        "ch06",
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch12-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q098",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q187",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q188",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cache-key",
+      "concept_id": "cache-key",
+      "title": "cache-key",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q106",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q112",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-capacity-reservation",
+      "concept_id": "capacity-reservation",
+      "title": "capacity-reservation",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q058",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cdc",
+      "concept_id": "cdc",
+      "title": "cdc",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l03",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cidr",
+      "concept_id": "cidr",
+      "title": "cidr",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q048",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-claim-check",
+      "concept_id": "claim-check",
+      "title": "claim-check",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q146",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cloudfront",
+      "concept_id": "cloudfront",
+      "title": "cloudfront",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q105",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q111",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cloudfront-oac",
+      "concept_id": "cloudfront-oac",
+      "title": "cloudfront-oac",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q107",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q114",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cloudtrail",
+      "concept_id": "cloudtrail",
+      "title": "cloudtrail",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q162",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q166",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cloudwatch",
+      "concept_id": "cloudwatch",
+      "title": "cloudwatch",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q164",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q165",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cognito",
+      "concept_id": "cognito",
+      "title": "Amazon Cognito",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q018",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cognito-identity",
+      "concept_id": "cognito-identity",
+      "title": "cognito-identity",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q030",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-consistency",
+      "concept_id": "consistency",
+      "title": "consistency",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q093",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cost-optimization",
+      "concept_id": "cost-optimization",
+      "title": "cost-optimization",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q191",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q192",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-cross-account",
+      "concept_id": "cross-account",
+      "title": "クロスアカウントアクセス",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q027",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-datasync",
+      "concept_id": "datasync",
+      "title": "datasync",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q181",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dax",
+      "concept_id": "dax",
+      "title": "dax",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q096",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-direct-connect",
+      "concept_id": "direct-connect",
+      "title": "direct-connect",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q044",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dlq",
+      "concept_id": "dlq",
+      "title": "dlq",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q143",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q144",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dms",
+      "concept_id": "dms",
+      "title": "dms",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q179",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q180",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dns-ttl",
+      "concept_id": "dns-ttl",
+      "title": "dns-ttl",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q103",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-durability",
+      "concept_id": "durability",
+      "title": "耐久性とデータの保全",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dynamodb",
+      "concept_id": "dynamodb",
+      "title": "dynamodb",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l02",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dynamodb-on-demand",
+      "concept_id": "dynamodb-on-demand",
+      "title": "dynamodb-on-demand",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q094",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dynamodb-transactions",
+      "concept_id": "dynamodb-transactions",
+      "title": "dynamodb-transactions",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q097",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-dynamodb-ttl",
+      "concept_id": "dynamodb-ttl",
+      "title": "dynamodb-ttl",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q095",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ebs",
+      "concept_id": "ebs",
+      "title": "ebs",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q067",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ebs-snapshot",
+      "concept_id": "ebs-snapshot",
+      "title": "ebs-snapshot",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q080",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ec2",
+      "concept_id": "ec2",
+      "title": "EC2の役割",
+      "related_chapter_ids": [
+        "ch01",
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ecr",
+      "concept_id": "ecr",
+      "title": "ecr",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q122",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ecs",
+      "concept_id": "ecs",
+      "title": "ecs",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q120",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q132",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-efs",
+      "concept_id": "efs",
+      "title": "efs",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q068",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-eks",
+      "concept_id": "eks",
+      "title": "eks",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q121",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-endpoint-policy",
+      "concept_id": "endpoint-policy",
+      "title": "endpoint-policy",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q049",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-eventbridge",
+      "concept_id": "eventbridge",
+      "title": "eventbridge",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q142",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-explicit-deny",
+      "concept_id": "explicit-deny",
+      "title": "明示的Deny",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q012",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-external-id",
+      "concept_id": "external-id",
+      "title": "External ID",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q016",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-fanout",
+      "concept_id": "fanout",
+      "title": "fanout",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q141",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q149",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-fargate",
+      "concept_id": "fargate",
+      "title": "fargate",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q118",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q131",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-fifo",
+      "concept_id": "fifo",
+      "title": "fifo",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q139",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-firehose",
+      "concept_id": "firehose",
+      "title": "firehose",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q198",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-fsx-windows",
+      "concept_id": "fsx-windows",
+      "title": "fsx-windows",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q069",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-global-accelerator",
+      "concept_id": "global-accelerator",
+      "title": "global-accelerator",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q110",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-global-tables",
+      "concept_id": "global-tables",
+      "title": "global-tables",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q100",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-glue",
+      "concept_id": "glue",
+      "title": "glue",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q195",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-gp3",
+      "concept_id": "gp3",
+      "title": "gp3",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q078",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-gsi",
+      "concept_id": "gsi",
+      "title": "gsi",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q092",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-guardduty",
+      "concept_id": "guardduty",
+      "title": "guardduty",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q158",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q161",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-health-check",
+      "concept_id": "health-check",
+      "title": "health-check",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q053",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-iam-role",
+      "concept_id": "iam-role",
+      "title": "IAMロール",
+      "related_chapter_ids": [
+        "ch02",
+        "ch04",
+        "ch08",
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q011",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q015",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [
+        "concept-iam-role-trust-permissions"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
+      ]
+    },
+    {
+      "id": "candidate-idempotency",
+      "concept_id": "idempotency",
+      "title": "idempotency",
+      "related_chapter_ids": [
+        "ch08",
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch09-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q125",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q147",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-identity-center",
+      "concept_id": "identity-center",
+      "title": "IAM Identity Center",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q017",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-implicit-deny",
+      "concept_id": "implicit-deny",
+      "title": "implicit-deny",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q029",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-inspector",
+      "concept_id": "inspector",
+      "title": "inspector",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q159",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-instance-store",
+      "concept_id": "instance-store",
+      "title": "インスタンスストアの寿命",
+      "related_chapter_ids": [
+        "ch01",
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q059",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-intelligent-tiering",
+      "concept_id": "intelligent-tiering",
+      "title": "intelligent-tiering",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q073",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-ipv6-egress",
+      "concept_id": "ipv6-egress",
+      "title": "ipv6-egress",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q045",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-kinesis",
+      "concept_id": "kinesis",
+      "title": "kinesis",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q197",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-kms",
+      "concept_id": "kms",
+      "title": "kms",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q151",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q152",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q167",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-lake-formation",
+      "concept_id": "lake-formation",
+      "title": "lake-formation",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q200",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-lambda",
+      "concept_id": "lambda",
+      "title": "lambda",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q116",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q117",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q134",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-lambda-concurrency",
+      "concept_id": "lambda-concurrency",
+      "title": "lambda-concurrency",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q123",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q124",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-least-privilege",
+      "concept_id": "least-privilege",
+      "title": "最小権限",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q014",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch02-l02",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-lifecycle",
+      "concept_id": "lifecycle",
+      "title": "lifecycle",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q076",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-longest-prefix",
+      "concept_id": "longest-prefix",
+      "title": "longest-prefix",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q047",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-macie",
+      "concept_id": "macie",
+      "title": "macie",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q160",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-mfa",
+      "concept_id": "mfa",
+      "title": "MFAと認証の強化",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q025",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-migration",
+      "concept_id": "migration",
+      "title": "migration",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q182",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-multipart-upload",
+      "concept_id": "multipart-upload",
+      "title": "multipart-upload",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q081",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-nat-gateway",
+      "concept_id": "nat-gateway",
+      "title": "nat-gateway",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q033",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q034",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-network-acl",
+      "concept_id": "network-acl",
+      "title": "network-acl",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q036",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q037",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-nlb",
+      "concept_id": "nlb",
+      "title": "nlb",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q052",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q064",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-noncurrent-version",
+      "concept_id": "noncurrent-version",
+      "title": "noncurrent-version",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q085",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-object-lock",
+      "concept_id": "object-lock",
+      "title": "object-lock",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q071",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-opensearch",
+      "concept_id": "opensearch",
+      "title": "opensearch",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q199",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-partition-key",
+      "concept_id": "partition-key",
+      "title": "partition-key",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q091",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-peering",
+      "concept_id": "peering",
+      "title": "peering",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q041",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-performance",
+      "concept_id": "performance",
+      "title": "performance",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q186",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-permissions-boundary",
+      "concept_id": "permissions-boundary",
+      "title": "permissions-boundary",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q021",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-pilot-light",
+      "concept_id": "pilot-light",
+      "title": "pilot-light",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q174",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-placement-group",
+      "concept_id": "placement-group",
+      "title": "placement-group",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q062",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-point-in-time-recovery",
+      "concept_id": "point-in-time-recovery",
+      "title": "point-in-time-recovery",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q089",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-presigned-url",
+      "concept_id": "presigned-url",
+      "title": "presigned-url",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q072",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-private-link",
+      "concept_id": "private-link",
+      "title": "private-link",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q040",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-provisioned-iops",
+      "concept_id": "provisioned-iops",
+      "title": "provisioned-iops",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q079",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-public-subnet",
+      "concept_id": "public-subnet",
+      "title": "public-subnet",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q032",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-queue-scaling",
+      "concept_id": "queue-scaling",
+      "title": "queue-scaling",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q145",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q150",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rds",
+      "concept_id": "rds",
+      "title": "Amazon RDS",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rds-multi-az",
+      "concept_id": "rds-multi-az",
+      "title": "rds-multi-az",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q086",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rds-proxy",
+      "concept_id": "rds-proxy",
+      "title": "rds-proxy",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q090",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rds-standby",
+      "concept_id": "rds-standby",
+      "title": "rds-standby",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q088",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-read-replica",
+      "concept_id": "read-replica",
+      "title": "read-replica",
+      "related_chapter_ids": [
+        "ch06"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch06-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q087",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-redshift",
+      "concept_id": "redshift",
+      "title": "redshift",
+      "related_chapter_ids": [
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch12-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q196",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-region",
+      "concept_id": "region",
+      "title": "リージョンの選定",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q004",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q005",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q006",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch01-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-replication",
+      "concept_id": "replication",
+      "title": "replication",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q176",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q183",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-resource-policy",
+      "concept_id": "resource-policy",
+      "title": "resource-policy",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q024",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-restore-test",
+      "concept_id": "restore-test",
+      "title": "restore-test",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q177",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-root",
+      "concept_id": "root",
+      "title": "ルートユーザー",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q020",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-route",
+      "concept_id": "route",
+      "title": "route",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l01",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-route53",
+      "concept_id": "route53",
+      "title": "route53",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q101",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q102",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q104",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q113",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q115",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rpo",
+      "concept_id": "rpo",
+      "title": "rpo",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q172",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-rto",
+      "concept_id": "rto",
+      "title": "rto",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q171",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-s3",
+      "concept_id": "s3",
+      "title": "S3の保存とアクセス",
+      "related_chapter_ids": [
+        "ch01",
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch05-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q066",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "draft",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-s3-consistency",
+      "concept_id": "s3-consistency",
+      "title": "s3-consistency",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q084",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-s3-encryption",
+      "concept_id": "s3-encryption",
+      "title": "s3-encryption",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q083",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-s3-replication",
+      "concept_id": "s3-replication",
+      "title": "s3-replication",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q077",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-savings-plans",
+      "concept_id": "savings-plans",
+      "title": "savings-plans",
+      "related_chapter_ids": [
+        "ch04",
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch12-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q057",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q189",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-scaling",
+      "concept_id": "scaling",
+      "title": "スケーリング",
+      "related_chapter_ids": [
+        "ch01",
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch12-l01",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-scheduled-scaling",
+      "concept_id": "scheduled-scaling",
+      "title": "scheduled-scaling",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q055",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-scp",
+      "concept_id": "scp",
+      "title": "サービスコントロールポリシー（SCP）",
+      "related_chapter_ids": [
+        "ch02"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q013",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q026",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-secrets-manager",
+      "concept_id": "secrets-manager",
+      "title": "secrets-manager",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q153",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q168",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-security-group",
+      "concept_id": "security-group",
+      "title": "security-group",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q035",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q038",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-session-manager",
+      "concept_id": "session-manager",
+      "title": "session-manager",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q050",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-shared-responsibility",
+      "concept_id": "shared-responsibility",
+      "title": "責任共有モデル",
+      "related_chapter_ids": [
+        "ch01"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q002",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q003",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q009",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-shield",
+      "concept_id": "shield",
+      "title": "shield",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q157",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-signed-url",
+      "concept_id": "signed-url",
+      "title": "signed-url",
+      "related_chapter_ids": [
+        "ch07"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch07-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q108",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q109",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-site-to-site-vpn",
+      "concept_id": "site-to-site-vpn",
+      "title": "site-to-site-vpn",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q043",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-sns",
+      "concept_id": "sns",
+      "title": "sns",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q148",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-spot",
+      "concept_id": "spot",
+      "title": "Spotインスタンス",
+      "related_chapter_ids": [
+        "ch01",
+        "ch04",
+        "ch12"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch01-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch04-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch12-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q008",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q056",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q190",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-sqs",
+      "concept_id": "sqs",
+      "title": "sqs",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q136",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q138",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q140",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-standard-ia",
+      "concept_id": "standard-ia",
+      "title": "standard-ia",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q074",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-stateless",
+      "concept_id": "stateless",
+      "title": "stateless",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch04-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q063",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-step-functions",
+      "concept_id": "step-functions",
+      "title": "step-functions",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q128",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q129",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q130",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q135",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-storage-class",
+      "concept_id": "storage-class",
+      "title": "storage-class",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l02",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-subnet",
+      "concept_id": "subnet",
+      "title": "subnet",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q031",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-target-tracking",
+      "concept_id": "target-tracking",
+      "title": "target-tracking",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q054",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-task-role",
+      "concept_id": "task-role",
+      "title": "task-role",
+      "related_chapter_ids": [
+        "ch08"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch08-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q119",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q133",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-temporary-credentials",
+      "concept_id": "temporary-credentials",
+      "title": "一時認証情報",
+      "related_chapter_ids": [
+        "ch02",
+        "ch04",
+        "ch08",
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q019",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch02-l01",
+          "relation": "unit_reference"
+        }
+      ],
+      "classification_ids": [
+        "concept-temporary-credentials-scope",
+        "concept-iam-role-trust-permissions"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
+      ]
+    },
+    {
+      "id": "candidate-tls",
+      "concept_id": "tls",
+      "title": "tls",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q154",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q169",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-transfer-acceleration",
+      "concept_id": "transfer-acceleration",
+      "title": "transfer-acceleration",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q082",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-transit-gateway",
+      "concept_id": "transit-gateway",
+      "title": "transit-gateway",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q042",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-versioning",
+      "concept_id": "versioning",
+      "title": "versioning",
+      "related_chapter_ids": [
+        "ch05"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch05-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q070",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-visibility-timeout",
+      "concept_id": "visibility-timeout",
+      "title": "visibility-timeout",
+      "related_chapter_ids": [
+        "ch09"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch09-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q137",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-vpc",
+      "concept_id": "vpc",
+      "title": "vpc",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l01",
+          "relation": "covered_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-vpc-endpoint",
+      "concept_id": "vpc-endpoint",
+      "title": "vpc-endpoint",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch03-l03",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q039",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-vpc-flow-logs",
+      "concept_id": "vpc-flow-logs",
+      "title": "vpc-flow-logs",
+      "related_chapter_ids": [
+        "ch03"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q046",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-waf",
+      "concept_id": "waf",
+      "title": "waf",
+      "related_chapter_ids": [
+        "ch10"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch10-l02",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q155",
+          "relation": "practised_by"
+        },
+        {
+          "node_id": "question:q156",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-warm-pool",
+      "concept_id": "warm-pool",
+      "title": "warm-pool",
+      "related_chapter_ids": [
+        "ch04"
+      ],
+      "material_refs": [
+        {
+          "node_id": "question:q061",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    },
+    {
+      "id": "candidate-warm-standby",
+      "concept_id": "warm-standby",
+      "title": "warm-standby",
+      "related_chapter_ids": [
+        "ch11"
+      ],
+      "material_refs": [
+        {
+          "node_id": "lesson:ch11-l01",
+          "relation": "covered_by"
+        },
+        {
+          "node_id": "question:q175",
+          "relation": "practised_by"
+        }
+      ],
+      "classification_ids": [],
+      "candidate_status": "inventory_seed",
+      "content_status": "unreviewed",
+      "effect_status": "not_designed",
+      "implementation_ids": [],
+      "open_questions": [
+        "原稿の目標・条件・例外を内容確認して分類する。",
+        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+      ]
+    }
+  ],
+  "separate_proposals": [
+    "12テーマからデッキを選ぶ画面は別提案。候補台帳を選択可能なデッキや初期カード枚数と誤認させない。",
+    "新キャラクターは複数の役・ビルド、苦手条件、試遊を設計して別提案とする。",
+    "条件付きの構成盤面と維持費の仕組みは別提案。現行の抽象カードへ未設計のAWS保証を付けない。"
+  ]
+}

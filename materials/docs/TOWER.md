@@ -135,3 +135,10 @@
 
 - 完了：45テスト、Chrome/WebKitの既存操作と6種類すべての固有デバフ表示/保存再開を確認。Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37465289352 build/deploy成功（96def37ce6e75b785c6cb0dadb73baaef3cd15d8）。公開HTTPSのChromeでも全6種の能力表示、遅延、旧保存移行、320pxを確認。
 - 更新入口 https://hiroshimu0113-web.github.io/SAA/tower/foes.html 。実機iPhoneの操作感と敵別バランスは未検証。次は実プレイで特性差と難易度を評価。
+
+
+## 2026-10-06 教材の確認済みケースを再利用
+- 連続2問の正本はknowledge/game-cases.json。分類・内容確認済みかつready/importedのケースをgame-content:exportで生成する。現在は一時認証情報とIAMロールの2ケース4問、既存の独立4問と合わせて8問。
+- 新規抽選はケースの順番を保持。既存問題のID・選択肢・正解順は変更せず、保存v4・旧v1-v3の取り扱いを維持。報酬は既存値のまま、途中再開で二重付与しない。
+- 12章のデッキ計画と候補素材はknowledge/deck-plan.json/DECK_CANDIDATES.md。共有の候補を記録するが、現行の20カード/3役の数値や保存デッキは変更していない。デッキ選択画面・新キャラクター・条件付き構成盤面は別提案。
+- ローカルChromiumで既存操作・新ケース・保存・オフラインを確認済み。GitHub専用ブランチへ保存し、main/Pagesへは未反映。公開URLのプロキシ403とWebKit配布先の接続制限により今回の公開/WebKit確認は未実施。

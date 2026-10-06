@@ -17,6 +17,8 @@
 - [INVENTORY.md](INVENTORY.md)：全12章・36レッスン・200問の棚卸し。公開範囲は2章6レッスン・20問。
 - [graph.json](../public/knowledge/graph.json)：自動生成する407ノード・609エッジのスナップショット。数は教材更新で変わる。
 - [EXPANSION_PLAN.md](EXPANSION_PLAN.md)：内容を厚くする順序と引き継ぎ。
+- [DECK_CANDIDATES.md](DECK_CANDIDATES.md)：12章のデッキ案と20枚目標の不足。素材棚卸しと確認・分類済み素材を区別。deck-plan.jsonが計画の正本、deck-candidates.jsonは生成物。
+- [game-cases.json](game-cases.json)：状況・条件・全誤答理由・条件変更を持つ連続2問の正本。確認・分類済みだけgame-content:exportでゲーム用データへ生成。
 
 ## 「理解」を分ける型
 
@@ -32,7 +34,7 @@
 ## 3種類の状態を混ぜない
 
 1. **教材の公開状態**：レッスン・問題の `release=published/draft`。`src/content/index.ts` に基づく。
-2. **細分化単位の監査状態**：`review.status=draft/reviewed`。現在の14単位はすべてdraft。旧教材の監査済み表示を新しい確認問題へ引き継がない。
+2. **細分化単位の監査状態**：`review.status=draft/reviewed`。現在数はCONTENT_PROGRESS.mdを参照。同一担当の別工程確認と別担当者の独立監査を区別する。旧教材の監査済み表示を新しい確認問題へ引き継がない。
 3. **本人の理解状態**：共有グラフではすべて `unassessed`。本人の回答がないため未評価。
 
 実際の学習観察を残す場合は、[空テンプレート](learner-observations.example.json)を非公開の保存先へコピーします。観察にはunit_id、check_id、回答原文、日時、確認した回答要素、未充足の要素、レビュー担当を残します。公開リポジトリへ個人の回答を入れないでください。1回の回答から長期定着や別条件への転移まで推定しません。

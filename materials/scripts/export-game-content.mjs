@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
 const source=JSON.parse(await readFile(new URL('knowledge/game-cases.json',root),'utf8'));
+const classifications=JSON.parse(await readFile(new URL('knowledge/game-classifications.json',root),'utf8')).items;
 assert.equal(source.schema_version,1);
 const quizzes={},pairs=[],ids=new Set();
 for(const c of source.cases){
@@ -10,6 +11,7 @@ for(const c of source.cases){
  assert.equal(c.questions.length,2,'a case needs two questions');
  assert.ok(['draft','reviewed'].includes(c.content_status));
  if(c.content_status!=='reviewed')continue;
+ assert.ok(classifications.some(i=>i.kind==='case'&&i.classification_status==='reviewed'&&i.content_status==='reviewed'&&['ready','imported'].includes(i.import_status)&&i.material_refs.some(r=>r.path==='knowledge/game-cases.json'&&r.locator===c.id)),'case lacks reviewed and ready classification');
  assert.ok(c.sources.length&&c.review_notes.some(n=>n.scope==='content'&&n.checked_on&&n.reviewer));
  const pair=[];
  for(const q of c.questions){

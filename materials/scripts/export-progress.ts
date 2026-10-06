@@ -7,6 +7,8 @@ const read=(p:string)=>readFile(new URL(p,root),'utf8');
 const chapters=[...chapters1,...chapters2],questions=[...questions1,...questions2];
 const units=JSON.parse(await read('knowledge/units.json')).units as {id:string;lesson_ids:string[];review:{status:string}}[];
 const items=JSON.parse(await read('knowledge/game-classifications.json')).items as {kind:string;import_status:string}[];
+const catalog=JSON.parse(await read('knowledge/deck-candidates.json'));
+const cases=JSON.parse(await read('knowledge/game-cases.json')).cases;
 const lessonIds=new Set(published.flatMap(c=>c.lessons.map(l=>l.id))),questionIds=new Set(released.map(q=>q.id));
 const practice=questions.filter(q=>!q.exam),publishedPractice=practice.filter(q=>questionIds.has(q.id));
 const reviewed=units.filter(u=>u.review.status==='reviewed').length;
@@ -27,6 +29,9 @@ let md=`# 教材制作の進捗表
 | 模試2 | ${questions.filter(q=>q.exam==='mock2').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock2').length}問を公開 |
 | 細分化した知識単位 | ${units.length}単位 | 確認済み${reviewed}、確認待ち${units.length-reviewed} |
 | ゲーム利用の分類 | ${items.length}件 | 取り込み済み${items.filter(i=>i.import_status==='imported').length}件（教材全体の分類完了ではない） |
+| 連続2問ケース | ${cases.length}件 / ${cases.reduce((n:number,c:any)=>n+c.questions.length,0)}問 | 確認済み${cases.filter((c:any)=>c.content_status==='reviewed').length}件。既存の通常200問とは別の正本 |
+| テーマ別デッキ案 | ${catalog.decks.length}案 | 選択画面・新キャラクターは未実装 |
+| カード候補素材（共有・重複除外） | ${catalog.cards.length}件 | 確認・分類済み${catalog.cards.filter((c:any)=>c.candidate_status==='reviewed_material').length}、新カード効果実装0 |
 
 公開範囲の確認記録は[先行版の確認記録](STARTER_REVIEW.md)、全体の未解決事項は[内容レビュー](CONTENT_REVIEW.md)を参照してください。公開数から全体の内容監査完了を推定しません。
 
@@ -48,9 +53,13 @@ for(const [kind,label] of Object.entries({term:'用語',concept:'概念',system:
 md+=`
 分類0件は、その分野の教材本文が存在しないという意味ではありません。既存教材の一括分類は未実施です。
 
+## 12章のデッキ候補
+
+[章別の候補数と20枚目標の不足](../knowledge/DECK_CANDIDATES.md)、機械用のdeck-candidates.jsonを参照。inventory_seedは未監査の既存概念タグの棚卸しで、完成カードではありません。現行ゲームの20カード・3役と新しい候補集合を区別します。
+
 ## 更新方法
 
-教材追加・改訂・公開範囲変更・分類変更の後、materialsで pnpm progress:update を実行します。pnpm progress:check で元データとの一致を確認できます。この表は直接編集しません。
+教材追加・改訂・公開範囲変更・分類変更の後、必要なknowledge:export、game-content:export、decks:updateを行い、materialsで pnpm progress:update を実行します。pnpm progress:check で元データとの一致を確認できます。この表は直接編集しません。classification:check、game-content:check、decks:checkも該当データを照合します。
 
 テキストと問題の保管数はsrc/content/part1.ts・part2.ts、公開数はsrc/content/index.ts、単位の確認状態はknowledge/units.json、分類数はknowledge/game-classifications.jsonから集計します。監査記録は自動で変更しません。
 `;

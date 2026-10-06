@@ -7,6 +7,8 @@
 - 教材拡充の前に `knowledge/README.md`、`knowledge/INVENTORY.md`、`knowledge/EXPANSION_PLAN.md` を確認する。正本は `knowledge/units.json` と `relations.json`。変更後は `pnpm knowledge:export` と `pnpm knowledge:check`。教材の監査状態と本人の理解度を混同しない。
 - 原計画と最新の状態は `docs/PROJECT.md`、`docs/TASKS.md`、`docs/CHECKPOINT.md` を確認する。
 
+- 分類変更後は `pnpm classification:check`。連続2問ケースは `knowledge/game-cases.json` を正本に `pnpm game-content:export` / `pnpm game-content:check`。12章の計画は `knowledge/deck-plan.json`、候補棚卸しは `pnpm decks:update` / `pnpm decks:check`。素材候補・内容確認・効果実装・公開を区別する。
+
 ## 利用上限に備えた中断・報告
 
 ユーザーは、利用上限の際に作業を中断し、完了した範囲の成果物と進捗・利用手順を報告することを希望している。

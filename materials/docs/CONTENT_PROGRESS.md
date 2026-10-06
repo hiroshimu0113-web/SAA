@@ -15,6 +15,9 @@
 | 模試2 | 0問 / 計画65問 | 0問を公開 |
 | 細分化した知識単位 | 14単位 | 確認済み2、確認待ち12 |
 | ゲーム利用の分類 | 27件 | 取り込み済み25件（教材全体の分類完了ではない） |
+| 連続2問ケース | 2件 / 4問 | 確認済み2件。既存の通常200問とは別の正本 |
+| テーマ別デッキ案 | 12案 | 選択画面・新キャラクターは未実装 |
+| カード候補素材（共有・重複除外） | 155件 | 確認・分類済み2、新カード効果実装0 |
 
 公開範囲の確認記録は[先行版の確認記録](STARTER_REVIEW.md)、全体の未解決事項は[内容レビュー](CONTENT_REVIEW.md)を参照してください。公開数から全体の内容監査完了を推定しません。
 
@@ -50,8 +53,12 @@
 
 分類0件は、その分野の教材本文が存在しないという意味ではありません。既存教材の一括分類は未実施です。
 
+## 12章のデッキ候補
+
+[章別の候補数と20枚目標の不足](../knowledge/DECK_CANDIDATES.md)、機械用のdeck-candidates.jsonを参照。inventory_seedは未監査の既存概念タグの棚卸しで、完成カードではありません。現行ゲームの20カード・3役と新しい候補集合を区別します。
+
 ## 更新方法
 
-教材追加・改訂・公開範囲変更・分類変更の後、materialsで pnpm progress:update を実行します。pnpm progress:check で元データとの一致を確認できます。この表は直接編集しません。
+教材追加・改訂・公開範囲変更・分類変更の後、必要なknowledge:export、game-content:export、decks:updateを行い、materialsで pnpm progress:update を実行します。pnpm progress:check で元データとの一致を確認できます。この表は直接編集しません。classification:check、game-content:check、decks:checkも該当データを照合します。
 
 テキストと問題の保管数はsrc/content/part1.ts・part2.ts、公開数はsrc/content/index.ts、単位の確認状態はknowledge/units.json、分類数はknowledge/game-classifications.jsonから集計します。監査記録は自動で変更しません。
