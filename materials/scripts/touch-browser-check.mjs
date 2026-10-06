@@ -4,7 +4,7 @@ import {preview} from 'vite';
 import assert from 'node:assert/strict';
 import {mkdir} from 'node:fs/promises';
 const kind=process.env.BROWSER||'chromium';
-const server=process.env.APP_URL?null:await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
+let server=process.env.APP_URL?null:await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
 const browser=await (kind==='webkit'?webkit:chromium).launch(kind==='chromium'&&process.platform==='win32'?{executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'}:{});
 const base=process.env.APP_URL||'http://127.0.0.1:4183/',key='saa-tower-run-v1';
 await mkdir('artifacts',{recursive:true});
@@ -37,10 +37,11 @@ try{
  await c.unroute('**/tower/*.mjs');console.log('Touch interactions passed; checking offline.');
  await p.getByRole('button',{name:'オフライン保存を確認',exact:true}).tap();await p.getByRole('status').filter({hasText:'オフライン保存を確認しました'}).waitFor({timeout:45000});
  await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
- if(kind==='webkit')await c.route('**/*',route=>route.abort('internetdisconnected'));else await c.setOffline(true);
+ if(kind==='webkit'&&server){await new Promise(r=>server.httpServer.close(r));server=null;}else await c.setOffline(true);
  await p.reload();await p.locator('.hand').waitFor();
  await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
+ if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
  // Deliberately stop the inline application: loader must offer recovery, not hang.
  const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/index.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
  await q.goto(base+'tower/index.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();
