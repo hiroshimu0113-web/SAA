@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
+import {runtimeQuestion} from './game-content-lib.mjs';
 const root=new URL('../',import.meta.url);
 const source=JSON.parse(await readFile(new URL('knowledge/game-cases.json',root),'utf8'));
 const classifications=JSON.parse(await readFile(new URL('knowledge/game-classifications.json',root),'utf8')).items;
@@ -18,11 +19,7 @@ for(const c of source.cases){
  const pair=[];
  for(const q of c.questions){
   assert.match(q.id,/^[a-z][a-z0-9-]*$/);assert.ok(!Object.hasOwn(quizzes,q.id),'duplicate quiz ID');
-  assert.ok(q.prompt.trim()&&q.options.length>=2&&q.options.every(x=>x.trim()));
-  assert.ok(Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length);
-  assert.equal(q.reasons.length,q.options.length);assert.ok(q.reasons.every(x=>x.trim()));
-  assert.ok(c.sources.some(s=>s.url===q.source&&s.checked_on&&s.claim&&s.reviewer),'unreviewed source');
-  quizzes[q.id]={prompt:c.premise+' '+q.prompt,options:q.options,answer:q.answer,reasons:q.reasons,source:q.source};pair.push(q.id);
+  quizzes[q.id]=runtimeQuestion(c,q);pair.push(q.id);
  }
  pairs.push(pair);
 }

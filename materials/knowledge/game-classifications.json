@@ -2911,6 +2911,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "47テスト、game-content:check、ビルド、Chromium 320pxの連続2問・全解説・回答途中再開・結果再開成功。旧問題のID/正解順と保存v4を保持。未公開。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ケース正本を固定選択肢IDの契約へ訂正。runtime_option_orderで表示順を保持。game-content:checkで生成モジュールが以前と完全一致、48テストで正本順変更・不正ID・旧保存・採点互換を確認。本文の内容監査状態は維持。"
         }
       ],
       "game_design": {
@@ -3199,6 +3205,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "47テスト、ビルド、Chromium 320pxで2ケース4問の全誤答理由・回答途中/結果の再開・重複報酬防止を確認。保存v4維持。未公開。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ケース正本を固定選択肢IDの契約へ訂正。runtime_option_orderで表示順を保持。game-content:checkで生成モジュールが以前と完全一致、48テストで正本順変更・不正ID・旧保存・採点互換を確認。本文の内容監査状態は維持。"
         }
       ],
       "game_design": {
@@ -3479,6 +3491,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "47テスト、ビルド、Chromiumの320pxで全3ケース6問・全解説・途中/結果再開・重複報酬防止、3ケースそれぞれのオフライン回答と再開、旧保存と既存操作を確認。未公開。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "ケース正本を固定選択肢IDの契約へ訂正。runtime_option_orderで表示順を保持。game-content:checkで生成モジュールが以前と完全一致、48テストで正本順変更・不正ID・旧保存・採点互換を確認。本文の内容監査状態は維持。"
         }
       ],
       "game_design": {

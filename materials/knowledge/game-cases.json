@@ -23,33 +23,65 @@
           "id": "temp-photo-provider",
           "prompt": "ロールとIMDSは利用可能で、SDKに先行する固定キー設定はない。コードへの固定キー埋め込みを避ける構成は？",
           "options": [
-            "IAMユーザーの固定キーをソースへ書く",
-            "SDKのEC2ロール認証情報プロバイダーを使う",
-            "ロールの名前をシークレットアクセスキーとして送る"
+            {
+              "id": "temp-photo-provider-a",
+              "text": "IAMユーザーの固定キーをソースへ書く",
+              "explanation": "固定キーをコードへ配布する管理が残り、要件を満たしません。"
+            },
+            {
+              "id": "temp-photo-provider-b",
+              "text": "SDKのEC2ロール認証情報プロバイダーを使う",
+              "explanation": "用意したEC2ロールの認証情報をIMDSから取得するプロバイダーを使えます。先行する設定がない前提です。"
+            },
+            {
+              "id": "temp-photo-provider-c",
+              "text": "ロールの名前をシークレットアクセスキーとして送る",
+              "explanation": "ロール名は認証情報ではありません。API要求には実際の認証情報が必要です。"
+            }
           ],
-          "answer": 1,
-          "reasons": [
-            "固定キーをコードへ配布する管理が残り、要件を満たしません。",
-            "用意したEC2ロールの認証情報をIMDSから取得するプロバイダーを使えます。先行する設定がない前提です。",
-            "ロール名は認証情報ではありません。API要求には実際の認証情報が必要です。"
+          "objective": "EC2ロールの認証情報取得方法を選ぶ。",
+          "correct_option_id": "temp-photo-provider-b",
+          "runtime_option_order": [
+            "temp-photo-provider-a",
+            "temp-photo-provider-b",
+            "temp-photo-provider-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go"
+          "rationale": "用意したEC2ロールの認証情報をIMDSから取得するプロバイダーを使えます。先行する設定がない前提です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/credentials/ec2rolecreds/doc.go"
+          ]
         },
         {
           "id": "temp-photo-permission",
           "prompt": "有効期限内の一時認証情報がある。s3:GetObjectだけ許可され、ほかの許可はない。同じオブジェクトへのs3:DeleteObjectは？",
           "options": [
-            "期限内なら削除も許可される",
-            "セッショントークンを外せば削除できる",
-            "削除は許可されない。期限と操作権限は別である"
+            {
+              "id": "temp-photo-permission-a",
+              "text": "期限内なら削除も許可される",
+              "explanation": "期限内であることは、削除権限の付与を意味しません。"
+            },
+            {
+              "id": "temp-photo-permission-b",
+              "text": "セッショントークンを外せば削除できる",
+              "explanation": "トークンを省略して権限を広げることはできません。一時認証情報を構成する必要な項目です。"
+            },
+            {
+              "id": "temp-photo-permission-c",
+              "text": "削除は許可されない。期限と操作権限は別である",
+              "explanation": "読み取り許可だけでは削除許可になりません。認証情報が有効でも操作の許可が必要です。"
+            }
           ],
-          "answer": 2,
-          "reasons": [
-            "期限内であることは、削除権限の付与を意味しません。",
-            "トークンを省略して権限を広げることはできません。一時認証情報を構成する必要な項目です。",
-            "読み取り許可だけでは削除許可になりません。認証情報が有効でも操作の許可が必要です。"
+          "objective": "一時認証情報の期限と操作権限を区別する。",
+          "correct_option_id": "temp-photo-permission-c",
+          "runtime_option_order": [
+            "temp-photo-permission-a",
+            "temp-photo-permission-b",
+            "temp-photo-permission-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          "rationale": "読み取り許可だけでは削除許可になりません。認証情報が有効でも操作の許可が必要です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          ]
         }
       ],
       "variant": {
@@ -108,33 +140,65 @@
           "id": "role-upload-trust",
           "prompt": "通信は正常でAには対象へのsts:AssumeRole許可があるが、Bの信頼ポリシーはAの主体を許可していない。認証情報の取得に失敗したとき調べる箇所は？",
           "options": [
-            "Bのロールの信頼ポリシー",
-            "BのロールにS3の全操作許可を付ける",
-            "セッション名を写真のファイル名に変える"
+            {
+              "id": "role-upload-trust-a",
+              "text": "Bのロールの信頼ポリシー",
+              "explanation": "引き受ける主体の許可が欠けています。Aの呼び出し元許可がある前提なので、Bの信頼関係を調べます。"
+            },
+            {
+              "id": "role-upload-trust-b",
+              "text": "BのロールにS3の全操作許可を付ける",
+              "explanation": "S3の操作権限を広げても、認証情報を得る段階の信頼不足は直りません。"
+            },
+            {
+              "id": "role-upload-trust-c",
+              "text": "セッション名を写真のファイル名に変える",
+              "explanation": "セッション名はセッションの識別に使う値で、信頼ポリシーの許可の代わりになりません。"
+            }
           ],
-          "answer": 0,
-          "reasons": [
-            "引き受ける主体の許可が欠けています。Aの呼び出し元許可がある前提なので、Bの信頼関係を調べます。",
-            "S3の操作権限を広げても、認証情報を得る段階の信頼不足は直りません。",
-            "セッション名はセッションの識別に使う値で、信頼ポリシーの許可の代わりになりません。"
+          "objective": "クロスアカウントの信頼不足を調べる。",
+          "correct_option_id": "role-upload-trust-a",
+          "runtime_option_order": [
+            "role-upload-trust-a",
+            "role-upload-trust-b",
+            "role-upload-trust-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          "rationale": "引き受ける主体の許可が欠けています。Aの呼び出し元許可がある前提なので、Bの信頼関係を調べます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          ]
         },
         {
           "id": "role-upload-permission",
           "prompt": "信頼を修正して引き受けは成功した。Bのロールは対象へのs3:GetObjectだけを許可し、ほかの許可やDenyはない。PutObjectに失敗する理由は？",
           "options": [
-            "信頼ポリシーにPutObjectを書く必要がある",
-            "インスタンスプロファイル名をキーとして送らないといけない",
-            "対象へのPutObject許可がない。引き受け許可と操作許可は別である"
+            {
+              "id": "role-upload-permission-a",
+              "text": "信頼ポリシーにPutObjectを書く必要がある",
+              "explanation": "信頼は引き受ける主体の条件です。対象S3操作を許可する権限とは分けて評価します。"
+            },
+            {
+              "id": "role-upload-permission-b",
+              "text": "インスタンスプロファイル名をキーとして送らないといけない",
+              "explanation": "これはクロスアカウントの利用者セッションです。プロファイル名は認証用キーではありません。"
+            },
+            {
+              "id": "role-upload-permission-c",
+              "text": "対象へのPutObject許可がない。引き受け許可と操作許可は別である",
+              "explanation": "引き受け成功はS3書き込み許可を意味しません。必要な対象・操作の許可を確認します。"
+            }
           ],
-          "answer": 2,
-          "reasons": [
-            "信頼は引き受ける主体の条件です。対象S3操作を許可する権限とは分けて評価します。",
-            "これはクロスアカウントの利用者セッションです。プロファイル名は認証用キーではありません。",
-            "引き受け成功はS3書き込み許可を意味しません。必要な対象・操作の許可を確認します。"
+          "objective": "引き受け後の操作許可不足を区別する。",
+          "correct_option_id": "role-upload-permission-c",
+          "runtime_option_order": [
+            "role-upload-permission-a",
+            "role-upload-permission-b",
+            "role-upload-permission-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          "rationale": "引き受け成功はS3書き込み許可を意味しません。必要な対象・操作の許可を確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+          ]
         }
       ],
       "variant": {
@@ -204,33 +268,65 @@
           "id": "auth-photo-version",
           "prompt": "認証と通信は正常。対象にs3:GetObjectだけ許可され、ほかの許可やDeny・KMS制約はない。存在する特定versionIdを指定して読む要求に不足する許可は？",
           "options": [
-            "s3:GetObjectVersion",
-            "s3:PutObjectTagging",
-            "許可は不足しない。GetObjectですべての版を読める"
+            {
+              "id": "auth-photo-version-a",
+              "text": "s3:GetObjectVersion",
+              "explanation": "特定versionIdを指定するGetObjectにはGetObjectVersionが必要です。この場合GetObjectも必須とはしません。"
+            },
+            {
+              "id": "auth-photo-version-b",
+              "text": "s3:PutObjectTagging",
+              "explanation": "タグ付き保存に関係する許可で、特定版の読み取りを許可しません。"
+            },
+            {
+              "id": "auth-photo-version-c",
+              "text": "許可は不足しない。GetObjectですべての版を読める",
+              "explanation": "versionIdの指定で必要許可が変わります。現在のGetObject許可だけでは要件を満たしません。"
+            }
           ],
-          "answer": 0,
-          "reasons": [
-            "特定versionIdを指定するGetObjectにはGetObjectVersionが必要です。この場合GetObjectも必須とはしません。",
-            "タグ付き保存に関係する許可で、特定版の読み取りを許可しません。",
-            "versionIdの指定で必要許可が変わります。現在のGetObject許可だけでは要件を満たしません。"
+          "objective": "versionId指定に対応する読取許可を選ぶ。",
+          "correct_option_id": "auth-photo-version-a",
+          "runtime_option_order": [
+            "auth-photo-version-a",
+            "auth-photo-version-b",
+            "auth-photo-version-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go"
+          "rationale": "特定versionIdを指定するGetObjectにはGetObjectVersionが必要です。この場合GetObjectも必須とはしません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go"
+          ]
         },
         {
           "id": "auth-photo-tags",
           "prompt": "今度は同じ汎用バケットへの保存。対象にs3:PutObjectを許可済み。KMS/ACL/ほかの許可やDenyはなく、PutObject要求でタグ集合も指定する。追加で必要な許可は？",
           "options": [
-            "s3:GetObjectVersion",
-            "s3:PutObjectTagging",
-            "追加の許可は不要。保存許可はタグ設定も必ず含む"
+            {
+              "id": "auth-photo-tags-a",
+              "text": "s3:GetObjectVersion",
+              "explanation": "特定版の読み取り用で、保存時のタグ設定を許可しません。"
+            },
+            {
+              "id": "auth-photo-tags-b",
+              "text": "s3:PutObjectTagging",
+              "explanation": "PutObjectでタグ集合を設定する要求にはPutObjectTaggingも必要です。指定条件に合わせて許可を確認します。"
+            },
+            {
+              "id": "auth-photo-tags-c",
+              "text": "追加の許可は不要。保存許可はタグ設定も必ず含む",
+              "explanation": "PutObject許可だけで、その要求に付随するタグ設定も自動的に許可されるわけではありません。"
+            }
           ],
-          "answer": 1,
-          "reasons": [
-            "特定版の読み取り用で、保存時のタグ設定を許可しません。",
-            "PutObjectでタグ集合を設定する要求にはPutObjectTaggingも必要です。指定条件に合わせて許可を確認します。",
-            "PutObject許可だけで、その要求に付随するタグ設定も自動的に許可されるわけではありません。"
+          "objective": "タグ集合の指定に対応する追加許可を選ぶ。",
+          "correct_option_id": "auth-photo-tags-b",
+          "runtime_option_order": [
+            "auth-photo-tags-a",
+            "auth-photo-tags-b",
+            "auth-photo-tags-c"
           ],
-          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+          "rationale": "PutObjectでタグ集合を設定する要求にはPutObjectTaggingも必要です。指定条件に合わせて許可を確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go"
+          ]
         }
       ],
       "variant": {

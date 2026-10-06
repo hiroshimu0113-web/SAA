@@ -374,3 +374,16 @@
 ### 最終GitHub同期確認
 - 実装・教材の最終コミット04ba985112130113c7bc4db1b2e96f52112357f8をcodex/content-expansion-20261006へ送信成功。git ls-remoteで同じハッシュを確認し、作業ツリーはクリーン。
 - ブランチ：https://github.com/hiroshimu0113-web/SAA/tree/codex/content-expansion-20261006 。main/Pagesは未反映。最終の同期確認記録もこのブランチへ保存する。
+
+
+## 2026-10-06 22:49 JST 継続依頼と明朝の報告時刻
+- 指示：利用可能な限り教材拡充を継続し、進捗表と引き継ぎを更新。報告希望は2026-10-07 07:00 JST（2026-10-06 22:00 UTC）。以前の時刻指定と別の現在の依頼。
+- 利用残量と予約：現在のツール一覧に残量取得・定時実行/報告予約の手段なし。残量は不明、自動送信の予約は未設定。バックグラウンドでの継続や7時送信を保証しない。小単位ごとに再開可能な記録とGitHub保存を行う。
+- 開始状態：95c9eab、作業ツリークリーン。知識確認済み3/14、ケース3件6問、候補155素材中確認分類済み3。
+- 次：分類ガイドの固定選択肢ID契約をケース正本へ揃え、旧ランタイムの順序・採点・保存を維持。その後authenticationを優先して拡充する。
+
+### 継続単位5：ケース正本の固定ID契約
+- 完了：前回の3ケース6問の正本を分類ガイド指定のobjective/options{id,text,explanation}/correct_option_id/rationale/source_urlsへ訂正。runtime_option_orderで取り込み後の表示順を固定し、番号形式の旧保存を保護。新規教材の重複作成はない。
+- 検証：game-content:checkで生成済みゲームモジュールのバイト一致を確認。48テストで正本選択肢の順番を逆転してもランタイム同一、不正ID/表示順拒否、旧保存と採点互換を確認。進捗更新・照合成功。
+- 分類：既存case-temporary-credentials-photo/case-iam-role-upload/case-authorization-photo-conditionsの取り込みレビュー記録を更新。内容確認・取り込み済み状態を保持。候補数/問題数の増加はない。
+- 利用残量：取得不可、不明。次：authenticationの認証主体と認可の違いを公式GetCallerIdentity API説明へ照合する。

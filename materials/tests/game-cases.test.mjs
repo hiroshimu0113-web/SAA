@@ -3,8 +3,16 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {newRun,act,parseRun,QUIZZES} from '../public/tower/engine.mjs';
 import {QUIZ_CASE_PAIRS,LEGACY_QUIZ_IDS} from '../public/tower/quiz.mjs';
+import {runtimeQuestion} from '../scripts/game-content-lib.mjs';
 const cases=JSON.parse(readFileSync(new URL('../knowledge/game-cases.json',import.meta.url))).cases;
 function enter(seed){const s=newRun(seed);s.floor=1;s.history=[{floor:0,lane:0,type:'battle'}];return act(s,{type:'node',lane:0});}
+test('cases: fixed option IDs preserve runtime answers when source choices reorder, reject broken IDs',()=>{
+ for(const c of cases)for(const q of c.questions){
+  const reordered=structuredClone(q);reordered.options.reverse();assert.deepEqual(runtimeQuestion(c,reordered),QUIZZES[q.id]);
+  const bad=structuredClone(q);bad.correct_option_id='missing';assert.throws(()=>runtimeQuestion(c,bad),/correct option/);
+  bad.correct_option_id=q.correct_option_id;bad.runtime_option_order[1]=bad.runtime_option_order[0];assert.throws(()=>runtimeQuestion(c,bad),/runtime option order/);
+ }
+});
 test('cases: export only reviewed pairs, choose in order, resume after every answer without duplicate payout',()=>{
  assert.deepEqual(QUIZ_CASE_PAIRS,cases.filter(c=>c.content_status==='reviewed').map(c=>c.questions.map(q=>q.id)));
  const seen=new Set();
