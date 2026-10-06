@@ -654,3 +654,5 @@
 - 新入口 tower/play.html を既存と同じ単一HTMLから生成。古いindex.htmlキャッシュが残る場合にも新入口で読めることを再現確認。保存キーとオリジンは同一。
 - 検証：ビルド、Chromeで戦闘エリアが画面外のケース、固定通知、デモの記録不変、古いindexキャッシュから新入口へ保存を維持した移動、攻撃・防御・回復、タップ／長押し・オフライン成功。画面外ケースの画像を確認。WebKitと公開確認はこれから。
 - 次の着手点：公開後、新入口の「演出 v2」「演出を試す」でiPhone表示を確認。教材・音声変更なし。
+
+- 公開完了：3b4bbaf56335ffd5cd176416fe70639ffad6df80、Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37419002737 成功。WebKitと公開HTTPS上のChromeで、画面外の戦闘エリアに対する固定通知、デモの記録不変、新入口への旧キャッシュ回避と保存データ維持、タッチ／オフラインを確認。新入口 https://hiroshimu0113-web.github.io/SAA/tower/play.html 。次はユーザーのiPhoneで「演出 v2」「演出を試す」を確認。本人の端末での根本原因は未確定。
