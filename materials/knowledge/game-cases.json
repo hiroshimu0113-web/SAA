@@ -80,6 +80,98 @@
           "summary": "作成後の別工程で、公式SDKの固定コミット、条件、全誤答理由、条件変更を照合。同一担当の確認で別担当の独立監査ではない。"
         }
       ]
+    },
+    {
+      "id": "iam-role-upload",
+      "title": "クロスアカウント写真アップロードの失敗段階",
+      "unit_ids": [
+        "iam-role",
+        "temporary-credentials"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch10"
+      ],
+      "premise": "アカウントAの利用者がBのロールを引き受け、写真をBのS3へアップロードする。",
+      "constraints": [
+        "通信経路は正常。Aの利用者は対象ロールへのsts:AssumeRoleを許可されている。",
+        "第1問では対象ロールの信頼にAの主体が含まれない。ほかの引き受け制約やDenyはない。",
+        "第2問では信頼を修正して引き受け成功済み。GetObjectだけを許可し、ほかの許可・Denyはない。"
+      ],
+      "questions": [
+        {
+          "id": "role-upload-trust",
+          "prompt": "通信は正常でAには対象へのsts:AssumeRole許可があるが、Bの信頼ポリシーはAの主体を許可していない。認証情報の取得に失敗したとき調べる箇所は？",
+          "options": [
+            "Bのロールの信頼ポリシー",
+            "BのロールにS3の全操作許可を付ける",
+            "セッション名を写真のファイル名に変える"
+          ],
+          "answer": 0,
+          "reasons": [
+            "引き受ける主体の許可が欠けています。Aの呼び出し元許可がある前提なので、Bの信頼関係を調べます。",
+            "S3の操作権限を広げても、認証情報を得る段階の信頼不足は直りません。",
+            "セッション名はセッションの識別に使う値で、信頼ポリシーの許可の代わりになりません。"
+          ],
+          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+        },
+        {
+          "id": "role-upload-permission",
+          "prompt": "信頼を修正して引き受けは成功した。Bのロールは対象へのs3:GetObjectだけを許可し、ほかの許可やDenyはない。PutObjectに失敗する理由は？",
+          "options": [
+            "信頼ポリシーにPutObjectを書く必要がある",
+            "インスタンスプロファイル名をキーとして送らないといけない",
+            "対象へのPutObject許可がない。引き受け許可と操作許可は別である"
+          ],
+          "answer": 2,
+          "reasons": [
+            "信頼は引き受ける主体の条件です。対象S3操作を許可する権限とは分けて評価します。",
+            "これはクロスアカウントの利用者セッションです。プロファイル名は認証用キーではありません。",
+            "引き受け成功はS3書き込み許可を意味しません。必要な対象・操作の許可を確認します。"
+          ],
+          "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go"
+        }
+      ],
+      "variant": {
+        "condition": "BのPutObject許可は存在するが、Aの呼び出し元から対象へのsts:AssumeRole許可を取り除く。",
+        "answer": "Aの引き受け許可を調べる。",
+        "reason": "クロスアカウントで認証情報を取得する段階に必要な呼び出し元許可が欠ける。BのS3操作許可を追加しても解決しない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "信頼ポリシーは引き受ける主体、権限ポリシーは実行する操作。クロスアカウントでは呼び出し元にもAssumeRole許可が必要。同一アカウントの直接信頼と一般化しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_CreateRole.go",
+          "claim": "AssumeRolePolicyDocumentは主体へロール引き受けを許可する信頼関係。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_AddRoleToInstanceProfile.go",
+          "claim": "インスタンスプロファイルは1ロール。ロールを追加するAPIにはPassRoleが必要で、変更には結果整合性がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AssociateIamInstanceProfile.go",
+          "claim": "実行中または停止中のEC2へIAMインスタンスプロファイルを関連付ける。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK固定版へ照合。引き受けと操作の段階、クロスアカウント条件、全誤答理由を確認。同一担当で別担当の独立監査ではない。"
+        }
+      ]
     }
   ]
 }

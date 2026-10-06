@@ -2939,6 +2939,294 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-iam-role-trust-permissions",
+      "title": "IAMロールの信頼と操作権限",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "引き受ける主体と実行操作の原理・判断を区別する。",
+      "objective": "引き受けられる主体と、引き受けた後の権限を区別する。",
+      "unit_ids": [
+        "iam-role",
+        "temporary-credentials"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/iam-role.md",
+          "locator": "IAMロール：引き受ける許可と操作する許可"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Security Token Service",
+        "AWS Identity and Access Management",
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "一時認証情報と認可を理解する。"
+      ],
+      "conditions": [
+        "通信経路は正常。Aの利用者は対象ロールへのsts:AssumeRoleを許可されている。",
+        "第1問では対象ロールの信頼にAの主体が含まれない。ほかの引き受け制約やDenyはない。",
+        "第2問では信頼を修正して引き受け成功済み。GetObjectだけを許可し、ほかの許可・Denyはない。"
+      ],
+      "limitations": [
+        "同一アカウントへの直接信頼とクロスアカウントを一律に扱わない。全ポリシー評価は範囲外。"
+      ],
+      "misconceptions": [
+        "ロールそのものがパスワードやアクセスキーである。",
+        "信頼ポリシーが引き受けを許可すればS3の全操作も許可される。",
+        "インスタンスプロファイルはS3の操作権限そのものである。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/iam-role.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "引き受け失敗か対象操作失敗かを区別して調査する。",
+        "counterexample": "S3の操作権限を拡張しても信頼不足は解消しない。",
+        "comparison": {
+          "path": "knowledge/lessons/iam-role.md",
+          "locator": "適用条件・限界・比較"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-iam-role-upload",
+          "reason": "失敗段階から判断する2問。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "信頼ポリシーは引き受ける主体、権限ポリシーは実行する操作。クロスアカウントでは呼び出し元にもAssumeRole許可が必要。同一アカウントの直接信頼と一般化しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_CreateRole.go",
+          "claim": "AssumeRolePolicyDocumentは主体へロール引き受けを許可する信頼関係。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_AddRoleToInstanceProfile.go",
+          "claim": "インスタンスプロファイルは1ロール。ロールを追加するAPIにはPassRoleが必要で、変更には結果整合性がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AssociateIamInstanceProfile.go",
+          "claim": "実行中または停止中のEC2へIAMインスタンスプロファイルを関連付ける。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "概念の目標と本文参照、固定語彙を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK固定版へ照合。引き受けと操作の段階、クロスアカウント条件、全誤答理由を確認。同一担当で別担当の独立監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "認証・信頼・権限を分けるカード候補。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/iam-role.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "引き受け成功を全操作許可と誤認する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード効果と条件付き役は未設計。"
+      ]
+    },
+    {
+      "id": "case-iam-role-upload",
+      "title": "クロスアカウント写真アップロードの失敗段階",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況で引き受け失敗と操作失敗を判断する2問ケース。",
+      "objective": "失敗した段階から信頼関係か操作権限かを選び、理由を説明する。",
+      "unit_ids": [
+        "iam-role",
+        "temporary-credentials"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "iam-role-upload"
+        }
+      ],
+      "domains": [
+        "security",
+        "compute"
+      ],
+      "capabilities": [
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Security Token Service",
+        "AWS Identity and Access Management",
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "一時認証情報と認可を理解する。"
+      ],
+      "conditions": [
+        "通信経路は正常。Aの利用者は対象ロールへのsts:AssumeRoleを許可されている。",
+        "第1問では対象ロールの信頼にAの主体が含まれない。ほかの引き受け制約やDenyはない。",
+        "第2問では信頼を修正して引き受け成功済み。GetObjectだけを許可し、ほかの許可・Denyはない。"
+      ],
+      "limitations": [
+        "同一アカウントへの直接信頼とクロスアカウントを一律に扱わない。全ポリシー評価は範囲外。"
+      ],
+      "misconceptions": [
+        "ロールそのものがパスワードやアクセスキーである。",
+        "信頼ポリシーが引き受けを許可すればS3の全操作も許可される。",
+        "インスタンスプロファイルはS3の操作権限そのものである。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "iam-role-upload.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "iam-role-upload.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "iam-role-upload.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "iam-role-upload.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+          "claim": "信頼ポリシーは引き受ける主体、権限ポリシーは実行する操作。クロスアカウントでは呼び出し元にもAssumeRole許可が必要。同一アカウントの直接信頼と一般化しない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_CreateRole.go",
+          "claim": "AssumeRolePolicyDocumentは主体へロール引き受けを許可する信頼関係。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_AddRoleToInstanceProfile.go",
+          "claim": "インスタンスプロファイルは1ロール。ロールを追加するAPIにはPassRoleが必要で、変更には結果整合性がある。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AssociateIamInstanceProfile.go",
+          "claim": "実行中または停止中のEC2へIAMインスタンスプロファイルを関連付ける。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "概念の目標と本文参照、固定語彙を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "作成後の別工程で公式SDK固定版へ照合。引き受けと操作の段階、クロスアカウント条件、全誤答理由を確認。同一担当で別担当の独立監査ではない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "47テスト、ビルド、Chromium 320pxで2ケース4問の全誤答理由・回答途中/結果の再開・重複報酬防止を確認。保存v4維持。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "知識の間へ条件変更を含む連続2問として取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/iam-role.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "引き受け成功を全操作許可と誤認する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "role-upload-trust, role-upload-permission"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

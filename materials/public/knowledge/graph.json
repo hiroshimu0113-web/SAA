@@ -794,20 +794,22 @@
       "id": "concept:iam-role",
       "kind": "concept",
       "title": "IAMロール",
-      "detail_status": "draft_unit",
+      "detail_status": "reviewed_unit",
       "unit": {
         "id": "iam-role",
         "title": "IAMロール",
         "group": "security",
         "objective": "引き受けられる主体と、引き受けた後の権限を区別する。",
         "estimated_minutes": 5,
-        "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+        "scope": "信頼と操作権限の区別、クロスアカウント引き受けの基本条件、EC2のインスタンスプロファイル。IAMの全評価経路は範囲外。",
         "prerequisites": [
           "temporary-credentials",
           "authorization"
         ],
         "misconceptions": [
-          "ロールそのものがパスワードやアクセスキーである。"
+          "ロールそのものがパスワードやアクセスキーである。",
+          "信頼ポリシーが引き受けを許可すればS3の全操作も許可される。",
+          "インスタンスプロファイルはS3の操作権限そのものである。"
         ],
         "checks": [
           {
@@ -816,7 +818,9 @@
             "prompt": "ロールの信頼ポリシーと権限ポリシーの役割は？",
             "expected_points": [
               "信頼ポリシーは誰が引き受けられるか",
-              "権限ポリシーは何を実行できるか"
+              "権限ポリシーは何を実行できるか",
+              "クロスアカウントでは呼び出し元のAssumeRole許可も確認する",
+              "他の制約や明示的Denyがある場合はこれだけでアクセス成功を保証しない"
             ]
           },
           {
@@ -825,7 +829,9 @@
             "prompt": "写真加工EC2からS3へ保存する構成を説明して。",
             "expected_points": [
               "適切なロールをEC2へ割り当てる",
-              "一時認証情報を使い保存先への必要な操作だけ許可する"
+              "一時認証情報を使い保存先への必要な操作だけ許可する",
+              "ロールを含むインスタンスプロファイルをEC2へ関連付ける",
+              "SDKのEC2ロール認証情報プロバイダーと取得経路を確認する"
             ]
           }
         ],
@@ -833,14 +839,40 @@
           "ch02-l01"
         ],
         "review": {
-          "status": "draft",
-          "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-          "source_document": "docs/STARTER_REVIEW.md"
+          "status": "reviewed",
+          "basis": "補足本文とケース作成後に公式SDKのAPI説明を確認。別担当による独立監査・実AWS権限実験・本人理解確認は未実施。",
+          "source_document": "knowledge/lessons/iam-role.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sts/api_op_AssumeRole.go",
+              "claim": "信頼ポリシーは引き受ける主体、権限ポリシーは実行する操作。クロスアカウントでは呼び出し元にもAssumeRole許可が必要。同一アカウントの直接信頼と一般化しない。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_CreateRole.go",
+              "claim": "AssumeRolePolicyDocumentは主体へロール引き受けを許可する信頼関係。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/iam/api_op_AddRoleToInstanceProfile.go",
+              "claim": "インスタンスプロファイルは1ロール。ロールを追加するAPIにはPassRoleが必要で、変更には結果整合性がある。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AssociateIamInstanceProfile.go",
+              "claim": "実行中または停止中のEC2へIAMインスタンスプロファイルを関連付ける。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "条件を1つ変えた転移問題を追加する",
-          "境界条件と公式根拠を照合してから公開教材へ反映する"
+          "SCP・アクセス許可境界・明示的Deny・クロスアカウントのリソースポリシー評価へ展開",
+          "実環境の権限実験と独立した別担当者レビュー"
         ]
       }
     },
