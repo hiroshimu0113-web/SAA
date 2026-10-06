@@ -1370,6 +1370,121 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "rds-photo-pitr",
+      "title": "写真注文DBの時点復元と接続先",
+      "premise": "RDS for PostgreSQLの注文DBの誤更新から復旧する。Aurora/RDS Customではない。",
+      "constraints": [
+        "時刻は架空のUTC例。自動バックアップ有効で指定する時刻の復元が可能という前提。実AWSの復旧時間保証ではない。",
+        "第2問は復元済みの新DBの確認。元にカスタム設定があり、復元では各グループ/配置を明示指定しなかった。"
+      ],
+      "questions": [
+        {
+          "id": "rds-pitr-restore-time",
+          "objective": "誤更新前の復元可能時刻を指定する。",
+          "prompt": "10:00 UTCに誤更新した。復元可能範囲は09:00から最新10:10 UTCまでで、09:59の状態が必要。適切な指定は？",
+          "options": [
+            {
+              "id": "rds-pitr-restore-time-a",
+              "text": "新しいDB名とRestoreTime=09:59 UTCを指定し、UseLatestRestorableTimeは同時指定しない",
+              "explanation": "必要時点が保持範囲内で最新時刻より前です。指定時刻と最新指定の排他条件を満たします。"
+            },
+            {
+              "id": "rds-pitr-restore-time-b",
+              "text": "新しいDB名とUseLatestRestorableTime=trueを指定すれば誤更新前へ必ず戻る",
+              "explanation": "最新10:10は誤更新後です。最新と業務上正しい状態は同じ条件ではありません。"
+            },
+            {
+              "id": "rds-pitr-restore-time-c",
+              "text": "RestoreTime=09:59 UTCとUseLatestRestorableTime=trueを両方指定する",
+              "explanation": "RestoreTimeと最新時刻指定は同時に使えません。どちらの状態が必要かを決めます。"
+            }
+          ],
+          "correct_option_id": "rds-pitr-restore-time-a",
+          "runtime_option_order": [
+            "rds-pitr-restore-time-a",
+            "rds-pitr-restore-time-b",
+            "rds-pitr-restore-time-c"
+          ],
+          "rationale": "必要時点が保持範囲内で最新時刻より前です。指定時刻と最新指定の排他条件を満たします。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go"
+          ]
+        },
+        {
+          "id": "rds-pitr-new-target",
+          "objective": "新DBの設定・接続と元DBを区別する。",
+          "prompt": "別にPITRを行い新しいDBが利用可能になった。元DBはカスタムグループを使用し、復元ではグループ/配置を明示しなかった。業務で使う前の適切な確認は？",
+          "options": [
+            {
+              "id": "rds-pitr-new-target-a",
+              "text": "元DBが自動巻戻しされたと考え、同じ接続先で確認を省略する",
+              "explanation": "PITRは新しいDBを作る操作です。元DBの内容と接続先が自動で入れ替わったとは考えません。"
+            },
+            {
+              "id": "rds-pitr-new-target-b",
+              "text": "復元は別DBなので、内容・接続先と必要なネットワーク/パラメーター/配置を確認して切替を検証する",
+              "explanation": "復元内容と利用経路・設定は別の確認です。既定設定と元のカスタム設定の違いも調べます。"
+            },
+            {
+              "id": "rds-pitr-new-target-c",
+              "text": "元とすべての設定が完全に同じなので、内容だけ見れば必ず接続できる",
+              "explanation": "多くの設定を持っていても、既定のグループや配置が適用される条件があります。完全一致や接続成功を保証しません。"
+            }
+          ],
+          "correct_option_id": "rds-pitr-new-target-b",
+          "runtime_option_order": [
+            "rds-pitr-new-target-a",
+            "rds-pitr-new-target-b",
+            "rds-pitr-new-target-c"
+          ],
+          "rationale": "復元内容と利用経路・設定は別の確認です。既定設定と元のカスタム設定の違いも調べます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "必要な09:59 UTCが、保持期限等によって現在の復元可能範囲外になっている。",
+        "answer": "このPITRからその時刻へ戻せるとは判断せず、別の有効なバックアップと復旧可能範囲を確認する。",
+        "reason": "必要時刻は保持/復元範囲を満たす必要がある。今から保持日数を伸ばしても、失われた過去のバックアップが復活する根拠にはならない。"
+      },
+      "unit_ids": [
+        "point-in-time-recovery"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch11"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go",
+          "claim": "保持範囲のLatestRestorableTimeより前のUTC時刻を指定して新DBを作成。時刻パラメーター排他、既定グループ等、Aurora別API。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "BackupRetentionPeriod正値で自動バックアップ有効、0で無効。0にできない条件とAuroraのクラスター管理。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

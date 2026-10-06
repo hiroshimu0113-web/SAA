@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 14,
-    "rubric_checks": 28
+    "detailed_units": 15,
+    "rubric_checks": 30
   },
   "nodes": [
     {
@@ -1423,9 +1423,74 @@
     {
       "id": "concept:point-in-time-recovery",
       "kind": "concept",
-      "title": "point-in-time-recovery",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "RDSの時点復元と復元先",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "point-in-time-recovery",
+        "title": "RDSの時点復元と復元先",
+        "group": "storage",
+        "objective": "復元可能な時刻と新しいDBへの復元を区別し、復元先の確認を選ぶ。",
+        "estimated_minutes": 7,
+        "scope": "RDS for PostgreSQL DBインスタンスの保持範囲と時刻、新DBと既定設定。Aurora/RDS Custom、復旧時間実測や全バックアップ設計は範囲外。",
+        "prerequisites": [
+          "durability"
+        ],
+        "misconceptions": [
+          "PITRは元のDBをそのまま過去へ巻き戻す。",
+          "最新復元可能時刻なら誤更新も必ず取り消せる。",
+          "PITRの元DBと復元先は同じもの。",
+          "復元先のネットワークやパラメーターは必ず元と完全一致する。"
+        ],
+        "checks": [
+          {
+            "id": "point-in-time-recovery-explain",
+            "level": "explain",
+            "prompt": "PITRの指定時刻と復元先はどう決まる？",
+            "expected_points": [
+              "PITRは新しいDBを作る",
+              "保持範囲とLatestRestorableTimeより前のUTC時刻を確認する",
+              "RestoreTimeと最新指定を同時に使わない"
+            ]
+          },
+          {
+            "id": "point-in-time-recovery-apply",
+            "level": "apply",
+            "prompt": "誤更新前へ戻した後、アプリで使うまでに何を確認する？",
+            "expected_points": [
+              "誤更新前の時刻が復元可能範囲にあるか確認する",
+              "復元内容、接続先、必要な設定とアクセスを確認する",
+              "指定時点より後の正しい業務更新と切替を別に扱う"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch06-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+          "source_document": "knowledge/lessons/point-in-time-recovery.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go",
+              "claim": "保持範囲のLatestRestorableTimeより前のUTC時刻を指定して新DBを作成。時刻パラメーター排他、既定グループ等、Aurora別API。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+              "claim": "BackupRetentionPeriod正値で自動バックアップ有効、0で無効。0にできない条件とAuroraのクラスター管理。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "復旧時間の実測、切替、差分の処理を含む実AWSの復旧試験を設計する。",
+          "Auroraのクラスター復元とスナップショットの比較を別範囲で確認する。"
+        ]
+      }
     },
     {
       "id": "concept:presigned-url",
@@ -8599,6 +8664,16 @@
     {
       "from": "concept:mfa",
       "to": "lesson:ch02-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:durability",
+      "to": "concept:point-in-time-recovery",
+      "type": "learn_before"
+    },
+    {
+      "from": "concept:point-in-time-recovery",
+      "to": "lesson:ch06-l03",
       "type": "unit_reference"
     },
     {

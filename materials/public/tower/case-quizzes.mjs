@@ -329,6 +329,36 @@ export const CASE_QUIZZES={
       "停止中の既存null版という条件に応じて作用が変わります。非null版の保持と現在の削除状態を分けます。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_DeleteObject.go"
+  },
+  "rds-pitr-restore-time": {
+    "prompt": "RDS for PostgreSQLの注文DBの誤更新から復旧する。Aurora/RDS Customではない。 10:00 UTCに誤更新した。復元可能範囲は09:00から最新10:10 UTCまでで、09:59の状態が必要。適切な指定は？",
+    "options": [
+      "新しいDB名とRestoreTime=09:59 UTCを指定し、UseLatestRestorableTimeは同時指定しない",
+      "新しいDB名とUseLatestRestorableTime=trueを指定すれば誤更新前へ必ず戻る",
+      "RestoreTime=09:59 UTCとUseLatestRestorableTime=trueを両方指定する"
+    ],
+    "answer": 0,
+    "reasons": [
+      "必要時点が保持範囲内で最新時刻より前です。指定時刻と最新指定の排他条件を満たします。",
+      "最新10:10は誤更新後です。最新と業務上正しい状態は同じ条件ではありません。",
+      "RestoreTimeと最新時刻指定は同時に使えません。どちらの状態が必要かを決めます。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go"
+  },
+  "rds-pitr-new-target": {
+    "prompt": "RDS for PostgreSQLの注文DBの誤更新から復旧する。Aurora/RDS Customではない。 別にPITRを行い新しいDBが利用可能になった。元DBはカスタムグループを使用し、復元ではグループ/配置を明示しなかった。業務で使う前の適切な確認は？",
+    "options": [
+      "元DBが自動巻戻しされたと考え、同じ接続先で確認を省略する",
+      "復元は別DBなので、内容・接続先と必要なネットワーク/パラメーター/配置を確認して切替を検証する",
+      "元とすべての設定が完全に同じなので、内容だけ見れば必ず接続できる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "PITRは新しいDBを作る操作です。元DBの内容と接続先が自動で入れ替わったとは考えません。",
+      "復元内容と利用経路・設定は別の確認です。既定設定と元のカスタム設定の違いも調べます。",
+      "多くの設定を持っていても、既定のグループや配置が適用される条件があります。完全一致や接続成功を保証しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -375,5 +405,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "s3-delete-marker-enabled",
     "s3-delete-null-suspended"
+  ],
+  [
+    "rds-pitr-restore-time",
+    "rds-pitr-new-target"
   ]
 ];

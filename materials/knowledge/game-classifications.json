@@ -5827,6 +5827,270 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-point-in-time-recovery-target",
+      "title": "RDSの時点復元：時刻と新しいDBを確認する",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "復元可能な時刻と新しいDBへの復元を区別し、復元先の確認を選ぶ。",
+      "unit_ids": [
+        "point-in-time-recovery"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/point-in-time-recovery.md",
+          "locator": "RDSの時点復元：時刻と新しいDBを確認する"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "recover",
+        "store"
+      ],
+      "concerns": [
+        "durability",
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Relational Database Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "耐久性とデータの保全"
+      ],
+      "conditions": [
+        "時刻は架空のUTC例。自動バックアップ有効で指定する時刻の復元が可能という前提。実AWSの復旧時間保証ではない。",
+        "第2問は復元済みの新DBの確認。元にカスタム設定があり、復元では各グループ/配置を明示指定しなかった。"
+      ],
+      "limitations": [
+        "RDS for PostgreSQL DBインスタンスの保持範囲と時刻、新DBと既定設定。Aurora/RDS Custom、復旧時間実測や全バックアップ設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "PITRは元のDBをそのまま過去へ巻き戻す。",
+        "最新復元可能時刻なら誤更新も必ず取り消せる。",
+        "PITRの元DBと復元先は同じもの。",
+        "復元先のネットワークやパラメーターは必ず元と完全一致する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/point-in-time-recovery.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "RDS for PostgreSQLの注文DBの誤更新から復旧する。Aurora/RDS Customではない。",
+        "counterexample": "最新復元可能時刻が誤更新後なら最新を選んでも正しい過去状態にはならない。",
+        "comparison": {
+          "path": "knowledge/lessons/point-in-time-recovery.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-rds-photo-pitr",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go",
+          "claim": "保持範囲のLatestRestorableTimeより前のUTC時刻を指定して新DBを作成。時刻パラメーター排他、既定グループ等、Aurora別API。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "BackupRetentionPeriod正値で自動バックアップ有効、0で無効。0にできない条件とAuroraのクラスター管理。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/point-in-time-recovery.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "PITRの元DBと復元先は同じもの。",
+          "復元先のネットワークやパラメーターは必ず元と完全一致する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-rds-photo-pitr",
+      "title": "写真注文DBの時点復元と接続先",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "point-in-time-recovery"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-photo-pitr"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "recover",
+        "store"
+      ],
+      "concerns": [
+        "durability",
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Relational Database Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "耐久性とデータの保全"
+      ],
+      "conditions": [
+        "時刻は架空のUTC例。自動バックアップ有効で指定する時刻の復元が可能という前提。実AWSの復旧時間保証ではない。",
+        "第2問は復元済みの新DBの確認。元にカスタム設定があり、復元では各グループ/配置を明示指定しなかった。"
+      ],
+      "limitations": [
+        "RDS for PostgreSQL DBインスタンスの保持範囲と時刻、新DBと既定設定。Aurora/RDS Custom、復旧時間実測や全バックアップ設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "PITRは元のDBをそのまま過去へ巻き戻す。",
+        "最新復元可能時刻なら誤更新も必ず取り消せる。",
+        "PITRの元DBと復元先は同じもの。",
+        "復元先のネットワークやパラメーターは必ず元と完全一致する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-photo-pitr.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-photo-pitr.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-photo-pitr.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-photo-pitr.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RestoreDBInstanceToPointInTime.go",
+          "claim": "保持範囲のLatestRestorableTimeより前のUTC時刻を指定して新DBを作成。時刻パラメーター排他、既定グループ等、Aurora別API。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "BackupRetentionPeriod正値で自動バックアップ有効、0で無効。0にできない条件とAuroraのクラスター管理。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/point-in-time-recovery.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "PITRの元DBと復元先は同じもの。",
+          "復元先のネットワークやパラメーターは必ず元と完全一致する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "rds-pitr-restore-time, rds-pitr-new-target"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
