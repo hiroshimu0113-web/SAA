@@ -1,4 +1,4 @@
-export const FLAVOR={
+export const BASE_FLAVOR={
   "strike": {
     "note": "指標を他の情報と照合し、問題の箇所を絞り込みます。",
     "limit": "切り分けそのものが障害を修復するとは限りません。",
@@ -100,3 +100,5 @@ export const FLAVOR={
     "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
   }
 };
+
+export const FLAVOR=JSON.parse(JSON.stringify(BASE_FLAVOR));

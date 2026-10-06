@@ -1,0 +1,22 @@
+export const BASE_CARDS={
+ strike:{name:'切り分け',cost:1,kind:'attack',damage:6,upDamage:3,text:'6ダメージ。'},
+ guard:{name:'防壁',cost:1,kind:'skill',block:5,upBlock:3,text:'5ブロック。'},
+ probe:{name:'観測',cost:1,kind:'attack',damage:4,upDamage:2,draw:1,text:'4ダメージ。1枚引く。'},
+ burst:{name:'集中処理',cost:2,kind:'attack',damage:18,upDamage:7,debuff:{id:'burn',amount:3},text:'18ダメージ。炎上3。'},
+ parallel:{name:'並列処理',cost:1,kind:'attack',damage:4,hits:2,upDamage:2,text:'4ダメージを2回。強化の効果も2回。'},
+ retry:{name:'再試行',cost:0,kind:'attack',damage:3,upDamage:2,text:'3ダメージ。'},
+ reserve:{name:'予備容量',cost:2,kind:'skill',block:14,upBlock:6,text:'14ブロック。'},
+ restore:{name:'復旧手順',cost:1,kind:'skill',heal:7,upHeal:4,exhaust:true,text:'HPを7回復。この戦闘中は除外。'},
+ foresight:{name:'先読み',cost:1,kind:'skill',draw:3,upDraw:1,text:'3枚引く。'},
+ isolate:{name:'隔離',cost:1,kind:'skill',debuff:{id:'overload',amount:2},block:3,upBlock:4,text:'3ブロック。敵に過負荷2。'},
+ detour:{name:'迂回',cost:1,kind:'skill',debuff:{id:'delay',amount:1},exhaust:true,block:4,draw:1,upBlock:4,text:'4ブロック。1枚引く。遅延。この戦闘中は除外。'},
+ analysis:{name:'ログ分析',cost:0,kind:'skill',debuff:{id:'misconfig',amount:2},draw:2,upDraw:1,exhaust:true,text:'2枚引く。設定不備2。この戦闘中は除外。'},
+ overload:{name:'過負荷試験',cost:1,kind:'attack',damage:16,self:3,debuff:{id:'depletion',amount:2},upDamage:5,text:'16ダメージ。枯渇2。自分のHPを3失う。'},
+ redundant:{name:'冗長構成',cost:2,kind:'power',armor:3,upArmor:2,exhaust:true,text:'毎ターン開始時3ブロック。この戦闘中持続。'},
+ optimize:{name:'最適化',cost:1,kind:'power',strength:2,upStrength:1,exhaust:true,text:'この戦闘中、攻撃のダメージ＋2。'},
+ cache:{name:'キャッシュ',cost:0,kind:'skill',energy:2,upEnergy:1,exhaust:true,text:'エナジーを2得る。この戦闘中は除外。'},
+ patch:{name:'緊急パッチ',cost:0,kind:'skill',block:4,upBlock:3,exhaust:true,text:'4ブロック。この戦闘中は除外。'},
+ balance:{name:'負荷分散',cost:1,kind:'attack',damage:7,block:4,upDamage:3,upBlock:2,text:'7ダメージ。4ブロック。'},
+ reversal:{name:'逆転の一手',cost:2,kind:'attack',damage:12,perBlock:true,upDamage:6,text:'12＋現在のブロック分のダメージ。'},
+ quarantine:{name:'封じ込め',cost:2,kind:'attack',damage:10,debuff:{id:'overload',amount:3},upDamage:5,text:'10ダメージ。敵に過負荷3。'}
+};

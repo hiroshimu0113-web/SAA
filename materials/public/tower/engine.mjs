@@ -3,28 +3,8 @@ import {COMBOS} from './combos.mjs';
 import {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 export {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 
-export const CARDS={
- strike:{name:'切り分け',cost:1,kind:'attack',damage:6,upDamage:3,text:'6ダメージ。'},
- guard:{name:'防壁',cost:1,kind:'skill',block:5,upBlock:3,text:'5ブロック。'},
- probe:{name:'観測',cost:1,kind:'attack',damage:4,upDamage:2,draw:1,text:'4ダメージ。1枚引く。'},
- burst:{name:'集中処理',cost:2,kind:'attack',damage:18,upDamage:7,debuff:{id:'burn',amount:3},text:'18ダメージ。炎上3。'},
- parallel:{name:'並列処理',cost:1,kind:'attack',damage:4,hits:2,upDamage:2,text:'4ダメージを2回。強化の効果も2回。'},
- retry:{name:'再試行',cost:0,kind:'attack',damage:3,upDamage:2,text:'3ダメージ。'},
- reserve:{name:'予備容量',cost:2,kind:'skill',block:14,upBlock:6,text:'14ブロック。'},
- restore:{name:'復旧手順',cost:1,kind:'skill',heal:7,upHeal:4,exhaust:true,text:'HPを7回復。この戦闘中は除外。'},
- foresight:{name:'先読み',cost:1,kind:'skill',draw:3,upDraw:1,text:'3枚引く。'},
- isolate:{name:'隔離',cost:1,kind:'skill',debuff:{id:'overload',amount:2},block:3,upBlock:4,text:'3ブロック。敵に過負荷2。'},
- detour:{name:'迂回',cost:1,kind:'skill',debuff:{id:'delay',amount:1},exhaust:true,block:4,draw:1,upBlock:4,text:'4ブロック。1枚引く。遅延。この戦闘中は除外。'},
- analysis:{name:'ログ分析',cost:0,kind:'skill',debuff:{id:'misconfig',amount:2},draw:2,upDraw:1,exhaust:true,text:'2枚引く。設定不備2。この戦闘中は除外。'},
- overload:{name:'過負荷試験',cost:1,kind:'attack',damage:16,self:3,debuff:{id:'depletion',amount:2},upDamage:5,text:'16ダメージ。枯渇2。自分のHPを3失う。'},
- redundant:{name:'冗長構成',cost:2,kind:'power',armor:3,upArmor:2,exhaust:true,text:'毎ターン開始時3ブロック。この戦闘中持続。'},
- optimize:{name:'最適化',cost:1,kind:'power',strength:2,upStrength:1,exhaust:true,text:'この戦闘中、攻撃のダメージ＋2。'},
- cache:{name:'キャッシュ',cost:0,kind:'skill',energy:2,upEnergy:1,exhaust:true,text:'エナジーを2得る。この戦闘中は除外。'},
- patch:{name:'緊急パッチ',cost:0,kind:'skill',block:4,upBlock:3,exhaust:true,text:'4ブロック。この戦闘中は除外。'},
- balance:{name:'負荷分散',cost:1,kind:'attack',damage:7,block:4,upDamage:3,upBlock:2,text:'7ダメージ。4ブロック。'},
- reversal:{name:'逆転の一手',cost:2,kind:'attack',damage:12,perBlock:true,upDamage:6,text:'12＋現在のブロック分のダメージ。'},
- quarantine:{name:'封じ込め',cost:2,kind:'attack',damage:10,debuff:{id:'overload',amount:3},upDamage:5,text:'10ダメージ。敵に過負荷3。'}
-};
+import {CARDS,activateCatalog,getActiveCatalog,activeVersion} from './catalog.mjs';
+export {CARDS,activateCatalog} from './catalog.mjs';
 export const ENEMIES={
  noise:{tier:'battle',name:'ノイズの群れ',hp:32,glyph:'✺',pattern:[['attack',7],['guard',7],['attack',10]]},
  surge:{tier:'battle',name:'負荷の奔流',hp:38,glyph:'≋',pattern:[['buff',2],['attack',8],['attack',12]]},
@@ -49,7 +29,7 @@ export const RELICS={
 };
 export const ROUTES=[['battle','battle'],['event','battle'],['elite','shop'],['rest','battle'],['battle','event'],['elite','shop'],['rest','rest'],['boss']];
 export const NODE_NAMES={battle:'戦闘',elite:'強敵',rest:'休息',shop:'交換所',event:'クイズ',boss:'ボス'};
-const rewardPool=Object.keys(CARDS).filter(x=>!['strike','guard'].includes(x));
+const rewardPool=()=>Object.keys(CARDS).filter(x=>!['strike','guard'].includes(x));
 const clone=x=>JSON.parse(JSON.stringify(x));
 const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 function rnd(s){s.rng=(Math.imul(s.rng,1664525)+1013904223)>>>0;return s.rng/4294967296;}
@@ -57,8 +37,10 @@ function shuffle(s,arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=M
 function log(s,t){s.log=[...s.log,t].slice(-5);}
 function heal(s,n){s.hp=Math.min(s.maxHp,s.hp+n);}
 function add(s,id){s.deck.push({uid:s.nextId++,id,plus:false});}
-export function newRun(seed=Date.now()){
+export function newRun(seed=Date.now(),catalog=null){
+ activateCatalog(catalog);
  const s={version:4,seed:seed>>>0,rng:seed>>>0,nextId:0,hp:72,maxHp:72,gold:60,floor:0,phase:'map',deck:[],relics:['lantern'],history:[],log:['観測灯を携えて、尖塔へ。'],battle:null,reward:[],stock:[],removed:false,quiz:null};
+ if(catalog)s.learningCatalog=JSON.parse(JSON.stringify(catalog));
  for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
 }
 export function cardValues(card){const d=CARDS[card.id],v={...d};if(card.plus)for(const k of ['damage','block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);return v;}
@@ -93,15 +75,17 @@ function burn(s,side){
 }
 function lose(s){s.phase='lost';log(s,'冒険はここまで。');}
 
-function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=shuffle(s,rewardPool).slice(0,3);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
+function offers(s){const pool=rewardPool(),study=pool.filter(id=>id.startsWith('study-'));if(!study.length)return shuffle(s,pool).slice(0,3);return shuffle(s,[...shuffle(s,pool.filter(id=>!id.startsWith('study-'))).slice(0,2),shuffle(s,study)[0]]);}
+function win(s){const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';s.gold+=elite?40:22;if(s.relics.includes('spring'))heal(s,4);if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}s.reward=offers(s);if(elite){const relic=shuffle(s,Object.keys(RELICS).filter(x=>!s.relics.includes(x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}s.phase='reward';log(s,'勝利。カードを1枚選ぶか、見送れます。');}
 function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];}
 export function act(state,action){
+ if(activeVersion()!==(state.learningCatalog?.version||null))activateCatalog(state.learningCatalog||null);
  const s=clone(state),a=action,b=s.battle;
  if(a.type==='node'&&s.phase==='map'&&Number.isInteger(a.lane)&&ROUTES[s.floor]?.[a.lane]){
   const type=ROUTES[s.floor][a.lane];s.history.push({floor:s.floor,lane:a.lane,type});s.floor++;log(s,s.floor+'階：'+NODE_NAMES[type]);
   if(['battle','elite','boss'].includes(type)){const pool=ENEMY_POOLS[type],id=pool[Math.floor(rnd(s)*pool.length)];startBattle(s,id);}
-  else{s.phase=type;s.battle=null;s.removed=false;if(type==='event')startQuiz(s);if(type==='shop')s.stock=shuffle(s,rewardPool).slice(0,3);}return s;
+  else{s.phase=type;s.battle=null;s.removed=false;if(type==='event')startQuiz(s);if(type==='shop')s.stock=offers(s);}return s;
  }
  if(a.type==='play'&&s.phase==='battle'){
   const index=b.hand.indexOf(a.uid),card=s.deck.find(c=>c.uid===a.uid);if(index<0||!card||b.playerDebuffs.delay===1)return state;const d=cardValues(card);if(d.cost>b.energy)return state;
@@ -194,10 +178,14 @@ export function act(state,action){
  return state;
 }
 export function parseRun(raw){
+ const previous=getActiveCatalog();
+ try{const candidate=JSON.parse(raw);activateCatalog(candidate&&Object.prototype.hasOwnProperty.call(candidate,'learningCatalog')?candidate.learningCatalog:null);return validateRun(raw);}catch(error){activateCatalog(previous);throw error;}
+}
+function validateRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
  if(!s||![1,2,3,4].includes(s.version)||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.hp,72)||s.maxHp!==72||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
  if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
- for(const [name,allowed,max] of [['relics',Object.keys(RELICS),4],['reward',rewardPool,3],['stock',rewardPool,3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
+ for(const [name,allowed,max] of [['relics',Object.keys(RELICS),4],['reward',rewardPool(),3],['stock',rewardPool(),3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
  if(!Array.isArray(s.history)||s.history.length!==s.floor||!s.history.every((h,i)=>h.floor===i&&num(h.lane,1)&&ROUTES[i][h.lane]===h.type)||!Array.isArray(s.log)||s.log.length>5||!s.log.every(t=>typeof t==='string'&&t.length<200)||typeof s.removed!=='boolean')throw Error('進行記録が不正です。');
  if(s.phase==='map'&&s.floor>=8)throw Error('ルートが不正です。');
  if(s.phase==='lost'&&s.hp!==0||s.phase!=='lost'&&s.hp===0)throw Error('HPが不正です。');

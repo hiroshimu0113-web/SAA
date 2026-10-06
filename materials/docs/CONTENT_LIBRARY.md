@@ -29,3 +29,7 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 5. `pnpm progress:update`と`pnpm progress:check`で進捗表を更新し、CHECKPOINTとTASKSに作業を記録する。GitHubにも保存したか、ローカルのみかを報告する。
 
 次回の教材拡充は[EXPANSION_PLAN.md](../knowledge/EXPANSION_PLAN.md)に従い、まず既存14単位の確認や先行2章の細分化から進めます。新しい原稿を増やす作業と、既存原稿を公開できる品質へ整える作業を分けて計画します。
+
+## ゲームへの反映
+
+公開済み教材はテスト/ビルド時にカード・クイズへ変換し、ゲーム画面の更新ボタンで取得できる。[連携仕様と教材担当の手順](GAME_CONTENT_UPDATE.md)を参照。独立HTMLは構造化補足の登録が必要。未公開原稿は取り込まない。

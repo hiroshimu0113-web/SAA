@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && vite build && node scripts/build-tower.mjs && node scripts/build-sw.mjs",
+    "build": "pnpm game:export && tsc --noEmit && vite build && node scripts/build-tower.mjs && node scripts/build-sw.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "tsx --test tests/*.test.ts tests/*.test.mjs",
+    "test": "pnpm game:export && tsx --test tests/*.test.ts tests/*.test.mjs",
     "check": "tsc --noEmit",
     "test:browser": "node scripts/browser-check.mjs",
     "book": "tsx scripts/export-book.ts && node scripts/check-book.mjs",
@@ -16,7 +16,9 @@
     "knowledge:export": "tsx scripts/export-knowledge.ts",
     "knowledge:check": "tsx scripts/export-knowledge.ts --check",
     "progress:update": "tsx scripts/export-progress.ts",
-    "progress:check": "tsx scripts/export-progress.ts --check"
+    "progress:check": "tsx scripts/export-progress.ts --check",
+    "game:export": "tsx scripts/export-game-catalog.ts",
+    "game:check": "tsx scripts/export-game-catalog.ts --check"
   },
   "dependencies": {
     "react": "^19.1.0",

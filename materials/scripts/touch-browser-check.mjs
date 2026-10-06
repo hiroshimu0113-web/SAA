@@ -11,7 +11,7 @@ import assert from 'node:assert/strict';
 import {mkdir} from 'node:fs/promises';
 const kind=process.env.BROWSER||'chromium';
 let server=process.env.APP_URL?null:await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
-const browser=await (kind==='webkit'?webkit:chromium).launch(kind==='chromium'&&process.platform==='win32'?{executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'}:{});
+const browser=await (kind==='webkit'?webkit:chromium).launch(kind==='chromium'&&process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:kind==='chromium'&&process.platform==='win32'?{executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'}:{});
 const base=process.env.APP_URL||'http://127.0.0.1:4183/',key='saa-tower-run-v1';
 await mkdir('artifacts',{recursive:true});
 try{

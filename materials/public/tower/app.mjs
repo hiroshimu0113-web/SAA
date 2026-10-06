@@ -1,3 +1,5 @@
+import bundledCatalog from './learning-catalog.json';
+import {chooseCatalog,fetchCatalog,activateCatalog,STARTERS} from './catalog.mjs';
 import {DEBUFFS,debuffLabel} from './debuffs.mjs';
 import {FLAVOR} from './flavor.mjs';
 import {COMBOS,comboReady} from './combos.mjs';
@@ -9,12 +11,14 @@ import {combatEffects,showCombatEffects} from './effects.mjs';
 import {CARDS,ENEMIES,enemyDebuffTypes,RELICS,ROUTES,NODE_NAMES,newRun,act,intent,describe,parseRun,cardValues,upgradeChanges} from './engine.mjs';
 const KEY='saa-tower-run-v1',root=document.querySelector('#game');
 let state=null,loadError='',notice='',saveFailed=false,selectedUid=null,upgradeNotice=null;
+let nextCatalog=chooseCatalog(bundledCatalog,{getItem:k=>localStorage.getItem(k)}),updating=false;
+activateCatalog(nextCatalog);
 let swipe=null,suppressUntil=0,holdTimer=null;
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 try{const raw=localStorage.getItem(KEY);if(raw)state=parseRun(raw);}catch(e){loadError='保存データを読み込めませんでした。元データは上書きしていません。';}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));saveFailed=false;}catch{saveFailed=true;notice='保存できません。ページを閉じる前に「バックアップ」を保存してください。';}}
 const btn=(text,action,extra='',disabled=false)=>'<button data-action="'+action+'" '+extra+(disabled?' disabled':'')+'>'+text+'</button>';
-const title=c=>CARDS[c.id].name+(c.plus?'＋':'');
+const title=c=>esc(CARDS[c.id].name)+(c.plus?'＋':'');
 function card(c,action,disabled=false){const d=cardValues(c),plan=action==='play'?inspectPlay(state,c):null,short=action==='play'?(plan?.brief||'エナジー不足'):'',tips=['reward','buy'].includes(action)?synergyHints(state,c):[];return '<button class="card '+d.kind+(action==='play'&&plan&&comboReady(state.battle,c.id).length?' combo-ready':'')+(action==='play'&&!plan?' unaffordable':'')+'" data-action="'+action+'" data-uid="'+c.uid+'" data-id="'+c.id+'" '+(disabled?'disabled':'')+'><span class="cost">'+d.cost+'</span><span class="kind">'+({attack:'攻撃',skill:'スキル',power:'持続'}[d.kind])+'</span><span class="sigil" aria-hidden="true">'+({attack:'ϟ',skill:'◇',power:'✧'}[d.kind])+'</span><strong>'+title(c)+'</strong><span class="effect">'+describe(c)+'</span>'+(action==='play'&&plan&&comboReady(state.battle,c.id).length?'<span class="combo-badge">役が揃う</span>':'')+(short?'<span class="card-summary">'+esc(short)+'</span>':'')+(action==='upgrade'?'<span class="upgrade-preview">強化すると<br>'+upgradeChanges(c).map(esc).join('<br>')+'</span>':'')+(tips.length?'<span class="synergy-note">組合せ例：'+esc(tips[0])+'</span>':'')+'</button>';}
 function relics(){return '<details class="relic-details"><summary>◈ 遺物 '+state.relics.length+'個 <small>この冒険中有効</small></summary><ul>'+state.relics.map(r=>'<li><strong>'+RELICS[r].name+'</strong>：'+RELICS[r].text+'</li>').join('')+'</ul></details>';}
 
@@ -55,6 +59,10 @@ function battleHud(){return state?.phase==='battle'?'<aside class="battle-hud" a
 
 function ending(){return '<section class="ending"><p class="eyebrow">'+(state.phase==='won'?'SUMMIT REACHED':'ANOTHER PATH AWAITS')+'</p><div class="event-art">'+(state.phase==='won'?'✧':'◇')+'</div><h2>'+(state.phase==='won'?'尖塔を越えて':'冒険の記録')+'</h2>'+quizResult()+'<p>'+state.floor+'階まで到達 · デッキ'+state.deck.length+'枚 · 遺物'+state.relics.length+'個</p><p>'+(state.phase==='won'?ENEMIES[state.battle.enemy].name+'を退けました。別のルート、別のデッキで次の冒険へ。':'この冒険のデッキはここまで。次は敵の予告を見ながら、攻撃と防御の配分を変えてみよう。')+'</p>'+btn('新しい冒険を始める','new','class="primary"')+'</section>';}
 function help(){return '<details class="help"><summary>遊び方とカードのルール</summary><ol><li>8階のルートで各階1つの道を選び、最後のボスを倒します。</li><li>戦闘は毎ターン3エナジー、手札5枚。最初のターンは観測灯で6枚です。左右スワイプで手札を送り、手札を1タップすると、左上の数字のエナジーを払って使用します。約0.45秒長押しすると詳細を表示します。指を離しても使用せず、「閉じる」で戻れます。キーボードではShift＋F10で詳細を表示できます。</li><li>自分や敵を長押しすると現在の状態を確認できます。キーボードではEnterでも開けます。敵の上に次の行動を表示します。ブロックはHPへの攻撃を防ぎ、次の自分のターン開始時に消えます。</li><li>ターン終了で残りの手札を捨て、敵が行動。その後5枚引きます。山札が尽きると捨て札を混ぜて再利用します。手札は最大10枚です。</li><li>強化は各攻撃のダメージを増加。過負荷は攻撃を25%減らします。設定不備は被攻撃を25%増やします。倍率を掛けてから端数を切り捨てます。「戦闘中除外」は次の戦闘で復帰します。</li><li>戦闘のHP損失は次の階に持ち越します。勝利報酬はカード3択。不要なら見送れます。</li><li>休息は回復かカード強化。交換所では購入とカード削除。強敵を倒すと遺物を獲得します。</li><li>HPが0になると冒険終了。新しい冒険は初期デッキから始まります。各操作後にこのブラウザーへ自動保存します。</li></ol><h3>デバフ（敵味方共通）</h3><ul>'+Object.values(DEBUFFS).map(d=>'<li><strong>'+d.name+'</strong>：'+d.rule+'</li>').join('')+'</ul><p>遅延中の自分はカード使用不可。次のターンは3エナジー・手札5枚を2回使えます。前半の防御と役の使用履歴を後半へ持ち越します。炎上は各側のターン終了時に1回。過負荷・枯渇・設定不備は敵行動後に1減少し、その敵行動で新たに受けた分は次のターンから減少します。遅延以外は重ねがけで数値を加算（上限999）。</p><p>雑魚はデバフなし。強敵3種はそれぞれ異なる1種、ボス3種はそれぞれ異なる2〜3種の組み合わせを使います。敵を長押しすると、その敵が使うデバフを確認できます。</p><p>クラウド運用をモチーフにした独立ゲームです。攻撃・HP・カード数値は架空のゲームルールで、AWSの機能や実性能を表すものではありません。「?」マスではSAA復習クイズを2問出題します。2問正解でレリック、1問で30コイン、0問でHPを8失います。教材の読了による解放条件はありません。</p><ul>'+Object.values(RELICS).map(r=>'<li>'+r.name+'：'+r.text+'</li>').join('')+'</ul></details>';}
+function catalogPanel(){
+ const current=state?.learningCatalog?.version||(state?'従来版':nextCatalog.version);
+ return '<section class="catalog-panel" aria-label="教材の更新"><h2>教材とカード</h2><p>使用中：'+Object.keys(CARDS).length+'種類のカード / クイズ'+Object.keys(QUIZZES).length+'問</p>'+btn(updating?'確認中…':'教材からカード・クイズを更新','update-learning','',updating)+'<p>公開された教材を取り込みます。進行中の冒険には変更を加えず、次の冒険から反映します。</p>'+(current!==nextCatalog.version?'<p class="catalog-pending">次の冒険：'+(Object.keys(nextCatalog.cards).length+3)+'種 / クイズ'+Object.keys(nextCatalog.quizzes).length+'問（更新準備済み）</p>':'')+'<details class="learning-cards"><summary>使用中のカードと学べる内容を見る</summary>'+Object.entries(CARDS).map(([id,c])=>'<section><h3>'+esc(c.name)+(STARTERS.includes(id)?'（スターター）':'')+'</h3><p>'+esc(describe({id,plus:false}))+'</p>'+flavorDetail({id}).replace('flavor-detail','catalog-note')+'</section>').join('')+'</details></section>';
+}
 function render(){
  root.classList.toggle('in-battle',state?.phase==='battle');
  root.classList.toggle('in-map',state?.phase==='map');
@@ -62,7 +70,7 @@ function render(){
  const activeCombo=root.querySelector('.combo-toast');
  const handScroll=root.querySelector('.hand')?.scrollLeft||0;
  const revealEnd=state?.phase==='battle'&&state.battle.energy===0&&!root.querySelector('.hand-end');
- root.innerHTML=battleHud()+(!state?'<section class="title-screen"><p class="eyebrow">CLOUD SPIRE / DECKBUILDING ROGUELIKE</p><div class="tower-art" aria-hidden="true"><i></i><i></i><i></i><i></i><span>✧</span></div><h1>クラウドの尖塔</h1><p>一枚の選択が、次の階を変える。</p><p class="muted">20種のカード。分岐する8階。<br>手札を育て、連鎖障害の王に挑もう。</p>'+(loadError?'<p class="warning" role="alert">'+loadError+'</p>':'')+btn(loadError?'保存を破棄して新しく始める':'冒険を始める','new','class="primary"')+'</section>':'<header class="run-header"><div><small>CLOUD SPIRE</small><h1>クラウドの尖塔</h1></div><div class="resources"><strong>♥ '+state.hp+' / '+state.maxHp+'</strong><span>◈ '+state.gold+'</span><span>'+state.floor+' / 8 F</span></div></header><div class="relics">'+relics()+'</div><section class="scene">'+upgradeResult()+({map:map,battle:battle,reward:reward,rest:rest,shop:shop,event:event,won:ending,lost:ending}[state.phase])()+'</section><details class="deck-list"><summary>デッキを見る（'+state.deck.length+'枚）</summary><ul>'+state.deck.map(c=>'<li><strong>'+title(c)+'</strong> — '+describe(c)+'</li>').join('')+'</ul></details><aside class="log" aria-label="直近の行動">'+state.log.map(x=>'<p>'+esc(x)+'</p>').join('')+'</aside>')+help()+'<footer class="controls">'+(state?btn('バックアップ','export')+btn('最初から','new','class="subtle"'):'')+'<label class="import">記録を読み込む<input type="file" accept=".json" id="import"></label>'+btn('オフライン保存を確認','offline')+'<a href="../index.html">学習ホームへ</a></footer><p class="muted">ゲーム記録は教材の学習記録とは別に保存されます。端末間の自動同期はありません。</p><p id="notice" class="'+(saveFailed?'warning':'muted')+'" role="status">'+esc(notice||(state?'自動保存済み':'保存した記録は次回起動時に再開します。'))+'</p>'+'<div class="game-tools"><span><span>演出 v2</span> · クイズ追加</span>'+btn('演出を試す','demo-fx')+'</div>';
+ root.innerHTML=battleHud()+(!state?'<section class="title-screen"><p class="eyebrow">CLOUD SPIRE / DECKBUILDING ROGUELIKE</p><div class="tower-art" aria-hidden="true"><i></i><i></i><i></i><i></i><span>✧</span></div><h1>クラウドの尖塔</h1><p>一枚の選択が、次の階を変える。</p><p class="muted">'+Object.keys(CARDS).length+'種のカード。分岐する8階。<br>手札を育て、連鎖障害の王に挑もう。</p>'+(loadError?'<p class="warning" role="alert">'+loadError+'</p>':'')+btn(loadError?'保存を破棄して新しく始める':'冒険を始める','new','class="primary"')+'</section>':'<header class="run-header"><div><small>CLOUD SPIRE</small><h1>クラウドの尖塔</h1></div><div class="resources"><strong>♥ '+state.hp+' / '+state.maxHp+'</strong><span>◈ '+state.gold+'</span><span>'+state.floor+' / 8 F</span></div></header><div class="relics">'+relics()+'</div><section class="scene">'+upgradeResult()+({map:map,battle:battle,reward:reward,rest:rest,shop:shop,event:event,won:ending,lost:ending}[state.phase])()+'</section><details class="deck-list"><summary>デッキを見る（'+state.deck.length+'枚）</summary><ul>'+state.deck.map(c=>'<li><strong>'+title(c)+'</strong> — '+describe(c)+'</li>').join('')+'</ul></details><aside class="log" aria-label="直近の行動">'+state.log.map(x=>'<p>'+esc(x)+'</p>').join('')+'</aside>')+catalogPanel()+help()+'<footer class="controls">'+(state?btn('バックアップ','export')+btn('最初から','new','class="subtle"'):'')+'<label class="import">記録を読み込む<input type="file" accept=".json" id="import"></label>'+btn('オフライン保存を確認','offline')+'<a href="../index.html">学習ホームへ</a></footer><p class="muted">ゲーム記録は教材の学習記録とは別に保存されます。端末間の自動同期はありません。</p><p id="notice" class="'+(saveFailed?'warning':'muted')+'" role="status">'+esc(notice||(state?'自動保存済み':'保存した記録は次回起動時に再開します。'))+'</p>'+'<div class="game-tools"><span><span>演出 v2</span> · クイズ追加</span>'+btn('演出を試す','demo-fx')+'</div>';
 
  if(activeCombo&&['battle','reward','won'].includes(state?.phase))root.append(activeCombo);
  const hand=root.querySelector('.hand');if(hand){hand.scrollLeft=revealEnd?0:handScroll;for(const el of hand.querySelectorAll('.card')){const picked=Number(el.dataset.uid)===selectedUid;el.classList.toggle('selected',picked);el.setAttribute('aria-expanded',String(picked));}}
@@ -99,12 +107,18 @@ root.addEventListener('keydown',e=>{const open=root.querySelector('.status-dialo
 root.addEventListener('click',e=>{if(Date.now()<suppressUntil||swipe?.held||swipe?.moved){e.preventDefault();e.stopImmediatePropagation();}},true);
 root.addEventListener('click',async e=>{
  const el=e.target.closest('[data-action]');if(!el||el.disabled)return;let type=el.dataset.action,uid=Number(el.dataset.uid);const id=el.dataset.id;let next;
+ if(type==='update-learning'){
+  if(updating)return;updating=true;notice='新しい教材を確認しています…';render();
+  try{const pack=await fetchCatalog('./learning-catalog.json?update='+Date.now(),{bundledVersion:bundledCatalog.version});const same=pack.version===nextCatalog.version;nextCatalog=pack;if(!state)activateCatalog(pack);notice=same?'教材は最新です。':state?'教材を保存しました。今の冒険はそのまま、次の冒険から反映します。':'カードとクイズを更新しました。';}
+  catch(error){notice='更新できませんでした。保存済みの教材と冒険を保持しています。通信と端末の空き容量を確認して再試行してください。';}
+  finally{updating=false;render();}return;
+ }
  if(type==='demo-fx'){showCombatEffects(root,[{side:'enemy',kind:'hit',value:6,label:'−6'},{side:'player',kind:'guard',value:5,label:'完全ガード 5'}],true);return;}
  if(type==='hand-prev'||type==='hand-next'){const h=root.querySelector('.hand');if(h)h.scrollBy({left:(type==='hand-next'?1:-1)*Math.max(160,h.clientWidth*.8),behavior:'smooth'});return;}
  if(type==='close-status'){closeStatus();return;}
  if(type==='dismiss-upgrade'){upgradeNotice=null;render();return;}
  if(type==='cancel-card'){selectedUid=null;render();return;}
- if(type==='new'){if((state||loadError)&&!confirm('現在の冒険を終了して、初期デッキから始めますか？'))return;state=newRun();selectedUid=null;upgradeNotice=null;loadError='';notice='';save();render();return;}
+ if(type==='new'){if((state||loadError)&&!confirm('現在の冒険を終了して、初期デッキから始めますか？'))return;state=newRun(Date.now(),nextCatalog);selectedUid=null;upgradeNotice=null;loadError='';notice='';save();render();return;}
  if(type==='export'){const url=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='cloud-spire-save.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);return;}
  if(type==='offline'){
   el.disabled=true;try{if(!('serviceWorker'in navigator))throw Error('HTTPSまたはlocalhostから開いてください。');await navigator.serviceWorker.register('../sw.js');const reg=await Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>setTimeout(()=>reject(Error("初回保存が完了しません。オンラインで再試行してください。")),20000))]);if(reg.waiting)throw Error("新版が待機中です。学習ホームの設定で更新を適用してください。");const ok=await new Promise((resolve,reject)=>{const ch=new MessageChannel(),timer=setTimeout(()=>reject(Error('保存確認がタイムアウトしました。')),20000);ch.port1.onmessage=e=>{clearTimeout(timer);ch.port1.close();resolve(e.data?.ok);};reg.active.postMessage({type:'REPAIR'},[ch.port2]);});notice=ok?'オフライン保存を確認しました。次に機内モードで再起動を確かめてください。':'保存が不足しています。オンラインで学習ホームの設定から更新してください。';}catch(e){notice='保存を確認できません：'+e.message;}render();return;
@@ -116,7 +130,7 @@ root.addEventListener('click',async e=>{
 });
 root.addEventListener('change',async e=>{
  if(e.target.id!=='import')return;const f=e.target.files?.[0];if(!f)return;
- try{if(f.size>100000)throw Error('100KB以内のJSONを選んでください。');const s=parseRun(await f.text());if(!confirm('このバックアップで現在の冒険を置き換えますか？'))return;state=s;selectedUid=null;upgradeNotice=null;loadError='';notice='記録を読み込みました。';save();}catch(err){notice='読み込めません：'+err.message;}render();
+ try{if(f.size>2000000)throw Error('2MB以内のJSONを選んでください。');const s=parseRun(await f.text());if(!confirm('このバックアップで現在の冒険を置き換えますか？')){activateCatalog(state?.learningCatalog||null);return;}state=s;selectedUid=null;upgradeNotice=null;loadError='';notice='記録を読み込みました。';save();}catch(err){notice='読み込めません：'+err.message;}render();
 });
 render();
 window.__towerStarted=true;

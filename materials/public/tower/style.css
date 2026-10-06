@@ -92,3 +92,5 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .in-map .run-header{position:sticky;top:0;z-index:50;background:#142330;padding:calc(10px + env(safe-area-inset-top)) 8px 10px;box-shadow:0 3px 12px #0006}.in-map{scroll-padding-top:100px}
 
 .debuff-strip{display:flex;flex-wrap:wrap;gap:3px 10px;margin:4px 0;color:#edc0b4;font-size:12px;line-height:1.6}.debuff-strip span{display:inline-block;margin-right:8px}.delay-notice{padding:10px;border:1px solid #b89a67;border-radius:8px;color:#ffe3a0;font-size:13px;line-height:1.6}.in-battle .intent{max-width:55%;overflow-wrap:anywhere}.status-debuffs p{border-top:1px solid #526574;padding-top:10px}.fx-debuff{color:#deb5ef}.toast-debuff{color:#e6bcff}
+
+.catalog-panel{margin:24px 0;padding:16px;border:1px solid #72604b;border-radius:12px;overflow-wrap:anywhere}.catalog-panel h2{font-size:18px}.catalog-panel p{font-size:13px}.catalog-panel button{min-height:44px}.learning-cards>section{border-top:1px solid #72604b;padding:12px 0}.learning-cards h3{font-size:16px}

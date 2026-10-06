@@ -43,6 +43,10 @@ jobs:
         run: node scripts/touch-browser-check.mjs
         env:
           BROWSER: webkit
+      - name: Verify learning catalogue updates in Safari
+        run: node scripts/catalog-browser-check.mjs
+        env:
+          BROWSER: webkit
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -17,6 +17,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.strike"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.strike"
         }
       ],
       "domains": [
@@ -36,18 +40,18 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "切り分けそのものが障害を修復するとは限りません。"
+        "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.strike.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.strike.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "切り分けそのものが障害を修復するとは限りません。",
+        "counterexample": "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [
@@ -59,14 +63,14 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "指標を他の情報と照合し、問題の箇所を絞り込みます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-and-compliance.html",
+          "claim": "責任共有モデルでは、AWSと利用者が責任を分担します。利用サービスによって利用者が管理する範囲も変わります。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -91,6 +95,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -113,6 +123,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.strike"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.strike"
           }
         ]
       },
@@ -135,6 +149,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.guard"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.guard"
         }
       ],
       "domains": [
@@ -154,18 +172,18 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。"
+        "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.guard.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.guard.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。",
+        "counterexample": "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [
@@ -177,14 +195,14 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "運用上の対応は、利用者や事業への影響を基準に優先します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "最小権限は、必要な対象に必要な操作だけを許可する原則です。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -209,6 +227,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -231,6 +255,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.guard"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.guard"
           }
         ]
       },
@@ -253,6 +281,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.probe"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.probe"
         }
       ],
       "domains": [
@@ -272,18 +304,18 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "監視を置くだけで障害が解消するわけではありません。"
+        "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.probe.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.probe.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "監視を置くだけで障害が解消するわけではありません。",
+        "counterexample": "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [
@@ -300,14 +332,14 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "データを集めるだけでなく、基準値や変化を読み取ることが重要です。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -332,6 +364,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -354,6 +392,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.probe"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.probe"
           }
         ]
       },
@@ -500,6 +542,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.parallel"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.parallel"
         }
       ],
       "domains": [
@@ -519,18 +565,18 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。"
+        "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.parallel.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.parallel.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。",
+        "counterexample": "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [
@@ -542,14 +588,14 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "複数の小さな資源へ処理を分散し、共通の障害点を避ける考え方があります。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "同じAZで台数を増やすことと、別AZに分散することは別です。同じAZに集中すると、そのAZ全体の障害でまとめて影響を受ける可能性があります。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -574,6 +620,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -596,6 +648,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.parallel"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.parallel"
           }
         ]
       },
@@ -730,6 +786,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.reserve"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.reserve"
         }
       ],
       "domains": [
@@ -749,31 +809,31 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "予備容量の確保だけで、すべての障害に耐えられるわけではありません。"
+        "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reserve.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.reserve.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "予備容量の確保だけで、すべての障害に耐えられるわけではありません。",
+        "counterexample": "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "需要と使用量を監視し、必要な容量を考えます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -798,6 +858,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -820,6 +886,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.reserve"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.reserve"
           }
         ]
       },
@@ -1190,6 +1260,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.detour"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.detour"
         }
       ],
       "domains": [
@@ -1209,31 +1283,31 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。"
+        "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.detour.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.detour.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。",
+        "counterexample": "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "障害を回避・修復する復旧の手順を設計し、試験します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "処理先が停止したとき、利用者を残った正常先へ送る仕組みも必要です。別AZにサーバーを置いただけでは、利用者の接続先は自動的に切り替わりません。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1264,6 +1338,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -1291,6 +1371,10 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.detour"
           }
         ],
         "debuff_rule": "遅延1・戦闘中除外"
@@ -1568,6 +1652,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.redundant"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.redundant"
         }
       ],
       "domains": [
@@ -1587,31 +1675,31 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。"
+        "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.redundant.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.redundant.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。",
+        "counterexample": "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "資源を複数に分ける際は、共通の障害点も確認します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "複数AZへ処理先を分けた上で、正常先への振り分け、必要なデータ、障害後の残存容量も用意します。同じリージョン内の複数AZだけではリージョン全体の停止に備えられません。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1636,6 +1724,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -1658,6 +1752,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.redundant"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.redundant"
           }
         ]
       },
@@ -2028,6 +2126,10 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.balance"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.balance"
         }
       ],
       "domains": [
@@ -2047,18 +2149,18 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "攻撃と防御を同時に得るのはゲーム固有の効果です。"
+        "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
       ],
       "content": {
         "principle": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.balance.note"
+          "path": "knowledge/game-supplement.json",
+          "locator": "notes.balance.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "攻撃と防御を同時に得るのはゲーム固有の効果です。",
+        "counterexample": "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。",
         "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
       },
       "relations": [
@@ -2070,14 +2172,14 @@
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "リクエストを複数の資源へ分散する考え方です。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
       "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2102,6 +2204,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
         }
       ],
       "game_design": {
@@ -2124,6 +2232,10 @@
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.balance"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "notes.balance"
           }
         ]
       },
@@ -2670,6 +2782,3954 @@
       "import_status": "imported",
       "open_questions": [
         "対応するsystem分類レコードは今後収集。"
+      ]
+    },
+    {
+      "id": "term-game-region",
+      "title": "リージョン",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「リージョン」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "region"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "region"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「リージョン」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-region"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-az",
+      "title": "アベイラビリティーゾーン（AZ）",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「アベイラビリティーゾーン（AZ）」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "az"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "az"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「アベイラビリティーゾーン（AZ）」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-az"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-shared-responsibility",
+      "title": "責任共有モデル",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「責任共有モデル」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "shared-responsibility"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "shared-responsibility"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "用語「責任共有モデル」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-shared-responsibility"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-availability",
+      "title": "可用性",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「可用性」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "availability"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "availability"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "claim": "用語「可用性」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-availability"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-durability",
+      "title": "耐久性",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「耐久性」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "durability"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "durability"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「耐久性」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-durability"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-scaling",
+      "title": "スケーリング",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「スケーリング」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "scaling"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "scaling"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「スケーリング」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-scaling"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-spot",
+      "title": "Spotインスタンス",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「Spotインスタンス」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "spot"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "spot"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "claim": "用語「Spotインスタンス」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-spot"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-instance-store",
+      "title": "インスタンスストア",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「インスタンスストア」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "instance-store"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "instance-store"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「インスタンスストア」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-instance-store"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-s3",
+      "title": "Amazon S3",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「Amazon S3」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "s3"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "s3"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「Amazon S3」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-s3"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-rds",
+      "title": "Amazon RDS",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「Amazon RDS」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "rds"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "rds"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "用語「Amazon RDS」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-rds"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-iam-role",
+      "title": "IAMロール",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「IAMロール」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "iam-role"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "iam-role"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+          "claim": "用語「IAMロール」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-iam-role"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-temporary-credentials",
+      "title": "一時認証情報",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「一時認証情報」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "temporary-credentials"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "temporary-credentials"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+          "claim": "用語「一時認証情報」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-temporary-credentials"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-least-privilege",
+      "title": "最小権限",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「最小権限」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "least-privilege"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "least-privilege"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "用語「最小権限」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-least-privilege"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-explicit-deny",
+      "title": "明示的Deny",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「明示的Deny」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "explicit-deny"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "explicit-deny"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "claim": "用語「明示的Deny」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-explicit-deny"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-scp",
+      "title": "サービスコントロールポリシー（SCP）",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「サービスコントロールポリシー（SCP）」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "scp"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "scp"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "claim": "用語「サービスコントロールポリシー（SCP）」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-scp"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-cross-account",
+      "title": "クロスアカウントアクセス",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「クロスアカウントアクセス」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "cross-account"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "cross-account"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "claim": "用語「クロスアカウントアクセス」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-cross-account"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-external-id",
+      "title": "External ID",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「External ID」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "external-id"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "external-id"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "claim": "用語「External ID」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-external-id"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-identity-center",
+      "title": "IAM Identity Center",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「IAM Identity Center」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "identity-center"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "identity-center"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+          "claim": "用語「IAM Identity Center」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-identity-center"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-cognito",
+      "title": "Amazon Cognito",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「Amazon Cognito」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "cognito"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "cognito"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
+          "claim": "用語「Amazon Cognito」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-cognito"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-root",
+      "title": "ルートユーザー",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「ルートユーザー」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "root"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "root"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "用語「ルートユーザー」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-root"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-mfa",
+      "title": "多要素認証（MFA）",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「多要素認証（MFA）」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/starter.ts",
+          "locator": "mfa"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "src/content/starter.ts",
+          "locator": "mfa"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "用語「多要素認証（MFA）」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-mfa"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-health-check",
+      "title": "ヘルスチェック",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「ヘルスチェック」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "health-check"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "health-check"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "用語「ヘルスチェック」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-health-check"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-alb",
+      "title": "Application Load Balancer",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「Application Load Balancer」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "alb"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "alb"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "用語「Application Load Balancer」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-alb"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "term-game-remaining-capacity",
+      "title": "残存容量",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "用語「残存容量」の意味を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "remaining-capacity"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "remaining-capacity"
+        },
+        "distinguish_from": [
+          "関連教材の注意点とゲーム上の比喩を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "用語「残存容量」の意味を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.study-remaining-capacity"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。"
+      ]
+    },
+    {
+      "id": "case-game-study-region-failure",
+      "title": "同じリージョンの複数AZにEC2を配置しました。リージョン全体の停止への備えとして、この配置だけで十分ですか？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-region-failure"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-region-failure"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "knowledge/game-supplement.json",
+            "locator": "study-region-failure"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-region-failure"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-alb-failopen",
+      "title": "ALBの全ターゲットが異常と判定された場合、どうなり得ますか？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-alb-failopen"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-alb-failopen"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "knowledge/game-supplement.json",
+            "locator": "study-alb-failopen"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-alb-failopen"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-data-access",
+      "title": "別AZの正常なEC2へ要求を切り替えましたが、必要な写真は停止中のEC2にしかありません。何が不足していますか？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-data-access"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "study-data-access"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "knowledge/game-supplement.json",
+            "locator": "study-data-access"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-data-access"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q001",
+      "title": "同じAZにEC2を2台置いた予約サイトがAZ障害で停止した。再発時にも稼働させる改善は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q001"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q001"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q001"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q001"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q002",
+      "title": "EC2上のWebアプリでゲストOSの脆弱性が見つかった。修正を計画する主体は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q002"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q002"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q002"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q002"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q003",
+      "title": "S3に機密ファイルを保存する。利用者が引き続き管理すべき項目は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q003"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q003"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q003"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q003"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q004",
+      "title": "大阪のEC2が東京リージョンのコンソールに表示されない。最初に確認することは？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q004"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q004"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q004"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q004"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q005",
+      "title": "日本の利用者向けサービスで往復通信時間を短くしたい。リージョン選定で優先して評価する項目は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q005"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q005"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q005"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q005"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q006",
+      "title": "単一リージョン全体が使えない場合にも業務を継続したい。追加すべき設計範囲は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q006"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q006"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q006"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q006"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q007",
+      "title": "再起動可能な分析処理で一時ファイルは再生成できるが、処理結果は失いたくない。適切な保存は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q007"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q007"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q007"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q007"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q008",
+      "title": "チェックポイントから再開できる夜間の画像変換を安価に実行したい。どれが適する？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q008"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q008"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q008"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q008"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q009",
+      "title": "EC2上の自前DBをRDSに移す主な運用上の効果は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q009"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q009"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q009"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q009"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q010",
+      "title": "同一リージョンに複数AZを置く価値を説明するならどれか？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q010"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q010"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q010"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q010"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q011",
+      "title": "EC2が毎日S3へレポートを保存する。固定キーを配布せずに認可するには？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q011"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q011"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q011"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q011"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q012",
+      "title": "同じ操作にAllowと明示的Denyが適用されている。結果は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q012"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q012"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q012"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q012"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q013",
+      "title": "OUへS3のAllowだけを記載したSCPを付けた。IAM権限がない新規ユーザーはS3を使えるか？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q013"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q013"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q013"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q013"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q014",
+      "title": "運用者は特定バケット内のレポートを読むだけでよい。適切な権限設計は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q014"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q014"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q014"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q014"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q015",
+      "title": "新しいIAMロールを作成している。信頼ポリシーで決めるものは？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q015"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q015"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q015"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q015"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q016",
+      "title": "複数顧客を扱う外部監視業者へロールを委任する。顧客の取り違えを防ぐ追加条件は？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q016"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q016"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q016"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q016"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q017",
+      "title": "社員が複数AWSアカウントを社内IDで利用したい。中心となるサービスは？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q017"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q017"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q017"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q017"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q018",
+      "title": "一般顧客向けアプリにサインアップとログインを加えたい。どれを検討する？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q018"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q018"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q018"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q018"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "case-game-study-q019",
+      "title": "一時認証情報を使う利点として適切なものは？",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "公開対象の教材を同じ意味・解答のまま再利用する。用語は名称と定義、ケースは条件から判断する問いを扱う。",
+      "objective": "設問の条件を読んで判断し、理由を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/part1.ts",
+          "locator": "q019"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "ゲーム内の報酬や正答数を、実際のAWS性能や本人の習得済み状態へ変換しない。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "premise": {
+          "path": "src/content/part1.ts",
+          "locator": "q019"
+        },
+        "constraints": [
+          "設問の前提条件に従う。"
+        ],
+        "questions": [
+          {
+            "path": "src/content/part1.ts",
+            "locator": "q019"
+          }
+        ],
+        "variant": null
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+          "claim": "設問の条件を読んで判断し、理由を説明する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "公開教材の意味を維持した自動取り込み",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "単語を知ることと設計に適用できることを混同しない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "quizzes.study-q019"
+          }
+        ]
+      },
+      "review_notes": [
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存の公開範囲・回答を維持して変換。形式検証とゲーム接続を実施。独立の内容監査ではない。"
+        }
+      ],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の再利用。分類と内容の独立レビューは別途必要。",
+        "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
       ]
     }
   ]

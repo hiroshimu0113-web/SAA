@@ -135,3 +135,7 @@
 
 - 完了：45テスト、Chrome/WebKitの既存操作と6種類すべての固有デバフ表示/保存再開を確認。Actions https://github.com/hiroshimu0113-web/SAA/actions/runs/37465289352 build/deploy成功（96def37ce6e75b785c6cb0dadb73baaef3cd15d8）。公開HTTPSのChromeでも全6種の能力表示、遅延、旧保存移行、320pxを確認。
 - 更新入口 https://hiroshimu0113-web.github.io/SAA/tower/foes.html 。実機iPhoneの操作感と敵別バランスは未検証。次は実プレイで特性差と難易度を評価。
+
+## 2026-10-07 教材更新
+
+[教材更新機能](GAME_CONTENT_UPDATE.md)を追加。カード44種類・クイズ26問。スターターの性能は維持し用語を名称に追加。公開教材更新後はゲーム内ボタンで取得し、次の冒険から反映。途中の冒険はその版で継続。
