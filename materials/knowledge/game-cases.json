@@ -2189,6 +2189,146 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "sg-app-db-boundary",
+      "title": "アプリからDBへの新規接続",
+      "premise": "同一VPC内のアプリEC2とDB EC2をSGで制御する。",
+      "unit_ids": [
+        "security-group"
+      ],
+      "chapter_ids": [
+        "ch03",
+        "ch04",
+        "ch06"
+      ],
+      "constraints": [
+        "同一VPCの直接接続。クロスVPC・中継機器・複数SGの合成は対象外。",
+        "新規通信の許可を扱い、既存接続や戻り通信を設定する設問ではない。"
+      ],
+      "questions": [
+        {
+          "id": "sg-db-peer-permission",
+          "objective": "開始側と受信側の必要な許可を選ぶ。",
+          "prompt": "同一VPCでアプリEC2からDB EC2のTCP 5432へ新規接続する。経路・NACL・OS・DB待受は正常。アプリSGは全送信禁止、DB SGは全受信禁止。他SGはなく、この2つの許可だけが不足している。最小限の設定は？",
+          "options": [
+            {
+              "id": "sg-db-peer-permission-a",
+              "text": "DB SGの受信だけをアプリSGから5432で許可し、アプリ送信は閉じたまま",
+              "explanation": "開始側の新規送信許可も必要です。受信側だけでは前提を満たしません。"
+            },
+            {
+              "id": "sg-db-peer-permission-b",
+              "text": "アプリSGの送信先をDB SG・TCP 5432、DB SGの送信元をアプリSG・TCP 5432で許可する",
+              "explanation": "開始側の送信と受信側の受信を必要な相手とポートに絞ります。"
+            },
+            {
+              "id": "sg-db-peer-permission-c",
+              "text": "DB SGの受信を任意IPv4・全ポートへ広げれば、開始側送信も自動的に開く",
+              "explanation": "受信許可は別SGの送信許可を変更せず、必要以上に範囲を広げます。"
+            }
+          ],
+          "correct_option_id": "sg-db-peer-permission-b",
+          "runtime_option_order": [
+            "sg-db-peer-permission-a",
+            "sg-db-peer-permission-b",
+            "sg-db-peer-permission-c"
+          ],
+          "rationale": "開始側の送信と受信側の受信を必要な相手とポートに絞ります。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupEgress.go",
+            "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-ec2/README.md"
+          ]
+        },
+        {
+          "id": "sg-reference-not-route",
+          "objective": "SG参照と経路を区別する。",
+          "prompt": "同一VPCのアプリ/DBでTCP 5432の開始側送信・受信側受信を正しく設定した。後からネットワーク構成が変わり、DBへの有効な経路がなくなった。SGに相手SGを指定してあるので到達できる？",
+          "options": [
+            {
+              "id": "sg-reference-not-route-a",
+              "text": "SG参照がルートも自動作成するので到達できる",
+              "explanation": "SGルールは通信許可であり、経路を作成する設定ではありません。"
+            },
+            {
+              "id": "sg-reference-not-route-b",
+              "text": "SG参照はDBのデータ読取り権限も付与するので経路不要",
+              "explanation": "ネットワーク許可とDB認証・認可は別です。"
+            },
+            {
+              "id": "sg-reference-not-route-c",
+              "text": "許可と経路は別。経路を復旧し、NACLや待受も確認する",
+              "explanation": "SG参照だけでネットワーク到達性を保証しません。"
+            }
+          ],
+          "correct_option_id": "sg-reference-not-route-c",
+          "runtime_option_order": [
+            "sg-reference-not-route-a",
+            "sg-reference-not-route-b",
+            "sg-reference-not-route-c"
+          ],
+          "rationale": "SG参照だけでネットワーク到達性を保証しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupEgress.go",
+            "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-ec2/README.md",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "アプリEC2に、許可ルールで参照しているアプリSGが関連付けられていない。",
+        "answer": "SGの関連付けと意図した許可対象を確認する。表示名だけをそろえても許可されない。",
+        "reason": "参照は関連SGのインスタンスを対象とし、アプリ名を参照していない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+          "claim": "受信許可は送信元IPv4/IPv6範囲、プレフィックスリスト、SGから一つを指定し、プロトコルとTCP/UDPポートを指定する。関連SGのインスタンスからの受信を許可する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupEgress.go",
+          "claim": "送信許可は宛先IPv4/IPv6範囲、プレフィックスリスト、宛先SGのインスタンスへの通信を許可する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-ec2/README.md",
+          "claim": "異なる構成要素間の通信には、開始側SGのEgressと受信側SGのIngressを設定する。connectionsが両側のSG設定を補助する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+          "claim": "ルートは宛先CIDR/プレフィックスリストとターゲットを指定し、最も具体的な宛先一致で経路を選ぶ。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+          "claim": "NACLには独立した受信/送信の番号付きルールがあり、関連サブネットを出入りするパケットを制御する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

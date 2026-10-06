@@ -108,6 +108,7 @@
         "candidate-placement-group",
         "candidate-savings-plans",
         "candidate-scheduled-scaling",
+        "candidate-security-group",
         "candidate-spot",
         "candidate-stateless",
         "candidate-target-tracking",
@@ -174,7 +175,8 @@
         "candidate-rds-multi-az",
         "candidate-rds-proxy",
         "candidate-rds-standby",
-        "candidate-read-replica"
+        "candidate-read-replica",
+        "candidate-security-group"
       ]
     },
     {
@@ -3876,9 +3878,11 @@
     {
       "id": "candidate-security-group",
       "concept_id": "security-group",
-      "title": "security-group",
+      "title": "SG参照と新規接続の許可境界",
       "related_chapter_ids": [
-        "ch03"
+        "ch03",
+        "ch04",
+        "ch06"
       ],
       "material_refs": [
         {
@@ -3892,16 +3896,21 @@
         {
           "node_id": "question:q038",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch03-l02",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-security-group-permission-boundary"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

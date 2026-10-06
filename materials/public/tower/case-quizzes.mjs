@@ -539,6 +539,36 @@ export const CASE_QUIZZES={
       "レート指定は移動速度の設定で、対象外の送信元を対象に変えません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_StartMessageMoveTask.go"
+  },
+  "sg-db-peer-permission": {
+    "prompt": "同一VPC内のアプリEC2とDB EC2をSGで制御する。 同一VPCでアプリEC2からDB EC2のTCP 5432へ新規接続する。経路・NACL・OS・DB待受は正常。アプリSGは全送信禁止、DB SGは全受信禁止。他SGはなく、この2つの許可だけが不足している。最小限の設定は？",
+    "options": [
+      "DB SGの受信だけをアプリSGから5432で許可し、アプリ送信は閉じたまま",
+      "アプリSGの送信先をDB SG・TCP 5432、DB SGの送信元をアプリSG・TCP 5432で許可する",
+      "DB SGの受信を任意IPv4・全ポートへ広げれば、開始側送信も自動的に開く"
+    ],
+    "answer": 1,
+    "reasons": [
+      "開始側の新規送信許可も必要です。受信側だけでは前提を満たしません。",
+      "開始側の送信と受信側の受信を必要な相手とポートに絞ります。",
+      "受信許可は別SGの送信許可を変更せず、必要以上に範囲を広げます。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go"
+  },
+  "sg-reference-not-route": {
+    "prompt": "同一VPC内のアプリEC2とDB EC2をSGで制御する。 同一VPCのアプリ/DBでTCP 5432の開始側送信・受信側受信を正しく設定した。後からネットワーク構成が変わり、DBへの有効な経路がなくなった。SGに相手SGを指定してあるので到達できる？",
+    "options": [
+      "SG参照がルートも自動作成するので到達できる",
+      "SG参照はDBのデータ読取り権限も付与するので経路不要",
+      "許可と経路は別。経路を復旧し、NACLや待受も確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "SGルールは通信許可であり、経路を作成する設定ではありません。",
+      "ネットワーク許可とDB認証・認可は別です。",
+      "SG参照だけでネットワーク到達性を保証しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -613,5 +643,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "dlq-source-rate",
     "dlq-nonsqs-origin"
+  ],
+  [
+    "sg-db-peer-permission",
+    "sg-reference-not-route"
   ]
 ];

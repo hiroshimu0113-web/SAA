@@ -1336,6 +1336,87 @@
         "IAM/KMS権限と暗号化したDLQの再投入を別単位で確認する。",
         "標準/FIFOの保持時刻・保持期間・順序制約を公式根拠で詳述する。"
       ]
+    },
+    {
+      "id": "security-group",
+      "title": "SG参照と新規接続の許可境界",
+      "group": "security",
+      "objective": "開始側送信・受信側受信を必要な相手とポートに絞り、経路やDB認可と区別する。",
+      "estimated_minutes": 7,
+      "scope": "同一VPC内の直接EC2間TCP接続。接続追跡・戻り通信、複数SGの合成、クロスVPC参照と中継機器の詳細は未確認。",
+      "prerequisites": [],
+      "misconceptions": [
+        "受信側SGを開けば開始側の新規送信も自動許可される。",
+        "SG参照で相手への経路やDB認可も付く。",
+        "SG名だけ同じなら関連付けなしでも許可される。"
+      ],
+      "checks": [
+        {
+          "id": "security-group-explain",
+          "level": "explain",
+          "prompt": "SGで相手を指定するとは何を許可する？",
+          "expected_points": [
+            "関連付けたSGのインスタンスから/への通信を許可する",
+            "プロトコルとポートを限定する",
+            "経路とアプリ認可は別"
+          ]
+        },
+        {
+          "id": "security-group-apply",
+          "level": "apply",
+          "prompt": "全送信禁止のアプリから全受信禁止のDBへ新規5432接続するには？",
+          "expected_points": [
+            "開始側送信と受信側受信の両方を設定",
+            "SG参照で必要な相手に限定",
+            "経路・NACL・待受の前提も確認"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch03-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/security-group.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+            "claim": "受信許可は送信元IPv4/IPv6範囲、プレフィックスリスト、SGから一つを指定し、プロトコルとTCP/UDPポートを指定する。関連SGのインスタンスからの受信を許可する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupEgress.go",
+            "claim": "送信許可は宛先IPv4/IPv6範囲、プレフィックスリスト、宛先SGのインスタンスへの通信を許可する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-ec2/README.md",
+            "claim": "異なる構成要素間の通信には、開始側SGのEgressと受信側SGのIngressを設定する。connectionsが両側のSG設定を補助する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+            "claim": "ルートは宛先CIDR/プレフィックスリストとターゲットを指定し、最も具体的な宛先一致で経路を選ぶ。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go",
+            "claim": "NACLには独立した受信/送信の番号付きルールがあり、関連サブネットを出入りするパケットを制御する。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "接続追跡と戻り通信の詳細を現行公式根拠で確認する。",
+        "複数SG・クロスVPC・中継機器を通る参照条件を別に扱う。"
+      ]
     }
   ]
 }

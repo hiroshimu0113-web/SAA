@@ -220,6 +220,15 @@
         "ch11"
       ],
       "reason": "同じ隔離・再投入教材を共有し、重複カードを増やさない。"
+    },
+    {
+      "concept_id": "security-group",
+      "chapter_ids": [
+        "ch03",
+        "ch04",
+        "ch06"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [
