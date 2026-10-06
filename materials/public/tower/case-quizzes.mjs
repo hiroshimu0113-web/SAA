@@ -239,6 +239,36 @@ export const CASE_QUIZZES={
       "終了時削除に設定されたEBSが対象です。falseの条件を無視しています。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go"
+  },
+  "s3-account-public-block": {
+    "prompt": "写真を保存する汎用S3バケットの公開アクセスを防ぐ設定を点検する。 アカウントのBlockPublicPolicy=true、バケットではfalse。実行主体はPutBucketPolicyの許可を持ち、公開と判定される新しいバケットポリシーを設定しようとしている。BPAによる判断は？",
+    "options": [
+      "バケットがfalseなので必ず受け付ける",
+      "アカウントのtrueが適用され、公開ポリシー設定要求は拒否される",
+      "アカウント設定はオブジェクトの内容にしか作用しない"
+    ],
+    "answer": 1,
+    "reasons": [
+      "バケットのfalseでアカウントのtrueを弱めることはできません。最も厳しい組み合わせを評価します。",
+      "実行許可があっても公開ポリシー防止の条件を別に評価します。アカウントのBlockPublicPolicyがこの要求を拒否します。",
+      "BPAは公開アクセスの設定です。保存された写真の内容だけの機能ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go"
+  },
+  "s3-existing-public-policy": {
+    "prompt": "写真を保存する汎用S3バケットの公開アクセスを防ぐ設定を点検する。 汎用バケットに既存の公開ポリシーがある。BlockPublicPolicyだけをtrueへ変更した。その設定自体の作用として適切な説明は？",
+    "options": [
+      "既存の公開ポリシーを自動で削除する",
+      "担当者の読み取り許可を自動で追加する",
+      "新しい公開ポリシー設定要求を拒否するが、既存ポリシーは変更しない"
+    ],
+    "answer": 2,
+    "reasons": [
+      "BlockPublicPolicyは既存ポリシーを削除・変更しません。不要な既存許可は別に点検します。",
+      "公開アクセスの防止設定は、必要な担当者への許可付与の代わりにはなりません。",
+      "設定要求の予防と既存設定の修正を区別しています。他のBPA設定によるアクセス制限も別に確認します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -273,5 +303,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "ec2-before-termination",
     "ec2-ebs-retained"
+  ],
+  [
+    "s3-account-public-block",
+    "s3-existing-public-policy"
   ]
 ];

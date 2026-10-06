@@ -174,12 +174,14 @@
       "group": "storage",
       "objective": "EC2から独立したオブジェクト保存と、アクセス制御を説明する。",
       "estimated_minutes": 5,
-      "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+      "scope": "汎用S3バケットの保存と必要アクセス、公開アクセス防止の層と4設定の差。ディレクトリバケットと全耐久性・復旧設計は範囲外。",
       "prerequisites": [
         "durability"
       ],
       "misconceptions": [
-        "S3に保存すると誰からでもアクセスできる必要がある。"
+        "S3に保存すると誰からでもアクセスできる必要がある。",
+        "バケットのBPAをfalseにすればアカウントのtrueを打ち消せる。",
+        "BlockPublicPolicyは既存公開ポリシーを削除する。"
       ],
       "checks": [
         {
@@ -187,8 +189,9 @@
           "level": "explain",
           "prompt": "バケットとオブジェクトは何？",
           "expected_points": [
-            "バケットはオブジェクトを入れる入れ物",
-            "オブジェクトは写真などのデータ"
+            "バケット、オブジェクト、キーを区別する",
+            "保存と読み取りにはそれぞれ必要許可がある",
+            "公開アクセス防止と必要な許可付与を区別する"
           ]
         },
         {
@@ -196,8 +199,9 @@
           "level": "apply",
           "prompt": "写真をEC2終了後も残し、担当者だけに見せたい。どうする？",
           "expected_points": [
-            "写真をS3へ保存する",
-            "非公開を基本に必要なアクセスだけを許可する"
+            "写真を独立して保存し必要な相手にだけ許可する",
+            "BPAのアカウントとバケットの最も厳しい組み合わせを見る",
+            "予防設定と既存公開許可の点検・修正を分ける"
           ]
         }
       ],
@@ -205,14 +209,46 @@
         "ch01-l03"
       ],
       "review": {
-        "status": "draft",
-        "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-        "source_document": "docs/STARTER_REVIEW.md"
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/s3.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_CreateBucket.go",
+            "claim": "汎用バケットのBPAを有効にしACLを無効に保つ推奨。Object Ownership既定BucketOwnerEnforcedと別種バケットの条件。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+            "claim": "バケットへオブジェクトを追加、成功応答なら全体保存、保存許可。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+            "claim": "対象オブジェクトの読み取りと別の必要許可。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go",
+            "claim": "バケットとアカウントでは最も厳しい組み合わせを評価する。組織設定をアカウントが継承。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go",
+            "claim": "BlockPublicPolicyは新規公開ポリシー設定を拒否するが既存ポリシーを変更しない。他の3設定との役割の違い。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
       },
       "learner_state": "unassessed",
       "next_enrichment": [
-        "条件を1つ変えた転移問題を追加する",
-        "境界条件と公式根拠を照合してから公開教材へ反映する"
+        "耐久性、上書き/削除保護、ストレージクラスを別単位で確認する。",
+        "クロスアカウント・SSE-KMS・全ポリシー評価を追加する。"
       ]
     },
     {

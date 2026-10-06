@@ -5102,6 +5102,304 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-s3-private-object-access",
+      "title": "S3：独立した保存と公開アクセス防止",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "EC2から独立したオブジェクト保存と、アクセス制御を説明する。",
+      "unit_ids": [
+        "s3"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/s3.md",
+          "locator": "S3：独立した保存と公開アクセス防止"
+        }
+      ],
+      "domains": [
+        "storage",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "durability"
+      ],
+      "service_names": [
+        "Amazon S3",
+        "AWS Identity and Access Management"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "耐久性とデータの保全"
+      ],
+      "conditions": [
+        "組織ポリシーはない。バケット所有者のアカウントとバケットの2層を比較する。",
+        "第2問はBlockPublicPolicyの作用だけを問う。他の3設定による実効アクセス判定は別とする。"
+      ],
+      "limitations": [
+        "汎用S3バケットの保存と必要アクセス、公開アクセス防止の層と4設定の差。ディレクトリバケットと全耐久性・復旧設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "S3に保存すると誰からでもアクセスできる必要がある。",
+        "バケットのBPAをfalseにすればアカウントのtrueを打ち消せる。",
+        "BlockPublicPolicyは既存公開ポリシーを削除する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/s3.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "写真を保存する汎用S3バケットの公開アクセスを防ぐ設定を点検する。",
+        "counterexample": "BlockPublicPolicyだけを有効にしても既存公開ポリシーは変更されない。",
+        "comparison": {
+          "path": "knowledge/lessons/s3.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-s3-public-access-layers",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_CreateBucket.go",
+          "claim": "汎用バケットのBPAを有効にしACLを無効に保つ推奨。Object Ownership既定BucketOwnerEnforcedと別種バケットの条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "バケットへオブジェクトを追加、成功応答なら全体保存、保存許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "対象オブジェクトの読み取りと別の必要許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go",
+          "claim": "バケットとアカウントでは最も厳しい組み合わせを評価する。組織設定をアカウントが継承。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go",
+          "claim": "BlockPublicPolicyは新規公開ポリシー設定を拒否するが既存ポリシーを変更しない。他の3設定との役割の違い。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/s3.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "バケットのBPAをfalseにすればアカウントのtrueを打ち消せる。",
+          "BlockPublicPolicyは既存公開ポリシーを削除する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-s3-public-access-layers",
+      "title": "S3の公開ポリシー防止と既存設定",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "s3"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-public-access-layers"
+        }
+      ],
+      "domains": [
+        "storage",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "durability"
+      ],
+      "service_names": [
+        "Amazon S3",
+        "AWS Identity and Access Management"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "耐久性とデータの保全"
+      ],
+      "conditions": [
+        "組織ポリシーはない。バケット所有者のアカウントとバケットの2層を比較する。",
+        "第2問はBlockPublicPolicyの作用だけを問う。他の3設定による実効アクセス判定は別とする。"
+      ],
+      "limitations": [
+        "汎用S3バケットの保存と必要アクセス、公開アクセス防止の層と4設定の差。ディレクトリバケットと全耐久性・復旧設計は範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "S3に保存すると誰からでもアクセスできる必要がある。",
+        "バケットのBPAをfalseにすればアカウントのtrueを打ち消せる。",
+        "BlockPublicPolicyは既存公開ポリシーを削除する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-public-access-layers.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-public-access-layers.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-public-access-layers.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "s3-public-access-layers.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_CreateBucket.go",
+          "claim": "汎用バケットのBPAを有効にしACLを無効に保つ推奨。Object Ownership既定BucketOwnerEnforcedと別種バケットの条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "バケットへオブジェクトを追加、成功応答なら全体保存、保存許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "対象オブジェクトの読み取りと別の必要許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go",
+          "claim": "バケットとアカウントでは最も厳しい組み合わせを評価する。組織設定をアカウントが継承。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go",
+          "claim": "BlockPublicPolicyは新規公開ポリシー設定を拒否するが既存ポリシーを変更しない。他の3設定との役割の違い。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/s3.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "バケットのBPAをfalseにすればアカウントのtrueを打ち消せる。",
+          "BlockPublicPolicyは既存公開ポリシーを削除する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "s3-account-public-block, s3-existing-public-policy"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

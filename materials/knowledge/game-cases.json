@@ -989,6 +989,140 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "s3-public-access-layers",
+      "title": "S3の公開ポリシー防止と既存設定",
+      "premise": "写真を保存する汎用S3バケットの公開アクセスを防ぐ設定を点検する。",
+      "constraints": [
+        "組織ポリシーはない。バケット所有者のアカウントとバケットの2層を比較する。",
+        "第2問はBlockPublicPolicyの作用だけを問う。他の3設定による実効アクセス判定は別とする。"
+      ],
+      "questions": [
+        {
+          "id": "s3-account-public-block",
+          "objective": "最も厳しい組み合わせを適用する。",
+          "prompt": "アカウントのBlockPublicPolicy=true、バケットではfalse。実行主体はPutBucketPolicyの許可を持ち、公開と判定される新しいバケットポリシーを設定しようとしている。BPAによる判断は？",
+          "options": [
+            {
+              "id": "s3-account-public-block-a",
+              "text": "バケットがfalseなので必ず受け付ける",
+              "explanation": "バケットのfalseでアカウントのtrueを弱めることはできません。最も厳しい組み合わせを評価します。"
+            },
+            {
+              "id": "s3-account-public-block-b",
+              "text": "アカウントのtrueが適用され、公開ポリシー設定要求は拒否される",
+              "explanation": "実行許可があっても公開ポリシー防止の条件を別に評価します。アカウントのBlockPublicPolicyがこの要求を拒否します。"
+            },
+            {
+              "id": "s3-account-public-block-c",
+              "text": "アカウント設定はオブジェクトの内容にしか作用しない",
+              "explanation": "BPAは公開アクセスの設定です。保存された写真の内容だけの機能ではありません。"
+            }
+          ],
+          "correct_option_id": "s3-account-public-block-b",
+          "runtime_option_order": [
+            "s3-account-public-block-a",
+            "s3-account-public-block-b",
+            "s3-account-public-block-c"
+          ],
+          "rationale": "実行許可があっても公開ポリシー防止の条件を別に評価します。アカウントのBlockPublicPolicyがこの要求を拒否します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go"
+          ]
+        },
+        {
+          "id": "s3-existing-public-policy",
+          "objective": "新規設定防止と既存設定修正を区別する。",
+          "prompt": "汎用バケットに既存の公開ポリシーがある。BlockPublicPolicyだけをtrueへ変更した。その設定自体の作用として適切な説明は？",
+          "options": [
+            {
+              "id": "s3-existing-public-policy-a",
+              "text": "既存の公開ポリシーを自動で削除する",
+              "explanation": "BlockPublicPolicyは既存ポリシーを削除・変更しません。不要な既存許可は別に点検します。"
+            },
+            {
+              "id": "s3-existing-public-policy-b",
+              "text": "担当者の読み取り許可を自動で追加する",
+              "explanation": "公開アクセスの防止設定は、必要な担当者への許可付与の代わりにはなりません。"
+            },
+            {
+              "id": "s3-existing-public-policy-c",
+              "text": "新しい公開ポリシー設定要求を拒否するが、既存ポリシーは変更しない",
+              "explanation": "設定要求の予防と既存設定の修正を区別しています。他のBPA設定によるアクセス制限も別に確認します。"
+            }
+          ],
+          "correct_option_id": "s3-existing-public-policy-c",
+          "runtime_option_order": [
+            "s3-existing-public-policy-a",
+            "s3-existing-public-policy-b",
+            "s3-existing-public-policy-c"
+          ],
+          "rationale": "設定要求の予防と既存設定の修正を区別しています。他のBPA設定によるアクセス制限も別に確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問のアカウントのBlockPublicPolicyもfalseになり、ほかのBPA設定・組織制約による拒否はないとする。",
+        "answer": "BlockPublicPolicyによる拒否条件は外れるが、API許可やほかの制約の確認は引き続き必要。公開にする業務上の必要性も別に判断する。",
+        "reason": "防止設定を弱めたことは権限を付与したことや設定成功の全保証ではない。"
+      },
+      "unit_ids": [
+        "s3"
+      ],
+      "chapter_ids": [
+        "ch01",
+        "ch05",
+        "ch10"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_CreateBucket.go",
+          "claim": "汎用バケットのBPAを有効にしACLを無効に保つ推奨。Object Ownership既定BucketOwnerEnforcedと別種バケットの条件。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "バケットへオブジェクトを追加、成功応答なら全体保存、保存許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_GetObject.go",
+          "claim": "対象オブジェクトの読み取りと別の必要許可。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutPublicAccessBlock.go",
+          "claim": "バケットとアカウントでは最も厳しい組み合わせを評価する。組織設定をアカウントが継承。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/types/types.go",
+          "claim": "BlockPublicPolicyは新規公開ポリシー設定を拒否するが既存ポリシーを変更しない。他の3設定との役割の違い。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
