@@ -31,4 +31,4 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 4. 変更対象に応じた検証を行い、知識データを変えた場合はknowledge:exportとknowledge:checkを実行する。
 5. `pnpm progress:update`と`pnpm progress:check`で進捗表を更新し、CHECKPOINTとTASKSに作業を記録する。GitHubにも保存したか、ローカルのみかを報告する。
 
-次回の教材拡充は[EXPANSION_PLAN.md](../knowledge/EXPANSION_PLAN.md)に従い、まず既存14単位の確認や先行2章の細分化から進めます。新しい原稿を増やす作業と、既存原稿を公開できる品質へ整える作業を分けて計画します。
+次回の教材拡充は[EXPANSION_PLAN.md](../knowledge/EXPANSION_PLAN.md)に従い、まずCHECKPOINTに残る確認待ち・取り込み待ちを優先し、公式根拠を取得できる不足範囲を細分化します。新しい原稿を増やす作業と、既存原稿を公開できる品質へ整える作業を分けて計画します。

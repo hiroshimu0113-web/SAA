@@ -1607,6 +1607,122 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "route53-weighted-rollout",
+      "title": "写真サイトのDNS段階移行と全重み0",
+      "premise": "写真サイトを旧環境から新環境へ段階移行する。Route 53の公開ゾーンで同名・Aレコードの重み付き応答を設定する。",
+      "constraints": [
+        "非エイリアス、ヘルスチェックなし。2候補、TTLは同じ。既存キャッシュを利用するクライアントを想定する。",
+        "アプリとデータの互換性はこの問題の前提として整っている。DNS配分だけを問う。"
+      ],
+      "questions": [
+        {
+          "id": "route53-dns-share",
+          "objective": "DNS応答とHTTP要求数を分ける。",
+          "prompt": "同名同種の2候補は非エイリアスでヘルスチェックなし。旧環境の重み9、新環境1にした。割合の適切な説明は？",
+          "options": [
+            {
+              "id": "route53-dns-share-a",
+              "text": "新環境のDNS応答の配分10%を意図するが、HTTP要求数が厳密10%とは限らない",
+              "explanation": "1/(9+1)=10%はDNS応答の配分です。有限回の結果やキャッシュから生じるHTTP要求の厳密比率は別です。"
+            },
+            {
+              "id": "route53-dns-share-b",
+              "text": "どの連続10回のDNS問い合わせでも必ず新へ1回回答する",
+              "explanation": "重みは各候補の比率で、固定の10件単位で割り当てる保証ではありません。"
+            },
+            {
+              "id": "route53-dns-share-c",
+              "text": "全クライアントのHTTP要求が常に厳密10%だけ新環境へ届く",
+              "explanation": "名前解決結果を再利用する条件ではDNS応答とHTTP要求は1対1ではありません。"
+            }
+          ],
+          "correct_option_id": "route53-dns-share-a",
+          "runtime_option_order": [
+            "route53-dns-share-a",
+            "route53-dns-share-b",
+            "route53-dns-share-c"
+          ],
+          "rationale": "1/(9+1)=10%はDNS応答の配分です。有限回の結果やキャッシュから生じるHTTP要求の厳密比率は別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go"
+          ]
+        },
+        {
+          "id": "route53-all-zero",
+          "objective": "全重み0の例外を適用する。",
+          "prompt": "別の変更で、同名同種の非エイリアス2候補の重みを両方0にした。ヘルスチェックはない。新しいDNS応答の選択は？",
+          "options": [
+            {
+              "id": "route53-all-zero-a",
+              "text": "両方0なので両環境への回答が必ず停止する",
+              "explanation": "この条件の全0は全停止を意味しません。全候補に等しい確率で応答する例外があります。"
+            },
+            {
+              "id": "route53-all-zero-b",
+              "text": "2候補が等しい確率で選ばれる",
+              "explanation": "非エイリアス・健康確認なしで同名同種が全0なら、全候補へ等しい確率で応答します。"
+            },
+            {
+              "id": "route53-all-zero-c",
+              "text": "必ず旧環境だけが選ばれる",
+              "explanation": "旧という役割を自動判定する設定ではありません。旧だけを優先する根拠がありません。"
+            }
+          ],
+          "correct_option_id": "route53-all-zero-b",
+          "runtime_option_order": [
+            "route53-all-zero-a",
+            "route53-all-zero-b",
+            "route53-all-zero-c"
+          ],
+          "rationale": "非エイリアス・健康確認なしで同名同種が全0なら、全候補へ等しい確率で応答します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問を旧100・新0へ変更する。同名同種・非エイリアス・健康確認なしは同じ。",
+        "answer": "新環境は新しいDNS応答として選ばれない。ただし以前のキャッシュや接続を使うHTTP要求の即時停止は別に確認する。",
+        "reason": "ほかの候補に正の重みがあるため全0の例外は外れる。DNS選択とアプリの通信は同じ操作ではない。"
+      },
+      "unit_ids": [
+        "route53"
+      ],
+      "chapter_ids": [
+        "ch07",
+        "ch11",
+        "ch12"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go",
+          "claim": "同名同種の重みの総和との比でDNS応答を配分。非エイリアス全0は等確率。健康確認/aliasは別条件。同じ重み付きグループのTTLをそろえる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/api_op_GetChange.go",
+          "claim": "INSYNCはホストゾーンを管理する全Route 53 DNSサーバーへの反映。全クライアントのキャッシュ削除という状態ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

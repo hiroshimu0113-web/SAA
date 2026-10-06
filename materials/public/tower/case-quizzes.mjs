@@ -389,6 +389,36 @@ export const CASE_QUIZZES={
       "最新受信のReceiptHandleを使います。Standardでの再受信に備える冪等処理も別に必要です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_DeleteMessage.go"
+  },
+  "route53-dns-share": {
+    "prompt": "写真サイトを旧環境から新環境へ段階移行する。Route 53の公開ゾーンで同名・Aレコードの重み付き応答を設定する。 同名同種の2候補は非エイリアスでヘルスチェックなし。旧環境の重み9、新環境1にした。割合の適切な説明は？",
+    "options": [
+      "新環境のDNS応答の配分10%を意図するが、HTTP要求数が厳密10%とは限らない",
+      "どの連続10回のDNS問い合わせでも必ず新へ1回回答する",
+      "全クライアントのHTTP要求が常に厳密10%だけ新環境へ届く"
+    ],
+    "answer": 0,
+    "reasons": [
+      "1/(9+1)=10%はDNS応答の配分です。有限回の結果やキャッシュから生じるHTTP要求の厳密比率は別です。",
+      "重みは各候補の比率で、固定の10件単位で割り当てる保証ではありません。",
+      "名前解決結果を再利用する条件ではDNS応答とHTTP要求は1対1ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go"
+  },
+  "route53-all-zero": {
+    "prompt": "写真サイトを旧環境から新環境へ段階移行する。Route 53の公開ゾーンで同名・Aレコードの重み付き応答を設定する。 別の変更で、同名同種の非エイリアス2候補の重みを両方0にした。ヘルスチェックはない。新しいDNS応答の選択は？",
+    "options": [
+      "両方0なので両環境への回答が必ず停止する",
+      "2候補が等しい確率で選ばれる",
+      "必ず旧環境だけが選ばれる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "この条件の全0は全停止を意味しません。全候補に等しい確率で応答する例外があります。",
+      "非エイリアス・健康確認なしで同名同種が全0なら、全候補へ等しい確率で応答します。",
+      "旧という役割を自動判定する設定ではありません。旧だけを優先する根拠がありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -443,5 +473,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "sqs-change-from-now",
     "sqs-new-receipt-handle"
+  ],
+  [
+    "route53-dns-share",
+    "route53-all-zero"
   ]
 ];

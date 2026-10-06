@@ -1066,6 +1066,69 @@
         "DB確定と削除の間の障害に対する冪等処理を具体化する。",
         "FIFOグループ/DLQ/保持期間と可視性を比較する。"
       ]
+    },
+    {
+      "id": "route53",
+      "title": "Route 53の重み付きDNS応答",
+      "group": "resilience",
+      "objective": "重み付きDNS応答の割合と、全重み0の例外を条件に適用する。",
+      "estimated_minutes": 7,
+      "scope": "公開ゾーン・非エイリアスA・ヘルスチェックなしの重み付きDNS応答。全ポリシー/エイリアス/委任/DNSSECは範囲外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "重み10%なら全HTTP要求が厳密10%になる。",
+        "全重み0なら全応答が停止する。",
+        "INSYNCは全クライアントのキャッシュを消したという状態。"
+      ],
+      "checks": [
+        {
+          "id": "route53-explain",
+          "level": "explain",
+          "prompt": "重み9:1は何を配分する？",
+          "expected_points": [
+            "重み÷同名同種の重みの総和でDNS応答を配分する",
+            "全0では等確率という例外がある",
+            "DNS応答とキャッシュを使うHTTP要求の数を区別する"
+          ]
+        },
+        {
+          "id": "route53-apply",
+          "level": "apply",
+          "prompt": "全重み0と一方だけ0で選択はどう変わる？",
+          "expected_points": [
+            "非エイリアス/ヘルスチェックなしの条件を読む",
+            "全0と一方0・ほか正の選択を区別する",
+            "INSYNCと利用者キャッシュ、移行観測を分ける"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch07-l01"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "本文・ケースの作成後に別工程で公式資料の主張・条件・誤答を照合。同一担当であり、別担当者の独立監査・実AWS実験・本人理解評価は未実施。",
+        "source_document": "knowledge/lessons/route53.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go",
+            "claim": "同名同種の重みの総和との比でDNS応答を配分。非エイリアス全0は等確率。健康確認/aliasは別条件。同じ重み付きグループのTTLをそろえる。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/api_op_GetChange.go",
+            "claim": "INSYNCはホストゾーンを管理する全Route 53 DNSサーバーへの反映。全クライアントのキャッシュ削除という状態ではない。",
+            "checked_on": "2026-10-06",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "ヘルスチェック付き/weighted aliasの0の扱いを現行公式資料で追加確認する。",
+        "DNS委任・別ルーティングポリシー・移行観測と切替の実験へ展開する。"
+      ]
     }
   ]
 }

@@ -6361,6 +6361,262 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-route53-weighted-answers",
+      "title": "Route 53：重み付き応答の割合と全重み0の例外",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "名称暗記ではなく、条件に応じた原理と判断の理解が目標。",
+      "objective": "重み付きDNS応答の割合と、全重み0の例外を条件に適用する。",
+      "unit_ids": [
+        "route53"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/route53.md",
+          "locator": "Route 53：重み付き応答の割合と全重み0の例外"
+        }
+      ],
+      "domains": [
+        "networking",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Route 53"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "非エイリアス、ヘルスチェックなし。2候補、TTLは同じ。既存キャッシュを利用するクライアントを想定する。",
+        "アプリとデータの互換性はこの問題の前提として整っている。DNS配分だけを問う。"
+      ],
+      "limitations": [
+        "公開ゾーン・非エイリアスA・ヘルスチェックなしの重み付きDNS応答。全ポリシー/エイリアス/委任/DNSSECは範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "重み10%なら全HTTP要求が厳密10%になる。",
+        "全重み0なら全応答が停止する。",
+        "INSYNCは全クライアントのキャッシュを消したという状態。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/route53.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "写真サイトを旧環境から新環境へ段階移行する。Route 53の公開ゾーンで同名・Aレコードの重み付き応答を設定する。",
+        "counterexample": "全候補の重み0はこの条件では全停止にならない。",
+        "comparison": {
+          "path": "knowledge/lessons/route53.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-route53-weighted-rollout",
+          "reason": "限定条件と条件変更を2問で問う。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go",
+          "claim": "同名同種の重みの総和との比でDNS応答を配分。非エイリアス全0は等確率。健康確認/aliasは別条件。同じ重み付きグループのTTLをそろえる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/api_op_GetChange.go",
+          "claim": "INSYNCはホストゾーンを管理する全Route 53 DNSサーバーへの反映。全クライアントのキャッシュ削除という状態ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "game_design": {
+        "proposal": "確認済み教材をカード・条件付き役の素材候補として保管。効果は未設計。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/route53.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "INSYNCは全クライアントのキャッシュを消したという状態。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "実務の条件と限界を保つカード効果・役・ビルドの設計と検証。"
+      ]
+    },
+    {
+      "id": "case-route53-weighted-rollout",
+      "title": "写真サイトのDNS段階移行と全重み0",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "同じ状況と明示した条件から判断し、理由と条件変更を問う2問ケース。",
+      "objective": "状況から適切な判断を選び、各誤答の不適合条件を説明する。",
+      "unit_ids": [
+        "route53"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "route53-weighted-rollout"
+        }
+      ],
+      "domains": [
+        "networking",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Route 53"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "非エイリアス、ヘルスチェックなし。2候補、TTLは同じ。既存キャッシュを利用するクライアントを想定する。",
+        "アプリとデータの互換性はこの問題の前提として整っている。DNS配分だけを問う。"
+      ],
+      "limitations": [
+        "公開ゾーン・非エイリアスA・ヘルスチェックなしの重み付きDNS応答。全ポリシー/エイリアス/委任/DNSSECは範囲外。",
+        "本人の理解と実環境のアクセス成功を保証する教材ではない。"
+      ],
+      "misconceptions": [
+        "重み10%なら全HTTP要求が厳密10%になる。",
+        "全重み0なら全応答が停止する。",
+        "INSYNCは全クライアントのキャッシュを消したという状態。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route53-weighted-rollout.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route53-weighted-rollout.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route53-weighted-rollout.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route53-weighted-rollout.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/types/types.go",
+          "claim": "同名同種の重みの総和との比でDNS応答を配分。非エイリアス全0は等確率。健康確認/aliasは別条件。同じ重み付きグループのTTLをそろえる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/route53/api_op_GetChange.go",
+          "claim": "INSYNCはホストゾーンを管理する全Route 53 DNSサーバーへの反映。全クライアントのキャッシュ削除という状態ではない。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "判断目標、主分類、固定語彙、実在する本文・単位参照を確認。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・回答/結果再開、全ケースのオフライン回答と報酬重複防止、知識地図の確認状態/公式根拠を確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "連続2問としてゲームへ取り込む。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/route53.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "クイズ報酬やカードのエナジーは認証の保証やAWS料金を表さない。",
+        "simplifications": [
+          "通信と他ポリシーによる許可・Denyは設問の明示した前提に限定。"
+        ],
+        "mislearning_risks": [
+          "INSYNCは全クライアントのキャッシュを消したという状態。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "route53-dns-share, route53-all-zero"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
