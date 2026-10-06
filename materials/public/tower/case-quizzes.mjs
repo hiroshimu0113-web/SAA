@@ -209,6 +209,36 @@ export const CASE_QUIZZES={
       "ルーティングの設定はアプリ修復の設定ではありません。全異常がそのまま成功へ変わる保証はありません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/elasticloadbalancingv2/types/types.go"
+  },
+  "ec2-before-termination": {
+    "prompt": "EC2で加工した完成写真をインスタンス終了後も納品する。 再生成できない完成写真の唯一のコピーが、終了で失われるローカル領域にある。加工EC2を終了する前の適切な対応は？",
+    "options": [
+      "EC2は処理用なので写真の扱いを確認せず終了する",
+      "ローカルにS3の保存予定を書き、転送を確認せず終了する",
+      "独立したS3等へ写真を保存し、成功・内容・必要なアクセスを確認してから終了する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "処理の役割と必要なデータの保持は別です。唯一のコピーが失われる条件を解決していません。",
+      "保存先の計画は保存完了ではありません。実際の転送と確認が必要です。",
+      "インスタンス終了と独立した保存を分け、唯一の完成写真を失う条件を解消します。保存側の保護も別途設計します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go"
+  },
+  "ec2-ebs-retained": {
+    "prompt": "EC2で加工した完成写真をインスタンス終了後も納品する。 別の加工EC2をTerminateInstancesで終了した。接続EBSのDeleteOnTerminationはfalse、ほかの削除はない。このEBSとEC2の説明は？",
+    "options": [
+      "EC2自体を同じIDで再起動して元どおりに戻せる",
+      "そのEBSは終了時削除されず残るが、終了したEC2自体は復旧できない",
+      "EBSの設定に関係なく必ずすべてのデータが削除される"
+    ],
+    "answer": 1,
+    "reasons": [
+      "TerminateInstancesの終了は不可逆です。StopInstancesとの混同です。",
+      "終了時削除の条件を分けています。残るEBSの利用には別インスタンスへの接続等の手順が必要です。",
+      "終了時削除に設定されたEBSが対象です。falseの条件を無視しています。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -239,5 +269,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "alb-consecutive-failures",
     "alb-all-unhealthy"
+  ],
+  [
+    "ec2-before-termination",
+    "ec2-ebs-retained"
   ]
 ];

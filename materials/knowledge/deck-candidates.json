@@ -127,6 +127,7 @@
         "candidate-authorization",
         "candidate-ebs",
         "candidate-ebs-snapshot",
+        "candidate-ec2",
         "candidate-efs",
         "candidate-fsx-windows",
         "candidate-gp3",
@@ -293,6 +294,7 @@
         "candidate-athena",
         "candidate-cache",
         "candidate-cost-optimization",
+        "candidate-ec2",
         "candidate-firehose",
         "candidate-glue",
         "candidate-kinesis",
@@ -1523,7 +1525,9 @@
       "title": "EC2の役割",
       "related_chapter_ids": [
         "ch01",
-        "ch04"
+        "ch04",
+        "ch05",
+        "ch12"
       ],
       "material_refs": [
         {
@@ -1535,14 +1539,15 @@
           "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "draft",
+      "classification_ids": [
+        "concept-ec2-compute-retention"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

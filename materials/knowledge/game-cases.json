@@ -860,6 +860,135 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "ec2-photo-retention",
+      "title": "加工EC2を終了する前の写真保存",
+      "premise": "EC2で加工した完成写真をインスタンス終了後も納品する。",
+      "constraints": [
+        "第1問では完成写真の唯一のコピーが、終了で失われるローカル領域にあり、再生成できない。",
+        "第2問ではEBSの終了時削除falseを明示。ほかの削除処理はない。データとEC2自体の寿命を区別する。"
+      ],
+      "questions": [
+        {
+          "id": "ec2-before-termination",
+          "objective": "処理先終了後に必要データを残す。",
+          "prompt": "再生成できない完成写真の唯一のコピーが、終了で失われるローカル領域にある。加工EC2を終了する前の適切な対応は？",
+          "options": [
+            {
+              "id": "ec2-before-termination-a",
+              "text": "EC2は処理用なので写真の扱いを確認せず終了する",
+              "explanation": "処理の役割と必要なデータの保持は別です。唯一のコピーが失われる条件を解決していません。"
+            },
+            {
+              "id": "ec2-before-termination-b",
+              "text": "ローカルにS3の保存予定を書き、転送を確認せず終了する",
+              "explanation": "保存先の計画は保存完了ではありません。実際の転送と確認が必要です。"
+            },
+            {
+              "id": "ec2-before-termination-c",
+              "text": "独立したS3等へ写真を保存し、成功・内容・必要なアクセスを確認してから終了する",
+              "explanation": "インスタンス終了と独立した保存を分け、唯一の完成写真を失う条件を解消します。保存側の保護も別途設計します。"
+            }
+          ],
+          "correct_option_id": "ec2-before-termination-c",
+          "runtime_option_order": [
+            "ec2-before-termination-a",
+            "ec2-before-termination-b",
+            "ec2-before-termination-c"
+          ],
+          "rationale": "インスタンス終了と独立した保存を分け、唯一の完成写真を失う条件を解消します。保存側の保護も別途設計します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go"
+          ]
+        },
+        {
+          "id": "ec2-ebs-retained",
+          "objective": "EBS設定と終了不可逆を区別する。",
+          "prompt": "別の加工EC2をTerminateInstancesで終了した。接続EBSのDeleteOnTerminationはfalse、ほかの削除はない。このEBSとEC2の説明は？",
+          "options": [
+            {
+              "id": "ec2-ebs-retained-a",
+              "text": "EC2自体を同じIDで再起動して元どおりに戻せる",
+              "explanation": "TerminateInstancesの終了は不可逆です。StopInstancesとの混同です。"
+            },
+            {
+              "id": "ec2-ebs-retained-b",
+              "text": "そのEBSは終了時削除されず残るが、終了したEC2自体は復旧できない",
+              "explanation": "終了時削除の条件を分けています。残るEBSの利用には別インスタンスへの接続等の手順が必要です。"
+            },
+            {
+              "id": "ec2-ebs-retained-c",
+              "text": "EBSの設定に関係なく必ずすべてのデータが削除される",
+              "explanation": "終了時削除に設定されたEBSが対象です。falseの条件を無視しています。"
+            }
+          ],
+          "correct_option_id": "ec2-ebs-retained-b",
+          "runtime_option_order": [
+            "ec2-ebs-retained-a",
+            "ec2-ebs-retained-b",
+            "ec2-ebs-retained-c"
+          ],
+          "rationale": "終了時削除の条件を分けています。残るEBSの利用には別インスタンスへの接続等の手順が必要です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "対象ファイルが、別に残した元写真と手順から再生成でき、再処理時間も許容する中間ファイルになる。",
+        "answer": "消失と再生成の条件を理解したうえで一時領域を候補にできる。納品に必要な唯一の完成データの扱いとは分ける。",
+        "reason": "失うと困る性質が変わる。すべての中間データを同じ保存期間で残す必要とは限らない。"
+      },
+      "unit_ids": [
+        "ec2"
+      ],
+      "chapter_ids": [
+        "ch01",
+        "ch04",
+        "ch05",
+        "ch12"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_RunInstances.go",
+          "claim": "AMIから起動し、タイプ・ネットワーク等を設定する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_TerminateInstances.go",
+          "claim": "終了は不可逆。終了時削除設定のEBSは削除、インスタンスストアのデータは喪失。終了前に必要データを永続保存する。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go",
+          "claim": "EBS-backedインスタンスは停止後に再開可能。停止中もEBSが残りボリューム料金が続く。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/s3/api_op_PutObject.go",
+          "claim": "バケットへオブジェクトを追加し、成功応答なら全体が保存されている。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "本文・ケース作成後に、固定版のAWS公式資料、限定条件、反例、全誤答理由、条件変更を別工程で照合。同一担当の確認。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

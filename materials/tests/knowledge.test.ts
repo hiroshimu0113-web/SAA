@@ -19,7 +19,7 @@ test('前提の循環・重複ID・存在しない教材や概念への参照を
 });
 test('本人の理解済み判定と根拠のない監査済み判定を共有教材へ混入させない',()=>{
   const fakeMastery=structuredClone(units);fakeMastery[0].learner_state='mastered';assert.throws(()=>validateUnits(fakeMastery,relations,lessons),/mastery/);
-  const fakeReview=structuredClone(units);fakeReview[0].review.status='reviewed';assert.throws(()=>validateUnits(fakeReview,relations,lessons),/evidence/);
+  const fakeReview=structuredClone(units);fakeReview[0].review.status='reviewed';delete fakeReview[0].review.evidence;assert.throws(()=>validateUnits(fakeReview,relations,lessons),/evidence/);
   const missingCheck=structuredClone(units);missingCheck[0].checks=missingCheck[0].checks.filter(c=>c.level==='explain');assert.throws(()=>validateUnits(missingCheck,relations,lessons),/application/);
 });
 test('公開済み教材と原稿を正確に分け、全体原稿の存在を公開と混同しない',()=>{
