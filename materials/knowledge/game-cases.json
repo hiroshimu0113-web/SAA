@@ -2446,6 +2446,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "route-longest-prefix",
+      "title": "宛先が重なるルートの選択",
+      "premise": "IPv4ルートテーブルで複数の宛先範囲が重なる。例のIPとターゲットは教材用で、実AWSの構成測定ではない。",
+      "unit_ids": [
+        "route"
+      ],
+      "chapter_ids": [
+        "ch03",
+        "ch07"
+      ],
+      "constraints": [
+        "異なるプレフィックスの有効なルートだけを比較する。同一CIDRの静的/伝播競合はない。",
+        "第2問は第1問の回答を前提とせず、削除後に残るルートを明示する。"
+      ],
+      "questions": [
+        {
+          "id": "route-prefix-choice",
+          "objective": "最長プレフィックス一致を適用する。",
+          "prompt": "同じルートテーブルに192.0.2.0/24→ターゲットAと192.0.2.0/28→ターゲットBがある。両ターゲットは有効、同一プレフィックスの競合はない。宛先192.0.2.3へのルート選択は？A/Bは教材用の抽象ターゲット。",
+          "options": [
+            {
+              "id": "route-prefix-choice-a",
+              "text": "A。広い/24のほうが多くの宛先を含むので常に優先する",
+              "explanation": "両方が一致する場合は、より具体的な小さい範囲を優先します。"
+            },
+            {
+              "id": "route-prefix-choice-b",
+              "text": "B。/28が一致し、/24より具体的な宛先範囲を持つ",
+              "explanation": "192.0.2.3は両方に含まれます。より長いプレフィックスの/28を選びます。"
+            },
+            {
+              "id": "route-prefix-choice-c",
+              "text": "AとBへ同じパケットを必ず複製して送る",
+              "explanation": "この条件は複製配信ではなく、より具体的なルートの選択です。"
+            }
+          ],
+          "correct_option_id": "route-prefix-choice-b",
+          "runtime_option_order": [
+            "route-prefix-choice-a",
+            "route-prefix-choice-b",
+            "route-prefix-choice-c"
+          ],
+          "rationale": "192.0.2.3は両方に含まれます。より長いプレフィックスの/28を選びます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go"
+          ]
+        },
+        {
+          "id": "route-specific-removed",
+          "objective": "最も具体的な一致を条件変更へ適用する。",
+          "prompt": "別の状態で、192.0.2.0/28→Bを削除した。192.0.2.0/24→Aと0.0.0.0/0→Cは残り、有効。宛先192.0.2.3で最も具体的な一致は？A/Cは教材用ターゲットで、SG/NACLの許可を判断する問題ではない。",
+          "options": [
+            {
+              "id": "route-specific-removed-a",
+              "text": "以前Bがあったので、削除後も必ずBを選ぶ",
+              "explanation": "有効なルート選択は現在残っている宛先条件で判断します。"
+            },
+            {
+              "id": "route-specific-removed-b",
+              "text": "C。デフォルトルートはどんな具体的ルートより優先する",
+              "explanation": "デフォルトルートは広い/0で、残る/24のほうが具体的です。"
+            },
+            {
+              "id": "route-specific-removed-c",
+              "text": "A。残る一致のうち/24が/0より具体的",
+              "explanation": "ルート変更後の一致対象を調べ直します。選択した経路があってもSG/NACLや待受は別の条件です。"
+            }
+          ],
+          "correct_option_id": "route-specific-removed-c",
+          "runtime_option_order": [
+            "route-specific-removed-a",
+            "route-specific-removed-b",
+            "route-specific-removed-c"
+          ],
+          "rationale": "ルート変更後の一致対象を調べ直します。選択した経路があってもSG/NACLや待受は別の条件です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の宛先が192.0.2.20へ変わる。",
+        "answer": "/28の192.0.2.0〜192.0.2.15には含まれず、/24に一致するのでAを選ぶ。",
+        "reason": "長いプレフィックスがあっても、宛先がその範囲に一致することが必要。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+          "claim": "ルートは宛先CIDRまたはプレフィックスリストとターゲットを指定する。最も具体的な宛先一致を選ぶ。例の192.0.2.3には/24より/28のルートが選ばれる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+          "claim": "受信SGルールは指定した送信元・プロトコル・TCP/UDPポートの通信を許可する。経路のターゲット設定とは別の操作。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

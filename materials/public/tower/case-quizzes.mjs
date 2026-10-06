@@ -599,6 +599,36 @@ export const CASE_QUIZZES={
       "別方向の番号変更は、この受信ルールのプロトコル指定を変更しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateNetworkAclEntry.go"
+  },
+  "route-prefix-choice": {
+    "prompt": "IPv4ルートテーブルで複数の宛先範囲が重なる。例のIPとターゲットは教材用で、実AWSの構成測定ではない。 同じルートテーブルに192.0.2.0/24→ターゲットAと192.0.2.0/28→ターゲットBがある。両ターゲットは有効、同一プレフィックスの競合はない。宛先192.0.2.3へのルート選択は？A/Bは教材用の抽象ターゲット。",
+    "options": [
+      "A。広い/24のほうが多くの宛先を含むので常に優先する",
+      "B。/28が一致し、/24より具体的な宛先範囲を持つ",
+      "AとBへ同じパケットを必ず複製して送る"
+    ],
+    "answer": 1,
+    "reasons": [
+      "両方が一致する場合は、より具体的な小さい範囲を優先します。",
+      "192.0.2.3は両方に含まれます。より長いプレフィックスの/28を選びます。",
+      "この条件は複製配信ではなく、より具体的なルートの選択です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go"
+  },
+  "route-specific-removed": {
+    "prompt": "IPv4ルートテーブルで複数の宛先範囲が重なる。例のIPとターゲットは教材用で、実AWSの構成測定ではない。 別の状態で、192.0.2.0/28→Bを削除した。192.0.2.0/24→Aと0.0.0.0/0→Cは残り、有効。宛先192.0.2.3で最も具体的な一致は？A/Cは教材用ターゲットで、SG/NACLの許可を判断する問題ではない。",
+    "options": [
+      "以前Bがあったので、削除後も必ずBを選ぶ",
+      "C。デフォルトルートはどんな具体的ルートより優先する",
+      "A。残る一致のうち/24が/0より具体的"
+    ],
+    "answer": 2,
+    "reasons": [
+      "有効なルート選択は現在残っている宛先条件で判断します。",
+      "デフォルトルートは広い/0で、残る/24のほうが具体的です。",
+      "ルート変更後の一致対象を調べ直します。選択した経路があってもSG/NACLや待受は別の条件です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -681,5 +711,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "nacl-direction-order",
     "nacl-all-protocol-port"
+  ],
+  [
+    "route-prefix-choice",
+    "route-specific-removed"
   ]
 ];

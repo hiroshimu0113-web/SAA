@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 22,
-    "rubric_checks": 44
+    "detailed_units": 23,
+    "rubric_checks": 46
   },
   "nodes": [
     {
@@ -1919,9 +1919,71 @@
     {
       "id": "concept:route",
       "kind": "concept",
-      "title": "route",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "ルートの最長プレフィックス一致",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "route",
+        "title": "ルートの最長プレフィックス一致",
+        "group": "coordination",
+        "objective": "複数の一致するIPv4ルートから最も具体的な宛先を選び、通信許可と区別する。",
+        "estimated_minutes": 7,
+        "scope": "IPv4の異なる宛先CIDRに一致する有効ルートの選択。静的/伝播の同一CIDR優先度、IPv6、プレフィックスリスト競合、blackhole時の挙動は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "広いルートが常に先に選ばれる。",
+          "デフォルトルートは具体的なルートより優先する。",
+          "ルートが存在すればSGやNACLも自動的に許可になる。"
+        ],
+        "checks": [
+          {
+            "id": "route-explain",
+            "level": "explain",
+            "prompt": "/24と/28が両方一致する宛先ではどちらを選ぶ？",
+            "expected_points": [
+              "宛先が両方の範囲に含まれることを確かめる",
+              "より具体的な/28を選ぶ",
+              "通信許可と到達成功は別"
+            ]
+          },
+          {
+            "id": "route-apply",
+            "level": "apply",
+            "prompt": "/28が削除され、/24と/0が残るとき選択は？",
+            "expected_points": [
+              "現在のルート一覧を確認",
+              "一致する/24が/0より具体的",
+              "経路変更とSG/NACLの許可を分けて確認"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch03-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/route.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+              "claim": "ルートは宛先CIDRまたはプレフィックスリストとターゲットを指定する。最も具体的な宛先一致を選ぶ。例の192.0.2.3には/24より/28のルートが選ばれる。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+              "claim": "受信SGルールは指定した送信元・プロトコル・TCP/UDPポートの通信を許可する。経路のターゲット設定とは別の操作。",
+              "checked_on": "2026-10-06",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "同一宛先CIDRの静的/伝播優先度を公式根拠で確認する。",
+          "IGW/NAT経路とパブリックIP、無効ターゲットの挙動を別単位で扱う。"
+        ]
+      }
     },
     {
       "id": "concept:route53",
@@ -9208,6 +9270,11 @@
     {
       "from": "concept:network-acl",
       "to": "lesson:ch03-l02",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:route",
+      "to": "lesson:ch03-l01",
       "type": "unit_reference"
     },
     {

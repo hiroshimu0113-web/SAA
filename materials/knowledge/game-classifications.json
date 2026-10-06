@@ -8105,6 +8105,258 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-route-longest-prefix",
+      "title": "ルートの最長プレフィックス一致",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "宛先が一致する候補から最も具体的な経路を選ぶ原理と条件変更を扱う概念。",
+      "objective": "複数の一致するIPv4ルートから最も具体的な宛先を選び、通信許可と区別する。",
+      "unit_ids": [
+        "route"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/route.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "networking"
+      ],
+      "capabilities": [
+        "route"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Virtual Private Cloud"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "異なるプレフィックスの有効なルートだけを比較する。同一CIDRの静的/伝播競合はない。",
+        "第2問は第1問の回答を前提とせず、削除後に残るルートを明示する。"
+      ],
+      "limitations": [
+        "IPv4の異なる宛先CIDRに一致する有効ルートの選択。静的/伝播の同一CIDR優先度、IPv6、プレフィックスリスト競合、blackhole時の挙動は対象外。"
+      ],
+      "misconceptions": [
+        "広いルートが常に先に選ばれる。",
+        "デフォルトルートは具体的なルートより優先する。",
+        "ルートが存在すればSGやNACLも自動的に許可になる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/route.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "IPv4ルートテーブルで複数の宛先範囲が重なる。例のIPとターゲットは教材用で、実AWSの構成測定ではない。",
+        "counterexample": "第1問の宛先が192.0.2.20へ変わる。 /28の192.0.2.0〜192.0.2.15には含まれず、/24に一致するのでAを選ぶ。",
+        "comparison": {
+          "path": "knowledge/lessons/route.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-route-longest-prefix",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+          "claim": "ルートは宛先CIDRまたはプレフィックスリストとターゲットを指定する。最も具体的な宛先一致を選ぶ。例の192.0.2.3には/24より/28のルートが選ばれる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+          "claim": "受信SGルールは指定した送信元・プロトコル・TCP/UDPポートの通信を許可する。経路のターゲット設定とは別の操作。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "経路選択の詳細素材。カード数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/route.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの移動や防御値はAWSの経路・通信成功を保証する表現ではない。",
+        "simplifications": [
+          "IPv4の異なる宛先CIDRに一致する有効ルートの選択。静的/伝播の同一CIDR優先度、IPv6、プレフィックスリスト競合、blackhole時の挙動は対象外。"
+        ],
+        "mislearning_risks": [
+          "広いルートが常に先に選ばれる。",
+          "デフォルトルートは具体的なルートより優先する。",
+          "ルートが存在すればSGやNACLも自動的に許可になる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-route-longest-prefix",
+      "title": "宛先が重なるルートの選択",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "複数の一致するIPv4ルートから最も具体的な宛先を選び、通信許可と区別する。",
+      "unit_ids": [
+        "route"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "route-longest-prefix"
+        }
+      ],
+      "domains": [
+        "networking"
+      ],
+      "capabilities": [
+        "route"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Virtual Private Cloud"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "異なるプレフィックスの有効なルートだけを比較する。同一CIDRの静的/伝播競合はない。",
+        "第2問は第1問の回答を前提とせず、削除後に残るルートを明示する。"
+      ],
+      "limitations": [
+        "IPv4の異なる宛先CIDRに一致する有効ルートの選択。静的/伝播の同一CIDR優先度、IPv6、プレフィックスリスト競合、blackhole時の挙動は対象外。"
+      ],
+      "misconceptions": [
+        "広いルートが常に先に選ばれる。",
+        "デフォルトルートは具体的なルートより優先する。",
+        "ルートが存在すればSGやNACLも自動的に許可になる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route-longest-prefix.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route-longest-prefix.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route-longest-prefix.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "route-longest-prefix.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateRoute.go",
+          "claim": "ルートは宛先CIDRまたはプレフィックスリストとターゲットを指定する。最も具体的な宛先一致を選ぶ。例の192.0.2.3には/24より/28のルートが選ばれる。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AuthorizeSecurityGroupIngress.go",
+          "claim": "受信SGルールは指定した送信元・プロトコル・TCP/UDPポートの通信を許可する。経路のターゲット設定とは別の操作。",
+          "checked_on": "2026-10-06",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-06",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "独立2問をゲームへ取り込み、保存と説明を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/route.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの移動や防御値はAWSの経路・通信成功を保証する表現ではない。",
+        "simplifications": [
+          "IPv4の異なる宛先CIDRに一致する有効ルートの選択。静的/伝播の同一CIDR優先度、IPv6、プレフィックスリスト競合、blackhole時の挙動は対象外。"
+        ],
+        "mislearning_risks": [
+          "広いルートが常に先に選ばれる。",
+          "デフォルトルートは具体的なルートより優先する。",
+          "ルートが存在すればSGやNACLも自動的に許可になる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "route-prefix-choice, route-specific-removed"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

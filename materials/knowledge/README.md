@@ -15,7 +15,7 @@
 - [units.schema.json](units.schema.json)：後続の制作者が使うJSON Schema。レッスン参照や循環などは生成時にも検証。
 - [relations.json](relations.json)：混同しやすい概念と、組み合わせる概念の関係。
 - [INVENTORY.md](INVENTORY.md)：全12章・36レッスン・200問の棚卸し。公開範囲は2章6レッスン・20問。
-- [graph.json](../public/knowledge/graph.json)：自動生成する407ノード・609エッジのスナップショット。数は教材更新で変わる。
+- [graph.json](../public/knowledge/graph.json)：正本から自動生成するスナップショット。最新の件数はINVENTORY.mdと生成時の検査結果を参照。
 - [EXPANSION_PLAN.md](EXPANSION_PLAN.md)：内容を厚くする順序と引き継ぎ。
 - [DECK_CANDIDATES.md](DECK_CANDIDATES.md)：12章のデッキ案と20枚目標の不足。素材棚卸しと確認・分類済み素材を区別。deck-plan.jsonが計画の正本、deck-candidates.jsonは生成物。
 - [game-cases.json](game-cases.json)：状況・条件・全誤答理由・条件変更を持つ連続2問の正本。確認・分類済みだけgame-content:exportでゲーム用データへ生成。
