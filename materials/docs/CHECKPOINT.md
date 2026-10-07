@@ -405,4 +405,4 @@
 - 敵行動の前にEnemy Turnを500ms、既存の結果ウインドウを1000ms、その後Your Turnを500ms表示。最後のカード/コンボの既存結果表示は敵ターン表示より前に維持。
 - 演出中はボタン・入力・タップ・キーボード操作を停止し、完了後に再開。戦闘結果を先に1回保存し、画面だけを順に進める。途中再読込では保存済み結果へ復帰し、敵行動を再実行しない。
 - 自分の2回行動の前半終了ではYour Turnのみ。敵休止は敵ターン＋休止結果。休止が続く間はYour Turnなし。戦闘終了後のYour Turnなし。
-- 教材本文・分類変更なし。89テスト・ビルド・Chromiumモバイル/オフライン回帰検証成功。CI WebKit・公開は進行中。新入口 tower/turns.html。次は実機でテンポと読みやすさを試遊評価。
+- 教材本文・分類変更なし。完了：89テスト・ビルド・Chromium/WebKitモバイル/オフライン回帰・教材更新検証成功。実装f0724b6、[Actions 37569295119](https://github.com/hiroshimu0113-web/SAA/actions/runs/37569295119) build/deploy成功。公開HTML・app・turn-presentation・CSS・Service WorkerがローカルビルドとSHA256一致。新入口 tower/turns.html。次は実機でテンポと読みやすさを試遊評価。
