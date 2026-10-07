@@ -1109,6 +1109,36 @@ export const CASE_QUIZZES={
       "SQL権限はAPIが要求するバックアップ保持条件を変更しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go"
+  },
+  "cloudfront-language-cache-key": {
+    "prompt": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。 標準CloudFront配信で、同じパス/catalogの公開商品一覧がクエリlang=ja/enで変わる。キャッシュは有効、認証・個人別応答はない。langはオリジンリクエストポリシーだけで転送し、キャッシュキーには含めていない。同じ言語で共有しつつ言語別の混同を防ぐ変更は？",
+    "options": [
+      "langを転送するだけで、言語ごとに必ず別キャッシュになると扱う",
+      "langをキャッシュポリシーのキーに含め、言語別の応答を分ける",
+      "無関係な全クッキーをキーに含め、langは除外したままにする"
+    ],
+    "answer": 1,
+    "reasons": [
+      "転送だけではキーに含まれず、応答の区別を指定できません。",
+      "応答を変えるlangをキーに含めます。キーに含む値はオリジンへも転送されます。",
+      "必要な言語の区別がなく、無関係な分割も増えます。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733"
+  },
+  "cloudfront-min-ttl-private": {
+    "prompt": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。 別の標準CloudFront配信で、オリジンがCache-Control: private, no-storeを返す。対象キャッシュポリシーのMinTTLは60秒。数値は教材用の設定例。これだけでCloudFrontが一切キャッシュしないと判断できる？",
+    "options": [
+      "no-storeがあれば正のMinTTLに関係なく必ず非キャッシュになる",
+      "privateが付いていればMinTTLの設定確認は不要",
+      "判断できない。正のMinTTLを見直し、非キャッシュ要件に合うポリシーを確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "正のMinTTLはこれらの指示があっても最低期間のキャッシュを行うという公式の注意があります。",
+      "オリジンの指示だけを見ず、配信側の保持設定も確認します。",
+      "正のMinTTLによる保持を避ける必要があります。MinTTL=0だけで全応答が必ず非キャッシュになるとも断定しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1259,5 +1289,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "rds-replica-freshness",
     "rds-replica-backup-prerequisite"
+  ],
+  [
+    "cloudfront-language-cache-key",
+    "cloudfront-min-ttl-private"
   ]
 ];

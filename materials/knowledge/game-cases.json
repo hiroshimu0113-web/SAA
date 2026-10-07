@@ -4539,6 +4539,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "cloudfront-cache-key-forwarding",
+      "title": "CloudFrontのキャッシュキーと転送情報を判断する",
+      "premise": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。",
+      "unit_ids": [
+        "cache-key"
+      ],
+      "chapter_ids": [
+        "ch07",
+        "ch10",
+        "ch12"
+      ],
+      "constraints": [
+        "個人別認証とマルチテナント配信は対象外。",
+        "正解を決める条件は各問にも記載する。"
+      ],
+      "questions": [
+        {
+          "id": "cloudfront-language-cache-key",
+          "objective": "応答を変える値でキャッシュを分ける。",
+          "prompt": "標準CloudFront配信で、同じパス/catalogの公開商品一覧がクエリlang=ja/enで変わる。キャッシュは有効、認証・個人別応答はない。langはオリジンリクエストポリシーだけで転送し、キャッシュキーには含めていない。同じ言語で共有しつつ言語別の混同を防ぐ変更は？",
+          "options": [
+            {
+              "id": "cloudfront-language-cache-key-a",
+              "text": "langを転送するだけで、言語ごとに必ず別キャッシュになると扱う",
+              "explanation": "転送だけではキーに含まれず、応答の区別を指定できません。"
+            },
+            {
+              "id": "cloudfront-language-cache-key-b",
+              "text": "langをキャッシュポリシーのキーに含め、言語別の応答を分ける",
+              "explanation": "応答を変えるlangをキーに含めます。キーに含む値はオリジンへも転送されます。"
+            },
+            {
+              "id": "cloudfront-language-cache-key-c",
+              "text": "無関係な全クッキーをキーに含め、langは除外したままにする",
+              "explanation": "必要な言語の区別がなく、無関係な分割も増えます。"
+            }
+          ],
+          "correct_option_id": "cloudfront-language-cache-key-b",
+          "runtime_option_order": [
+            "cloudfront-language-cache-key-a",
+            "cloudfront-language-cache-key-b",
+            "cloudfront-language-cache-key-c"
+          ],
+          "rationale": "応答を変えるlangをキーに含めます。キーに含む値はオリジンへも転送されます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4650"
+          ]
+        },
+        {
+          "id": "cloudfront-min-ttl-private",
+          "objective": "保持期間とオリジン指示を照合する。",
+          "prompt": "別の標準CloudFront配信で、オリジンがCache-Control: private, no-storeを返す。対象キャッシュポリシーのMinTTLは60秒。数値は教材用の設定例。これだけでCloudFrontが一切キャッシュしないと判断できる？",
+          "options": [
+            {
+              "id": "cloudfront-min-ttl-private-a",
+              "text": "no-storeがあれば正のMinTTLに関係なく必ず非キャッシュになる",
+              "explanation": "正のMinTTLはこれらの指示があっても最低期間のキャッシュを行うという公式の注意があります。"
+            },
+            {
+              "id": "cloudfront-min-ttl-private-b",
+              "text": "privateが付いていればMinTTLの設定確認は不要",
+              "explanation": "オリジンの指示だけを見ず、配信側の保持設定も確認します。"
+            },
+            {
+              "id": "cloudfront-min-ttl-private-c",
+              "text": "判断できない。正のMinTTLを見直し、非キャッシュ要件に合うポリシーを確認する",
+              "explanation": "正のMinTTLによる保持を避ける必要があります。MinTTL=0だけで全応答が必ず非キャッシュになるとも断定しません。"
+            }
+          ],
+          "correct_option_id": "cloudfront-min-ttl-private-c",
+          "runtime_option_order": [
+            "cloudfront-min-ttl-private-a",
+            "cloudfront-min-ttl-private-b",
+            "cloudfront-min-ttl-private-c"
+          ],
+          "rationale": "正のMinTTLによる保持を避ける必要があります。MinTTL=0だけで全応答が必ず非キャッシュになるとも断定しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "商品一覧の応答がlangで変わらなくなり、langはオリジンの補助処理でだけ必要になる。",
+        "answer": "キーから外して転送だけにする設計を検討できる。応答が本当に共通かを確認する。",
+        "reason": "応答を区別する必要と、オリジンへ情報を送る必要は別。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733",
+          "claim": "CachePolicyConfigはキャッシュキーとTTLを決定。キーに含むヘッダー/クッキー/クエリはオリジンへも転送。OriginRequestPolicyはキーに加えず転送する。MinTTL>0はno-cache/no-store/privateがあっても最低期間キャッシュする。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4650",
+          "claim": "OriginRequestPolicyConfigはオリジンへ送る値を設定し、その値をキャッシュキーへ含めない。キーにも含める場合はCachePolicyを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

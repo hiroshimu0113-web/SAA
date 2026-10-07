@@ -2545,6 +2545,69 @@
         "現行エンジン対応・料金・制限の確認",
         "実AWSによる切替・複製遅延の観測"
       ]
+    },
+    {
+      "id": "cache-key",
+      "title": "CloudFrontのキャッシュキーと転送情報",
+      "group": "networking",
+      "objective": "応答を変える値をキーに含め、転送だけの値とTTLの条件を区別する。",
+      "estimated_minutes": 7,
+      "scope": "標準CloudFront配信のキャッシュ/オリジンリクエストポリシー。個人別認証、全ヘッダー例外、無効化、エラーキャッシュ、マルチテナント配信は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "オリジンへ転送した値はすべて自動的にキャッシュキーに入る。",
+        "no-storeなら正のMinTTLでも必ず保存されない。",
+        "MinTTL=0だけで全応答が必ず非キャッシュになる。"
+      ],
+      "checks": [
+        {
+          "id": "cache-key-explain",
+          "level": "explain",
+          "prompt": "キャッシュポリシーとオリジンリクエストポリシーの違いは？",
+          "expected_points": [
+            "キーは応答の区別に使う",
+            "キーの値は転送もされる",
+            "転送だけではキーに加わらない"
+          ]
+        },
+        {
+          "id": "cache-key-apply",
+          "level": "apply",
+          "prompt": "公開商品一覧がlangだけで変わるなら？",
+          "expected_points": [
+            "langをキーに含める",
+            "無関係な値を無条件に増やさない",
+            "認証や個人別応答へ一般化しない"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch07-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/cache-key.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733",
+            "claim": "CachePolicyConfigはキャッシュキーとTTLを決定。キーに含むヘッダー/クッキー/クエリはオリジンへも転送。OriginRequestPolicyはキーに加えず転送する。MinTTL>0はno-cache/no-store/privateがあっても最低期間キャッシュする。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4650",
+            "claim": "OriginRequestPolicyConfigはオリジンへ送る値を設定し、その値をキャッシュキーへ含めない。キーにも含める場合はCachePolicyを使う。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "現行の細かな制限・全権限評価",
+        "実AWSの設定変更・アクセス検証"
+      ]
     }
   ]
 }

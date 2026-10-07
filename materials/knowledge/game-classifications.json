@@ -12779,6 +12779,264 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-cloudfront-cache-key-forwarding",
+      "title": "CloudFrontのキャッシュキーと転送情報",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "CloudFrontの設定対象と条件を説明し、要求に合った設定を判断する概念。",
+      "objective": "応答を変える値をキーに含め、転送だけの値とTTLの条件を区別する。",
+      "unit_ids": [
+        "cache-key"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/cache-key.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "networking",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon CloudFront"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "個人別認証とマルチテナント配信は対象外。",
+        "正解を決める条件は各問にも記載する。"
+      ],
+      "limitations": [
+        "標準CloudFront配信のキャッシュ/オリジンリクエストポリシー。個人別認証、全ヘッダー例外、無効化、エラーキャッシュ、マルチテナント配信は対象外。"
+      ],
+      "misconceptions": [
+        "オリジンへ転送した値はすべて自動的にキャッシュキーに入る。",
+        "no-storeなら正のMinTTLでも必ず保存されない。",
+        "MinTTL=0だけで全応答が必ず非キャッシュになる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/cache-key.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。",
+        "counterexample": "商品一覧の応答がlangで変わらなくなり、langはオリジンの補助処理でだけ必要になる。 キーから外して転送だけにする設計を検討できる。応答が本当に共通かを確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/cache-key.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-cloudfront-cache-key-forwarding",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733",
+          "claim": "CachePolicyConfigはキャッシュキーとTTLを決定。キーに含むヘッダー/クッキー/クエリはオリジンへも転送。OriginRequestPolicyはキーに加えず転送する。MinTTL>0はno-cache/no-store/privateがあっても最低期間キャッシュする。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4650",
+          "claim": "OriginRequestPolicyConfigはオリジンへ送る値を設定し、その値をキャッシュキーへ含めない。キーにも含める場合はCachePolicyを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "CloudFrontの仕組みと条件を説明するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cache-key.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSのキャッシュ率・データ保護・配信性能・料金を保証しない。",
+        "simplifications": [
+          "標準CloudFront配信のキャッシュ/オリジンリクエストポリシー。個人別認証、全ヘッダー例外、無効化、エラーキャッシュ、マルチテナント配信は対象外。"
+        ],
+        "mislearning_risks": [
+          "オリジンへ転送した値はすべて自動的にキャッシュキーに入る。",
+          "no-storeなら正のMinTTLでも必ず保存されない。",
+          "MinTTL=0だけで全応答が必ず非キャッシュになる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-cloudfront-cache-key-forwarding",
+      "title": "CloudFrontのキャッシュキーと転送情報を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "応答を変える値をキーに含め、転送だけの値とTTLの条件を区別する。",
+      "unit_ids": [
+        "cache-key"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudfront-cache-key-forwarding"
+        }
+      ],
+      "domains": [
+        "networking",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon CloudFront"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "個人別認証とマルチテナント配信は対象外。",
+        "正解を決める条件は各問にも記載する。"
+      ],
+      "limitations": [
+        "標準CloudFront配信のキャッシュ/オリジンリクエストポリシー。個人別認証、全ヘッダー例外、無効化、エラーキャッシュ、マルチテナント配信は対象外。"
+      ],
+      "misconceptions": [
+        "オリジンへ転送した値はすべて自動的にキャッシュキーに入る。",
+        "no-storeなら正のMinTTLでも必ず保存されない。",
+        "MinTTL=0だけで全応答が必ず非キャッシュになる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudfront-cache-key-forwarding.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudfront-cache-key-forwarding.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudfront-cache-key-forwarding.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudfront-cache-key-forwarding.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733",
+          "claim": "CachePolicyConfigはキャッシュキーとTTLを決定。キーに含むヘッダー/クッキー/クエリはオリジンへも転送。OriginRequestPolicyはキーに加えず転送する。MinTTL>0はno-cache/no-store/privateがあっても最低期間キャッシュする。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4650",
+          "claim": "OriginRequestPolicyConfigはオリジンへ送る値を設定し、その値をキャッシュキーへ含めない。キーにも含める場合はCachePolicyを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cache-key.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSのキャッシュ率・データ保護・配信性能・料金を保証しない。",
+        "simplifications": [
+          "標準CloudFront配信のキャッシュ/オリジンリクエストポリシー。個人別認証、全ヘッダー例外、無効化、エラーキャッシュ、マルチテナント配信は対象外。"
+        ],
+        "mislearning_risks": [
+          "オリジンへ転送した値はすべて自動的にキャッシュキーに入る。",
+          "no-storeなら正のMinTTLでも必ず保存されない。",
+          "MinTTL=0だけで全応答が必ず非キャッシュになる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "cloudfront-language-cache-key, cloudfront-min-ttl-private"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
