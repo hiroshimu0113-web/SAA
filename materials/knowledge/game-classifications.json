@@ -9189,6 +9189,254 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-ebs-snapshot-capture",
+      "title": "EBSスナップショットの取得時点と未書込みデータ",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "スナップショットに含まれる保存状態と業務停止時点を説明・適用する概念。",
+      "objective": "必要なデータをEBSへ保存して取得時点を調整し、業務再開とバックアップ完了・復元確認を分ける。",
+      "unit_ids": [
+        "ebs-snapshot"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/ebs-snapshot.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ebs"
+      ],
+      "conditions": [
+        "単一の非ルートEBSデータボリューム。アプリ/OSの安全な停止・保存・再開手順は検証済み。",
+        "スナップショットでメモリやDB固有のトランザクション整合性まで保証しない。"
+      ],
+      "limitations": [
+        "単一の非ルートEBSデータボリュームの作成。OS/アプリの停止/再開手順は検証済みという設問前提。DB固有の整合性、複数ボリューム、インクリメンタル課金、保持/削除は対象外。"
+      ],
+      "misconceptions": [
+        "スナップショットには未書込みのメモリも必ず保存される。",
+        "暗号化すれば未書込みデータも取得される。",
+        "pending中は元ボリュームを必ず使えない。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/ebs-snapshot.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "EBSのバックアップ取得時点に必要なファイルを含め、業務再開と取得完了を分ける。",
+        "counterexample": "元ボリュームがデータ用ではなくEC2のルートデバイスになる。 公式の推奨ではインスタンスを停止してから取得する。アプリ停止条件と復旧手順も確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/ebs-snapshot.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-ebs-snapshot-capture",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go",
+          "claim": "スナップショットは要求時点でEBSへ書き込まれたデータを取得し、アプリ/OSのキャッシュは含まれない場合がある。書込み一時停止またはアンマウントして作成し、pending中でも再マウントして利用できる。ルートボリュームはEC2停止後の取得を推奨。暗号化元のスナップショットは暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/ebs-snapshot.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの回復値や保存状態はAWSのバックアップ整合性・取得完了を保証しない。",
+        "simplifications": [
+          "単一の非ルートEBSデータボリュームの作成。OS/アプリの停止/再開手順は検証済みという設問前提。DB固有の整合性、複数ボリューム、インクリメンタル課金、保持/削除は対象外。"
+        ],
+        "mislearning_risks": [
+          "スナップショットには未書込みのメモリも必ず保存される。",
+          "暗号化すれば未書込みデータも取得される。",
+          "pending中は元ボリュームを必ず使えない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-ebs-snapshot-capture",
+      "title": "未書込みデータとスナップショットの取得",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "必要なデータをEBSへ保存して取得時点を調整し、業務再開とバックアップ完了・復元確認を分ける。",
+      "unit_ids": [
+        "ebs-snapshot"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-snapshot-capture"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ebs"
+      ],
+      "conditions": [
+        "単一の非ルートEBSデータボリューム。アプリ/OSの安全な停止・保存・再開手順は検証済み。",
+        "スナップショットでメモリやDB固有のトランザクション整合性まで保証しない。"
+      ],
+      "limitations": [
+        "単一の非ルートEBSデータボリュームの作成。OS/アプリの停止/再開手順は検証済みという設問前提。DB固有の整合性、複数ボリューム、インクリメンタル課金、保持/削除は対象外。"
+      ],
+      "misconceptions": [
+        "スナップショットには未書込みのメモリも必ず保存される。",
+        "暗号化すれば未書込みデータも取得される。",
+        "pending中は元ボリュームを必ず使えない。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-snapshot-capture.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-snapshot-capture.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-snapshot-capture.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-snapshot-capture.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go",
+          "claim": "スナップショットは要求時点でEBSへ書き込まれたデータを取得し、アプリ/OSのキャッシュは含まれない場合がある。書込み一時停止またはアンマウントして作成し、pending中でも再マウントして利用できる。ルートボリュームはEC2停止後の取得を推奨。暗号化元のスナップショットは暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/ebs-snapshot.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの回復値や保存状態はAWSのバックアップ整合性・取得完了を保証しない。",
+        "simplifications": [
+          "単一の非ルートEBSデータボリュームの作成。OS/アプリの停止/再開手順は検証済みという設問前提。DB固有の整合性、複数ボリューム、インクリメンタル課金、保持/削除は対象外。"
+        ],
+        "mislearning_risks": [
+          "スナップショットには未書込みのメモリも必ず保存される。",
+          "暗号化すれば未書込みデータも取得される。",
+          "pending中は元ボリュームを必ず使えない。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "snapshot-unwritten-buffer, snapshot-pending-resume"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

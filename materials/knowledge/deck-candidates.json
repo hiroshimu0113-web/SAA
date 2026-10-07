@@ -290,6 +290,7 @@
         "candidate-dms",
         "candidate-durability",
         "candidate-ebs",
+        "candidate-ebs-snapshot",
         "candidate-kms",
         "candidate-migration",
         "candidate-pilot-light",
@@ -1538,24 +1539,34 @@
     {
       "id": "candidate-ebs-snapshot",
       "concept_id": "ebs-snapshot",
-      "title": "ebs-snapshot",
+      "title": "EBSスナップショットの取得時点と未書込みデータ",
       "related_chapter_ids": [
-        "ch05"
+        "ch05",
+        "ch11"
       ],
       "material_refs": [
         {
           "node_id": "question:q080",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch05-l01",
+          "relation": "unit_reference"
+        },
+        {
+          "node_id": "lesson:ch11-l02",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-ebs-snapshot-capture"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

@@ -1767,6 +1767,66 @@
         "EBSスナップショット作成とアプリ/OSの未書込みデータを別単位で確認する。",
         "復元性能・OS別利用手順・暗号化鍵権限を別途検証する。"
       ]
+    },
+    {
+      "id": "ebs-snapshot",
+      "title": "EBSスナップショットの取得時点と未書込みデータ",
+      "group": "storage",
+      "objective": "必要なデータをEBSへ保存して取得時点を調整し、業務再開とバックアップ完了・復元確認を分ける。",
+      "estimated_minutes": 7,
+      "scope": "単一の非ルートEBSデータボリュームの作成。OS/アプリの停止/再開手順は検証済みという設問前提。DB固有の整合性、複数ボリューム、インクリメンタル課金、保持/削除は対象外。",
+      "prerequisites": [
+        "ebs"
+      ],
+      "misconceptions": [
+        "スナップショットには未書込みのメモリも必ず保存される。",
+        "暗号化すれば未書込みデータも取得される。",
+        "pending中は元ボリュームを必ず使えない。"
+      ],
+      "checks": [
+        {
+          "id": "ebs-snapshot-explain",
+          "level": "explain",
+          "prompt": "スナップショットに入るデータと、キャッシュはどう違う？",
+          "expected_points": [
+            "要求時点でEBSへ書き込まれたデータが対象",
+            "アプリ/OSの未書込みは含まれない場合がある",
+            "必要データの保存と取得時点の書込み調整を行う"
+          ]
+        },
+        {
+          "id": "ebs-snapshot-apply",
+          "level": "apply",
+          "prompt": "アンマウントして要求成功後、pending中に元ボリュームを使える？",
+          "expected_points": [
+            "再マウントして利用可能",
+            "完了状態は別に確認する",
+            "アプリ整合性と復元結果の検証は必要"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch05-l01",
+        "ch11-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/ebs-snapshot.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go",
+            "claim": "スナップショットは要求時点でEBSへ書き込まれたデータを取得し、アプリ/OSのキャッシュは含まれない場合がある。書込み一時停止またはアンマウントして作成し、pending中でも再マウントして利用できる。ルートボリュームはEC2停止後の取得を推奨。暗号化元のスナップショットは暗号化される。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "DB固有の整合性と複数ボリューム取得を公式根拠で確認する。",
+        "世代保持・削除・増分課金と復元テストを具体化する。"
+      ]
     }
   ]
 }

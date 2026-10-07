@@ -719,6 +719,36 @@ export const CASE_QUIZZES={
       "スナップショットと同じか大きい容量が必要です。縮小移行は別の作業になります。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go"
+  },
+  "snapshot-unwritten-buffer": {
+    "prompt": "EBSのバックアップ取得時点に必要なファイルを含め、業務再開と取得完了を分ける。 単一EBSデータボリュームでアプリがファイルを書いている。直近の必要データはまだアプリ/OSのキャッシュにあり、EBSへ書き込まれていない。すべてを含む復元点を作りたい。停止調整は可能で、アプリの保存・書込み一時停止手順は検証済み。対応は？",
+    "options": [
+      "今すぐCreateSnapshotを呼べば、インスタンスのメモリも必ず含まれる",
+      "検証済み手順で必要データをEBSへ保存し、書込みを一時停止してスナップショットを要求する",
+      "ボリュームを暗号化すれば、未書込みのメモリも自動でスナップショットに入る"
+    ],
+    "answer": 1,
+    "reasons": [
+      "スナップショットはEBSへ書き込まれたデータが対象です。未書込みキャッシュまで必ず保存しません。",
+      "取得時点で必要データをEBSへ書き込み、変化を調整します。要求成功だけで復元検証が完了するわけではありません。",
+      "暗号化と、どのデータがEBSに保存されているかは別の条件です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go"
+  },
+  "snapshot-pending-resume": {
+    "prompt": "EBSのバックアップ取得時点に必要なファイルを含め、業務再開と取得完了を分ける。 別の単一EBSデータボリュームを、安全な手順でアンマウントしてCreateSnapshotを要求した。要求は成功し、状態はpending。OS/アプリの再開手順は検証済み。再マウントと完了確認の説明は？",
+    "options": [
+      "pending中でも再マウントして利用できる。スナップショット完了と復元検証は別途確認する",
+      "pendingの間は必ずアンマウントを維持し、元ボリュームは一切使用できない",
+      "要求成功だけで状態確認も復元テストも不要になる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "取得要求後のpending中にも元ボリュームを利用できます。業務再開とバックアップの完了確認を分けます。",
+      "公式APIはpending中の再マウントと利用を認めています。全処理中の停止を常に要求しません。",
+      "APIの要求成功は復元の可否やアプリ整合性を検証したことにはなりません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -817,5 +847,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "ebs-restore-target-az",
     "ebs-snapshot-capacity"
+  ],
+  [
+    "snapshot-unwritten-buffer",
+    "snapshot-pending-resume"
   ]
 ];

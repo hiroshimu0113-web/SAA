@@ -2950,6 +2950,115 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "ebs-snapshot-capture",
+      "title": "未書込みデータとスナップショットの取得",
+      "premise": "EBSのバックアップ取得時点に必要なファイルを含め、業務再開と取得完了を分ける。",
+      "unit_ids": [
+        "ebs-snapshot"
+      ],
+      "chapter_ids": [
+        "ch05",
+        "ch11"
+      ],
+      "constraints": [
+        "単一の非ルートEBSデータボリューム。アプリ/OSの安全な停止・保存・再開手順は検証済み。",
+        "スナップショットでメモリやDB固有のトランザクション整合性まで保証しない。"
+      ],
+      "questions": [
+        {
+          "id": "snapshot-unwritten-buffer",
+          "objective": "バックアップ対象へ未書込みのデータを含める前提を選ぶ。",
+          "prompt": "単一EBSデータボリュームでアプリがファイルを書いている。直近の必要データはまだアプリ/OSのキャッシュにあり、EBSへ書き込まれていない。すべてを含む復元点を作りたい。停止調整は可能で、アプリの保存・書込み一時停止手順は検証済み。対応は？",
+          "options": [
+            {
+              "id": "snapshot-unwritten-buffer-a",
+              "text": "今すぐCreateSnapshotを呼べば、インスタンスのメモリも必ず含まれる",
+              "explanation": "スナップショットはEBSへ書き込まれたデータが対象です。未書込みキャッシュまで必ず保存しません。"
+            },
+            {
+              "id": "snapshot-unwritten-buffer-b",
+              "text": "検証済み手順で必要データをEBSへ保存し、書込みを一時停止してスナップショットを要求する",
+              "explanation": "取得時点で必要データをEBSへ書き込み、変化を調整します。要求成功だけで復元検証が完了するわけではありません。"
+            },
+            {
+              "id": "snapshot-unwritten-buffer-c",
+              "text": "ボリュームを暗号化すれば、未書込みのメモリも自動でスナップショットに入る",
+              "explanation": "暗号化と、どのデータがEBSに保存されているかは別の条件です。"
+            }
+          ],
+          "correct_option_id": "snapshot-unwritten-buffer-b",
+          "runtime_option_order": [
+            "snapshot-unwritten-buffer-a",
+            "snapshot-unwritten-buffer-b",
+            "snapshot-unwritten-buffer-c"
+          ],
+          "rationale": "取得時点で必要データをEBSへ書き込み、変化を調整します。要求成功だけで復元検証が完了するわけではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go"
+          ]
+        },
+        {
+          "id": "snapshot-pending-resume",
+          "objective": "取得時点の調整と非同期完了待ちを区別する。",
+          "prompt": "別の単一EBSデータボリュームを、安全な手順でアンマウントしてCreateSnapshotを要求した。要求は成功し、状態はpending。OS/アプリの再開手順は検証済み。再マウントと完了確認の説明は？",
+          "options": [
+            {
+              "id": "snapshot-pending-resume-a",
+              "text": "pending中でも再マウントして利用できる。スナップショット完了と復元検証は別途確認する",
+              "explanation": "取得要求後のpending中にも元ボリュームを利用できます。業務再開とバックアップの完了確認を分けます。"
+            },
+            {
+              "id": "snapshot-pending-resume-b",
+              "text": "pendingの間は必ずアンマウントを維持し、元ボリュームは一切使用できない",
+              "explanation": "公式APIはpending中の再マウントと利用を認めています。全処理中の停止を常に要求しません。"
+            },
+            {
+              "id": "snapshot-pending-resume-c",
+              "text": "要求成功だけで状態確認も復元テストも不要になる",
+              "explanation": "APIの要求成功は復元の可否やアプリ整合性を検証したことにはなりません。"
+            }
+          ],
+          "correct_option_id": "snapshot-pending-resume-a",
+          "runtime_option_order": [
+            "snapshot-pending-resume-a",
+            "snapshot-pending-resume-b",
+            "snapshot-pending-resume-c"
+          ],
+          "rationale": "取得要求後のpending中にも元ボリュームを利用できます。業務再開とバックアップの完了確認を分けます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "元ボリュームがデータ用ではなくEC2のルートデバイスになる。",
+        "answer": "公式の推奨ではインスタンスを停止してから取得する。アプリ停止条件と復旧手順も確認する。",
+        "reason": "ルートデバイスには別の停止推奨があり、非ルートでのアンマウント手順をそのまま当てはめない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go",
+          "claim": "スナップショットは要求時点でEBSへ書き込まれたデータを取得し、アプリ/OSのキャッシュは含まれない場合がある。書込み一時停止またはアンマウントして作成し、pending中でも再マウントして利用できる。ルートボリュームはEC2停止後の取得を推奨。暗号化元のスナップショットは暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
