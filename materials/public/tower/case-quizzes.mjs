@@ -1319,6 +1319,36 @@ export const CASE_QUIZZES={
       "指定クローラーの実行状態を踏まえて起動を管理します。開始要求とカタログ更新完了も区別します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go"
+  },
+  "analytics-s3-ad-hoc-target": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 S3に既存の公開分析用ファイルがあり、Athena対応形式・カタログ定義・権限は正常。時々SQL集計したい。既存Redshiftはなく、新規データウェアハウスを準備せずS3を直接分析したい。選択は？",
+    "options": [
+      "Athena SQLを使い、対象定義と実行結果を確認する",
+      "Redshiftの接続先設定だけで、未準備の全分析構成が必ず完成する",
+      "Glueクローラーを起動しただけで、SQL集計結果も取得済みと扱う"
+    ],
+    "answer": 0,
+    "reasons": [
+      "このS3直接分析と新規ウェアハウスを準備しない条件に合います。料金や性能が常に優れるとは断定しません。",
+      "この前提にRedshiftの実行先やデータ分析構成はなく、名前の設定だけでは条件を満たしません。",
+      "定義を調べるクローラーとSQLの集計・結果取得は別です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go"
+  },
+  "redshift-submitted-not-finished": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 別構成で既存RedshiftへData APIのExecuteStatementを実行し、文IDが返った。DescribeStatementのStatusはSUBMITTED。SELECT文の全結果行が必要。これで実行完了・全行取得済みと扱える？",
+    "options": [
+      "文IDが返れば、SUBMITTEDでも全行取得済み",
+      "完了状態と失敗理由を確認し、結果があるなら形式に合う結果取得とページングを行う",
+      "Athenaの実行IDとして扱えばRedshiftの結果を取得できる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "IDは文を追跡するための識別子です。SUBMITTEDはまだ処理されていない状態です。",
+      "実行の状態と結果取得を分けます。JSON形式ならGetStatementResultを使い、NextTokenも確認します。",
+      "異なるサービスの文IDと実行IDを混同しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_ExecuteStatement.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1497,5 +1527,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "glue-metadata-not-query",
     "glue-crawler-already-running"
+  ],
+  [
+    "analytics-s3-ad-hoc-target",
+    "redshift-submitted-not-finished"
   ]
 ];

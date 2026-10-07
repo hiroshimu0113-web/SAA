@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 44,
-    "rubric_checks": 88
+    "detailed_units": 45,
+    "rubric_checks": 90
   },
   "nodes": [
     {
@@ -3066,9 +3066,88 @@
     {
       "id": "concept:redshift",
       "kind": "concept",
-      "title": "redshift",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "RedshiftとAthenaの選択・SQL結果確認",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "redshift",
+        "title": "RedshiftとAthenaの選択・SQL結果確認",
+        "group": "processing",
+        "objective": "データの場所と運用条件で分析先を選び、SQLの受理・完了・結果取得を分ける。",
+        "estimated_minutes": 7,
+        "scope": "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "SQL文IDが返れば全結果も取得済み。",
+          "RedshiftとAthenaの実行IDは交換できる。",
+          "どんな負荷でも一方が必ず速く安い。"
+        ],
+        "checks": [
+          {
+            "id": "redshift-explain",
+            "level": "explain",
+            "prompt": "この判断で何を分けて確認する？",
+            "expected_points": [
+              "S3直接分析という目的と準備済みの実行先を確認",
+              "SUBMITTEDとFINISHEDを区別",
+              "実行完了と全結果の取得は別"
+            ]
+          },
+          {
+            "id": "redshift-apply",
+            "level": "apply",
+            "prompt": "第1問で、集計対象がS3ファイルではなく既存Redshift DBのテーブルとなり、必要な権限と実行先が準備済みになる。 どう判断する？",
+            "expected_points": [
+              "既存RedshiftのSQL実行を検討し、状態と結果を確認する。",
+              "対象データと準備済みの実行環境が変わる。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch12-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK固定コミットのAPI条件・全選択肢と、公式アーカイブ版のS3直接分析の仕組みを照合。アーカイブを現行価格・性能・制限の根拠には使わない。同一担当確認、独立レビュー・実AWS試験は未実施。",
+          "source_document": "knowledge/lessons/redshift.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_ExecuteStatement.go",
+              "claim": "Data APIで単一SQLを実行する。認証方式とクラスター/Serverlessワークグループに応じて接続先・DB名・権限を指定。応答は文のIDを持つ。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_DescribeStatement.go",
+              "claim": "文のStatusを取得し、SUBMITTEDは未処理、STARTEDは実行開始、FINISHEDは完了、FAILED/ABORTEDは別状態。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_GetStatementResult.go",
+              "claim": "JSON形式の一時キャッシュ結果を文IDで取得。結果のNextTokenで続きのページを取得する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+              "claim": "SQLクエリを実行し、実行IDを返す。実行コンテキストとワークグループ等を指定する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/awsdocs/amazon-athena-user-guide/blob/765e909ebcf8817b22efad881b7f90f32440b891/doc_source/what-is.md",
+              "claim": "公式アーカイブ版：Athena SQLはS3データをSQLで分析するサーバーレスの仕組み。現行価格・速度・制限・全機能の根拠には使わない。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "本文の確認範囲外の詳細条件",
+          "実AWSでの動作・権限検証"
+        ]
+      }
     },
     {
       "id": "concept:region",
@@ -10887,6 +10966,11 @@
     },
     {
       "from": "concept:glue",
+      "to": "lesson:ch12-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:redshift",
       "to": "lesson:ch12-l03",
       "type": "unit_reference"
     },

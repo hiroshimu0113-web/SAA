@@ -15,7 +15,7 @@
 | ch09 疎結合とメッセージ | 0 / 3 | 0 / 15 | visibility-timeout, idempotency, dlq, sns, eventbridge | CR-009 |
 | ch10 暗号化・保護・監視 | 0 / 3 | 0 / 20 | kms, secrets-manager, cloudwatch | CR-005, CR-006, CR-009 |
 | ch11 災害復旧と移行 | 0 / 3 | 0 / 15 | ebs-snapshot, dms, cdc | CR-006, CR-007, CR-009 |
-| ch12 性能・コスト・分析の総合設計 | 0 / 3 | 0 / 15 | athena, cost-optimization, glue | CR-002, CR-003, CR-007, CR-009 |
+| ch12 性能・コスト・分析の総合設計 | 0 / 3 | 0 / 15 | athena, cost-optimization, glue, redshift | CR-002, CR-003, CR-007, CR-009 |
 
 指摘本文は [CONTENT_REVIEW.md](../docs/CONTENT_REVIEW.md)。第3章以降は全体監査待ち。詳細単位のない概念は `inventory_only` として保持しています。
 

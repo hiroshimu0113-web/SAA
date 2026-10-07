@@ -14603,6 +14603,298 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-analytics-target-result",
+      "title": "RedshiftとAthenaの選択・SQL結果確認",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "目的・観測した状態・操作の範囲から判断する概念。",
+      "objective": "データの場所と運用条件で分析先を選び、SQLの受理・完了・結果取得を分ける。",
+      "unit_ids": [
+        "redshift"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/redshift.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "process",
+        "observe"
+      ],
+      "concerns": [
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Redshift",
+        "Amazon Athena"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+      ],
+      "limitations": [
+        "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+      ],
+      "misconceptions": [
+        "SQL文IDが返れば全結果も取得済み。",
+        "RedshiftとAthenaの実行IDは交換できる。",
+        "どんな負荷でも一方が必ず速く安い。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/redshift.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。例の状態・タグは教材用。",
+        "counterexample": "第1問で、集計対象がS3ファイルではなく既存Redshift DBのテーブルとなり、必要な権限と実行先が準備済みになる。 既存RedshiftのSQL実行を検討し、状態と結果を確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/redshift.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-analytics-target-result",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_ExecuteStatement.go",
+          "claim": "Data APIで単一SQLを実行する。認証方式とクラスター/Serverlessワークグループに応じて接続先・DB名・権限を指定。応答は文のIDを持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_DescribeStatement.go",
+          "claim": "文のStatusを取得し、SUBMITTEDは未処理、STARTEDは実行開始、FINISHEDは完了、FAILED/ABORTEDは別状態。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_GetStatementResult.go",
+          "claim": "JSON形式の一時キャッシュ結果を文IDで取得。結果のNextTokenで続きのページを取得する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "SQLクエリを実行し、実行IDを返す。実行コンテキストとワークグループ等を指定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/awsdocs/amazon-athena-user-guide/blob/765e909ebcf8817b22efad881b7f90f32440b891/doc_source/what-is.md",
+          "claim": "公式アーカイブ版：Athena SQLはS3データをSQLで分析するサーバーレスの仕組み。現行価格・速度・制限・全機能の根拠には使わない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK固定コミットのAPI条件・全選択肢と、公式アーカイブ版のS3直接分析の仕組みを照合。アーカイブを現行価格・性能・制限の根拠には使わない。同一担当確認、独立レビュー・実AWS試験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/redshift.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの分析性能・監査網羅性・修復完了・料金を保証しない。",
+        "simplifications": [
+          "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+        ],
+        "mislearning_risks": [
+          "SQL文IDが返れば全結果も取得済み。",
+          "RedshiftとAthenaの実行IDは交換できる。",
+          "どんな負荷でも一方が必ず速く安い。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-analytics-target-result",
+      "title": "RedshiftとAthenaの選択・SQL結果確認を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "データの場所と運用条件で分析先を選び、SQLの受理・完了・結果取得を分ける。",
+      "unit_ids": [
+        "redshift"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "analytics-target-result"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "process",
+        "observe"
+      ],
+      "concerns": [
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Redshift",
+        "Amazon Athena"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+      ],
+      "limitations": [
+        "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+      ],
+      "misconceptions": [
+        "SQL文IDが返れば全結果も取得済み。",
+        "RedshiftとAthenaの実行IDは交換できる。",
+        "どんな負荷でも一方が必ず速く安い。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "analytics-target-result.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "analytics-target-result.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "analytics-target-result.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "analytics-target-result.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_ExecuteStatement.go",
+          "claim": "Data APIで単一SQLを実行する。認証方式とクラスター/Serverlessワークグループに応じて接続先・DB名・権限を指定。応答は文のIDを持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_DescribeStatement.go",
+          "claim": "文のStatusを取得し、SUBMITTEDは未処理、STARTEDは実行開始、FINISHEDは完了、FAILED/ABORTEDは別状態。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_GetStatementResult.go",
+          "claim": "JSON形式の一時キャッシュ結果を文IDで取得。結果のNextTokenで続きのページを取得する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "SQLクエリを実行し、実行IDを返す。実行コンテキストとワークグループ等を指定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/awsdocs/amazon-athena-user-guide/blob/765e909ebcf8817b22efad881b7f90f32440b891/doc_source/what-is.md",
+          "claim": "公式アーカイブ版：Athena SQLはS3データをSQLで分析するサーバーレスの仕組み。現行価格・速度・制限・全機能の根拠には使わない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK固定コミットのAPI条件・全選択肢と、公式アーカイブ版のS3直接分析の仕組みを照合。アーカイブを現行価格・性能・制限の根拠には使わない。同一担当確認、独立レビュー・実AWS試験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/redshift.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの分析性能・監査網羅性・修復完了・料金を保証しない。",
+        "simplifications": [
+          "AthenaのS3直接SQL分析とRedshift Data API。価格・性能の優劣、Spectrum/外部/連携クエリ、Spark、全認証・結果形式は対象外。"
+        ],
+        "mislearning_risks": [
+          "SQL文IDが返れば全結果も取得済み。",
+          "RedshiftとAthenaの実行IDは交換できる。",
+          "どんな負荷でも一方が必ず速く安い。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "analytics-s3-ad-hoc-target, redshift-submitted-not-finished"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
