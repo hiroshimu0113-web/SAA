@@ -9,7 +9,7 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 test('catalog: published terms/questions are playable; starter effects and initial deck are unchanged',()=>{
  const legacy=newRun(42),current=newRun(42,pack);assert.deepEqual(current.deck,legacy.deck);
  for(const id of STARTERS){const {name,...actual}=CARDS[id],{name:old,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);assert.notEqual(name,old);}
- assert.equal(Object.keys(CARDS).length,Object.keys(pack.cards).length+3);assert.equal(Object.keys(QUIZZES).length,Object.keys(pack.quizzes).length);
+ assert.equal(Object.keys(CARDS).filter(id=>!CARDS[id].battleOnly).length,Object.keys(pack.cards).length+3);assert.equal(Object.keys(QUIZZES).length,Object.keys(pack.quizzes).length);
  const expected=questions.filter(q=>!q.exam&&q.answers.length===1).map(q=>'study-'+q.id).sort();
  assert.deepEqual(Object.keys(QUIZZES).filter(id=>/^study-q[0-9]+$/.test(id)).sort(),expected);
  for(const id of Object.keys(pack.cards).filter(id=>id.startsWith('study-'))){
@@ -27,7 +27,7 @@ test('catalog: old/ongoing quiz snapshot survives a changed answer and backup im
  activateCatalog(null);
 });
 test('catalog: malformed packs cannot redefine starters, inject links or corrupt score/card shapes',()=>{
- for(const mutate of [p=>p.schema=2,p=>p.cards.strike={...BASE_CARDS.strike},p=>p.cards['study-region'].cost=-1,p=>p.notes.strike.source='javascript:alert(1)',p=>p.starterNames.guard='<script>',p=>p.quizzes['study-q001'].answer=99,p=>delete p.notes.probe]){const p=clone(pack);mutate(p);assert.throws(()=>validateCatalog(p));}
+ for(const mutate of [p=>p.schema=2,p=>p.cards.junk={...BASE_CARDS.strike},p=>p.cards.strike={...BASE_CARDS.strike},p=>p.cards['study-region'].cost=-1,p=>p.notes.strike.source='javascript:alert(1)',p=>p.starterNames.guard='<script>',p=>p.quizzes['study-q001'].answer=99,p=>delete p.notes.probe]){const p=clone(pack);mutate(p);assert.throws(()=>validateCatalog(p));}
 });
 test('catalog: update is atomic, offline/bad JSON/quota errors preserve stored content; new bundle supersedes stale cache',async()=>{
  let value;const storage={getItem:()=>value,setItem:(k,v)=>{assert.equal(k,CATALOG_KEY);value=v;}};

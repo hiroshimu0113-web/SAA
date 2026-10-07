@@ -9,7 +9,7 @@ export function combatEffects(before,after,action){
  const add=(side,kind,value,label)=>out.push({side,kind,value,label});
  if(action.type==='play'){
   const c=before.deck.find(c=>c.uid===action.uid);if(!c||!b.hand.includes(c.uid))return [];
-  const d=cardValues(c),hits=d.hits||1;
+  const d=cardValues(c),hits=d.hits||1;if(d.battleOnly)add('player','power',0,'障害ログを除外');
   if(d.damage){
    const loss=b.hp-n.hp,blocked=Math.max(0,b.block-n.block);
    if(loss)add('enemy','hit',loss,'−'+loss+(hits>1&&!triggeredCombos(before,after).length?' / '+hits+' HIT':''));

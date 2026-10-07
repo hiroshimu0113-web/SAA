@@ -16,7 +16,7 @@ export const ENEMIES={
  elite_fire:{tier:'elite',name:'炎上の番人',hp:65,glyph:'♨',pattern:[['debuff',3,'burn'],['attack',14],['guard',12],['attack',18]]},
  elite_drain:{tier:'elite',name:'枯渇の収集者',hp:65,glyph:'◈',pattern:[['debuff',2,'depletion'],['attack',15],['guard',10],['attack',19]]},
  boss:{tier:'boss',name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay',10],['attack',16],['debuff',3,'burn',10],['guard',18],['debuff',2,'overload',10],['attack',27]]},
- boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion',10],['attack',19],['debuff',2,'misconfig',10],['attack',21],['guard',18],['attack',25]]},
+ boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion',10],['attack',19],['debuff',2,'misconfig',10],['attack',21],['junk',1,null,10],['attack',25]]},
  boss_stagnation:{tier:'boss',name:'停滞の支配者',hp:125,glyph:'⌛',pattern:[['debuff',2,'overload',10],['attack',19],['debuff',1,'delay',10],['guard',18],['attack',25],['attack',17]]}
 };
 export const ENEMY_POOLS=Object.fromEntries(['battle','elite','boss'].map(tier=>[tier,Object.keys(ENEMIES).filter(id=>ENEMIES[id].tier===tier)]));
@@ -25,7 +25,7 @@ import {HEROES,RELICS,REWARD_RELICS} from './relics.mjs';
 export {HEROES,RELICS,REWARD_RELICS} from './relics.mjs';
 export const ROUTES=[['battle','battle'],['event','battle'],['elite','shop'],['rest','battle'],['battle','event'],['elite','shop'],['rest','rest'],['boss']];
 export const NODE_NAMES={battle:'戦闘',elite:'強敵',rest:'休息',shop:'交換所',event:'クイズ',boss:'ボス'};
-const rewardPool=()=>Object.keys(CARDS).filter(x=>!['strike','guard'].includes(x));
+const rewardPool=()=>Object.keys(CARDS).filter(x=>!['strike','guard','junk'].includes(x));
 const clone=x=>JSON.parse(JSON.stringify(x));
 const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 function rnd(s){s.rng=(Math.imul(s.rng,1664525)+1013904223)>>>0;return s.rng/4294967296;}
@@ -60,7 +60,7 @@ export function newRun(seed=Date.now(),catalog=null){
  for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
 }
 export function cardValues(card){const d=CARDS[card.id],v={...d,...(d.debuff?{debuff:{...d.debuff}}:{})};if(card.plus){if(d.kind==='power'){v.cost=Math.max(0,d.cost-1);}else{for(const k of ['block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);if(d.damage)v.damage=Math.ceil(d.damage*1.5);if(d.debuff)v.debuff.amount=d.debuff.amount+1;}}return v;}
-export function describe(card){const d=cardValues(card),parts=[];if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.debuff)parts.push('敵に'+DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'（休止'+d.debuff.amount+'ターン）':d.debuff.amount));if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}
+export function describe(card){const d=cardValues(card),parts=[];if(d.battleOnly)return d.text;if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.debuff)parts.push('敵に'+DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'（休止'+d.debuff.amount+'ターン）':d.debuff.amount));if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}
 export function upgradeChanges(card){
  const before=cardValues({...card,plus:false}),after=cardValues({...card,plus:true}),labels={cost:'コスト',damage:before.hits?'1回のダメージ':'ダメージ',block:'ブロック',heal:'HP回復',draw:'ドロー枚数',energy:'獲得エナジー',armor:'毎ターン防御',strength:'強化'};
  const changes=Object.keys(labels).filter(k=>(before[k]||0)!==(after[k]||0)).map(k=>labels[k]+' '+(before[k]||0)+' → '+(after[k]||0));if(before.debuff&&after.debuff.amount!==before.debuff.amount)changes.push(DEBUFFS[before.debuff.id].name+' '+before.debuff.amount+' → '+after.debuff.amount);return changes;
@@ -91,10 +91,12 @@ function burn(s,side){
  if(side==='enemy')b.hp-=loss;else s.hp-=loss;
  d.burn--;emit(b,side,'hit',loss,'炎上 −'+loss);log(s,(side==='enemy'?'敵':'自分')+'の炎上：HP −'+loss+'。');
 }
-function lose(s){s.phase='lost';log(s,'冒険はここまで。');}
+function clearJunk(s){const ids=new Set(s.deck.filter(c=>c.id==='junk').map(c=>c.uid));s.deck=s.deck.filter(c=>!ids.has(c.uid));if(s.battle){for(const pile of ['hand','draw','discard','exhaust'])s.battle[pile]=s.battle[pile].filter(id=>!ids.has(id));s.battle.comboPlayed=s.battle.comboPlayed.filter(id=>id!=='junk');}}
+function lose(s){clearJunk(s);s.phase='lost';log(s,'冒険はここまで。');}
 
 function offers(s,count=3){const pool=rewardPool(),study=pool.filter(id=>id.startsWith('study-'));if(!study.length)return shuffle(s,pool).slice(0,count);return shuffle(s,[...shuffle(s,pool.filter(id=>!id.startsWith('study-'))).slice(0,count-1),shuffle(s,study)[0]]);}
 function win(s){
+ clearJunk(s);
  const tier=ENEMIES[s.battle.enemy].tier,elite=tier==='elite',boss=tier==='boss';
  s.gold+=(elite?40:22)+(has(s,'bounty')?30:0);
  if(has(s,'growth'))s.maxHp+=5;
@@ -133,7 +135,7 @@ export function act(state,action){
    if(r.damage){const amount=attackAmount(r.damage,b.playerDebuffs,b.enemyDebuffs),absorbed=Math.min(b.block,amount);b.block-=absorbed;b.hp=Math.max(0,b.hp-amount+absorbed);}
    log(s,'役「'+r.name+'」成立：'+r.label+'。');
   }
-  if(s.hp===0){s.phase='lost';log(s,'力尽きた。デッキを見直して次の冒険へ。');}
+  if(s.hp===0){lose(s);log(s,'力尽きた。デッキを見直して次の冒険へ。');}
   else if(b.hp===0)win(s);else if(d.draw)draw(s,d.draw);return s;
  }
  if(a.type==='end'&&s.phase==='battle'){
@@ -161,6 +163,10 @@ export function act(state,action){
      if(blocked)emit(b,'player','guard',blocked,(blocked===value?'完全ガード ':'防御 ')+blocked);
      if(loss)emit(b,'player','hit',loss,'−'+loss);
      log(s,'敵の攻撃'+value+'。HPダメージ '+loss+'。');
+    }
+    if(type==='junk'&&s.hp>0){
+     for(let i=0;i<base;i++){const uid=s.nextId;add(s,'junk');b.draw.splice(Math.floor(rnd(s)*(b.draw.length+1)),0,uid);}
+     emit(b,'player','debuff',base,'障害ログ ＋'+base);log(s,'山札に障害ログを'+base+'枚混ぜられた。');
     }
     if(type==='guard'){const value=blockAmount(base,b.enemyDebuffs);b.block+=value;emit(b,'enemy','shield',value,'◇ ＋'+value);log(s,'敵は'+value+'ブロック。');}
     if(type==='buff'){b.strength+=base;emit(b,'enemy','power',base,'攻撃力 ＋'+base);log(s,'敵の強化＋'+base+'。');}
@@ -221,8 +227,8 @@ export function parseRun(raw){
 }
 function validateRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
- if(!s||![1,2,3,4].includes(s.version)||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.maxHp,112)||s.maxHp<72||(s.maxHp-72)%5!==0||!num(s.hp,s.maxHp)||!num(s.gold)||!num(s.nextId,1000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
- if(!Array.isArray(s.deck)||s.deck.length<5||s.deck.length>100||!s.deck.every(c=>num(c.uid,999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean')||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
+ if(!s||![1,2,3,4].includes(s.version)||!num(s.seed,4294967295)||!num(s.rng,4294967295)||!num(s.floor,8)||!num(s.maxHp,112)||s.maxHp<72||(s.maxHp-72)%5!==0||!num(s.hp,s.maxHp)||!num(s.gold)||!num(s.nextId,100000)||!['map','battle','reward','rest','event','shop','won','lost'].includes(s.phase))throw Error('保存データの形式が不正です。');
+ if(!Array.isArray(s.deck)||s.deck.filter(c=>c.id!=='junk').length<5||s.deck.length>100000||s.deck.filter(c=>c.id!=='junk').length>100||!s.deck.every(c=>num(c.uid,99999)&&c.uid<s.nextId&&owns(CARDS,c.id)&&typeof c.plus==='boolean'&&(c.id!=='junk'||s.phase==='battle'&&!c.plus))||new Set(s.deck.map(c=>c.uid)).size!==s.deck.length)throw Error('デッキが不正です。');
  for(const [name,allowed,max] of [['relics',Object.keys(RELICS),Object.keys(RELICS).length],['reward',rewardPool(),4],['stock',rewardPool(),3]])if(!Array.isArray(s[name])||s[name].length>max||!s[name].every(x=>allowed.includes(x))||new Set(s[name]).size!==s[name].length)throw Error('報酬が不正です。');
  if(owns(s,'hero')&&(!owns(HEROES,s.hero)||!s.relics.includes(HEROES[s.hero].relic)||s.relics.some(r=>!REWARD_RELICS.includes(r)&&r!==HEROES[s.hero].relic)))throw Error('主人公の記録が不正です。');
  if(owns(s,'routes')&&(!Array.isArray(s.routes)||s.routes.length!==8||!s.routes.every((row,i)=>Array.isArray(row)&&row.length===(i===7?1:2)&&row.every(t=>i===7?t==='boss':i===0?t==='battle':['battle','elite','event','rest','shop'].includes(t)))))throw Error('マップが不正です。');

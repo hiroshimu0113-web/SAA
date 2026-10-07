@@ -14,7 +14,7 @@ export function inspectPlay(s,c){
  for(const id of roles)lines.push('役「'+COMBOS[id].name+'」成立：'+COMBOS[id].label);
  if(d.draw&&next.phase==='battle')lines.push('手札に '+Math.max(0,next.battle.hand.length-s.battle.hand.length+1)+'枚補充');
  if(next.phase==='lost')lines.push('自分のHPが0になり、この冒険は終了');
- const brief=d.damage?'AT ＋'+attackAmount(d.damage+s.battle.playerStrength+(d.strength||0)+(d.perBlock?s.battle.playerBlock+playerBlockGain(s,d.block||0):0),s.battle.playerDebuffs,{misconfig:0})+(d.hits?' ×'+d.hits:''):d.block?'防御 ＋'+(next.battle.playerBlock-s.battle.playerBlock):d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:d.debuff?DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'': ' ＋'+d.debuff.amount):'手札を補充';
+ const brief=d.battleOnly?'1エナジーで除外':d.damage?'AT ＋'+attackAmount(d.damage+s.battle.playerStrength+(d.strength||0)+(d.perBlock?s.battle.playerBlock+playerBlockGain(s,d.block||0):0),s.battle.playerDebuffs,{misconfig:0})+(d.hits?' ×'+d.hits:''):d.block?'防御 ＋'+(next.battle.playerBlock-s.battle.playerBlock):d.heal?'回復 ＋'+(next.hp-s.hp):d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御':d.energy?'⚡ ＋'+d.energy:d.debuff?DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'': ' ＋'+d.debuff.amount):'手札を補充';
  return {lines,brief,nextPhase:next.phase};
 }
 export function synergyHints(s,c){

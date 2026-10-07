@@ -1,3 +1,4 @@
+import {checkJunk} from './junk-browser-check.mjs';
 import {checkRules} from './rules-browser-check.mjs';
 import {checkExpansion} from './expansion-browser-check.mjs';
 import {checkHeroes} from './heroes-browser-check.mjs';
@@ -62,6 +63,7 @@ try{
  await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
+ await checkJunk(browser,base);
  await checkHeroes(browser,base);
  await checkExpansion(browser,base);
  await checkRules(browser,base);

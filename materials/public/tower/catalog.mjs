@@ -1,8 +1,9 @@
 import {BASE_CARDS} from './card-definitions.mjs';
 import {BASE_QUIZZES,QUIZZES} from './quiz.mjs';
 import {BASE_FLAVOR,FLAVOR} from './flavor.mjs';
+const JUNK={name:'障害ログ',cost:1,kind:'junk',exhaust:true,battleOnly:true,text:'効果なし。1エナジーで戦闘中除外。使わないと捨て札へ回り、再び引きます。戦闘終了時に消滅。'};
 export const STARTERS=['strike','guard','probe'];
-export const CARDS=JSON.parse(JSON.stringify(BASE_CARDS));
+export const CARDS={...JSON.parse(JSON.stringify(BASE_CARDS)),junk:{...JUNK}};
 let active=null;
 const copy=x=>JSON.parse(JSON.stringify(x));
 const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
@@ -16,7 +17,7 @@ export function validateCatalog(p){
  assert(Object.keys(p.starterNames).length===3&&STARTERS.every(k=>text(p.starterNames[k],100)&&!/[<>]/.test(p.starterNames[k])));
  const numeric=['cost','damage','upDamage','block','upBlock','draw','upDraw','heal','upHeal','energy','upEnergy','armor','upArmor','strength','upStrength','hits','self'];
  for(const [k,c] of Object.entries(p.cards)){
-  assert(id(k)&&!STARTERS.includes(k)&&obj(c)&&text(c.name,100)&&!/[<>]/.test(c.name)&&['attack','skill','power'].includes(c.kind)&&text(c.text,500));
+  assert(id(k)&&k!=='junk'&&!STARTERS.includes(k)&&obj(c)&&text(c.name,100)&&!/[<>]/.test(c.name)&&['attack','skill','power'].includes(c.kind)&&text(c.text,500));
   assert(Number.isInteger(c.cost)&&c.cost>=0&&c.cost<=3);
   for(const [key,v] of Object.entries(c)){
    if(numeric.includes(key))assert(Number.isInteger(v)&&v>=0&&v<=50);
@@ -36,6 +37,7 @@ export function activateCatalog(pack){
  if(pack!==null)validateCatalog(pack);
  replace(CARDS,BASE_CARDS);replace(QUIZZES,BASE_QUIZZES);replace(FLAVOR,BASE_FLAVOR);
  if(pack){Object.assign(CARDS,copy(pack.cards));for(const k of STARTERS)CARDS[k].name=pack.starterNames[k];Object.assign(QUIZZES,copy(pack.quizzes));Object.assign(FLAVOR,copy(pack.notes));}
+ CARDS.junk={...JUNK};
  active=pack?copy(pack):null;
 }
 export const getActiveCatalog=()=>active?copy(active):null;

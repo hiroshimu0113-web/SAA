@@ -20,8 +20,8 @@ test('tower: enemy intent, block lifetime and weakness have exact numerical effe
  s.battle.enemyDebuffs.overload=2;assert.equal(intent(s).value,7);s=act(s,{type:'end'});assert.equal(s.hp,63);assert.equal(s.battle.enemyDebuffs.overload,1);assert.equal(s.battle.block,0);
 });
 test('tower: all 20 cards execute, upgrades, exhaustion and self-damage defeat',()=>{
- assert.equal(Object.keys(CARDS).length,20);
- for(const id of Object.keys(CARDS)){
+ assert.equal(Object.keys(CARDS).filter(id=>!CARDS[id].battleOnly).length,20);
+ for(const id of Object.keys(CARDS).filter(id=>!CARDS[id].battleOnly)){
   let s=start();s.deck[0]={uid:0,id,plus:true};s.battle.hand=s.deck.map(c=>c.uid);s.battle.draw=[];s.battle.energy=3;
   const d=cardValues(s.deck[0]);s=act(s,{type:'play',uid:0});roundTrip(s);
   assert.ok(d.damage||d.block||d.draw||d.heal||d.energy||d.armor||d.strength||d.debuff);

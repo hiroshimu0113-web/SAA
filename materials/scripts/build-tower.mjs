@@ -48,3 +48,5 @@ await writeFile('dist/tower/routes.html',html);
 await writeFile('dist/tower/flow.html',html);
 
 await writeFile('dist/tower/bosses.html',html);
+
+await writeFile('dist/tower/junk.html',html);
