@@ -870,3 +870,35 @@
 - 新規冒険を攻撃strike3枚・防御guard3枚・観測probe1枚の計7枚に変更。全主人公・教材名差し替え時に共通。カード効果と主人公レリックは維持。
 - 保存済みのデッキは削減しない。「最初から」で適用。旧10枚デッキのシナリオ検証はlegacy fixtureとして保持し、新規7枚構成は実newRunとブラウザーで検証。
 - 教材本文・分類変更なし。89テスト・ビルド・Chromiumの3主人公開始/再読込と獲得・削除検証成功。完了：CI WebKitの操作/オフライン回帰・教材更新検証成功。実装c622cd4、[Actions 37573659157](https://github.com/hiroshimu0113-web/SAA/actions/runs/37573659157) build/deploy成功。公開HTML・engine・Service WorkerがローカルビルドとSHA256一致。新入口 tower/starter.html。次は実機でデッキの回転と難易度を試遊評価。
+
+## 教材用語へのカード更新（2026-10-07）
+
+- ユーザー方針をAGENTS.mdへ記録：ゲームの学習用語は教材由来。「更新お願いします」は最新教材からの実装更新として扱う。
+- 最新の公開範囲は先行2章・20問と2026-10-07の追加教材。カード候補24件は取り込み済みで、新たな未取り込み候補はなし。未公開180問やdraftの知識単位は公開せず保持。
+- 通常44カードの名称と説明を公開用語へ統一。既存20カードはknowledge/game-supplement.jsonのcardTermsから用語名・定義・出典を解決。生成時の対応漏れ/公開用語不在を拒否。教材パック3e1a2ff5d9eacd9b。
+- 既存カードの数値効果、初期7枚、旧保存/途中冒険の教材スナップショット、26問のクイズは維持。既存の敵・レリック・役・デバフ・戦闘限定カードの名称は今回未変更。
+- 分類：concept-{strike,guard,probe,burst,parallel,retry,reserve,restore,foresight,isolate,detour,analysis,overload,redundant,optimize,cache,patch,balance,reversal,quarantine}-metaphorの20件を新対応へ改訂。importedは維持、変更した説明の独立監査はdraft。過去のレビュー記録は旧説明への記録として保持。知識正本は変更なし。
+- 検証：pnpm test 90件成功。game:check、knowledge:check（407ノード/609辺）、progress:update/check、型検査・ビルド成功。ブラウザー結果は後記。
+- 保存先：materials/knowledge/game-supplement.json、game-classifications.json、scripts/export-game-catalog.ts、public/tower/learning-catalog.json等。ローカル作業のみ、GitHub同期・公開配信は未実施。
+- 次：公開配信と公開カタログの一致確認。今回未変更の学習対象名称も教材の出現箇所と意味を確認して対応付ける。iPhone実機で新名称・同名カードの識別を評価。
+
+- ブラウザー検証：Chromiumでスターター/教材カード表示、320px、途中クイズの保存保持、次回冒険への更新、不正JSONの保持、オフライン再開、Service Worker利用中の最新取得に成功。分類69件のID一意性・教材参照ファイル・関係先IDとgit diff --checkも確認。WebKit/iPhone実機は今回未検証。
+
+## 主人公・デバフ固定で全学習名称を更新（2026-10-07、追加指示）
+
+- ユーザーの指定：主人公3種とデバフ5種は固定、それ以外の名称は更新可能。AGENTS.mdへ固定対象と更新可能範囲を記録。
+- 完了：通常44カードに加え、敵12種・レリック24種（主人公固有含む）・役3種・戦闘限定カード1種を公開教材の用語へ更新。主人公の名前/外見/能力とデバフの名前/規則は維持。カードの効果・敵HP/行動・レリック効果・役のカードID/成立条件/効果・初期7枚も維持。
+- 正本：knowledge/game-supplement.jsonのcardTerms/vocabulary。生成時に公開用語と全実装IDの対応を検査し、本文由来の「一時データ」は公開レッスンch01-l03の実在する出現箇所を照合。学習カタログbc603555ef9ea626。
+- 実装：enemy-definitions.mjsへ敵定義を分離。カタログへ任意の名称/学習補足フィールドを追加し、数値性能・主人公・デバフの上書きを拒否。名称も冒険の教材スナップショットに保存。旧保存/従来パックは旧名称で継続、新しい冒険から新版を採用。
+- 表示：敵状態・所持レリック・用語一覧から教材の定義と出典を確認。役を責任共有モデル/可用性/クロスアカウントアクセスへ更新。旧「障害ログ」は「一時データ」へ変更し、予告/ログ/効果表示/遊び方/組合せヒントを使用中の名称へ連動。
+- 分類：term-game-*の24件に敵/レリック等の実装参照を追加。term-game-temporary-dataを新設。combo-{incident,balancing,caching}-roleの3件を改訂。計70件・imported70件。新規/変更補足はdraftで独立監査待ち、本人の理解は未評価。知識正本と公開教材範囲は変更なし。
+- 検証：pnpm test 92件、game:check、knowledge:check（407ノード/609辺）、progress:update/check、型検査・ビルド成功。分類IDの一意性・関係先・教材ファイル参照・git diff --check成功。
+- Chromium：新名称/教材の補足/全12敵の320px幅/一時カード生成と再読込/更新の次回反映/途中クイズ保持/取得失敗時の旧データ保持/オフライン再開成功。既存touch-browser-checkによる主人公3種・固定デバフ・遺物・クイズ・コンボ・旧保存・モバイル操作・オフラインの回帰も成功。WebKit/iPhone実機は今回未検証。
+- 保存：materials/内の上記正本・public/tower/・scripts/・tests/・docs/。配信ビルドはdist/tower/vocabulary.html。GitHub同期・公開サイト更新は未実施。旧配布ZIP/音声は保持。
+- 次：公開配信と公開カタログの一致確認。配信後の新入口はtower/vocabulary.html。教材の定義とゲーム数値は別とした上で、同名カードの見分けやすさと敵の復習名を実機で評価。
+
+## 更新依頼に公開とリンク提供を含める（2026-10-07、ユーザー補足）
+
+- 更新作業の指示は公式サイトへの反映までを含み、完了回答に公開リンクを提供する。AGENTS.mdとGAME_CONTENT_UPDATE.mdへ記録。
+- 前回までの名称更新（通常44カード、戦闘限定1カード、敵12種、レリック24種、役3種）を既存GitHub Pagesへ公開する。主人公とデバフは固定。92テスト・ローカルビルド・Chromium検証は前回完了済み。
+- 公開の入口：https://hiroshimu0113-web.github.io/SAA/tower/vocabulary.html 。公開処理中。Actions/公開確認の結果は後記する。

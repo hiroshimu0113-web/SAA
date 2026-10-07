@@ -58,3 +58,5 @@ await writeFile('dist/tower/turns.html',html);
 await writeFile('dist/tower/impact.html',html);
 
 await writeFile('dist/tower/starter.html',html);
+
+await writeFile('dist/tower/vocabulary.html',html);

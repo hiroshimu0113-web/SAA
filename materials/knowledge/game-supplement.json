@@ -4,53 +4,6 @@
     "public/study/2026-10-07/text.html",
     "public/study/2026-10-07/questions.html"
   ],
-  "starterNames": {
-    "strike": "切り分け｜責任共有",
-    "guard": "防壁｜最小権限",
-    "probe": "観測｜ヘルスチェック"
-  },
-  "notes": {
-    "strike": {
-      "note": "責任共有モデルでは、AWSと利用者が責任を分担します。利用サービスによって利用者が管理する範囲も変わります。",
-      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-and-compliance.html",
-      "limit": "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。"
-    },
-    "guard": {
-      "note": "最小権限は、必要な対象に必要な操作だけを許可する原則です。",
-      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "limit": "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。"
-    },
-    "probe": {
-      "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
-      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。"
-    },
-    "parallel": {
-      "note": "同じAZで台数を増やすことと、別AZに分散することは別です。同じAZに集中すると、そのAZ全体の障害でまとめて影響を受ける可能性があります。",
-      "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。"
-    },
-    "redundant": {
-      "note": "複数AZへ処理先を分けた上で、正常先への振り分け、必要なデータ、障害後の残存容量も用意します。同じリージョン内の複数AZだけではリージョン全体の停止に備えられません。",
-      "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。"
-    },
-    "reserve": {
-      "note": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
-      "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。"
-    },
-    "balance": {
-      "note": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
-      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。"
-    },
-    "detour": {
-      "note": "処理先が停止したとき、利用者を残った正常先へ送る仕組みも必要です。別AZにサーバーを置いただけでは、利用者の接続先は自動的に切り替わりません。",
-      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。"
-    }
-  },
   "terms": [
     {
       "id": "health-check",
@@ -116,6 +69,167 @@
         "振り分け先が動いていても、必要データがなければ処理は続けられません。"
       ],
       "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html"
+    }
+  },
+  "cardTerms": {
+    "strike": "shared-responsibility",
+    "guard": "least-privilege",
+    "probe": "health-check",
+    "burst": "scaling",
+    "parallel": "az",
+    "retry": "spot",
+    "reserve": "remaining-capacity",
+    "restore": "durability",
+    "foresight": "region",
+    "isolate": "explicit-deny",
+    "detour": "availability",
+    "analysis": "cross-account",
+    "overload": "instance-store",
+    "redundant": "s3",
+    "optimize": "iam-role",
+    "cache": "temporary-credentials",
+    "patch": "mfa",
+    "balance": "alb",
+    "reversal": "rds",
+    "quarantine": "scp"
+  },
+  "vocabulary": {
+    "enemies": {
+      "noise": {
+        "term": "least-privilege"
+      },
+      "surge": {
+        "term": "scaling"
+      },
+      "leak": {
+        "term": "instance-store"
+      },
+      "timeout": {
+        "term": "temporary-credentials"
+      },
+      "storm": {
+        "term": "spot"
+      },
+      "deadlock": {
+        "term": "explicit-deny"
+      },
+      "elite": {
+        "term": "cross-account"
+      },
+      "elite_fire": {
+        "term": "root"
+      },
+      "elite_drain": {
+        "term": "scp"
+      },
+      "boss": {
+        "term": "region"
+      },
+      "boss_resource": {
+        "term": "remaining-capacity"
+      },
+      "boss_stagnation": {
+        "term": "availability"
+      }
+    },
+    "relics": {
+      "blueprint": {
+        "term": "shared-responsibility"
+      },
+      "runbook": {
+        "term": "availability"
+      },
+      "capacity": {
+        "term": "scaling"
+      },
+      "lantern": {
+        "term": "health-check"
+      },
+      "shell": {
+        "term": "az"
+      },
+      "spring": {
+        "term": "durability"
+      },
+      "ember": {
+        "term": "s3"
+      },
+      "edge": {
+        "term": "iam-role"
+      },
+      "plating": {
+        "term": "least-privilege"
+      },
+      "battery": {
+        "term": "temporary-credentials"
+      },
+      "opener": {
+        "term": "alb"
+      },
+      "dusk": {
+        "term": "explicit-deny"
+      },
+      "prune": {
+        "term": "scp"
+      },
+      "choice": {
+        "term": "region"
+      },
+      "double": {
+        "term": "rds"
+      },
+      "elite_edge": {
+        "term": "cross-account"
+      },
+      "elite_energy": {
+        "term": "external-id"
+      },
+      "renewal": {
+        "term": "mfa"
+      },
+      "growth": {
+        "term": "identity-center"
+      },
+      "bounty": {
+        "term": "cognito"
+      },
+      "insight": {
+        "term": "root"
+      },
+      "escalation": {
+        "term": "instance-store"
+      },
+      "discount": {
+        "term": "spot"
+      },
+      "coupon": {
+        "term": "remaining-capacity"
+      }
+    },
+    "combos": {
+      "incident": {
+        "term": "shared-responsibility",
+        "lesson": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。"
+      },
+      "balancing": {
+        "term": "availability",
+        "lesson": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。"
+      },
+      "caching": {
+        "term": "cross-account",
+        "lesson": "クロスアカウントアクセスではIAMロールの信頼関係と操作権限を設定し、ロールを引き受けた一時認証情報で操作します。外部事業者への委任ではExternal IDなどの条件も検討します。3枚条件やエナジー回復はゲーム上のルールで、実際の設定を代行しません。"
+      }
+    },
+    "junk": {
+      "junk": {
+        "term": "instance-store",
+        "name": "一時データ",
+        "material_ref": {
+          "path": "src/content/index.ts",
+          "locator": "ch01-l03"
+        },
+        "note": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。"
+      }
     }
   }
 }

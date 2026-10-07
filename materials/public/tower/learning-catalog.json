@@ -1,13 +1,263 @@
 {
   "schema": 1,
+  "vocabulary": {
+    "enemies": {
+      "noise": {
+        "name": "最小権限",
+        "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "surge": {
+        "name": "スケーリング",
+        "note": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "leak": {
+        "name": "インスタンスストア",
+        "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "timeout": {
+        "name": "一時認証情報",
+        "note": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "storm": {
+        "name": "Spotインスタンス",
+        "note": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "deadlock": {
+        "name": "明示的Deny",
+        "note": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "elite": {
+        "name": "クロスアカウントアクセス",
+        "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "elite_fire": {
+        "name": "ルートユーザー",
+        "note": "AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "elite_drain": {
+        "name": "サービスコントロールポリシー（SCP）",
+        "note": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+        "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "boss": {
+        "name": "リージョン",
+        "note": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "boss_resource": {
+        "name": "残存容量",
+        "note": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+        "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      },
+      "boss_stagnation": {
+        "name": "可用性",
+        "note": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+        "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
+      }
+    },
+    "relics": {
+      "blueprint": {
+        "name": "責任共有モデル",
+        "note": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+        "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "runbook": {
+        "name": "可用性",
+        "note": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "capacity": {
+        "name": "スケーリング",
+        "note": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "lantern": {
+        "name": "ヘルスチェック",
+        "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+        "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "shell": {
+        "name": "アベイラビリティーゾーン（AZ）",
+        "note": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "spring": {
+        "name": "耐久性",
+        "note": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "ember": {
+        "name": "Amazon S3",
+        "note": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "edge": {
+        "name": "IAMロール",
+        "note": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "plating": {
+        "name": "最小権限",
+        "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "battery": {
+        "name": "一時認証情報",
+        "note": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "opener": {
+        "name": "Application Load Balancer",
+        "note": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
+        "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "dusk": {
+        "name": "明示的Deny",
+        "note": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "prune": {
+        "name": "サービスコントロールポリシー（SCP）",
+        "note": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+        "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "choice": {
+        "name": "リージョン",
+        "note": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "double": {
+        "name": "Amazon RDS",
+        "note": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "elite_edge": {
+        "name": "クロスアカウントアクセス",
+        "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "elite_energy": {
+        "name": "External ID",
+        "note": "外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "renewal": {
+        "name": "多要素認証（MFA）",
+        "note": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "growth": {
+        "name": "IAM Identity Center",
+        "note": "従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。",
+        "source": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "bounty": {
+        "name": "Amazon Cognito",
+        "note": "一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。",
+        "source": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "insight": {
+        "name": "ルートユーザー",
+        "note": "AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "escalation": {
+        "name": "インスタンスストア",
+        "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "discount": {
+        "name": "Spotインスタンス",
+        "note": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "coupon": {
+        "name": "残存容量",
+        "note": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+        "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      }
+    },
+    "combos": {
+      "incident": {
+        "name": "責任共有モデル",
+        "note": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。",
+        "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "balancing": {
+        "name": "可用性",
+        "note": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "caching": {
+        "name": "クロスアカウントアクセス",
+        "note": "クロスアカウントアクセスではIAMロールの信頼関係と操作権限を設定し、ロールを引き受けた一時認証情報で操作します。外部事業者への委任ではExternal IDなどの条件も検討します。3枚条件やエナジー回復はゲーム上のルールで、実際の設定を代行しません。",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      }
+    },
+    "junk": {
+      "junk": {
+        "name": "一時データ",
+        "note": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      }
+    }
+  },
   "starterNames": {
-    "strike": "切り分け｜責任共有",
-    "guard": "防壁｜最小権限",
-    "probe": "観測｜ヘルスチェック"
+    "strike": "責任共有モデル",
+    "guard": "最小権限",
+    "probe": "ヘルスチェック"
   },
   "cards": {
     "burst": {
-      "name": "集中処理",
+      "name": "スケーリング",
       "cost": 2,
       "kind": "attack",
       "damage": 18,
@@ -19,7 +269,7 @@
       "text": "18ダメージ。炎上3。"
     },
     "parallel": {
-      "name": "並列処理",
+      "name": "アベイラビリティーゾーン（AZ）",
       "cost": 1,
       "kind": "attack",
       "damage": 4,
@@ -28,7 +278,7 @@
       "text": "4ダメージを2回。強化の効果も2回。"
     },
     "retry": {
-      "name": "再試行",
+      "name": "Spotインスタンス",
       "cost": 0,
       "kind": "attack",
       "damage": 3,
@@ -36,7 +286,7 @@
       "text": "3ダメージ。"
     },
     "reserve": {
-      "name": "予備容量",
+      "name": "残存容量",
       "cost": 2,
       "kind": "skill",
       "block": 14,
@@ -44,7 +294,7 @@
       "text": "14ブロック。"
     },
     "restore": {
-      "name": "復旧手順",
+      "name": "耐久性",
       "cost": 1,
       "kind": "skill",
       "heal": 7,
@@ -53,7 +303,7 @@
       "text": "HPを7回復。この戦闘中は除外。"
     },
     "foresight": {
-      "name": "先読み",
+      "name": "リージョン",
       "cost": 1,
       "kind": "skill",
       "draw": 3,
@@ -61,7 +311,7 @@
       "text": "3枚引く。"
     },
     "isolate": {
-      "name": "隔離",
+      "name": "明示的Deny",
       "cost": 1,
       "kind": "skill",
       "debuff": {
@@ -73,7 +323,7 @@
       "text": "3ブロック。敵に過負荷2。"
     },
     "detour": {
-      "name": "迂回",
+      "name": "可用性",
       "cost": 1,
       "kind": "skill",
       "debuff": {
@@ -87,7 +337,7 @@
       "text": "4ブロック。1枚引く。遅延。この戦闘中は除外。"
     },
     "analysis": {
-      "name": "ログ分析",
+      "name": "クロスアカウントアクセス",
       "cost": 0,
       "kind": "skill",
       "debuff": {
@@ -100,7 +350,7 @@
       "text": "2枚引く。設定不備2。この戦闘中は除外。"
     },
     "overload": {
-      "name": "過負荷試験",
+      "name": "インスタンスストア",
       "cost": 1,
       "kind": "attack",
       "damage": 16,
@@ -113,7 +363,7 @@
       "text": "16ダメージ。枯渇2。自分のHPを3失う。"
     },
     "redundant": {
-      "name": "冗長構成",
+      "name": "Amazon S3",
       "cost": 2,
       "kind": "power",
       "armor": 3,
@@ -122,7 +372,7 @@
       "text": "毎ターン開始時3ブロック。この戦闘中持続。"
     },
     "optimize": {
-      "name": "最適化",
+      "name": "IAMロール",
       "cost": 1,
       "kind": "power",
       "strength": 2,
@@ -131,7 +381,7 @@
       "text": "この戦闘中、攻撃のダメージ＋2。"
     },
     "cache": {
-      "name": "キャッシュ",
+      "name": "一時認証情報",
       "cost": 0,
       "kind": "skill",
       "energy": 2,
@@ -140,7 +390,7 @@
       "text": "エナジーを2得る。この戦闘中は除外。"
     },
     "patch": {
-      "name": "緊急パッチ",
+      "name": "多要素認証（MFA）",
       "cost": 0,
       "kind": "skill",
       "block": 4,
@@ -149,7 +399,7 @@
       "text": "4ブロック。この戦闘中は除外。"
     },
     "balance": {
-      "name": "負荷分散",
+      "name": "Application Load Balancer",
       "cost": 1,
       "kind": "attack",
       "damage": 7,
@@ -159,7 +409,7 @@
       "text": "7ダメージ。4ブロック。"
     },
     "reversal": {
-      "name": "逆転の一手",
+      "name": "Amazon RDS",
       "cost": 2,
       "kind": "attack",
       "damage": 12,
@@ -168,7 +418,7 @@
       "text": "12＋現在のブロック分のダメージ。"
     },
     "quarantine": {
-      "name": "封じ込め",
+      "name": "サービスコントロールポリシー（SCP）",
       "cost": 2,
       "kind": "attack",
       "damage": 10,
@@ -398,104 +648,104 @@
   },
   "notes": {
     "strike": {
-      "note": "責任共有モデルでは、AWSと利用者が責任を分担します。利用サービスによって利用者が管理する範囲も変わります。",
-      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-and-compliance.html",
-      "limit": "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。"
+      "note": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+      "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "guard": {
-      "note": "最小権限は、必要な対象に必要な操作だけを許可する原則です。",
+      "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
       "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-      "limit": "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。"
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "probe": {
       "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
       "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。"
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "burst": {
-      "note": "ワークロードの要件に合わせ、資源の種類や大きさを選びます。",
-      "limit": "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。",
-      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html"
+      "note": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "parallel": {
-      "note": "同じAZで台数を増やすことと、別AZに分散することは別です。同じAZに集中すると、そのAZ全体の障害でまとめて影響を受ける可能性があります。",
-      "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。"
+      "note": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "retry": {
-      "note": "このカードは0エナジーで攻撃できます。",
-      "limit": "実際の再試行が無料・無制限・常に安全という意味ではありません。",
-      "source": null
+      "note": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "reserve": {
       "note": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
       "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。"
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "restore": {
-      "note": "復旧手順は、障害を想定して実際に試験します。",
-      "limit": "HP回復量は現実の復旧時間やデータ復元量を表しません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
+      "note": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "foresight": {
-      "note": "平常時の指標を基準に、変化を捉えます。",
-      "limit": "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html"
+      "note": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "isolate": {
-      "note": "共通の障害点を避け、単一障害の影響を小さくする設計を考えます。",
-      "limit": "過負荷のターン数は現実の障害隔離時間ではありません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
+      "note": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "detour": {
-      "note": "処理先が停止したとき、利用者を残った正常先へ送る仕組みも必要です。別AZにサーバーを置いただけでは、利用者の接続先は自動的に切り替わりません。",
-      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。"
+      "note": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "analysis": {
-      "note": "ログや指標を調査と原因分析に利用します。",
-      "limit": "ログがあるだけで原因を断定できるわけではありません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html"
+      "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "overload": {
-      "note": "性能試験で基準を作り、負荷をかけたときの指標を確認します。",
-      "limit": "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。",
-      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html"
+      "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "redundant": {
-      "note": "複数AZへ処理先を分けた上で、正常先への振り分け、必要なデータ、障害後の残存容量も用意します。同じリージョン内の複数AZだけではリージョン全体の停止に備えられません。",
-      "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-      "limit": "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。"
+      "note": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "optimize": {
-      "note": "指標を観察し、ワークロードに合う改善を選びます。",
-      "limit": "強化値は実際の性能改善率ではありません。",
-      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html"
+      "note": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "cache": {
-      "note": "キャッシュの効果や性能を監視し、使い方を見直します。",
-      "limit": "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。",
-      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html"
+      "note": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "patch": {
-      "note": "インフラの変更は自動化し、その変更自体も追跡・レビューします。",
-      "limit": "緊急パッチのブロック値は、脆弱性の解消度を表しません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
+      "note": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "balance": {
       "note": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
       "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-      "limit": "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。"
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "reversal": {
-      "note": "このカードは、使用時のブロックを攻撃に加えます。",
-      "limit": "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。",
-      "source": null
+      "note": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "quarantine": {
-      "note": "一つの障害が全体へ与える影響を小さくすることを考えます。",
-      "limit": "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。",
-      "source": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html"
+      "note": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+      "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+      "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "study-region": {
       "note": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
@@ -1059,5 +1309,5 @@
     "src/content/starter.ts",
     "knowledge/game-supplement.json"
   ],
-  "version": "352d234570063422"
+  "version": "bc603555ef9ea626"
 }

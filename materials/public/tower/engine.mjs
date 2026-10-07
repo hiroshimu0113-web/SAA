@@ -5,20 +5,8 @@ export {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 
 import {CARDS,activateCatalog,getActiveCatalog,activeVersion} from './catalog.mjs';
 export {CARDS,activateCatalog} from './catalog.mjs';
-export const ENEMIES={
- noise:{tier:'battle',name:'ノイズの群れ',hp:32,glyph:'✺',pattern:[['attack',7],['guard',7],['attack',10],['junk',2]]},
- surge:{tier:'battle',name:'負荷の奔流',hp:38,glyph:'≋',pattern:[['buff',2],['attack',8],['attack',12],['junk',2]]},
- leak:{tier:'battle',name:'メモリの亡霊',hp:35,glyph:'♧',pattern:[['attack',6],['attack',6],['attack',13],['junk',2]]},
- timeout:{tier:'battle',name:'時切れの番人',hp:42,glyph:'⌛',pattern:[['guard',10],['attack',13],['buff',3],['junk',2]]},
- storm:{tier:'battle',name:'再試行の嵐',hp:45,glyph:'ϟ',pattern:[['attack',9],['buff',2],['attack',14],['junk',2]]},
- deadlock:{tier:'battle',name:'膠着の双環',hp:47,glyph:'∞',pattern:[['attack',10],['guard',12],['attack',14],['junk',2]]},
- elite:{tier:'elite',name:'断絶の騎士',hp:65,glyph:'⛨',pattern:[['debuff',2,'misconfig'],['attack',15],['attack',19],['guard',12]]},
- elite_fire:{tier:'elite',name:'炎上の番人',hp:65,glyph:'♨',pattern:[['debuff',3,'burn'],['attack',14],['guard',12],['attack',18]]},
- elite_drain:{tier:'elite',name:'枯渇の収集者',hp:65,glyph:'◈',pattern:[['debuff',2,'depletion'],['attack',15],['guard',10],['attack',19]]},
- boss:{tier:'boss',name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay',10],['attack',16],['debuff',3,'burn',10],['guard',18],['debuff',2,'overload',10],['attack',27]]},
- boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion',10],['attack',19],['debuff',2,'misconfig',10],['attack',21],['junk',1,null,10],['attack',25]]},
- boss_stagnation:{tier:'boss',name:'停滞の支配者',hp:125,glyph:'⌛',pattern:[['debuff',2,'overload',10],['attack',19],['debuff',1,'delay',10],['guard',18],['attack',25],['attack',17]]}
-};
+import {ENEMIES} from './enemy-definitions.mjs';
+export {ENEMIES} from './enemy-definitions.mjs';
 export const ENEMY_POOLS=Object.fromEntries(['battle','elite','boss'].map(tier=>[tier,Object.keys(ENEMIES).filter(id=>ENEMIES[id].tier===tier)]));
 export const enemyDebuffTypes=id=>[...new Set(ENEMIES[id].pattern.filter(a=>a[0]==='debuff').map(a=>a[2]))];
 import {HEROES,RELICS,REWARD_RELICS} from './relics.mjs';
@@ -104,7 +92,7 @@ function win(s){
  if(s.hp>before)emit(s.battle,'player','heal',s.hp-before,'回復 ＋'+(s.hp-before));
  // Resolve benefits owned at victory before granting this battle's new relic.
  s.reward=boss?[]:offers(s,has(s,'choice')?4:3);s.rewardPicks=boss?0:has(s,'double')?2:1;
- if(boss){s.phase='won';log(s,'連鎖障害を断ち切った。登頂成功！');return;}
+ if(boss){s.phase='won';log(s,ENEMIES[s.battle.enemy].name+'を乗り越えた。登頂成功！');return;}
  if(elite){const relic=shuffle(s,REWARD_RELICS.filter(x=>!has(s,x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}
  s.phase='reward';log(s,'勝利。カードを'+s.rewardPicks+'枚まで選ぶか、見送れます。');
 }
@@ -146,7 +134,7 @@ export function act(state,action){
   }
   if(delayPaused(b.playerDebuffs.delay)){b.playerDebuffs.delay=advanceDelay(b.playerDebuffs.delay);log(s,delayPaused(b.playerDebuffs.delay)?'遅延：残り'+delayRemaining(b.playerDebuffs.delay)+'ターン休止。':'遅延で休止。次は2回行動。');}
   else if(b.playerDebuffs.delay===2)b.playerDebuffs.delay=0;
-  if(has(s,'dusk')){const value=playerBlockGain(s,3);b.playerBlock+=value;emit(b,'player','shield',value,'終端の防壁 ＋'+value);}
+  if(has(s,'dusk')){const value=playerBlockGain(s,3);b.playerBlock+=value;emit(b,'player','shield',value,RELICS.dusk.name+' ＋'+value);}
   burn(s,'player');if(s.hp===0){lose(s);return s;}
   b.block=0;
   const refreshed=[];
@@ -166,7 +154,7 @@ export function act(state,action){
     }
     if(type==='junk'&&s.hp>0){
      for(let i=0;i<base;i++){const uid=s.nextId;add(s,'junk');b.draw.splice(Math.floor(rnd(s)*(b.draw.length+1)),0,uid);}
-     emit(b,'player','debuff',base,'障害ログ ＋'+base);log(s,'山札に障害ログを'+base+'枚混ぜられた。');
+     emit(b,'player','debuff',base,CARDS.junk.name+' ＋'+base);log(s,'山札に'+CARDS.junk.name+'を'+base+'枚混ぜられた。');
     }
     if(type==='guard'){const value=blockAmount(base,b.enemyDebuffs);b.block+=value;emit(b,'enemy','shield',value,'◇ ＋'+value);log(s,'敵は'+value+'ブロック。');}
     if(type==='buff'){b.strength+=base;emit(b,'enemy','power',base,'攻撃力 ＋'+base);log(s,'敵の強化＋'+base+'。');}

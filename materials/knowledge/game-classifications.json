@@ -3,11 +3,11 @@
   "items": [
     {
       "id": "concept-strike-metaphor",
-      "title": "切り分けの比喩と補足",
+      "title": "責任共有モデルの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "切り分けの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "責任共有モデルの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -21,6 +21,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.strike"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.strike"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "shared-responsibility"
         }
       ],
       "domains": [
@@ -40,7 +48,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -51,25 +59,30 @@
           "locator": "notes.strike.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "責任の切り分けをカード名に重ねています。責任共有そのものが障害を解消したり、攻撃したりする機能ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-incident-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-shared-responsibility",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-and-compliance.html",
-          "claim": "責任共有モデルでは、AWSと利用者が責任を分担します。利用サービスによって利用者が管理する範囲も変わります。",
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
           "checked_on": null,
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -101,23 +114,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.strike.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.strike.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.strike.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.strike.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "切り分けそのものが障害を修復するとは限りません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -127,19 +146,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.strike"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "starterNames.strike"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-guard-metaphor",
-      "title": "防壁の比喩と補足",
+      "title": "最小権限の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "防壁の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "最小権限の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -153,6 +178,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.guard"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.guard"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "least-privilege"
         }
       ],
       "domains": [
@@ -172,7 +205,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -183,25 +216,30 @@
           "locator": "notes.guard.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "ブロック5は架空の値です。最小権限だけであらゆる攻撃を防げるという意味ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-incident-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-least-privilege",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-          "claim": "最小権限は、必要な対象に必要な操作だけを許可する原則です。",
+          "claim": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
           "checked_on": null,
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -233,23 +271,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.guard.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.guard.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.guard.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.guard.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -259,19 +303,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.guard"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "starterNames.guard"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-probe-metaphor",
-      "title": "観測の比喩と補足",
+      "title": "ヘルスチェックの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "観測の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "ヘルスチェックの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -285,6 +335,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.probe"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.probe"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "health-check"
         }
       ],
       "domains": [
@@ -304,7 +362,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -315,8 +373,8 @@
           "locator": "notes.probe.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "ドローは情報を得る比喩です。監視やチェックだけでは障害を修復しません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
@@ -328,6 +386,11 @@
           "type": "part_of",
           "target_id": "combo-balancing-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-health-check",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
@@ -338,7 +401,7 @@
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -370,23 +433,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.probe.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.probe.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.probe.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.probe.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "監視を置くだけで障害が解消するわけではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -396,19 +465,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.probe"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "starterNames.probe"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-burst-metaphor",
-      "title": "集中処理の比喩と補足",
+      "title": "スケーリングの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "集中処理の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "スケーリングの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -418,6 +493,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.burst"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.burst"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "scaling"
         }
       ],
       "domains": [
@@ -437,7 +520,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -448,20 +531,26 @@
           "locator": "FLAVOR.burst.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
-          "claim": "ワークロードの要件に合わせ、資源の種類や大きさを選びます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-scaling",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -492,24 +581,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.burst.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.burst.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.burst.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.burst.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "集中処理の攻撃値は、特定インスタンスの処理性能ではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -519,20 +613,26 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.burst"
           }
         ],
         "debuff_rule": "炎上3"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-parallel-metaphor",
-      "title": "並列処理の比喩と補足",
+      "title": "アベイラビリティーゾーン（AZ）の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "並列処理の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "アベイラビリティーゾーン（AZ）の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -546,6 +646,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.parallel"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.parallel"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "az"
         }
       ],
       "domains": [
@@ -565,7 +673,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -576,25 +684,30 @@
           "locator": "notes.parallel.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "2回攻撃はゲーム固有です。複数台や複数AZにしただけで性能や可用性が保証されるわけではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-balancing-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-az",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-          "claim": "同じAZで台数を増やすことと、別AZに分散することは別です。同じAZに集中すると、そのAZ全体の障害でまとめて影響を受ける可能性があります。",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
           "checked_on": null,
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -626,23 +739,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.parallel.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.parallel.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.parallel.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.parallel.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "2回攻撃はゲーム上の表現で、性能が必ず2倍になる意味ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -652,19 +771,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.parallel"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.parallel"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-retry-metaphor",
-      "title": "再試行の比喩と補足",
+      "title": "Spotインスタンスの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "再試行の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "Spotインスタンスの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -674,6 +799,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.retry"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.retry"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "spot"
         }
       ],
       "domains": [
@@ -693,7 +826,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "実際の再試行が無料・無制限・常に安全という意味ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -704,20 +837,26 @@
           "locator": "FLAVOR.retry.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "実際の再試行が無料・無制限・常に安全という意味ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://github.com/hiroshimu0113-web/SAA/blob/main/materials/public/tower/engine.mjs",
-          "claim": "このカードは0エナジーで攻撃できます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-spot",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "claim": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -742,41 +881,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.retry.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.retry.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.retry.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.retry.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "実際の再試行が無料・無制限・常に安全という意味ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.retry"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.retry"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-reserve-metaphor",
-      "title": "予備容量の比喩と補足",
+      "title": "残存容量の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "予備容量の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "残存容量の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -790,6 +941,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.reserve"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.reserve"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "remaining-capacity"
         }
       ],
       "domains": [
@@ -809,7 +968,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -820,10 +979,16 @@
           "locator": "notes.reserve.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "14ブロックは現実の処理能力ではありません。複数AZやALBが残存容量を自動的に増やすわけではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
+      "relations": [
+        {
+          "type": "used_in",
+          "target_id": "term-game-remaining-capacity",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
+        }
+      ],
       "sources": [
         {
           "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
@@ -832,7 +997,7 @@
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -864,23 +1029,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reserve.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.reserve.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reserve.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.reserve.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "予備容量の確保だけで、すべての障害に耐えられるわけではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -890,19 +1061,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.reserve"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.reserve"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-restore-metaphor",
-      "title": "復旧手順の比喩と補足",
+      "title": "耐久性の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "復旧手順の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "耐久性の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -912,6 +1089,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.restore"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.restore"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "durability"
         }
       ],
       "domains": [
@@ -931,7 +1116,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "HP回復量は現実の復旧時間やデータ復元量を表しません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -942,20 +1127,26 @@
           "locator": "FLAVOR.restore.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "HP回復量は現実の復旧時間やデータ復元量を表しません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "復旧手順は、障害を想定して実際に試験します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-durability",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -980,41 +1171,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.restore.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.restore.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.restore.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.restore.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "HP回復量は現実の復旧時間やデータ復元量を表しません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.restore"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.restore"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-foresight-metaphor",
-      "title": "先読みの比喩と補足",
+      "title": "リージョンの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "先読みの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "リージョンの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1024,6 +1227,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.foresight"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.foresight"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "region"
         }
       ],
       "domains": [
@@ -1043,7 +1254,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1054,20 +1265,26 @@
           "locator": "FLAVOR.foresight.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "平常時の指標を基準に、変化を捉えます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-region",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1092,41 +1309,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.foresight.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.foresight.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.foresight.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.foresight.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "ドローは情報を得る比喩で、将来の障害を確実に予言する機能ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.foresight"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.foresight"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-isolate-metaphor",
-      "title": "隔離の比喩と補足",
+      "title": "明示的Denyの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "隔離の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "明示的Denyの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1136,6 +1365,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.isolate"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.isolate"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "explicit-deny"
         }
       ],
       "domains": [
@@ -1155,7 +1392,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "過負荷のターン数は現実の障害隔離時間ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1166,20 +1403,26 @@
           "locator": "FLAVOR.isolate.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "過負荷のターン数は現実の障害隔離時間ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "共通の障害点を避け、単一障害の影響を小さくする設計を考えます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-explicit-deny",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "claim": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1210,24 +1453,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.isolate.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.isolate.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.isolate.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.isolate.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "弱体のターン数は現実の障害隔離時間ではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -1237,20 +1485,26 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.isolate"
           }
         ],
         "debuff_rule": "過負荷2"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-detour-metaphor",
-      "title": "迂回の比喩と補足",
+      "title": "可用性の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "迂回の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "可用性の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1264,6 +1518,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.detour"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.detour"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "availability"
         }
       ],
       "domains": [
@@ -1283,7 +1545,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1294,19 +1556,25 @@
           "locator": "notes.detour.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "遅延付与やドローは比喩です。実際の切り替えには経路・データ・容量の準備と試験が必要です。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
+      "relations": [
+        {
+          "type": "used_in",
+          "target_id": "term-game-availability",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
+        }
+      ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-          "claim": "処理先が停止したとき、利用者を残った正常先へ送る仕組みも必要です。別AZにサーバーを置いただけでは、利用者の接続先は自動的に切り替わりません。",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "claim": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
           "checked_on": null,
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -1344,24 +1612,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.detour.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.detour.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.detour.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.detour.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "カードを使うだけで現実の代替経路が自動的に用意されるわけではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -1375,20 +1648,26 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.detour"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.detour"
           }
         ],
         "debuff_rule": "遅延1・戦闘中除外"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-analysis-metaphor",
-      "title": "ログ分析の比喩と補足",
+      "title": "クロスアカウントアクセスの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "ログ分析の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "クロスアカウントアクセスの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1398,6 +1677,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.analysis"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.analysis"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "cross-account"
         }
       ],
       "domains": [
@@ -1417,7 +1704,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "ログがあるだけで原因を断定できるわけではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1428,26 +1715,31 @@
           "locator": "FLAVOR.analysis.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "ログがあるだけで原因を断定できるわけではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-caching-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-cross-account",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "ログや指標を調査と原因分析に利用します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "claim": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1478,24 +1770,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.analysis.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.analysis.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.analysis.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.analysis.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "ログがあるだけで原因を断定できるわけではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -1505,20 +1802,26 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.analysis"
           }
         ],
         "debuff_rule": "設定不備2"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-overload-metaphor",
-      "title": "過負荷試験の比喩と補足",
+      "title": "インスタンスストアの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "過負荷試験の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "インスタンスストアの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1528,6 +1831,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.overload"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.overload"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "instance-store"
         }
       ],
       "domains": [
@@ -1547,7 +1858,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1558,20 +1869,26 @@
           "locator": "FLAVOR.overload.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
-          "claim": "性能試験で基準を作り、負荷をかけたときの指標を確認します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-instance-store",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1602,24 +1919,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.overload.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.overload.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.overload.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.overload.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "自傷3は架空の代償で、本番環境へ無計画に負荷をかける推奨ではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -1629,20 +1951,26 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.overload"
           }
         ],
         "debuff_rule": "枯渇2"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-redundant-metaphor",
-      "title": "冗長構成の比喩と補足",
+      "title": "Amazon S3の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "冗長構成の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "Amazon S3の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1656,6 +1984,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.redundant"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.redundant"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "s3"
         }
       ],
       "domains": [
@@ -1675,7 +2011,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1686,19 +2022,25 @@
           "locator": "notes.redundant.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "毎ターンの防御は比喩です。冗長化だけで停止を完全になくせるという意味ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
+      "relations": [
+        {
+          "type": "used_in",
+          "target_id": "term-game-s3",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
+        }
+      ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html",
-          "claim": "複数AZへ処理先を分けた上で、正常先への振り分け、必要なデータ、障害後の残存容量も用意します。同じリージョン内の複数AZだけではリージョン全体の停止に備えられません。",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
           "checked_on": null,
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -1730,23 +2072,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.redundant.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.redundant.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.redundant.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.redundant.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "毎ターン防御は比喩です。複製するだけで可用性が保証されるわけではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -1756,19 +2104,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.redundant"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.redundant"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-optimize-metaphor",
-      "title": "最適化の比喩と補足",
+      "title": "IAMロールの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "最適化の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "IAMロールの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1778,6 +2132,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.optimize"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.optimize"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "iam-role"
         }
       ],
       "domains": [
@@ -1797,7 +2159,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "強化値は実際の性能改善率ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1808,26 +2170,31 @@
           "locator": "FLAVOR.optimize.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "強化値は実際の性能改善率ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-caching-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-iam-role",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
-          "claim": "指標を観察し、ワークロードに合う改善を選びます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+          "claim": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1852,41 +2219,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.optimize.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.optimize.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.optimize.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.optimize.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "強化値は実際の性能改善率ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.optimize"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.optimize"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-cache-metaphor",
-      "title": "キャッシュの比喩と補足",
+      "title": "一時認証情報の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "キャッシュの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "一時認証情報の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -1896,6 +2275,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.cache"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.cache"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "temporary-credentials"
         }
       ],
       "domains": [
@@ -1915,7 +2302,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -1926,26 +2313,31 @@
           "locator": "FLAVOR.cache.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-caching-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-temporary-credentials",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
-          "claim": "キャッシュの効果や性能を監視し、使い方を見直します。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+          "claim": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -1970,41 +2362,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.cache.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.cache.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.cache.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.cache.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "エナジー回復はゲーム上の報酬で、キャッシュが無条件に有効という意味ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.cache"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.cache"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-patch-metaphor",
-      "title": "緊急パッチの比喩と補足",
+      "title": "多要素認証（MFA）の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "緊急パッチの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "多要素認証（MFA）の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -2014,6 +2418,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.patch"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.patch"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "mfa"
         }
       ],
       "domains": [
@@ -2033,7 +2445,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "緊急パッチのブロック値は、脆弱性の解消度を表しません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -2044,20 +2456,26 @@
           "locator": "FLAVOR.patch.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "緊急パッチのブロック値は、脆弱性の解消度を表しません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "インフラの変更は自動化し、その変更自体も追跡・レビューします。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-mfa",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2082,41 +2500,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.patch.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.patch.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.patch.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.patch.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "緊急パッチのブロック値は、脆弱性の解消度を表しません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.patch"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.patch"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-balance-metaphor",
-      "title": "負荷分散の比喩と補足",
+      "title": "Application Load Balancerの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "負荷分散の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "Application Load Balancerの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -2130,6 +2560,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "notes.balance"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.balance"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "alb"
         }
       ],
       "domains": [
@@ -2149,7 +2587,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -2160,14 +2598,19 @@
           "locator": "notes.balance.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "攻撃と防御を同時に得るのはゲーム固有の報酬です。ALBを置けば必ず処理が成功するという意味ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
       "relations": [
         {
           "type": "part_of",
           "target_id": "combo-balancing-role",
           "reason": "このカードを含む3種類で役を構成する。"
+        },
+        {
+          "type": "used_in",
+          "target_id": "term-game-alb",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
@@ -2178,7 +2621,7 @@
           "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
+      "classification_status": "draft",
       "content_status": "draft",
       "review_notes": [
         {
@@ -2210,23 +2653,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開済みリージョン/AZ教材と先行教材を参照した更新データへ接続。カードの効果を維持。新説明の独立監査は別途。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.balance.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.balance.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.balance.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.balance.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "攻撃と防御を同時に得るのはゲーム固有の効果です。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -2236,19 +2685,25 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "notes.balance"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.balance"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-reversal-metaphor",
-      "title": "逆転の一手の比喩と補足",
+      "title": "Amazon RDSの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "逆転の一手の比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "Amazon RDSの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -2258,6 +2713,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.reversal"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.reversal"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "rds"
         }
       ],
       "domains": [
@@ -2277,7 +2740,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -2288,20 +2751,26 @@
           "locator": "FLAVOR.reversal.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://github.com/hiroshimu0113-web/SAA/blob/main/materials/public/tower/engine.mjs",
-          "claim": "このカードは、使用時のブロックを攻撃に加えます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-rds",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2326,41 +2795,53 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "ユーザー訂正に従い創作フレーバーを削除。用語の説明・補足と比喩の限界、既存出典は維持。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reversal.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.reversal.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.reversal.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.reversal.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "防御を攻撃へ変える計算はゲーム固有で、AWSの機能ではありません。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
             "path": "public/tower/flavor.mjs",
             "locator": "FLAVOR.reversal"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.reversal"
           }
         ]
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "concept-quarantine-metaphor",
-      "title": "封じ込めの比喩と補足",
+      "title": "サービスコントロールポリシー（SCP）の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "封じ込めの比喩が表す考え方と、現実へそのまま適用できない部分を区別する。",
+      "objective": "サービスコントロールポリシー（SCP）の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -2370,6 +2851,14 @@
         {
           "path": "public/tower/engine.mjs",
           "locator": "CARDS.quarantine"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "cardTerms.quarantine"
+        },
+        {
+          "path": "src/content/starter.ts",
+          "locator": "scp"
         }
       ],
       "domains": [
@@ -2389,7 +2878,7 @@
         "カードの効果は架空のゲームルールとして読む。"
       ],
       "limitations": [
-        "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。"
+        "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
       ],
       "misconceptions": [
         "カードの数値をAWSの性能や保証と同一視する。"
@@ -2400,20 +2889,26 @@
           "locator": "FLAVOR.quarantine.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
-        "counterexample": "過負荷の付与はゲーム上の比喩で、具体的な隔離設定を代わりに実施するものではありません。",
-        "comparison": "フレーバーは比喩、補足は説明、カード効果はゲームルール。"
+        "counterexample": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。",
+        "comparison": "教材の定義と戦闘効果は別。数値効果はAWSの機能・性能を表さない。"
       },
-      "relations": [],
-      "sources": [
+      "relations": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/design-principles.html",
-          "claim": "一つの障害が全体へ与える影響を小さくすることを考えます。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "type": "used_in",
+          "target_id": "term-game-scp",
+          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "claim": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2444,24 +2939,29 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "5種の敵味方共通デバフへ接続。計算・遅延・保存移行の43テスト成功。ブラウザー/公開結果はCHECKPOINT参照。ITの説明本文や公式主張は拡張していない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
         }
       ],
       "game_design": {
         "proposal": "長押し詳細に効果と併記。小さい手札には載せない。",
         "mechanism_note": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.quarantine.note"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.quarantine.note"
         },
         "metaphor_limit": {
-          "path": "public/tower/flavor.mjs",
-          "locator": "FLAVOR.quarantine.limit"
+          "path": "public/tower/learning-catalog.json",
+          "locator": "notes.quarantine.limit"
         },
         "simplifications": [
           "短い比喩と補足であり、具体的なAWS設定手順ではない。"
         ],
         "mislearning_risks": [
-          "弱体化は比喩で、具体的な隔離設定を代わりに実施するものではありません。",
-          "敵に状態異常を付与するのは架空の戦闘効果。良い運用手順が実際のAWSへ障害を発生させるという説明ではない。"
+          "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
         ],
         "implementation_refs": [
           {
@@ -2471,25 +2971,41 @@
           {
             "path": "public/tower/debuffs.mjs",
             "locator": "DEBUFFS"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "cards.quarantine"
           }
         ],
         "debuff_rule": "過負荷3"
       },
       "import_status": "imported",
-      "open_questions": []
+      "open_questions": [
+        "教材用語と戦闘効果の対応は復習用。実際のAWS構成・性能の説明としての独立監査は未実施。"
+      ]
     },
     {
       "id": "combo-incident-role",
-      "title": "インシデント対応",
-      "aliases": [],
+      "title": "責任共有モデル",
+      "aliases": [
+        "インシデント対応"
+      ],
       "kind": "combo",
       "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
-      "objective": "インシデント対応のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "objective": "責任共有モデルの構成要素とゲーム上の3枚条件の違いを説明する。",
       "unit_ids": [],
       "material_refs": [
         {
           "path": "public/tower/combos.mjs",
           "locator": "COMBOS.incident"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.incident"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.incident"
         }
       ],
       "domains": [
@@ -2521,27 +3037,27 @@
           "guard"
         ],
         "real_world_relation": {
-          "path": "public/tower/combos.mjs",
-          "locator": "COMBOS.incident.lesson"
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.incident.lesson"
         },
         "trigger": "同一ターンに指定の3種類すべてを使用",
         "reward": "ブロック ＋5",
         "repeat_limit": "各役1ターン1回",
         "reset": "次ターンと次戦闘",
         "system_refs": [],
-        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+        "counterexample": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html",
-          "claim": "観測して状況を把握し、原因を切り分け、影響を抑えるという運用の考え方です。AWSではメトリクスと調査用のプレイブック等を使います。この3枚だけで対応が完結するという意味ではありません。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+          "claim": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2560,6 +3076,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "教材語彙へ名称と補足を更新。カードID・発動条件・追加効果は維持。過去の内容レビューは旧説明への記録。新補足は独立監査待ち。"
         }
       ],
       "game_design": {
@@ -2567,11 +3089,17 @@
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
-        "mislearning_risks": [],
+        "mislearning_risks": [
+          "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+        ],
         "implementation_refs": [
           {
             "path": "public/tower/combos.mjs",
             "locator": "COMBOS.incident"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.combos.incident"
           }
         ]
       },
@@ -2582,16 +3110,26 @@
     },
     {
       "id": "combo-balancing-role",
-      "title": "負荷分散構成",
-      "aliases": [],
+      "title": "可用性",
+      "aliases": [
+        "負荷分散構成"
+      ],
       "kind": "combo",
       "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
-      "objective": "負荷分散構成のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "objective": "可用性の構成要素とゲーム上の3枚条件の違いを説明する。",
       "unit_ids": [],
       "material_refs": [
         {
           "path": "public/tower/combos.mjs",
           "locator": "COMBOS.balancing"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.balancing"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.balancing"
         }
       ],
       "domains": [
@@ -2623,27 +3161,27 @@
           "probe"
         ],
         "real_world_relation": {
-          "path": "public/tower/combos.mjs",
-          "locator": "COMBOS.balancing.lesson"
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.balancing.lesson"
         },
         "trigger": "同一ターンに指定の3種類すべてを使用",
         "reward": "追加攻撃 3",
         "repeat_limit": "各役1ターン1回",
         "reset": "次ターンと次戦闘",
         "system_refs": [],
-        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+        "counterexample": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html",
-          "claim": "ALBは登録されたターゲットへリクエストを振り分け、ヘルスチェックで状態を確認します。分散先と正常性の確認をカードで表現しています。実際にはリスナー、ターゲットグループ、ネットワーク等の設定も必要です。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "claim": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2662,6 +3200,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "教材語彙へ名称と補足を更新。カードID・発動条件・追加効果は維持。過去の内容レビューは旧説明への記録。新補足は独立監査待ち。"
         }
       ],
       "game_design": {
@@ -2669,11 +3213,17 @@
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
-        "mislearning_risks": [],
+        "mislearning_risks": [
+          "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+        ],
         "implementation_refs": [
           {
             "path": "public/tower/combos.mjs",
             "locator": "COMBOS.balancing"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.combos.balancing"
           }
         ]
       },
@@ -2684,16 +3234,26 @@
     },
     {
       "id": "combo-caching-role",
-      "title": "キャッシュ活用",
-      "aliases": [],
+      "title": "クロスアカウントアクセス",
+      "aliases": [
+        "キャッシュ活用"
+      ],
       "kind": "combo",
       "classification_reason": "3種類のカードの連携を成立条件と追加報酬に対応させた役。",
-      "objective": "キャッシュ活用のカードの組み合わせと、実際の仕組みとの違いを説明する。",
+      "objective": "クロスアカウントアクセスの構成要素とゲーム上の3枚条件の違いを説明する。",
       "unit_ids": [],
       "material_refs": [
         {
           "path": "public/tower/combos.mjs",
           "locator": "COMBOS.caching"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.caching"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.caching"
         }
       ],
       "domains": [
@@ -2725,27 +3285,27 @@
           "optimize"
         ],
         "real_world_relation": {
-          "path": "public/tower/combos.mjs",
-          "locator": "COMBOS.caching.lesson"
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.combos.caching.lesson"
         },
         "trigger": "同一ターンに指定の3種類すべてを使用",
         "reward": "エナジー ＋1",
         "repeat_limit": "各役1ターン1回",
         "reset": "次ターンと次戦闘",
         "system_refs": [],
-        "counterexample": "名称を揃えても、実際の構成条件や設定が不足していれば動作は保証されない。"
+        "counterexample": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/PerformanceEfficiencyPillar.html",
-          "claim": "キャッシュは置くだけでなく、ヒット率や性能を調べて使い方を改善します。ElastiCacheの指標を監視し、ワークロードに合う戦略を選ぶ考え方です。エナジー回復はゲーム上の報酬です。",
-          "checked_on": "2026-10-06",
-          "reviewer": "Codex"
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "claim": "クロスアカウントアクセスではIAMロールの信頼関係と操作権限を設定し、ロールを引き受けた一時認証情報で操作します。外部事業者への委任ではExternal IDなどの条件も検討します。3枚条件やエナジー回復はゲーム上のルールで、実際の設定を代行しません。",
+          "checked_on": null,
+          "reviewer": null
         }
       ],
-      "classification_status": "reviewed",
-      "content_status": "reviewed",
+      "classification_status": "draft",
+      "content_status": "draft",
       "review_notes": [
         {
           "scope": "classification",
@@ -2764,6 +3324,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "全20カードのデータ網羅、既存3役の参照、35テスト、Chromeの320px詳細表示と既存役操作を確認。WebKit/公開検証はCHECKPOINT参照。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "教材語彙へ名称と補足を更新。カードID・発動条件・追加効果は維持。過去の内容レビューは旧説明への記録。新補足は独立監査待ち。"
         }
       ],
       "game_design": {
@@ -2771,11 +3337,17 @@
         "mechanism_note": null,
         "metaphor_limit": null,
         "simplifications": [],
-        "mislearning_risks": [],
+        "mislearning_risks": [
+          "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+        ],
         "implementation_refs": [
           {
             "path": "public/tower/combos.mjs",
             "locator": "COMBOS.caching"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.combos.caching"
           }
         ]
       },
@@ -2796,6 +3368,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "region"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.boss"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.choice"
         }
       ],
       "domains": [
@@ -2805,7 +3385,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -2850,6 +3431,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-region"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.boss"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.choice"
           }
         ]
       },
@@ -2878,6 +3467,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "az"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.shell"
         }
       ],
       "domains": [
@@ -2932,6 +3525,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-az"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.shell"
           }
         ]
       },
@@ -2960,6 +3557,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "shared-responsibility"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.blueprint"
         }
       ],
       "domains": [
@@ -3014,6 +3615,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-shared-responsibility"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.blueprint"
           }
         ]
       },
@@ -3042,6 +3647,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "availability"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.boss_stagnation"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.runbook"
         }
       ],
       "domains": [
@@ -3051,7 +3664,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3096,6 +3710,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-availability"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.boss_stagnation"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.runbook"
           }
         ]
       },
@@ -3124,6 +3746,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "durability"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.spring"
         }
       ],
       "domains": [
@@ -3178,6 +3804,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-durability"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.spring"
           }
         ]
       },
@@ -3206,6 +3836,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "scaling"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.surge"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.capacity"
         }
       ],
       "domains": [
@@ -3215,7 +3853,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3260,6 +3899,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-scaling"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.surge"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.capacity"
           }
         ]
       },
@@ -3288,6 +3935,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "spot"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.storm"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.discount"
         }
       ],
       "domains": [
@@ -3297,7 +3952,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3342,6 +3998,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-spot"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.storm"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.discount"
           }
         ]
       },
@@ -3370,6 +4034,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "instance-store"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.leak"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.escalation"
         }
       ],
       "domains": [
@@ -3379,7 +4051,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3424,6 +4097,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-instance-store"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.leak"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.escalation"
           }
         ]
       },
@@ -3452,6 +4133,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "s3"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.ember"
         }
       ],
       "domains": [
@@ -3506,6 +4191,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-s3"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.ember"
           }
         ]
       },
@@ -3534,6 +4223,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "rds"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.double"
         }
       ],
       "domains": [
@@ -3588,6 +4281,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-rds"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.double"
           }
         ]
       },
@@ -3616,6 +4313,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "iam-role"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.edge"
         }
       ],
       "domains": [
@@ -3670,6 +4371,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-iam-role"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.edge"
           }
         ]
       },
@@ -3698,6 +4403,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "temporary-credentials"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.timeout"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.battery"
         }
       ],
       "domains": [
@@ -3707,7 +4420,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3752,6 +4466,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-temporary-credentials"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.timeout"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.battery"
           }
         ]
       },
@@ -3780,6 +4502,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "least-privilege"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.noise"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.plating"
         }
       ],
       "domains": [
@@ -3789,7 +4519,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3834,6 +4565,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-least-privilege"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.noise"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.plating"
           }
         ]
       },
@@ -3862,6 +4601,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "explicit-deny"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.deadlock"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.dusk"
         }
       ],
       "domains": [
@@ -3871,7 +4618,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3916,6 +4664,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-explicit-deny"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.deadlock"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.dusk"
           }
         ]
       },
@@ -3944,6 +4700,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "scp"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.elite_drain"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.prune"
         }
       ],
       "domains": [
@@ -3953,7 +4717,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -3998,6 +4763,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-scp"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.elite_drain"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.prune"
           }
         ]
       },
@@ -4026,6 +4799,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "cross-account"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.elite"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.elite_edge"
         }
       ],
       "domains": [
@@ -4035,7 +4816,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -4080,6 +4862,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-cross-account"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.elite"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.elite_edge"
           }
         ]
       },
@@ -4108,6 +4898,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "external-id"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.elite_energy"
         }
       ],
       "domains": [
@@ -4162,6 +4956,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-external-id"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.elite_energy"
           }
         ]
       },
@@ -4190,6 +4988,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "identity-center"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.growth"
         }
       ],
       "domains": [
@@ -4244,6 +5046,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-identity-center"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.growth"
           }
         ]
       },
@@ -4272,6 +5078,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "cognito"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.bounty"
         }
       ],
       "domains": [
@@ -4326,6 +5136,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-cognito"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.bounty"
           }
         ]
       },
@@ -4354,6 +5168,14 @@
         {
           "path": "src/content/starter.ts",
           "locator": "root"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.elite_fire"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.insight"
         }
       ],
       "domains": [
@@ -4363,7 +5185,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -4408,6 +5231,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-root"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.elite_fire"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.insight"
           }
         ]
       },
@@ -4436,6 +5267,10 @@
         {
           "path": "src/content/starter.ts",
           "locator": "mfa"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.renewal"
         }
       ],
       "domains": [
@@ -4490,6 +5325,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-mfa"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.renewal"
           }
         ]
       },
@@ -4518,6 +5357,10 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "health-check"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.lantern"
         }
       ],
       "domains": [
@@ -4572,6 +5415,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-health-check"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.lantern"
           }
         ]
       },
@@ -4600,6 +5447,10 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "alb"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.opener"
         }
       ],
       "domains": [
@@ -4654,6 +5505,10 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-alb"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.opener"
           }
         ]
       },
@@ -4682,6 +5537,14 @@
         {
           "path": "knowledge/game-supplement.json",
           "locator": "remaining-capacity"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.enemies.boss_resource"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.relics.coupon"
         }
       ],
       "domains": [
@@ -4691,7 +5554,8 @@
       "concerns": [],
       "service_names": [],
       "game_targets": [
-        "card"
+        "card",
+        "character"
       ],
       "character_families": [],
       "prerequisites": [],
@@ -4736,6 +5600,14 @@
           {
             "path": "public/tower/learning-catalog.json",
             "locator": "cards.study-remaining-capacity"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.enemies.boss_resource"
+          },
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.relics.coupon"
           }
         ]
       },
@@ -6730,6 +7602,87 @@
       "open_questions": [
         "公開教材の再利用。分類と内容の独立レビューは別途必要。",
         "同じ状況を扱う2問のケースへの構成は未完了。現行の復習プールで単問を2問出題。"
+      ]
+    },
+    {
+      "id": "term-game-temporary-data",
+      "title": "一時データ",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "公開レッスン内の一時データという名前と意味を復習する。",
+      "objective": "再生成できる一時データと、失いたくない処理結果の保存先を区別する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "src/content/index.ts",
+          "locator": "ch01-l03"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.junk.junk"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "card"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "公開対象の教材から取り込む。ゲーム数値は学習内容の性能値ではない。"
+      ],
+      "limitations": [
+        "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      ],
+      "misconceptions": [
+        "カードの数値をAWSの保証値とみなす。"
+      ],
+      "content": {
+        "definition": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。",
+        "distinguish_from": [
+          "失いたくない処理結果・唯一の永続データ"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "claim": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "game_design": {
+        "proposal": "戦闘中に生成され、戦闘終了で消えるカードの復習名。",
+        "simplifications": [
+          "復習カードの効果は共通の1コスト・5ブロック・1ドロー。単問クイズ2問を無作為に出題する。"
+        ],
+        "mislearning_risks": [
+          "実際の一時データが無価値であるという意味ではない。インスタンスストアは再生成可能なデータの保存先として利用できる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/learning-catalog.json",
+            "locator": "vocabulary.junk.junk"
+          }
+        ],
+        "mechanism_note": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "vocabulary.junk.junk.note"
+        },
+        "metaphor_limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
+      },
+      "review_notes": [],
+      "import_status": "imported",
+      "open_questions": [
+        "公開教材の記述を再利用。新しいゲーム対応の独立監査と実機評価は未実施。"
       ]
     }
   ]

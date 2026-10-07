@@ -3,7 +3,7 @@ export const HEROES={
  sre:{name:'SRE',title:'サイト信頼性エンジニア',relic:'runbook'},
  architect:{name:'クラウドアーキテクト',title:'クラウドアーキテクト',relic:'capacity'}
 };
-export const RELICS={
+export const BASE_RELICS={
  blueprint:{name:'設計の青写真',text:'各戦闘の開始時に2枚追加で引く。'},
  runbook:{name:'復旧手順書',text:'戦闘勝利時にHPを6回復（最大HPまで）。'},
  capacity:{name:'拡張の余力',text:'各戦闘の開始時にエナジー＋1（最初のターンのみ）。'},
@@ -29,4 +29,5 @@ export const RELICS={
  discount:{name:'交渉の契約書',text:'交換所の全価格が25％引き。割引後の端数は切り上げ。'},
  coupon:{name:'初回の招待券',text:'この冒険で購入する最初のカード1枚が無料。すでにカード購入済みなら使用不可。'}
 };
+export const RELICS=JSON.parse(JSON.stringify(BASE_RELICS));
 export const REWARD_RELICS=Object.keys(RELICS).filter(id=>!Object.values(HEROES).some(h=>h.relic===id));

@@ -1,3 +1,6 @@
+import {BASE_ENEMIES,ENEMIES} from './enemy-definitions.mjs';
+import {BASE_RELICS,RELICS} from './relics.mjs';
+import {BASE_COMBOS,COMBOS} from './combos.mjs';
 import {BASE_CARDS} from './card-definitions.mjs';
 import {BASE_QUIZZES,QUIZZES} from './quiz.mjs';
 import {BASE_FLAVOR,FLAVOR} from './flavor.mjs';
@@ -30,14 +33,29 @@ export function validateCatalog(p){
  assert([...Object.keys(p.cards),...STARTERS].every(k=>Object.prototype.hasOwnProperty.call(p.notes,k)));
  assert(Object.keys(BASE_QUIZZES).every(k=>Object.prototype.hasOwnProperty.call(p.quizzes,k)));
  for(const [k,q] of Object.entries(p.quizzes))assert(id(k)&&obj(q)&&text(q.prompt)&&Array.isArray(q.options)&&q.options.length>=2&&q.options.length<=8&&q.options.every(s=>text(s))&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length&&Array.isArray(q.reasons)&&q.reasons.length===q.options.length&&q.reasons.every(s=>text(s))&&source(q.source));
+ if(p.vocabulary!==undefined){
+  assert(obj(p.vocabulary)&&Object.keys(p.vocabulary).sort().join()==='combos,enemies,junk,relics');
+  for(const [group,base] of Object.entries({enemies:BASE_ENEMIES,relics:BASE_RELICS,combos:BASE_COMBOS,junk:{junk:JUNK}})){
+   const entries=p.vocabulary[group];assert(obj(entries)&&Object.keys(entries).sort().join()===Object.keys(base).sort().join());
+   for(const entry of Object.values(entries))assert(obj(entry)&&Object.keys(entry).sort().join()==='limit,name,note,source'&&text(entry.name,100)&&!/[<>]/.test(entry.name)&&text(entry.note)&&!/[<>]/.test(entry.note)&&text(entry.limit)&&!/[<>]/.test(entry.limit)&&source(entry.source));
+  }
+ }
  return p;
 }
 function replace(target,data){for(const k of Object.keys(target))delete target[k];Object.assign(target,copy(data));}
 export function activateCatalog(pack){
  if(pack!==null)validateCatalog(pack);
+ replace(ENEMIES,BASE_ENEMIES);replace(RELICS,BASE_RELICS);replace(COMBOS,BASE_COMBOS);
  replace(CARDS,BASE_CARDS);replace(QUIZZES,BASE_QUIZZES);replace(FLAVOR,BASE_FLAVOR);
  if(pack){Object.assign(CARDS,copy(pack.cards));for(const k of STARTERS)CARDS[k].name=pack.starterNames[k];Object.assign(QUIZZES,copy(pack.quizzes));Object.assign(FLAVOR,copy(pack.notes));}
  CARDS.junk={...JUNK};
+ if(pack?.vocabulary){
+  for(const [group,target] of Object.entries({enemies:ENEMIES,relics:RELICS,combos:COMBOS,junk:{junk:CARDS.junk}}))for(const [id,entry] of Object.entries(pack.vocabulary[group])){
+   target[id].name=entry.name;
+   if(group==='combos'){target[id].lesson=entry.note+' '+entry.limit;target[id].source=entry.source;}
+  }
+  FLAVOR.junk={...pack.vocabulary.junk.junk};
+ }
  active=pack?copy(pack):null;
 }
 export const getActiveCatalog=()=>active?copy(active):null;
