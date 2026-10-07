@@ -102,6 +102,7 @@
         "candidate-capacity-reservation",
         "candidate-ebs",
         "candidate-ec2",
+        "candidate-efs",
         "candidate-health-check",
         "candidate-iam-role",
         "candidate-instance-store",
@@ -213,6 +214,7 @@
         "candidate-api-gateway",
         "candidate-ecr",
         "candidate-ecs",
+        "candidate-efs",
         "candidate-eks",
         "candidate-fargate",
         "candidate-gsi",
@@ -1696,9 +1698,11 @@
     {
       "id": "candidate-efs",
       "concept_id": "efs",
-      "title": "efs",
+      "title": "EFSの共有ファイルとマウントターゲット配置",
       "related_chapter_ids": [
-        "ch05"
+        "ch04",
+        "ch05",
+        "ch08"
       ],
       "material_refs": [
         {
@@ -1708,16 +1712,21 @@
         {
           "node_id": "question:q068",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch05-l01",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-efs-mount-placement"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

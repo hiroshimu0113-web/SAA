@@ -929,6 +929,36 @@ export const CASE_QUIZZES={
       "指標の目標値変更は、ALBリクエスト数の対象設定を代替しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go"
+  },
+  "efs-same-az-subnets": {
+    "prompt": "同一VPCのEC2からEFSを利用する。各設問でRegionalまたはOne Zoneを明記する。 同一VPC・同一AZ-AのサブネットX/Y。Regional EFSの利用可能なマウントターゲットはXに1つあり、YのEC2で同じEFSを使いたい。経路・DNS・TCP 2049の通信許可・NFS設定・ファイル権限は正常。このAZにY用の2つ目も必要？",
+    "options": [
+      "必要。EC2とマウントターゲットは必ず同じサブネットでなければならない",
+      "不要。既存ターゲットを使える。同じファイルシステム・AZへ2つ目は作れない",
+      "新しいファイルシステムをYに作るだけで、既存ファイルも自動同期される"
+    ],
+    "answer": 1,
+    "reasons": [
+      "同じAZ内のEC2は、別サブネットの同じマウントターゲットを利用できます。サブネットごとに作る要件ではありません。",
+      "1AZにつき1つという配置制約と、同じサブネットでなくてもアクセスできる条件を分けます。",
+      "別のファイルシステムを作成することは同じ共有ファイルへの接続でも自動同期の設定でもありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go"
+  },
+  "efs-one-zone-target": {
+    "prompt": "同一VPCのEC2からEFSを利用する。各設問でRegionalまたはOne Zoneを明記する。 別の構成で、One Zone EFSはAZ-Aに作成済みでavailable。まだマウントターゲットはない。同一VPCのAZ-Bのサブネットを指定して最初のターゲットを作ろうとしている。権限・空きIP等の他条件は正常。適切な配置は？",
+    "options": [
+      "One Zoneのターゲットはファイルシステムと同じAZ-Aに1つ作る",
+      "AZ-A/Bの両方へ1つずつ作れば、そのままRegionalへ変わる",
+      "VPCが同じならAZ-Bに作成してよく、AZの条件はない"
+    ],
+    "answer": 0,
+    "reasons": [
+      "One Zoneでは対象ファイルシステムと同じAZのサブネットを指定します。複数AZへターゲットを作る構成ではありません。",
+      "マウントターゲットを増やしてファイルシステムの配置方式が変わるわけではありません。",
+      "同じVPCという条件だけではOne Zoneの同じAZという条件を満たしません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1055,5 +1085,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "target-tracking-disable-in",
     "target-tracking-alb-label"
+  ],
+  [
+    "efs-same-az-subnets",
+    "efs-one-zone-target"
   ]
 ];

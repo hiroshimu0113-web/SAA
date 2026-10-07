@@ -2169,6 +2169,92 @@
         "複数ポリシー/欠測/ゼロ容量",
         "ヘルス連携と処理保護"
       ]
+    },
+    {
+      "id": "efs",
+      "title": "EFSの共有ファイルとマウントターゲット配置",
+      "group": "storage",
+      "objective": "共有ファイルの接続先を追い、Regional/One ZoneのAZ条件とサブネットの違いを判断する。",
+      "estimated_minutes": 7,
+      "scope": "同一VPCのEC2からEFSへアクセスする配置条件。Regional/One Zoneを区別。VPC外/オンプレミス/クロスVPC接続、性能/料金/全IAM評価は対象外。",
+      "prerequisites": [
+        "ec2",
+        "security-group"
+      ],
+      "misconceptions": [
+        "同じAZ内でもEC2ごと/サブネットごとにマウントターゲットが必要。",
+        "One Zoneでも任意のAZにマウントターゲットを作れる。",
+        "ターゲットの追加でOne ZoneがRegionalになる。",
+        "EFSの作成API成功はマウントやファイル読書き成功と同じ。"
+      ],
+      "checks": [
+        {
+          "id": "efs-explain",
+          "level": "explain",
+          "prompt": "EFSファイルシステムとマウントターゲットはどう違う？",
+          "expected_points": [
+            "EFSは共有ファイルストレージ",
+            "ターゲットはVPC内の接続先",
+            "1VPC内・1AZにつき1つでサブネットごとではない"
+          ]
+        },
+        {
+          "id": "efs-apply",
+          "level": "apply",
+          "prompt": "One Zone EFSがAZ-Aにあるとき最初のターゲットはどこへ作る？",
+          "expected_points": [
+            "同じAZ-Aのサブネット",
+            "One Zoneのターゲットは1つ",
+            "作成状態と接続/権限も確認する"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch05-l01"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/efs.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go",
+            "claim": "1ファイルシステムのマウントターゲットは1VPC内・1AZにつき1つ。同じAZの複数サブネットで共有でき、EC2と同じサブネットである必要はない。One Zoneはファイルシステムと同じAZに1つだけ作る。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateFileSystem.go",
+            "claim": "ファイルシステム作成要求はcreatingで戻り、availableになってからマウントターゲットを作る。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/README.md",
+            "claim": "EFSはPOSIX対応の共有ファイルストレージで複数EC2の同時読書きを提供し、NFSによるマウント例と接続許可の設定を持つ。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/lib/efs-file-system.ts",
+            "claim": "FileSystem.DEFAULT_PORTは2049。connectionsの既定ポートはTCPでその値を使う。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+            "claim": "EBSはEC2へ接続するボリューム。VolumeIdの接続条件はボリュームとEC2が同じAZであること。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "アクセスポイントのユーザー/ルート制御",
+        "通信とPOSIX/IAM権限の違い",
+        "性能・料金と配置方式の比較"
+      ]
     }
   ]
 }

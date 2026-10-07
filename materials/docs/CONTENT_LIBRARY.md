@@ -65,3 +65,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [Auto Scalingの希望容量と最小・最大境界](../knowledge/lessons/auto-scaling.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [ターゲット追跡の目標指標と縮退の範囲](../knowledge/lessons/target-tracking.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [EFSの共有ファイルとマウントターゲット配置](../knowledge/lessons/efs.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

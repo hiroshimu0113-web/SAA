@@ -3785,6 +3785,141 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "efs-mount-placement",
+      "title": "EFSのマウントターゲットを配置する",
+      "premise": "同一VPCのEC2からEFSを利用する。各設問でRegionalまたはOne Zoneを明記する。",
+      "unit_ids": [
+        "efs"
+      ],
+      "chapter_ids": [
+        "ch05",
+        "ch04",
+        "ch08"
+      ],
+      "constraints": [
+        "第1問はRegional・同一AZ内の別サブネットで、経路や権限等は正常。",
+        "第2問はOne Zone・同じVPC内で最初のターゲットを作る。"
+      ],
+      "questions": [
+        {
+          "id": "efs-same-az-subnets",
+          "objective": "サブネットとAZの制約を区別する。",
+          "prompt": "同一VPC・同一AZ-AのサブネットX/Y。Regional EFSの利用可能なマウントターゲットはXに1つあり、YのEC2で同じEFSを使いたい。経路・DNS・TCP 2049の通信許可・NFS設定・ファイル権限は正常。このAZにY用の2つ目も必要？",
+          "options": [
+            {
+              "id": "efs-same-az-subnets-a",
+              "text": "必要。EC2とマウントターゲットは必ず同じサブネットでなければならない",
+              "explanation": "同じAZ内のEC2は、別サブネットの同じマウントターゲットを利用できます。サブネットごとに作る要件ではありません。"
+            },
+            {
+              "id": "efs-same-az-subnets-b",
+              "text": "不要。既存ターゲットを使える。同じファイルシステム・AZへ2つ目は作れない",
+              "explanation": "1AZにつき1つという配置制約と、同じサブネットでなくてもアクセスできる条件を分けます。"
+            },
+            {
+              "id": "efs-same-az-subnets-c",
+              "text": "新しいファイルシステムをYに作るだけで、既存ファイルも自動同期される",
+              "explanation": "別のファイルシステムを作成することは同じ共有ファイルへの接続でも自動同期の設定でもありません。"
+            }
+          ],
+          "correct_option_id": "efs-same-az-subnets-b",
+          "runtime_option_order": [
+            "efs-same-az-subnets-a",
+            "efs-same-az-subnets-b",
+            "efs-same-az-subnets-c"
+          ],
+          "rationale": "1AZにつき1つという配置制約と、同じサブネットでなくてもアクセスできる条件を分けます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go"
+          ]
+        },
+        {
+          "id": "efs-one-zone-target",
+          "objective": "One Zoneのマウントターゲット配置を判断する。",
+          "prompt": "別の構成で、One Zone EFSはAZ-Aに作成済みでavailable。まだマウントターゲットはない。同一VPCのAZ-Bのサブネットを指定して最初のターゲットを作ろうとしている。権限・空きIP等の他条件は正常。適切な配置は？",
+          "options": [
+            {
+              "id": "efs-one-zone-target-a",
+              "text": "One Zoneのターゲットはファイルシステムと同じAZ-Aに1つ作る",
+              "explanation": "One Zoneでは対象ファイルシステムと同じAZのサブネットを指定します。複数AZへターゲットを作る構成ではありません。"
+            },
+            {
+              "id": "efs-one-zone-target-b",
+              "text": "AZ-A/Bの両方へ1つずつ作れば、そのままRegionalへ変わる",
+              "explanation": "マウントターゲットを増やしてファイルシステムの配置方式が変わるわけではありません。"
+            },
+            {
+              "id": "efs-one-zone-target-c",
+              "text": "VPCが同じならAZ-Bに作成してよく、AZの条件はない",
+              "explanation": "同じVPCという条件だけではOne Zoneの同じAZという条件を満たしません。"
+            }
+          ],
+          "correct_option_id": "efs-one-zone-target-a",
+          "runtime_option_order": [
+            "efs-one-zone-target-a",
+            "efs-one-zone-target-b",
+            "efs-one-zone-target-c"
+          ],
+          "rationale": "One Zoneでは対象ファイルシステムと同じAZのサブネットを指定します。複数AZへターゲットを作る構成ではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateFileSystem.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問のY側EC2が、同じVPCの別AZ-Bへ配置される。EFSはRegionalのまま。",
+        "answer": "AZ-Bのサブネットへ追加のマウントターゲットを設け、そのAZ内のEC2の接続と許可を確認する構成を検討する。",
+        "reason": "各AZに接続先を設けることが推奨される。別AZのターゲット利用は不可能という意味ではなく、費用とAZ依存の障害条件も比較する。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go",
+          "claim": "1ファイルシステムのマウントターゲットは1VPC内・1AZにつき1つ。同じAZの複数サブネットで共有でき、EC2と同じサブネットである必要はない。One Zoneはファイルシステムと同じAZに1つだけ作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateFileSystem.go",
+          "claim": "ファイルシステム作成要求はcreatingで戻り、availableになってからマウントターゲットを作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/README.md",
+          "claim": "EFSはPOSIX対応の共有ファイルストレージで複数EC2の同時読書きを提供し、NFSによるマウント例と接続許可の設定を持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/lib/efs-file-system.ts",
+          "claim": "FileSystem.DEFAULT_PORTは2049。connectionsの既定ポートはTCPでその値を使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "EBSはEC2へ接続するボリューム。VolumeIdの接続条件はボリュームとEC2が同じAZであること。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

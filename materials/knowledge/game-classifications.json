@@ -11097,6 +11097,310 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-efs-mount-placement",
+      "title": "EFSの共有ファイルとマウントターゲット配置",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "共有ファイルと接続先、AZ/サブネットの配置条件を区別して適用する概念。",
+      "objective": "共有ファイルの接続先を追い、Regional/One ZoneのAZ条件とサブネットの違いを判断する。",
+      "unit_ids": [
+        "efs"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/efs.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "storage",
+        "networking"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic File System",
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ec2",
+        "security-group"
+      ],
+      "conditions": [
+        "第1問はRegional・同一AZ内の別サブネットで、経路や権限等は正常。",
+        "第2問はOne Zone・同じVPC内で最初のターゲットを作る。"
+      ],
+      "limitations": [
+        "同一VPCのEC2からEFSへアクセスする配置条件。Regional/One Zoneを区別。VPC外/オンプレミス/クロスVPC接続、性能/料金/全IAM評価は対象外。"
+      ],
+      "misconceptions": [
+        "同じAZ内でもEC2ごと/サブネットごとにマウントターゲットが必要。",
+        "One Zoneでも任意のAZにマウントターゲットを作れる。",
+        "ターゲットの追加でOne ZoneがRegionalになる。",
+        "EFSの作成API成功はマウントやファイル読書き成功と同じ。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/efs.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "同一VPCのEC2からEFSを利用する。各設問でRegionalまたはOne Zoneを明記する。",
+        "counterexample": "第1問のY側EC2が、同じVPCの別AZ-Bへ配置される。EFSはRegionalのまま。 AZ-Bのサブネットへ追加のマウントターゲットを設け、そのAZ内のEC2の接続と許可を確認する構成を検討する。",
+        "comparison": {
+          "path": "knowledge/lessons/efs.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-efs-mount-placement",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go",
+          "claim": "1ファイルシステムのマウントターゲットは1VPC内・1AZにつき1つ。同じAZの複数サブネットで共有でき、EC2と同じサブネットである必要はない。One Zoneはファイルシステムと同じAZに1つだけ作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateFileSystem.go",
+          "claim": "ファイルシステム作成要求はcreatingで戻り、availableになってからマウントターゲットを作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/README.md",
+          "claim": "EFSはPOSIX対応の共有ファイルストレージで複数EC2の同時読書きを提供し、NFSによるマウント例と接続許可の設定を持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/lib/efs-file-system.ts",
+          "claim": "FileSystem.DEFAULT_PORTは2049。connectionsの既定ポートはTCPでその値を使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "EBSはEC2へ接続するボリューム。VolumeIdの接続条件はボリュームとEC2が同じAZであること。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "共有ファイルと配置条件を判断するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/efs.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの共有性能、配置による耐障害性、読書き権限を保証しない。",
+        "simplifications": [
+          "同一VPCのEC2からEFSへアクセスする配置条件。Regional/One Zoneを区別。VPC外/オンプレミス/クロスVPC接続、性能/料金/全IAM評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "同じAZ内でもEC2ごと/サブネットごとにマウントターゲットが必要。",
+          "One Zoneでも任意のAZにマウントターゲットを作れる。",
+          "ターゲットの追加でOne ZoneがRegionalになる。",
+          "EFSの作成API成功はマウントやファイル読書き成功と同じ。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-efs-mount-placement",
+      "title": "EFSのマウントターゲットを配置する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "共有ファイルの接続先を追い、Regional/One ZoneのAZ条件とサブネットの違いを判断する。",
+      "unit_ids": [
+        "efs"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-mount-placement"
+        }
+      ],
+      "domains": [
+        "storage",
+        "networking"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic File System",
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ec2",
+        "security-group"
+      ],
+      "conditions": [
+        "第1問はRegional・同一AZ内の別サブネットで、経路や権限等は正常。",
+        "第2問はOne Zone・同じVPC内で最初のターゲットを作る。"
+      ],
+      "limitations": [
+        "同一VPCのEC2からEFSへアクセスする配置条件。Regional/One Zoneを区別。VPC外/オンプレミス/クロスVPC接続、性能/料金/全IAM評価は対象外。"
+      ],
+      "misconceptions": [
+        "同じAZ内でもEC2ごと/サブネットごとにマウントターゲットが必要。",
+        "One Zoneでも任意のAZにマウントターゲットを作れる。",
+        "ターゲットの追加でOne ZoneがRegionalになる。",
+        "EFSの作成API成功はマウントやファイル読書き成功と同じ。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-mount-placement.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-mount-placement.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-mount-placement.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-mount-placement.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go",
+          "claim": "1ファイルシステムのマウントターゲットは1VPC内・1AZにつき1つ。同じAZの複数サブネットで共有でき、EC2と同じサブネットである必要はない。One Zoneはファイルシステムと同じAZに1つだけ作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateFileSystem.go",
+          "claim": "ファイルシステム作成要求はcreatingで戻り、availableになってからマウントターゲットを作る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/README.md",
+          "claim": "EFSはPOSIX対応の共有ファイルストレージで複数EC2の同時読書きを提供し、NFSによるマウント例と接続許可の設定を持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-efs/lib/efs-file-system.ts",
+          "claim": "FileSystem.DEFAULT_PORTは2049。connectionsの既定ポートはTCPでその値を使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "EBSはEC2へ接続するボリューム。VolumeIdの接続条件はボリュームとEC2が同じAZであること。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/efs.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの共有性能、配置による耐障害性、読書き権限を保証しない。",
+        "simplifications": [
+          "同一VPCのEC2からEFSへアクセスする配置条件。Regional/One Zoneを区別。VPC外/オンプレミス/クロスVPC接続、性能/料金/全IAM評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "同じAZ内でもEC2ごと/サブネットごとにマウントターゲットが必要。",
+          "One Zoneでも任意のAZにマウントターゲットを作れる。",
+          "ターゲットの追加でOne ZoneがRegionalになる。",
+          "EFSの作成API成功はマウントやファイル読書き成功と同じ。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "efs-same-az-subnets, efs-one-zone-target"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
