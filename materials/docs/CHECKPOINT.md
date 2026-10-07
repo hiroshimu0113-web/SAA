@@ -479,3 +479,11 @@
 - **公開未反映**。GitHub Actionsの今回分は未起動。次は認証回復後、main差分確認 → `git push origin HEAD:main` → Actions成功 → `/SAA/tower/options.html` の配信確認。公開成功と報告しない。
 
 - WebKitのローカル実行も試行したが、ブラウザー実行ファイルが環境に未導入で起動不可。今回のWebKit検証は未実施（認証回復後のCIで実施）。Chromiumの実行結果とは区別する。
+
+
+### 公開完了（2026-10-07 UTC）
+- GitHub認証が復旧し、オプション・役候補更新をmainへ反映済み。
+- 初回・再実行でWebKit依存ソフトの準備が停滞。診断出力と6分のタイムアウトを追加したところ、Azure HTTP Ubuntuミラーへの接続待ちと判明。GitHub runnerのaptミラーを、ログ上で接続成功していた公式 `https://archive.ubuntu.com/ubuntu/` に固定して解消。ゲームのテストは省略していない。
+- 公開コミット `1a93f7a`、Actions `37688381913` のbuild/deploy成功。96テスト、教材整合性、ビルド、WebKitタッチ・オフライン・オプション・役表示・教材更新検証を通過。
+- 公開確認：`https://hiroshimu0113-web.github.io/SAA/tower/options.html` と通常の `tower/index.html` がHTTP 200。両方189562 bytesでローカル配布物とのSHA256一致を確認。
+- 上記の認証ブロック・公開未反映・WebKit未検証は解消。実機iPhoneでの本人確認は未実施。

@@ -922,3 +922,5 @@
 - 96テスト・ビルド・Chromiumタッチ回帰成功。教材内容や分類の更新なし。公開確認後に最終状態を追記。
 
 - 公開段階でブロック：実装 `2cad455` はローカル保存済み。GitHubが401を返しpush不可。GitHub再認証待ちで、Pagesへは未反映。認証復旧後にpush・CI・公開確認を再開する。
+
+- 最終状態：公開完了（2026-10-07 UTC）。`1a93f7a` / Actions `37688381913` のbuild/deploy成功。WebKit検証を含め通過。`tower/options.html` と `tower/index.html` のHTTP 200・配布物一致確認済み。認証ブロックとUbuntuミラーの接続待ちを解消。
