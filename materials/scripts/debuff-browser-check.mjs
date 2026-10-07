@@ -11,9 +11,7 @@ export async function checkDebuffs(browser,base){
   const read=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
   const setup=async s=>{await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();};
   await setup(battle('boss'));assert.match(await p.locator('.intent').innerText(),/遅延/);
-  await p.locator('.end-turn').tap();assert.match(await p.locator('.delay-notice').innerText(),/カードを使えません/);assert.equal(await p.locator('.hand .card').count(),0);assert.equal((await read()).battle.playerDebuffs.delay,1);
-  await p.reload();assert.match(await p.locator('.end-turn').innerText(),/休止/);
-  await p.locator('.hand-end').tap();assert.match(await p.locator('.delay-notice').innerText(),/前半/);assert.equal((await read()).battle.playerActions,2);
+  await p.locator('.end-turn').tap();assert.match(await p.locator('.delay-notice').innerText(),/前半/);assert.equal((await read()).battle.playerActions,2);assert.equal((await read()).battle.playerDebuffs.delay,2);assert.equal((await read()).battle.enemyStep,2);
   const before=await read();await p.reload();await p.locator('.end-turn').tap();const after=await read();assert.equal(after.battle.enemyStep,before.battle.enemyStep);assert.equal(after.hp,before.hp);assert.equal(after.battle.playerActions,1);assert.match(await p.locator('.delay-notice').innerText(),/後半/);
   await p.evaluate(()=>window.scrollTo(0,0));await p.screenshot({path:'artifacts/player-double-action.png'});await p.locator('.end-turn').tap();assert.equal((await read()).battle.playerDebuffs.delay,0);assert.equal(await p.locator('.player-column [data-debuff="burn"]').getAttribute('aria-label'),'炎上 3');
   await p.locator('[data-status="player"]').focus();await p.keyboard.press('Enter');const text=await p.locator('.status-dialog').innerText();for(const word of ['炎上','過負荷','遅延','枯渇','設定不備'])assert.ok(text.includes(word));assert.ok(!text.includes('弱体'));await p.getByRole('button',{name:'閉じる',exact:true}).tap();

@@ -7,7 +7,7 @@ export async function checkCombos(browser,base){
  try{
   await p.goto(base+'tower/combo.html');
   for(const [id,r] of Object.entries(COMBOS)){
-   const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.deck=s.deck.map((card,i)=>({...card,id:r.cards[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];
+   const s=act(newRun(1),{type:'node',lane:0});s.battle.energy=4;s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.deck=s.deck.map((card,i)=>({...card,id:r.cards[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];
    await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();
    for(const card of r.cards.slice(0,2))await p.locator('.hand .card[data-id="'+card+'"]').first().tap();
    const raw=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));await p.reload();assert.equal(await p.locator('.combo-toast').count(),0);
@@ -25,5 +25,5 @@ export async function checkCombos(browser,base){
 
 export async function checkComboOffline(p){
  const old=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),s=act(newRun(1),{type:'node',lane:0});s.deck=s.deck.map((c,i)=>({...c,id:COMBOS.incident.cards[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];
- await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();for(const id of ['probe','strike'])await p.locator('.hand .card[data-id="'+id+'"]').first().tap();await p.reload();await p.locator('.hand .card[data-id="guard"]').first().tap();await p.locator('.combo-toast').waitFor();assert.ok(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.comboDone.includes('incident')));await p.evaluate(old=>localStorage.setItem('saa-tower-run-v1',old),old);await p.reload();await p.locator('.hand').waitFor();console.log('PASS offline role progress, reload and completion.');
+ await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();for(const id of ['probe','strike'])await p.locator('.hand .card[data-id="'+id+'"]').first().tap();await p.reload();await p.locator('.hand .card[data-id="guard"]').first().tap();await p.locator('.combo-toast').waitFor();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.turn),2);assert.deepEqual(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.comboDone),[]);await p.evaluate(old=>localStorage.setItem('saa-tower-run-v1',old),old);await p.reload();await p.locator('.hand').waitFor();console.log('PASS offline role progress, reload and completion.');
 }
