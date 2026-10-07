@@ -1,3 +1,4 @@
+import {presentTurns} from './turn-presentation.mjs';
 import {resolveAction} from './turn-flow.mjs';
 import {heroFigure} from './hero-visuals.mjs';
 import bundledCatalog from './learning-catalog.json';
@@ -12,6 +13,7 @@ import {combatEffects,showCombatEffects} from './effects.mjs';
 
 import {routesFor,shopPrice,defenseBonus,HEROES,CARDS,ENEMIES,enemyDebuffTypes,RELICS,NODE_NAMES,newRun,intent,describe,parseRun,cardValues,upgradeChanges} from './engine.mjs';
 const KEY='saa-tower-run-v1',root=document.querySelector('#game');
+let turnBusy=false,presentationView=null;
 let state=null,loadError='',notice='',saveFailed=false,selectedUid=null,upgradeNotice=null;
 let nextCatalog=chooseCatalog(bundledCatalog,{getItem:k=>localStorage.getItem(k)}),updating=false;
 activateCatalog(nextCatalog);
@@ -69,7 +71,23 @@ function catalogPanel(){
  const current=state?.learningCatalog?.version||(state?'従来版':nextCatalog.version);
  return '<section class="catalog-panel" aria-label="教材の更新"><h2>教材とカード</h2><p>使用中：'+Object.values(CARDS).filter(c=>!c.battleOnly).length+'種類のカード / クイズ'+Object.keys(QUIZZES).length+'問</p>'+btn(updating?'確認中…':'教材からカード・クイズを更新','update-learning','',updating)+'<p>公開された教材を取り込みます。進行中の冒険には変更を加えず、次の冒険から反映します。</p>'+(current!==nextCatalog.version?'<p class="catalog-pending">次の冒険：'+(Object.keys(nextCatalog.cards).length+3)+'種 / クイズ'+Object.keys(nextCatalog.quizzes).length+'問（更新準備済み）</p>':'')+'<details class="learning-cards"><summary>使用中のカードと学べる内容を見る</summary>'+Object.entries(CARDS).filter(([,c])=>!c.battleOnly).map(([id,c])=>'<section><h3>'+esc(c.name)+(STARTERS.includes(id)?'（スターター）':'')+'</h3><p>'+esc(describe({id,plus:false}))+'</p>'+flavorDetail({id}).replace('flavor-detail','catalog-note')+'</section>').join('')+'</details></section>';
 }
-function render(){
+function render(snapshot=presentationView||state){
+ const committed=state;state=snapshot;
+ try{renderCurrent();}finally{state=committed;}
+ root.setAttribute('aria-busy',String(turnBusy));
+ if(turnBusy)for(const control of root.querySelectorAll('button,input'))control.disabled=true;
+}
+async function animateTurns(flow){
+ turnBusy=true;
+ const blocker=document.createElement('div');blocker.className='turn-blocker';document.body.append(blocker);
+ try{await presentTurns(flow.steps,{
+  draw(snapshot){presentationView=snapshot;render();},
+  effects(step){showCombatEffects(root,combatEffects(step.before,step.after,step.action));showComboEffects(root,step.before,step.after,CARDS);},
+  banner(text){const el=document.createElement('aside');el.className='turn-banner '+(text==='Enemy Turn'?'enemy-turn':'your-turn');el.setAttribute('role','status');el.textContent=text;blocker.append(el);return ()=>el.remove();}
+ });}catch(error){console.error(error);notice='ターン演出を省略しました。保存済みの結果から続けられます。';}
+ finally{turnBusy=false;presentationView=null;blocker.remove();render();}
+}
+function renderCurrent(){
  root.classList.toggle('in-battle',state?.phase==='battle');
  root.classList.toggle('in-map',state?.phase==='map');
  clearTimeout(holdTimer);holdTimer=null;
@@ -95,7 +113,7 @@ function showStatus(side){
  if(!dialog.open){if(dialog.showModal)dialog.showModal();else{dialog.setAttribute('open','');dialog.classList.add('legacy-dialog');dialog.querySelector('button').focus();}}
 }
 function clearHold(){clearTimeout(holdTimer);holdTimer=null;}
-root.addEventListener('pointerdown',e=>{
+root.addEventListener('pointerdown',e=>{if(turnBusy)return;
  if(swipe){swipe.moved=true;clearHold();return;}
  const el=e.target.closest('.hand .card, .hand-end, [data-status]');if(!el||e.button!==0)return;
  suppressUntil=0;swipe={id:e.pointerId,x:e.clientX,y:e.clientY,moved:false,held:false,uid:Number(el.dataset.uid),side:el.dataset.status};
@@ -109,10 +127,10 @@ for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>
 },{passive:true});
 window.addEventListener('blur',()=>{clearHold();swipe=null;suppressUntil=Date.now()+500;});
 root.addEventListener('contextmenu',e=>{const el=e.target.closest('.hand .card, .hand-end, [data-status]');if(el)e.preventDefault();});
-root.addEventListener('keydown',e=>{const open=root.querySelector('.status-dialog[open]');if(open&&e.key==='Escape'){e.preventDefault();closeStatus();return;}if(open&&e.key==='Tab'&&open.classList.contains('legacy-dialog')){e.preventDefault();open.querySelector('button').focus();return;}const target=e.target.closest('[data-status]');if(target&&(['Enter',' ','ContextMenu'].includes(e.key)||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showStatus(target.dataset.status);return;}const el=e.target.closest('.hand .card');if(el&&(e.key==='ContextMenu'||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showDetails(Number(el.dataset.uid));root.querySelector('.card-preview')?.scrollIntoView({block:'nearest'});}if(e.key==='Escape'&&selectedUid!==null){selectedUid=null;render();}});
-root.addEventListener('click',e=>{if(Date.now()<suppressUntil||swipe?.held||swipe?.moved){e.preventDefault();e.stopImmediatePropagation();}},true);
+root.addEventListener('keydown',e=>{if(turnBusy){e.preventDefault();e.stopImmediatePropagation();return;}const open=root.querySelector('.status-dialog[open]');if(open&&e.key==='Escape'){e.preventDefault();closeStatus();return;}if(open&&e.key==='Tab'&&open.classList.contains('legacy-dialog')){e.preventDefault();open.querySelector('button').focus();return;}const target=e.target.closest('[data-status]');if(target&&(['Enter',' ','ContextMenu'].includes(e.key)||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showStatus(target.dataset.status);return;}const el=e.target.closest('.hand .card');if(el&&(e.key==='ContextMenu'||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showDetails(Number(el.dataset.uid));root.querySelector('.card-preview')?.scrollIntoView({block:'nearest'});}if(e.key==='Escape'&&selectedUid!==null){selectedUid=null;render();}});
+root.addEventListener('click',e=>{if(turnBusy||Date.now()<suppressUntil||swipe?.held||swipe?.moved){e.preventDefault();e.stopImmediatePropagation();}},true);
 root.addEventListener('click',async e=>{
- const el=e.target.closest('[data-action]');if(!el||el.disabled)return;let type=el.dataset.action,uid=Number(el.dataset.uid);const id=el.dataset.id;let next;
+ const el=e.target.closest('[data-action]');if(turnBusy||!el||el.disabled)return;let type=el.dataset.action,uid=Number(el.dataset.uid);const id=el.dataset.id;let next;
  if(type==='update-learning'){
   if(updating)return;updating=true;notice='新しい教材を確認しています…';render();
   try{const pack=await fetchCatalog('./learning-catalog.json?update='+Date.now(),{bundledVersion:bundledCatalog.version});const same=pack.version===nextCatalog.version;nextCatalog=pack;if(!state)activateCatalog(pack);notice=same?'教材は最新です。':state?'教材を保存しました。今の冒険はそのまま、次の冒険から反映します。':'カードとクイズを更新しました。';}
@@ -132,10 +150,10 @@ root.addEventListener('click',async e=>{
  if(!state)return;
  if(type==='play'&&state.phase==='battle'){const c=state.deck.find(c=>c.uid===uid);if(c&&cardValues(c).cost>state.battle.energy){notice='エナジーが足りません。長押しでカードの詳細を確認できます。';render();return;}}
  const actions={'quiz-answer':{type,questionId:el.dataset.question,choice:Number(el.dataset.choice)},'quiz-next':{type,questionId:el.dataset.question},'quiz-leave':{type},node:{type,lane:Number(el.dataset.lane)},play:{type,uid},end:{type},reward:{type,id},skip:{type:'reward',id:null},heal:{type},upgrade:{type,uid},buy:{type,id},'buy-relic':{type,id},'rest-remove':{type,uid},remove:{type,uid},leave:{type},risk:{type:'event',choice:'risk'},safe:{type:'event',choice:'safe'}};
- if(actions[type]){const flow=resolveAction(state,actions[type]);next=flow.state;if(next!==state){const upgraded=type==='upgrade'?state.deck.find(c=>c.uid===uid):null;upgradeNotice=upgraded?{name:CARDS[upgraded.id].name,changes:upgradeChanges(upgraded),after:describe({...upgraded,plus:true})}:null;const previous=state,fx=flow.steps.flatMap(step=>combatEffects(step.before,step.after,step.action));state=next;selectedUid=null;notice='';save();render();showCombatEffects(root,fx);showComboEffects(root,previous,flow.steps[0].after,CARDS);if(type==='node'||['reward','skip','heal','upgrade','rest-remove','leave','risk','safe','quiz-next','quiz-leave'].includes(type))window.scrollTo({top:0,behavior:'auto'});}}
+ if(actions[type]){const flow=resolveAction(state,actions[type]);next=flow.state;if(next!==state){const upgraded=type==='upgrade'?state.deck.find(c=>c.uid===uid):null;upgradeNotice=upgraded?{name:CARDS[upgraded.id].name,changes:upgradeChanges(upgraded),after:describe({...upgraded,plus:true})}:null;const previous=state,fx=flow.steps.flatMap(step=>combatEffects(step.before,step.after,step.action));state=next;selectedUid=null;notice='';save();if(flow.steps.some(step=>step.action.type==='end')){await animateTurns(flow);}else{render();showCombatEffects(root,fx);showComboEffects(root,previous,flow.steps[0].after,CARDS);}if(type==='node'||['reward','skip','heal','upgrade','rest-remove','leave','risk','safe','quiz-next','quiz-leave'].includes(type))window.scrollTo({top:0,behavior:'auto'});}}
 });
 root.addEventListener('change',async e=>{
- if(e.target.id!=='import')return;const f=e.target.files?.[0];if(!f)return;
+ if(turnBusy||e.target.id!=='import')return;const f=e.target.files?.[0];if(!f)return;
  try{if(f.size>2000000)throw Error('2MB以内のJSONを選んでください。');const s=parseRun(await f.text());if(!confirm('このバックアップで現在の冒険を置き換えますか？')){activateCatalog(state?.learningCatalog||null);return;}state=s;selectedUid=null;upgradeNotice=null;loadError='';notice='記録を読み込みました。';save();}catch(err){notice='読み込めません：'+err.message;}render();
 });
 render();

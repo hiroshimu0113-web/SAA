@@ -114,3 +114,5 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .quiz-rules summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px}.quiz-rules summary::before{content:"▸"}.quiz-rules[open] summary::before{content:"▾"}.quiz-rules p{margin:8px 0 0}
 
 .card.junk{background:#302d35;border-color:#9b839c}.card.junk .sigil{color:#b09ab6}
+
+.turn-blocker{position:fixed;inset:0;z-index:100;cursor:wait;touch-action:none}.turn-banner{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);width:min(310px,85vw);padding:24px 12px;border:2px solid;border-radius:16px;text-align:center;font-size:32px;font-weight:800;letter-spacing:.03em;background:#132631f5;box-shadow:0 12px 60px #000b}.turn-banner.enemy-turn{color:#f0a99e;border-color:#c58074}.turn-banner.your-turn{color:#a9e7d2;border-color:#75b9a3}

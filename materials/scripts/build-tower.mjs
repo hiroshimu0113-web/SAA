@@ -52,3 +52,5 @@ await writeFile('dist/tower/bosses.html',html);
 await writeFile('dist/tower/junk.html',html);
 
 await writeFile('dist/tower/junk-debug.html',html);
+
+await writeFile('dist/tower/turns.html',html);
