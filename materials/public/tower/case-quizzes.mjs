@@ -1259,6 +1259,36 @@ export const CASE_QUIZZES={
       "包装の省略とフィルターの対象指定は別の設定です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go"
+  },
+  "eventbridge-pattern-or-schedule": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 通常EventBridgeイベントバスに注文イベントが届く。予定時刻ではなく、指定したsourceとdetail-typeに一致する到着イベントだけを処理先へ送る。対象バス・ターゲットと権限は正常。ルールの条件は？",
+    "options": [
+      "ScheduleExpressionだけを設定し、到着内容の選別にも使う",
+      "EventPatternでsourceとdetail-typeの必要な条件を指定する",
+      "ルールの表示名だけにsourceを書いて、パターンを省略する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "スケジュール起動と、イベント内容へのパターン一致は別です。",
+      "一致する到着イベントを選別する目的に合います。ターゲット設定と実際の到達も確認します。",
+      "表示名はイベント内容の一致条件ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go"
+  },
+  "eventbridge-partial-ingestion": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 別のPutEvents要求で2件を送った。応答はFailedEntryCount=1。片方にEventId、片方にErrorCodeとErrorMessageがある。数値は教材用。両件の取込みと下流完了をどう判断する？",
+    "options": [
+      "API応答が返ったので、両件の業務処理も成功したと扱う",
+      "成功のEventIdがあっても、両件を必ず取込み失敗と扱う",
+      "失敗エントリの理由を確認し、成功分と分けて対処する。下流完了は別途確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "取込みは部分失敗しており、下流の業務完了は応答だけで判断できません。",
+      "エントリごとの成功と失敗を区別します。",
+      "FailedEntryCountと各結果を照合します。再送の可否は失敗理由で判断し、既存の冪等性設計も使います。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1429,5 +1459,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "sns-two-independent-consumers",
     "sns-filter-body-scope"
+  ],
+  [
+    "eventbridge-pattern-or-schedule",
+    "eventbridge-partial-ingestion"
   ]
 ];

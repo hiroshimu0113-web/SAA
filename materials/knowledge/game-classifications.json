@@ -14077,6 +14077,260 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-eventbridge-rule-ingestion",
+      "title": "EventBridgeのルール選別とイベント取込み結果",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "設定と実際の状態を区別して、要件に合う構成・対処を選ぶ概念。",
+      "objective": "到着イベントの選別と予定起動を区別し、取込み応答の部分失敗を判断する。",
+      "unit_ids": [
+        "eventbridge"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/eventbridge.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "integration",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EventBridge"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+      ],
+      "limitations": [
+        "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+      ],
+      "misconceptions": [
+        "スケジュールだけで到着イベントの内容を選別できる。",
+        "PutEventsの応答だけで全エントリと業務処理が成功したと扱う。",
+        "PutRuleで省略した旧設定は常に保持される。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/eventbridge.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+        "counterexample": "到着イベントではなく、決まった予定に基づくルール起動が目的になる。 このルールモデルではScheduleExpressionを検討する。Scheduler等の別サービス選定は別途行う。",
+        "comparison": {
+          "path": "knowledge/lessons/eventbridge.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-eventbridge-rule-ingestion",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go",
+          "claim": "ルールは単一イベントバスのイベントを監視。EventPatternは一致時、ScheduleExpressionは予定時刻で起動。PutRule更新時に省略した引数は旧値を維持せずnullへ置換。更新の反映は即時とは限らない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go",
+          "claim": "PutEventsの応答はFailedEntryCountと各Entriesの成功イベントID/失敗理由を持つ。取込み結果をエントリごとに判断する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "判断の仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/eventbridge.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+        ],
+        "mislearning_risks": [
+          "スケジュールだけで到着イベントの内容を選別できる。",
+          "PutEventsの応答だけで全エントリと業務処理が成功したと扱う。",
+          "PutRuleで省略した旧設定は常に保持される。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-eventbridge-rule-ingestion",
+      "title": "EventBridgeのルール選別とイベント取込み結果を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "到着イベントの選別と予定起動を区別し、取込み応答の部分失敗を判断する。",
+      "unit_ids": [
+        "eventbridge"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "eventbridge-rule-ingestion"
+        }
+      ],
+      "domains": [
+        "integration",
+        "operations"
+      ],
+      "capabilities": [
+        "route",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EventBridge"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+      ],
+      "limitations": [
+        "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+      ],
+      "misconceptions": [
+        "スケジュールだけで到着イベントの内容を選別できる。",
+        "PutEventsの応答だけで全エントリと業務処理が成功したと扱う。",
+        "PutRuleで省略した旧設定は常に保持される。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "eventbridge-rule-ingestion.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "eventbridge-rule-ingestion.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "eventbridge-rule-ingestion.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "eventbridge-rule-ingestion.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go",
+          "claim": "ルールは単一イベントバスのイベントを監視。EventPatternは一致時、ScheduleExpressionは予定時刻で起動。PutRule更新時に省略した引数は旧値を維持せずnullへ置換。更新の反映は即時とは限らない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go",
+          "claim": "PutEventsの応答はFailedEntryCountと各Entriesの成功イベントID/失敗理由を持つ。取込み結果をエントリごとに判断する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/eventbridge.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+        ],
+        "mislearning_risks": [
+          "スケジュールだけで到着イベントの内容を選別できる。",
+          "PutEventsの応答だけで全エントリと業務処理が成功したと扱う。",
+          "PutRuleで省略した旧設定は常に保持される。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "eventbridge-pattern-or-schedule, eventbridge-partial-ingestion"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

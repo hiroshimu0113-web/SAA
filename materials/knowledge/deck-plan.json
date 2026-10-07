@@ -409,6 +409,13 @@
         "ch09"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "eventbridge",
+      "chapter_ids": [
+        "ch09"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [

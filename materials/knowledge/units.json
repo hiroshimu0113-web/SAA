@@ -2875,6 +2875,69 @@
         "本文に残した詳細条件の公式確認",
         "実AWSによる動作検証"
       ]
+    },
+    {
+      "id": "eventbridge",
+      "title": "EventBridgeのルール選別とイベント取込み結果",
+      "group": "processing",
+      "objective": "到着イベントの選別と予定起動を区別し、取込み応答の部分失敗を判断する。",
+      "estimated_minutes": 7,
+      "scope": "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "スケジュールだけで到着イベントの内容を選別できる。",
+        "PutEventsの応答だけで全エントリと業務処理が成功したと扱う。",
+        "PutRuleで省略した旧設定は常に保持される。"
+      ],
+      "checks": [
+        {
+          "id": "eventbridge-explain",
+          "level": "explain",
+          "prompt": "この単位の判断で分けて確認するものは？",
+          "expected_points": [
+            "EventPatternは到着内容、ScheduleExpressionは予定",
+            "取込み結果はエントリごとに見る",
+            "取込みと業務完了は別"
+          ]
+        },
+        {
+          "id": "eventbridge-apply",
+          "level": "apply",
+          "prompt": "ケースの条件が変わったときに何を確認する？",
+          "expected_points": [
+            "到着イベントではなく、決まった予定に基づくルール起動が目的になる。",
+            "このルールモデルではScheduleExpressionを検討する。Scheduler等の別サービス選定は別途行う。",
+            "内容の一致から時刻の条件へ目的が変わる。"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch09-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/eventbridge.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go",
+            "claim": "ルールは単一イベントバスのイベントを監視。EventPatternは一致時、ScheduleExpressionは予定時刻で起動。PutRule更新時に省略した引数は旧値を維持せずnullへ置換。更新の反映は即時とは限らない。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go",
+            "claim": "PutEventsの応答はFailedEntryCountと各Entriesの成功イベントID/失敗理由を持つ。取込み結果をエントリごとに判断する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "本文に残した詳細条件の公式確認",
+        "実AWSによる動作検証"
+      ]
     }
   ]
 }

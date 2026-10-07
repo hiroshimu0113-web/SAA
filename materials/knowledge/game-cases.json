@@ -5129,6 +5129,119 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "eventbridge-rule-ingestion",
+      "title": "EventBridgeのルール選別とイベント取込み結果を判断する",
+      "premise": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+      "unit_ids": [
+        "eventbridge"
+      ],
+      "chapter_ids": [
+        "ch09"
+      ],
+      "constraints": [
+        "通常イベントバスのルールとPutEvents。全イベントパターン演算子、ターゲット再試行、アーカイブ/リプレイ、Scheduler/Pipesは対象外。"
+      ],
+      "questions": [
+        {
+          "id": "eventbridge-pattern-or-schedule",
+          "objective": "イベント到着で選別する。",
+          "prompt": "通常EventBridgeイベントバスに注文イベントが届く。予定時刻ではなく、指定したsourceとdetail-typeに一致する到着イベントだけを処理先へ送る。対象バス・ターゲットと権限は正常。ルールの条件は？",
+          "options": [
+            {
+              "id": "eventbridge-pattern-or-schedule-a",
+              "text": "ScheduleExpressionだけを設定し、到着内容の選別にも使う",
+              "explanation": "スケジュール起動と、イベント内容へのパターン一致は別です。"
+            },
+            {
+              "id": "eventbridge-pattern-or-schedule-b",
+              "text": "EventPatternでsourceとdetail-typeの必要な条件を指定する",
+              "explanation": "一致する到着イベントを選別する目的に合います。ターゲット設定と実際の到達も確認します。"
+            },
+            {
+              "id": "eventbridge-pattern-or-schedule-c",
+              "text": "ルールの表示名だけにsourceを書いて、パターンを省略する",
+              "explanation": "表示名はイベント内容の一致条件ではありません。"
+            }
+          ],
+          "correct_option_id": "eventbridge-pattern-or-schedule-b",
+          "runtime_option_order": [
+            "eventbridge-pattern-or-schedule-a",
+            "eventbridge-pattern-or-schedule-b",
+            "eventbridge-pattern-or-schedule-c"
+          ],
+          "rationale": "一致する到着イベントを選別する目的に合います。ターゲット設定と実際の到達も確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go"
+          ]
+        },
+        {
+          "id": "eventbridge-partial-ingestion",
+          "objective": "部分失敗を確認する。",
+          "prompt": "別のPutEvents要求で2件を送った。応答はFailedEntryCount=1。片方にEventId、片方にErrorCodeとErrorMessageがある。数値は教材用。両件の取込みと下流完了をどう判断する？",
+          "options": [
+            {
+              "id": "eventbridge-partial-ingestion-a",
+              "text": "API応答が返ったので、両件の業務処理も成功したと扱う",
+              "explanation": "取込みは部分失敗しており、下流の業務完了は応答だけで判断できません。"
+            },
+            {
+              "id": "eventbridge-partial-ingestion-b",
+              "text": "成功のEventIdがあっても、両件を必ず取込み失敗と扱う",
+              "explanation": "エントリごとの成功と失敗を区別します。"
+            },
+            {
+              "id": "eventbridge-partial-ingestion-c",
+              "text": "失敗エントリの理由を確認し、成功分と分けて対処する。下流完了は別途確認する",
+              "explanation": "FailedEntryCountと各結果を照合します。再送の可否は失敗理由で判断し、既存の冪等性設計も使います。"
+            }
+          ],
+          "correct_option_id": "eventbridge-partial-ingestion-c",
+          "runtime_option_order": [
+            "eventbridge-partial-ingestion-a",
+            "eventbridge-partial-ingestion-b",
+            "eventbridge-partial-ingestion-c"
+          ],
+          "rationale": "FailedEntryCountと各結果を照合します。再送の可否は失敗理由で判断し、既存の冪等性設計も使います。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "到着イベントではなく、決まった予定に基づくルール起動が目的になる。",
+        "answer": "このルールモデルではScheduleExpressionを検討する。Scheduler等の別サービス選定は別途行う。",
+        "reason": "内容の一致から時刻の条件へ目的が変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutRule.go",
+          "claim": "ルールは単一イベントバスのイベントを監視。EventPatternは一致時、ScheduleExpressionは予定時刻で起動。PutRule更新時に省略した引数は旧値を維持せずnullへ置換。更新の反映は即時とは限らない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go",
+          "claim": "PutEventsの応答はFailedEntryCountと各Entriesの成功イベントID/失敗理由を持つ。取込み結果をエントリごとに判断する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
