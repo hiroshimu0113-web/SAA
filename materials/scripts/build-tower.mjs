@@ -54,3 +54,5 @@ await writeFile('dist/tower/junk.html',html);
 await writeFile('dist/tower/junk-debug.html',html);
 
 await writeFile('dist/tower/turns.html',html);
+
+await writeFile('dist/tower/impact.html',html);

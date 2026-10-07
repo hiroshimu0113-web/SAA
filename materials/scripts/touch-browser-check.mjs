@@ -1,3 +1,4 @@
+import {checkImpact} from './impact-browser-check.mjs';
 import {checkTurnBanners} from './turn-browser-check.mjs';
 import {checkJunk} from './junk-browser-check.mjs';
 import {checkRules} from './rules-browser-check.mjs';
@@ -64,6 +65,7 @@ try{
  await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
+ await checkImpact(browser,base);
  await checkTurnBanners(browser,base);
  await checkJunk(browser,base);
  await checkHeroes(browser,base);

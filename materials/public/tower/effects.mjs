@@ -25,10 +25,18 @@ export function combatEffects(before,after,action){
  return out;
 }
 let clearEffects=()=>{};
+function shakeScreen(root){
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return ()=>{};
+ void root.offsetWidth; // Restart cleanly when consecutive hits arrive in one frame.
+ root.classList.add('screen-shake');document.documentElement.classList.add('screen-shaking');
+ const stop=()=>{root.classList.remove('screen-shake');document.documentElement.classList.remove('screen-shaking');};
+ const timer=setTimeout(stop,320);return ()=>{clearTimeout(timer);stop();};
+}
 export function showCombatEffects(root,effects,demo=false){
  if(!effects.length)return;
  const stage=root.querySelector('.arena')||root.querySelector('.scene')||root;
  clearEffects();
+ const stopShake=effects.some(f=>f.side==='player'&&f.kind==='hit'&&f.value>0)?shakeScreen(root):()=>{};
  const layer=document.createElement('div');layer.className='combat-fx';layer.setAttribute('aria-hidden','true');
  const counts={player:0,enemy:0};
  for(const fx of effects){
@@ -43,7 +51,7 @@ export function showCombatEffects(root,effects,demo=false){
  root.append(info);
  // The fixed result remains visible even when the arena is above the viewport.
  const targets=[...stage.querySelectorAll('[class*="react-"]')];
- const cleanup=()=>{layer.remove();info.remove();for(const el of targets)for(const name of [...el.classList])if(name.startsWith('react-'))el.classList.remove(name);};
+ const cleanup=()=>{stopShake();layer.remove();info.remove();for(const el of targets)for(const name of [...el.classList])if(name.startsWith('react-'))el.classList.remove(name);};
  const timer=setTimeout(cleanup,1000);clearEffects=()=>{clearTimeout(timer);cleanup();};
 
 }
