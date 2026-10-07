@@ -1349,6 +1349,36 @@ export const CASE_QUIZZES={
       "異なるサービスの文IDと実行IDを混同しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/redshiftdata/api_op_ExecuteStatement.go"
+  },
+  "cloudtrail-s3-object-events": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 動作中のCloudTrail証跡が既定の管理イベントだけを記録している。対象S3オブジェクトのGetObject操作を今後監査したい。データイベントの選択はまだ設定していない。変更は？",
+    "options": [
+      "管理イベントがあれば全S3オブジェクト操作も必ず記録済みと扱う",
+      "必要な対象・読取り操作のデータイベントを選択し、実際の記録を確認する",
+      "CloudWatchのCPU指標だけを増やし、API監査を代替する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "S3オブジェクト操作のデータイベントと管理イベントは別の記録対象です。",
+      "監査したい操作に記録範囲を合わせます。設定前の操作を後から記録したとは扱いません。",
+      "性能指標はこの操作の監査ログの代替ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go"
+  },
+  "cloudtrail-advanced-replaces-basic": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 別の証跡は基本セレクターで管理イベントを記録中。高度セレクターへ移行してS3データイベントも記録したい。今後も管理イベントが必要。高度セレクターをS3データだけにしても、旧基本設定はそのまま残る？",
+    "options": [
+      "高度セレクターを追加すると、基本設定も必ず併用される",
+      "管理と必要なデータの両方を高度セレクターで表し、更新後の設定・記録を検証する",
+      "基本と高度を同じ要求へ両方指定すれば確実に保持できる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "両者は併用できず、高度セレクターで既存基本設定を上書きします。",
+      "上書きを踏まえ、必要な監査範囲を更新後の設定へ含めます。",
+      "両方の指定はできません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1531,5 +1561,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "analytics-s3-ad-hoc-target",
     "redshift-submitted-not-finished"
+  ],
+  [
+    "cloudtrail-s3-object-events",
+    "cloudtrail-advanced-replaces-basic"
   ]
 ];

@@ -14895,6 +14895,246 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-cloudtrail-data-selector",
+      "title": "CloudTrailの記録対象とセレクター更新",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "目的・観測した状態・操作の範囲から判断する概念。",
+      "objective": "監査対象を管理/データイベントで分け、セレクター更新時に必要な記録範囲を維持する。",
+      "unit_ids": [
+        "cloudtrail"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/cloudtrail.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "security",
+        "observability"
+      ],
+      "capabilities": [
+        "observe"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS CloudTrail"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+      ],
+      "limitations": [
+        "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+      ],
+      "misconceptions": [
+        "管理イベントだけで全S3オブジェクト操作も記録される。",
+        "基本と高度セレクターは常に併用される。",
+        "監査を有効にすれば過去の未記録操作も自動復元される。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/cloudtrail.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。例の状態・タグは教材用。",
+        "counterexample": "監査対象がS3オブジェクト操作ではなく、現在の選択に含まれる管理操作だけになる。 管理イベントの選択と記録を確認する。この条件だけでデータイベント追加を必須にしない。",
+        "comparison": {
+          "path": "knowledge/lessons/cloudtrail.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-cloudtrail-data-selector",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go",
+          "claim": "指定なしの証跡は管理イベントの読取り/書込みを記録し、データ/ネットワーク活動イベントは記録しない。基本と高度なセレクターは併用不可。高度セレクター適用で既存基本セレクターを上書きする。基本セレクターはS3 Object等を扱える。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cloudtrail.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの分析性能・監査網羅性・修復完了・料金を保証しない。",
+        "simplifications": [
+          "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+        ],
+        "mislearning_risks": [
+          "管理イベントだけで全S3オブジェクト操作も記録される。",
+          "基本と高度セレクターは常に併用される。",
+          "監査を有効にすれば過去の未記録操作も自動復元される。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-cloudtrail-data-selector",
+      "title": "CloudTrailの記録対象とセレクター更新を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "監査対象を管理/データイベントで分け、セレクター更新時に必要な記録範囲を維持する。",
+      "unit_ids": [
+        "cloudtrail"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudtrail-data-selector"
+        }
+      ],
+      "domains": [
+        "security",
+        "observability"
+      ],
+      "capabilities": [
+        "observe"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS CloudTrail"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+      ],
+      "limitations": [
+        "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+      ],
+      "misconceptions": [
+        "管理イベントだけで全S3オブジェクト操作も記録される。",
+        "基本と高度セレクターは常に併用される。",
+        "監査を有効にすれば過去の未記録操作も自動復元される。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudtrail-data-selector.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudtrail-data-selector.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudtrail-data-selector.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudtrail-data-selector.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go",
+          "claim": "指定なしの証跡は管理イベントの読取り/書込みを記録し、データ/ネットワーク活動イベントは記録しない。基本と高度なセレクターは併用不可。高度セレクター適用で既存基本セレクターを上書きする。基本セレクターはS3 Object等を扱える。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cloudtrail.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの分析性能・監査網羅性・修復完了・料金を保証しない。",
+        "simplifications": [
+          "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+        ],
+        "mislearning_risks": [
+          "管理イベントだけで全S3オブジェクト操作も記録される。",
+          "基本と高度セレクターは常に併用される。",
+          "監査を有効にすれば過去の未記録操作も自動復元される。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "cloudtrail-s3-object-events, cloudtrail-advanced-replaces-basic"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

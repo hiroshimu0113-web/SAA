@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 45,
-    "rubric_checks": 90
+    "detailed_units": 46,
+    "rubric_checks": 92
   },
   "nodes": [
     {
@@ -840,9 +840,64 @@
     {
       "id": "concept:cloudtrail",
       "kind": "concept",
-      "title": "cloudtrail",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "CloudTrailの記録対象とセレクター更新",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "cloudtrail",
+        "title": "CloudTrailの記録対象とセレクター更新",
+        "group": "operations",
+        "objective": "監査対象を管理/データイベントで分け、セレクター更新時に必要な記録範囲を維持する。",
+        "estimated_minutes": 7,
+        "scope": "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "管理イベントだけで全S3オブジェクト操作も記録される。",
+          "基本と高度セレクターは常に併用される。",
+          "監査を有効にすれば過去の未記録操作も自動復元される。"
+        ],
+        "checks": [
+          {
+            "id": "cloudtrail-explain",
+            "level": "explain",
+            "prompt": "この判断で何を分けて確認する？",
+            "expected_points": [
+              "管理イベントとデータイベントを区別",
+              "セレクターは対象操作に合わせる",
+              "高度セレクターの適用は基本設定を上書きする"
+            ]
+          },
+          {
+            "id": "cloudtrail-apply",
+            "level": "apply",
+            "prompt": "監査対象がS3オブジェクト操作ではなく、現在の選択に含まれる管理操作だけになる。 どう判断する？",
+            "expected_points": [
+              "管理イベントの選択と記録を確認する。この条件だけでデータイベント追加を必須にしない。",
+              "必要な監査対象が変わる。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch10-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/cloudtrail.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go",
+              "claim": "指定なしの証跡は管理イベントの読取り/書込みを記録し、データ/ネットワーク活動イベントは記録しない。基本と高度なセレクターは併用不可。高度セレクター適用で既存基本セレクターを上書きする。基本セレクターはS3 Object等を扱える。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "本文の確認範囲外の詳細条件",
+          "実AWSでの動作・権限検証"
+        ]
+      }
     },
     {
       "id": "concept:cloudwatch",
@@ -10972,6 +11027,11 @@
     {
       "from": "concept:redshift",
       "to": "lesson:ch12-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:cloudtrail",
+      "to": "lesson:ch10-l03",
       "type": "unit_reference"
     },
     {

@@ -5497,6 +5497,113 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "cloudtrail-data-selector",
+      "title": "CloudTrailの記録対象とセレクター更新を判断する",
+      "premise": "2問は別状況の独立判断。例の状態・タグは教材用。",
+      "unit_ids": [
+        "cloudtrail"
+      ],
+      "chapter_ids": [
+        "ch10"
+      ],
+      "constraints": [
+        "通常CloudTrail証跡の記録対象と基本/高度セレクター。イベント履歴/Lake/Insights、全資源の対応、全ログ配信権限・料金は対象外。"
+      ],
+      "questions": [
+        {
+          "id": "cloudtrail-s3-object-events",
+          "objective": "記録範囲を合わせる。",
+          "prompt": "動作中のCloudTrail証跡が既定の管理イベントだけを記録している。対象S3オブジェクトのGetObject操作を今後監査したい。データイベントの選択はまだ設定していない。変更は？",
+          "options": [
+            {
+              "id": "cloudtrail-s3-object-events-a",
+              "text": "管理イベントがあれば全S3オブジェクト操作も必ず記録済みと扱う",
+              "explanation": "S3オブジェクト操作のデータイベントと管理イベントは別の記録対象です。"
+            },
+            {
+              "id": "cloudtrail-s3-object-events-b",
+              "text": "必要な対象・読取り操作のデータイベントを選択し、実際の記録を確認する",
+              "explanation": "監査したい操作に記録範囲を合わせます。設定前の操作を後から記録したとは扱いません。"
+            },
+            {
+              "id": "cloudtrail-s3-object-events-c",
+              "text": "CloudWatchのCPU指標だけを増やし、API監査を代替する",
+              "explanation": "性能指標はこの操作の監査ログの代替ではありません。"
+            }
+          ],
+          "correct_option_id": "cloudtrail-s3-object-events-b",
+          "runtime_option_order": [
+            "cloudtrail-s3-object-events-a",
+            "cloudtrail-s3-object-events-b",
+            "cloudtrail-s3-object-events-c"
+          ],
+          "rationale": "監査したい操作に記録範囲を合わせます。設定前の操作を後から記録したとは扱いません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go"
+          ]
+        },
+        {
+          "id": "cloudtrail-advanced-replaces-basic",
+          "objective": "更新後も必要な監査を残す。",
+          "prompt": "別の証跡は基本セレクターで管理イベントを記録中。高度セレクターへ移行してS3データイベントも記録したい。今後も管理イベントが必要。高度セレクターをS3データだけにしても、旧基本設定はそのまま残る？",
+          "options": [
+            {
+              "id": "cloudtrail-advanced-replaces-basic-a",
+              "text": "高度セレクターを追加すると、基本設定も必ず併用される",
+              "explanation": "両者は併用できず、高度セレクターで既存基本設定を上書きします。"
+            },
+            {
+              "id": "cloudtrail-advanced-replaces-basic-b",
+              "text": "管理と必要なデータの両方を高度セレクターで表し、更新後の設定・記録を検証する",
+              "explanation": "上書きを踏まえ、必要な監査範囲を更新後の設定へ含めます。"
+            },
+            {
+              "id": "cloudtrail-advanced-replaces-basic-c",
+              "text": "基本と高度を同じ要求へ両方指定すれば確実に保持できる",
+              "explanation": "両方の指定はできません。"
+            }
+          ],
+          "correct_option_id": "cloudtrail-advanced-replaces-basic-b",
+          "runtime_option_order": [
+            "cloudtrail-advanced-replaces-basic-a",
+            "cloudtrail-advanced-replaces-basic-b",
+            "cloudtrail-advanced-replaces-basic-c"
+          ],
+          "rationale": "上書きを踏まえ、必要な監査範囲を更新後の設定へ含めます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "監査対象がS3オブジェクト操作ではなく、現在の選択に含まれる管理操作だけになる。",
+        "answer": "管理イベントの選択と記録を確認する。この条件だけでデータイベント追加を必須にしない。",
+        "reason": "必要な監査対象が変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go",
+          "claim": "指定なしの証跡は管理イベントの読取り/書込みを記録し、データ/ネットワーク活動イベントは記録しない。基本と高度なセレクターは併用不可。高度セレクター適用で既存基本セレクターを上書きする。基本セレクターはS3 Object等を扱える。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
