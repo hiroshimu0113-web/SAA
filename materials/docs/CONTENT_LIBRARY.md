@@ -63,3 +63,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [Athenaの結果出力と取得経路の制御](../knowledge/lessons/athena-output-access.md)：確認・分類済みの構成本文。既存athena/least-privilegeを共有し、カード素材・詳細単位へ重複計上しない。ケース取り込み済み、公開未実施。
 
 - [Auto Scalingの希望容量と最小・最大境界](../knowledge/lessons/auto-scaling.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [ターゲット追跡の目標指標と縮退の範囲](../knowledge/lessons/target-tracking.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

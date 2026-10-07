@@ -3663,6 +3663,128 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "target-tracking-policy-scope",
+      "title": "指標に合わせるASGのポリシー設定",
+      "premise": "Amazon EC2 Auto Scalingのターゲット追跡を使う。2問は別の構成の独立した判断。",
+      "unit_ids": [
+        "target-tracking"
+      ],
+      "chapter_ids": [
+        "ch04",
+        "ch09",
+        "ch12"
+      ],
+      "constraints": [
+        "第1問は他の容量変更や障害による置換を除き当該ポリシーの縮退だけを問う。",
+        "第2問は未関連のターゲットグループを実際の指標対象として設定する前提を問う。"
+      ],
+      "questions": [
+        {
+          "id": "target-tracking-disable-in",
+          "objective": "縮退禁止の対象範囲を判断する。",
+          "prompt": "通常台数指定のASGで、平均CPUのターゲット追跡を設定し、DisableScaleIn=true。CPUが目標より低下した。容量値は最小以上最大以下、他のポリシー・スケジュール・手動容量変更・障害による置換はない。このポリシーによる縮退は？",
+          "options": [
+            {
+              "id": "target-tracking-disable-in-a",
+              "text": "このポリシーでは縮退しない。ただし別の容量変更まで禁止する設定ではない",
+              "explanation": "DisableScaleInはこのターゲット追跡ポリシーによる縮退を無効にします。ASG全体のすべての終了を禁止するものではありません。"
+            },
+            {
+              "id": "target-tracking-disable-in-b",
+              "text": "低CPUなのでこのポリシーで必ず1台減る",
+              "explanation": "明示された縮退禁止を無視しています。正確な台数計算もこの条件だけでは判断できません。"
+            },
+            {
+              "id": "target-tracking-disable-in-c",
+              "text": "全EC2が終了不能になるため、手動の希望容量変更も永久に禁止される",
+              "explanation": "ポリシーの縮退設定と、すべての終了や手動変更の禁止は別です。"
+            }
+          ],
+          "correct_option_id": "target-tracking-disable-in-a",
+          "runtime_option_order": [
+            "target-tracking-disable-in-a",
+            "target-tracking-disable-in-b",
+            "target-tracking-disable-in-c"
+          ],
+          "rationale": "DisableScaleInはこのターゲット追跡ポリシーによる縮退を無効にします。ASG全体のすべての終了を禁止するものではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go"
+          ]
+        },
+        {
+          "id": "target-tracking-alb-label",
+          "objective": "ALBリクエスト指標の対象を確認する。",
+          "prompt": "別のASGでALBRequestCountPerTargetを使い、特定ターゲットグループの平均リクエスト数を追跡したい。まだそのターゲットグループはこのASGに関連付けていない。ResourceLabelを設定する前提として必要なことは？",
+          "options": [
+            {
+              "id": "target-tracking-alb-label-a",
+              "text": "ASGと関係のない任意のターゲットグループのラベルでよい",
+              "explanation": "ResourceLabelはASGへ関連付けたターゲットグループから指標を取るための識別です。関連付けの前提を飛ばせません。"
+            },
+            {
+              "id": "target-tracking-alb-label-b",
+              "text": "ターゲットグループをこのASGへ関連付け、対象ALBとターゲットグループを識別するResourceLabelを使う",
+              "explanation": "実際に追跡する対象を関連付けとラベルで確認します。CPU指標の設定だけを流用しません。"
+            },
+            {
+              "id": "target-tracking-alb-label-c",
+              "text": "平均CPUのTargetValueを100にすれば、ALBの関連付けやResourceLabelは不要になる",
+              "explanation": "指標の目標値変更は、ALBリクエスト数の対象設定を代替しません。"
+            }
+          ],
+          "correct_option_id": "target-tracking-alb-label-b",
+          "runtime_option_order": [
+            "target-tracking-alb-label-a",
+            "target-tracking-alb-label-b",
+            "target-tracking-alb-label-c"
+          ],
+          "rationale": "実際に追跡する対象を関連付けとラベルで確認します。CPU指標の設定だけを流用しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問のDisableScaleInをfalseへ変更する。",
+        "answer": "そのポリシーも縮退できる設定になる。ただし、この変更だけで必ず即時に1台減るとは判断しない。",
+        "reason": "禁止の解除は実行可能性の設定で、正確な台数・時刻の保証ではない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-autoscaling/README.md",
+          "claim": "Target Tracking Scalingは指標を目標付近へ保つよう増減する。平均CPU50%の例は希望台数50ではない。Default Instance Warmingは使用量データを集約指標へ含める前の初期化期間を考慮する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go",
+          "claim": "TargetTrackingConfiguration.TargetValueは指標の目標値。DisableScaleIn=trueならそのターゲット追跡ポリシーはインスタンスを削除しない。既定false。ALBRequestCountPerTargetのResourceLabelはASGへ関連付けたターゲットグループを識別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "DefaultInstanceWarmupはInService後に初期化と資源使用が安定するまでの秒数。新インスタンスの指標を既存と集約するまで待つ。HealthCheckGracePeriodはヘルスチェック失敗でunhealthyにする前の猶予で、役割が違う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

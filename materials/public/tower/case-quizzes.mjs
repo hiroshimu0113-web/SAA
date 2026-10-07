@@ -899,6 +899,36 @@ export const CASE_QUIZZES={
       "縮退時の対象選択も別の設定です。ローカル状態や実行中処理の保護は別途設計します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go"
+  },
+  "target-tracking-disable-in": {
+    "prompt": "Amazon EC2 Auto Scalingのターゲット追跡を使う。2問は別の構成の独立した判断。 通常台数指定のASGで、平均CPUのターゲット追跡を設定し、DisableScaleIn=true。CPUが目標より低下した。容量値は最小以上最大以下、他のポリシー・スケジュール・手動容量変更・障害による置換はない。このポリシーによる縮退は？",
+    "options": [
+      "このポリシーでは縮退しない。ただし別の容量変更まで禁止する設定ではない",
+      "低CPUなのでこのポリシーで必ず1台減る",
+      "全EC2が終了不能になるため、手動の希望容量変更も永久に禁止される"
+    ],
+    "answer": 0,
+    "reasons": [
+      "DisableScaleInはこのターゲット追跡ポリシーによる縮退を無効にします。ASG全体のすべての終了を禁止するものではありません。",
+      "明示された縮退禁止を無視しています。正確な台数計算もこの条件だけでは判断できません。",
+      "ポリシーの縮退設定と、すべての終了や手動変更の禁止は別です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go"
+  },
+  "target-tracking-alb-label": {
+    "prompt": "Amazon EC2 Auto Scalingのターゲット追跡を使う。2問は別の構成の独立した判断。 別のASGでALBRequestCountPerTargetを使い、特定ターゲットグループの平均リクエスト数を追跡したい。まだそのターゲットグループはこのASGに関連付けていない。ResourceLabelを設定する前提として必要なことは？",
+    "options": [
+      "ASGと関係のない任意のターゲットグループのラベルでよい",
+      "ターゲットグループをこのASGへ関連付け、対象ALBとターゲットグループを識別するResourceLabelを使う",
+      "平均CPUのTargetValueを100にすれば、ALBの関連付けやResourceLabelは不要になる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "ResourceLabelはASGへ関連付けたターゲットグループから指標を取るための識別です。関連付けの前提を飛ばせません。",
+      "実際に追跡する対象を関連付けとラベルで確認します。CPU指標の設定だけを流用しません。",
+      "指標の目標値変更は、ALBリクエスト数の対象設定を代替しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1021,5 +1051,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "asg-min-only-update",
     "asg-max-only-update"
+  ],
+  [
+    "target-tracking-disable-in",
+    "target-tracking-alb-label"
   ]
 ];

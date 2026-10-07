@@ -10815,6 +10815,288 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-target-tracking-policy-scope",
+      "title": "ターゲット追跡の目標指標と縮退の範囲",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "目標指標と設定範囲を区別して制御条件へ適用する概念。",
+      "objective": "目標値の意味と対象指標、ポリシー単位の縮退禁止を区別し、初期化中の指標の扱いを説明する。",
+      "unit_ids": [
+        "target-tracking"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/target-tracking.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "scale",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2 Auto Scaling",
+        "Elastic Load Balancing",
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "auto-scaling"
+      ],
+      "conditions": [
+        "第1問は他の容量変更や障害による置換を除き当該ポリシーの縮退だけを問う。",
+        "第2問は未関連のターゲットグループを実際の指標対象として設定する前提を問う。"
+      ],
+      "limitations": [
+        "Amazon EC2 Auto Scalingの平均CPUとALBRequestCountPerTarget、DisableScaleIn、標準ウォームアップの説明範囲。正確な増減台数・複数ポリシー競合・欠測/ゼロ容量・全カスタム指標は対象外。"
+      ],
+      "misconceptions": [
+        "CPU目標50は希望台数50を意味する。",
+        "DisableScaleInはASG内の全インスタンス終了を永久に禁止する。",
+        "ALBリクエスト指標へ無関係なターゲットグループを指定できる。",
+        "ウォームアップ時間を指定すればアプリが必ずその秒数で準備完了する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/target-tracking.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "Amazon EC2 Auto Scalingのターゲット追跡を使う。2問は別の構成の独立した判断。",
+        "counterexample": "第1問のDisableScaleInをfalseへ変更する。 そのポリシーも縮退できる設定になる。ただし、この変更だけで必ず即時に1台減るとは判断しない。",
+        "comparison": {
+          "path": "knowledge/lessons/target-tracking.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-target-tracking-policy-scope",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-autoscaling/README.md",
+          "claim": "Target Tracking Scalingは指標を目標付近へ保つよう増減する。平均CPU50%の例は希望台数50ではない。Default Instance Warmingは使用量データを集約指標へ含める前の初期化期間を考慮する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go",
+          "claim": "TargetTrackingConfiguration.TargetValueは指標の目標値。DisableScaleIn=trueならそのターゲット追跡ポリシーはインスタンスを削除しない。既定false。ALBRequestCountPerTargetのResourceLabelはASGへ関連付けたターゲットグループを識別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "DefaultInstanceWarmupはInService後に初期化と資源使用が安定するまでの秒数。新インスタンスの指標を既存と集約するまで待つ。HealthCheckGracePeriodはヘルスチェック失敗でunhealthyにする前の猶予で、役割が違う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "目標指標と縮退条件を選ぶカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/target-tracking.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSのCPU使用率・費用・台数やアプリ準備完了を保証しない。",
+        "simplifications": [
+          "Amazon EC2 Auto Scalingの平均CPUとALBRequestCountPerTarget、DisableScaleIn、標準ウォームアップの説明範囲。正確な増減台数・複数ポリシー競合・欠測/ゼロ容量・全カスタム指標は対象外。"
+        ],
+        "mislearning_risks": [
+          "CPU目標50は希望台数50を意味する。",
+          "DisableScaleInはASG内の全インスタンス終了を永久に禁止する。",
+          "ALBリクエスト指標へ無関係なターゲットグループを指定できる。",
+          "ウォームアップ時間を指定すればアプリが必ずその秒数で準備完了する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-target-tracking-policy-scope",
+      "title": "指標に合わせるASGのポリシー設定",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "目標値の意味と対象指標、ポリシー単位の縮退禁止を区別し、初期化中の指標の扱いを説明する。",
+      "unit_ids": [
+        "target-tracking"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "target-tracking-policy-scope"
+        }
+      ],
+      "domains": [
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "scale",
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2 Auto Scaling",
+        "Elastic Load Balancing",
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "auto-scaling"
+      ],
+      "conditions": [
+        "第1問は他の容量変更や障害による置換を除き当該ポリシーの縮退だけを問う。",
+        "第2問は未関連のターゲットグループを実際の指標対象として設定する前提を問う。"
+      ],
+      "limitations": [
+        "Amazon EC2 Auto Scalingの平均CPUとALBRequestCountPerTarget、DisableScaleIn、標準ウォームアップの説明範囲。正確な増減台数・複数ポリシー競合・欠測/ゼロ容量・全カスタム指標は対象外。"
+      ],
+      "misconceptions": [
+        "CPU目標50は希望台数50を意味する。",
+        "DisableScaleInはASG内の全インスタンス終了を永久に禁止する。",
+        "ALBリクエスト指標へ無関係なターゲットグループを指定できる。",
+        "ウォームアップ時間を指定すればアプリが必ずその秒数で準備完了する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "target-tracking-policy-scope.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "target-tracking-policy-scope.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "target-tracking-policy-scope.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "target-tracking-policy-scope.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-autoscaling/README.md",
+          "claim": "Target Tracking Scalingは指標を目標付近へ保つよう増減する。平均CPU50%の例は希望台数50ではない。Default Instance Warmingは使用量データを集約指標へ含める前の初期化期間を考慮する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/types/types.go",
+          "claim": "TargetTrackingConfiguration.TargetValueは指標の目標値。DisableScaleIn=trueならそのターゲット追跡ポリシーはインスタンスを削除しない。既定false。ALBRequestCountPerTargetのResourceLabelはASGへ関連付けたターゲットグループを識別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "DefaultInstanceWarmupはInService後に初期化と資源使用が安定するまでの秒数。新インスタンスの指標を既存と集約するまで待つ。HealthCheckGracePeriodはヘルスチェック失敗でunhealthyにする前の猶予で、役割が違う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/target-tracking.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSのCPU使用率・費用・台数やアプリ準備完了を保証しない。",
+        "simplifications": [
+          "Amazon EC2 Auto Scalingの平均CPUとALBRequestCountPerTarget、DisableScaleIn、標準ウォームアップの説明範囲。正確な増減台数・複数ポリシー競合・欠測/ゼロ容量・全カスタム指標は対象外。"
+        ],
+        "mislearning_risks": [
+          "CPU目標50は希望台数50を意味する。",
+          "DisableScaleInはASG内の全インスタンス終了を永久に禁止する。",
+          "ALBリクエスト指標へ無関係なターゲットグループを指定できる。",
+          "ウォームアップ時間を指定すればアプリが必ずその秒数で準備完了する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "target-tracking-disable-in, target-tracking-alb-label"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
