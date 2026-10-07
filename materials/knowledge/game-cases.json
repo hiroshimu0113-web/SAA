@@ -5242,6 +5242,127 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "glue-catalog-crawler-boundary",
+      "title": "Glueの定義取得とクローラー起動を判断する",
+      "premise": "通常S3ファイルを参照するカタログを扱う。2問は別状況の独立判断。",
+      "unit_ids": [
+        "glue"
+      ],
+      "chapter_ids": [
+        "ch12"
+      ],
+      "constraints": [
+        "Iceberg・Lake Formation・ETLジョブの詳細は対象外。",
+        "各問で既知の操作と実行状態を明示する。"
+      ],
+      "questions": [
+        {
+          "id": "glue-metadata-not-query",
+          "objective": "定義の取得とデータの取得を分ける。",
+          "prompt": "S3の通常ファイルを参照するGlue Data CatalogテーブルでGetTableを呼び、列定義と保存場所を取得した。この呼出し以外にデータの読取りやクエリ実行はしていない。売上のデータ行を取得したと言える？",
+          "options": [
+            {
+              "id": "glue-metadata-not-query-a",
+              "text": "列定義が返ったので、全売上行も取得済みと扱う",
+              "explanation": "GetTableはテーブル定義の取得です。定義と実データの取得を区別します。"
+            },
+            {
+              "id": "glue-metadata-not-query-b",
+              "text": "言えない。保存場所や形式を確認し、必要なデータ読取り・クエリを別に実行する",
+              "explanation": "カタログの定義はデータを参照するための情報であり、この応答だけを売上行の取得結果にしません。"
+            },
+            {
+              "id": "glue-metadata-not-query-c",
+              "text": "GetTableだけでS3の全ファイルがカタログ内へ移動されたと扱う",
+              "explanation": "テーブル定義の取得はファイル移動の操作ではありません。"
+            }
+          ],
+          "correct_option_id": "glue-metadata-not-query-b",
+          "runtime_option_order": [
+            "glue-metadata-not-query-a",
+            "glue-metadata-not-query-b",
+            "glue-metadata-not-query-c"
+          ],
+          "rationale": "カタログの定義はデータを参照するための情報であり、この応答だけを売上行の取得結果にしません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/types/types.go"
+          ]
+        },
+        {
+          "id": "glue-crawler-already-running",
+          "objective": "実行中のクローラーを重複起動しない。",
+          "prompt": "別の同一GlueクローラーCが既に実行中。StartCrawler(C)がCrawlerRunningExceptionを返した。権限等は正常。この状態での対処は？",
+          "options": [
+            {
+              "id": "glue-crawler-already-running-a",
+              "text": "同じCを連続起動すれば、必ず並列実行が増える",
+              "explanation": "既に実行中のクローラーの起動はこの例外を返します。"
+            },
+            {
+              "id": "glue-crawler-already-running-b",
+              "text": "例外だけを見て、カタログの全テーブルを削除する",
+              "explanation": "実行中という状態は、全テーブル削除を必要とする条件ではありません。"
+            },
+            {
+              "id": "glue-crawler-already-running-c",
+              "text": "現在の実行状態・結果を確認し、終了後に必要な再実行を判断する",
+              "explanation": "指定クローラーの実行状態を踏まえて起動を管理します。開始要求とカタログ更新完了も区別します。"
+            }
+          ],
+          "correct_option_id": "glue-crawler-already-running-c",
+          "runtime_option_order": [
+            "glue-crawler-already-running-a",
+            "glue-crawler-already-running-b",
+            "glue-crawler-already-running-c"
+          ],
+          "rationale": "指定クローラーの実行状態を踏まえて起動を管理します。開始要求とカタログ更新完了も区別します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "売上行ではなく、テーブルの列定義と保存場所だけを知りたい。",
+        "answer": "GetTableで対象定義を取得する目的に合う。",
+        "reason": "必要な結果が実データの行からメタデータへ変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go",
+          "claim": "GetTableはData Catalogのテーブル定義を取得する。データ行を問い合わせる操作とは区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/types/types.go",
+          "claim": "Crawlerはデータソースを調べ、分類器でスキーマを推定し、成功するとカタログへメタデータを記録する。StorageDescriptorは列・形式・物理的な保存場所を持つ。SchemaChangePolicyは更新・削除の動作を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go",
+          "claim": "StartCrawlerは予定に関係なく指定クローラーを開始する。既に実行中ならCrawlerRunningExceptionを返す。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

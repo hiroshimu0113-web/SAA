@@ -14331,6 +14331,278 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-glue-catalog-crawler-boundary",
+      "title": "Glueデータカタログの定義とクローラー",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "定義の取得とデータ処理、実行状態を説明・判断する概念。",
+      "objective": "テーブル定義・データ読取り・クローラー実行を区別する。",
+      "unit_ids": [
+        "glue"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/glue.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "observe",
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [
+        "AWS Glue",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "s3"
+      ],
+      "conditions": [
+        "Iceberg・Lake Formation・ETLジョブの詳細は対象外。",
+        "各問で既知の操作と実行状態を明示する。"
+      ],
+      "limitations": [
+        "通常S3ファイルのカタログ定義とクローラー。Iceberg等の形式別機能、Lake Formationの全権限、ETLジョブの設計は対象外。"
+      ],
+      "misconceptions": [
+        "GetTableでデータ行も全取得できる。",
+        "カタログへ登録すると元データが自動移動する。",
+        "実行中の同じクローラーをStartCrawlerで必ず並列起動できる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/glue.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "通常S3ファイルを参照するカタログを扱う。2問は別状況の独立判断。",
+        "counterexample": "売上行ではなく、テーブルの列定義と保存場所だけを知りたい。 GetTableで対象定義を取得する目的に合う。",
+        "comparison": {
+          "path": "knowledge/lessons/glue.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-glue-catalog-crawler-boundary",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go",
+          "claim": "GetTableはData Catalogのテーブル定義を取得する。データ行を問い合わせる操作とは区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/types/types.go",
+          "claim": "Crawlerはデータソースを調べ、分類器でスキーマを推定し、成功するとカタログへメタデータを記録する。StorageDescriptorは列・形式・物理的な保存場所を持つ。SchemaChangePolicyは更新・削除の動作を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go",
+          "claim": "StartCrawlerは予定に関係なく指定クローラーを開始する。既に実行中ならCrawlerRunningExceptionを返す。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "カタログの役割と実行条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/glue.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSのスキーマ推定・更新完了・データ品質・処理時間を保証しない。",
+        "simplifications": [
+          "通常S3ファイルのカタログ定義とクローラー。Iceberg等の形式別機能、Lake Formationの全権限、ETLジョブの設計は対象外。"
+        ],
+        "mislearning_risks": [
+          "GetTableでデータ行も全取得できる。",
+          "カタログへ登録すると元データが自動移動する。",
+          "実行中の同じクローラーをStartCrawlerで必ず並列起動できる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-glue-catalog-crawler-boundary",
+      "title": "Glueの定義取得とクローラー起動を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "テーブル定義・データ読取り・クローラー実行を区別する。",
+      "unit_ids": [
+        "glue"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "glue-catalog-crawler-boundary"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "observe",
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [
+        "AWS Glue",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "s3"
+      ],
+      "conditions": [
+        "Iceberg・Lake Formation・ETLジョブの詳細は対象外。",
+        "各問で既知の操作と実行状態を明示する。"
+      ],
+      "limitations": [
+        "通常S3ファイルのカタログ定義とクローラー。Iceberg等の形式別機能、Lake Formationの全権限、ETLジョブの設計は対象外。"
+      ],
+      "misconceptions": [
+        "GetTableでデータ行も全取得できる。",
+        "カタログへ登録すると元データが自動移動する。",
+        "実行中の同じクローラーをStartCrawlerで必ず並列起動できる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "glue-catalog-crawler-boundary.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "glue-catalog-crawler-boundary.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "glue-catalog-crawler-boundary.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "glue-catalog-crawler-boundary.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go",
+          "claim": "GetTableはData Catalogのテーブル定義を取得する。データ行を問い合わせる操作とは区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/types/types.go",
+          "claim": "Crawlerはデータソースを調べ、分類器でスキーマを推定し、成功するとカタログへメタデータを記録する。StorageDescriptorは列・形式・物理的な保存場所を持つ。SchemaChangePolicyは更新・削除の動作を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go",
+          "claim": "StartCrawlerは予定に関係なく指定クローラーを開始する。既に実行中ならCrawlerRunningExceptionを返す。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/glue.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSのスキーマ推定・更新完了・データ品質・処理時間を保証しない。",
+        "simplifications": [
+          "通常S3ファイルのカタログ定義とクローラー。Iceberg等の形式別機能、Lake Formationの全権限、ETLジョブの設計は対象外。"
+        ],
+        "mislearning_risks": [
+          "GetTableでデータ行も全取得できる。",
+          "カタログへ登録すると元データが自動移動する。",
+          "実行中の同じクローラーをStartCrawlerで必ず並列起動できる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "glue-metadata-not-query, glue-crawler-already-running"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

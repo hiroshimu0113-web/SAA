@@ -1289,6 +1289,36 @@ export const CASE_QUIZZES={
       "FailedEntryCountと各結果を照合します。再送の可否は失敗理由で判断し、既存の冪等性設計も使います。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/eventbridge/api_op_PutEvents.go"
+  },
+  "glue-metadata-not-query": {
+    "prompt": "通常S3ファイルを参照するカタログを扱う。2問は別状況の独立判断。 S3の通常ファイルを参照するGlue Data CatalogテーブルでGetTableを呼び、列定義と保存場所を取得した。この呼出し以外にデータの読取りやクエリ実行はしていない。売上のデータ行を取得したと言える？",
+    "options": [
+      "列定義が返ったので、全売上行も取得済みと扱う",
+      "言えない。保存場所や形式を確認し、必要なデータ読取り・クエリを別に実行する",
+      "GetTableだけでS3の全ファイルがカタログ内へ移動されたと扱う"
+    ],
+    "answer": 1,
+    "reasons": [
+      "GetTableはテーブル定義の取得です。定義と実データの取得を区別します。",
+      "カタログの定義はデータを参照するための情報であり、この応答だけを売上行の取得結果にしません。",
+      "テーブル定義の取得はファイル移動の操作ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go"
+  },
+  "glue-crawler-already-running": {
+    "prompt": "通常S3ファイルを参照するカタログを扱う。2問は別状況の独立判断。 別の同一GlueクローラーCが既に実行中。StartCrawler(C)がCrawlerRunningExceptionを返した。権限等は正常。この状態での対処は？",
+    "options": [
+      "同じCを連続起動すれば、必ず並列実行が増える",
+      "例外だけを見て、カタログの全テーブルを削除する",
+      "現在の実行状態・結果を確認し、終了後に必要な再実行を判断する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "既に実行中のクローラーの起動はこの例外を返します。",
+      "実行中という状態は、全テーブル削除を必要とする条件ではありません。",
+      "指定クローラーの実行状態を踏まえて起動を管理します。開始要求とカタログ更新完了も区別します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1463,5 +1493,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "eventbridge-pattern-or-schedule",
     "eventbridge-partial-ingestion"
+  ],
+  [
+    "glue-metadata-not-query",
+    "glue-crawler-already-running"
   ]
 ];

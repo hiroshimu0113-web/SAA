@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 43,
-    "rubric_checks": 86
+    "detailed_units": 44,
+    "rubric_checks": 88
   },
   "nodes": [
     {
@@ -1759,9 +1759,79 @@
     {
       "id": "concept:glue",
       "kind": "concept",
-      "title": "glue",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "Glueデータカタログの定義とクローラー",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "glue",
+        "title": "Glueデータカタログの定義とクローラー",
+        "group": "processing",
+        "objective": "テーブル定義・データ読取り・クローラー実行を区別する。",
+        "estimated_minutes": 7,
+        "scope": "通常S3ファイルのカタログ定義とクローラー。Iceberg等の形式別機能、Lake Formationの全権限、ETLジョブの設計は対象外。",
+        "prerequisites": [
+          "s3"
+        ],
+        "misconceptions": [
+          "GetTableでデータ行も全取得できる。",
+          "カタログへ登録すると元データが自動移動する。",
+          "実行中の同じクローラーをStartCrawlerで必ず並列起動できる。"
+        ],
+        "checks": [
+          {
+            "id": "glue-explain",
+            "level": "explain",
+            "prompt": "カタログ定義と実データはどう違う？",
+            "expected_points": [
+              "定義は列・形式・保存場所などの情報",
+              "データ行の取得は別の操作",
+              "クローラーの開始と更新完了は別"
+            ]
+          },
+          {
+            "id": "glue-apply",
+            "level": "apply",
+            "prompt": "同じクローラーが実行中なら？",
+            "expected_points": [
+              "CrawlerRunningExceptionを実行状態として確認",
+              "終了と結果を確認",
+              "必要なら終了後に再実行する"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch12-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/glue.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_GetTable.go",
+              "claim": "GetTableはData Catalogのテーブル定義を取得する。データ行を問い合わせる操作とは区別する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/types/types.go",
+              "claim": "Crawlerはデータソースを調べ、分類器でスキーマを推定し、成功するとカタログへメタデータを記録する。StorageDescriptorは列・形式・物理的な保存場所を持つ。SchemaChangePolicyは更新・削除の動作を設定する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/glue/api_op_StartCrawler.go",
+              "claim": "StartCrawlerは予定に関係なく指定クローラーを開始する。既に実行中ならCrawlerRunningExceptionを返す。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "形式・パーティションごとの推定と更新条件",
+          "ETL・データ品質・全アクセス権の確認"
+        ]
+      }
     },
     {
       "id": "concept:gp3",
@@ -10808,6 +10878,16 @@
     {
       "from": "concept:eventbridge",
       "to": "lesson:ch09-l02",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:s3",
+      "to": "concept:glue",
+      "type": "learn_before"
+    },
+    {
+      "from": "concept:glue",
+      "to": "lesson:ch12-l03",
       "type": "unit_reference"
     },
     {
