@@ -471,3 +471,11 @@
 - 判定は保存データ・乱数を変更しない。重複分岐を省略し、探索上限では保守的に光らせない。メニューの閲覧でも保存・ターンは不変。Escape/戻る/閉じる・背景操作抑止・フォーカス復帰に対応。
 - 検証：単体96件、ビルド、Chromiumの既存タッチ/戦闘/オフライン回帰成功。320pxでメニュー4項目・全枚数・強化・マップ閲覧のみ・保存不変を確認。公開はこの記録時点で準備中。公開結果は追記する。
 - 成果物：public/tower/{app,options-ui,combo-hints}.mjs、style.css、tests/combo-hints.test.mjs、scripts/options-browser-check.mjs。新しい公開入口は tower/options.html。
+
+### 公開処理の中断
+- 実装コミット：`2cad455`。最新教材を使った45種類のコレクションと弱/強の役表示もChromiumで確認済み。
+- `git push origin HEAD:main` はGitHub認証を取得できず失敗。`gh` も HTTP 401 Bad credentials。直前までAPI参照は成功していたが、再確認時点では読み取りも失敗。
+- 環境ステータスは接続中だが、利用可能と確認された認証設定は返されなかった。認証情報の探索・書き換えはしていない。ユーザーへGitHub接続の再認証を依頼。
+- **公開未反映**。GitHub Actionsの今回分は未起動。次は認証回復後、main差分確認 → `git push origin HEAD:main` → Actions成功 → `/SAA/tower/options.html` の配信確認。公開成功と報告しない。
+
+- WebKitのローカル実行も試行したが、ブラウザー実行ファイルが環境に未導入で起動不可。今回のWebKit検証は未実施（認証回復後のCIで実施）。Chromiumの実行結果とは区別する。
