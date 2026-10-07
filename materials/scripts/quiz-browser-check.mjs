@@ -14,9 +14,10 @@ export async function checkQuizAndHud(browser,base){
   const s=enter();await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();await p.getByRole('heading',{name:'知識の間：1 / 2問'}).waitFor();
   assert.equal(await p.locator('.quiz-rules').getAttribute('open'),null);
   assert.ok(await p.locator('.quiz-prompt').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.quiz-rules'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+  assert.ok(await p.locator('.quiz-options').evaluate(e=>Boolean(e.compareDocumentPosition(document.querySelector('.quiz-rules'))&Node.DOCUMENT_POSITION_FOLLOWING)));
   const guideSave=await p.evaluate(k=>localStorage.getItem(k),key);await p.locator('.quiz-rules summary').tap();assert.ok(await p.locator('.quiz-rules p').isVisible());await p.locator('.quiz-rules summary').tap();assert.equal(await p.locator('.quiz-rules p').isVisible(),false);assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),guideSave);
   for(let i=0;i<2;i++){
-   const id=s.quiz.ids[i],choice=i<correct?QUIZZES[id].answer:(QUIZZES[id].answer+1)%3;await p.locator('[data-action="quiz-answer"][data-choice="'+choice+'"]').tap();await p.locator('.quiz-explanation').waitFor();assert.ok(await p.locator('.quiz-option').first().isDisabled());
+   const id=s.quiz.ids[i],choice=i<correct?QUIZZES[id].answer:(QUIZZES[id].answer+1)%3;await p.locator('[data-action="quiz-answer"][data-choice="'+choice+'"]').tap();await p.locator('.quiz-explanation').waitFor();assert.equal(await p.locator('.quiz-option').count(),0);
    const saved=await p.evaluate(k=>localStorage.getItem(k),key);await p.reload();await p.locator('.quiz-explanation').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),saved);await p.locator('[data-action="quiz-next"]').tap();
   }
   await p.locator('.quiz-result').waitFor();const result=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(result.quiz.result.correct,correct);assert.equal(result.hp,72-(2-correct)*8);assert.equal(result.gold,correct===1?90:60);assert.equal(result.relics.length,correct===2?2:1);

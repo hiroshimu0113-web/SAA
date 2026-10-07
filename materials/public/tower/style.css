@@ -138,3 +138,5 @@ html.screen-shaking{overflow-x:hidden}
 @media(max-width:400px){.options-dialog{padding:12px}.options-cards{gap:4px}.options-cards .card{min-height:104px}.options-cards .card strong{font-size:9px}.options-cards .card .sigil{font-size:20px}}
 
 .route-row.current{scroll-margin-bottom:24px}.options-dialog>header{position:sticky;top:-16px;background:#14232d;z-index:4;padding-top:4px}.options-menu [data-command]{border-color:#a98462;margin-top:8px}@media(max-width:400px){.options-dialog>header{top:-12px}}
+.header-options,.run-header .header-options,.battle-hud .header-options{width:44px;height:44px;min-width:44px;padding:7px;font-size:22px;line-height:1}
+.options-content>.hero-profile{display:block;font-size:18px;color:#e8d5a6;margin:12px 0}.options-content>.relic-details{font-size:14px;line-height:1.8}.options-content>.relic-details li{margin-bottom:16px}.combo-guide .options-cards{margin:12px 0}.combo-guide .options-cards .card{min-height:104px}

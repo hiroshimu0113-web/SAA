@@ -12,7 +12,7 @@ test('expansion: seeded random maps vary, preserve guaranteed endpoints and lega
  for(const routes of [[],[['constructor']],Array(8).fill(['boss'])]){const s=newRun(1);s.routes=routes;assert.throws(()=>round(s));}
 });
 test('expansion: static attack bonuses apply by enemy tier and never accumulate by turn',()=>{
- for(const [tier,extra] of [['battle',0],['elite',2],['boss',0]]){let s=enter(tier==='boss'?'elite':tier,['edge','ember','opener','elite_edge']);if(tier==='boss'){s=newRun(2);s.relics.push('edge','ember','opener','elite_edge');s.floor=7;s.history=s.routes.slice(0,7).map((r,i)=>({floor:i,lane:0,type:r[0]}));s=act(s,{type:'node',lane:0});}assert.equal(s.battle.playerStrength,7+extra);const before=s.battle.playerStrength;s=act(s,{type:'end'});assert.equal(s.battle.playerStrength,before);round(s);}
+ for(const [tier,extra] of [['battle',0],['elite',2],['boss',0]]){let s=enter(tier==='boss'?'elite':tier,['edge','ember','opener','elite_edge']);if(tier==='boss'){s=newRun(2);s.relics.push('edge','ember','opener','elite_edge');s.floor=7;s.history=s.routes.slice(0,7).map((r,i)=>({floor:i,lane:0,type:r[0]}));s=act(s,{type:'node',lane:0});}assert.equal(s.battle.playerStrength,7+extra);const before=s.battle.playerStrength;s=act(s,{type:'end'});assert.equal(s.battle.playerStrength,before-5);round(s);}
 });
 test('expansion: first turn energy stacks; hard-fight energy and extra draw apply each real turn',()=>{
  for(const [type,energy] of [['battle',5],['elite',6]]){let s=quiet(enter(type,['battery','elite_energy','insight']));if(type==='elite'){s.battle.enemy='elite';s.battle.hp=s.battle.maxHp=65;s.battle.enemyStep=3;}assert.equal(s.battle.energy,energy);assert.equal(s.battle.hand.length,6);s=act(s,{type:'end'});assert.equal(s.battle.energy,type==='elite'?4:3);assert.equal(s.battle.hand.length,6);round(s);}
@@ -90,4 +90,19 @@ test('combined relic: either old id migrates, both collapse into one, four effec
  let quiz=enter('event',[]);for(let i=0;i<2;i++){const id=quiz.quiz.ids[i];quiz=act(quiz,{type:'quiz-answer',questionId:id,choice:QUIZZES[id].answer});quiz=act(quiz,{type:'quiz-next',questionId:id});}
  quiz.relics=quiz.relics.map(id=>id===quiz.quiz.result.relic?'regeneration':id);quiz.quiz.result.relic='regeneration';const migrated=parseRun(JSON.stringify(quiz));assert.equal(migrated.quiz.result.relic,'escalation');round(migrated);
  assert.ok(!REWARD_RELICS.includes('regeneration'));
+});
+
+
+test('opener: expires once after the whole first turn, preserves other strength and migrates saves',()=>{
+ let s=quiet(enter('battle',['opener','edge','escalation']));
+ assert.equal(s.battle.playerStrength,9);
+ s.battle.playerStrength+=2; // A separate card buff must survive expiration.
+ s.battle.playerDebuffs.delay=2;s.battle.playerActions=2;
+ s=round(act(s,{type:'end'}));assert.equal(s.battle.turn,1);assert.equal(s.battle.playerStrength,11);
+ s=round(act(s,{type:'end'}));assert.equal(s.battle.turn,2);assert.equal(s.battle.playerStrength,9);
+ s=round(act(s,{type:'end'}));assert.equal(s.battle.playerStrength,12);
+ const old=copy(s);delete old.battle.openerVersion;old.battle.playerStrength+=5;
+ const migrated=parseRun(JSON.stringify(old));assert.equal(migrated.battle.playerStrength,12);round(migrated);
+ const first=quiet(enter('battle',['opener']));delete first.battle.openerVersion;
+ assert.equal(parseRun(JSON.stringify(first)).battle.playerStrength,5);
 });

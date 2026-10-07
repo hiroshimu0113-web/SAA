@@ -55,7 +55,7 @@ export function upgradeChanges(card){
 }
 function draw(s,n){const b=s.battle;for(let i=0;i<n;i++){if(!b.draw.length){b.draw=shuffle(s,b.discard);b.discard=[];}if(!b.draw.length||b.hand.length>=10)break;b.hand.push(b.draw.pop());}}
 function startBattle(s,id){
- const e=ENEMIES[id];s.phase='battle';s.battle={enemy:id,hp:e.hp,maxHp:e.hp,block:0,strength:0,enemyDebuffs:emptyDebuffs(),playerDebuffs:emptyDebuffs(),enemyStep:0,playerActions:1,events:[],turn:1,playerBlock:s.relics.includes('shell')?8:0,playerStrength:s.relics.includes('ember')?1:0,armor:0,energy:3+(s.relics.includes('capacity')?1:0),comboPlayed:[],comboDone:[],hand:[],draw:shuffle(s,s.deck.map(c=>c.uid)),discard:[],exhaust:[]};s.battle.playerStrength+=(has(s,'edge')?1:0)+(has(s,'opener')?5:0)+(has(s,'elite_edge')&&e.tier==='elite'?2:0);
+ const e=ENEMIES[id];s.phase='battle';s.battle={enemy:id,hp:e.hp,maxHp:e.hp,block:0,strength:0,enemyDebuffs:emptyDebuffs(),playerDebuffs:emptyDebuffs(),enemyStep:0,playerActions:1,events:[],turn:1,playerBlock:s.relics.includes('shell')?8:0,playerStrength:s.relics.includes('ember')?1:0,armor:0,energy:3+(s.relics.includes('capacity')?1:0),comboPlayed:[],comboDone:[],hand:[],draw:shuffle(s,s.deck.map(c=>c.uid)),discard:[],exhaust:[]};if(has(s,'opener'))s.battle.openerVersion=1;s.battle.playerStrength+=(has(s,'edge')?1:0)+(has(s,'opener')?5:0)+(has(s,'elite_edge')&&e.tier==='elite'?2:0);
  s.battle.playerBlock=playerBlockGain(s,s.battle.playerBlock);s.battle.energy=turnEnergy(s)+(has(s,'capacity')?1:0)+(has(s,'battery')?1:0);turnStart(s);
  draw(s,turnDraw(s)+(has(s,'lantern')?1:0)+(has(s,'blueprint')?2:0));log(s,e.name+'が現れた。');
 }
@@ -167,6 +167,7 @@ export function act(state,action){
   if(s.hp===0){lose(s);return s;}
   burn(s,'enemy');decayDebuffs(b.enemyDebuffs);decayDebuffs(b.playerDebuffs,refreshed);
   if(b.hp===0){win(s);return s;}
+  if(b.turn===1&&has(s,'opener'))b.playerStrength=Math.max(0,b.playerStrength-5);
   b.turn++;b.energy=delayPaused(b.playerDebuffs.delay)?0:turnEnergy(s);b.playerActions=b.playerDebuffs.delay===2?2:1;
   b.comboPlayed=[];b.comboDone=[];b.playerBlock=playerBlockGain(s,b.armor);turnStart(s);
   if(b.playerBlock)emit(b,'player','shield',b.playerBlock,'◇ ＋'+b.playerBlock);
@@ -249,6 +250,8 @@ function validateRun(raw){
  if(['battle','reward','won','lost'].includes(s.phase)&&!quizLost){
   if(!b||!owns(ENEMIES,b.enemy)||b.maxHp!==ENEMIES[b.enemy].hp||!num(b.hp,b.maxHp))throw Error('敵が不正です。');
   for(const k of ['block','strength','turn','playerBlock','playerStrength','armor','energy'])if(!num(b[k]))throw Error('戦闘の数値が不正です。');
+  if(b.openerVersion!==undefined&&b.openerVersion!==1)throw Error('開始時強化の形式が不正です。');
+  if(s.phase==='battle'&&has(s,'opener')&&b.openerVersion===undefined){if(b.turn>1)b.playerStrength=Math.max(0,b.playerStrength-5);b.openerVersion=1;}
   if(s.version<3){b.comboPlayed=[];b.comboDone=[];}
   if(s.version<4){
    if(b.weak!==undefined&&!num(b.weak))throw Error('旧状態異常の数値が不正です。');
