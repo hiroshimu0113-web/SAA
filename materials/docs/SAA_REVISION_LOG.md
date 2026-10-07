@@ -147,3 +147,5 @@
 ## 検証と公開
 
 検証結果・公開コミットと配信確認はCHECKPOINT末尾に記録する。独立レビューと学習者の未見正答率による合格準備判定は今回の制作完了と別である。
+
+公開確認完了：2026-10-08 JST。公開コミット `30b04cb`、[Actions 37694824501](https://github.com/hiroshimu0113-web/SAA/actions/runs/37694824501)。100テスト、ChromiumとWebKitの操作検証、公開ファイルのHTTP 200・SHA256一致を確認。[公式教材サイト](https://hiroshimu0113-web.github.io/SAA/)へ反映済み。
