@@ -89,3 +89,15 @@ test('catalog: vocabulary rejects missing IDs, altered mechanics and fixed hero/
  }
  activateCatalog(null);
 });
+
+test('catalog: 30-card pool remains capped while retired cards in old adventures still resume',()=>{
+ assert.equal(Object.keys(pack.cards).length+STARTERS.length,30);
+ const older=clone(pack);older.version='eeeeeeeeeeeeeeee';
+ older.cards['study-root']={...older.cards['study-region'],name:'ルートユーザー'};
+ older.notes['study-root']={...older.notes['study-region']};
+ const old=newRun(51,older);old.deck[0].id='study-root';const saved=JSON.stringify(old);
+ newRun(52,pack);assert.equal(CARDS['study-root'],undefined);
+ assert.deepEqual(parseRun(saved),old);assert.equal(CARDS['study-root'].name,'ルートユーザー');
+ newRun(53,pack);assert.equal(CARDS['study-root'],undefined);
+ activateCatalog(null);
+});

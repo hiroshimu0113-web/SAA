@@ -24,7 +24,10 @@ for(const [id,termId] of Object.entries(supplement.cardTerms)){
  else cards[id]={...cards[id],name:term.name};
  notes[id]={note:term.meaning,source:term.source,limit:'教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。'};
 }
-for(const term of publishedTerms){
+const selectedStudyTerms=supplement.studyTerms;
+if(!Array.isArray(selectedStudyTerms)||new Set(selectedStudyTerms).size!==selectedStudyTerms.length||Object.keys(BASE_CARDS).length+selectedStudyTerms.length>30)throw Error('通常カードは30種類以内で、復習用語IDは重複不可です');
+for(const termId of selectedStudyTerms){
+ const term=termById.get(termId);if(!term)throw Error('公開教材にない復習用語: '+termId);
  const id='study-'+term.id;
  if(cards[id])throw Error('duplicate card '+id);
  // A single explicitly designed study-card mechanic, never inferred from AWS performance.

@@ -231,5 +231,17 @@
         "note": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。"
       }
     }
-  }
+  },
+  "studyTerms": [
+    "region",
+    "vpc",
+    "ec2",
+    "ebs",
+    "dynamodb",
+    "cloudfront",
+    "lambda",
+    "sqs",
+    "kms",
+    "cloudwatch"
+  ]
 }
