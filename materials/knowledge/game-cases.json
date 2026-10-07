@@ -5008,6 +5008,127 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "sns-fanout-filter-scope",
+      "title": "SNSの配信分岐と購読フィルターを判断する",
+      "premise": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+      "unit_ids": [
+        "sns"
+      ],
+      "chapter_ids": [
+        "ch09"
+      ],
+      "constraints": [
+        "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+      ],
+      "questions": [
+        {
+          "id": "sns-two-independent-consumers",
+          "objective": "同じ通知を独立して処理する。",
+          "prompt": "通常SNSトピックで注文イベントを発行し、在庫と監査がそれぞれ全イベントを独立に保持・処理したい。フィルターなしの購読を利用し、権限・配信と処理能力は正常。同じ1つのSQSキューを2処理系が消費する競合を避けたい。構成は？",
+          "options": [
+            {
+              "id": "sns-two-independent-consumers-a",
+              "text": "SNSトピックに在庫用と監査用の別SQSキューを購読させる",
+              "explanation": "購読先ごとのキューで受信・保持・消費を分けます。受理と業務完了は別に確認します。"
+            },
+            {
+              "id": "sns-two-independent-consumers-b",
+              "text": "同じSQSキューを2処理系で消費すれば、各メッセージを両方が必ず受け取る",
+              "explanation": "同じキューの競合消費は、独立した各処理系への配信分岐の代替ではありません。"
+            },
+            {
+              "id": "sns-two-independent-consumers-c",
+              "text": "トピック名だけ2つ付け、購読先を設定しない",
+              "explanation": "名前だけでは各処理系への配信経路を作れません。"
+            }
+          ],
+          "correct_option_id": "sns-two-independent-consumers-a",
+          "runtime_option_order": [
+            "sns-two-independent-consumers-a",
+            "sns-two-independent-consumers-b",
+            "sns-two-independent-consumers-c"
+          ],
+          "rationale": "購読先ごとのキューで受信・保持・消費を分けます。受理と業務完了は別に確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go"
+          ]
+        },
+        {
+          "id": "sns-filter-body-scope",
+          "objective": "フィルター対象をそろえる。",
+          "prompt": "別のSNS購読で、JSON本文にだけcategory=orderがあり、メッセージ属性にはcategoryがない。FilterPolicyはcategory=order、FilterPolicyScopeはMessageAttributes。この本文を対象に選別したい。変更は？",
+          "options": [
+            {
+              "id": "sns-filter-body-scope-a",
+              "text": "既定の属性対象のまま、本文も自動的に検索されると扱う",
+              "explanation": "MessageAttributesは属性が対象です。本文へ自動的に切り替わりません。"
+            },
+            {
+              "id": "sns-filter-body-scope-b",
+              "text": "FilterPolicyScopeをMessageBodyにし、本文の構造とポリシーを確認する",
+              "explanation": "フィルターの対象を本文へ合わせます。設定変更の反映や実配信も検証します。"
+            },
+            {
+              "id": "sns-filter-body-scope-c",
+              "text": "RawMessageDeliveryだけを有効にすると、フィルター対象も本文へ変わる",
+              "explanation": "包装の省略とフィルターの対象指定は別の設定です。"
+            }
+          ],
+          "correct_option_id": "sns-filter-body-scope-b",
+          "runtime_option_order": [
+            "sns-filter-body-scope-a",
+            "sns-filter-body-scope-b",
+            "sns-filter-body-scope-c"
+          ],
+          "rationale": "フィルターの対象を本文へ合わせます。設定変更の反映や実配信も検証します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問のcategoryを本文ではなくメッセージ属性へ移し、本文にcategoryはない。",
+        "answer": "MessageAttributesを対象にして、属性の型・値とポリシーをそろえる。",
+        "reason": "選別したい値の所在が変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go",
+          "claim": "トピックへの発行は購読した各エンドポイントへ配信する。エンドポイントにより形式が異なる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+          "claim": "受信メッセージには可視性タイムアウトが適用され、同じキューでの消費と購読先ごとの分岐を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go",
+          "claim": "SQS購読先はキューARN。FilterPolicyは部分集合の配信、FilterPolicyScopeはMessageAttributes既定またはMessageBody。RawMessageDeliveryはSNSのJSONメタデータ包装を省く。RedrivePolicyは配信できないメッセージをDLQへ送る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

@@ -2806,6 +2806,75 @@
         "本文に残した詳細条件の公式確認",
         "実AWSによる動作検証"
       ]
+    },
+    {
+      "id": "sns",
+      "title": "SNSの配信分岐と購読フィルター",
+      "group": "processing",
+      "objective": "購読先ごとの配信分岐を設計し、フィルター対象とメッセージ形式を区別する。",
+      "estimated_minutes": 7,
+      "scope": "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "同じキューを競合消費すれば全処理系に同じイベントが必ず配られる。",
+        "属性フィルターは本文も自動検索する。",
+        "RawMessageDeliveryでフィルター対象も変わる。"
+      ],
+      "checks": [
+        {
+          "id": "sns-explain",
+          "level": "explain",
+          "prompt": "この単位の判断で分けて確認するものは？",
+          "expected_points": [
+            "購読先ごとのキューで独立して処理",
+            "属性と本文のフィルター対象を合わせる",
+            "包装の省略はフィルター対象を変えない"
+          ]
+        },
+        {
+          "id": "sns-apply",
+          "level": "apply",
+          "prompt": "ケースの条件が変わったときに何を確認する？",
+          "expected_points": [
+            "第2問のcategoryを本文ではなくメッセージ属性へ移し、本文にcategoryはない。",
+            "MessageAttributesを対象にして、属性の型・値とポリシーをそろえる。",
+            "選別したい値の所在が変わる。"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch09-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/sns.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go",
+            "claim": "トピックへの発行は購読した各エンドポイントへ配信する。エンドポイントにより形式が異なる。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+            "claim": "受信メッセージには可視性タイムアウトが適用され、同じキューでの消費と購読先ごとの分岐を区別する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go",
+            "claim": "SQS購読先はキューARN。FilterPolicyは部分集合の配信、FilterPolicyScopeはMessageAttributes既定またはMessageBody。RawMessageDeliveryはSNSのJSONメタデータ包装を省く。RedrivePolicyは配信できないメッセージをDLQへ送る。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "本文に残した詳細条件の公式確認",
+        "実AWSによる動作検証"
+      ]
     }
   ]
 }

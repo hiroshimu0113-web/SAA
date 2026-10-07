@@ -13811,6 +13811,272 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-sns-fanout-filter-scope",
+      "title": "SNSの配信分岐と購読フィルター",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "設定と実際の状態を区別して、要件に合う構成・対処を選ぶ概念。",
+      "objective": "購読先ごとの配信分岐を設計し、フィルター対象とメッセージ形式を区別する。",
+      "unit_ids": [
+        "sns"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/sns.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "integration"
+      ],
+      "capabilities": [
+        "coordinate",
+        "route"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Notification Service",
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+      ],
+      "limitations": [
+        "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+      ],
+      "misconceptions": [
+        "同じキューを競合消費すれば全処理系に同じイベントが必ず配られる。",
+        "属性フィルターは本文も自動検索する。",
+        "RawMessageDeliveryでフィルター対象も変わる。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/sns.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+        "counterexample": "第2問のcategoryを本文ではなくメッセージ属性へ移し、本文にcategoryはない。 MessageAttributesを対象にして、属性の型・値とポリシーをそろえる。",
+        "comparison": {
+          "path": "knowledge/lessons/sns.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-sns-fanout-filter-scope",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go",
+          "claim": "トピックへの発行は購読した各エンドポイントへ配信する。エンドポイントにより形式が異なる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+          "claim": "受信メッセージには可視性タイムアウトが適用され、同じキューでの消費と購読先ごとの分岐を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go",
+          "claim": "SQS購読先はキューARN。FilterPolicyは部分集合の配信、FilterPolicyScopeはMessageAttributes既定またはMessageBody。RawMessageDeliveryはSNSのJSONメタデータ包装を省く。RedrivePolicyは配信できないメッセージをDLQへ送る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "判断の仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/sns.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+        ],
+        "mislearning_risks": [
+          "同じキューを競合消費すれば全処理系に同じイベントが必ず配られる。",
+          "属性フィルターは本文も自動検索する。",
+          "RawMessageDeliveryでフィルター対象も変わる。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-sns-fanout-filter-scope",
+      "title": "SNSの配信分岐と購読フィルターを判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "購読先ごとの配信分岐を設計し、フィルター対象とメッセージ形式を区別する。",
+      "unit_ids": [
+        "sns"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "sns-fanout-filter-scope"
+        }
+      ],
+      "domains": [
+        "integration"
+      ],
+      "capabilities": [
+        "coordinate",
+        "route"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Notification Service",
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+      ],
+      "limitations": [
+        "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+      ],
+      "misconceptions": [
+        "同じキューを競合消費すれば全処理系に同じイベントが必ず配られる。",
+        "属性フィルターは本文も自動検索する。",
+        "RawMessageDeliveryでフィルター対象も変わる。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sns-fanout-filter-scope.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sns-fanout-filter-scope.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sns-fanout-filter-scope.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "sns-fanout-filter-scope.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go",
+          "claim": "トピックへの発行は購読した各エンドポイントへ配信する。エンドポイントにより形式が異なる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sqs/api_op_ReceiveMessage.go",
+          "claim": "受信メッセージには可視性タイムアウトが適用され、同じキューでの消費と購読先ごとの分岐を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go",
+          "claim": "SQS購読先はキューARN。FilterPolicyは部分集合の配信、FilterPolicyScopeはMessageAttributes既定またはMessageBody。RawMessageDeliveryはSNSのJSONメタデータ包装を省く。RedrivePolicyは配信できないメッセージをDLQへ送る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/sns.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常SNSトピックとSQS購読。FIFOの順序/重複排除、全配信保証、クロスアカウント権限、変更反映時間の数値は対象外。"
+        ],
+        "mislearning_risks": [
+          "同じキューを競合消費すれば全処理系に同じイベントが必ず配られる。",
+          "属性フィルターは本文も自動検索する。",
+          "RawMessageDeliveryでフィルター対象も変わる。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "sns-two-independent-consumers, sns-filter-body-scope"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

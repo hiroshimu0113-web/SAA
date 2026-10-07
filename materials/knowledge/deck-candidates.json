@@ -4218,7 +4218,7 @@
     {
       "id": "candidate-sns",
       "concept_id": "sns",
-      "title": "sns",
+      "title": "SNSの配信分岐と購読フィルター",
       "related_chapter_ids": [
         "ch09"
       ],
@@ -4230,16 +4230,21 @@
         {
           "node_id": "question:q148",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch09-l02",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-sns-fanout-filter-scope"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

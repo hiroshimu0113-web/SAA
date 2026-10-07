@@ -1229,6 +1229,36 @@ export const CASE_QUIZZES={
       "通知先の個数はActionsEnabled=falseを変更しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go"
+  },
+  "sns-two-independent-consumers": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 通常SNSトピックで注文イベントを発行し、在庫と監査がそれぞれ全イベントを独立に保持・処理したい。フィルターなしの購読を利用し、権限・配信と処理能力は正常。同じ1つのSQSキューを2処理系が消費する競合を避けたい。構成は？",
+    "options": [
+      "SNSトピックに在庫用と監査用の別SQSキューを購読させる",
+      "同じSQSキューを2処理系で消費すれば、各メッセージを両方が必ず受け取る",
+      "トピック名だけ2つ付け、購読先を設定しない"
+    ],
+    "answer": 0,
+    "reasons": [
+      "購読先ごとのキューで受信・保持・消費を分けます。受理と業務完了は別に確認します。",
+      "同じキューの競合消費は、独立した各処理系への配信分岐の代替ではありません。",
+      "名前だけでは各処理系への配信経路を作れません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Publish.go"
+  },
+  "sns-filter-body-scope": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 別のSNS購読で、JSON本文にだけcategory=orderがあり、メッセージ属性にはcategoryがない。FilterPolicyはcategory=order、FilterPolicyScopeはMessageAttributes。この本文を対象に選別したい。変更は？",
+    "options": [
+      "既定の属性対象のまま、本文も自動的に検索されると扱う",
+      "FilterPolicyScopeをMessageBodyにし、本文の構造とポリシーを確認する",
+      "RawMessageDeliveryだけを有効にすると、フィルター対象も本文へ変わる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "MessageAttributesは属性が対象です。本文へ自動的に切り替わりません。",
+      "フィルターの対象を本文へ合わせます。設定変更の反映や実配信も検証します。",
+      "包装の省略とフィルターの対象指定は別の設定です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/sns/api_op_Subscribe.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1395,5 +1425,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "cloudwatch-m-of-n-evaluation",
     "cloudwatch-disabled-actions"
+  ],
+  [
+    "sns-two-independent-consumers",
+    "sns-filter-body-scope"
   ]
 ];
