@@ -287,6 +287,7 @@
       "title": "災害復旧と移行",
       "target_cards": 20,
       "card_candidate_ids": [
+        "candidate-auto-scaling",
         "candidate-backup",
         "candidate-cdc",
         "candidate-datasync",
@@ -317,6 +318,7 @@
       "target_cards": 20,
       "card_candidate_ids": [
         "candidate-athena",
+        "candidate-auto-scaling",
         "candidate-cache",
         "candidate-cost-optimization",
         "candidate-ec2",
@@ -610,9 +612,11 @@
     {
       "id": "candidate-auto-scaling",
       "concept_id": "auto-scaling",
-      "title": "auto-scaling",
+      "title": "Auto Scalingの希望容量と最小・最大境界",
       "related_chapter_ids": [
-        "ch04"
+        "ch04",
+        "ch11",
+        "ch12"
       ],
       "material_refs": [
         {
@@ -622,16 +626,21 @@
         {
           "node_id": "question:q065",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch04-l03",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-auto-scaling-capacity-boundary"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

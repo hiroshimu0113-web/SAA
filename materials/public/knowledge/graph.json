@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 30,
-    "rubric_checks": 60
+    "detailed_units": 31,
+    "rubric_checks": 62
   },
   "nodes": [
     {
@@ -380,9 +380,80 @@
     {
       "id": "concept:auto-scaling",
       "kind": "concept",
-      "title": "auto-scaling",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "Auto Scalingの希望容量と最小・最大境界",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "auto-scaling",
+        "title": "Auto Scalingの希望容量と最小・最大境界",
+        "group": "processing",
+        "objective": "通常の台数指定で希望容量と実際の準備完了を分け、境界だけを変更した場合の容量更新を判断する。",
+        "estimated_minutes": 7,
+        "scope": "1台1容量単位の通常ASG。重み付き混合構成/属性ベース容量/AZ再配分や置換時の一時超過の詳細は対象外。",
+        "prerequisites": [
+          "ec2"
+        ],
+        "misconceptions": [
+          "最大容量まで常に起動しておく。",
+          "最小・最大だけを変更しても希望容量は絶対に変わらない。",
+          "希望容量の更新完了はアプリ全台の準備完了を意味する。"
+        ],
+        "checks": [
+          {
+            "id": "auto-scaling-explain",
+            "level": "explain",
+            "prompt": "最小・最大・希望容量と現在の準備完了台数はどう違う？",
+            "expected_points": [
+              "最小と最大は希望容量の範囲",
+              "希望は維持を試みる容量",
+              "設定値だけで起動とアプリ準備完了は保証しない"
+            ]
+          },
+          {
+            "id": "auto-scaling-apply",
+            "level": "apply",
+            "prompt": "現在3台で最小だけを2から4へ上げ、希望を指定しない場合は？",
+            "expected_points": [
+              "新最小4が現在サイズ3を超える",
+              "希望容量も4になる",
+              "実際の起動とヘルス・処理準備を確認する"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch04-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/auto-scaling.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go",
+              "claim": "DesiredCapacityは作成時の容量と維持を試みる容量。MinSize以上MaxSize以下。未指定ならMinSize。通常unitsはインスタンス数、重み付き混合構成にはMaxSizeを超える例外がある。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+              "claim": "希望容量は最小以上最大以下。DesiredCapacityを指定せずMinSizeを現在サイズより大きくすると希望容量も新MinSizeへ、MaxSizeを現在サイズより小さくすると新MaxSizeへ変わる。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_SetDesiredCapacity.go",
+              "claim": "希望容量を現在サイズより小さくして縮退が起きると終了ポリシーで終了対象を決める。希望容量は維持を試みる容量であり即時の処理準備完了ではない。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "重み付き容量と一時超過の条件",
+          "終了時の処理保護",
+          "ターゲット追跡とウォームアップ"
+        ]
+      }
     },
     {
       "id": "concept:availability",
@@ -9802,6 +9873,16 @@
     {
       "from": "concept:athena",
       "to": "lesson:ch12-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:ec2",
+      "to": "concept:auto-scaling",
+      "type": "learn_before"
+    },
+    {
+      "from": "concept:auto-scaling",
+      "to": "lesson:ch04-l03",
       "type": "unit_reference"
     },
     {

@@ -10543,6 +10543,278 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-auto-scaling-capacity-boundary",
+      "title": "Auto Scalingの希望容量と最小・最大境界",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "容量境界と設定値の意味を説明し、更新条件へ適用する概念。",
+      "objective": "通常の台数指定で希望容量と実際の準備完了を分け、境界だけを変更した場合の容量更新を判断する。",
+      "unit_ids": [
+        "auto-scaling"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/auto-scaling.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "compute",
+        "operations"
+      ],
+      "capabilities": [
+        "scale"
+      ],
+      "concerns": [
+        "availability",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2 Auto Scaling"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "ec2"
+      ],
+      "conditions": [
+        "現在サイズ・希望容量・変更する境界を各設問で指定する。",
+        "容量設定の更新と実際の処理準備完了は区別する。"
+      ],
+      "limitations": [
+        "1台1容量単位の通常ASG。重み付き混合構成/属性ベース容量/AZ再配分や置換時の一時超過の詳細は対象外。"
+      ],
+      "misconceptions": [
+        "最大容量まで常に起動しておく。",
+        "最小・最大だけを変更しても希望容量は絶対に変わらない。",
+        "希望容量の更新完了はアプリ全台の準備完了を意味する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/auto-scaling.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "通常の台数指定ASGを使う。数値は教材用の仮定。重み付き混合構成は使わない。",
+        "counterexample": "第1問で最小2を維持し、最大だけ6から8へ上げる。希望容量は指定しない。 現在3は新最大8を超えず、最大値変更だけで希望8になるとは判断しない。増台したいなら必要な希望容量やポリシーも確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/auto-scaling.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-asg-capacity-boundary",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go",
+          "claim": "DesiredCapacityは作成時の容量と維持を試みる容量。MinSize以上MaxSize以下。未指定ならMinSize。通常unitsはインスタンス数、重み付き混合構成にはMaxSizeを超える例外がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "希望容量は最小以上最大以下。DesiredCapacityを指定せずMinSizeを現在サイズより大きくすると希望容量も新MinSizeへ、MaxSizeを現在サイズより小さくすると新MaxSizeへ変わる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_SetDesiredCapacity.go",
+          "claim": "希望容量を現在サイズより小さくして縮退が起きると終了ポリシーで終了対象を決める。希望容量は維持を試みる容量であり即時の処理準備完了ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "容量の増減を条件に合わせて判断するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/auto-scaling.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの台数・処理能力・費用や即時準備完了を保証しない。",
+        "simplifications": [
+          "1台1容量単位の通常ASG。重み付き混合構成/属性ベース容量/AZ再配分や置換時の一時超過の詳細は対象外。"
+        ],
+        "mislearning_risks": [
+          "最大容量まで常に起動しておく。",
+          "最小・最大だけを変更しても希望容量は絶対に変わらない。",
+          "希望容量の更新完了はアプリ全台の準備完了を意味する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-asg-capacity-boundary",
+      "title": "ASGの容量境界を変更する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "通常の台数指定で希望容量と実際の準備完了を分け、境界だけを変更した場合の容量更新を判断する。",
+      "unit_ids": [
+        "auto-scaling"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "asg-capacity-boundary"
+        }
+      ],
+      "domains": [
+        "compute",
+        "operations"
+      ],
+      "capabilities": [
+        "scale"
+      ],
+      "concerns": [
+        "availability",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2 Auto Scaling"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "ec2"
+      ],
+      "conditions": [
+        "現在サイズ・希望容量・変更する境界を各設問で指定する。",
+        "容量設定の更新と実際の処理準備完了は区別する。"
+      ],
+      "limitations": [
+        "1台1容量単位の通常ASG。重み付き混合構成/属性ベース容量/AZ再配分や置換時の一時超過の詳細は対象外。"
+      ],
+      "misconceptions": [
+        "最大容量まで常に起動しておく。",
+        "最小・最大だけを変更しても希望容量は絶対に変わらない。",
+        "希望容量の更新完了はアプリ全台の準備完了を意味する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "asg-capacity-boundary.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "asg-capacity-boundary.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "asg-capacity-boundary.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "asg-capacity-boundary.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go",
+          "claim": "DesiredCapacityは作成時の容量と維持を試みる容量。MinSize以上MaxSize以下。未指定ならMinSize。通常unitsはインスタンス数、重み付き混合構成にはMaxSizeを超える例外がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "希望容量は最小以上最大以下。DesiredCapacityを指定せずMinSizeを現在サイズより大きくすると希望容量も新MinSizeへ、MaxSizeを現在サイズより小さくすると新MaxSizeへ変わる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_SetDesiredCapacity.go",
+          "claim": "希望容量を現在サイズより小さくして縮退が起きると終了ポリシーで終了対象を決める。希望容量は維持を試みる容量であり即時の処理準備完了ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/auto-scaling.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの台数・処理能力・費用や即時準備完了を保証しない。",
+        "simplifications": [
+          "1台1容量単位の通常ASG。重み付き混合構成/属性ベース容量/AZ再配分や置換時の一時超過の詳細は対象外。"
+        ],
+        "mislearning_risks": [
+          "最大容量まで常に起動しておく。",
+          "最小・最大だけを変更しても希望容量は絶対に変わらない。",
+          "希望容量の更新完了はアプリ全台の準備完了を意味する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "asg-min-only-update, asg-max-only-update"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

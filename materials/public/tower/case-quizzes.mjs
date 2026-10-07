@@ -869,6 +869,36 @@ export const CASE_QUIZZES={
       "結果ファイルの取得経路も保護します。APIの制限だけでは読取りを止め切れません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go"
+  },
+  "asg-min-only-update": {
+    "prompt": "通常の台数指定ASGを使う。数値は教材用の仮定。重み付き混合構成は使わない。 通常の台数指定（1台=1容量単位、重み付き混合構成なし）のASG。現在サイズ3、希望3、最小2、最大6。UpdateAutoScalingGroupで最小だけを4へ変更し、DesiredCapacityは指定しない。ほかの容量変更はない。希望容量はどうなる？",
+    "options": [
+      "3のまま。最小値は希望容量に影響しない",
+      "4になる。ただし4台が即時に起動・処理準備完了する保証ではない",
+      "最大値6まで必ず増える"
+    ],
+    "answer": 1,
+    "reasons": [
+      "新しい最小値4が現在サイズ3を超えるこの更新では、希望容量も4になります。",
+      "希望容量を新しい最小値へ変更します。設定値と実際の準備完了は分けて確認します。",
+      "最小値だけを変更した条件で、最大値まで増やす設定ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go"
+  },
+  "asg-max-only-update": {
+    "prompt": "通常の台数指定ASGを使う。数値は教材用の仮定。重み付き混合構成は使わない。 別の通常台数指定ASG。現在サイズ5、希望5、最小2、最大6。最大だけを3へ変更し、DesiredCapacityは指定しない。他の容量変更、終了保護、処理の停止はなく、縮退が行える。期待する設定と終了対象の決まり方は？",
+    "options": [
+      "希望5を維持する。最大は表示上の注意にすぎない",
+      "最小2へ必ず下がり、全インスタンスが終了する",
+      "希望3へ変わり、縮退時は終了ポリシーで終了対象を選ぶ"
+    ],
+    "answer": 2,
+    "reasons": [
+      "新しい最大値3が現在サイズ5より小さいこの更新では、希望容量は3へ変わります。",
+      "設定される希望容量は新しい最大値3です。全台終了の設定ではありません。",
+      "縮退時の対象選択も別の設定です。ローカル状態や実行中処理の保護は別途設計します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -987,5 +1017,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "athena-workgroup-output",
     "athena-s3-result-deny"
+  ],
+  [
+    "asg-min-only-update",
+    "asg-max-only-update"
   ]
 ];

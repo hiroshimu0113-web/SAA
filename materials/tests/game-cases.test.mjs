@@ -16,7 +16,8 @@ test('cases: fixed option IDs preserve runtime answers when source choices reord
 test('cases: export only reviewed pairs, choose in order, resume after every answer without duplicate payout',()=>{
  assert.deepEqual(QUIZ_CASE_PAIRS,cases.filter(c=>c.content_status==='reviewed').map(c=>c.questions.map(q=>q.id)));
  const seen=new Set();
- for(let seed=1;seed<=120;seed++){
+ const seedBudget=Math.max(120,QUIZ_CASE_PAIRS.length*20);
+ for(let seed=1;seed<=seedBudget;seed++){
   // Spread deterministic seeds across the 32-bit space; small consecutive seeds
   // can share the same early xorshift/shuffle choices as the case pool grows.
   let s=enter((seed*2654435761)>>>0);const pair=s.quiz.ids.join(',');seen.add(pair);
@@ -27,6 +28,7 @@ test('cases: export only reviewed pairs, choose in order, resume after every ans
   }
   assert.equal(s.quiz.result.correct,2);const saved=JSON.stringify(s);
   assert.equal(JSON.stringify(act(s,{type:'quiz-next',questionId:s.quiz.ids[1]})),saved);
+  if(seed>=120&&QUIZ_CASE_PAIRS.every(p=>seen.has(p.join(','))))break;
  }
  for(const pair of QUIZ_CASE_PAIRS)assert.ok(seen.has(pair.join(',')),'unreachable case');
 });

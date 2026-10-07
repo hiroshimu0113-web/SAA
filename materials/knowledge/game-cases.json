@@ -3539,6 +3539,130 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "asg-capacity-boundary",
+      "title": "ASGの容量境界を変更する",
+      "premise": "通常の台数指定ASGを使う。数値は教材用の仮定。重み付き混合構成は使わない。",
+      "unit_ids": [
+        "auto-scaling"
+      ],
+      "chapter_ids": [
+        "ch04",
+        "ch11",
+        "ch12"
+      ],
+      "constraints": [
+        "現在サイズ・希望容量・変更する境界を各設問で指定する。",
+        "容量設定の更新と実際の処理準備完了は区別する。"
+      ],
+      "questions": [
+        {
+          "id": "asg-min-only-update",
+          "objective": "最小値だけを上げた場合の希望容量を判断する。",
+          "prompt": "通常の台数指定（1台=1容量単位、重み付き混合構成なし）のASG。現在サイズ3、希望3、最小2、最大6。UpdateAutoScalingGroupで最小だけを4へ変更し、DesiredCapacityは指定しない。ほかの容量変更はない。希望容量はどうなる？",
+          "options": [
+            {
+              "id": "asg-min-only-update-a",
+              "text": "3のまま。最小値は希望容量に影響しない",
+              "explanation": "新しい最小値4が現在サイズ3を超えるこの更新では、希望容量も4になります。"
+            },
+            {
+              "id": "asg-min-only-update-b",
+              "text": "4になる。ただし4台が即時に起動・処理準備完了する保証ではない",
+              "explanation": "希望容量を新しい最小値へ変更します。設定値と実際の準備完了は分けて確認します。"
+            },
+            {
+              "id": "asg-min-only-update-c",
+              "text": "最大値6まで必ず増える",
+              "explanation": "最小値だけを変更した条件で、最大値まで増やす設定ではありません。"
+            }
+          ],
+          "correct_option_id": "asg-min-only-update-b",
+          "runtime_option_order": [
+            "asg-min-only-update-a",
+            "asg-min-only-update-b",
+            "asg-min-only-update-c"
+          ],
+          "rationale": "希望容量を新しい最小値へ変更します。設定値と実際の準備完了は分けて確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go"
+          ]
+        },
+        {
+          "id": "asg-max-only-update",
+          "objective": "最大値を下げた場合の縮退を判断する。",
+          "prompt": "別の通常台数指定ASG。現在サイズ5、希望5、最小2、最大6。最大だけを3へ変更し、DesiredCapacityは指定しない。他の容量変更、終了保護、処理の停止はなく、縮退が行える。期待する設定と終了対象の決まり方は？",
+          "options": [
+            {
+              "id": "asg-max-only-update-a",
+              "text": "希望5を維持する。最大は表示上の注意にすぎない",
+              "explanation": "新しい最大値3が現在サイズ5より小さいこの更新では、希望容量は3へ変わります。"
+            },
+            {
+              "id": "asg-max-only-update-b",
+              "text": "最小2へ必ず下がり、全インスタンスが終了する",
+              "explanation": "設定される希望容量は新しい最大値3です。全台終了の設定ではありません。"
+            },
+            {
+              "id": "asg-max-only-update-c",
+              "text": "希望3へ変わり、縮退時は終了ポリシーで終了対象を選ぶ",
+              "explanation": "縮退時の対象選択も別の設定です。ローカル状態や実行中処理の保護は別途設計します。"
+            }
+          ],
+          "correct_option_id": "asg-max-only-update-c",
+          "runtime_option_order": [
+            "asg-max-only-update-a",
+            "asg-max-only-update-b",
+            "asg-max-only-update-c"
+          ],
+          "rationale": "縮退時の対象選択も別の設定です。ローカル状態や実行中処理の保護は別途設計します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_SetDesiredCapacity.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問で最小2を維持し、最大だけ6から8へ上げる。希望容量は指定しない。",
+        "answer": "現在3は新最大8を超えず、最大値変更だけで希望8になるとは判断しない。増台したいなら必要な希望容量やポリシーも確認する。",
+        "reason": "最大値を上げることは利用できる設定範囲を広げること。最大まで起動する指示とは別。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_CreateAutoScalingGroup.go",
+          "claim": "DesiredCapacityは作成時の容量と維持を試みる容量。MinSize以上MaxSize以下。未指定ならMinSize。通常unitsはインスタンス数、重み付き混合構成にはMaxSizeを超える例外がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_UpdateAutoScalingGroup.go",
+          "claim": "希望容量は最小以上最大以下。DesiredCapacityを指定せずMinSizeを現在サイズより大きくすると希望容量も新MinSizeへ、MaxSizeを現在サイズより小さくすると新MaxSizeへ変わる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/autoscaling/api_op_SetDesiredCapacity.go",
+          "claim": "希望容量を現在サイズより小さくして縮退が起きると終了ポリシーで終了対象を決める。希望容量は維持を試みる容量であり即時の処理準備完了ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
