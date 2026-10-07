@@ -295,6 +295,14 @@
         "ch11"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "athena",
+      "chapter_ids": [
+        "ch07",
+        "ch12"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [

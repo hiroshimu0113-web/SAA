@@ -3292,6 +3292,129 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "athena-result-reuse",
+      "title": "過去の集計結果と新しいログ",
+      "premise": "AthenaのSQL結果の再利用を、データの最新性と実行実績から判断する。",
+      "unit_ids": [
+        "athena"
+      ],
+      "chapter_ids": [
+        "ch07",
+        "ch12"
+      ],
+      "constraints": [
+        "第1問は実際に10分前の結果を再利用したことが確認済み。例の時間は教材用の仮定。",
+        "再利用の全適格条件や将来の結果を有効設定だけから推定しない。"
+      ],
+      "questions": [
+        {
+          "id": "athena-reused-freshness",
+          "objective": "再利用された結果と追加済み入力を区別する。",
+          "prompt": "ある集計結果が生成された後に、対象S3へ新しいログを追加した。同じ集計SQLの今回の結果はReusedPreviousResult=trueで、10分前の結果を再利用している。今追加したログも含む最新集計が必要。どう判断する？",
+          "options": [
+            {
+              "id": "athena-reused-freshness-a",
+              "text": "最大経過時間内なので、10分前の結果にも必ず新しいログが入っている",
+              "explanation": "過去の生成済み結果を使っています。結果の経過時間と、生成後の新データを含むことは別です。"
+            },
+            {
+              "id": "athena-reused-freshness-b",
+              "text": "今回の結果を最新とは扱わず、再利用を無効にした新しい実行と対象データ・結果を確認する",
+              "explanation": "実際に再利用された結果から、生成後の変更も集計済みとは判断しません。再実行の対象と結果も確認します。"
+            },
+            {
+              "id": "athena-reused-freshness-c",
+              "text": "同じ実行IDへGetQueryResultsを繰り返せば、SQLも必ず再実行される",
+              "explanation": "結果取得はクエリ実行とは別です。同じ実行結果の取得で入力追加後の集計が行われるわけではありません。"
+            }
+          ],
+          "correct_option_id": "athena-reused-freshness-b",
+          "runtime_option_order": [
+            "athena-reused-freshness-a",
+            "athena-reused-freshness-b",
+            "athena-reused-freshness-c"
+          ],
+          "rationale": "実際に再利用された結果から、生成後の変更も集計済みとは判断しません。再実行の対象と結果も確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go"
+          ]
+        },
+        {
+          "id": "athena-reuse-flag",
+          "objective": "再利用の設定と実績を分ける。",
+          "prompt": "別の集計で結果再利用を有効にした。候補の最大経過時間は60分、今回のReusedPreviousResult=false。今回の結果の説明は？再利用の全適格条件を推定する問題ではない。",
+          "options": [
+            {
+              "id": "athena-reuse-flag-a",
+              "text": "新しいクエリ実行から生成された結果。設定の有効化だけで再利用されたとは言えない",
+              "explanation": "falseは新しい実行の結果を示します。候補の年齢設定と実際の再利用を分けます。"
+            },
+            {
+              "id": "athena-reuse-flag-b",
+              "text": "有効設定があるので、実績フラグに関係なく過去結果を再利用した",
+              "explanation": "設定は再利用の許可で、実際に使われた証拠ではありません。"
+            },
+            {
+              "id": "athena-reuse-flag-c",
+              "text": "falseなら次のすべてのクエリでも再利用は永久に禁止される",
+              "explanation": "これは今回の結果の情報です。将来の設定や別実行の結果を保証しません。"
+            }
+          ],
+          "correct_option_id": "athena-reuse-flag-a",
+          "runtime_option_order": [
+            "athena-reuse-flag-a",
+            "athena-reuse-flag-b",
+            "athena-reuse-flag-c"
+          ],
+          "rationale": "falseは新しい実行の結果を示します。候補の年齢設定と実際の再利用を分けます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の要件が、10分前の生成済み集計でもよい定期レポートへ変わる。",
+        "answer": "その鮮度を明示して許容でき、再利用の他条件も満たすなら、過去結果を使う選択肢が成立する。",
+        "reason": "最新性の要求が変わると過去結果を利用できる条件も変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "ResultReuseByAgeConfiguration.Enabledは過去結果を再利用可能にする設定で既定false。MaxAgeInMinutesは候補結果の最大経過時間で既定60分。ResultReuseInformation.ReusedPreviousResult=trueは過去結果の再利用、falseは新しい実行の結果。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "StartQueryExecutionはSQLを実行し、ResultReuseConfigurationで結果再利用の動作を指定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "GetQueryResultsは指定実行IDの結果をS3の結果場所から取得し、SQLを実行しない。実行にはStartQueryExecutionを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

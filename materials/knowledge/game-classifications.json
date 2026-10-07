@@ -9989,6 +9989,276 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-athena-result-reuse",
+      "title": "Athenaの結果再利用と最新性の判断",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "過去結果の再利用と最新性・実績の条件を適用する概念。",
+      "objective": "結果再利用の設定・実績・生成後の入力変更を分け、必要な最新性に合わせて実行を選ぶ。",
+      "unit_ids": [
+        "athena"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/athena.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "cost"
+      ],
+      "capabilities": [
+        "process",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Athena"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "第1問は実際に10分前の結果を再利用したことが確認済み。例の時間は教材用の仮定。",
+        "再利用の全適格条件や将来の結果を有効設定だけから推定しない。"
+      ],
+      "limitations": [
+        "過去のSQL結果の再利用、最大経過時間と実績フラグ。再利用の全適格条件、SQL最適化/パーティション、費用測定、入力のトランザクション整合性は対象外。"
+      ],
+      "misconceptions": [
+        "再利用の最大経過時間内なら生成後の新データも必ず含む。",
+        "再利用を有効にしただけで実際に再利用されたと証明できる。",
+        "GetQueryResultsを繰り返すとSQLも必ず再実行される。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/athena.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "AthenaのSQL結果の再利用を、データの最新性と実行実績から判断する。",
+        "counterexample": "第1問の要件が、10分前の生成済み集計でもよい定期レポートへ変わる。 その鮮度を明示して許容でき、再利用の他条件も満たすなら、過去結果を使う選択肢が成立する。",
+        "comparison": {
+          "path": "knowledge/lessons/athena.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-athena-result-reuse",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "ResultReuseByAgeConfiguration.Enabledは過去結果を再利用可能にする設定で既定false。MaxAgeInMinutesは候補結果の最大経過時間で既定60分。ResultReuseInformation.ReusedPreviousResult=trueは過去結果の再利用、falseは新しい実行の結果。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "StartQueryExecutionはSQLを実行し、ResultReuseConfigurationで結果再利用の動作を指定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "GetQueryResultsは指定実行IDの結果をS3の結果場所から取得し、SQLを実行しない。実行にはStartQueryExecutionを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "SQL結果の再利用条件を説明するカード素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/athena.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬やエナジーはAWSの料金・速度・データの最新性を保証しない。",
+        "simplifications": [
+          "過去のSQL結果の再利用、最大経過時間と実績フラグ。再利用の全適格条件、SQL最適化/パーティション、費用測定、入力のトランザクション整合性は対象外。"
+        ],
+        "mislearning_risks": [
+          "再利用の最大経過時間内なら生成後の新データも必ず含む。",
+          "再利用を有効にしただけで実際に再利用されたと証明できる。",
+          "GetQueryResultsを繰り返すとSQLも必ず再実行される。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-athena-result-reuse",
+      "title": "過去の集計結果と新しいログ",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "結果再利用の設定・実績・生成後の入力変更を分け、必要な最新性に合わせて実行を選ぶ。",
+      "unit_ids": [
+        "athena"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-result-reuse"
+        }
+      ],
+      "domains": [
+        "database",
+        "cost"
+      ],
+      "capabilities": [
+        "process",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Athena"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "第1問は実際に10分前の結果を再利用したことが確認済み。例の時間は教材用の仮定。",
+        "再利用の全適格条件や将来の結果を有効設定だけから推定しない。"
+      ],
+      "limitations": [
+        "過去のSQL結果の再利用、最大経過時間と実績フラグ。再利用の全適格条件、SQL最適化/パーティション、費用測定、入力のトランザクション整合性は対象外。"
+      ],
+      "misconceptions": [
+        "再利用の最大経過時間内なら生成後の新データも必ず含む。",
+        "再利用を有効にしただけで実際に再利用されたと証明できる。",
+        "GetQueryResultsを繰り返すとSQLも必ず再実行される。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-result-reuse.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-result-reuse.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-result-reuse.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-result-reuse.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "ResultReuseByAgeConfiguration.Enabledは過去結果を再利用可能にする設定で既定false。MaxAgeInMinutesは候補結果の最大経過時間で既定60分。ResultReuseInformation.ReusedPreviousResult=trueは過去結果の再利用、falseは新しい実行の結果。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "StartQueryExecutionはSQLを実行し、ResultReuseConfigurationで結果再利用の動作を指定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "GetQueryResultsは指定実行IDの結果をS3の結果場所から取得し、SQLを実行しない。実行にはStartQueryExecutionを使う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/athena.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬やエナジーはAWSの料金・速度・データの最新性を保証しない。",
+        "simplifications": [
+          "過去のSQL結果の再利用、最大経過時間と実績フラグ。再利用の全適格条件、SQL最適化/パーティション、費用測定、入力のトランザクション整合性は対象外。"
+        ],
+        "mislearning_risks": [
+          "再利用の最大経過時間内なら生成後の新データも必ず含む。",
+          "再利用を有効にしただけで実際に再利用されたと証明できる。",
+          "GetQueryResultsを繰り返すとSQLも必ず再実行される。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "athena-reused-freshness, athena-reuse-flag"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

@@ -809,6 +809,36 @@ export const CASE_QUIZZES={
       "二重指定はエラーです。ソースの設定不足を別の開始パラメータ追加で解消しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
+  },
+  "athena-reused-freshness": {
+    "prompt": "AthenaのSQL結果の再利用を、データの最新性と実行実績から判断する。 ある集計結果が生成された後に、対象S3へ新しいログを追加した。同じ集計SQLの今回の結果はReusedPreviousResult=trueで、10分前の結果を再利用している。今追加したログも含む最新集計が必要。どう判断する？",
+    "options": [
+      "最大経過時間内なので、10分前の結果にも必ず新しいログが入っている",
+      "今回の結果を最新とは扱わず、再利用を無効にした新しい実行と対象データ・結果を確認する",
+      "同じ実行IDへGetQueryResultsを繰り返せば、SQLも必ず再実行される"
+    ],
+    "answer": 1,
+    "reasons": [
+      "過去の生成済み結果を使っています。結果の経過時間と、生成後の新データを含むことは別です。",
+      "実際に再利用された結果から、生成後の変更も集計済みとは判断しません。再実行の対象と結果も確認します。",
+      "結果取得はクエリ実行とは別です。同じ実行結果の取得で入力追加後の集計が行われるわけではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go"
+  },
+  "athena-reuse-flag": {
+    "prompt": "AthenaのSQL結果の再利用を、データの最新性と実行実績から判断する。 別の集計で結果再利用を有効にした。候補の最大経過時間は60分、今回のReusedPreviousResult=false。今回の結果の説明は？再利用の全適格条件を推定する問題ではない。",
+    "options": [
+      "新しいクエリ実行から生成された結果。設定の有効化だけで再利用されたとは言えない",
+      "有効設定があるので、実績フラグに関係なく過去結果を再利用した",
+      "falseなら次のすべてのクエリでも再利用は永久に禁止される"
+    ],
+    "answer": 0,
+    "reasons": [
+      "falseは新しい実行の結果を示します。候補の年齢設定と実際の再利用を分けます。",
+      "設定は再利用の許可で、実際に使われた証拠ではありません。",
+      "これは今回の結果の情報です。将来の設定や別実行の結果を保証しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -919,5 +949,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "cdc-position-or-time",
     "cdc-postgresql-slot"
+  ],
+  [
+    "athena-reused-freshness",
+    "athena-reuse-flag"
   ]
 ];

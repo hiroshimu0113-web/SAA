@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 29,
-    "rubric_checks": 58
+    "detailed_units": 30,
+    "rubric_checks": 60
   },
   "nodes": [
     {
@@ -138,9 +138,77 @@
     {
       "id": "concept:athena",
       "kind": "concept",
-      "title": "athena",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "Athenaの結果再利用と最新性の判断",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "athena",
+        "title": "Athenaの結果再利用と最新性の判断",
+        "group": "processing",
+        "objective": "結果再利用の設定・実績・生成後の入力変更を分け、必要な最新性に合わせて実行を選ぶ。",
+        "estimated_minutes": 7,
+        "scope": "過去のSQL結果の再利用、最大経過時間と実績フラグ。再利用の全適格条件、SQL最適化/パーティション、費用測定、入力のトランザクション整合性は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "再利用の最大経過時間内なら生成後の新データも必ず含む。",
+          "再利用を有効にしただけで実際に再利用されたと証明できる。",
+          "GetQueryResultsを繰り返すとSQLも必ず再実行される。"
+        ],
+        "checks": [
+          {
+            "id": "athena-explain",
+            "level": "explain",
+            "prompt": "再利用の設定とReusedPreviousResultはどう違う？",
+            "expected_points": [
+              "Enabledは再利用可能にする設定",
+              "最大経過時間は候補の条件",
+              "フラグで今回の再利用/新実行を区別"
+            ]
+          },
+          {
+            "id": "athena-apply",
+            "level": "apply",
+            "prompt": "結果生成後にデータが追加され、最新集計が必要なら？",
+            "expected_points": [
+              "過去の生成済み結果を最新と決めつけない",
+              "再利用を無効にした新実行と対象データを確認",
+              "結果取得とクエリ実行を分ける"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch12-l03"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/athena.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+              "claim": "ResultReuseByAgeConfiguration.Enabledは過去結果を再利用可能にする設定で既定false。MaxAgeInMinutesは候補結果の最大経過時間で既定60分。ResultReuseInformation.ReusedPreviousResult=trueは過去結果の再利用、falseは新しい実行の結果。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+              "claim": "StartQueryExecutionはSQLを実行し、ResultReuseConfigurationで結果再利用の動作を指定する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+              "claim": "GetQueryResultsは指定実行IDの結果をS3の結果場所から取得し、SQLを実行しない。実行にはStartQueryExecutionを使う。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "出力先・ワークグループと結果ファイルの権限境界を別の構成説明で確認する。",
+          "再利用の全適格条件、パーティション/列指向形式と実測を詳述する。"
+        ]
+      }
     },
     {
       "id": "concept:aurora-replica",
@@ -9729,6 +9797,11 @@
     {
       "from": "concept:cdc",
       "to": "lesson:ch11-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:athena",
+      "to": "lesson:ch12-l03",
       "type": "unit_reference"
     },
     {
