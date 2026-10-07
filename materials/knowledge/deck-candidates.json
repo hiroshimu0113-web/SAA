@@ -256,6 +256,7 @@
       "target_cards": 20,
       "card_candidate_ids": [
         "candidate-alb",
+        "candidate-athena",
         "candidate-authentication",
         "candidate-authorization",
         "candidate-aws-config",
@@ -324,6 +325,7 @@
         "candidate-gsi",
         "candidate-kinesis",
         "candidate-lake-formation",
+        "candidate-least-privilege",
         "candidate-opensearch",
         "candidate-performance",
         "candidate-redshift",
@@ -498,6 +500,7 @@
       "title": "Athenaの結果再利用と最新性の判断",
       "related_chapter_ids": [
         "ch07",
+        "ch10",
         "ch12"
       ],
       "material_refs": [
@@ -2577,7 +2580,8 @@
       "related_chapter_ids": [
         "ch02",
         "ch05",
-        "ch10"
+        "ch10",
+        "ch12"
       ],
       "material_refs": [
         {

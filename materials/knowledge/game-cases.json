@@ -3415,6 +3415,130 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "athena-output-access",
+      "title": "Athenaの出力先と結果への直接アクセス",
+      "premise": "S3へSQL結果を保存するAthenaを使う。マネージド結果保存とSparkは使わない。",
+      "unit_ids": [
+        "athena",
+        "least-privilege"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch10",
+        "ch12"
+      ],
+      "constraints": [
+        "設問は結果をS3に保存するSQL構成で、必要な出力/暗号化条件を満たす。",
+        "第2問のS3取得には別の阻害条件がなく、API制限だけと直接経路を区別する。"
+      ],
+      "questions": [
+        {
+          "id": "athena-workgroup-output",
+          "objective": "強制する設定から実際の出力先を選ぶ。",
+          "prompt": "S3へ結果を保存するAthena SQLで、クライアントのOutputLocationはバケットA、ワークグループはバケットB。EnforceWorkGroupConfiguration=true。必要な出力権限と暗号化条件は満たす。実際に使う出力設定は？A/Bは教材用の仮称。",
+          "options": [
+            {
+              "id": "athena-workgroup-output-a",
+              "text": "クライアントが指定したAを必ず使い、ワークグループは無視する",
+              "explanation": "強制するワークグループ設定はクライアント側設定を上書きします。"
+            },
+            {
+              "id": "athena-workgroup-output-b",
+              "text": "ワークグループのBを使う。取得側の権限もBの結果場所で確認する",
+              "explanation": "出力先が変われば、結果取得のS3権限を確認する場所もその実際の場所です。"
+            },
+            {
+              "id": "athena-workgroup-output-c",
+              "text": "AとBへ結果を必ず二重保存し、両方の読取りを自動許可する",
+              "explanation": "設定の優先制御であり、二重保存や読取り権限の自動付与ではありません。"
+            }
+          ],
+          "correct_option_id": "athena-workgroup-output-b",
+          "runtime_option_order": [
+            "athena-workgroup-output-a",
+            "athena-workgroup-output-b",
+            "athena-workgroup-output-c"
+          ],
+          "rationale": "出力先が変われば、結果取得のS3権限を確認する場所もその実際の場所です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go"
+          ]
+        },
+        {
+          "id": "athena-s3-result-deny",
+          "objective": "APIのDenyとS3結果ファイルの保護を分ける。",
+          "prompt": "別の利用者へathena:GetQueryResultsをDenyしたが、S3結果ファイルのs3:GetObjectは許可したまま。対象ファイルが存在し、他の取得を阻害する条件はない。この利用者による結果の読取りを止めたい。追加で必要な制御は？",
+          "options": [
+            {
+              "id": "athena-s3-result-deny-a",
+              "text": "Athena APIだけをDenyすれば、S3への直接読取りも必ず拒否される",
+              "explanation": "S3 GetObjectが許可されていれば、Athena APIのDenyとは別にS3から読めます。"
+            },
+            {
+              "id": "athena-s3-result-deny-b",
+              "text": "ワークグループの表示名を変更すれば、既存結果へのS3権限も消える",
+              "explanation": "表示名の変更は、S3のオブジェクトアクセス制御を変更しません。"
+            },
+            {
+              "id": "athena-s3-result-deny-c",
+              "text": "S3結果場所の直接読取りも拒否・制限し、Athena APIとS3の両経路を確認する",
+              "explanation": "結果ファイルの取得経路も保護します。APIの制限だけでは読取りを止め切れません。"
+            }
+          ],
+          "correct_option_id": "athena-s3-result-deny-c",
+          "runtime_option_order": [
+            "athena-s3-result-deny-a",
+            "athena-s3-result-deny-b",
+            "athena-s3-result-deny-c"
+          ],
+          "rationale": "結果ファイルの取得経路も保護します。APIの制限だけでは読取りを止め切れません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問でワークグループもクライアントも結果出力先を設定していない。マネージド結果保存も使わない。",
+        "answer": "結果出力先がないというエラーになる。適切な結果場所と必要な権限を設定する。",
+        "reason": "このS3結果構成では、個別要求かワークグループに出力場所が必要。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "EnforceWorkGroupConfiguration=trueではワークグループ設定がクライアント側設定を上書きする。S3結果出力先も対象。ExpectedBucketOwner不一致では権限エラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "クエリのResultConfigurationはワークグループ設定により出力先等が上書きされ得る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "結果取得APIにはAthenaのGetQueryResultsと結果場所のS3 GetObjectが必要。S3 GetObjectが許可される利用者は、GetQueryResultsがDenyでもS3から結果を取得できる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "作成後にワークグループ上書き・S3直接取得と全選択肢の条件を公式SDKへ照合。同一担当の確認、独立監査と実AWS試験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

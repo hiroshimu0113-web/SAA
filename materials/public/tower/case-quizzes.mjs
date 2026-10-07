@@ -839,6 +839,36 @@ export const CASE_QUIZZES={
       "これは今回の結果の情報です。将来の設定や別実行の結果を保証しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go"
+  },
+  "athena-workgroup-output": {
+    "prompt": "S3へSQL結果を保存するAthenaを使う。マネージド結果保存とSparkは使わない。 S3へ結果を保存するAthena SQLで、クライアントのOutputLocationはバケットA、ワークグループはバケットB。EnforceWorkGroupConfiguration=true。必要な出力権限と暗号化条件は満たす。実際に使う出力設定は？A/Bは教材用の仮称。",
+    "options": [
+      "クライアントが指定したAを必ず使い、ワークグループは無視する",
+      "ワークグループのBを使う。取得側の権限もBの結果場所で確認する",
+      "AとBへ結果を必ず二重保存し、両方の読取りを自動許可する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "強制するワークグループ設定はクライアント側設定を上書きします。",
+      "出力先が変われば、結果取得のS3権限を確認する場所もその実際の場所です。",
+      "設定の優先制御であり、二重保存や読取り権限の自動付与ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go"
+  },
+  "athena-s3-result-deny": {
+    "prompt": "S3へSQL結果を保存するAthenaを使う。マネージド結果保存とSparkは使わない。 別の利用者へathena:GetQueryResultsをDenyしたが、S3結果ファイルのs3:GetObjectは許可したまま。対象ファイルが存在し、他の取得を阻害する条件はない。この利用者による結果の読取りを止めたい。追加で必要な制御は？",
+    "options": [
+      "Athena APIだけをDenyすれば、S3への直接読取りも必ず拒否される",
+      "ワークグループの表示名を変更すれば、既存結果へのS3権限も消える",
+      "S3結果場所の直接読取りも拒否・制限し、Athena APIとS3の両経路を確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "S3 GetObjectが許可されていれば、Athena APIのDenyとは別にS3から読めます。",
+      "表示名の変更は、S3のオブジェクトアクセス制御を変更しません。",
+      "結果ファイルの取得経路も保護します。APIの制限だけでは読取りを止め切れません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -953,5 +983,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "athena-reused-freshness",
     "athena-reuse-flag"
+  ],
+  [
+    "athena-workgroup-output",
+    "athena-s3-result-deny"
   ]
 ];

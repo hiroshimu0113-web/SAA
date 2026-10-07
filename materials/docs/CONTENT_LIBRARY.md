@@ -59,3 +59,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [CDCの開始位置とソース固有の再開条件](../knowledge/lessons/cdc.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [Athenaの結果再利用と最新性の判断](../knowledge/lessons/athena.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [Athenaの結果出力と取得経路の制御](../knowledge/lessons/athena-output-access.md)：確認・分類済みの構成本文。既存athena/least-privilegeを共有し、カード素材・詳細単位へ重複計上しない。ケース取り込み済み、公開未実施。

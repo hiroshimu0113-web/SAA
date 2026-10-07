@@ -10259,6 +10259,290 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "system-athena-output-access",
+      "title": "AthenaからS3結果取得までの制御",
+      "aliases": [],
+      "kind": "system",
+      "classification_reason": "クライアント/ワークグループ/結果保存/複数取得経路の連携を追う構成説明。",
+      "objective": "有効な出力設定とS3結果ファイルの両取得経路を追い、保護範囲を決める。",
+      "unit_ids": [
+        "athena",
+        "least-privilege"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Athena",
+        "Amazon Simple Storage Service"
+      ],
+      "game_targets": [
+        "case",
+        "build"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "Athenaの結果取得と実行の区別",
+        "最小権限"
+      ],
+      "conditions": [
+        "設問は結果をS3に保存するSQL構成で、必要な出力/暗号化条件を満たす。",
+        "第2問のS3取得には別の阻害条件がなく、API制限だけと直接経路を区別する。"
+      ],
+      "limitations": [
+        "S3結果保存のSQL構成。マネージド結果保存/Sparkと完全なポリシー評価は対象外。"
+      ],
+      "misconceptions": [
+        "APIのDenyだけでS3直接取得も禁止される。",
+        "強制ワークグループ設定よりクライアント出力先が常に優先する。"
+      ],
+      "content": {
+        "components": {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "構成要素"
+        },
+        "input": "SQLとクライアント/ワークグループの結果設定",
+        "flow": {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "仕組み"
+        },
+        "output": "有効な出力場所のS3結果ファイルと、その取得経路",
+        "dependencies": [
+          "設問は結果をS3に保存するSQL構成で、必要な出力/暗号化条件を満たす。",
+          "第2問のS3取得には別の阻害条件がなく、API制限だけと直接経路を区別する。"
+        ],
+        "failure_behavior": {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "異常時・限界"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-athena-output-access",
+          "reason": "有効な設定と読取り経路を独立2問で確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "EnforceWorkGroupConfiguration=trueではワークグループ設定がクライアント側設定を上書きする。S3結果出力先も対象。ExpectedBucketOwner不一致では権限エラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "クエリのResultConfigurationはワークグループ設定により出力先等が上書きされ得る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "結果取得APIにはAthenaのGetQueryResultsと結果場所のS3 GetObjectが必要。S3 GetObjectが許可される利用者は、GetQueryResultsがDenyでもS3から結果を取得できる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "結果保存と取得の流れをsystem、条件判断をcaseとして分離。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "作成後にワークグループ上書き・S3直接取得と全選択肢の条件を公式SDKへ照合。同一担当の確認、独立監査と実AWS試験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "結果保存/取得の構成判断をケースと将来のビルド素材へ再利用する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬は保存場所のアクセス許可やAWSのセキュリティ保証を表さない。",
+        "simplifications": [
+          "S3結果保存のSQL構成。マネージド結果保存/Sparkと完全なポリシー評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "APIのDenyだけでS3直接取得も禁止される。",
+          "強制ワークグループ設定よりクライアント出力先が常に優先する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "全ポリシー評価と暗号化条件、実AWS試験は未実施。"
+      ]
+    },
+    {
+      "id": "case-athena-output-access",
+      "title": "Athenaの出力先と結果への直接アクセス",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "強制設定と別経路を明示した独立2問のケース。",
+      "objective": "有効な出力設定とS3結果ファイルの両取得経路を追い、保護範囲を決める。",
+      "unit_ids": [
+        "athena",
+        "least-privilege"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-output-access"
+        }
+      ],
+      "domains": [
+        "database",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Athena",
+        "Amazon Simple Storage Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "Athenaの結果取得と実行の区別",
+        "最小権限"
+      ],
+      "conditions": [
+        "設問は結果をS3に保存するSQL構成で、必要な出力/暗号化条件を満たす。",
+        "第2問のS3取得には別の阻害条件がなく、API制限だけと直接経路を区別する。"
+      ],
+      "limitations": [
+        "S3結果保存のSQL構成。マネージド結果保存/Sparkと完全なポリシー評価は対象外。"
+      ],
+      "misconceptions": [
+        "APIのDenyだけでS3直接取得も禁止される。",
+        "強制ワークグループ設定よりクライアント出力先が常に優先する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-output-access.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-output-access.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-output-access.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "athena-output-access.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/types/types.go",
+          "claim": "EnforceWorkGroupConfiguration=trueではワークグループ設定がクライアント側設定を上書きする。S3結果出力先も対象。ExpectedBucketOwner不一致では権限エラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_StartQueryExecution.go",
+          "claim": "クエリのResultConfigurationはワークグループ設定により出力先等が上書きされ得る。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/athena/api_op_GetQueryResults.go",
+          "claim": "結果取得APIにはAthenaのGetQueryResultsと結果場所のS3 GetObjectが必要。S3 GetObjectが許可される利用者は、GetQueryResultsがDenyでもS3から結果を取得できる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "結果保存と取得の流れをsystem、条件判断をcaseとして分離。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "作成後にワークグループ上書き・S3直接取得と全選択肢の条件を公式SDKへ照合。同一担当の確認、独立監査と実AWS試験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全29ケースの両問・全解説・320px・回答/結果保存再開・オフライン・報酬重複防止、知識地図30ノード・検索・前提導線・キーボード・320pxを確認。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問ケースへ取り込み、全解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/athena-output-access.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬は保存場所のアクセス許可やAWSのセキュリティ保証を表さない。",
+        "simplifications": [
+          "S3結果保存のSQL構成。マネージド結果保存/Sparkと完全なポリシー評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "APIのDenyだけでS3直接取得も禁止される。",
+          "強制ワークグループ設定よりクライアント出力先が常に優先する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "athena-workgroup-output, athena-s3-result-deny"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
