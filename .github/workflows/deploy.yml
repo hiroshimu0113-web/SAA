@@ -76,3 +76,16 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: pages-artifact
+      - name: Verify the published learning release
+        timeout-minutes: 8
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          mkdir published-artifact
+          tar -xf pages-artifact/artifact.tar -C published-artifact
+          python materials/scripts/verify-publication.py published-artifact "$PAGE_URL"
