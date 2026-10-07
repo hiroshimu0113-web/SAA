@@ -38,3 +38,5 @@ await writeFile('dist/tower/heroes.html',html);
 await writeFile('dist/tower/models.html',html);
 
 await writeFile('dist/tower/relics.html',html);
+
+await writeFile('dist/tower/reactor.html',html);

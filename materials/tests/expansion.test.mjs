@@ -21,15 +21,15 @@ test('expansion: first turn energy stacks; hard-fight energy and extra draw appl
 });
 test('expansion: defense modifiers clamp at zero, affect block only and precede depletion',()=>{
  let s=enter('battle',['plating']);assert.equal(playerBlockGain(s,5),6);assert.equal(playerBlockGain(s,0),0);s=act(s,{type:'play',uid:force(s,'guard')});assert.equal(s.battle.playerBlock,6);
- s=enter('battle',['regeneration']);assert.equal(s.hp,44);assert.equal(playerBlockGain(s,5),3);assert.equal(playerBlockGain(s,1),0);s.battle.playerDebuffs.depletion=2;assert.equal(playerBlockGain(s,5),1);
- s=enter('battle',['regeneration','plating','shell']);assert.equal(s.battle.playerBlock,7);assert.equal(playerBlockGain(s,5),4);round(s);
+ s=enter('battle',['escalation']);assert.equal(s.hp,44);assert.equal(playerBlockGain(s,5),3);assert.equal(playerBlockGain(s,1),0);s.battle.playerDebuffs.depletion=2;assert.equal(playerBlockGain(s,5),1);
+ s=enter('battle',['escalation','plating','shell']);assert.equal(s.battle.playerBlock,7);assert.equal(playerBlockGain(s,5),4);round(s);
 });
 test('expansion: end-turn guard protects before enemy attack; double action triggers it only once',()=>{
  let s=enter('battle',['dusk']);s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.enemyStep=0;const hp=s.hp;s=act(s,{type:'end'});assert.equal(s.hp,hp-4);assert.equal(s.battle.playerBlock,0);round(s);
  s=enter('battle',['dusk']);s.battle.playerDebuffs.delay=2;s.battle.playerActions=2;s=act(s,{type:'end'});assert.equal(s.battle.playerBlock,0);assert.equal(s.battle.events.length,0);
 });
 test('expansion: escalating attack and healing start once per turn; reload is inert; defense penalty is fixed',()=>{
- let s=quiet(enter('battle',['escalation','regeneration']));assert.equal(s.hp,44);assert.equal(s.battle.playerStrength,3);assert.equal(s.battle.strength,1);round(s);
+ let s=quiet(enter('battle',['escalation']));assert.equal(s.hp,44);assert.equal(s.battle.playerStrength,3);assert.equal(s.battle.strength,1);round(s);
  s=act(s,{type:'end'});assert.equal(s.hp,48);assert.equal(s.battle.playerStrength,6);assert.equal(s.battle.strength,2);assert.equal(playerBlockGain(s,5),3);round(s);
  s.hp=s.maxHp;s=quiet(s);s=act(s,{type:'end'});assert.equal(s.hp,s.maxHp);
 });
@@ -57,7 +57,7 @@ test('expansion: journey-wide free first card never resets on revisit or reload,
  s=enter('shop',['coupon']);delete s.cardPurchases;round(s);assert.equal(shopPrice(s,'card'),0);s=round(act(s,{type:'buy',id:s.stock[0]}));assert.equal(s.cardPurchases,1);assert.equal(shopPrice(s,'card'),35);
 });
 test('expansion: save validates expanded limits, inventory, prices and partial reward progress',()=>{
- const s=newRun(3);s.relics.push(...REWARD_RELICS);round(s);assert.equal(Object.keys(RELICS).length,25);
+ const s=newRun(3);s.relics.push(...REWARD_RELICS);round(s);assert.equal(Object.keys(RELICS).length,24);
  for(const mutate of [s=>s.routes[0]=['shop','battle'],s=>s.cardPurchases=-1,s=>s.shopRelic='edge',s=>s.rewardPicks=2,s=>s.maxHp=100000]){const x=newRun(1);mutate(x);assert.throws(()=>round(x));}
  let reward=win(enter('battle',['double']));reward.rewardPicks=3;assert.throws(()=>round(reward));
 });
@@ -78,4 +78,16 @@ test('expansion: randomized complete journeys with all regular relics remain pla
   assert.ok(['won','lost'].includes(s.phase));outcomes.add(s.phase);
  }
  assert.ok(outcomes.has('won'));
+});
+
+test('combined relic: either old id migrates, both collapse into one, four effects fire only once',()=>{
+ for(const ids of [['escalation'],['regeneration'],['escalation','regeneration']]){
+  const old=newRun(2);old.relics.push(...ids);old.hp=40;
+  let s=parseRun(JSON.stringify(old));assert.equal(s.relics.filter(id=>id==='escalation').length,1);assert.ok(!s.relics.includes('regeneration'));
+  s=act(s,{type:'node',lane:0});assert.equal(s.hp,44);assert.equal(s.battle.playerStrength,3);assert.equal(s.battle.strength,1);assert.equal(playerBlockGain(s,5),3);round(s);
+ }
+ let shop=enter('shop',[]);shop.shopRelic='regeneration';assert.equal(parseRun(JSON.stringify(shop)).shopRelic,'escalation');shop.relics.push('escalation');assert.equal(parseRun(JSON.stringify(shop)).shopRelic,null);
+ let quiz=enter('event',[]);for(let i=0;i<2;i++){const id=quiz.quiz.ids[i];quiz=act(quiz,{type:'quiz-answer',questionId:id,choice:QUIZZES[id].answer});quiz=act(quiz,{type:'quiz-next',questionId:id});}
+ quiz.relics=quiz.relics.map(id=>id===quiz.quiz.result.relic?'regeneration':id);quiz.quiz.result.relic='regeneration';const migrated=parseRun(JSON.stringify(quiz));assert.equal(migrated.quiz.result.relic,'escalation');round(migrated);
+ assert.ok(!REWARD_RELICS.includes('regeneration'));
 });

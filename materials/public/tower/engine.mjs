@@ -33,13 +33,13 @@ function shuffle(s,arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=M
 export const routesFor=s=>s.routes||ROUTES;
 export function generateRoutes(seed){const r={rng:(seed^0x9e3779b9)>>>0};return [['battle','battle'],...shuffle(r,ROUTES.slice(1,6)).map(row=>shuffle(r,row)),['rest','rest'],['boss']];}
 const has=(s,id)=>s.relics.includes(id);
-export const defenseBonus=s=>(has(s,'plating')?1:0)-(has(s,'regeneration')?2:0);
+export const defenseBonus=s=>(has(s,'plating')?1:0)-(has(s,'escalation')?2:0);
 export const playerBlockGain=(s,n)=>n>0?blockAmount(Math.max(0,n+defenseBonus(s)),s.battle.playerDebuffs):0;
 const hardFight=s=>['elite','boss'].includes(ENEMIES[s.battle.enemy].tier);
 const turnEnergy=s=>3+(has(s,'elite_energy')&&hardFight(s)?1:0);
 const turnDraw=s=>5+(has(s,'insight')?1:0);
 export const shopPrice=(s,kind)=>kind==='card'&&has(s,'coupon')&&(s.cardPurchases??0)===0?0:Math.ceil(({card:35,remove:45,relic:100}[kind])*(has(s,'discount')?.75:1));
-function turnStart(s){const b=s.battle;if(has(s,'escalation')){b.playerStrength+=3;b.strength+=1;emit(b,'player','power',3,'攻撃力 ＋3');emit(b,'enemy','power',1,'攻撃力 ＋1');}if(has(s,'regeneration')){const before=s.hp;heal(s,4);if(s.hp>before)emit(b,'player','heal',s.hp-before,'回復 ＋'+(s.hp-before));}}
+function turnStart(s){const b=s.battle;if(has(s,'escalation')){b.playerStrength+=3;b.strength+=1;emit(b,'player','power',3,'攻撃力 ＋3');emit(b,'enemy','power',1,'攻撃力 ＋1');}if(has(s,'escalation')){const before=s.hp;heal(s,4);if(s.hp>before)emit(b,'player','heal',s.hp-before,'回復 ＋'+(s.hp-before));}}
 function log(s,t){s.log=[...s.log,t].slice(-5);}
 function heal(s,n){s.hp=Math.min(s.maxHp,s.hp+n);}
 function add(s,id){s.deck.push({uid:s.nextId++,id,plus:false});}
@@ -203,7 +203,13 @@ export function act(state,action){
 }
 export function parseRun(raw){
  const previous=getActiveCatalog();
- try{const candidate=JSON.parse(raw);activateCatalog(candidate&&Object.prototype.hasOwnProperty.call(candidate,'learningCatalog')?candidate.learningCatalog:null);return validateRun(raw);}catch(error){activateCatalog(previous);throw error;}
+ try{const candidate=JSON.parse(raw);
+ // Merge the mistakenly split relic in old backups without doubling its effects.
+ if(candidate&&Array.isArray(candidate.relics)&&candidate.relics.includes('regeneration'))candidate.relics=candidate.relics.map(id=>id==='regeneration'?'escalation':id).filter((id,i,ids)=>id!=='escalation'||ids.indexOf(id)===i);
+ if(candidate?.quiz?.result?.relic==='regeneration')candidate.quiz.result.relic='escalation';
+ if(candidate?.shopRelic==='regeneration')candidate.shopRelic='escalation';
+ if(candidate?.shopRelic==='escalation'&&candidate.relics?.includes('escalation'))candidate.shopRelic=null;
+ activateCatalog(candidate&&Object.prototype.hasOwnProperty.call(candidate,'learningCatalog')?candidate.learningCatalog:null);return validateRun(JSON.stringify(candidate));}catch(error){activateCatalog(previous);throw error;}
 }
 function validateRun(raw){
  const s=JSON.parse(raw),num=(x,max=100000)=>Number.isSafeInteger(x)&&x>=0&&x<=max;
