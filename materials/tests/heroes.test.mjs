@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {newRun,act,parseRun,HEROES,REWARD_RELICS,CARDS} from '../public/tower/engine.mjs';
+import {act,parseRun,HEROES,REWARD_RELICS,CARDS} from '../public/tower/engine.mjs';
 const battle=seed=>act(newRun(seed),{type:'node',lane:0});
 const round=s=>parseRun(JSON.stringify(s));
 function win(s){s.battle.hp=1;const c=s.deck.find(c=>s.battle.hand.includes(c.uid)&&CARDS[c.id].damage);assert.ok(c);return act(s,{type:'play',uid:c.uid});}

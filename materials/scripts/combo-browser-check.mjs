@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import assert from 'node:assert/strict';
-import {newRun,act} from '../public/tower/engine.mjs';
+import {act} from '../public/tower/engine.mjs';
 import {COMBOS} from '../public/tower/combos.mjs';
 export async function checkCombos(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);

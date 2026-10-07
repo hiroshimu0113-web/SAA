@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';
-import {newRun,parseRun,act,CARDS,QUIZZES,cardValues,activateCatalog} from '../public/tower/engine.mjs';
+import {parseRun,act,CARDS,QUIZZES,cardValues,activateCatalog} from '../public/tower/engine.mjs';
 import {validateCatalog,chooseCatalog,fetchCatalog,CATALOG_KEY,STARTERS} from '../public/tower/catalog.mjs';
 import {questions} from '../src/content/index.ts';
 import {BASE_CARDS} from '../public/tower/card-definitions.mjs';

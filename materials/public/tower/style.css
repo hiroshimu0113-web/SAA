@@ -103,3 +103,8 @@ button,.import,summary,.controls a{min-height:48px;touch-action:manipulation}
 .operator.hero-architect .hero-model{filter:drop-shadow(0 0 8px #d5ac6533)}
 .operator .hero-tag{position:absolute;bottom:-14px;left:-14px;right:-14px;text-align:center;font-size:10px;font-weight:700;white-space:nowrap;color:#b5e8ff;line-height:1.4}
 .operator.hero-sre .hero-tag{color:#a4f3bf}.operator.hero-architect .hero-tag{color:#ffe2a5}
+
+.hero-profile{padding:4px 8px;margin:0;border:1px solid #527575;background:#172d36;line-height:1.5;border-radius:6px;align-self:center}
+.hero-arrival{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);z-index:80;width:min(290px,85vw);text-align:center;padding:18px;border:1px solid #d5b36c;border-radius:18px;background:#132631f5;box-shadow:0 12px 70px #000b;pointer-events:none;color:#f1e5ce}
+.hero-arrival svg{display:block;height:90px;width:90px;margin:0 auto 8px}.hero-arrival small,.hero-arrival strong{display:block}.hero-arrival strong{font-size:20px;margin:6px 0}.hero-arrival p{font-size:12px;margin:6px 0}
+.shop-relic{padding:16px;border:1px solid #977f4d;border-radius:12px;margin:20px 0;background:#253039}.shop-relic p,.rest-remove p{font-size:14px}.rest-remove summary{padding:16px;cursor:pointer}.rest-remove{margin-top:18px;border:1px solid #607783;border-radius:10px}

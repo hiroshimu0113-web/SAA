@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {newRun,act} from '../public/tower/engine.mjs';
+import {act} from '../public/tower/engine.mjs';
 import {combatEffects} from '../public/tower/effects.mjs';
 function start(id='strike'){const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.deck.find(c=>c.uid===s.battle.hand[0]).id=id;return s;}
 function play(s){const a={type:'play',uid:s.battle.hand[0]},n=act(s,a);return combatEffects(s,n,a);}

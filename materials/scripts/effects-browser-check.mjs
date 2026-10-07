@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import assert from 'node:assert/strict';
-import {newRun,act} from '../public/tower/engine.mjs';
+import {act} from '../public/tower/engine.mjs';
 export async function checkCombatEffects(browser,base){
  const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{

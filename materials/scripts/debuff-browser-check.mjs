@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import {DEBUFFS} from '../public/tower/debuffs.mjs';
 import assert from 'node:assert/strict';
-import {newRun,act,ENEMIES,ENEMY_POOLS,enemyDebuffTypes} from '../public/tower/engine.mjs';
+import {act,ENEMIES,ENEMY_POOLS,enemyDebuffTypes} from '../public/tower/engine.mjs';
 const key='saa-tower-run-v1';
 function battle(enemy){const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy=enemy;s.battle.hp=s.battle.maxHp=ENEMIES[enemy].hp;return s;}
 export async function checkDebuffs(browser,base){

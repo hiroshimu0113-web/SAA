@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {newRun,act,parseRun,ENEMIES,ENEMY_POOLS,ROUTES,enemyDebuffTypes} from '../public/tower/engine.mjs';
+import {act,parseRun,ENEMIES,ENEMY_POOLS,ROUTES,enemyDebuffTypes} from '../public/tower/engine.mjs';
 function enter(seed,tier){const s=newRun(seed);s.floor=tier==='elite'?2:7;s.history=ROUTES.slice(0,s.floor).map((r,floor)=>({floor,lane:0,type:r[0]}));return act(s,{type:'node',lane:0});}
 test('roster: three distinct fixed profiles per tier, deterministic selection and saved identity',()=>{
  for(const tier of ['elite','boss']){

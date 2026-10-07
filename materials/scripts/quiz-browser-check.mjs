@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import assert from 'node:assert/strict';
-import {newRun,act,QUIZZES} from '../public/tower/engine.mjs';
+import {act,QUIZZES} from '../public/tower/engine.mjs';
 const key='saa-tower-run-v1';
 function enter(){const s=newRun(7);s.floor=1;s.history=[{floor:0,lane:0,type:'battle'}];return act(s,{type:'node',lane:0});}
 export async function quizOfflineRoundtrip(p){

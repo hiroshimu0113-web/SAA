@@ -1,7 +1,8 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {QUIZZES,CARDS,ENEMIES,ROUTES,newRun,act,intent,parseRun,cardValues} from '../public/tower/engine.mjs';
+import {QUIZZES,CARDS,ENEMIES,ROUTES,act,intent,parseRun,cardValues} from '../public/tower/engine.mjs';
 function start(seed=1){return act(newRun(seed),{type:'node',lane:0});}
 function roundTrip(s){assert.deepEqual(parseRun(JSON.stringify(s)),s);}
 test('tower: deterministic draw, card conservation, invalid actions and energy',()=>{

@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {newRun,act,parseRun,ENEMIES,CARDS,ROUTES,intent,intentActions} from '../public/tower/engine.mjs';
+import {act,parseRun,ENEMIES,CARDS,ROUTES,intent,intentActions} from '../public/tower/engine.mjs';
 import {DEBUFFS,applyDebuff,attackAmount,blockAmount} from '../public/tower/debuffs.mjs';
 import {combatEffects} from '../public/tower/effects.mjs';
 import {inspectPlay} from '../public/tower/strategy.mjs';

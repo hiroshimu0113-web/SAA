@@ -1,10 +1,11 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 
 import http from 'node:http';
 import {readFile} from 'node:fs/promises';
 import {resolve,extname} from 'node:path';
 import {chromium} from '@playwright/test';
 import assert from 'node:assert/strict';
-import {newRun} from '../public/tower/engine.mjs';
+import {} from '../public/tower/engine.mjs';
 let upgraded=false;
 const oldWorker="const PREFIX='saa-v1-'+self.registration.scope+'-';const CACHE=PREFIX+'legacy';const ROOT=new URL('./index.html',self.registration.scope).href;self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.add(ROOT))));self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));self.addEventListener('fetch',e=>{if(e.request.mode==='navigate')e.respondWith(caches.open(CACHE).then(async c=>(await c.match(e.request))||(await c.match(ROOT))));});";
 const server=http.createServer(async(req,res)=>{

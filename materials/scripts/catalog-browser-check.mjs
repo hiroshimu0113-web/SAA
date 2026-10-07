@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import assert from 'node:assert/strict';import {readFile,mkdir} from 'node:fs/promises';
 import {chromium,webkit} from '@playwright/test';import {preview} from 'vite';
-import {newRun,act} from '../public/tower/engine.mjs';
+import {act} from '../public/tower/engine.mjs';
 let server=await preview({base:'/SAA/',preview:{host:'127.0.0.1',port:4192,strictPort:true}});
 const isWebKit=process.env.BROWSER==='webkit';
 const browser=await (isWebKit?webkit:chromium).launch(isWebKit?{}:{executablePath:process.env.CHROME_PATH||undefined});

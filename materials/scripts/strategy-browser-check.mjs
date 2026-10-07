@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from './fixed-run-fixture.mjs';
 import assert from 'node:assert/strict';
-import {newRun,act,RELICS} from '../public/tower/engine.mjs';
+import {act,RELICS} from '../public/tower/engine.mjs';
 export async function checkStrategy(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{

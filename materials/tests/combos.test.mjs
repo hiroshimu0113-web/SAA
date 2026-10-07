@@ -1,5 +1,6 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';import assert from 'node:assert/strict';
-import {newRun,act,parseRun} from '../public/tower/engine.mjs';
+import {act,parseRun} from '../public/tower/engine.mjs';
 import {COMBOS,comboReady,triggeredCombos} from '../public/tower/combos.mjs';
 import {inspectPlay} from '../public/tower/strategy.mjs';
 function setup(ids){const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.energy=20;s.deck=s.deck.map((c,i)=>({...c,id:ids[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];return s;}

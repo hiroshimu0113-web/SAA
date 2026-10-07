@@ -1,6 +1,7 @@
+import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {CARDS,newRun,act,cardValues} from '../public/tower/engine.mjs';
+import {CARDS,act,cardValues} from '../public/tower/engine.mjs';
 import {inspectPlay,playableCount,turnForecast,synergyHints,lifetime} from '../public/tower/strategy.mjs';
 function start(){return act(newRun(1),{type:'node',lane:0});}
 test('live card forecasts reuse combat resolution without changing saves or RNG',()=>{
