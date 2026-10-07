@@ -1079,6 +1079,36 @@ export const CASE_QUIZZES={
       "新しい参照先へ接続を復旧します。切断前の処理結果は別途確認し、書込みを無条件に二重実行しません。"
     ],
     "source": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md"
+  },
+  "rds-replica-freshness": {
+    "prompt": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。 通常RDS PostgreSQLのリードレプリカを分析に使う。プライマリで確定した更新Xが、このレプリカにはまだ反映されていないことを確認済み。更新Xを今すぐ確認する読取りが必要で、プライマリへの接続・権限は正常。選択は？",
+    "options": [
+      "レプリカは常に同期済みと扱い、ここで最新のXを読む",
+      "プライマリで確定済みのXを読み、通常の分析と最新確認の読取り先を分ける",
+      "レプリカ自身をMulti-AZにすればXが必ず即時反映される"
+    ],
+    "answer": 1,
+    "reasons": [
+      "このレプリカではXが未反映という条件が明示されています。",
+      "非同期複製の未反映を踏まえて読取り先を選びます。",
+      "レプリカ自身の可用性と、元DBからの非同期複製の鮮度は別です。"
+    ],
+    "source": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md"
+  },
+  "rds-replica-backup-prerequisite": {
+    "prompt": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。 別の通常RDS PostgreSQL DBインスタンスから読取り用レプリカを作成したい。作成元のバックアップ保持期間は0で、保持は無効。権限・対応条件・容量は正常。作成前に必要な変更は？",
+    "options": [
+      "作成元のバックアップ保持を有効にして、必要な作成条件を満たす",
+      "作成元の保持を0のままにし、Multi-AZだけを有効にする",
+      "アプリのSQL権限だけを変更してバックアップ保持の前提を省く"
+    ],
+    "answer": 0,
+    "reasons": [
+      "CreateDBInstanceReadReplicaは作成元のバックアップ保持が有効であることを要求します。",
+      "Multi-AZはバックアップ保持の有効化を代替しません。",
+      "SQL権限はAPIが要求するバックアップ保持条件を変更しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1225,5 +1255,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "rds-standby-read-target",
     "rds-failover-reconnect"
+  ],
+  [
+    "rds-replica-freshness",
+    "rds-replica-backup-prerequisite"
   ]
 ];

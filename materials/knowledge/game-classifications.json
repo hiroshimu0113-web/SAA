@@ -12509,6 +12509,276 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-rds-read-replica-freshness",
+      "title": "RDSリードレプリカの鮮度と作成条件",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "RDSの配置・複製・接続先の条件から対処を判断する概念。",
+      "objective": "非同期複製の鮮度と読取り先を判断し、レプリカの作成前提と可用性を分ける。",
+      "unit_ids": [
+        "read-replica"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/read-replica.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon RDS"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "limitations": [
+        "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+      ],
+      "misconceptions": [
+        "レプリカは更新直後に必ず最新値を返す。",
+        "レプリカをMulti-AZにすれば元DBからの複製は同期になる。",
+        "Multi-AZがあればバックアップ保持の作成前提は不要。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/read-replica.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。",
+        "counterexample": "第1問の分析では更新Xの即時確認が不要で、現在の遅延を許容する。 通常の分析をレプリカへ分離する方針を選べる。鮮度の監視と許容条件は維持する。",
+        "comparison": {
+          "path": "knowledge/lessons/read-replica.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-rds-read-replica-freshness",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md",
+          "claim": "AWS公式アーカイブ版：通常PostgreSQLの読取り用レプリカは非同期複製で読取り負荷を分離。アプリが接続先を選び、昇格後は独立DBとなり元の複製先ではなくなる。現行の数値上限・エンジン対応には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go",
+          "claim": "作成元でバックアップ保持を有効にする必要がある。レプリカ自身をMulti-AZにし、別AZのスタンバイでレプリカの切替を支援できる。AuroraはこのAPIを使用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_PromoteReadReplica.go",
+          "claim": "昇格は独立DBインスタンスにする操作。backing-up状態では昇格できず、事前のバックアップ有効化と少なくとも一度のバックアップ完了を推奨。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "RDSの可用性と読取り条件を説明するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/read-replica.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの復旧時間・複製遅延・データ損失・費用を保証しない。",
+        "simplifications": [
+          "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+        ],
+        "mislearning_risks": [
+          "レプリカは更新直後に必ず最新値を返す。",
+          "レプリカをMulti-AZにすれば元DBからの複製は同期になる。",
+          "Multi-AZがあればバックアップ保持の作成前提は不要。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-rds-read-replica-freshness",
+      "title": "RDSリードレプリカの鮮度と作成条件を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "非同期複製の鮮度と読取り先を判断し、レプリカの作成前提と可用性を分ける。",
+      "unit_ids": [
+        "read-replica"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-read-replica-freshness"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon RDS"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "limitations": [
+        "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+      ],
+      "misconceptions": [
+        "レプリカは更新直後に必ず最新値を返す。",
+        "レプリカをMulti-AZにすれば元DBからの複製は同期になる。",
+        "Multi-AZがあればバックアップ保持の作成前提は不要。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-read-replica-freshness.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-read-replica-freshness.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-read-replica-freshness.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-read-replica-freshness.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md",
+          "claim": "AWS公式アーカイブ版：通常PostgreSQLの読取り用レプリカは非同期複製で読取り負荷を分離。アプリが接続先を選び、昇格後は独立DBとなり元の複製先ではなくなる。現行の数値上限・エンジン対応には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go",
+          "claim": "作成元でバックアップ保持を有効にする必要がある。レプリカ自身をMulti-AZにし、別AZのスタンバイでレプリカの切替を支援できる。AuroraはこのAPIを使用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_PromoteReadReplica.go",
+          "claim": "昇格は独立DBインスタンスにする操作。backing-up状態では昇格できず、事前のバックアップ有効化と少なくとも一度のバックアップ完了を推奨。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/read-replica.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの復旧時間・複製遅延・データ損失・費用を保証しない。",
+        "simplifications": [
+          "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+        ],
+        "mislearning_risks": [
+          "レプリカは更新直後に必ず最新値を返す。",
+          "レプリカをMulti-AZにすれば元DBからの複製は同期になる。",
+          "Multi-AZがあればバックアップ保持の作成前提は不要。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "rds-replica-freshness, rds-replica-backup-prerequisite"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

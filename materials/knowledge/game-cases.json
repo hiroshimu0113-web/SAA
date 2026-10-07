@@ -4416,6 +4416,129 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "rds-read-replica-freshness",
+      "title": "RDSリードレプリカの鮮度と作成条件を判断する",
+      "premise": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。",
+      "unit_ids": [
+        "read-replica"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch11",
+        "ch12"
+      ],
+      "constraints": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "questions": [
+        {
+          "id": "rds-replica-freshness",
+          "objective": "更新の反映を確認して読取り先を選ぶ。",
+          "prompt": "通常RDS PostgreSQLのリードレプリカを分析に使う。プライマリで確定した更新Xが、このレプリカにはまだ反映されていないことを確認済み。更新Xを今すぐ確認する読取りが必要で、プライマリへの接続・権限は正常。選択は？",
+          "options": [
+            {
+              "id": "rds-replica-freshness-a",
+              "text": "レプリカは常に同期済みと扱い、ここで最新のXを読む",
+              "explanation": "このレプリカではXが未反映という条件が明示されています。"
+            },
+            {
+              "id": "rds-replica-freshness-b",
+              "text": "プライマリで確定済みのXを読み、通常の分析と最新確認の読取り先を分ける",
+              "explanation": "非同期複製の未反映を踏まえて読取り先を選びます。"
+            },
+            {
+              "id": "rds-replica-freshness-c",
+              "text": "レプリカ自身をMulti-AZにすればXが必ず即時反映される",
+              "explanation": "レプリカ自身の可用性と、元DBからの非同期複製の鮮度は別です。"
+            }
+          ],
+          "correct_option_id": "rds-replica-freshness-b",
+          "runtime_option_order": [
+            "rds-replica-freshness-a",
+            "rds-replica-freshness-b",
+            "rds-replica-freshness-c"
+          ],
+          "rationale": "非同期複製の未反映を踏まえて読取り先を選びます。",
+          "source_urls": [
+            "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go"
+          ]
+        },
+        {
+          "id": "rds-replica-backup-prerequisite",
+          "objective": "読取り用レプリカの作成前提を満たす。",
+          "prompt": "別の通常RDS PostgreSQL DBインスタンスから読取り用レプリカを作成したい。作成元のバックアップ保持期間は0で、保持は無効。権限・対応条件・容量は正常。作成前に必要な変更は？",
+          "options": [
+            {
+              "id": "rds-replica-backup-prerequisite-a",
+              "text": "作成元のバックアップ保持を有効にして、必要な作成条件を満たす",
+              "explanation": "CreateDBInstanceReadReplicaは作成元のバックアップ保持が有効であることを要求します。"
+            },
+            {
+              "id": "rds-replica-backup-prerequisite-b",
+              "text": "作成元の保持を0のままにし、Multi-AZだけを有効にする",
+              "explanation": "Multi-AZはバックアップ保持の有効化を代替しません。"
+            },
+            {
+              "id": "rds-replica-backup-prerequisite-c",
+              "text": "アプリのSQL権限だけを変更してバックアップ保持の前提を省く",
+              "explanation": "SQL権限はAPIが要求するバックアップ保持条件を変更しません。"
+            }
+          ],
+          "correct_option_id": "rds-replica-backup-prerequisite-a",
+          "runtime_option_order": [
+            "rds-replica-backup-prerequisite-a",
+            "rds-replica-backup-prerequisite-b",
+            "rds-replica-backup-prerequisite-c"
+          ],
+          "rationale": "CreateDBInstanceReadReplicaは作成元のバックアップ保持が有効であることを要求します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の分析では更新Xの即時確認が不要で、現在の遅延を許容する。",
+        "answer": "通常の分析をレプリカへ分離する方針を選べる。鮮度の監視と許容条件は維持する。",
+        "reason": "必要な鮮度が変わると、適切な読取り先も変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md",
+          "claim": "AWS公式アーカイブ版：通常PostgreSQLの読取り用レプリカは非同期複製で読取り負荷を分離。アプリが接続先を選び、昇格後は独立DBとなり元の複製先ではなくなる。現行の数値上限・エンジン対応には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go",
+          "claim": "作成元でバックアップ保持を有効にする必要がある。レプリカ自身をMulti-AZにし、別AZのスタンバイでレプリカの切替を支援できる。AuroraはこのAPIを使用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_PromoteReadReplica.go",
+          "claim": "昇格は独立DBインスタンスにする操作。backing-up状態では昇格できず、事前のバックアップ有効化と少なくとも一度のバックアップ完了を推奨。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

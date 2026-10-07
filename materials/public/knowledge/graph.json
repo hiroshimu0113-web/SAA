@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 36,
-    "rubric_checks": 72
+    "detailed_units": 37,
+    "rubric_checks": 74
   },
   "nodes": [
     {
@@ -2602,9 +2602,77 @@
     {
       "id": "concept:read-replica",
       "kind": "concept",
-      "title": "read-replica",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "RDSリードレプリカの鮮度と作成条件",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "read-replica",
+        "title": "RDSリードレプリカの鮮度と作成条件",
+        "group": "storage",
+        "objective": "非同期複製の鮮度と読取り先を判断し、レプリカの作成前提と可用性を分ける。",
+        "estimated_minutes": 7,
+        "scope": "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "レプリカは更新直後に必ず最新値を返す。",
+          "レプリカをMulti-AZにすれば元DBからの複製は同期になる。",
+          "Multi-AZがあればバックアップ保持の作成前提は不要。"
+        ],
+        "checks": [
+          {
+            "id": "read-replica-explain",
+            "level": "explain",
+            "prompt": "レプリカ自身のMulti-AZで、元DBからの複製も同期に変わる？",
+            "expected_points": [
+              "レプリカ自身の可用性と元DBからの非同期複製は別",
+              "読取り先の鮮度を確認する",
+              "レプリカの待機系は分析の読取り先ではない"
+            ]
+          },
+          {
+            "id": "read-replica-apply",
+            "level": "apply",
+            "prompt": "元DBで確定した更新がレプリカに未反映で、即時確認が必要なら？",
+            "expected_points": [
+              "対象更新の未反映を既知条件として扱う",
+              "正常に接続できる元DBの確定値を読む",
+              "遅延を許容する分析の読取り方針と分ける"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch06-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/read-replica.md",
+          "evidence": [
+            {
+              "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/USER_ReadRepl.md",
+              "claim": "AWS公式アーカイブ版：通常PostgreSQLの読取り用レプリカは非同期複製で読取り負荷を分離。アプリが接続先を選び、昇格後は独立DBとなり元の複製先ではなくなる。現行の数値上限・エンジン対応には用いない。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstanceReadReplica.go",
+              "claim": "作成元でバックアップ保持を有効にする必要がある。レプリカ自身をMulti-AZにし、別AZのスタンバイでレプリカの切替を支援できる。AuroraはこのAPIを使用しない。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_PromoteReadReplica.go",
+              "claim": "昇格は独立DBインスタンスにする操作。backing-up状態では昇格できず、事前のバックアップ有効化と少なくとも一度のバックアップ完了を推奨。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "現行エンジン対応・料金・制限の確認",
+          "実AWSによる切替・複製遅延の観測"
+        ]
+      }
     },
     {
       "id": "concept:redshift",
@@ -10307,6 +10375,11 @@
     },
     {
       "from": "concept:rds-multi-az",
+      "to": "lesson:ch06-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:read-replica",
       "to": "lesson:ch06-l01",
       "type": "unit_reference"
     },
