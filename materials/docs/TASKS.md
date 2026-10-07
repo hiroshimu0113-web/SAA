@@ -817,3 +817,8 @@
 - 旧保存・バックアップ・店在庫・クイズ報酬の参照を移行。旧2種の両方を所持していても1個にまとめ、二重発動なし。能力の過去ターンへの遡及なし。
 - 完了：68テスト・ビルド・Chrome/WebKit成功。旧2種の統合、旧店在庫/クイズ結果、重複発動防止を検証。実装9cf46a9、Actions 37555965370 build/deploy成功。公開HTML・engine・relics・Service Workerがローカルと一致。
 - 新入口 https://hiroshimu0113-web.github.io/SAA/tower/reactor.html 。実機での強さの調整は未実施。
+
+## G-RU 強化・クイズ・デバフUI
+- 状態: 検証中
+- 成果物: 強化倍率とコスト変更、2ターン遅延、クイズ規則v2と旧保存互換、デバフアイコン、RULES_UPDATE.md。
+- 検証: 74テストとビルド成功、Chrome検証。CI/WebKitと配信確認を続行。

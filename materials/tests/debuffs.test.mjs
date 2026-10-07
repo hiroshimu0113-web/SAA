@@ -70,7 +70,7 @@ test('debuffs: old saves migrate weak to overload, preserve deck and reject corr
   const old=start();old.version=version;old.battle.weak=2;delete old.battle.enemyDebuffs;delete old.battle.playerDebuffs;delete old.battle.enemyStep;delete old.battle.playerActions;delete old.battle.events;
   const n=parseRun(JSON.stringify(old));assert.equal(n.version,4);assert.equal(n.battle.enemyDebuffs.overload,2);assert.equal('weak'in n.battle,false);assert.deepEqual(n.deck,old.deck);round(n);
  }
- for(const mutate of [s=>s.battle.playerDebuffs.burn=-1,s=>s.battle.enemyDebuffs.delay=3,s=>delete s.battle.enemyDebuffs.overload,s=>s.battle.enemyStep=-1,s=>s.battle.playerActions=2,s=>s.battle.weak=1,s=>s.battle.playerDebuffs.delay=1]){
+ for(const mutate of [s=>s.battle.playerDebuffs.burn=-1,s=>s.battle.enemyDebuffs.delay=1000,s=>delete s.battle.enemyDebuffs.overload,s=>s.battle.enemyStep=-1,s=>s.battle.playerActions=2,s=>s.battle.weak=1,s=>s.battle.playerDebuffs.delay=1]){
   const s=start();mutate(s);assert.throws(()=>parseRun(JSON.stringify(s)));
  }
 });

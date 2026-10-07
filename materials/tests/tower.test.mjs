@@ -65,6 +65,6 @@ test('tower: purchases, one-time removal, rest upgrades and elite rewards surviv
  let s=newRun(99);s.floor=3;s.history=[{floor:0,lane:0,type:'battle'},{floor:1,lane:0,type:'event'},{floor:2,lane:1,type:'shop'}];s.phase='shop';s.gold=100;s.stock=['burst','reserve','cache'];
  const n=s.deck.length;s=take(s,{type:'buy',id:'burst'});assert.equal(s.gold,65);assert.equal(s.deck.length,n+1);assert.equal(act(s,{type:'buy',id:'burst'}),s);
  s=take(s,{type:'remove',uid:0});assert.equal(s.gold,20);assert.equal(s.deck.length,n);assert.equal(act(s,{type:'remove',uid:1}),s);
- s=take(s,{type:'leave'});s=take(s,{type:'node',lane:0});const uid=s.deck.find(c=>c.id==='burst').uid;s=take(s,{type:'upgrade',uid});assert.equal(cardValues(s.deck.find(c=>c.uid===uid)).damage,25);assert.equal(s.phase,'map');
+ s=take(s,{type:'leave'});s=take(s,{type:'node',lane:0});const uid=s.deck.find(c=>c.id==='burst').uid;s=take(s,{type:'upgrade',uid});assert.equal(cardValues(s.deck.find(c=>c.uid===uid)).damage,27);assert.equal(s.phase,'map');
  let e=newRun(7);e.floor=2;e.history=[{floor:0,lane:0,type:'battle'},{floor:1,lane:0,type:'event'}];e=take(e,{type:'node',lane:0});e.battle.hp=1;const attack=e.deck.find(c=>e.battle.hand.includes(c.uid)&&CARDS[c.id].damage);const before=e.gold;e=take(e,{type:'play',uid:attack.uid});assert.equal(e.phase,'reward');assert.equal(e.relics.length,2);assert.equal(e.gold,before+40);e=take(e,{type:'reward',id:null});assert.equal(act(e,{type:'reward',id:null}),e);
 });

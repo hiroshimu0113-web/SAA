@@ -16,7 +16,7 @@ export async function checkQuizAndHud(browser,base){
    const id=s.quiz.ids[i],choice=i<correct?QUIZZES[id].answer:(QUIZZES[id].answer+1)%3;await p.locator('[data-action="quiz-answer"][data-choice="'+choice+'"]').tap();await p.locator('.quiz-explanation').waitFor();assert.ok(await p.locator('.quiz-option').first().isDisabled());
    const saved=await p.evaluate(k=>localStorage.getItem(k),key);await p.reload();await p.locator('.quiz-explanation').waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),saved);await p.locator('[data-action="quiz-next"]').tap();
   }
-  await p.locator('.quiz-result').waitFor();const result=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(result.quiz.result.correct,correct);assert.equal(result.hp,correct===0?64:72);assert.equal(result.gold,correct===1?90:60);assert.equal(result.relics.length,correct===2?2:1);
+  await p.locator('.quiz-result').waitFor();const result=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(result.quiz.result.correct,correct);assert.equal(result.hp,72-(2-correct)*8);assert.equal(result.gold,correct===1?90:60);assert.equal(result.relics.length,correct===2?2:1);
   await p.reload();assert.deepEqual(JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key)),result);if(correct===2)await p.screenshot({path:'artifacts/quiz-result.png',fullPage:true});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.locator('[data-action="quiz-leave"]').tap();await p.locator('.route-map').waitFor();
  }
  // Old event saves migrate without discarding HP or currency.

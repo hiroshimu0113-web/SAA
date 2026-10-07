@@ -7,5 +7,6 @@ export const BASE_QUIZZES={
  capacity:{prompt:'2つのAZに処理能力が各100件/秒のサーバー。全体で160件/秒が必要。片方のAZ停止後、残った1台で維持できる？（この問題の仮定値）',options:['維持できる。複数AZなら容量も自動で倍になる','維持できない。残る100件/秒では60件/秒不足する','ALBがあれば残った1台の能力は必ず160件/秒になる'],answer:1,reasons:['配置を分けることと、残った処理能力は別です。','160−100＝60件/秒の不足です。障害後の残存容量も設計します。','振り分けは、処理先の能力を必ず増やす仕組みではありません。'],source:regions}
 };
 export const QUIZZES=JSON.parse(JSON.stringify(BASE_QUIZZES));
-export const QUIZ_RULES={coins:30,damage:8,allRelicsCoins:60};
+export const QUIZ_RULES={coins:30,wrongRate:.1};
+export const LEGACY_QUIZ_RULES={damage:8,allRelicsCoins:60};
 export function quizScore(q){return q.answers.reduce((n,a,i)=>n+Number(a===QUIZZES[q.ids[i]].answer),0);}

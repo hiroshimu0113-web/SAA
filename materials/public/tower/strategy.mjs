@@ -1,13 +1,13 @@
-import {DEBUFFS,attackAmount} from './debuffs.mjs';
+import {DEBUFFS,delayPaused,attackAmount} from './debuffs.mjs';
 import {COMBOS,triggeredCombos} from './combos.mjs';
 import {cardValues,act,playerBlockGain} from './engine.mjs';
 import {combatEffects} from './effects.mjs';
 export function lifetime(c){const d=cardValues(c);return d.kind==='power'?'この戦闘中、効果が続く':d.block?'使用時に防御を得る。次の自分のターンにリセット':'使用時に効果を解決する';}
-export function playableCount(s){return s?.phase==='battle'&&s.battle.playerDebuffs.delay!==1?s.battle.hand.filter(uid=>{const c=s.deck.find(c=>c.uid===uid);return c&&cardValues(c).cost<=s.battle.energy;}).length:0;}
+export function playableCount(s){return s?.phase==='battle'&&!delayPaused(s.battle.playerDebuffs.delay)?s.battle.hand.filter(uid=>{const c=s.deck.find(c=>c.uid===uid);return c&&cardValues(c).cost<=s.battle.energy;}).length:0;}
 export function turnForecast(s){if(s?.phase!=='battle')return '';const next=act(s,{type:'end'});return '今ターンを終了すると：HP −'+(s.hp-next.hp)+(s.battle.playerDebuffs.delay===2&&s.battle.playerActions===2?' / 2回行動の後半へ':'');}
 
 export function inspectPlay(s,c){
- if(s?.phase!=='battle'||s.battle.playerDebuffs.delay===1||!s.battle.hand.includes(c.uid)||cardValues(c).cost>s.battle.energy)return null;
+ if(s?.phase!=='battle'||delayPaused(s.battle.playerDebuffs.delay)||!s.battle.hand.includes(c.uid)||cardValues(c).cost>s.battle.energy)return null;
  const action={type:'play',uid:c.uid},next=act(s,action),effects=combatEffects(s,next,action),d=cardValues(c);
  const roles=triggeredCombos(s,next);
  const lines=effects.map(f=>(f.side==='enemy'?'敵：':'自分：')+f.label);

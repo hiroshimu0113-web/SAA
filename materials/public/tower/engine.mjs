@@ -1,6 +1,6 @@
-import {DEBUFFS,emptyDebuffs,applyDebuff,attackAmount,blockAmount,decayDebuffs} from './debuffs.mjs';
+import {DEBUFFS,delayPaused,delayRemaining,advanceDelay,emptyDebuffs,applyDebuff,attackAmount,blockAmount,decayDebuffs} from './debuffs.mjs';
 import {COMBOS} from './combos.mjs';
-import {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
+import {QUIZZES,QUIZ_RULES,LEGACY_QUIZ_RULES,quizScore} from './quiz.mjs';
 export {QUIZZES,QUIZ_RULES,quizScore} from './quiz.mjs';
 
 import {CARDS,activateCatalog,getActiveCatalog,activeVersion} from './catalog.mjs';
@@ -51,11 +51,11 @@ export function newRun(seed=Date.now(),catalog=null){
  if(catalog)s.learningCatalog=JSON.parse(JSON.stringify(catalog));
  for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
 }
-export function cardValues(card){const d=CARDS[card.id],v={...d};if(card.plus)for(const k of ['damage','block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);return v;}
-export function describe(card){const d=cardValues(card),parts=[];if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.debuff)parts.push('敵に'+DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'':d.debuff.amount));if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}
+export function cardValues(card){const d=CARDS[card.id],v={...d,...(d.debuff?{debuff:{...d.debuff}}:{})};if(card.plus){if(d.kind==='power'){v.cost=Math.max(0,d.cost-1);}else{for(const k of ['block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);if(d.damage)v.damage=Math.ceil(d.damage*1.5);if(d.debuff)v.debuff.amount=d.debuff.amount+1;}}return v;}
+export function describe(card){const d=cardValues(card),parts=[];if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.debuff)parts.push('敵に'+DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'（休止'+d.debuff.amount+'ターン）':d.debuff.amount));if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}
 export function upgradeChanges(card){
- const before=cardValues({...card,plus:false}),after=cardValues({...card,plus:true}),labels={damage:before.hits?'1回のダメージ':'ダメージ',block:'ブロック',heal:'HP回復',draw:'ドロー枚数',energy:'獲得エナジー',armor:'毎ターン防御',strength:'強化'};
- return Object.keys(labels).filter(k=>(before[k]||0)!==(after[k]||0)).map(k=>labels[k]+' '+(before[k]||0)+' → '+(after[k]||0));
+ const before=cardValues({...card,plus:false}),after=cardValues({...card,plus:true}),labels={cost:'コスト',damage:before.hits?'1回のダメージ':'ダメージ',block:'ブロック',heal:'HP回復',draw:'ドロー枚数',energy:'獲得エナジー',armor:'毎ターン防御',strength:'強化'};
+ const changes=Object.keys(labels).filter(k=>(before[k]||0)!==(after[k]||0)).map(k=>labels[k]+' '+(before[k]||0)+' → '+(after[k]||0));if(before.debuff&&after.debuff.amount!==before.debuff.amount)changes.push(DEBUFFS[before.debuff.id].name+' '+before.debuff.amount+' → '+after.debuff.amount);return changes;
 }
 function draw(s,n){const b=s.battle;for(let i=0;i<n;i++){if(!b.draw.length){b.draw=shuffle(s,b.discard);b.discard=[];}if(!b.draw.length||b.hand.length>=10)break;b.hand.push(b.draw.pop());}}
 function startBattle(s,id){
@@ -65,7 +65,7 @@ function startBattle(s,id){
 }
 export function intentActions(s){
  if(!s.battle)return [];
- const b=s.battle;if(b.enemyDebuffs.delay===1)return [{type:'wait',value:0}];
+ const b=s.battle;if(delayPaused(b.enemyDebuffs.delay))return [{type:'wait',value:0}];
  let strength=b.strength;const actions=[],target={...b.playerDebuffs};
  for(let n=0;n<(b.enemyDebuffs.delay===2?2:1);n++){
   const [type,base,status]=ENEMIES[b.enemy].pattern[(b.enemyStep+n)%ENEMIES[b.enemy].pattern.length];
@@ -98,7 +98,7 @@ function win(s){
  if(elite){const relic=shuffle(s,REWARD_RELICS.filter(x=>!has(s,x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}
  s.phase='reward';log(s,'勝利。カードを'+s.rewardPicks+'枚まで選ぶか、見送れます。');
 }
-function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null};}
+function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];s.rewardPicks=0;s.shopRelic=null;}
 export function act(state,action){
  if(activeVersion()!==(state.learningCatalog?.version||null))activateCatalog(state.learningCatalog||null);
@@ -109,7 +109,7 @@ export function act(state,action){
   else{s.phase=type;s.battle=null;s.removed=false;if(type==='event')startQuiz(s);if(type==='shop'){s.stock=offers(s);s.shopRelic=shuffle(s,REWARD_RELICS.filter(id=>!has(s,id)))[0]||null;}}return s;
  }
  if(a.type==='play'&&s.phase==='battle'){
-  const index=b.hand.indexOf(a.uid),card=s.deck.find(c=>c.uid===a.uid);if(index<0||!card||b.playerDebuffs.delay===1)return state;const d=cardValues(card);if(d.cost>b.energy)return state;
+  const index=b.hand.indexOf(a.uid),card=s.deck.find(c=>c.uid===a.uid);if(index<0||!card||delayPaused(b.playerDebuffs.delay))return state;const d=cardValues(card);if(d.cost>b.energy)return state;
   b.events=[];
   b.hand.splice(index,1);b.energy-=d.cost;(d.exhaust?b.exhaust:b.discard).push(card.uid);
   b.playerBlock+=playerBlockGain(s,d.block||0);b.playerStrength+=d.strength||0;b.armor+=d.armor||0;b.energy+=d.energy||0;
@@ -134,14 +134,14 @@ export function act(state,action){
   if(b.playerDebuffs.delay===2&&b.playerActions===2){
    b.playerActions=1;b.energy=3;draw(s,5);log(s,'2回行動：後半へ。敵はまだ行動しない。');return s;
   }
-  if(b.playerDebuffs.delay===1){b.playerDebuffs.delay=2;log(s,'遅延で休止。次は2回行動。');}
+  if(delayPaused(b.playerDebuffs.delay)){b.playerDebuffs.delay=advanceDelay(b.playerDebuffs.delay);log(s,delayPaused(b.playerDebuffs.delay)?'遅延：残り'+delayRemaining(b.playerDebuffs.delay)+'ターン休止。':'遅延で休止。次は2回行動。');}
   else if(b.playerDebuffs.delay===2)b.playerDebuffs.delay=0;
   if(has(s,'dusk')){const value=playerBlockGain(s,3);b.playerBlock+=value;emit(b,'player','shield',value,'終端の防壁 ＋'+value);}
   burn(s,'player');if(s.hp===0){lose(s);return s;}
   b.block=0;
   const refreshed=[];
-  if(b.enemyDebuffs.delay===1){
-   b.enemyDebuffs.delay=2;emit(b,'enemy','debuff',0,'遅延：行動休止');log(s,'敵は遅延で休止。次は2回行動。');
+  if(delayPaused(b.enemyDebuffs.delay)){
+   b.enemyDebuffs.delay=advanceDelay(b.enemyDebuffs.delay);emit(b,'enemy','debuff',0,'遅延：行動休止');log(s,delayPaused(b.enemyDebuffs.delay)?'敵は遅延：残り'+delayRemaining(b.enemyDebuffs.delay)+'ターン休止。':'敵は遅延で休止。次は2回行動。');
   }else{
    const count=b.enemyDebuffs.delay===2?2:1;
    for(let n=0;n<count&&s.hp>0;n++){
@@ -165,10 +165,10 @@ export function act(state,action){
   if(s.hp===0){lose(s);return s;}
   burn(s,'enemy');decayDebuffs(b.enemyDebuffs);decayDebuffs(b.playerDebuffs,refreshed);
   if(b.hp===0){win(s);return s;}
-  b.turn++;b.energy=b.playerDebuffs.delay===1?0:turnEnergy(s);b.playerActions=b.playerDebuffs.delay===2?2:1;
+  b.turn++;b.energy=delayPaused(b.playerDebuffs.delay)?0:turnEnergy(s);b.playerActions=b.playerDebuffs.delay===2?2:1;
   b.comboPlayed=[];b.comboDone=[];b.playerBlock=playerBlockGain(s,b.armor);turnStart(s);
   if(b.playerBlock)emit(b,'player','shield',b.playerBlock,'◇ ＋'+b.playerBlock);
-  if(b.playerDebuffs.delay!==1)draw(s,turnDraw(s));return s;
+  if(!delayPaused(b.playerDebuffs.delay))draw(s,turnDraw(s));return s;
  }
  if(a.type==='reward'&&s.phase==='reward'&&(a.id===null||s.reward.includes(a.id))){if(a.id){add(s,a.id);s.battle.discard.push(s.deck[s.deck.length-1].uid);s.reward=s.reward.filter(id=>id!==a.id);s.rewardPicks=(s.rewardPicks??1)-1;log(s,CARDS[a.id].name+'をデッキに追加。');if(s.rewardPicks>0&&s.reward.length)return s;}complete(s);return s;}
  if(s.phase==='rest'){
@@ -179,14 +179,14 @@ export function act(state,action){
  if(s.phase==='event'){
   const q=s.quiz;
   if(!q)return state;
-  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){q.answers.push(a.choice);return s;}
+  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){q.answers.push(a.choice);if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
   if(a.type==='quiz-next'&&q.step<2&&q.answers.length===q.step+1&&a.questionId===q.ids[q.step]){
    q.step++;
    if(q.step===2){
-    const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:0};
-    if(correct===2){const relic=shuffle(s,REWARD_RELICS.filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else{q.result.gold=QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
+    const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:q.rulesVersion===2?q.damageTaken:0};
+    if(correct===2){const relic=shuffle(s,REWARD_RELICS.filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else if(q.rulesVersion!==2){q.result.gold=LEGACY_QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
     if(correct===1){q.result.gold=QUIZ_RULES.coins;s.gold+=q.result.gold;}
-    if(correct===0){q.result.damage=Math.min(s.hp,QUIZ_RULES.damage);s.hp-=q.result.damage;}
+    if(correct===0&&q.rulesVersion!==2){q.result.damage=Math.min(s.hp,LEGACY_QUIZ_RULES.damage);s.hp-=q.result.damage;}
     log(s,'クイズ '+correct+'/2問正解。'+(q.result.relic?'遺物「'+RELICS[q.result.relic].name+'」を獲得。':q.result.gold?q.result.gold+'コイン獲得。':'HP −'+q.result.damage+'。'));
     if(s.hp===0){s.phase='lost';log(s,'クイズのダメージで力尽きた。');}
    }return s;
@@ -228,10 +228,21 @@ function validateRun(raw){
  const q=s.quiz;
  if(q!==null){
   if(!['event','lost'].includes(s.phase)||s.history[s.history.length-1]?.type!=='event'||!Array.isArray(q.ids)||q.ids.length!==2||new Set(q.ids).size!==2||!q.ids.every(id=>owns(QUIZZES,id))||!Array.isArray(q.answers)||!num(q.step,2)||q.answers.length<q.step||q.answers.length>Math.min(2,q.step+1)||!q.answers.every((v,i)=>num(v,QUIZZES[q.ids[i]].options.length-1)))throw Error('クイズの記録が不正です。');
+  if(q.rulesVersion===2){
+   const wrong=q.answers.filter((v,i)=>v!==QUIZZES[q.ids[i]].answer).length,damage=Math.min(q.startHp,wrong*q.penalty);
+   if(!num(q.startHp,s.maxHp)||q.startHp<1||q.penalty!==Math.ceil(s.maxHp*QUIZ_RULES.wrongRate)||q.damageTaken!==damage||s.hp!==q.startHp-damage)throw Error('クイズのダメージ記録が不正です。');
+   if(q.result){const r=q.result,n=quizScore(q);if(r.correct!==n||r.damage!==damage)throw Error('クイズ採点が不正です。');
+    if(r.interrupted){if(r.interrupted!==true||s.phase!=='lost'||s.hp!==0||q.step!==q.answers.length||q.step<1||r.gold!==0||r.relic!==null)throw Error('中断クイズが不正です。');}
+    else if(s.hp===0||q.step!==2||q.answers.length!==2||r.gold!==(n===1?30:0)||(n===2?(r.relic!==null&&(!REWARD_RELICS.includes(r.relic)||!s.relics.includes(r.relic))):r.relic!==null))throw Error('クイズ報酬が不正です。');
+   }else if(q.step===2||s.hp===0)throw Error('クイズ結果がありません。');
+  }else{
+   if(q.rulesVersion!==undefined)throw Error('未対応のクイズ形式です。');
   if(q.step<2&&q.result!==null||q.step===2&&!q.result)throw Error('クイズ結果が不正です。');
   if(q.result){const r=q.result,n=quizScore(q);if(r.correct!==n||!num(r.gold)||!num(r.damage,8))throw Error('クイズ採点が不正です。');if(n===2?(r.damage!==0||(r.relic===null?r.gold!==60:!owns(RELICS,r.relic)||!s.relics.includes(r.relic)||r.gold!==0)):n===1?(r.relic!==null||r.gold!==30||r.damage!==0):(r.relic!==null||r.gold!==0||r.damage<1))throw Error('クイズ報酬が不正です。');}
+
+  }
  }else if(s.phase==='event')throw Error('クイズがありません。');
- const quizLost=s.phase==='lost'&&q?.result?.correct===0&&q.step===2&&s.battle===null;
+ const quizLost=s.phase==='lost'&&(q?.result?.interrupted===true||q?.result?.correct===0&&q.step===2)&&s.battle===null;
  const b=s.battle;
  if(['battle','reward','won','lost'].includes(s.phase)&&!quizLost){
   if(!b||!owns(ENEMIES,b.enemy)||b.maxHp!==ENEMIES[b.enemy].hp||!num(b.hp,b.maxHp))throw Error('敵が不正です。');
@@ -243,9 +254,9 @@ function validateRun(raw){
    b.enemyStep=b.turn-1;b.playerActions=1;b.events=[];delete b.weak;
   }
   for(const side of ['enemyDebuffs','playerDebuffs']){
-   const d=b[side];if(!d||typeof d!=='object'||Object.keys(d).length!==5||!Object.keys(DEBUFFS).every(k=>num(d[k],k==='delay'?2:999)))throw Error('デバフの記録が不正です。');
+   const d=b[side];if(!d||typeof d!=='object'||Object.keys(d).length!==5||!Object.keys(DEBUFFS).every(k=>num(d[k],999)))throw Error('デバフの記録が不正です。');
   }
-  if(!num(b.enemyStep)||![1,2].includes(b.playerActions)||b.playerActions===2&&b.playerDebuffs.delay!==2||s.phase==='battle'&&b.playerDebuffs.delay===1&&b.energy!==0||owns(b,'weak'))throw Error('行動順の記録が不正です。');
+  if(!num(b.enemyStep)||![1,2].includes(b.playerActions)||b.playerActions===2&&b.playerDebuffs.delay!==2||s.phase==='battle'&&delayPaused(b.playerDebuffs.delay)&&b.energy!==0||owns(b,'weak'))throw Error('行動順の記録が不正です。');
   // Only newly resolved actions can produce effects; saved UI events are not replayed.
   if(!Array.isArray(b.events)||b.events.length>30||!b.events.every(e=>e&&['player','enemy'].includes(e.side)&&['hit','guard','shield','power','debuff','heal'].includes(e.kind)&&num(e.value)&&typeof e.label==='string'&&e.label.length<100))throw Error('演出記録が不正です。');
 
