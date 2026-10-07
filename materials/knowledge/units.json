@@ -2749,6 +2749,63 @@
         "本文に残した詳細条件の公式確認",
         "実AWSによる動作検証"
       ]
+    },
+    {
+      "id": "cloudwatch",
+      "title": "CloudWatchアラームの評価窓と通知動作",
+      "group": "operations",
+      "objective": "M out of Nの評価と、状態変化時のアクション実行条件を分ける。",
+      "estimated_minutes": 7,
+      "scope": "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "M out of NでもN点すべての超過が必要。",
+        "ALARMになれば無効なアクションも必ず実行される。",
+        "欠測は必ず実値0と同じ。"
+      ],
+      "checks": [
+        {
+          "id": "cloudwatch-explain",
+          "level": "explain",
+          "prompt": "この単位の判断で分けて確認するものは？",
+          "expected_points": [
+            "EvaluationPeriodsはN、DatapointsToAlarmはM",
+            "状態評価とアクション実行は別",
+            "欠測と実値0は別"
+          ]
+        },
+        {
+          "id": "cloudwatch-apply",
+          "level": "apply",
+          "prompt": "ケースの条件が変わったときに何を確認する？",
+          "expected_points": [
+            "第1問の有効な3点のうち、閾値超過が1点だけになる。",
+            "2/3の必要数を満たさない。状態とアクションを別に確認する。",
+            "必要超過数M=2に届かない。"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch10-l03"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/cloudwatch.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go",
+            "claim": "DatapointsToAlarmはM、EvaluationPeriodsはN。ActionsEnabledは状態変化時のアクション実行を制御。TreatMissingDataはbreaching/notBreaching/ignore/missingで、DynamoDBには例外がある。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "本文に残した詳細条件の公式確認",
+        "実AWSによる動作検証"
+      ]
     }
   ]
 }

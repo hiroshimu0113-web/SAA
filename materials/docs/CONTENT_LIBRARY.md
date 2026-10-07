@@ -83,3 +83,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [第7章CloudFront OAC](../knowledge/lessons/cloudfront-oac.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [不足章補充：第12章予算管理](../knowledge/lessons/cost-optimization.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [不足章補充：第10章CloudWatch](../knowledge/lessons/cloudwatch.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

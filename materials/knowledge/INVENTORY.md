@@ -13,7 +13,7 @@
 | ch07 名前解決と世界への配信 | 0 / 3 | 0 / 15 | route53, cache-key, cloudfront-oac | CR-003, CR-009 |
 | ch08 サーバーレスとコンテナ | 0 / 3 | 0 / 20 | idempotency, lambda, lambda-concurrency | CR-008, CR-009 |
 | ch09 疎結合とメッセージ | 0 / 3 | 0 / 15 | visibility-timeout, idempotency, dlq | CR-009 |
-| ch10 暗号化・保護・監視 | 0 / 3 | 0 / 20 | kms, secrets-manager | CR-005, CR-006, CR-009 |
+| ch10 暗号化・保護・監視 | 0 / 3 | 0 / 20 | kms, secrets-manager, cloudwatch | CR-005, CR-006, CR-009 |
 | ch11 災害復旧と移行 | 0 / 3 | 0 / 15 | ebs-snapshot, dms, cdc | CR-006, CR-007, CR-009 |
 | ch12 性能・コスト・分析の総合設計 | 0 / 3 | 0 / 15 | athena, cost-optimization | CR-002, CR-003, CR-007, CR-009 |
 

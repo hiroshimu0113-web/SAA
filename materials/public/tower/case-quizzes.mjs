@@ -1199,6 +1199,36 @@ export const CASE_QUIZZES={
       "通知とアクションは別です。実行対象・権限・承認・業務影響を確認して対処します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go"
+  },
+  "cloudwatch-m-of-n-evaluation": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 通常のカスタムメトリクスの静的閾値アラーム。評価対象の3期間はすべて有効値があり、追加取得・欠測・遅延はない。DatapointsToAlarm=2、EvaluationPeriods=3で、3点中2点が閾値超過。数値は教材用。評価は？",
+    "options": [
+      "3点すべて超過しないと、条件を満たさない",
+      "2/3の条件を満たす。評価とアクション実行は別に確認する",
+      "超過点が連続しないと、どんなM out of N設定でも無効"
+    ],
+    "answer": 1,
+    "reasons": [
+      "Mは必要な超過点数2で、Nの全3点超過を要求していません。",
+      "評価窓Nのうち必要なM点が超過しています。通知設定の確認は別です。",
+      "この条件で必要な点数を満たす判断を、すべて連続必須へ読み替えません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go"
+  },
+  "cloudwatch-disabled-actions": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 別の通常CloudWatchメトリクスアラームがOKからALARMへ変化した。SNS通知先は設定済みだがActionsEnabled=false。権限や宛先は正常で、他の通知経路はない。この状態変化でアラームアクションの通知は実行される？",
+    "options": [
+      "ALARMになればActionsEnabledに関係なく必ず通知する",
+      "通知を受けたいならActionsEnabledを確認・有効化し、以後の状態変化と通知を検証する",
+      "通知先を増やせば無効なアクションも自動実行される"
+    ],
+    "answer": 1,
+    "reasons": [
+      "ActionsEnabledは状態変化時のアクション実行を制御します。",
+      "ALARMの評価と通知アクションは別です。有効化だけで過去の通知が再送されるとは主張しません。",
+      "通知先の個数はActionsEnabled=falseを変更しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1361,5 +1391,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "budget-forecast-warning",
     "budget-notification-not-action"
+  ],
+  [
+    "cloudwatch-m-of-n-evaluation",
+    "cloudwatch-disabled-actions"
   ]
 ];

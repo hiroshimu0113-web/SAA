@@ -13575,6 +13575,242 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-cloudwatch-m-of-n-action",
+      "title": "CloudWatchアラームの評価窓と通知動作",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "設定と実際の状態を区別して、要件に合う構成・対処を選ぶ概念。",
+      "objective": "M out of Nの評価と、状態変化時のアクション実行条件を分ける。",
+      "unit_ids": [
+        "cloudwatch"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/cloudwatch.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "observability",
+        "operations"
+      ],
+      "capabilities": [
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+      ],
+      "limitations": [
+        "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+      ],
+      "misconceptions": [
+        "M out of NでもN点すべての超過が必要。",
+        "ALARMになれば無効なアクションも必ず実行される。",
+        "欠測は必ず実値0と同じ。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/cloudwatch.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+        "counterexample": "第1問の有効な3点のうち、閾値超過が1点だけになる。 2/3の必要数を満たさない。状態とアクションを別に確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/cloudwatch.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-cloudwatch-m-of-n-action",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go",
+          "claim": "DatapointsToAlarmはM、EvaluationPeriodsはN。ActionsEnabledは状態変化時のアクション実行を制御。TreatMissingDataはbreaching/notBreaching/ignore/missingで、DynamoDBには例外がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "判断の仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cloudwatch.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+        ],
+        "mislearning_risks": [
+          "M out of NでもN点すべての超過が必要。",
+          "ALARMになれば無効なアクションも必ず実行される。",
+          "欠測は必ず実値0と同じ。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-cloudwatch-m-of-n-action",
+      "title": "CloudWatchアラームの評価窓と通知動作を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "M out of Nの評価と、状態変化時のアクション実行条件を分ける。",
+      "unit_ids": [
+        "cloudwatch"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudwatch-m-of-n-action"
+        }
+      ],
+      "domains": [
+        "observability",
+        "operations"
+      ],
+      "capabilities": [
+        "observe"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+      ],
+      "limitations": [
+        "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+      ],
+      "misconceptions": [
+        "M out of NでもN点すべての超過が必要。",
+        "ALARMになれば無効なアクションも必ず実行される。",
+        "欠測は必ず実値0と同じ。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudwatch-m-of-n-action.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudwatch-m-of-n-action.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudwatch-m-of-n-action.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cloudwatch-m-of-n-action.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudwatch/api_op_PutMetricAlarm.go",
+          "claim": "DatapointsToAlarmはM、EvaluationPeriodsはN。ActionsEnabledは状態変化時のアクション実行を制御。TreatMissingDataはbreaching/notBreaching/ignore/missingで、DynamoDBには例外がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cloudwatch.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "通常メトリクスの静的閾値アラーム。ケースは欠測なし。DynamoDB例外、異常検知、複合アラーム、全通知再試行は対象外。"
+        ],
+        "mislearning_risks": [
+          "M out of NでもN点すべての超過が必要。",
+          "ALARMになれば無効なアクションも必ず実行される。",
+          "欠測は必ず実値0と同じ。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "cloudwatch-m-of-n-evaluation, cloudwatch-disabled-actions"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
