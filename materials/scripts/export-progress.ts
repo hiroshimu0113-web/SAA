@@ -43,6 +43,16 @@ let md=`# 教材制作の進捗表
 |---|---:|---:|---:|---:|---|
 `;
 for(const c of chapters){const qs=practice.filter(q=>q.chapterId===c.id),lp=c.lessons.filter(l=>lessonIds.has(l.id)).length,qp=qs.filter(q=>questionIds.has(q.id)).length;md+=`| ${c.id} ${c.title} | ${c.lessons.length} | ${lp} | ${qs.length} | ${qp} | ${lp||qp?'公開あり':'原稿保管・未公開'} |\n`;}
+const coverage=JSON.parse(await read('knowledge/saa-coverage.json'));
+md+=`
+## SAA範囲の充足確認
+
+[章別の不足と判定根拠](SAA_COVERAGE.md)。現行公式ガイド確認状態：${coverage.current_guide.status}。教材数とは別の判定です。
+
+| 章 | 判定 | 未解決の不足束 |
+|---|---|---:|
+`;
+for(const c of coverage.chapters)md+=`| ${c.id} ${c.title} | ${c.status} | ${c.gaps.filter((g:any)=>g.status!=='resolved').length} |\n`;
 md+=`
 ## ゲーム利用の分類状況
 

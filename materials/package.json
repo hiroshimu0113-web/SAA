@@ -21,7 +21,8 @@
     "game-content:check": "node scripts/export-game-content.mjs --check",
     "decks:update": "tsx scripts/export-decks.ts",
     "decks:check": "tsx scripts/export-decks.ts --check",
-    "classification:check": "node scripts/check-classifications.mjs"
+    "classification:check": "node scripts/check-classifications.mjs",
+    "coverage:check": "node scripts/check-saa-coverage.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",

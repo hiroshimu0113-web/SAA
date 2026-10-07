@@ -40,6 +40,25 @@
 | ch11 災害復旧と移行 | 3 | 0 | 15 | 0 | 原稿保管・未公開 |
 | ch12 性能・コスト・分析の総合設計 | 3 | 0 | 15 | 0 | 原稿保管・未公開 |
 
+## SAA範囲の充足確認
+
+[章別の不足と判定根拠](SAA_COVERAGE.md)。現行公式ガイド確認状態：access_blocked。教材数とは別の判定です。
+
+| 章 | 判定 | 未解決の不足束 |
+|---|---|---:|
+| ch01 AWSの全体像 | needs_expansion | 2 |
+| ch02 IAMとアクセス制御 | needs_expansion | 2 |
+| ch03 VPCとネットワーク | needs_expansion | 2 |
+| ch04 EC2・負荷分散・Auto Scaling | needs_expansion | 2 |
+| ch05 ストレージを選ぶ | needs_expansion | 2 |
+| ch06 データベースとキャッシュ | needs_expansion | 2 |
+| ch07 名前解決と世界への配信 | needs_expansion | 2 |
+| ch08 サーバーレスとコンテナ | needs_expansion | 2 |
+| ch09 疎結合とメッセージ | needs_expansion | 2 |
+| ch10 暗号化・保護・監視 | needs_expansion | 2 |
+| ch11 災害復旧と移行 | needs_expansion | 2 |
+| ch12 性能・コスト・分析の総合設計 | needs_expansion | 2 |
+
 ## ゲーム利用の分類状況
 
 | 分類 | 登録数 |

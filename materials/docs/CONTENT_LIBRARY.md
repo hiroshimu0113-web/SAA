@@ -97,3 +97,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [不足章補充：第10章CloudTrail](../knowledge/lessons/cloudtrail.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [不足章補充：第10章AWS Config](../knowledge/lessons/aws-config.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [SAA範囲の章別充足確認](SAA_COVERAGE.md)：正本knowledge/saa-coverage.json。coverage:checkで参照・解消根拠・充足判定の前提を検証。

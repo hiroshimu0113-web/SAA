@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "goal_status": "in_progress",
+  "exam": "SAA-C03",
+  "checked_on": "2026-10-07",
+  "reviewer": "Codex",
+  "basis": {
+    "path": "docs/CONTENT_MAP.md",
+    "checked_on": "2026-10-05",
+    "note": "既存の公式14タスク対応表を暫定基準。全詳細スキルの充足や現行版の再確認を意味しない。"
+  },
+  "current_guide": {
+    "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+    "status": "access_blocked",
+    "checked_on": "2026-10-07",
+    "reason": "この環境のHTTP取得で403。ネットワークポリシーを迂回しない。"
+  },
+  "completion_criteria": [
+    "現行公式ガイドの詳細スキルと章別の判断目標を対応させる",
+    "対象ごとに仕組み・適用条件・限界・比較・問題/全誤答理由・条件変更を確認する",
+    "未解決の不足と確認待ちを解消し、教材正本と分類へ記録する",
+    "生成/進捗/必要なゲーム検証とGitHub保存を行う"
+  ],
+  "chapters": [
+    {
+      "id": "ch01",
+      "title": "AWSの全体像",
+      "task_ids": [
+        "1.1",
+        "2.2"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "ec2",
+        "instance-store",
+        "durability",
+        "s3",
+        "region",
+        "az",
+        "availability"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch01-gap-01",
+          "requirement": "region/az/availability/instance-storeの確認待ちと用語不足",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch01-gap-02",
+          "requirement": "責任共有とサービスごとの管理範囲、障害範囲・残存容量を条件で判断",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch02",
+      "title": "IAMとアクセス制御",
+      "task_ids": [
+        "1.1"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "authentication",
+        "authorization",
+        "temporary-credentials",
+        "iam-role",
+        "least-privilege",
+        "mfa"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch02-gap-01",
+          "requirement": "ポリシー評価：明示的Deny・SCP/境界・リソースポリシー",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch02-gap-02",
+          "requirement": "Organizations/OU/Control Tower、従業員フェデレーションとクロスアカウント",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch03",
+      "title": "VPCとネットワーク",
+      "task_ids": [
+        "1.2",
+        "3.4",
+        "4.4"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "security-group",
+        "network-acl",
+        "route"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch03-gap-01",
+          "requirement": "IGW/NAT・エンドポイントと戻り通信の経路/許可",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch03-gap-02",
+          "requirement": "DX/VPN/Transit Gateway/ピアリングの暗号化・冗長化・費用要因",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch04",
+      "title": "EC2・負荷分散・Auto Scaling",
+      "task_ids": [
+        "2.1",
+        "2.2",
+        "3.2",
+        "4.2"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "alb",
+        "auto-scaling",
+        "target-tracking"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch04-gap-01",
+          "requirement": "インスタンスファミリー/配置・NLBの要件、AMIと状態分離",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch04-gap-02",
+          "requirement": "Spot/RI/Savings Plans/容量予約、伸縮時の保護・ウォームアップ・欠測",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch05",
+      "title": "ストレージを選ぶ",
+      "task_ids": [
+        "1.3",
+        "3.1",
+        "4.1"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "ebs",
+        "ebs-snapshot",
+        "efs"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch05-gap-01",
+          "requirement": "保存クラス/ライフサイクル・復元・保持/ロック/複製",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch05-gap-02",
+          "requirement": "EBS IOPSとスループット、EFS/FSxと性能/アクセス要件",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch06",
+      "title": "データベースとキャッシュ",
+      "task_ids": [
+        "1.3",
+        "2.2",
+        "3.3",
+        "4.3"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "point-in-time-recovery",
+        "gsi",
+        "rds-multi-az",
+        "read-replica"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch06-gap-01",
+          "requirement": "Aurora/RDS/DynamoDBの選択、容量方式・整合性・キー設計",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch06-gap-02",
+          "requirement": "ElastiCache/DAXとキャッシュ戦略、復元・保持・DB費用比較",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch07",
+      "title": "名前解決と世界への配信",
+      "task_ids": [
+        "2.2",
+        "3.4",
+        "4.4"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "route53",
+        "cache-key",
+        "cloudfront-oac"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch07-gap-01",
+          "requirement": "Route 53ポリシー/ヘルスチェック/TTLと実切替",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch07-gap-02",
+          "requirement": "CloudFrontの無効化・署名/認証・圧縮、配信経路の費用比較",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch08",
+      "title": "サーバーレスとコンテナ",
+      "task_ids": [
+        "1.2",
+        "2.1",
+        "3.2",
+        "4.2"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "idempotency",
+        "lambda",
+        "lambda-concurrency"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch08-gap-01",
+          "requirement": "ECS/Fargate/EKSの実行・伸縮・状態/責任境界",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch08-gap-02",
+          "requirement": "API Gateway/Step Functionsと認証・例外/再試行、Lambda資源/イベントソース",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch09",
+      "title": "疎結合とメッセージ",
+      "task_ids": [
+        "2.1",
+        "3.5"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "visibility-timeout",
+        "idempotency",
+        "dlq",
+        "sns",
+        "eventbridge"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch09-gap-01",
+          "requirement": "SQS Standard/FIFO・重複/順序・流量とポーリング",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch09-gap-02",
+          "requirement": "Kinesis等の取り込み頻度・順序/保持、配信失敗と消費失敗の境界",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch10",
+      "title": "暗号化・保護・監視",
+      "task_ids": [
+        "1.2",
+        "1.3",
+        "2.2"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "kms",
+        "secrets-manager",
+        "cloudwatch",
+        "cloudtrail",
+        "aws-config"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch10-gap-01",
+          "requirement": "KMSエンベロープ暗号化・権限/削除、ACMの証明書更新",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch10-gap-02",
+          "requirement": "WAF/Shield/検知サービスと目的、トレースと観測、全記録/修復条件",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch11",
+      "title": "災害復旧と移行",
+      "task_ids": [
+        "1.3",
+        "2.2",
+        "3.5",
+        "4.1"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "ebs-snapshot",
+        "dms",
+        "cdc"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch11-gap-01",
+          "requirement": "RTO/RPOと復旧方式・復旧先容量/クォータ・IaC/復旧試験",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch11-gap-02",
+          "requirement": "DataSync/Storage Gateway/Transfer Family/MGNの選択と切替/整合性",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    },
+    {
+      "id": "ch12",
+      "title": "性能・コスト・分析の総合設計",
+      "task_ids": [
+        "3.2",
+        "3.5",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4"
+      ],
+      "status": "needs_expansion",
+      "unit_ids": [
+        "athena",
+        "cost-optimization",
+        "glue",
+        "redshift"
+      ],
+      "assessment": "原稿と詳細単位の確認範囲を既存対応表・CONTENT_REVIEWの詳細スキル指摘へ照合。概要や部分的な詳細確認だけでは充足としない。",
+      "evidence_refs": [
+        "docs/CONTENT_MAP.md",
+        "docs/CONTENT_REVIEW.md",
+        "knowledge/INVENTORY.md"
+      ],
+      "gaps": [
+        {
+          "id": "ch12-gap-01",
+          "requirement": "ボトルネック計測・適正化・購入方式とDB/ネットワーク費用",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        },
+        {
+          "id": "ch12-gap-02",
+          "requirement": "取り込み→変換→分析→可視化の構成比較、全機能/最新料金と条件",
+          "status": "open",
+          "resolution_refs": [],
+          "review": null
+        }
+      ],
+      "final_review": null
+    }
+  ]
+}
