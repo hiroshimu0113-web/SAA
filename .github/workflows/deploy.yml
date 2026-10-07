@@ -38,7 +38,16 @@ jobs:
       - run: pnpm knowledge:check
       - run: pnpm build
       - name: Install WebKit for Safari regression tests
-        run: pnpm exec playwright install --with-deps webkit
+        timeout-minutes: 7
+        run: |
+          set +e
+          timeout 360s pnpm exec playwright install --with-deps webkit > /tmp/webkit-install.log 2>&1
+          result=$?
+          tail -100 /tmp/webkit-install.log
+          if [ "$result" -ne 0 ]; then
+            node --input-type=module -e "import {readFileSync} from 'node:fs'; const log=readFileSync('/tmp/webkit-install.log','utf8').slice(-12000); console.log('::error::WebKit installation failed or timed out: '+log.replaceAll('%','%25').replaceAll('\\n','%0A').replaceAll('\\r','%0D'));"
+          fi
+          exit "$result"
       - name: Verify touch controls and Safari startup
         run: node scripts/touch-browser-check.mjs
         env:
