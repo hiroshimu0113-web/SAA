@@ -1890,6 +1890,71 @@
         "CDCの開始位置・チェックポイント・ソース固有の条件を別単位で確認する。",
         "スキーマ/SQL互換性、データ検証・切替/ロールバックを具体化する。"
       ]
+    },
+    {
+      "id": "cdc",
+      "title": "CDCの開始位置とソース固有の再開条件",
+      "group": "coordination",
+      "objective": "チェックポイント・時刻・ソース設定を対応付け、開始要求の有効性とデータの連続性を分けて確認する。",
+      "estimated_minutes": 7,
+      "scope": "通常のDMS CDC専用タスクを指定地点から初回開始。ソース/移行先の対応データは確認済みの前提。既存タスクの停止位置再開、エンジン別ログ保持や完全な切替設計は対象外。",
+      "prerequisites": [
+        "dms"
+      ],
+      "misconceptions": [
+        "CdcStartPositionとCdcStartTimeを両方指定すれば安全な方を選ぶ。",
+        "すべてのソースで任意の時刻から開始できる。",
+        "PostgreSQLの開始位置だけ指定すればスロットや関連付けは不要。"
+      ],
+      "checks": [
+        {
+          "id": "cdc-explain",
+          "level": "explain",
+          "prompt": "CDCの開始位置と時刻はどう指定する？",
+          "expected_points": [
+            "開始位置と開始時刻はどちらか一方",
+            "チェックポイントを開始位置へ渡せる",
+            "ソースによって時刻開始や位置指定の制約が異なる"
+          ]
+        },
+        {
+          "id": "cdc-apply",
+          "level": "apply",
+          "prompt": "PostgreSQLで開始位置は有効だがスロットがない。何を確認する？",
+          "expected_points": [
+            "論理スロットの存在",
+            "エンドポイントのslotNameと開始位置の対応",
+            "移行先データと差分の連続性は別に検証"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch11-l03"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/cdc.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+            "claim": "CDC専用タスクを指定位置から開始するにはstart-replicationと開始位置を指定する。CdcStartPositionとCdcStartTimeの両方指定はエラー。ソースごとの制約があり、すべてのソースで時刻開始に対応するわけではない。PostgreSQLでは既存の論理レプリケーションスロットとエンドポイントのslotNameを確認。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go",
+            "claim": "ReplicationTask.RecoveryCheckpointは最後のCDCチェックポイントで、CdcStartPositionへ渡してそこから開始できる。PostgreSQLSettings.SlotNameの指定ではスロットの存在と有効なCdcStartPositionを検証し、不備でエラーになる。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "ソース別のCDCログ保持と開始点対応を公式資料で確認する。",
+        "初期データとの境界・検証・切替/ロールバックを具体化する。"
+      ]
     }
   ]
 }

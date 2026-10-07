@@ -8480,10 +8480,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
         }
       ],
       "game_design": {
-        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "proposal": "鍵素材更新と復号条件を説明するカード素材。数値効果は未実装。",
         "mechanism_note": {
           "path": "knowledge/lessons/kms.md",
           "locator": "仕組み"
@@ -8768,10 +8774,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-06",
           "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
         }
       ],
       "game_design": {
-        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "proposal": "現在版とアプリの再取得を説明するカード素材。数値効果は未実装。",
         "mechanism_note": {
           "path": "knowledge/lessons/secrets-manager.md",
           "locator": "仕組み"
@@ -9032,10 +9044,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
         }
       ],
       "game_design": {
-        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "proposal": "復元のAZ配置・容量・接続条件を説明するカード素材。数値効果は未実装。",
         "mechanism_note": {
           "path": "knowledge/lessons/ebs.md",
           "locator": "仕組み"
@@ -9284,10 +9302,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
         }
       ],
       "game_design": {
-        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "proposal": "取得時点と未書込みデータの条件を説明するカード素材。数値効果は未実装。",
         "mechanism_note": {
           "path": "knowledge/lessons/ebs-snapshot.md",
           "locator": "仕組み"
@@ -9536,10 +9560,16 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
         }
       ],
       "game_design": {
-        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "proposal": "初期ロード/変更追従と初回起動条件を説明するカード素材。数値効果は未実装。",
         "mechanism_note": {
           "path": "knowledge/lessons/dms.md",
           "locator": "仕組み"
@@ -9684,6 +9714,272 @@
           {
             "path": "public/tower/case-quizzes.mjs",
             "locator": "dms-initial-and-changes, dms-first-start-action"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
+    },
+    {
+      "id": "concept-cdc-start-position",
+      "title": "CDCの開始位置とソース固有の再開条件",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "変更取得の開始地点とソース固有の条件を対応付ける概念。",
+      "objective": "チェックポイント・時刻・ソース設定を対応付け、開始要求の有効性とデータの連続性を分けて確認する。",
+      "unit_ids": [
+        "cdc"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/cdc.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Database Migration Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "dms"
+      ],
+      "conditions": [
+        "新しいCDC専用タスク。開始地点に対応する移行先データとソースの必要ログ/設定は設問の明示条件に従う。",
+        "APIパラメータの有効性と、欠落/重複のないデータ適用を同じ保証として扱わない。"
+      ],
+      "limitations": [
+        "通常のDMS CDC専用タスクを指定地点から初回開始。ソース/移行先の対応データは確認済みの前提。既存タスクの停止位置再開、エンジン別ログ保持や完全な切替設計は対象外。"
+      ],
+      "misconceptions": [
+        "CdcStartPositionとCdcStartTimeを両方指定すれば安全な方を選ぶ。",
+        "すべてのソースで任意の時刻から開始できる。",
+        "PostgreSQLの開始位置だけ指定すればスロットや関連付けは不要。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/cdc.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "DMSの変更データ追従を、対応する開始地点とソース設定で開始する。",
+        "counterexample": "第2問のソースがPostgreSQLではなく別エンジンに変わる。 そのソースの開始位置形式・時刻開始対応・ログ等の前提を確認し直す。PostgreSQLのslotNameをそのまま必須条件として流用しない。",
+        "comparison": {
+          "path": "knowledge/lessons/cdc.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-cdc-start-position",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "CDC専用タスクを指定位置から開始するにはstart-replicationと開始位置を指定する。CdcStartPositionとCdcStartTimeの両方指定はエラー。ソースごとの制約があり、すべてのソースで時刻開始に対応するわけではない。PostgreSQLでは既存の論理レプリケーションスロットとエンドポイントのslotNameを確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go",
+          "claim": "ReplicationTask.RecoveryCheckpointは最後のCDCチェックポイントで、CdcStartPositionへ渡してそこから開始できる。PostgreSQLSettings.SlotNameの指定ではスロットの存在と有効なCdcStartPositionを検証し、不備でエラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "再利用案に残っていた通信制御のテンプレート表現を対象の学習目標に修正。効果実装・取り込み状態は変更しない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "変更取得の開始地点とソース条件を説明するカード素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cdc.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの継続や報酬は変更取得の連続性や移行の完了を保証しない。",
+        "simplifications": [
+          "通常のDMS CDC専用タスクを指定地点から初回開始。ソース/移行先の対応データは確認済みの前提。既存タスクの停止位置再開、エンジン別ログ保持や完全な切替設計は対象外。"
+        ],
+        "mislearning_risks": [
+          "CdcStartPositionとCdcStartTimeを両方指定すれば安全な方を選ぶ。",
+          "すべてのソースで任意の時刻から開始できる。",
+          "PostgreSQLの開始位置だけ指定すればスロットや関連付けは不要。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-cdc-start-position",
+      "title": "チェックポイントからのCDC開始",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "チェックポイント・時刻・ソース設定を対応付け、開始要求の有効性とデータの連続性を分けて確認する。",
+      "unit_ids": [
+        "cdc"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "cdc-start-position"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Database Migration Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "dms"
+      ],
+      "conditions": [
+        "新しいCDC専用タスク。開始地点に対応する移行先データとソースの必要ログ/設定は設問の明示条件に従う。",
+        "APIパラメータの有効性と、欠落/重複のないデータ適用を同じ保証として扱わない。"
+      ],
+      "limitations": [
+        "通常のDMS CDC専用タスクを指定地点から初回開始。ソース/移行先の対応データは確認済みの前提。既存タスクの停止位置再開、エンジン別ログ保持や完全な切替設計は対象外。"
+      ],
+      "misconceptions": [
+        "CdcStartPositionとCdcStartTimeを両方指定すれば安全な方を選ぶ。",
+        "すべてのソースで任意の時刻から開始できる。",
+        "PostgreSQLの開始位置だけ指定すればスロットや関連付けは不要。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cdc-start-position.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cdc-start-position.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cdc-start-position.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "cdc-start-position.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "CDC専用タスクを指定位置から開始するにはstart-replicationと開始位置を指定する。CdcStartPositionとCdcStartTimeの両方指定はエラー。ソースごとの制約があり、すべてのソースで時刻開始に対応するわけではない。PostgreSQLでは既存の論理レプリケーションスロットとエンドポイントのslotNameを確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go",
+          "claim": "ReplicationTask.RecoveryCheckpointは最後のCDCチェックポイントで、CdcStartPositionへ渡してそこから開始できる。PostgreSQLSettings.SlotNameの指定ではスロットの存在と有効なCdcStartPositionを検証し、不備でエラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cdc.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの継続や報酬は変更取得の連続性や移行の完了を保証しない。",
+        "simplifications": [
+          "通常のDMS CDC専用タスクを指定地点から初回開始。ソース/移行先の対応データは確認済みの前提。既存タスクの停止位置再開、エンジン別ログ保持や完全な切替設計は対象外。"
+        ],
+        "mislearning_risks": [
+          "CdcStartPositionとCdcStartTimeを両方指定すれば安全な方を選ぶ。",
+          "すべてのソースで任意の時刻から開始できる。",
+          "PostgreSQLの開始位置だけ指定すればスロットや関連付けは不要。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "cdc-position-or-time, cdc-postgresql-slot"
           },
           {
             "path": "public/tower/engine.mjs",

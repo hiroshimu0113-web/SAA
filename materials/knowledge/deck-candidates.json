@@ -163,6 +163,7 @@
       "card_candidate_ids": [
         "candidate-aurora-replica",
         "candidate-cache",
+        "candidate-cdc",
         "candidate-consistency",
         "candidate-dax",
         "candidate-dms",
@@ -883,24 +884,30 @@
     {
       "id": "candidate-cdc",
       "concept_id": "cdc",
-      "title": "cdc",
+      "title": "CDCの開始位置とソース固有の再開条件",
       "related_chapter_ids": [
+        "ch06",
         "ch11"
       ],
       "material_refs": [
         {
           "node_id": "lesson:ch11-l03",
           "relation": "covered_by"
+        },
+        {
+          "node_id": "lesson:ch11-l03",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-cdc-start-position"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

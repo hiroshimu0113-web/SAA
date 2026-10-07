@@ -55,3 +55,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [EBSスナップショットの取得時点と未書込みデータ](../knowledge/lessons/ebs-snapshot.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [DMSの初期ロードと変更追従の開始](../knowledge/lessons/dms.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [CDCの開始位置とソース固有の再開条件](../knowledge/lessons/cdc.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

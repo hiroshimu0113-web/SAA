@@ -779,6 +779,36 @@ export const CASE_QUIZZES={
       "この方式を含めたタスクの初回にはstart-replicationを使います。要求成功とデータ移行の完了は別です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
+  },
+  "cdc-position-or-time": {
+    "prompt": "DMSの変更データ追従を、対応する開始地点とソース設定で開始する。 新しいCDC専用タスクを初回起動する。対応ソースの有効なRecoveryCheckpointと、その地点に一致する移行先データがあり、必要設定・ログ・権限は確認済み。このチェックポイントから始めたいのに、CdcStartPositionとCdcStartTimeを両方指定した。どう直す？",
+    "options": [
+      "開始位置と時刻を両方指定すると、DMSが自動で安全な方を選ぶので直さない",
+      "start-replicationと有効なチェックポイントのCdcStartPositionを使い、CdcStartTimeを指定しない",
+      "初期データと同じ位置が必要でも、任意の今の時刻へ変更すれば差分欠落は必ず防げる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "両方の指定はエラーです。時刻と位置の優先度選択ではありません。",
+      "開始位置と時刻はどちらか一方です。チェックポイントの対応データとソース条件は別にも確認します。",
+      "開始地点を勝手に変えると必要な差分を外す危険があります。APIが受け付けることとデータの連続性は別です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
+  },
+  "cdc-postgresql-slot": {
+    "prompt": "DMSの変更データ追従を、対応する開始地点とソース設定で開始する。 別のPostgreSQLソースでネイティブのCdcStartPositionを使うCDCタスクを開始したい。有効な開始位置と対応データは準備済みだが、必要な論理レプリケーションスロットが存在せず、エンドポイントにも関連付けていない。対応は？",
+    "options": [
+      "ソース条件を満たすスロットの存在とslotNameの関連付けを整え、開始位置と合わせて確認する",
+      "タスク名にPostgreSQLと付ければ、スロットなしでも必ず成功する",
+      "CdcStartTimeも追加すれば、足りないスロットが自動で作られる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "PostgreSQLの開始位置指定では論理スロットとエンドポイントの設定も必要です。適切な開始点条件を確認します。",
+      "表示名はソースの論理スロットやエンドポイント設定を用意しません。",
+      "二重指定はエラーです。ソースの設定不足を別の開始パラメータ追加で解消しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -885,5 +915,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "dms-initial-and-changes",
     "dms-first-start-action"
+  ],
+  [
+    "cdc-position-or-time",
+    "cdc-postgresql-slot"
   ]
 ];

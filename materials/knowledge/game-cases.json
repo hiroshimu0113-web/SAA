@@ -3175,6 +3175,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "cdc-start-position",
+      "title": "チェックポイントからのCDC開始",
+      "premise": "DMSの変更データ追従を、対応する開始地点とソース設定で開始する。",
+      "unit_ids": [
+        "cdc"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch11"
+      ],
+      "constraints": [
+        "新しいCDC専用タスク。開始地点に対応する移行先データとソースの必要ログ/設定は設問の明示条件に従う。",
+        "APIパラメータの有効性と、欠落/重複のないデータ適用を同じ保証として扱わない。"
+      ],
+      "questions": [
+        {
+          "id": "cdc-position-or-time",
+          "objective": "チェックポイントと時刻の二重指定を避ける。",
+          "prompt": "新しいCDC専用タスクを初回起動する。対応ソースの有効なRecoveryCheckpointと、その地点に一致する移行先データがあり、必要設定・ログ・権限は確認済み。このチェックポイントから始めたいのに、CdcStartPositionとCdcStartTimeを両方指定した。どう直す？",
+          "options": [
+            {
+              "id": "cdc-position-or-time-a",
+              "text": "開始位置と時刻を両方指定すると、DMSが自動で安全な方を選ぶので直さない",
+              "explanation": "両方の指定はエラーです。時刻と位置の優先度選択ではありません。"
+            },
+            {
+              "id": "cdc-position-or-time-b",
+              "text": "start-replicationと有効なチェックポイントのCdcStartPositionを使い、CdcStartTimeを指定しない",
+              "explanation": "開始位置と時刻はどちらか一方です。チェックポイントの対応データとソース条件は別にも確認します。"
+            },
+            {
+              "id": "cdc-position-or-time-c",
+              "text": "初期データと同じ位置が必要でも、任意の今の時刻へ変更すれば差分欠落は必ず防げる",
+              "explanation": "開始地点を勝手に変えると必要な差分を外す危険があります。APIが受け付けることとデータの連続性は別です。"
+            }
+          ],
+          "correct_option_id": "cdc-position-or-time-b",
+          "runtime_option_order": [
+            "cdc-position-or-time-a",
+            "cdc-position-or-time-b",
+            "cdc-position-or-time-c"
+          ],
+          "rationale": "開始位置と時刻はどちらか一方です。チェックポイントの対応データとソース条件は別にも確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go"
+          ]
+        },
+        {
+          "id": "cdc-postgresql-slot",
+          "objective": "PostgreSQLの開始位置とスロット条件を確認する。",
+          "prompt": "別のPostgreSQLソースでネイティブのCdcStartPositionを使うCDCタスクを開始したい。有効な開始位置と対応データは準備済みだが、必要な論理レプリケーションスロットが存在せず、エンドポイントにも関連付けていない。対応は？",
+          "options": [
+            {
+              "id": "cdc-postgresql-slot-a",
+              "text": "ソース条件を満たすスロットの存在とslotNameの関連付けを整え、開始位置と合わせて確認する",
+              "explanation": "PostgreSQLの開始位置指定では論理スロットとエンドポイントの設定も必要です。適切な開始点条件を確認します。"
+            },
+            {
+              "id": "cdc-postgresql-slot-b",
+              "text": "タスク名にPostgreSQLと付ければ、スロットなしでも必ず成功する",
+              "explanation": "表示名はソースの論理スロットやエンドポイント設定を用意しません。"
+            },
+            {
+              "id": "cdc-postgresql-slot-c",
+              "text": "CdcStartTimeも追加すれば、足りないスロットが自動で作られる",
+              "explanation": "二重指定はエラーです。ソースの設定不足を別の開始パラメータ追加で解消しません。"
+            }
+          ],
+          "correct_option_id": "cdc-postgresql-slot-a",
+          "runtime_option_order": [
+            "cdc-postgresql-slot-a",
+            "cdc-postgresql-slot-b",
+            "cdc-postgresql-slot-c"
+          ],
+          "rationale": "PostgreSQLの開始位置指定では論理スロットとエンドポイントの設定も必要です。適切な開始点条件を確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問のソースがPostgreSQLではなく別エンジンに変わる。",
+        "answer": "そのソースの開始位置形式・時刻開始対応・ログ等の前提を確認し直す。PostgreSQLのslotNameをそのまま必須条件として流用しない。",
+        "reason": "開始点とソース固有設定はエンジンの対応条件に依存する。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "CDC専用タスクを指定位置から開始するにはstart-replicationと開始位置を指定する。CdcStartPositionとCdcStartTimeの両方指定はエラー。ソースごとの制約があり、すべてのソースで時刻開始に対応するわけではない。PostgreSQLでは既存の論理レプリケーションスロットとエンドポイントのslotNameを確認。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/types/types.go",
+          "claim": "ReplicationTask.RecoveryCheckpointは最後のCDCチェックポイントで、CdcStartPositionへ渡してそこから開始できる。PostgreSQLSettings.SlotNameの指定ではスロットの存在と有効なCdcStartPositionを検証し、不備でエラーになる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
