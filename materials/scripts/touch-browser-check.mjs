@@ -1,3 +1,4 @@
+import {checkOptions} from './options-browser-check.mjs';
 import {checkImpact} from './impact-browser-check.mjs';
 import {checkTurnBanners} from './turn-browser-check.mjs';
 import {checkJunk} from './junk-browser-check.mjs';
@@ -38,7 +39,7 @@ try{
  const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(compact.width<=100&&expanded.width>=compact.width*2);
  await p.locator('.card-preview .card').tap();assert.equal(await readSave(),before,'detail is read-only');
  await p.getByRole('button',{name:'閉じる',exact:true}).tap();assert.equal(await p.locator('.card-preview').count(),0);
- await p.getByRole('button',{name:'次の手札へ',exact:true}).tap();await p.waitForFunction(()=>document.querySelector('.hand').scrollLeft>50);
+ assert.equal(await p.locator('[data-action=hand-next],[data-action=hand-prev]').count(),0);await p.locator('.hand').evaluate(e=>e.scrollLeft=100);await p.waitForFunction(()=>document.querySelector('.hand').scrollLeft>50);
  const last=p.locator('.hand .card').last();await last.scrollIntoViewIfNeeded();
  await last.dispatchEvent('pointerdown',{clientX:250,clientY:500,pointerId:1,pointerType:'touch',button:0});
  await last.dispatchEvent('pointermove',{clientX:90,clientY:501,pointerId:1,pointerType:'touch'});
@@ -65,6 +66,7 @@ try{
  await checkDebuffOffline(p);
  await c.setOffline(false);await c.close();assert.deepEqual(errors,[]);
  if(kind==='webkit'&&!process.env.APP_URL)server=await preview({preview:{host:'127.0.0.1',port:4183,strictPort:true}});
+ await checkOptions(browser,base);
  await checkImpact(browser,base);
  await checkTurnBanners(browser,base);
  await checkJunk(browser,base);

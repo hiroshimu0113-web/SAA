@@ -9,7 +9,7 @@ export async function checkCombos(browser,base){
   for(const [id,r] of Object.entries(COMBOS)){
    const s=act(newRun(1),{type:'node',lane:0});s.battle.energy=4;s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.deck=s.deck.map((card,i)=>({...card,id:r.cards[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];
    await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();
-   for(const card of r.cards.slice(0,2))await p.locator('.hand .card[data-id="'+card+'"]').first().tap();
+   for(const [index,card] of r.cards.slice(0,2).entries()){await p.locator('.hand .card[data-id="'+card+'"]').first().tap();if(index===0)assert.ok(await p.locator('.hand .combo-progress').count()>=2,'first used type softly highlights possible completions');}
    const raw=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));await p.reload();assert.equal(await p.locator('.combo-toast').count(),0);
    const last=p.locator('.hand .card[data-id="'+r.cards[2]+'"]').first();assert.match(await last.getAttribute('class'),/combo-ready/);
    await last.focus();await p.keyboard.press('Shift+F10');assert.ok((await p.locator('.combo-info').allInnerTexts()).some(t=>t.includes(r.name)));assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);await p.getByRole('button',{name:'閉じる',exact:true}).tap();

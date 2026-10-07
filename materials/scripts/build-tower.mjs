@@ -60,3 +60,5 @@ await writeFile('dist/tower/impact.html',html);
 await writeFile('dist/tower/starter.html',html);
 
 await writeFile('dist/tower/vocabulary.html',html);
+
+await writeFile("dist/tower/options.html",html);
