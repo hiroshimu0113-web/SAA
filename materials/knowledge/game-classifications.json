@@ -13313,6 +13313,268 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-budget-forecast-action",
+      "title": "予算管理の実績・予測通知と対処",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "設定と実際の状態を区別して、要件に合う構成・対処を選ぶ概念。",
+      "objective": "実績と予測の通知を目的で選び、通知と費用抑制の対処を分ける。",
+      "unit_ids": [
+        "cost-optimization"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/cost-optimization.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "cost",
+        "operations"
+      ],
+      "capabilities": [
+        "observe",
+        "optimize"
+      ],
+      "concerns": [
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Budgets"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+      ],
+      "limitations": [
+        "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+      ],
+      "misconceptions": [
+        "予測費用は既に発生した実績である。",
+        "予算メールだけで全AWSサービスが自動停止する。",
+        "予算値を下げれば使用中のリソース費用が消える。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/cost-optimization.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+        "counterexample": "予測ではなく、既に発生した費用の閾値超過だけを検知したい。 ACTUALを対象にした通知を選ぶ。",
+        "comparison": {
+          "path": "knowledge/lessons/cost-optimization.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-budget-forecast-action",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go",
+          "claim": "NotificationはACTUALとFORECASTED、比較演算子、閾値と閾値種別を区別。予算200ドルの80%は160ドルという例。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudget.go",
+          "claim": "予算と通知・購読先を作成する。BudgetLimitとPlannedBudgetLimits、旧/新フィルター指定はそれぞれ排他的。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudgetAction.go",
+          "claim": "予算アクションを作成する操作は通知とは別。承認方式・アクション種別・実行ロール等を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "判断の仕組みと条件を説明するカード詳細素材。効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cost-optimization.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+        ],
+        "mislearning_risks": [
+          "予測費用は既に発生した実績である。",
+          "予算メールだけで全AWSサービスが自動停止する。",
+          "予算値を下げれば使用中のリソース費用が消える。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-budget-forecast-action",
+      "title": "予算管理の実績・予測通知と対処を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "実績と予測の通知を目的で選び、通知と費用抑制の対処を分ける。",
+      "unit_ids": [
+        "cost-optimization"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "budget-forecast-action"
+        }
+      ],
+      "domains": [
+        "cost",
+        "operations"
+      ],
+      "capabilities": [
+        "observe",
+        "optimize"
+      ],
+      "concerns": [
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Budgets"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+      ],
+      "limitations": [
+        "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+      ],
+      "misconceptions": [
+        "予測費用は既に発生した実績である。",
+        "予算メールだけで全AWSサービスが自動停止する。",
+        "予算値を下げれば使用中のリソース費用が消える。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "budget-forecast-action.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "budget-forecast-action.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "budget-forecast-action.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "budget-forecast-action.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go",
+          "claim": "NotificationはACTUALとFORECASTED、比較演算子、閾値と閾値種別を区別。予算200ドルの80%は160ドルという例。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudget.go",
+          "claim": "予算と通知・購読先を作成する。BudgetLimitとPlannedBudgetLimits、旧/新フィルター指定はそれぞれ排他的。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudgetAction.go",
+          "claim": "予算アクションを作成する操作は通知とは別。承認方式・アクション種別・実行ロール等を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/cost-optimization.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果は実AWSの費用・配信保証・検知時間・業務成功を保証しない。",
+        "simplifications": [
+          "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+        ],
+        "mislearning_risks": [
+          "予測費用は既に発生した実績である。",
+          "予算メールだけで全AWSサービスが自動停止する。",
+          "予算値を下げれば使用中のリソース費用が消える。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "budget-forecast-warning, budget-notification-not-action"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

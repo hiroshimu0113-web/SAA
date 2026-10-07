@@ -4780,6 +4780,127 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "budget-forecast-action",
+      "title": "予算管理の実績・予測通知と対処を判断する",
+      "premise": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。",
+      "unit_ids": [
+        "cost-optimization"
+      ],
+      "chapter_ids": [
+        "ch12"
+      ],
+      "constraints": [
+        "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。"
+      ],
+      "questions": [
+        {
+          "id": "budget-forecast-warning",
+          "objective": "予測超過を早期に検知する。",
+          "prompt": "月額予算200ドル、閾値80%の教材用例。実績150ドル、予測240ドルが既知。月末の予測超過を早く知らせたい。通知対象は？",
+          "options": [
+            {
+              "id": "budget-forecast-warning-a",
+              "text": "ACTUALだけを選び、未発生の予測費用も実績に数える",
+              "explanation": "ACTUALは実績、FORECASTEDは予測です。別の値を実績へ読み替えません。"
+            },
+            {
+              "id": "budget-forecast-warning-b",
+              "text": "FORECASTEDを選び、必要なら実績通知も別に用意する",
+              "explanation": "予測の超過を知りたい目的に合います。実績の把握は別の通知として管理できます。"
+            },
+            {
+              "id": "budget-forecast-warning-c",
+              "text": "閾値を削除すれば、将来の費用を必ず0に抑えられる",
+              "explanation": "通知の比較条件を変えても費用を抑制する構成にはなりません。"
+            }
+          ],
+          "correct_option_id": "budget-forecast-warning-b",
+          "runtime_option_order": [
+            "budget-forecast-warning-a",
+            "budget-forecast-warning-b",
+            "budget-forecast-warning-c"
+          ],
+          "rationale": "予測の超過を知りたい目的に合います。実績の把握は別の通知として管理できます。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go"
+          ]
+        },
+        {
+          "id": "budget-notification-not-action",
+          "objective": "通知と自動対処を区別する。",
+          "prompt": "別の予算で通知とメール購読だけを設定した。予算アクション、リソース停止や権限制限の自動化は設定していない。通知が届けば、その通知だけで全リソースが停止し費用が増えなくなる？",
+          "options": [
+            {
+              "id": "budget-notification-not-action-a",
+              "text": "メール通知だけで全サービスの利用が自動停止する",
+              "explanation": "通知の購読設定はリソース停止の設定ではありません。"
+            },
+            {
+              "id": "budget-notification-not-action-b",
+              "text": "予算値を下げれば、保存済みデータ等の費用も即時消える",
+              "explanation": "予算の設定値と利用中リソースの状態は別です。"
+            },
+            {
+              "id": "budget-notification-not-action-c",
+              "text": "停止は保証されない。対象と影響を確認し、必要な対処や制御を別途設計する",
+              "explanation": "通知とアクションは別です。実行対象・権限・承認・業務影響を確認して対処します。"
+            }
+          ],
+          "correct_option_id": "budget-notification-not-action-c",
+          "runtime_option_order": [
+            "budget-notification-not-action-a",
+            "budget-notification-not-action-b",
+            "budget-notification-not-action-c"
+          ],
+          "rationale": "通知とアクションは別です。実行対象・権限・承認・業務影響を確認して対処します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudget.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudgetAction.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "予測ではなく、既に発生した費用の閾値超過だけを検知したい。",
+        "answer": "ACTUALを対象にした通知を選ぶ。",
+        "reason": "知りたい情報が予測から実績へ変わる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go",
+          "claim": "NotificationはACTUALとFORECASTED、比較演算子、閾値と閾値種別を区別。予算200ドルの80%は160ドルという例。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudget.go",
+          "claim": "予算と通知・購読先を作成する。BudgetLimitとPlannedBudgetLimits、旧/新フィルター指定はそれぞれ排他的。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudgetAction.go",
+          "claim": "予算アクションを作成する操作は通知とは別。承認方式・アクション種別・実行ロール等を設定する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

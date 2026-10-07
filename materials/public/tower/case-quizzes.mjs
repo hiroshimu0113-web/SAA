@@ -1169,6 +1169,36 @@ export const CASE_QUIZZES={
       "既知の不足をバケットポリシーで修正します。インポート済みバケットではCDKが元ポリシーを変更したと仮定しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330"
+  },
+  "budget-forecast-warning": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 月額予算200ドル、閾値80%の教材用例。実績150ドル、予測240ドルが既知。月末の予測超過を早く知らせたい。通知対象は？",
+    "options": [
+      "ACTUALだけを選び、未発生の予測費用も実績に数える",
+      "FORECASTEDを選び、必要なら実績通知も別に用意する",
+      "閾値を削除すれば、将来の費用を必ず0に抑えられる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "ACTUALは実績、FORECASTEDは予測です。別の値を実績へ読み替えません。",
+      "予測の超過を知りたい目的に合います。実績の把握は別の通知として管理できます。",
+      "通知の比較条件を変えても費用を抑制する構成にはなりません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go"
+  },
+  "budget-notification-not-action": {
+    "prompt": "2問は別状況の独立判断。数値は教材用の仮定で、AWSの料金・性能保証ではない。 別の予算で通知とメール購読だけを設定した。予算アクション、リソース停止や権限制限の自動化は設定していない。通知が届けば、その通知だけで全リソースが停止し費用が増えなくなる？",
+    "options": [
+      "メール通知だけで全サービスの利用が自動停止する",
+      "予算値を下げれば、保存済みデータ等の費用も即時消える",
+      "停止は保証されない。対象と影響を確認し、必要な対処や制御を別途設計する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "通知の購読設定はリソース停止の設定ではありません。",
+      "予算の設定値と利用中リソースの状態は別です。",
+      "通知とアクションは別です。実行対象・権限・承認・業務影響を確認して対処します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1327,5 +1357,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "cloudfront-oac-website-origin",
     "cloudfront-oac-imported-bucket-policy"
+  ],
+  [
+    "budget-forecast-warning",
+    "budget-notification-not-action"
   ]
 ];

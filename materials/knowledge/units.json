@@ -2680,6 +2680,75 @@
         "現行の細かな制限・全権限評価",
         "実AWSの設定変更・アクセス検証"
       ]
+    },
+    {
+      "id": "cost-optimization",
+      "title": "予算管理の実績・予測通知と対処",
+      "group": "operations",
+      "objective": "実績と予測の通知を目的で選び、通知と費用抑制の対処を分ける。",
+      "estimated_minutes": 7,
+      "scope": "AWS Budgetsの通知と対処の境界。見積り精度・最新価格・全アクション種別・課金停止保証は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "予測費用は既に発生した実績である。",
+        "予算メールだけで全AWSサービスが自動停止する。",
+        "予算値を下げれば使用中のリソース費用が消える。"
+      ],
+      "checks": [
+        {
+          "id": "cost-optimization-explain",
+          "level": "explain",
+          "prompt": "この単位の判断で分けて確認するものは？",
+          "expected_points": [
+            "ACTUALは実績、FORECASTEDは予測",
+            "割合閾値と金額閾値を区別",
+            "通知と自動対処は別設定"
+          ]
+        },
+        {
+          "id": "cost-optimization-apply",
+          "level": "apply",
+          "prompt": "ケースの条件が変わったときに何を確認する？",
+          "expected_points": [
+            "予測ではなく、既に発生した費用の閾値超過だけを検知したい。",
+            "ACTUALを対象にした通知を選ぶ。",
+            "知りたい情報が予測から実績へ変わる。"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch12-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/cost-optimization.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/types/types.go",
+            "claim": "NotificationはACTUALとFORECASTED、比較演算子、閾値と閾値種別を区別。予算200ドルの80%は160ドルという例。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudget.go",
+            "claim": "予算と通知・購読先を作成する。BudgetLimitとPlannedBudgetLimits、旧/新フィルター指定はそれぞれ排他的。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/budgets/api_op_CreateBudgetAction.go",
+            "claim": "予算アクションを作成する操作は通知とは別。承認方式・アクション種別・実行ロール等を設定する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "本文に残した詳細条件の公式確認",
+        "実AWSによる動作検証"
+      ]
     }
   ]
 }

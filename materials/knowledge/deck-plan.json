@@ -388,6 +388,13 @@
         "ch12"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "cost-optimization",
+      "chapter_ids": [
+        "ch12"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [
