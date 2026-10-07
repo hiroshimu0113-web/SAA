@@ -2608,6 +2608,78 @@
         "現行の細かな制限・全権限評価",
         "実AWSの設定変更・アクセス検証"
       ]
+    },
+    {
+      "id": "cloudfront-oac",
+      "title": "CloudFront OACとS3オリジンの許可境界",
+      "group": "networking",
+      "objective": "通常S3オリジンのOAC署名とバケット許可を組み合わせ、website endpointや閲覧者制御と区別する。",
+      "estimated_minutes": 7,
+      "scope": "標準CloudFrontから通常S3オリジンを読み取る構成。ケースはSSE-S3、他条件正常。全IAM評価・SSE-KMSの完全な権限・書込み・OAI移行・website機能代替は対象外。",
+      "prerequisites": [
+        "authorization",
+        "s3"
+      ],
+      "misconceptions": [
+        "S3のwebsite endpointにもOACを使える。",
+        "OACの署名だけでバケット許可が付く。",
+        "閲覧者向け署名付きURLだけで公開S3への直接アクセスも閉じる。"
+      ],
+      "checks": [
+        {
+          "id": "cloudfront-oac-explain",
+          "level": "explain",
+          "prompt": "OACの署名とS3バケット許可はどう違う？",
+          "expected_points": [
+            "署名と許可は別",
+            "通常S3オリジンが対象",
+            "閲覧者の認証とは別"
+          ]
+        },
+        {
+          "id": "cloudfront-oac-apply",
+          "level": "apply",
+          "prompt": "インポート済み非公開バケットで必要なGetObject許可が欠けるなら？",
+          "expected_points": [
+            "バケットポリシーを更新",
+            "CloudFrontサービスプリンシパルと配信SourceArnを限定",
+            "公開化で代替しない"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch07-l02"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/cloudfront-oac.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330",
+            "claim": "OriginAccessControlConfigのalwaysはCloudFrontがオリジン要求を署名しAuthorizationを上書きする。S3のwebsite endpointはカスタムオリジンとして扱う。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#restricting-access-to-a-standard-s3-origin",
+            "claim": "OAC/OAIは通常S3オリジンに利用でき、website endpointには利用できない。非公開バケットと組み合わせる。インポート済みバケットはポリシーを手動変更する必要がある。CloudFrontサービスプリンシパルへGetObjectを許可しSourceArnで配信を限定する例がある。 S3 Object Ownershipは通常Bucket owner enforced、ACLが必要ならBucket owner preferred。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#setting-up-oac-with-a-sse-kms-encrypted-s3-origin",
+            "claim": "SSE-KMSではKMSキーへの許可が別途必要。インポート済みKMSキーはCDKで変更されず、手動のキーポリシー更新が必要。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "現行の細かな制限・全権限評価",
+        "実AWSの設定変更・アクセス検証"
+      ]
     }
   ]
 }

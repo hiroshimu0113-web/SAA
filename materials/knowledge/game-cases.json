@@ -4656,6 +4656,130 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "cloudfront-oac-s3-boundary",
+      "title": "CloudFront OACとS3オリジンの許可境界を判断する",
+      "premise": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。",
+      "unit_ids": [
+        "cloudfront-oac"
+      ],
+      "chapter_ids": [
+        "ch07",
+        "ch10",
+        "ch12"
+      ],
+      "constraints": [
+        "個人別認証とマルチテナント配信は対象外。",
+        "正解を決める条件は各問にも記載する。"
+      ],
+      "questions": [
+        {
+          "id": "cloudfront-oac-website-origin",
+          "objective": "OACを使えるオリジンを選ぶ。",
+          "prompt": "標準CloudFront配信の配信元を、公開S3静的ウェブサイトエンドポイントから非公開S3へ変更したい。ウェブサイト固有のリダイレクト等には依存せず、通常S3オリジンへの移行が可能。OACを使う構成は？",
+          "options": [
+            {
+              "id": "cloudfront-oac-website-origin-a",
+              "text": "ウェブサイトエンドポイントのままOACを関連付ける",
+              "explanation": "S3のwebsite endpointはHTTPのカスタムオリジンで、OAC/OAIの対象ではありません。"
+            },
+            {
+              "id": "cloudfront-oac-website-origin-b",
+              "text": "通常S3オリジンへ変更し、OACと配信元バケットの必要な許可を設定する",
+              "explanation": "OACの対象である通常S3オリジンと非公開バケットを組み合わせ、署名と許可を確認します。"
+            },
+            {
+              "id": "cloudfront-oac-website-origin-c",
+              "text": "閲覧者向け署名付きURLだけを追加し、S3の公開アクセスは維持する",
+              "explanation": "閲覧者の条件を変えても、この前提のS3直接公開を閉じる構成にはなりません。"
+            }
+          ],
+          "correct_option_id": "cloudfront-oac-website-origin-b",
+          "runtime_option_order": [
+            "cloudfront-oac-website-origin-a",
+            "cloudfront-oac-website-origin-b",
+            "cloudfront-oac-website-origin-c"
+          ],
+          "rationale": "OACの対象である通常S3オリジンと非公開バケットを組み合わせ、署名と許可を確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330",
+            "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#restricting-access-to-a-standard-s3-origin"
+          ]
+        },
+        {
+          "id": "cloudfront-oac-imported-bucket-policy",
+          "objective": "署名とアクセス許可を分ける。",
+          "prompt": "別の標準CloudFront配信Dで、既存の非公開S3バケットをCDKへインポートした。通常S3オリジンにOACが関連付け済みで、署名はalways。Object OwnershipはBucket owner enforced。オブジェクトは存在しSSE-S3、必要なCloudFrontのs3:GetObject許可だけがバケットポリシーにない。他の権限・経路は正常。修正は？",
+          "options": [
+            {
+              "id": "cloudfront-oac-imported-bucket-policy-a",
+              "text": "OACが署名すれば、欠けたGetObject許可も自動的に有効と扱う",
+              "explanation": "署名による要求の識別と、バケットポリシーによる許可は別です。インポート済みバケットのポリシー更新も必要です。"
+            },
+            {
+              "id": "cloudfront-oac-imported-bucket-policy-b",
+              "text": "バケットを全員へ公開して、配信Dへの限定を省略する",
+              "explanation": "公開すると非公開の配信元という要件を満たしません。"
+            },
+            {
+              "id": "cloudfront-oac-imported-bucket-policy-c",
+              "text": "CloudFrontサービスプリンシパルのGetObject許可を対象オブジェクトに追加し、SourceArnでDへ限定する",
+              "explanation": "既知の不足をバケットポリシーで修正します。インポート済みバケットではCDKが元ポリシーを変更したと仮定しません。"
+            }
+          ],
+          "correct_option_id": "cloudfront-oac-imported-bucket-policy-c",
+          "runtime_option_order": [
+            "cloudfront-oac-imported-bucket-policy-a",
+            "cloudfront-oac-imported-bucket-policy-b",
+            "cloudfront-oac-imported-bucket-policy-c"
+          ],
+          "rationale": "既知の不足をバケットポリシーで修正します。インポート済みバケットではCDKが元ポリシーを変更したと仮定しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330",
+            "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#restricting-access-to-a-standard-s3-origin"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問のオブジェクト暗号化をSSE-KMSへ変更し、KMSキーへの必要な許可がない。",
+        "answer": "S3の許可だけで解決とせず、配信のKMSキー利用許可も確認・設定する。",
+        "reason": "暗号化方式が変わるとキーを利用する権限も必要になる。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330",
+          "claim": "OriginAccessControlConfigのalwaysはCloudFrontがオリジン要求を署名しAuthorizationを上書きする。S3のwebsite endpointはカスタムオリジンとして扱う。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#restricting-access-to-a-standard-s3-origin",
+          "claim": "OAC/OAIは通常S3オリジンに利用でき、website endpointには利用できない。非公開バケットと組み合わせる。インポート済みバケットはポリシーを手動変更する必要がある。CloudFrontサービスプリンシパルへGetObjectを許可しSourceArnで配信を限定する例がある。 S3 Object Ownershipは通常Bucket owner enforced、ACLが必要ならBucket owner preferred。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-cdk/blob/6ede0060d93bab5903a0528bdd323a56e1430003/packages/aws-cdk-lib/aws-cloudfront-origins/README.md#setting-up-oac-with-a-sse-kms-encrypted-s3-origin",
+          "claim": "SSE-KMSではKMSキーへの許可が別途必要。インポート済みKMSキーはCDKで変更されず、手動のキーポリシー更新が必要。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

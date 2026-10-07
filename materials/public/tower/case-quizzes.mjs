@@ -1139,6 +1139,36 @@ export const CASE_QUIZZES={
       "正のMinTTLによる保持を避ける必要があります。MinTTL=0だけで全応答が必ず非キャッシュになるとも断定しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L733"
+  },
+  "cloudfront-oac-website-origin": {
+    "prompt": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。 標準CloudFront配信の配信元を、公開S3静的ウェブサイトエンドポイントから非公開S3へ変更したい。ウェブサイト固有のリダイレクト等には依存せず、通常S3オリジンへの移行が可能。OACを使う構成は？",
+    "options": [
+      "ウェブサイトエンドポイントのままOACを関連付ける",
+      "通常S3オリジンへ変更し、OACと配信元バケットの必要な許可を設定する",
+      "閲覧者向け署名付きURLだけを追加し、S3の公開アクセスは維持する"
+    ],
+    "answer": 1,
+    "reasons": [
+      "S3のwebsite endpointはHTTPのカスタムオリジンで、OAC/OAIの対象ではありません。",
+      "OACの対象である通常S3オリジンと非公開バケットを組み合わせ、署名と許可を確認します。",
+      "閲覧者の条件を変えても、この前提のS3直接公開を閉じる構成にはなりません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330"
+  },
+  "cloudfront-oac-imported-bucket-policy": {
+    "prompt": "標準CloudFront配信の設定を扱う。2問は別状況の独立判断。 別の標準CloudFront配信Dで、既存の非公開S3バケットをCDKへインポートした。通常S3オリジンにOACが関連付け済みで、署名はalways。Object OwnershipはBucket owner enforced。オブジェクトは存在しSSE-S3、必要なCloudFrontのs3:GetObject許可だけがバケットポリシーにない。他の権限・経路は正常。修正は？",
+    "options": [
+      "OACが署名すれば、欠けたGetObject許可も自動的に有効と扱う",
+      "バケットを全員へ公開して、配信Dへの限定を省略する",
+      "CloudFrontサービスプリンシパルのGetObject許可を対象オブジェクトに追加し、SourceArnでDへ限定する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "署名による要求の識別と、バケットポリシーによる許可は別です。インポート済みバケットのポリシー更新も必要です。",
+      "公開すると非公開の配信元という要件を満たしません。",
+      "既知の不足をバケットポリシーで修正します。インポート済みバケットではCDKが元ポリシーを変更したと仮定しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudfront/types/types.go#L4330"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1293,5 +1323,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "cloudfront-language-cache-key",
     "cloudfront-min-ttl-private"
+  ],
+  [
+    "cloudfront-oac-website-origin",
+    "cloudfront-oac-imported-bucket-policy"
   ]
 ];

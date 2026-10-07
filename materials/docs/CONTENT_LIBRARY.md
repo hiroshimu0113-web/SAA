@@ -79,3 +79,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [第6章RDSリードレプリカ](../knowledge/lessons/read-replica.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [第7章CloudFrontキャッシュキー](../knowledge/lessons/cache-key.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [第7章CloudFront OAC](../knowledge/lessons/cloudfront-oac.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

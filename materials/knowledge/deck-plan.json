@@ -379,6 +379,15 @@
         "ch12"
       ],
       "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
+    },
+    {
+      "concept_id": "cloudfront-oac",
+      "chapter_ids": [
+        "ch07",
+        "ch10",
+        "ch12"
+      ],
+      "reason": "確認した同一素材を共有し、章別の言い換えカードを増やさない。"
     }
   ],
   "separate_proposals": [
