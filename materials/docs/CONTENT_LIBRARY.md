@@ -9,7 +9,8 @@
 | 資料 | 保管先 | 扱い |
 |---|---|---|
 | テキストと問題の全体原稿 | [part1.ts](../src/content/part1.ts)・[part2.ts](../src/content/part2.ts) | 未公開原稿も削除せず保持する |
-| 先行公開版の範囲と補足 | [index.ts](../src/content/index.ts)・[starter.ts](../src/content/starter.ts) | 現在の配信設定。公開版の補足も確認してから改訂する |
+| 公開版の範囲と補足 | [index.ts](../src/content/index.ts)・[starter.ts](../src/content/starter.ts) | 現在の配信設定。公開版の補足も確認してから改訂する |
+| 章別レビュー補填と独自模試 | [readiness](../src/content/readiness/) | 12章の追加本文・25問・模試65問×2・用語・確認問答。part1/part2から取り込む |
 | 細分化した知識と確認問題 | [units.json](../knowledge/units.json) | 1単位1目標で蓄積し、確認待ちと確認済みを区別する |
 | 知識同士の関係 | [relations.json](../knowledge/relations.json) | 前提・比較・組み合わせを記録する |
 | カード等へ再利用する分類 | [game-classifications.json](../knowledge/game-classifications.json) | 用語・概念・システム・役・ビルド・ケースを記録し、本文の保管先へ参照をつなぐ |
@@ -33,3 +34,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 ## ゲームへの反映
 
 公開済み教材はテスト/ビルド時にカード・クイズへ変換し、ゲーム画面の更新ボタンで取得できる。[連携仕様と教材担当の手順](GAME_CONTENT_UPDATE.md)を参照。独立HTMLは構造化補足の登録が必要。未公開原稿は取り込まない。
+
+今回のレビュー対応は [SAA_REVISION_LOG.md](SAA_REVISION_LOG.md)、提供された報告書は [SAA_READINESS_REVIEW.md](SAA_READINESS_REVIEW.md)。報告書は改訂前の評価として保存する。

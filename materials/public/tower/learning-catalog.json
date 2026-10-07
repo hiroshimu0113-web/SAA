@@ -17,7 +17,7 @@
       "leak": {
         "name": "インスタンスストア",
         "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
-        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
         "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
       },
       "timeout": {
@@ -41,7 +41,7 @@
       "elite": {
         "name": "クロスアカウントアクセス",
         "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
-        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
         "limit": "教材の用語を復習する課題名です。敵の攻撃・HP・デバフは架空の戦闘ルールで、AWSサービスが攻撃するという意味ではありません。"
       },
       "elite_fire": {
@@ -115,7 +115,7 @@
       "ember": {
         "name": "Amazon S3",
         "note": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
-        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "edge": {
@@ -169,7 +169,7 @@
       "elite_edge": {
         "name": "クロスアカウントアクセス",
         "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
-        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "elite_energy": {
@@ -205,7 +205,7 @@
       "escalation": {
         "name": "インスタンスストア",
         "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
-        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "discount": {
@@ -237,7 +237,7 @@
       "caching": {
         "name": "クロスアカウントアクセス",
         "note": "クロスアカウントアクセスではIAMロールの信頼関係と操作権限を設定し、ロールを引き受けた一時認証情報で操作します。外部事業者への委任ではExternal IDなどの条件も検討します。3枚条件やエナジー回復はゲーム上のルールで、実際の設定を代行しません。",
-        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+        "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       }
     },
@@ -245,7 +245,7 @@
       "junk": {
         "name": "一時データ",
         "note": "インスタンスストアには再生成できる一時データを置き、失いたくない処理結果はS3などへ保存します。",
-        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+        "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       }
     }
@@ -618,6 +618,1194 @@
       "upBlock": 3,
       "text": "5ブロック。1枚引く。"
     },
+    "study-organizations": {
+      "name": "AWS Organizations",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-control-tower": {
+      "name": "AWS Control Tower",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-permissions-boundary": {
+      "name": "アクセス許可の境界",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-abac": {
+      "name": "ABAC",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-resource-policy": {
+      "name": "リソースベースポリシー",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-implicit-deny": {
+      "name": "暗黙的Deny",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-access-analyzer": {
+      "name": "IAM Access Analyzer",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cognito-identity": {
+      "name": "Cognito IDプール",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-block-public-access": {
+      "name": "S3 Block Public Access",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-vpc": {
+      "name": "Amazon VPC",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-subnet": {
+      "name": "サブネット",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-route": {
+      "name": "ルートテーブル",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-public-subnet": {
+      "name": "パブリックサブネット",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-longest-prefix": {
+      "name": "最長プレフィックス一致",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-security-group": {
+      "name": "セキュリティグループ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-network-acl": {
+      "name": "ネットワークACL",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-nat-gateway": {
+      "name": "NAT Gateway",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-vpc-endpoint": {
+      "name": "VPCエンドポイント",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-private-link": {
+      "name": "AWS PrivateLink",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-peering": {
+      "name": "VPCピアリング",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-transit-gateway": {
+      "name": "AWS Transit Gateway",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-site-to-site-vpn": {
+      "name": "Site-to-Site VPN",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-direct-connect": {
+      "name": "AWS Direct Connect",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ipv6-egress": {
+      "name": "Egress-only Internet Gateway",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-vpc-flow-logs": {
+      "name": "VPC Flow Logs",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-session-manager": {
+      "name": "Session Manager",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ec2": {
+      "name": "Amazon EC2",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-nlb": {
+      "name": "Network Load Balancer",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-auto-scaling": {
+      "name": "EC2 Auto Scaling",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-target-tracking": {
+      "name": "ターゲット追跡スケーリング",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-scheduled-scaling": {
+      "name": "予定スケーリング",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-warm-pool": {
+      "name": "Warm Pool",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ami": {
+      "name": "AMI",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-capacity-reservation": {
+      "name": "Capacity Reservation",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-placement-group": {
+      "name": "プレイスメントグループ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-instance-family": {
+      "name": "インスタンスファミリー",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ebs": {
+      "name": "Amazon EBS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-efs": {
+      "name": "Amazon EFS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-gp3": {
+      "name": "gp3",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-provisioned-iops": {
+      "name": "Provisioned IOPS SSD",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-storage-performance": {
+      "name": "IOPSとスループット",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-standard-ia": {
+      "name": "S3 Standard-IA",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-intelligent-tiering": {
+      "name": "S3 Intelligent-Tiering",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-archive": {
+      "name": "アーカイブ保存",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-versioning": {
+      "name": "S3バージョニング",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-noncurrent-version": {
+      "name": "S3旧バージョン",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-object-lock": {
+      "name": "S3 Object Lock",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-fsx-windows": {
+      "name": "FSx for Windows File Server",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ebs-snapshot": {
+      "name": "EBSスナップショット",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-multipart-upload": {
+      "name": "マルチパートアップロード",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-transfer-acceleration": {
+      "name": "S3 Transfer Acceleration",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-s3-consistency": {
+      "name": "S3の強い整合性",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-s3-encryption": {
+      "name": "S3の保存時暗号化",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-s3-replication": {
+      "name": "S3レプリケーション",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-rds-multi-az": {
+      "name": "RDS Multi-AZ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-read-replica": {
+      "name": "リードレプリカ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-rds-standby": {
+      "name": "RDSの単一スタンバイ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dynamodb": {
+      "name": "Amazon DynamoDB",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-partition-key": {
+      "name": "パーティションキー",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-gsi": {
+      "name": "グローバルセカンダリインデックス（GSI）",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-consistency": {
+      "name": "読取り整合性",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dynamodb-on-demand": {
+      "name": "DynamoDBオンデマンド容量",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dynamodb-ttl": {
+      "name": "DynamoDB TTL",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dynamodb-transactions": {
+      "name": "DynamoDBトランザクション",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dax": {
+      "name": "DAX",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-rds-proxy": {
+      "name": "RDS Proxy",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-point-in-time-recovery": {
+      "name": "ポイントインタイムリカバリ（PITR）",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-aurora-replica": {
+      "name": "Aurora Replica",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-global-tables": {
+      "name": "DynamoDBグローバルテーブル",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-database-selection": {
+      "name": "データモデルによるDB選定",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-database-cost": {
+      "name": "DBの総費用",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-network-cost": {
+      "name": "ネットワークの総費用",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-storage-cost": {
+      "name": "ストレージの総費用",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-route53": {
+      "name": "Route 53",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dns-ttl": {
+      "name": "TTL",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cloudfront": {
+      "name": "CloudFront",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cache-key": {
+      "name": "キャッシュキー",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-global-accelerator": {
+      "name": "Global Accelerator",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cloudfront-oac": {
+      "name": "OAC",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-signed-url": {
+      "name": "署名付き URL",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-lambda": {
+      "name": "Lambda",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-lambda-concurrency": {
+      "name": "同時実行",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ecs": {
+      "name": "ECS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-fargate": {
+      "name": "Fargate",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-eks": {
+      "name": "EKS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-ecr": {
+      "name": "ECR",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-task-role": {
+      "name": "タスクロール",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-api-gateway": {
+      "name": "API Gateway",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-step-functions": {
+      "name": "Step Functions",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-sqs": {
+      "name": "SQS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-visibility-timeout": {
+      "name": "可視性タイムアウト",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-fifo": {
+      "name": "FIFO",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-idempotency": {
+      "name": "冪等性",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-sns": {
+      "name": "SNS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-fanout": {
+      "name": "ファンアウト",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-eventbridge": {
+      "name": "EventBridge",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dlq": {
+      "name": "デッドレターキュー",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-queue-scaling": {
+      "name": "キューに基づくスケーリング",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-claim-check": {
+      "name": "Claim Check",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-kms": {
+      "name": "KMS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-secrets-manager": {
+      "name": "Secrets Manager",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-tls": {
+      "name": "TLS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-waf": {
+      "name": "WAF",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-guardduty": {
+      "name": "GuardDuty",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-inspector": {
+      "name": "Inspector",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-macie": {
+      "name": "Macie",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-shield": {
+      "name": "Shield",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cloudwatch": {
+      "name": "CloudWatch",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cloudtrail": {
+      "name": "CloudTrail",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-aws-config": {
+      "name": "AWS Config",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-rto": {
+      "name": "RTO",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-rpo": {
+      "name": "RPO",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-pilot-light": {
+      "name": "パイロットライト",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-warm-standby": {
+      "name": "ウォームスタンバイ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-backup": {
+      "name": "バックアップ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-restore-test": {
+      "name": "復元テスト",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-replication": {
+      "name": "レプリケーション",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-dms": {
+      "name": "DMS",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cdc": {
+      "name": "CDC",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-datasync": {
+      "name": "DataSync",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-migration": {
+      "name": "リホスト",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-performance": {
+      "name": "ボトルネック",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cache": {
+      "name": "キャッシュ",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-savings-plans": {
+      "name": "Savings Plans",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-cost-optimization": {
+      "name": "コスト最適化",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-athena": {
+      "name": "Athena",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-glue": {
+      "name": "Glue",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-redshift": {
+      "name": "Redshift",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-kinesis": {
+      "name": "Kinesis Data Streams",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-firehose": {
+      "name": "Data Firehose",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-opensearch": {
+      "name": "OpenSearch",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
+    "study-lake-formation": {
+      "name": "Lake Formation",
+      "cost": 1,
+      "kind": "skill",
+      "block": 5,
+      "draw": 1,
+      "upBlock": 3,
+      "text": "5ブロック。1枚引く。"
+    },
     "study-health-check": {
       "name": "ヘルスチェック",
       "cost": 1,
@@ -704,17 +1892,17 @@
     },
     "analysis": {
       "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
-      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "overload": {
       "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
-      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "redundant": {
       "note": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
-      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "optimize": {
@@ -785,12 +1973,12 @@
     "study-instance-store": {
       "note": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
       "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
-      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
     },
     "study-s3": {
       "note": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
       "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
-      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
     },
     "study-rds": {
       "note": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
@@ -825,7 +2013,7 @@
     "study-cross-account": {
       "note": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
       "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
-      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html"
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html"
     },
     "study-external-id": {
       "note": "外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。",
@@ -851,6 +2039,666 @@
       "note": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
       "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
       "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+    },
+    "study-organizations": {
+      "note": "AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+    },
+    "study-control-tower": {
+      "note": "ランディングゾーンと複数アカウントの統制・払い出しを支援する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+    },
+    "study-permissions-boundary": {
+      "note": "IAM主体へ付与できる権限の上限。単独で権限を付与しない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html"
+    },
+    "study-abac": {
+      "note": "タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html"
+    },
+    "study-resource-policy": {
+      "note": "S3バケット等のリソース側でPrincipalと許可・拒否を定める。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-policy-language-overview.html"
+    },
+    "study-implicit-deny": {
+      "note": "適用される許可がない要求を既定で拒否すること。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html"
+    },
+    "study-access-analyzer": {
+      "note": "外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
+    },
+    "study-cognito-identity": {
+      "note": "認証済みID等に応じた限定的なAWS一時認証情報を提供する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html"
+    },
+    "study-block-public-access": {
+      "note": "S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html"
+    },
+    "study-vpc": {
+      "note": "リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-subnet": {
+      "note": "1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-route": {
+      "note": "宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-public-subnet": {
+      "note": "IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-longest-prefix": {
+      "note": "宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-security-group": {
+      "note": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+    },
+    "study-network-acl": {
+      "note": "サブネット境界で許可・拒否を設定するステートレスな通信制御。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+    },
+    "study-nat-gateway": {
+      "note": "外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html"
+    },
+    "study-vpc-endpoint": {
+      "note": "対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html"
+    },
+    "study-private-link": {
+      "note": "対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html"
+    },
+    "study-peering": {
+      "note": "2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html"
+    },
+    "study-transit-gateway": {
+      "note": "複数VPCや拠点接続を集約するネットワークハブ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html"
+    },
+    "study-site-to-site-vpn": {
+      "note": "拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
+    },
+    "study-direct-connect": {
+      "note": "AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html"
+    },
+    "study-ipv6-egress": {
+      "note": "IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html"
+    },
+    "study-vpc-flow-logs": {
+      "note": "IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html"
+    },
+    "study-session-manager": {
+      "note": "Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html"
+    },
+    "study-ec2": {
+      "note": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html"
+    },
+    "study-nlb": {
+      "note": "TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html"
+    },
+    "study-auto-scaling": {
+      "note": "需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+    },
+    "study-target-tracking": {
+      "note": "1台当たりの負荷等が目標に近づくよう容量を調整する方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+    },
+    "study-scheduled-scaling": {
+      "note": "既知の時刻の需要に合わせて事前に容量を変更する方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html"
+    },
+    "study-warm-pool": {
+      "note": "初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html"
+    },
+    "study-ami": {
+      "note": "EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html"
+    },
+    "study-capacity-reservation": {
+      "note": "指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html"
+    },
+    "study-placement-group": {
+      "note": "低遅延や障害分離等の要件に合わせEC2の配置を制御する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html"
+    },
+    "study-instance-family": {
+      "note": "CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html"
+    },
+    "study-ebs": {
+      "note": "EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-efs": {
+      "note": "Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/efs/latest/ug/features.html"
+    },
+    "study-gp3": {
+      "note": "容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-provisioned-iops": {
+      "note": "厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-storage-performance": {
+      "note": "秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html"
+    },
+    "study-standard-ia": {
+      "note": "低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-intelligent-tiering": {
+      "note": "アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-archive": {
+      "note": "長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects.html"
+    },
+    "study-versioning": {
+      "note": "オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+    },
+    "study-noncurrent-version": {
+      "note": "現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+    },
+    "study-object-lock": {
+      "note": "一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+    },
+    "study-fsx-windows": {
+      "note": "SMB共有やActive Directory連携を要件とするWindowsファイルサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html"
+    },
+    "study-ebs-snapshot": {
+      "note": "EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html"
+    },
+    "study-multipart-upload": {
+      "note": "大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html"
+    },
+    "study-transfer-acceleration": {
+      "note": "遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html"
+    },
+    "study-s3-consistency": {
+      "note": "成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel"
+    },
+    "study-s3-encryption": {
+      "note": "SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html"
+    },
+    "study-s3-replication": {
+      "note": "ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html"
+    },
+    "study-rds-multi-az": {
+      "note": "複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+    },
+    "study-read-replica": {
+      "note": "読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html"
+    },
+    "study-rds-standby": {
+      "note": "Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+    },
+    "study-dynamodb": {
+      "note": "キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+    },
+    "study-partition-key": {
+      "note": "DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html"
+    },
+    "study-gsi": {
+      "note": "別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html"
+    },
+    "study-consistency": {
+      "note": "更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+    },
+    "study-dynamodb-on-demand": {
+      "note": "読書き要求ベースの容量課金。事前の固定容量計画を減らす。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html"
+    },
+    "study-dynamodb-ttl": {
+      "note": "項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html"
+    },
+    "study-dynamodb-transactions": {
+      "note": "複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html"
+    },
+    "study-dax": {
+      "note": "DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html"
+    },
+    "study-rds-proxy": {
+      "note": "DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html"
+    },
+    "study-point-in-time-recovery": {
+      "note": "保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html"
+    },
+    "study-aurora-replica": {
+      "note": "Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html"
+    },
+    "study-global-tables": {
+      "note": "複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html"
+    },
+    "study-database-selection": {
+      "note": "SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html"
+    },
+    "study-database-cost": {
+      "note": "実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html"
+    },
+    "study-network-cost": {
+      "note": "出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html"
+    },
+    "study-storage-cost": {
+      "note": "保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-route53": {
+      "note": "名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-dns-ttl": {
+      "note": "DNS やキャッシュの情報を再利用する有効期間。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-cloudfront": {
+      "note": "エッジで HTTP/HTTPS コンテンツを配信する CDN。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html"
+    },
+    "study-cache-key": {
+      "note": "どの要求で同じキャッシュを共有するかを決める識別情報。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+    },
+    "study-global-accelerator": {
+      "note": "静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html"
+    },
+    "study-cloudfront-oac": {
+      "note": "CloudFront からオリジンへのアクセスを制限する仕組み。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html"
+    },
+    "study-signed-url": {
+      "note": "有効期限等を含む署名で視聴者のアクセスを制限する URL。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-choosing-signed-urls-cookies.html"
+    },
+    "study-lambda": {
+      "note": "イベントに応じてコードを動かすサーバーレスサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html"
+    },
+    "study-lambda-concurrency": {
+      "note": "同じ時点で処理されている関数呼出し数。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html"
+    },
+    "study-ecs": {
+      "note": "コンテナタスクの実行・配置・維持を管理するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-fargate": {
+      "note": "ホストを直接管理せずコンテナを動かす計算基盤。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-eks": {
+      "note": "Kubernetes のマネージドサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-ecr": {
+      "note": "コンテナイメージを保管するレジストリ。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-task-role": {
+      "note": "ECS タスク内のアプリが AWS API を使うための IAM ロール。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-api-gateway": {
+      "note": "API の公開・認証連携・流量管理を担う入口。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html"
+    },
+    "study-step-functions": {
+      "note": "複数ステップの順序や再試行を状態機械で管理するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html"
+    },
+    "study-sqs": {
+      "note": "非同期処理の作業待ちメッセージを保持するキュー。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-visibility-timeout": {
+      "note": "受信済みメッセージをほかの受信者から一時的に隠す期間。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-fifo": {
+      "note": "先入れ先出し。SQS ではメッセージグループ内の順序を維持する。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-idempotency": {
+      "note": "同じ要求を繰り返しても業務上の結果が重複しない性質。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html"
+    },
+    "study-sns": {
+      "note": "トピックの購読者へメッセージを配信するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-fanout": {
+      "note": "一つのメッセージを複数の独立した受信先へ配る構成。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-eventbridge": {
+      "note": "イベントをパターンに応じて対象へ振り分けるサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-dlq": {
+      "note": "処理に繰り返し失敗したメッセージの隔離先。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-queue-scaling": {
+      "note": "滞留件数や待ち時間に応じて処理能力を調整すること。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html"
+    },
+    "study-claim-check": {
+      "note": "大きなデータを外部保存し、メッセージには参照を渡す方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-kms": {
+      "note": "暗号鍵と暗号操作の権限を管理するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+    },
+    "study-secrets-manager": {
+      "note": "認証情報等を保管し、更新を管理するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html"
+    },
+    "study-tls": {
+      "note": "通信経路の暗号化と相手認証のプロトコル。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-waf": {
+      "note": "HTTP リクエストを条件に基づいて検査・制御する仕組み。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html"
+    },
+    "study-guardduty": {
+      "note": "不審な活動や脅威の兆候を検出するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-inspector": {
+      "note": "対応ワークロードのソフトウェア脆弱性等を調べるサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-macie": {
+      "note": "S3 データの機密情報を検出するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-shield": {
+      "note": "DDoS 攻撃からの保護を提供するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-cloudwatch": {
+      "note": "メトリクス、ログ、アラーム等の可観測性サービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-cloudtrail": {
+      "note": "AWS API 操作の履歴を追跡する監査サービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+    },
+    "study-aws-config": {
+      "note": "リソース設定の履歴とルール準拠を評価するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+    },
+    "study-rto": {
+      "note": "障害後にサービスを復旧させるまでの目標時間。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-rpo": {
+      "note": "どれだけ過去までのデータ損失を許容するかという時間の目標。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-pilot-light": {
+      "note": "復旧先で中核だけを維持し、障害時に残りを起動する戦略。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-warm-standby": {
+      "note": "縮小した全体構成を復旧先で稼働させておく戦略。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-backup": {
+      "note": "誤更新や障害から戻すための復元可能なデータの複製。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-restore-test": {
+      "note": "バックアップから起動・整合性・所要時間を検証する試験。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-replication": {
+      "note": "別の保存先へデータの更新を複製する仕組み。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-dms": {
+      "note": "DB の初期移行と継続的な変更同期を行うサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"
+    },
+    "study-cdc": {
+      "note": "データベースに生じた変更を取得して反映する方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"
+    },
+    "study-datasync": {
+      "note": "対応するストレージ間でファイル・オブジェクトを転送するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html"
+    },
+    "study-migration": {
+      "note": "アプリを大きく変更せず実行環境を移す移行方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-performance": {
+      "note": "処理全体の速度や容量を制限している部分。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-cache": {
+      "note": "再利用可能なデータを速く取得できる場所へ一時保存する仕組み。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
+    },
+    "study-savings-plans": {
+      "note": "一定の利用額をコミットして対象使用料の割引を受ける購入方式。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html"
+    },
+    "study-cost-optimization": {
+      "note": "要件を満たしながら使用量と価格条件を改善すること。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html"
+    },
+    "study-athena": {
+      "note": "S3 などのデータを SQL で分析するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html"
+    },
+    "study-glue": {
+      "note": "データカタログとデータ統合・ETL を提供するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-redshift": {
+      "note": "大規模な分析用データウェアハウス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-kinesis": {
+      "note": "データストリームを収集し処理・再読込するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-firehose": {
+      "note": "ストリーミングデータを対応先へ配信するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-opensearch": {
+      "note": "全文検索やログ分析に使う検索・分析エンジン。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-lake-formation": {
+      "note": "データレイクの権限管理を支援するサービス。",
+      "limit": "復習して備えることを、5ブロックと1枚ドローで表した学習カードです。AWSの性能・権限・耐障害性を数値化したものではありません。",
+      "source": "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html"
     },
     "study-health-check": {
       "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
@@ -1045,16 +2893,16 @@
     "study-q005": {
       "prompt": "日本の利用者向けサービスで往復通信時間を短くしたい。リージョン選定で優先して評価する項目は？",
       "options": [
-        "リージョン名の文字数",
-        "アカウント作成者の住所だけ",
-        "AZ名が全アカウントで同じ物理場所か",
+        "最も安いリージョンを遅延測定なしで選ぶ",
+        "AZ数が最大のリージョンだけを選ぶ",
+        "社内拠点に最も近いリージョンだけを選ぶ",
         "利用者からの距離と実測遅延"
       ],
       "answer": 3,
       "reasons": [
-        "ネットワーク遅延に影響しない。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
-        "実際の利用者との通信経路が重要。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
-        "利用者との地理的距離の評価にはならない。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
+        "価格だけでは往復遅延の条件を満たすか判断できない。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
+        "AZ数は障害分離の選択肢であり利用者との遅延の測定ではない。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
+        "社内拠点と実際の利用者が異なる場合は利用者の遅延を最小化できない。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。",
         "近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。 近いリージョンを候補に、必要機能と測定結果を合わせて選ぶ。"
       ],
       "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html"
@@ -1296,18 +3144,3299 @@
         "適用される権限で制限される。 期限付きで必要な権限を利用できる。"
       ],
       "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html"
+    },
+    "study-q021": {
+      "prompt": "開発者がIAMロールを作成できるが、付与する権限の上限を制限したい。どれが適切か？",
+      "options": [
+        "新規ロールに全管理権限を自動付与",
+        "S3のVersioningを無効化",
+        "EC2を大型化する",
+        "アクセス許可の境界を必須にする"
+      ],
+      "answer": 3,
+      "reasons": [
+        "権限の拡大を防げない。 委任先が作る主体の最大権限を制限できる。",
+        "IAM権限の上限に影響しない。 委任先が作る主体の最大権限を制限できる。",
+        "認可の上限とは無関係。 委任先が作る主体の最大権限を制限できる。",
+        "委任先が作る主体の最大権限を制限できる。 委任先が作る主体の最大権限を制限できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html"
+    },
+    "study-q022": {
+      "prompt": "部署が頻繁に増える。Projectタグが一致するリソースだけ操作させたい。適切な考え方は？",
+      "options": [
+        "IPアドレスだけを権限名にする",
+        "タグは料金専用なので認可に使えない",
+        "ABACで主体とリソースのタグ条件を比較する",
+        "全員を1つの管理ユーザーに統合する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "プロジェクト属性による判定にならない。 属性に基づきプロジェクト単位の認可を行える。",
+        "対応する条件キーでアクセス制御にも使える。 属性に基づきプロジェクト単位の認可を行える。",
+        "属性に基づきプロジェクト単位の認可を行える。 属性に基づきプロジェクト単位の認可を行える。",
+        "部署間の権限分離ができない。 属性に基づきプロジェクト単位の認可を行える。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html"
+    },
+    "study-q023": {
+      "prompt": "意図しない外部アカウントへのS3共有を検出したい。適した分析機能は？",
+      "options": [
+        "Route 53のレイテンシールーティング",
+        "IAM Access Analyzer",
+        "Auto ScalingのCPU指標",
+        "S3 Lifecycle"
+      ],
+      "answer": 1,
+      "reasons": [
+        "接続先選択の機能。 リソースポリシー等の外部アクセスを分析する。",
+        "リソースポリシー等の外部アクセスを分析する。 リソースポリシー等の外部アクセスを分析する。",
+        "処理負荷を測るもので共有権限を分析しない。 リソースポリシー等の外部アクセスを分析する。",
+        "保存期間の管理でありアクセス分析ではない。 リソースポリシー等の外部アクセスを分析する。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
+    },
+    "study-q024": {
+      "prompt": "別アカウントへ特定S3バケットの読み取りを許可したい。リソース側で主体を指定する仕組みは？",
+      "options": [
+        "バケットポリシー",
+        "EC2起動テンプレート",
+        "VPCのCIDR",
+        "S3ストレージクラス"
+      ],
+      "answer": 0,
+      "reasons": [
+        "バケット側から対象プリンシパルへの操作許可を記載できる。 バケット側から対象プリンシパルへの操作許可を記載できる。",
+        "インスタンスの起動設定を定義する。 バケット側から対象プリンシパルへの操作許可を記載できる。",
+        "アドレス範囲でありIAMの主体指定ではない。 バケット側から対象プリンシパルへの操作許可を記載できる。",
+        "性能と保存費用の選択であり主体指定ではない。 バケット側から対象プリンシパルへの操作許可を記載できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-policy-language-overview.html"
+    },
+    "study-q025": {
+      "prompt": "管理画面への不正ログイン対策として、パスワード漏えい時の追加防御になるものは？",
+      "options": [
+        "パスワードを社内wikiへ掲載する",
+        "同じパスワードを全員で使う",
+        "CloudFrontのTTLを長くする",
+        "MFAを有効にする"
+      ],
+      "answer": 3,
+      "reasons": [
+        "秘密情報の漏えい範囲を拡大する。 追加要素を要求してパスワード単独の侵害を補う。",
+        "個別保護と追跡ができなくなる。 追加要素を要求してパスワード単独の侵害を補う。",
+        "管理者の認証強化にはならない。 追加要素を要求してパスワード単独の侵害を補う。",
+        "追加要素を要求してパスワード単独の侵害を補う。 追加要素を要求してパスワード単独の侵害を補う。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+    },
+    "study-q026": {
+      "prompt": "組織のメンバーアカウントで特定操作を禁止したい。各IAM管理者がAllowしても禁止を維持するには？",
+      "options": [
+        "Cost Explorerの画面を隠す",
+        "リソース名に禁止と書く",
+        "対象OUに適切なDenyのSCPを適用する",
+        "全IAMユーザーへAllowを追加する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "API権限を制約しない。 メンバーアカウントでの権限上限として働く。",
+        "名前は認可制御ではない。 メンバーアカウントでの権限上限として働く。",
+        "メンバーアカウントでの権限上限として働く。 メンバーアカウントでの権限上限として働く。",
+        "禁止とは逆の設定。 メンバーアカウントでの権限上限として働く。"
+      ],
+      "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+    },
+    "study-q027": {
+      "prompt": "Aアカウントの担当者がBのロールを引き受けられない。確認すべき組合せは？",
+      "options": [
+        "CloudFrontのキャッシュTTLだけ",
+        "A側のAssumeRole許可とB側の信頼ポリシー",
+        "両アカウントのS3保存クラス",
+        "EC2のRAMとCPU"
+      ],
+      "answer": 1,
+      "reasons": [
+        "STSの権限評価に影響しない。 呼び出す権限と受け入れる信頼関係が必要。",
+        "呼び出す権限と受け入れる信頼関係が必要。 呼び出す権限と受け入れる信頼関係が必要。",
+        "ロール引き受けの認可と無関係。 呼び出す権限と受け入れる信頼関係が必要。",
+        "認可エラーは計算能力では解決しない。 呼び出す権限と受け入れる信頼関係が必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html"
+    },
+    "study-q028": {
+      "prompt": "機密文書用バケットで誤ってパブリックポリシーを設定する事故を防ぎたい。どれを有効にする？",
+      "options": [
+        "S3 Block Public Access",
+        "S3 Transfer Acceleration",
+        "S3の静的ウェブサイト公開",
+        "全ユーザー向けACL"
+      ],
+      "answer": 0,
+      "reasons": [
+        "パブリックアクセス設定に対する防御を加える。 パブリックアクセス設定に対する防御を加える。",
+        "転送速度用であり公開防止ではない。 パブリックアクセス設定に対する防御を加える。",
+        "公開用機能で要件と逆方向。 パブリックアクセス設定に対する防御を加える。",
+        "匿名公開の原因になる。 パブリックアクセス設定に対する防御を加える。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html"
+    },
+    "study-q029": {
+      "prompt": "同一アカウントのIAMユーザーに対象操作のAllowがなく、許可するリソースポリシーもない。結果は？",
+      "options": [
+        "ReadOnlyとして書き込みだけ許可",
+        "利用料金を払えば自動許可",
+        "最初の1回だけ許可",
+        "暗黙的に拒否される"
+      ],
+      "answer": 3,
+      "reasons": [
+        "そのような既定権限はない。 権限は既定で許可ではない。",
+        "課金と認可は別。 権限は既定で許可ではない。",
+        "試行回数で許可は変わらない。 権限は既定で許可ではない。",
+        "権限は既定で許可ではない。 権限は既定で許可ではない。"
+      ],
+      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html"
+    },
+    "study-q030": {
+      "prompt": "モバイルアプリの認証済みユーザーへ限定したAWS一時認証情報を渡したい。どの機能か？",
+      "options": [
+        "共通ルートキーをアプリに埋め込む",
+        "Route 53パブリックホストゾーン",
+        "Cognito IDプール",
+        "ユーザープールだけで全AWS権限を自動付与"
+      ],
+      "answer": 2,
+      "reasons": [
+        "利用者間の分離と秘密情報の保護を失う。 認証されたID等に応じてAWSへの一時アクセスを提供する。",
+        "DNSであり認証情報を発行しない。 認証されたID等に応じてAWSへの一時アクセスを提供する。",
+        "認証されたID等に応じてAWSへの一時アクセスを提供する。 認証されたID等に応じてAWSへの一時アクセスを提供する。",
+        "ユーザー認証とAWS認証情報の発行は区別する。 認証されたID等に応じてAWSへの一時アクセスを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html"
+    },
+    "study-q031": {
+      "prompt": "AZ-AとAZ-BへEC2を分散したい。サブネット構成は？",
+      "options": [
+        "S3バケットを2個作ればよい",
+        "各AZにそれぞれサブネットを作る",
+        "1つのサブネットを2つのAZへ広げる",
+        "VPCを必ず別リージョンへ移す"
+      ],
+      "answer": 1,
+      "reasons": [
+        "EC2の配置先サブネットにはならない。 サブネットは1つのAZに属する。",
+        "サブネットは1つのAZに属する。 サブネットは1つのAZに属する。",
+        "サブネットはAZをまたがない。 サブネットは1つのAZに属する。",
+        "同一リージョンでAZ分散できる。 サブネットは1つのAZに属する。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-q032": {
+      "prompt": "IGWへのルートがあるサブネットのEC2へIPv4で直接接続できない。SG等が正しい場合、確認する項目は？",
+      "options": [
+        "EC2にパブリックIPv4があるか",
+        "EBSが暗号化されているか",
+        "S3の保存クラス",
+        "IAMユーザーの表示名"
+      ],
+      "answer": 0,
+      "reasons": [
+        "プライベートIPv4だけではIGWから直接公開できない。 プライベートIPv4だけではIGWから直接公開できない。",
+        "通信経路のアドレス条件とは別。 プライベートIPv4だけではIGWから直接公開できない。",
+        "EC2の到達性に関係しない。 プライベートIPv4だけではIGWから直接公開できない。",
+        "ネットワーク到達性の条件ではない。 プライベートIPv4だけではIGWから直接公開できない。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-q033": {
+      "prompt": "非公開EC2が外部のIPv4更新サイトへ接続したい。外部からの新規接続は不要。適切な構成は？",
+      "options": [
+        "EC2に無条件の全ポート公開を設定",
+        "ルートをすべて削除する",
+        "NATだけ作りルートは変えない",
+        "パブリックNAT GatewayとIGWを経由する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "不要な外部接続を広げる。 外向き接続とその応答を許し直接の新規着信を避けられる。",
+        "外部への更新通信もできなくなる。 外向き接続とその応答を許し直接の新規着信を避けられる。",
+        "対象サブネットからNATへ通信が向かわない。 外向き接続とその応答を許し直接の新規着信を避けられる。",
+        "外向き接続とその応答を許し直接の新規着信を避けられる。 外向き接続とその応答を許し直接の新規着信を避けられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html"
+    },
+    "study-q034": {
+      "prompt": "AZごとのプライベートアプリが1台のゾーン型NAT Gatewayに依存する。AZ障害の影響を減らすには？",
+      "options": [
+        "全AZの経路を1つへさらに集約",
+        "全EC2のRAMを倍増する",
+        "各AZのNAT Gatewayへ同じAZの経路を向ける",
+        "NATのタグだけを増やす"
+      ],
+      "answer": 2,
+      "reasons": [
+        "単一の依存先が残る。 別AZのNAT障害に依存しにくい構成にできる。",
+        "ネットワーク出口の障害対策にならない。 別AZのNAT障害に依存しにくい構成にできる。",
+        "別AZのNAT障害に依存しにくい構成にできる。 別AZのNAT障害に依存しにくい構成にできる。",
+        "経路と障害範囲は変わらない。 別AZのNAT障害に依存しにくい構成にできる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html"
+    },
+    "study-q035": {
+      "prompt": "アプリEC2のHTTPS受信をSGで許可した。戻り通信の扱いは？",
+      "options": [
+        "ACLの設定は無視される",
+        "追跡された接続の応答は許可される",
+        "必ず受信と同じ宛先ポートを送信許可する必要がある",
+        "すべての未関連通信も許可される"
+      ],
+      "answer": 1,
+      "reasons": [
+        "別の制御であるACLも通過が必要。 SGはステートフルに通信を追跡する。",
+        "SGはステートフルに通信を追跡する。 SGはステートフルに通信を追跡する。",
+        "SGの戻りは状態追跡される。 SGはステートフルに通信を追跡する。",
+        "接続の応答と新規通信は区別される。 SGはステートフルに通信を追跡する。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+    },
+    "study-q036": {
+      "prompt": "特定の悪意あるIPv4範囲をサブネット境界で明示的に拒否したい。利用できるものは？",
+      "options": [
+        "ネットワークACLの拒否ルール",
+        "SGにDenyルールを追加",
+        "EBSスナップショット",
+        "S3 Versioning"
+      ],
+      "answer": 0,
+      "reasons": [
+        "ACLは許可と拒否の両方を持つ。 ACLは許可と拒否の両方を持つ。",
+        "SGは許可ルールのみ。 ACLは許可と拒否の両方を持つ。",
+        "ディスクのバックアップ機能。 ACLは許可と拒否の両方を持つ。",
+        "オブジェクト履歴でありパケット制御ではない。 ACLは許可と拒否の両方を持つ。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+    },
+    "study-q037": {
+      "prompt": "ACLでHTTP受信を許可したが応答が返らない。確認すべき追加設定は？",
+      "options": [
+        "受信ルールだけを複製する",
+        "EC2名を変更する",
+        "IAMのMFAを外す",
+        "戻り先エフェメラルポートへの送信許可"
+      ],
+      "answer": 3,
+      "reasons": [
+        "逆方向の通過条件は変わらない。 ACLはステートレスなので戻り方向も必要。",
+        "パケット通過条件に影響しない。 ACLはステートレスなので戻り方向も必要。",
+        "ネットワークACLによる遮断は解消しない。 ACLはステートレスなので戻り方向も必要。",
+        "ACLはステートレスなので戻り方向も必要。 ACLはステートレスなので戻り方向も必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"
+    },
+    "study-q038": {
+      "prompt": "DBの5432番ポートはアプリ層からだけ受けたい。IPの変化にも対応する設定は？",
+      "options": [
+        "DBのSGを空にする",
+        "DBの名前にprivateと付ける",
+        "DBのSGで送信元にアプリのSGを指定",
+        "送信元0.0.0.0/0を許可"
+      ],
+      "answer": 2,
+      "reasons": [
+        "必要なアプリ通信まで拒否される。 アプリに関連付けたSGを信頼元として管理できる。",
+        "名前は通信制御として働かない。 アプリに関連付けたSGを信頼元として管理できる。",
+        "アプリに関連付けたSGを信頼元として管理できる。 アプリに関連付けたSGを信頼元として管理できる。",
+        "任意のIPv4からの到達を許す範囲になる。 アプリに関連付けたSGを信頼元として管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html"
+    },
+    "study-q039": {
+      "prompt": "非公開EC2から同一リージョンのS3へ大量転送している。NAT経由を減らす適切な方法は？",
+      "options": [
+        "S3への操作権限を削除する",
+        "S3ゲートウェイエンドポイントを利用する",
+        "転送を一度海外リージョンへ迂回する",
+        "全オブジェクトを公開する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "正常な転送自体ができなくなる。 対象ルートを通じてNATを使わずS3へ到達できる。",
+        "対象ルートを通じてNATを使わずS3へ到達できる。 対象ルートを通じてNATを使わずS3へ到達できる。",
+        "不要な通信と経路を増やす。 対象ルートを通じてNATを使わずS3へ到達できる。",
+        "ネットワーク経路を最適化せず保護を弱める。 対象ルートを通じてNATを使わずS3へ到達できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html"
+    },
+    "study-q040": {
+      "prompt": "Secrets ManagerのAPIへプライベートIP経由で接続したい。対応する方式は？",
+      "options": [
+        "インターフェイスVPCエンドポイント",
+        "S3専用ゲートウェイエンドポイント",
+        "Internet Gatewayだけ",
+        "S3 Object Lock"
+      ],
+      "answer": 0,
+      "reasons": [
+        "PrivateLinkで対応サービスのAPIへ接続できる。 PrivateLinkで対応サービスのAPIへ接続できる。",
+        "Secrets Manager向けの経路にはならない。 PrivateLinkで対応サービスのAPIへ接続できる。",
+        "プライベート接続の要件を満たさない。 PrivateLinkで対応サービスのAPIへ接続できる。",
+        "API接続方式とは無関係。 PrivateLinkで対応サービスのAPIへ接続できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html"
+    },
+    "study-q041": {
+      "prompt": "A-BとB-CにVPCピアリングがある。AからCへの推移的な通信は？",
+      "options": [
+        "Bが自動的に中継する",
+        "IAM管理者ならネットワーク制約を無視できる",
+        "同じタグなら自動接続される",
+        "そのピアリングだけではできない"
+      ],
+      "answer": 3,
+      "reasons": [
+        "ピアリングはルーターのような経由転送をしない。 VPCピアリングは推移的ルーティングを提供しない。",
+        "認可と経路は別。 VPCピアリングは推移的ルーティングを提供しない。",
+        "タグは経路を作らない。 VPCピアリングは推移的ルーティングを提供しない。",
+        "VPCピアリングは推移的ルーティングを提供しない。 VPCピアリングは推移的ルーティングを提供しない。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html"
+    },
+    "study-q042": {
+      "prompt": "数十のVPCとオンプレミス接続をハブ形式で管理したい。どれが適する？",
+      "options": [
+        "各VPCへS3バケットを作る",
+        "EC2のAMI共有",
+        "Transit Gateway",
+        "全VPC間に手動でフルメッシュだけを作る"
+      ],
+      "answer": 2,
+      "reasons": [
+        "ネットワークハブにならない。 多数のネットワーク接続を集約できる。",
+        "イメージ配布機能で通信を中継しない。 多数のネットワーク接続を集約できる。",
+        "多数のネットワーク接続を集約できる。 多数のネットワーク接続を集約できる。",
+        "接続数と管理が膨らみハブ要件に合わない。 多数のネットワーク接続を集約できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html"
+    },
+    "study-q043": {
+      "prompt": "オンプレミスとVPCをインターネット上の暗号化トンネルで結びたい。適するサービスは？",
+      "options": [
+        "Route 53のドメイン登録だけ",
+        "Site-to-Site VPN",
+        "S3 Lifecycle",
+        "EC2 Auto Scaling"
+      ],
+      "answer": 1,
+      "reasons": [
+        "暗号化されたネットワーク経路を作らない。 IPsecトンネルで拠点間接続を提供する。",
+        "IPsecトンネルで拠点間接続を提供する。 IPsecトンネルで拠点間接続を提供する。",
+        "保管データのライフサイクル管理。 IPsecトンネルで拠点間接続を提供する。",
+        "計算能力の台数調整。 IPsecトンネルで拠点間接続を提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html"
+    },
+    "study-q044": {
+      "prompt": "オンプレミスからAWSへの専用接続を求めている。どれを検討する？",
+      "options": [
+        "AWS Direct Connect",
+        "S3署名付きURL",
+        "IAMロール",
+        "CloudTrail"
+      ],
+      "answer": 0,
+      "reasons": [
+        "専用ネットワーク接続のためのサービス。 専用ネットワーク接続のためのサービス。",
+        "限定オブジェクトアクセスで専用回線ではない。 専用ネットワーク接続のためのサービス。",
+        "APIの権限を与えるもので専用線ではない。 専用ネットワーク接続のためのサービス。",
+        "API監査ログで通信路を提供しない。 専用ネットワーク接続のためのサービス。"
+      ],
+      "source": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html"
+    },
+    "study-q045": {
+      "prompt": "IPv6を持つプライベートEC2からインターネットへ接続し、外からの新規着信を防ぎたい。どれか？",
+      "options": [
+        "IPv4専用の設計としてパブリックIPv4を必須にする",
+        "IGWと全受信許可を設定",
+        "S3のアクセスログ",
+        "Egress-only Internet Gateway"
+      ],
+      "answer": 3,
+      "reasons": [
+        "IPv6での要件を不要に変更している。 IPv6の外向き通信に対応する。",
+        "外部からの新規着信を防ぐ要件に反する。 IPv6の外向き通信に対応する。",
+        "通信経路を制御しない。 IPv6の外向き通信に対応する。",
+        "IPv6の外向き通信に対応する。 IPv6の外向き通信に対応する。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html"
+    },
+    "study-q046": {
+      "prompt": "VPCで送信元・宛先やACCEPT/REJECTを調べたい。どのログを有効化する？",
+      "options": [
+        "IAM認証情報レポートだけ",
+        "RDSスナップショット",
+        "VPC Flow Logs",
+        "S3の旧バージョン"
+      ],
+      "answer": 2,
+      "reasons": [
+        "ユーザー認証情報の状況で通信フローではない。 ネットワークインターフェイスを通るIPトラフィックの情報を記録できる。",
+        "DBの復元データでパケット記録ではない。 ネットワークインターフェイスを通るIPトラフィックの情報を記録できる。",
+        "ネットワークインターフェイスを通るIPトラフィックの情報を記録できる。 ネットワークインターフェイスを通るIPトラフィックの情報を記録できる。",
+        "ネットワーク通信メタデータではない。 ネットワークインターフェイスを通るIPトラフィックの情報を記録できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html"
+    },
+    "study-q047": {
+      "prompt": "宛先10.1.2.3について、10.0.0.0/8と10.1.0.0/16の静的ルートがある。優先するのは？",
+      "options": [
+        "毎回ランダム",
+        "10.1.0.0/16",
+        "10.0.0.0/8",
+        "作成日時が早いほう"
+      ],
+      "answer": 1,
+      "reasons": [
+        "同条件のランダム経路選択ではない。 一致するプレフィックスがより具体的。",
+        "一致するプレフィックスがより具体的。 一致するプレフィックスがより具体的。",
+        "より広い範囲なので優先しない。 一致するプレフィックスがより具体的。",
+        "この条件では最長一致で決まる。 一致するプレフィックスがより具体的。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html"
+    },
+    "study-q048": {
+      "prompt": "VPCピアリング候補の2つのVPCが同じ10.0.0.0/16を使う。どの問題がある？",
+      "options": [
+        "CIDRが重複しそのままピアリングできない",
+        "IP数が多いほど自動で接続できる",
+        "IAMユーザー名を変えれば解決する",
+        "S3複製を設定すれば経路ができる"
+      ],
+      "answer": 0,
+      "reasons": [
+        "接続先のアドレス範囲が重複しない設計が必要。 接続先のアドレス範囲が重複しない設計が必要。",
+        "アドレスの数は重複を解消しない。 接続先のアドレス範囲が重複しない設計が必要。",
+        "アドレス重複の問題に影響しない。 接続先のアドレス範囲が重複しない設計が必要。",
+        "オブジェクト複製とVPC接続は別。 接続先のアドレス範囲が重複しない設計が必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html"
+    },
+    "study-q049": {
+      "prompt": "S3エンドポイントを作れば、IAMで禁止されたオブジェクトも読めるか？",
+      "options": [
+        "同一リージョンなら必ず読める",
+        "NATがなければ全権限になる",
+        "DNS名の末尾を変えれば読める",
+        "読めない。ネットワーク到達性と認可は別"
+      ],
+      "answer": 3,
+      "reasons": [
+        "地理的一致だけで権限は得られない。 エンドポイントはIAMの拒否を上書きしない。",
+        "出口の構成とIAM権限は無関係。 エンドポイントはIAMの拒否を上書きしない。",
+        "名前の変更で権限評価を回避できない。 エンドポイントはIAMの拒否を上書きしない。",
+        "エンドポイントはIAMの拒否を上書きしない。 エンドポイントはIAMの拒否を上書きしない。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html"
+    },
+    "study-q050": {
+      "prompt": "非公開EC2の管理でSSH受信ポートと踏み台を減らしたい。権限・Agent・到達性を整えた上で使う機能は？",
+      "options": [
+        "公開鍵をS3で全世界に配る",
+        "CloudFrontをDB前段に置く",
+        "Systems Manager Session Manager",
+        "SSHを全世界へ開く"
+      ],
+      "answer": 2,
+      "reasons": [
+        "管理経路を提供せず認証設計も不適切。 インバウンドSSHを開けずに管理セッションを利用できる。",
+        "EC2管理セッションの代替にはならない。 インバウンドSSHを開けずに管理セッションを利用できる。",
+        "インバウンドSSHを開けずに管理セッションを利用できる。 インバウンドSSHを開けずに管理セッションを利用できる。",
+        "受信ポートを減らす要件と逆。 インバウンドSSHを開けずに管理セッションを利用できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html"
+    },
+    "study-q051": {
+      "prompt": "同じドメインの/apiと/imagesを別のEC2群へ送るには？",
+      "options": [
+        "S3のVersioning",
+        "ALBのパスベースルール",
+        "NLBのURLパスルール",
+        "Route 53でURLパスを解釈"
+      ],
+      "answer": 1,
+      "reasons": [
+        "リクエストの振り分け機能ではない。 HTTPパスでターゲットグループを選べる。",
+        "HTTPパスでターゲットグループを選べる。 HTTPパスでターゲットグループを選べる。",
+        "NLBはHTTPパスによるルーティングを行わない。 HTTPパスでターゲットグループを選べる。",
+        "DNSはHTTPパスを扱わない。 HTTPパスでターゲットグループを選べる。"
+      ],
+      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html"
+    },
+    "study-q052": {
+      "prompt": "UDPを使うゲームサーバーの前にロードバランサーを置きたい。どれか？",
+      "options": [
+        "Network Load Balancer",
+        "Application Load Balancer",
+        "S3ゲートウェイエンドポイント",
+        "IAM Identity Center"
+      ],
+      "answer": 0,
+      "reasons": [
+        "UDPトラフィックを扱える。 UDPトラフィックを扱える。",
+        "HTTP系の負荷分散が用途。 UDPトラフィックを扱える。",
+        "S3向けの通信経路。 UDPトラフィックを扱える。",
+        "従業員アクセス管理。 UDPトラフィックを扱える。"
+      ],
+      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html"
+    },
+    "study-q053": {
+      "prompt": "EC2自体は起動中だがアプリが応答しない。ASGにアプリ異常を反映して置換したい。どうする？",
+      "options": [
+        "EC2の名前を毎分変える",
+        "最大台数を0にする",
+        "ルートキーをEC2へ保存する",
+        "ELBヘルスチェック連携を有効にする"
+      ],
+      "answer": 3,
+      "reasons": [
+        "健康状態の監視にならない。 ロードバランサーのアプリ健康状態を置換判断に利用できる。",
+        "サービスを継続できない。 ロードバランサーのアプリ健康状態を置換判断に利用できる。",
+        "健康状態の検知とは無関係。 ロードバランサーのアプリ健康状態を置換判断に利用できる。",
+        "ロードバランサーのアプリ健康状態を置換判断に利用できる。 ロードバランサーのアプリ健康状態を置換判断に利用できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-checks-overview.html"
+    },
+    "study-q054": {
+      "prompt": "平均CPU使用率を目標値付近へ保つよう台数を調整したい。どの方針か？",
+      "options": [
+        "最小台数と最大台数を常に同値にする",
+        "IAMポリシーの文字数を増やす",
+        "ターゲット追跡スケーリング",
+        "毎年1回の手動増設だけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "台数の変動を制限してしまう。 目標指標に近づくよう容量を調整する。",
+        "負荷に応じた計算能力調整ではない。 目標指標に近づくよう容量を調整する。",
+        "目標指標に近づくよう容量を調整する。 目標指標に近づくよう容量を調整する。",
+        "日々の負荷変動に追従しない。 目標指標に近づくよう容量を調整する。"
+      ],
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+    },
+    "study-q055": {
+      "prompt": "毎朝9時ちょうどにアクセスが集中し、起動に数分かかる。事前の準備として適切なのは？",
+      "options": [
+        "アプリデータをインスタンスストアだけに移す",
+        "混雑前にスケジュールで容量を増やす",
+        "9時を過ぎてから手動起動だけ",
+        "ヘルスチェックを停止する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "混雑への事前容量確保にはならない。 既知の時刻に先回りして台数を確保する。",
+        "既知の時刻に先回りして台数を確保する。 既知の時刻に先回りして台数を確保する。",
+        "起動遅延により初期の負荷に対応できない。 既知の時刻に先回りして台数を確保する。",
+        "不健全なターゲットを除外できなくなる。 既知の時刻に先回りして台数を確保する。"
+      ],
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html"
+    },
+    "study-q056": {
+      "prompt": "中断通知に備えたバッチで計算費用を抑えたい。適切な実装は？",
+      "options": [
+        "作業を小分けにしチェックポイントから再試行する",
+        "処理結果を最後までメモリにだけ保持",
+        "中断が絶対起きないと仮定する",
+        "中断時に全入力を削除する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "Spot中断時に未完了処理をやり直せる。 Spot中断時に未完了処理をやり直せる。",
+        "中断で進捗を失う。 Spot中断時に未完了処理をやり直せる。",
+        "Spot容量は中断されることがある。 Spot中断時に未完了処理をやり直せる。",
+        "復旧に必要なデータを失う。 Spot中断時に未完了処理をやり直せる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html"
+    },
+    "study-q057": {
+      "prompt": "毎時一定の計算利用があり、インスタンスの種類も将来変わりうる。Compute Savings Plansの特徴は？",
+      "options": [
+        "すべての利用を無料にする",
+        "Spot中断を無効にする",
+        "希望AZの空きを必ず確保する",
+        "一定の時間当たり利用額を約束して対象利用の割引を得る"
+      ],
+      "answer": 3,
+      "reasons": [
+        "支払いコミットメントと対象範囲がある。 柔軟な対象利用に割引を適用できる。",
+        "購入割引とSpot中断は別。 柔軟な対象利用に割引を適用できる。",
+        "容量確保と料金割引を混同してはいけない。 柔軟な対象利用に割引を適用できる。",
+        "柔軟な対象利用に割引を適用できる。 柔軟な対象利用に割引を適用できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html"
+    },
+    "study-q058": {
+      "prompt": "イベント当日に特定AZのEC2起動容量を確保したい。料金割引とは別に検討するものは？",
+      "options": [
+        "S3 Intelligent-Tiering",
+        "CloudWatchのグラフ色",
+        "On-Demand Capacity Reservation",
+        "Savings Plansだけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "保存費用の機能でEC2容量は確保しない。 指定属性のオンデマンド容量を確保する。",
+        "容量に影響しない。 指定属性のオンデマンド容量を確保する。",
+        "指定属性のオンデマンド容量を確保する。 指定属性のオンデマンド容量を確保する。",
+        "料金割引であり容量確保の代わりにはならない。 指定属性のオンデマンド容量を確保する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html"
+    },
+    "study-q059": {
+      "prompt": "インスタンスストアに置いた唯一のデータを失わない設計へ変えるには？",
+      "options": [
+        "同じホストの別インスタンスストア領域へコピーする",
+        "必要なデータをEBSやS3など永続保存先に保管する",
+        "終了保護だけを有効にする",
+        "AMIを作ればインスタンスストア内の全変更も自動保存されるとする"
+      ],
+      "answer": 1,
+      "reasons": [
+        "同じホストの停止や故障による喪失から分離できない。 一時ストレージのライフサイクルに依存しない。",
+        "一時ストレージのライフサイクルに依存しない。 一時ストレージのライフサイクルに依存しない。",
+        "誤った終了を防ぐ対策でありホスト障害等からデータを永続化しない。 一時ストレージのライフサイクルに依存しない。",
+        "AMIの作成だけでインスタンスストアの業務データを継続保存することにはならない。 一時ストレージのライフサイクルに依存しない。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html"
+    },
+    "study-q060": {
+      "prompt": "同じ構成のEC2を繰り返し素早く起動したい。OSと必要ソフトを事前にまとめるものは？",
+      "options": [
+        "AMI",
+        "VPC Flow Logs",
+        "S3の署名付きURLだけ",
+        "IAMグループ"
+      ],
+      "answer": 0,
+      "reasons": [
+        "インスタンスの起動元となるマシンイメージ。 インスタンスの起動元となるマシンイメージ。",
+        "ネットワーク通信の記録。 インスタンスの起動元となるマシンイメージ。",
+        "EC2の起動イメージにはならない。 インスタンスの起動元となるマシンイメージ。",
+        "ユーザー権限の集合でOSを含まない。 インスタンスの起動元となるマシンイメージ。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html"
+    },
+    "study-q061": {
+      "prompt": "アプリ初期化が長く、ASG増台時の準備時間を減らしたい。検討する機能は？",
+      "options": [
+        "スケールアウトを永久禁止",
+        "EC2終了時に入力データを削除",
+        "IAMアクセスキーを長くする",
+        "ウォームプール"
+      ],
+      "answer": 3,
+      "reasons": [
+        "負荷増加へ対応できない。 事前初期化したインスタンス群を保持できる。",
+        "起動時間短縮の機能ではない。 事前初期化したインスタンス群を保持できる。",
+        "アプリの初期化時間を改善しない。 事前初期化したインスタンス群を保持できる。",
+        "事前初期化したインスタンス群を保持できる。 事前初期化したインスタンス群を保持できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html"
+    },
+    "study-q062": {
+      "prompt": "同一AZのHPC処理でノード間の低遅延が重要。適する配置戦略は？",
+      "options": [
+        "S3のGlacier Deep Archive",
+        "IAMユーザーをノードごとに増やす",
+        "クラスタープレイスメントグループ",
+        "必ず別大陸にノードを分散"
+      ],
+      "answer": 2,
+      "reasons": [
+        "EC2配置の制御ではない。 近接配置で密なノード間通信に向く。",
+        "ネットワーク距離に影響しない。 近接配置で密なノード間通信に向く。",
+        "近接配置で密なノード間通信に向く。 近接配置で密なノード間通信に向く。",
+        "通信遅延を増やす。 近接配置で密なノード間通信に向く。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html"
+    },
+    "study-q063": {
+      "prompt": "ALB配下のEC2が入れ替わるとログイン状態が消える。根本対策は？",
+      "options": [
+        "ALBのDNS名を短くする",
+        "セッション状態を共有ストアへ外出しする",
+        "EC2の表示名を統一する",
+        "異常なEC2へ常に固定する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "セッション保存とは無関係。 特定EC2のローカル状態への依存を減らす。",
+        "特定EC2のローカル状態への依存を減らす。 特定EC2のローカル状態への依存を減らす。",
+        "名前が同じでもメモリは共有されない。 特定EC2のローカル状態への依存を減らす。",
+        "単一障害点と継続性問題が残る。 特定EC2のローカル状態への依存を減らす。"
+      ],
+      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html"
+    },
+    "study-q064": {
+      "prompt": "接続先のIPを許可リスト登録する取引先へTCPサービスを提供する。固定IPが必要なロードバランサーは？",
+      "options": [
+        "Network Load Balancer",
+        "ALBの現在のIPを永久固定値として配る",
+        "S3静的Webサイト",
+        "Auto Scalingのグループ名"
+      ],
+      "answer": 0,
+      "reasons": [
+        "AZごとの静的IPやElastic IPを利用できる。 AZごとの静的IPやElastic IPを利用できる。",
+        "ALBのIP固定を前提にできない。 AZごとの静的IPやElastic IPを利用できる。",
+        "任意のTCPサービスを負荷分散しない。 AZごとの静的IPやElastic IPを利用できる。",
+        "ネットワーク接続先ではない。 AZごとの静的IPやElastic IPを利用できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html"
+    },
+    "study-q065": {
+      "prompt": "ASGの最大台数が2台で、すでに2台稼働している。負荷が増えても3台にならない理由は？",
+      "options": [
+        "CPUが高いと必ず台数が減る",
+        "ALBは2台以上扱えない",
+        "リージョン内のEC2は合計2台まで",
+        "最大台数の上限でスケールアウトが制限される"
+      ],
+      "answer": 3,
+      "reasons": [
+        "そのような一般規則ではない。 ポリシーは設定した容量範囲内で動く。",
+        "ALBの一般的な制約ではない。 ポリシーは設定した容量範囲内で動く。",
+        "そのような共通上限ではない。 ポリシーは設定した容量範囲内で動く。",
+        "ポリシーは設定した容量範囲内で動く。 ポリシーは設定した容量範囲内で動く。"
+      ],
+      "source": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+    },
+    "study-q066": {
+      "prompt": "Webアプリの画像をAPI経由で大量保存し、サーバー台数と独立させたい。適切な保存先は？",
+      "options": [
+        "単一EC2のインスタンスストアだけ",
+        "IAMユーザーのタグ",
+        "Amazon S3",
+        "EC2のRAMだけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "サーバーの終了に依存する。 オブジェクトとして保存しHTTP APIで扱える。",
+        "大量の画像データ保存用ではない。 オブジェクトとして保存しHTTP APIで扱える。",
+        "オブジェクトとして保存しHTTP APIで扱える。 オブジェクトとして保存しHTTP APIで扱える。",
+        "永続保存にならない。 オブジェクトとして保存しHTTP APIで扱える。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"
+    },
+    "study-q067": {
+      "prompt": "EC2上のOSが通常のブロックデバイスを必要とする。適切なのは？",
+      "options": [
+        "SNSトピック",
+        "EBSボリューム",
+        "S3バケットをそのままOSディスクに指定",
+        "Route 53ホストゾーン"
+      ],
+      "answer": 1,
+      "reasons": [
+        "通知の配信先でディスクではない。 EC2に接続するブロックストレージ。",
+        "EC2に接続するブロックストレージ。 EC2に接続するブロックストレージ。",
+        "S3はブロックデバイスではない。 EC2に接続するブロックストレージ。",
+        "DNS情報の管理領域。 EC2に接続するブロックストレージ。"
+      ],
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-q068": {
+      "prompt": "複数AZのLinux Webサーバーで同じNFSファイルを共有したい。どれを選ぶ？",
+      "options": [
+        "Regional Amazon EFS",
+        "各EC2に独立したローカルファイルだけ",
+        "別AZのEC2へ同一EBSを通常接続",
+        "SQSキュー"
+      ],
+      "answer": 0,
+      "reasons": [
+        "複数AZのクライアントで共有ファイルへアクセスできる。 複数AZのクライアントで共有ファイルへアクセスできる。",
+        "内容は自動同期されない。 複数AZのクライアントで共有ファイルへアクセスできる。",
+        "EBSはAZ境界をまたいだ通常接続ができない。 複数AZのクライアントで共有ファイルへアクセスできる。",
+        "ファイルシステムではない。 複数AZのクライアントで共有ファイルへアクセスできる。"
+      ],
+      "source": "https://docs.aws.amazon.com/efs/latest/ug/features.html"
+    },
+    "study-q069": {
+      "prompt": "既存WindowsアプリがSMBとActive Directory連携を必要とする。適する管理サービスは？",
+      "options": [
+        "EFSをSMB専用として使う",
+        "DynamoDBへそのままSMB接続",
+        "CloudFrontのキャッシュだけ",
+        "FSx for Windows File Server"
+      ],
+      "answer": 3,
+      "reasons": [
+        "EFSはNFSベース。 Windows向けSMB共有とAD統合に対応する。",
+        "SMBファイルサーバーではない。 Windows向けSMB共有とAD統合に対応する。",
+        "編集可能な共有ファイルサーバーではない。 Windows向けSMB共有とAD統合に対応する。",
+        "Windows向けSMB共有とAD統合に対応する。 Windows向けSMB共有とAD統合に対応する。"
+      ],
+      "source": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html"
+    },
+    "study-q070": {
+      "prompt": "S3で同じキーのファイルを誤って上書きしたとき戻したい。事前に有効にする機能は？",
+      "options": [
+        "静的ウェブサイトホスティング",
+        "タグを1個追加",
+        "Versioning",
+        "Transfer Acceleration"
+      ],
+      "answer": 2,
+      "reasons": [
+        "公開方法で旧版保存機能ではない。 旧バージョンを保持して復旧できる。",
+        "ファイルの過去内容を保存しない。 旧バージョンを保持して復旧できる。",
+        "旧バージョンを保持して復旧できる。 旧バージョンを保持して復旧できる。",
+        "転送高速化で履歴保存ではない。 旧バージョンを保持して復旧できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+    },
+    "study-q071": {
+      "prompt": "監査記録の特定バージョンを保持期間中に削除できないWORM形式で保護したい。どれか？",
+      "options": [
+        "CloudFrontの圧縮",
+        "S3 Object Lock",
+        "S3 Transfer Acceleration",
+        "EC2 Auto Scaling"
+      ],
+      "answer": 1,
+      "reasons": [
+        "配信サイズを変える機能。 保持設定でオブジェクトバージョンを保護する。",
+        "保持設定でオブジェクトバージョンを保護する。 保持設定でオブジェクトバージョンを保護する。",
+        "転送機能で削除保護ではない。 保持設定でオブジェクトバージョンを保護する。",
+        "計算台数の調整。 保持設定でオブジェクトバージョンを保護する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html"
+    },
+    "study-q072": {
+      "prompt": "非公開S3の請求書を顧客へ短時間だけダウンロード可能にしたい。どれか？",
+      "options": [
+        "期限の短い署名付きURL",
+        "バケット全体を匿名公開",
+        "ルートキーを顧客へ送る",
+        "S3の保存クラスだけ変更"
+      ],
+      "answer": 0,
+      "reasons": [
+        "権限を持つ発行者に基づく限定アクセスを提供できる。 権限を持つ発行者に基づく限定アクセスを提供できる。",
+        "他の請求書にも公開範囲が広がりうる。 権限を持つ発行者に基づく限定アクセスを提供できる。",
+        "過大な権限と秘密情報を渡してしまう。 権限を持つ発行者に基づく限定アクセスを提供できる。",
+        "アクセス期限を設定しない。 権限を持つ発行者に基づく限定アクセスを提供できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html"
+    },
+    "study-q073": {
+      "prompt": "アクセス頻度を予測できない大量オブジェクトを、監視に基づいて階層移動したい。どれか？",
+      "options": [
+        "全データを常に最速のEC2メモリへ保存",
+        "毎日すべて削除",
+        "IAMのMFAを追加するだけ",
+        "S3 Intelligent-Tiering"
+      ],
+      "answer": 3,
+      "reasons": [
+        "永続性と費用の要件に合わない。 アクセスパターンに応じた階層最適化を行う。",
+        "保存要件を満たさない。 アクセスパターンに応じた階層最適化を行う。",
+        "保存階層は変わらない。 アクセスパターンに応じた階層最適化を行う。",
+        "アクセスパターンに応じた階層最適化を行う。 アクセスパターンに応じた階層最適化を行う。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-q074": {
+      "prompt": "保存後ほとんど読まないが、読むときはミリ秒単位の取得が必要で複数AZ保護も必要。候補は？",
+      "options": [
+        "インスタンスストアの唯一のコピー",
+        "データを保存しない",
+        "S3 Standard-IA",
+        "S3 Glacier Deep Archiveのみ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "長期耐久性と複数AZ保護がない。 低頻度アクセスでも即時取得できる。",
+        "読み出し要件を満たせない。 低頻度アクセスでも即時取得できる。",
+        "低頻度アクセスでも即時取得できる。 低頻度アクセスでも即時取得できる。",
+        "通常は復元待ちがある。 低頻度アクセスでも即時取得できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-q075": {
+      "prompt": "10年保存する記録を年に一度読む。取り出しに半日以上待てる。低コスト候補は？",
+      "options": [
+        "SQSに10年間保持",
+        "S3 Glacier Deep Archive",
+        "全記録を常時起動EC2のRAMへ保持",
+        "高IOPS EBSのみを常時稼働"
+      ],
+      "answer": 1,
+      "reasons": [
+        "長期文書保存の仕組みではない。 長期保存と待ち時間を許容する復元向け。",
+        "長期保存と待ち時間を許容する復元向け。 長期保存と待ち時間を許容する復元向け。",
+        "永続性に問題があり保存目的に不適切。 長期保存と待ち時間を許容する復元向け。",
+        "低頻度の長期保管には過剰になりやすい。 長期保存と待ち時間を許容する復元向け。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects.html"
+    },
+    "study-q076": {
+      "prompt": "ログを一定日数後に低頻度クラスへ移し、期限後に削除したい。運用を自動化する機能は？",
+      "options": [
+        "S3 Lifecycle",
+        "IAMユーザーの自動生成",
+        "VPCピアリング",
+        "ALBのヘルスチェック"
+      ],
+      "answer": 0,
+      "reasons": [
+        "経過日数等に基づく移行・期限切れを設定できる。 経過日数等に基づく移行・期限切れを設定できる。",
+        "保存期間管理とは別。 経過日数等に基づく移行・期限切れを設定できる。",
+        "ネットワーク接続機能。 経過日数等に基づく移行・期限切れを設定できる。",
+        "アプリ応答確認でログの保管処理ではない。 経過日数等に基づく移行・期限切れを設定できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
+    },
+    "study-q077": {
+      "prompt": "S3の新規オブジェクトを別リージョンにも継続的に複製したい。必要な構成は？",
+      "options": [
+        "送信元のバケット名だけ変える",
+        "CloudFrontのキャッシュを永久保持",
+        "IAMユーザーを同名で作るだけ",
+        "両バケットのVersioningと適切なCRR設定・権限"
+      ],
+      "answer": 3,
+      "reasons": [
+        "複製処理は始まらない。 クロスリージョンレプリケーションの要件を満たす。",
+        "正式な永続複製先ではない。 クロスリージョンレプリケーションの要件を満たす。",
+        "オブジェクトの複製設定にならない。 クロスリージョンレプリケーションの要件を満たす。",
+        "クロスリージョンレプリケーションの要件を満たす。 クロスリージョンレプリケーションの要件を満たす。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html"
+    },
+    "study-q078": {
+      "prompt": "汎用SSDで容量とは独立してIOPSやスループットを調整したい。適切なEBSタイプは？",
+      "options": [
+        "gp2",
+        "st1",
+        "gp3",
+        "sc1だけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "容量と基本IOPSが関連するため容量と性能を独立に設定する要件とは異なる。 容量と性能の設定を分けられる。",
+        "スループット志向のHDDであり汎用SSDの選択肢ではない。 容量と性能の設定を分けられる。",
+        "容量と性能の設定を分けられる。 容量と性能の設定を分けられる。",
+        "低頻度のスループット志向HDD。 容量と性能の設定を分けられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-q079": {
+      "prompt": "EC2上の重要DBで高く安定したIOPSを明示的に用意したい。候補は？",
+      "options": [
+        "汎用SSDの基本性能だけで実測せず保証する",
+        "Provisioned IOPS SSD",
+        "Cold HDDをIOPS重視で選ぶ",
+        "スループット最適化HDD"
+      ],
+      "answer": 1,
+      "reasons": [
+        "高く安定したIOPS要件には必要性能と種類を明示して比較する。 IOPS要件の厳しいストレージ向け。",
+        "IOPS要件の厳しいストレージ向け。 IOPS要件の厳しいストレージ向け。",
+        "低頻度のスループット用途が中心。 IOPS要件の厳しいストレージ向け。",
+        "連続転送向けで重要DBの小さいランダムI/Oとは負荷特性が異なる。 IOPS要件の厳しいストレージ向け。"
+      ],
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html"
+    },
+    "study-q080": {
+      "prompt": "EBSデータを別AZで復元してEC2へ接続したい。適切な手順は？",
+      "options": [
+        "スナップショットから対象AZに新ボリュームを作る",
+        "元ボリュームを別AZへ直接通常接続する",
+        "EC2のタグだけ変更する",
+        "S3署名付きURLをEC2に貼る"
+      ],
+      "answer": 0,
+      "reasons": [
+        "EBSボリュームは作成先AZで接続する。 EBSボリュームは作成先AZで接続する。",
+        "EBS接続は同一AZが基本。 EBSボリュームは作成先AZで接続する。",
+        "ボリュームの配置は変わらない。 EBSボリュームは作成先AZで接続する。",
+        "ブロックボリュームの復元にはならない。 EBSボリュームは作成先AZで接続する。"
+      ],
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html"
+    },
+    "study-q081": {
+      "prompt": "大きな動画のアップロードで失敗箇所だけ再転送したい。どれか？",
+      "options": [
+        "毎回ファイル全体を最初から転送",
+        "S3 Object Lockだけ",
+        "Route 53のTTL変更",
+        "S3マルチパートアップロード"
+      ],
+      "answer": 3,
+      "reasons": [
+        "再試行の転送量が増える。 パート単位で並列転送・再試行できる。",
+        "転送の分割機能ではない。 パート単位で並列転送・再試行できる。",
+        "アップロード単位を変えない。 パート単位で並列転送・再試行できる。",
+        "パート単位で並列転送・再試行できる。 パート単位で並列転送・再試行できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html"
+    },
+    "study-q082": {
+      "prompt": "世界各地から遠い単一S3バケットへアップロードする速度を評価改善したい。候補は？",
+      "options": [
+        "バケットを公開書き込みにする",
+        "IAMロールを増やすだけ",
+        "S3 Transfer Accelerationを測定して比較する",
+        "S3 Versioningを止めれば必ず最速"
+      ],
+      "answer": 2,
+      "reasons": [
+        "認可を弱めても経路改善は保証されない。 エッジ経由の転送最適化を利用できるが効果を確認する。",
+        "転送経路は変わらない。 エッジ経由の転送最適化を利用できるが効果を確認する。",
+        "エッジ経由の転送最適化を利用できるが効果を確認する。 エッジ経由の転送最適化を利用できるが効果を確認する。",
+        "履歴機能の停止は地理的経路改善ではない。 エッジ経由の転送最適化を利用できるが効果を確認する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html"
+    },
+    "study-q083": {
+      "prompt": "S3の保存時暗号化を使えば、アクセス権を広くしても安全か？",
+      "options": [
+        "暗号化するとバックアップが不要",
+        "いいえ。暗号化とアクセス制御を両方設計する",
+        "はい。暗号化されていれば誰も読めない",
+        "はい。公開ポリシーは自動削除される"
+      ],
+      "answer": 1,
+      "reasons": [
+        "誤削除や復旧要件は残る。 正規に許可された読み取りは復号されるため権限の制限も必要。",
+        "正規に許可された読み取りは復号されるため権限の制限も必要。 正規に許可された読み取りは復号されるため権限の制限も必要。",
+        "許可された利用者には読み取りを提供する。 正規に許可された読み取りは復号されるため権限の制限も必要。",
+        "暗号化は公開ポリシー削除機能ではない。 正規に許可された読み取りは復号されるため権限の制限も必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html"
+    },
+    "study-q084": {
+      "prompt": "S3への新規PUTが成功した直後にGETする。整合性の説明として正しいのは？",
+      "options": [
+        "強い読み取り整合性により成功した書き込みを読める",
+        "必ず数時間待つ必要がある",
+        "キーを変えないと永久に読めない",
+        "全バケットを公開する必要がある"
+      ],
+      "answer": 0,
+      "reasons": [
+        "S3のオブジェクト読み取りは強い整合性を提供する。 S3のオブジェクト読み取りは強い整合性を提供する。",
+        "一般的なS3オブジェクトGETの整合性ではない。 S3のオブジェクト読み取りは強い整合性を提供する。",
+        "成功したオブジェクトを同じキーで取得できる。 S3のオブジェクト読み取りは強い整合性を提供する。",
+        "認可された利用者は非公開でも読める。 S3のオブジェクト読み取りは強い整合性を提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel"
+    },
+    "study-q085": {
+      "prompt": "Versioningを使うバケットの古い版が増え費用が上がった。適切な管理は？",
+      "options": [
+        "現在版の削除だけで全旧版も必ず消えると考える",
+        "IAMのパスワードを変える",
+        "S3へ上書きを増やす",
+        "保持要件を満たす非現行版のLifecycleを設定"
+      ],
+      "answer": 3,
+      "reasons": [
+        "削除マーカーだけでは旧版は残る。 旧版にも保存費用がかかるため期間を定めて管理する。",
+        "保存容量は変わらない。 旧版にも保存費用がかかるため期間を定めて管理する。",
+        "さらに版を増やす可能性がある。 旧版にも保存費用がかかるため期間を定めて管理する。",
+        "旧版にも保存費用がかかるため期間を定めて管理する。 旧版にも保存費用がかかるため期間を定めて管理する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html"
+    },
+    "study-q086": {
+      "prompt": "RDS PostgreSQLでDBインスタンスのAZ障害に備え、自動切り替えを求める。どれか？",
+      "options": [
+        "毎晩のスナップショットから手動復元する",
+        "DBは単一AZのままWeb層だけを複数AZにする",
+        "Multi-AZ DBインスタンス配置",
+        "単一AZのDBを大型化する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "履歴復旧には有効だがAZ障害時の自動切替ではない。 別AZのスタンバイで可用性を高める。",
+        "入口が残ってもDB層のAZ障害で業務が停止する。 別AZのスタンバイで可用性を高める。",
+        "別AZのスタンバイで可用性を高める。 別AZのスタンバイで可用性を高める。",
+        "処理性能は増やせるが別AZの切替先はできない。 別AZのスタンバイで可用性を高める。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+    },
+    "study-q087": {
+      "prompt": "RDSの読み取りが多く、多少古いデータでもよい分析SQLを分離したい。適切な方法は？",
+      "options": [
+        "SGを全公開する",
+        "リードレプリカへ分析の読み取りを向ける",
+        "DBインスタンス配置のスタンバイを分析用に使う",
+        "プライマリの書き込みを全停止する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "処理能力を増やさず保護を弱める。 参照負荷をプライマリから分離できる。",
+        "参照負荷をプライマリから分離できる。 参照負荷をプライマリから分離できる。",
+        "このスタンバイは読み取りを提供しない。 参照負荷をプライマリから分離できる。",
+        "業務の継続要件を壊す。 参照負荷をプライマリから分離できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html"
+    },
+    "study-q088": {
+      "prompt": "RDS Multi-AZ DBインスタンス配置のスタンバイでSELECTを実行したい。正しい説明は？",
+      "options": [
+        "スタンバイは通常の読み取りには利用できない",
+        "必ず読み取りエンドポイントがある",
+        "全SQLがプライマリより高速",
+        "IAM管理者なら任意のSQLを直接流せる"
+      ],
+      "answer": 0,
+      "reasons": [
+        "高可用性用でありリードレプリカとは用途が異なる。 高可用性用でありリードレプリカとは用途が異なる。",
+        "Multi-AZ DBクラスターとの混同。 高可用性用でありリードレプリカとは用途が異なる。",
+        "そもそも通常の読み取り先ではない。 高可用性用でありリードレプリカとは用途が異なる。",
+        "管理者権限で配置方式の仕様は変わらない。 高可用性用でありリードレプリカとは用途が異なる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+    },
+    "study-q089": {
+      "prompt": "10時にテーブルを誤更新した。自動バックアップ保持期間内の9時59分へ戻したい。適切な方法は？",
+      "options": [
+        "リードレプリカなら必ず誤更新が伝わらない",
+        "Multi-AZのスタンバイに誤更新は絶対届かない",
+        "DBの名前だけ変える",
+        "PITRで指定時点の新しいDBを復元する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "誤更新も複製されうる。 復元先を確認して接続先を切り替える。",
+        "同期複製は業務上の誤りを区別しない。 復元先を確認して接続先を切り替える。",
+        "内容は戻らない。 復元先を確認して接続先を切り替える。",
+        "復元先を確認して接続先を切り替える。 復元先を確認して接続先を切り替える。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html"
+    },
+    "study-q090": {
+      "prompt": "LambdaからRDSへの短命な接続が急増する。接続の再利用を管理したい。どれか？",
+      "options": [
+        "Route 53ドメイン登録",
+        "DBパスワードを公開",
+        "RDS Proxy",
+        "S3 Lifecycle"
+      ],
+      "answer": 2,
+      "reasons": [
+        "DB接続のプールを行わない。 接続プーリングでDBへの接続負荷を抑える。",
+        "接続負荷を改善せず情報を漏らす。 接続プーリングでDBへの接続負荷を抑える。",
+        "接続プーリングでDBへの接続負荷を抑える。 接続プーリングでDBへの接続負荷を抑える。",
+        "オブジェクト保存期間の管理。 接続プーリングでDBへの接続負荷を抑える。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html"
+    },
+    "study-q091": {
+      "prompt": "DynamoDBで全注文のパーティションキーを同じ固定文字列にして負荷が集中した。改善は？",
+      "options": [
+        "IAMの表示名を変更",
+        "高カーディナリティでアクセスを分散するキーを設計",
+        "キーをさらに短い同じ定数にする",
+        "全検索をScanへ置き換える"
+      ],
+      "answer": 1,
+      "reasons": [
+        "データ分散に影響しない。 処理が一部のキーへ集中するのを抑える。",
+        "処理が一部のキーへ集中するのを抑える。 処理が一部のキーへ集中するのを抑える。",
+        "値の偏りは変わらない。 処理が一部のキーへ集中するのを抑える。",
+        "読み取り範囲を増やし負荷を悪化させうる。 処理が一部のキーへ集中するのを抑える。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html"
+    },
+    "study-q092": {
+      "prompt": "DynamoDBの主キーは注文ID。顧客IDでも効率よく注文を検索したい。追加候補は？",
+      "options": [
+        "顧客IDをキーにするGSI",
+        "毎回全テーブルをScanする設計だけ",
+        "S3バケットポリシー",
+        "CloudFrontのTTL"
+      ],
+      "answer": 0,
+      "reasons": [
+        "異なるキーで問い合わせるアクセスパターンを提供する。 異なるキーで問い合わせるアクセスパターンを提供する。",
+        "データ増加時に読み取り負担が大きい。 異なるキーで問い合わせるアクセスパターンを提供する。",
+        "DynamoDBの索引を作らない。 異なるキーで問い合わせるアクセスパターンを提供する。",
+        "テーブルの検索キーを増やさない。 異なるキーで問い合わせるアクセスパターンを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html"
+    },
+    "study-q093": {
+      "prompt": "DynamoDBで更新直後の最新値をテーブルから読みたい。どれを選ぶ？",
+      "options": [
+        "GSIの強い整合性読み取り",
+        "結果整合性だけで常に最新を保証",
+        "Scanなら整合性設定に関係なく常に最新",
+        "強い整合性の読み取り"
+      ],
+      "answer": 3,
+      "reasons": [
+        "GSIは強い整合性をサポートしない。 成功済みの書き込みを反映した読み取りが必要な場合に選ぶ。",
+        "一時的に古い値を返しうる。 成功済みの書き込みを反映した読み取りが必要な場合に選ぶ。",
+        "操作の種類だけで整合性は保証されない。 成功済みの書き込みを反映した読み取りが必要な場合に選ぶ。",
+        "成功済みの書き込みを反映した読み取りが必要な場合に選ぶ。 成功済みの書き込みを反映した読み取りが必要な場合に選ぶ。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html"
+    },
+    "study-q094": {
+      "prompt": "DynamoDBのアクセスが不規則で事前の容量見積もりを避けたい。課金方式の候補は？",
+      "options": [
+        "最低容量だけを固定し急増しても変更しない",
+        "前年の平均値だけで常にプロビジョンドを固定する",
+        "オンデマンドキャパシティ",
+        "アクセスがなくても最大RCUを固定"
+      ],
+      "answer": 2,
+      "reasons": [
+        "低い固定容量では急増時の処理要求を満たさない可能性がある。 リクエストに応じた利用方式を選べる。",
+        "不規則な需要と突発ピークへの対応を省いている。 リクエストに応じた利用方式を選べる。",
+        "リクエストに応じた利用方式を選べる。 リクエストに応じた利用方式を選べる。",
+        "不規則な需要で無駄が出やすい。 リクエストに応じた利用方式を選べる。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html"
+    },
+    "study-q095": {
+      "prompt": "期限切れの一時レコードをDynamoDBから自動削除したい。即時削除でなくてよい。どれか？",
+      "options": [
+        "テーブル名に日付を入れるだけ",
+        "TTL属性を設定する",
+        "TTLで秒単位の削除時刻を厳密保証",
+        "GSIだけ作成する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "レコードが自動削除されるわけではない。 期限後に非同期で項目が削除される。",
+        "期限後に非同期で項目が削除される。 期限後に非同期で項目が削除される。",
+        "削除には遅延があり即時保証ではない。 期限後に非同期で項目が削除される。",
+        "期限切れ削除の機能ではない。 期限後に非同期で項目が削除される。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html"
+    },
+    "study-q096": {
+      "prompt": "DynamoDBで同じ項目への結果整合性読み取りが多く、キャッシュで短縮したい。どれか？",
+      "options": [
+        "DAX",
+        "RDS Proxy",
+        "S3 Glacier",
+        "AWS Budgets"
+      ],
+      "answer": 0,
+      "reasons": [
+        "DynamoDB向けのインメモリキャッシュを提供する。 DynamoDB向けのインメモリキャッシュを提供する。",
+        "RDS接続管理でDynamoDBキャッシュではない。 DynamoDB向けのインメモリキャッシュを提供する。",
+        "アーカイブ保存で低遅延キャッシュではない。 DynamoDB向けのインメモリキャッシュを提供する。",
+        "予算監視でデータをキャッシュしない。 DynamoDB向けのインメモリキャッシュを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html"
+    },
+    "study-q097": {
+      "prompt": "DynamoDBの在庫更新と注文登録を全件成功または全件失敗にしたい。どれを使う？",
+      "options": [
+        "独立したPutを成功確認なしに実行",
+        "GSIを追加するだけ",
+        "TTLで後日消すだけ",
+        "トランザクション書き込み"
+      ],
+      "answer": 3,
+      "reasons": [
+        "途中失敗で部分更新が残りうる。 複数項目の変更を原子的に扱える。",
+        "複数操作の原子性は提供しない。 複数項目の変更を原子的に扱える。",
+        "即時の整合した変更を保証しない。 複数項目の変更を原子的に扱える。",
+        "複数項目の変更を原子的に扱える。 複数項目の変更を原子的に扱える。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html"
+    },
+    "study-q098": {
+      "prompt": "商品一覧を繰り返しDBから読む。キャッシュ導入時に追加で設計すべきものは？",
+      "options": [
+        "キャッシュは永久に正しいと仮定",
+        "全書き込みを匿名化して許可",
+        "元データ更新後の失効・有効期限",
+        "DBの全バックアップを廃止"
+      ],
+      "answer": 2,
+      "reasons": [
+        "更新との整合性問題が残る。 古い結果を返し続けない方針が必要。",
+        "読み取り性能とは別にデータ保護を壊す。 古い結果を返し続けない方針が必要。",
+        "古い結果を返し続けない方針が必要。 古い結果を返し続けない方針が必要。",
+        "キャッシュはバックアップの代替ではない。 古い結果を返し続けない方針が必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
+    },
+    "study-q099": {
+      "prompt": "Auroraの障害時に昇格先を用意し、読み取りも分散したい。どれを追加する？",
+      "options": [
+        "DB名の別名だけ",
+        "別AZのAurora Replica",
+        "CloudFrontだけ",
+        "IAMユーザーだけ"
+      ],
+      "answer": 1,
+      "reasons": [
+        "実体のない別名は復旧先にならない。 読み取りを担当し、フェイルオーバー先にもなれる。",
+        "読み取りを担当し、フェイルオーバー先にもなれる。 読み取りを担当し、フェイルオーバー先にもなれる。",
+        "DBノードの昇格先にはならない。 読み取りを担当し、フェイルオーバー先にもなれる。",
+        "DB計算リソースを増やさない。 読み取りを担当し、フェイルオーバー先にもなれる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html"
+    },
+    "study-q100": {
+      "prompt": "複数リージョンの利用者が近い場所でDynamoDBへ読み書きしたい。管理された複製方式は？",
+      "options": [
+        "DynamoDBグローバルテーブル",
+        "通常テーブルを同名で手動作成するだけ",
+        "単一リージョンにGSIを作るだけ",
+        "S3 CRRをDynamoDBへ設定"
+      ],
+      "answer": 0,
+      "reasons": [
+        "複数リージョンにまたがるレプリカを提供する。 複数リージョンにまたがるレプリカを提供する。",
+        "同名だけではデータは複製されない。 複数リージョンにまたがるレプリカを提供する。",
+        "別リージョンのレプリカにはならない。 複数リージョンにまたがるレプリカを提供する。",
+        "S3オブジェクト向けの複製機能。 複数リージョンにまたがるレプリカを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html"
+    },
+    "study-rr01-01": {
+      "prompt": "学習用の仮定：各AZに毎秒300件処理できるサーバーが2台ずつある。通常負荷は毎秒900件。片側AZ停止直後も同じ負荷を処理する最小の事前配置はどれか。",
+      "options": [
+        "各AZに3台ずつ置く",
+        "各AZに2台ずつ置く",
+        "片側に4台、もう片側に2台置く",
+        "各AZに1台置き障害後に増やす"
+      ],
+      "answer": 0,
+      "reasons": [
+        "残る1AZだけで3×300=900件/秒を処理できる。 残る1AZだけで3×300=900件/秒を処理できる。 条件変更：負荷600件/秒なら各AZ2台で計算上満たす。",
+        "平常時は足りるが障害後は600件/秒となる。 残る1AZだけで3×300=900件/秒を処理できる。 条件変更：負荷600件/秒なら各AZ2台で計算上満たす。",
+        "4台の側が停止すると600件/秒しか残らない。 残る1AZだけで3×300=900件/秒を処理できる。 条件変更：負荷600件/秒なら各AZ2台で計算上満たす。",
+        "起動完了前の容量を満たさず直後の条件に違反する。 残る1AZだけで3×300=900件/秒を処理できる。 条件変更：負荷600件/秒なら各AZ2台で計算上満たす。"
+      ],
+      "source": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_withstand_component_failures_static_stability.html"
+    },
+    "study-rr02-02": {
+      "prompt": "アカウントAの既存IAMロールがBのS3オブジェクトを直接読む。暗号化はSSE-S3で、SCP等の拒否はない。AのロールにはGetObjectのAllowがあるがBから拒否される。最小の追加はどれか。",
+      "options": [
+        "BのバケットポリシーでAの対象ロールへ対象プレフィックスのGetObjectを許可",
+        "Aのロールに同じAllowをもう1件付ける",
+        "BのSCPにS3のAllowを追加する",
+        "Bのバケットを暗号化し直す"
+      ],
+      "answer": 0,
+      "reasons": [
+        "クロスアカウントのリソース側の許可を具体的な主体と範囲へ付与する。 クロスアカウントのリソース側の許可を具体的な主体と範囲へ付与する。 条件変更：SSE-KMSならKMSキー側の利用許可も確認する。",
+        "利用元の許可を重ねてもB側の許可は追加されない。 クロスアカウントのリソース側の許可を具体的な主体と範囲へ付与する。 条件変更：SSE-KMSならKMSキー側の利用許可も確認する。",
+        "SCPはバケットへのアクセス権を付与しない。 クロスアカウントのリソース側の許可を具体的な主体と範囲へ付与する。 条件変更：SSE-KMSならKMSキー側の利用許可も確認する。",
+        "保存時暗号化とクロスアカウント認可は別の判断である。 クロスアカウントのリソース側の許可を具体的な主体と範囲へ付与する。 条件変更：SSE-KMSならKMSキー側の利用許可も確認する。"
+      ],
+      "source": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+    },
+    "study-rr03-02": {
+      "prompt": "学習用の仮定：NAT追加の固定費は月40単位、共有時だけ発生するAZ間転送費は月60単位。他の費用と負荷は同じ。AZごとのNATへ変更すると月額はどうなるか。",
+      "options": [
+        "20単位減る",
+        "40単位増える",
+        "60単位減る",
+        "100単位減る"
+      ],
+      "answer": 0,
+      "reasons": [
+        "追加40から回避60を引くと差額は-20となる。 追加40から回避60を引くと差額は-20となる。 実料金ではなく比較式の演習。転送費が10なら月30単位増えるが可用性条件は別に満たす必要がある。",
+        "固定費だけを見て回避できる転送費を落としている。 追加40から回避60を引くと差額は-20となる。 実料金ではなく比較式の演習。転送費が10なら月30単位増えるが可用性条件は別に満たす必要がある。",
+        "追加するNATの固定費40を落としている。 追加40から回避60を引くと差額は-20となる。 実料金ではなく比較式の演習。転送費が10なら月30単位増えるが可用性条件は別に満たす必要がある。",
+        "増加費と削減費を両方削減として足している。 追加40から回避60を引くと差額は-20となる。 実料金ではなく比較式の演習。転送費が10なら月30単位増えるが可用性条件は別に満たす必要がある。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html"
+    },
+    "study-rr04-01": {
+      "prompt": "夜間集計は分割できず、CPU使用率30%、メモリ不足で大量のスワップが発生する。処理は中断不可で期限も厳しい。最初に比較すべき構成はどれか。",
+      "options": [
+        "作業集合が収まるメモリ最適化のオンデマンドEC2で実測する",
+        "同じメモリ容量のコンピューティング最適化Spotへ移す",
+        "同じインスタンスを複数台へ増やすだけにする",
+        "CPUが低いのでインスタンスをさらに縮小する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "メモリ不足へ対処しSpot中断を避けて処理時間を評価する。 メモリ不足へ対処しSpot中断を避けて処理時間を評価する。 条件変更：CPUが飽和しメモリに余裕があればコンピューティング最適化を比較する。",
+        "メモリ不足を解消せず中断不可にも反する。 メモリ不足へ対処しSpot中断を避けて処理時間を評価する。 条件変更：CPUが飽和しメモリに余裕があればコンピューティング最適化を比較する。",
+        "分割不可の処理では単一ジョブのメモリ不足は残る。 メモリ不足へ対処しSpot中断を避けて処理時間を評価する。 条件変更：CPUが飽和しメモリに余裕があればコンピューティング最適化を比較する。",
+        "メモリ不足と遅延を悪化させる可能性がある。 メモリ不足へ対処しSpot中断を避けて処理時間を評価する。 条件変更：CPUが飽和しメモリに余裕があればコンピューティング最適化を比較する。"
+      ],
+      "source": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html"
+    },
+    "study-rr05-01": {
+      "prompt": "EBSを使うEC2で保存容量100GiBは足りる。実測から6000IOPS・250MiB/秒が必要で、EC2側の上限には余裕がある。必要以上の容量を買わない改善はどれか。",
+      "options": [
+        "gp3の容量100GiBを維持しIOPSとスループットを必要量に設定",
+        "gp3を1TiBへ増やすだけで性能設定は変えない",
+        "CPUだけ増やしてEBS設定は変えない",
+        "同容量のHDDへ変更してIOPSを保証する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "gp3は容量と性能を分けて設定できる。 gp3は容量と性能を分けて設定できる。 条件変更：ボトルネックがEC2のEBS上限ならインスタンス側も見直す。",
+        "保存容量だけの増加では必要性能の設定にならない。 gp3は容量と性能を分けて設定できる。 条件変更：ボトルネックがEC2のEBS上限ならインスタンス側も見直す。",
+        "確認済みのストレージ要求に対する設定変更ではない。 gp3は容量と性能を分けて設定できる。 条件変更：ボトルネックがEC2のEBS上限ならインスタンス側も見直す。",
+        "小さいランダムI/Oの要求をHDDで保証する根拠がない。 gp3は容量と性能を分けて設定できる。 条件変更：ボトルネックがEC2のEBS上限ならインスタンス側も見直す。"
+      ],
+      "source": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html"
+    },
+    "study-rr06-01": {
+      "prompt": "注文システムは複数表のJOINと既存PostgreSQLアプリを大きく変えずに移す必要がある。AZ障害時の自動切替も必要。最適な出発点はどれか。",
+      "options": [
+        "RDS PostgreSQLのMulti-AZ構成で互換性と切替を検証",
+        "DynamoDBへSQLをそのままコピーする",
+        "単一AZのRDSで夜間スナップショットだけ設定",
+        "EC2上の単一DBを大型化する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "SQL要件を維持しAZ障害への切替を設計できる。 SQL要件を維持しAZ障害への切替を設計できる。 条件変更：新規のキー取得中心で不規則負荷ならDynamoDBオンデマンドも比較する。",
+        "キー中心のデータモデルに既存JOINをそのまま移せない。 SQL要件を維持しAZ障害への切替を設計できる。 条件変更：新規のキー取得中心で不規則負荷ならDynamoDBオンデマンドも比較する。",
+        "互換性は満たし得るが自動切替先がない。 SQL要件を維持しAZ障害への切替を設計できる。 条件変更：新規のキー取得中心で不規則負荷ならDynamoDBオンデマンドも比較する。",
+        "性能は上がってもAZ障害への自動切替を用意しない。 SQL要件を維持しAZ障害への切替を設計できる。 条件変更：新規のキー取得中心で不規則負荷ならDynamoDBオンデマンドも比較する。"
+      ],
+      "source": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html"
+    },
+    "study-q101": {
+      "prompt": "東京と欧州に同等の Web アプリがある。利用者ごとにネットワーク遅延が小さいリージョンへ DNS で案内したい。どのポリシーか。",
+      "options": [
+        "位置情報ルーティング",
+        "加重ルーティング",
+        "シンプルルーティング",
+        "レイテンシールーティング"
+      ],
+      "answer": 3,
+      "reasons": [
+        "国などの地理条件を指定するもので、遅延を基準にはしない。 利用者から AWS リージョンへの遅延に基づいて案内先を選ぶ。",
+        "設定した重みで応答を分け、遅延を比較しない。 利用者から AWS リージョンへの遅延に基づいて案内先を選ぶ。",
+        "複数リージョンの遅延を評価して選択しない。 利用者から AWS リージョンへの遅延に基づいて案内先を選ぶ。",
+        "利用者から AWS リージョンへの遅延に基づいて案内先を選ぶ。 利用者から AWS リージョンへの遅延に基づいて案内先を選ぶ。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q102": {
+      "prompt": "新環境へ DNS 応答のおよそ10%を向け、問題がなければ段階的に増やしたい。適切な設定は。",
+      "options": [
+        "新環境だけにシンプルレコードを変更",
+        "位置情報を日本に限定",
+        "新旧レコードへ加重ルーティングを設定",
+        "TTL を10秒にする"
+      ],
+      "answer": 2,
+      "reasons": [
+        "全体切替となり段階配分にならない。 重みを調整して段階的な移行を行える。ただし DNS キャッシュで実要求比率は変動する。",
+        "国で分類するため10%の段階配分を表さない。 重みを調整して段階的な移行を行える。ただし DNS キャッシュで実要求比率は変動する。",
+        "重みを調整して段階的な移行を行える。ただし DNS キャッシュで実要求比率は変動する。 重みを調整して段階的な移行を行える。ただし DNS キャッシュで実要求比率は変動する。",
+        "再解決頻度は変わるが、新環境への配分は定義できない。 重みを調整して段階的な移行を行える。ただし DNS キャッシュで実要求比率は変動する。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q103": {
+      "prompt": "DNS レコードを正常な待機系に変更したが一部の端末が数分間旧 IP に接続する。最も妥当な説明は。",
+      "options": [
+        "IAM ロールが DNS 応答を固定している",
+        "リゾルバーが以前の応答を TTL の範囲で保持している",
+        "Route 53 が HTTP の本文を保持している",
+        "待機系の CPU が必ず不足している"
+      ],
+      "answer": 1,
+      "reasons": [
+        "通常のクライアント DNS キャッシュは IAM ロールで固定されない。 DNS 変更後もキャッシュされた応答は有効期間中に再利用され得る。",
+        "DNS 変更後もキャッシュされた応答は有効期間中に再利用され得る。 DNS 変更後もキャッシュされた応答は有効期間中に再利用され得る。",
+        "DNS は HTTP コンテンツのキャッシュではない。 DNS 変更後もキャッシュされた応答は有効期間中に再利用され得る。",
+        "旧 IP を選ぶ原因を CPU だけでは説明できない。 DNS 変更後もキャッシュされた応答は有効期間中に再利用され得る。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q104": {
+      "prompt": "主サイト障害時だけ別リージョンの待機サイトへ案内したい。データ同期は完了している。DNS に追加する構成は。",
+      "options": [
+        "ヘルスチェックとフェイルオーバールーティング",
+        "両方を同じ重みで配信",
+        "TXT レコードに障害情報を記録",
+        "CloudTrail のみ有効化"
+      ],
+      "answer": 0,
+      "reasons": [
+        "主系の健全性に応じて待機系の DNS 応答を返せる。 主系の健全性に応じて待機系の DNS 応答を返せる。",
+        "平常時から両方へ向き、待機系のみ切替という要件と違う。 主系の健全性に応じて待機系の DNS 応答を返せる。",
+        "TXT に書くだけでは宛先選択は変わらない。 主系の健全性に応じて待機系の DNS 応答を返せる。",
+        "監査記録は DNS の自動切替を実行しない。 主系の健全性に応じて待機系の DNS 応答を返せる。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q105": {
+      "prompt": "日本の S3 に置いた公開画像を世界中に配信する。読取り遅延とオリジンへの要求を減らすには。",
+      "options": [
+        "S3 のバケット名を短くする",
+        "Route 53 の TTL をゼロにする",
+        "全画像を SQS に入れる",
+        "CloudFront を S3 の前に配置"
+      ],
+      "answer": 3,
+      "reasons": [
+        "名前の長さはネットワーク距離やキャッシュを改善しない。 エッジのキャッシュで画像を配り、遠距離のオリジンアクセスを減らす。",
+        "DNS 問合せが増え、画像本文の取得距離は変わらない。 エッジのキャッシュで画像を配り、遠距離のオリジンアクセスを減らす。",
+        "SQS はブラウザー向け画像 CDN ではない。 エッジのキャッシュで画像を配り、遠距離のオリジンアクセスを減らす。",
+        "エッジのキャッシュで画像を配り、遠距離のオリジンアクセスを減らす。 エッジのキャッシュで画像を配り、遠距離のオリジンアクセスを減らす。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+    },
+    "study-q106": {
+      "prompt": "全員に同じ商品画像を配る CDN で、追跡用クエリが毎回異なりヒット率が低い。最も直接的な改善は。",
+      "options": [
+        "オリジンの暗号化を無効化",
+        "TTL を必ずゼロにする",
+        "応答内容に不要な追跡用クエリをキャッシュキーから除く",
+        "全 Cookie をキーに追加"
+      ],
+      "answer": 2,
+      "reasons": [
+        "キー分断の解消と無関係で保護を弱める。 同じ内容への要求を同じキャッシュにまとめられる。",
+        "保存しなくなるためヒット率は改善しない。 同じ内容への要求を同じキャッシュにまとめられる。",
+        "同じ内容への要求を同じキャッシュにまとめられる。 同じ内容への要求を同じキャッシュにまとめられる。",
+        "さらにキャッシュが分断される。 同じ内容への要求を同じキャッシュにまとめられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+    },
+    "study-q107": {
+      "prompt": "S3 の有料教材は CloudFront 経由だけで配信したい。バケットの直接公開を避けるには。",
+      "options": [
+        "CloudWatch アラームだけを付ける",
+        "OAC とバケットポリシーで対象配信からの読取りを許可",
+        "S3 を公開して URL を秘密にする",
+        "DNS から S3 の名前を消す"
+      ],
+      "answer": 1,
+      "reasons": [
+        "検知しても読取り権限を制限しない。 S3 を非公開に保ち、CloudFront からの認証済み要求を許可する。",
+        "S3 を非公開に保ち、CloudFront からの認証済み要求を許可する。 S3 を非公開に保ち、CloudFront からの認証済み要求を許可する。",
+        "URL の秘匿はアクセス制御にならない。 S3 を非公開に保ち、CloudFront からの認証済み要求を許可する。",
+        "S3 の既知のエンドポイントへの直接接続は防げない。 S3 を非公開に保ち、CloudFront からの認証済み要求を許可する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html"
+    },
+    "study-q108": {
+      "prompt": "会員が一つの PDF を30分だけ取得できるリンクを発行したい。CloudFront で使う機能は。",
+      "options": [
+        "署名付き URL",
+        "OAC だけを設定",
+        "公開バケット ACL",
+        "加重 DNS レコード"
+      ],
+      "answer": 0,
+      "reasons": [
+        "ファイルへのアクセス条件や期限を署名で検証できる。 ファイルへのアクセス条件や期限を署名で検証できる。",
+        "OAC は CloudFront とオリジン間の保護で視聴者の会員判定ではない。 ファイルへのアクセス条件や期限を署名で検証できる。",
+        "誰でも取得でき、会員や期限を制御しない。 ファイルへのアクセス条件や期限を署名で検証できる。",
+        "配信先の割合であり PDF の利用権ではない。 ファイルへのアクセス条件や期限を署名で検証できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html"
+    },
+    "study-q109": {
+      "prompt": "会員向け動画は多数の小さなセグメントで構成される。各 URL を変更せずまとめて利用権を与えたい。",
+      "options": [
+        "セグメントをすべて公開",
+        "各ファイル名に会員名を付ける",
+        "SQS FIFO を導入",
+        "CloudFront の署名付き Cookie"
+      ],
+      "answer": 3,
+      "reasons": [
+        "非会員からの取得を制限できない。 複数の制限コンテンツへのアクセスを Cookie でまとめて制御できる。",
+        "命名だけでは署名検証やアクセス制御にならない。 複数の制限コンテンツへのアクセスを Cookie でまとめて制御できる。",
+        "動画視聴者の認可とは役割が異なる。 複数の制限コンテンツへのアクセスを Cookie でまとめて制御できる。",
+        "複数の制限コンテンツへのアクセスを Cookie でまとめて制御できる。 複数の制限コンテンツへのアクセスを Cookie でまとめて制御できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html"
+    },
+    "study-q110": {
+      "prompt": "世界中から UDP を使うゲームサーバーへ接続する。利用者側の許可リスト用に固定 IP も必要。何を検討するか。",
+      "options": [
+        "S3 Transfer Acceleration のみ",
+        "SNS のメール通知",
+        "Global Accelerator",
+        "CloudFront の画像キャッシュ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "S3 オブジェクト転送向けでゲームサーバーの UDP 入口ではない。 固定のエニーキャスト IP と AWS ネットワークを利用して TCP/UDP のエンドポイントへ接続する。",
+        "ネットワーク経路や固定 IP を提供しない。 固定のエニーキャスト IP と AWS ネットワークを利用して TCP/UDP のエンドポイントへ接続する。",
+        "固定のエニーキャスト IP と AWS ネットワークを利用して TCP/UDP のエンドポイントへ接続する。 固定のエニーキャスト IP と AWS ネットワークを利用して TCP/UDP のエンドポイントへ接続する。",
+        "UDP ゲーム通信を汎用的に中継する CDN ではない。 固定のエニーキャスト IP と AWS ネットワークを利用して TCP/UDP のエンドポイントへ接続する。"
+      ],
+      "source": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html"
+    },
+    "study-q111": {
+      "prompt": "公開した CSS を更新したがエッジに旧版が残る。今後の更新を明確に区別する一般的な方式は。",
+      "options": [
+        "DNS の MX レコードを書き換える",
+        "内容ごとに異なるバージョン付きファイル名を使う",
+        "同じ名前で TTL を1年に延ばす",
+        "CloudTrail を停止する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "メール配送設定は CSS 配信に作用しない。 新 URL が別オブジェクトとして取得され、旧版キャッシュとの混同を避けられる。",
+        "新 URL が別オブジェクトとして取得され、旧版キャッシュとの混同を避けられる。 新 URL が別オブジェクトとして取得され、旧版キャッシュとの混同を避けられる。",
+        "旧版が長く利用される可能性を増やす。 新 URL が別オブジェクトとして取得され、旧版キャッシュとの混同を避けられる。",
+        "配信キャッシュの更新と無関係。 新 URL が別オブジェクトとして取得され、旧版キャッシュとの混同を避けられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+    },
+    "study-q112": {
+      "prompt": "アカウント名を含むマイページが CloudFront で別利用者に返った。最優先で見直す設計は。",
+      "options": [
+        "個人別の応答を共有キャッシュしない設定と認証・認可",
+        "TTL を長くしてヒット率を上げる",
+        "画像の圧縮率を下げる",
+        "ALB を大きくする"
+      ],
+      "answer": 0,
+      "reasons": [
+        "利用者固有データが共通キーで保存されると漏えいする。必要に応じてキャッシュを無効化する。 利用者固有データが共通キーで保存されると漏えいする。必要に応じてキャッシュを無効化する。",
+        "誤った共有を長く継続してしまう。 利用者固有データが共通キーで保存されると漏えいする。必要に応じてキャッシュを無効化する。",
+        "認可と応答の混同を解決しない。 利用者固有データが共通キーで保存されると漏えいする。必要に応じてキャッシュを無効化する。",
+        "計算能力は共有キャッシュの情報漏えいを防がない。 利用者固有データが共通キーで保存されると漏えいする。必要に応じてキャッシュを無効化する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"
+    },
+    "study-q113": {
+      "prompt": "example.com のゾーン頂点を CloudFront 配信へ向けたい。Route 53 で選ぶ適切なレコードは。",
+      "options": [
+        "頂点の通常の CNAME",
+        "CloudFront の一時的な IP を手動固定",
+        "MX レコード",
+        "CloudFront を参照するエイリアス A/AAAA レコード"
+      ],
+      "answer": 3,
+      "reasons": [
+        "DNS の制約によりゾーン頂点の CNAME は適切でない。 Route 53 のエイリアスはゾーン頂点で AWS リソースを参照できる。",
+        "IP の変化に追従できず、配信名による参照を使うべき。 Route 53 のエイリアスはゾーン頂点で AWS リソースを参照できる。",
+        "MX はメールサーバー用で Web の宛先ではない。 Route 53 のエイリアスはゾーン頂点で AWS リソースを参照できる。",
+        "Route 53 のエイリアスはゾーン頂点で AWS リソースを参照できる。 Route 53 のエイリアスはゾーン頂点で AWS リソースを参照できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q114": {
+      "prompt": "S3 静的ウェブサイトエンドポイントを CloudFront のオリジンにしている。OAC を使って S3 を非公開にしたい場合の対応は。",
+      "options": [
+        "公開 ACL を残して DNS だけ非公開化",
+        "TTL を短くする",
+        "S3 REST オリジンへ変更して OAC と権限を設定する",
+        "ウェブサイトエンドポイントのまま OAC のみ追加"
+      ],
+      "answer": 2,
+      "reasons": [
+        "S3 に直接到達できれば読取り可能なまま。 ウェブサイトエンドポイントはカスタムオリジンで OAC の対象となる S3 オリジンとは異なる。",
+        "オリジン認証方式は変わらない。 ウェブサイトエンドポイントはカスタムオリジンで OAC の対象となる S3 オリジンとは異なる。",
+        "ウェブサイトエンドポイントはカスタムオリジンで OAC の対象となる S3 オリジンとは異なる。 ウェブサイトエンドポイントはカスタムオリジンで OAC の対象となる S3 オリジンとは異なる。",
+        "その構成で OAC による S3 オリジン制限はできない。 ウェブサイトエンドポイントはカスタムオリジンで OAC の対象となる S3 オリジンとは異なる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html"
+    },
+    "study-q115": {
+      "prompt": "カナダの利用者には現地向けコンテンツ、その他には標準サイトを DNS で案内したい。国別条件を直接表せるのは。",
+      "options": [
+        "単一のシンプルレコード",
+        "位置情報ルーティング",
+        "レイテンシールーティング",
+        "フェイルオーバー"
+      ],
+      "answer": 1,
+      "reasons": [
+        "国別の分岐を定義しない。 利用者の地理的な所在地に基づく宛先選択に対応する。",
+        "利用者の地理的な所在地に基づく宛先選択に対応する。 利用者の地理的な所在地に基づく宛先選択に対応する。",
+        "最小遅延を選ぶので必ず国別サイトになるとは限らない。 利用者の地理的な所在地に基づく宛先選択に対応する。",
+        "健全性と主従の切替が目的。 利用者の地理的な所在地に基づく宛先選択に対応する。"
+      ],
+      "source": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html"
+    },
+    "study-q116": {
+      "prompt": "画像が S3 にアップロードされた直後、数秒でサムネイルを作りたい。常時サーバーは管理したくない。",
+      "options": [
+        "S3 イベントで Lambda 関数を起動",
+        "専用 EC2 を常に最大台数で稼働",
+        "Route 53 のヘルスチェック",
+        "S3 ライフサイクル"
+      ],
+      "answer": 0,
+      "reasons": [
+        "短いイベント処理を必要時だけ実行できる。 短いイベント処理を必要時だけ実行できる。",
+        "実現可能でもサーバー管理と待機費用が増える。 短いイベント処理を必要時だけ実行できる。",
+        "画像処理コードを実行する用途ではない。 短いイベント処理を必要時だけ実行できる。",
+        "保管クラスを変える機能で画像を加工しない。 短いイベント処理を必要時だけ実行できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q117": {
+      "prompt": "Lambda のローカルファイルに注文履歴を置いたところ、別の呼出しで履歴がない。設計上必要な変更は。",
+      "options": [
+        "関数名を固定する",
+        "メモリを最大にする",
+        "ログ保存期間を延ばす",
+        "DynamoDB 等へ永続状態を外出しする"
+      ],
+      "answer": 3,
+      "reasons": [
+        "同名の関数でも実行環境は複数あり得る。 実行環境の再利用は保証されず、ローカル状態を正本にできない。",
+        "容量を増やしても環境寿命の保証にはならない。 実行環境の再利用は保証されず、ローカル状態を正本にできない。",
+        "アプリの状態を自動復元する仕組みにはならない。 実行環境の再利用は保証されず、ローカル状態を正本にできない。",
+        "実行環境の再利用は保証されず、ローカル状態を正本にできない。 実行環境の再利用は保証されず、ローカル状態を正本にできない。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q118": {
+      "prompt": "既存コンテナの変換処理は1件45分かかり分割できない。Managed Instancesを使わない標準Lambdaとコンテナ基盤を比較し、ホスト管理を減らしたい。",
+      "options": [
+        "API Gateway のみ",
+        "ECR に格納するだけ",
+        "ECS の Fargate タスク",
+        "標準Lambda呼出しを45分に設定"
+      ],
+      "answer": 2,
+      "reasons": [
+        "API 入口でありコンテナ実行環境ではない。 Managed Instancesを使わない標準Lambdaの1回900秒上限を超える既存コンテナ処理に適する。",
+        "保存だけでは処理が実行されない。 Managed Instancesを使わない標準Lambdaの1回900秒上限を超える既存コンテナ処理に適する。",
+        "Managed Instancesを使わない標準Lambdaの1回900秒上限を超える既存コンテナ処理に適する。 Managed Instancesを使わない標準Lambdaの1回900秒上限を超える既存コンテナ処理に適する。",
+        "標準実行の900秒上限を超える。 Managed Instancesを使わない標準Lambdaの1回900秒上限を超える既存コンテナ処理に適する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q119": {
+      "prompt": "ECS タスク内のアプリが特定の S3 バケットだけを読みたい。アクセスキーを埋め込まず権限を渡すには。",
+      "options": [
+        "ECR のタグを変更する",
+        "必要な S3 権限を持つタスクロール",
+        "ルートアクセスキーをイメージに格納",
+        "バケットを公開する"
+      ],
+      "answer": 1,
+      "reasons": [
+        "イメージタグは API 利用権限を与えない。 タスク内アプリへ一時的な認証情報を提供できる。",
+        "タスク内アプリへ一時的な認証情報を提供できる。 タスク内アプリへ一時的な認証情報を提供できる。",
+        "漏えい時の影響が大きく固定秘密も残る。 タスク内アプリへ一時的な認証情報を提供できる。",
+        "不要な第三者アクセスまで許可する。 タスク内アプリへ一時的な認証情報を提供できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q120": {
+      "prompt": "Web コンテナを常に4タスク維持し、異常終了したタスクを置換したい。ECS のどの構成か。",
+      "options": [
+        "希望数4の ECS Service",
+        "ECR リポジトリを4個作る",
+        "一度だけ RunTask を実行",
+        "CloudTrail の証跡を4個作る"
+      ],
+      "answer": 0,
+      "reasons": [
+        "サービスのスケジューラーが指定タスク数を維持する。 サービスのスケジューラーが指定タスク数を維持する。",
+        "イメージの保存数は稼働数を維持しない。 サービスのスケジューラーが指定タスク数を維持する。",
+        "独立タスクだけでは継続する希望数を維持しない。 サービスのスケジューラーが指定タスク数を維持する。",
+        "監査記録はタスクの補充を行わない。 サービスのスケジューラーが指定タスク数を維持する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q121": {
+      "prompt": "既存運用は Kubernetes のマニフェストとカスタムコントローラーに依存している。管理された制御プレーンを AWS で使うには。",
+      "options": [
+        "ECS へマニフェストを無変更投入",
+        "ECR のみ",
+        "SQS FIFO",
+        "Amazon EKS"
+      ],
+      "answer": 3,
+      "reasons": [
+        "ECS は Kubernetes API の実装ではない。 Kubernetes API とエコシステムを利用するマネージドサービス。",
+        "イメージレジストリは Kubernetes クラスターを提供しない。 Kubernetes API とエコシステムを利用するマネージドサービス。",
+        "メッセージ処理順序と制御プレーンは別の機能。 Kubernetes API とエコシステムを利用するマネージドサービス。",
+        "Kubernetes API とエコシステムを利用するマネージドサービス。 Kubernetes API とエコシステムを利用するマネージドサービス。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q122": {
+      "prompt": "CI が作成したコンテナイメージを AWS 上のプライベートなレジストリへ保管し、ECS が取得したい。",
+      "options": [
+        "Route 53",
+        "Step Functions の状態",
+        "Amazon ECR",
+        "Amazon EFS のみ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "DNS はイメージレイヤーを保管しない。 コンテナイメージの保存と配布を担う。",
+        "状態機械の定義はイメージレジストリにならない。 コンテナイメージの保存と配布を担う。",
+        "コンテナイメージの保存と配布を担う。 コンテナイメージの保存と配布を担う。",
+        "共有ファイルストレージでありイメージレジストリ API を提供しない。 コンテナイメージの保存と配布を担う。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q123": {
+      "prompt": "Lambda の処理が急増し、接続先の小さな DB を過負荷にしている。この関数の並列実行上限を抑えるには。",
+      "options": [
+        "プロビジョニング済み同時実行を増やすだけ",
+        "予約済み同時実行数を適切に設定",
+        "タイムアウトだけを延長",
+        "ログを削除"
+      ],
+      "answer": 1,
+      "reasons": [
+        "初期化遅延対策であり、今回の並列負荷抑制とは逆方向。 関数単位の同時実行上限として下流への並列負荷を制御できる。",
+        "関数単位の同時実行上限として下流への並列負荷を制御できる。 関数単位の同時実行上限として下流への並列負荷を制御できる。",
+        "同時実行の増加を防がず、接続を長く保持し得る。 関数単位の同時実行上限として下流への並列負荷を制御できる。",
+        "DB への並列接続数を制限しない。 関数単位の同時実行上限として下流への並列負荷を制御できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q124": {
+      "prompt": "対話 API の初回呼出しの初期化遅延を抑えたい。Lambda で事前に実行環境を準備する機能は。",
+      "options": [
+        "プロビジョニング済み同時実行",
+        "予約済み同時実行だけ",
+        "SQS の保持期間",
+        "CloudTrail データイベント"
+      ],
+      "answer": 0,
+      "reasons": [
+        "初期化済み環境を事前に用意することで起動遅延を抑える。 初期化済み環境を事前に用意することで起動遅延を抑える。",
+        "実行枠の確保・上限設定であり事前初期化そのものではない。 初期化済み環境を事前に用意することで起動遅延を抑える。",
+        "メッセージ保持期間は関数の初期化を短縮しない。 初期化済み環境を事前に用意することで起動遅延を抑える。",
+        "監査記録は起動遅延対策ではない。 初期化済み環境を事前に用意することで起動遅延を抑える。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q125": {
+      "prompt": "決済通知で Lambda が再試行されると同じ注文が二重計上される。防ぐ設計は。",
+      "options": [
+        "再試行が絶対起きないと仮定",
+        "呼出しごとに新しい注文IDを発行",
+        "メモリだけに処理済みIDを保存",
+        "注文IDによる処理済み判定と条件付き更新"
+      ],
+      "answer": 3,
+      "reasons": [
+        "障害や配信方式により重複は発生し得る。 同一イベントの再処理でも副作用が重複しないようにする。",
+        "同じ注文と識別できなくなり二重計上を防げない。 同一イベントの再処理でも副作用が重複しないようにする。",
+        "実行環境が変わると処理済み状態を共有できない。 同一イベントの再処理でも副作用が重複しないようにする。",
+        "同一イベントの再処理でも副作用が重複しないようにする。 同一イベントの再処理でも副作用が重複しないようにする。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q126": {
+      "prompt": "モバイルアプリ向け HTTPS API を公開し、Lambda と接続して流量を制御したい。入口に使うサービスは。",
+      "options": [
+        "AWS Backup",
+        "DataSync",
+        "API Gateway",
+        "ECR"
+      ],
+      "answer": 2,
+      "reasons": [
+        "バックアップ管理であり API 公開の用途ではない。 API のエンドポイントとバックエンド連携、スロットリングを提供する。",
+        "データ転送は API の受付とは異なる。 API のエンドポイントとバックエンド連携、スロットリングを提供する。",
+        "API のエンドポイントとバックエンド連携、スロットリングを提供する。 API のエンドポイントとバックエンド連携、スロットリングを提供する。",
+        "コンテナイメージ保存用で API の管理入口ではない。 API のエンドポイントとバックエンド連携、スロットリングを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html"
+    },
+    "study-q127": {
+      "prompt": "会員制 REST API が API キーだけで本人確認している。改善として適切なのは。",
+      "options": [
+        "全利用者で一つの公開キー値を共有する",
+        "Cognito 等のオーソライザーでトークンを検証する",
+        "API キーを短くする",
+        "アクセスログを止める"
+      ],
+      "answer": 1,
+      "reasons": [
+        "共有された API キーでは個人の権限を判断できない。 API キーの使用量管理と、利用者の認証・認可を分離する。",
+        "API キーの使用量管理と、利用者の認証・認可を分離する。 API キーの使用量管理と、利用者の認証・認可を分離する。",
+        "識別子の長さを変えても認証設計は改善しない。 API キーの使用量管理と、利用者の認証・認可を分離する。",
+        "本人確認機能は追加されない。 API キーの使用量管理と、利用者の認証・認可を分離する。"
+      ],
+      "source": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html"
+    },
+    "study-q128": {
+      "prompt": "本人確認→審査→決済を順に実行し、審査エラー時は別処理へ分岐したい。順序を管理するサービスは。",
+      "options": [
+        "Step Functions",
+        "Route 53 の加重ポリシー",
+        "S3 バージョニング",
+        "ECR"
+      ],
+      "answer": 0,
+      "reasons": [
+        "状態機械の遷移・分岐・Retry・Catch で進行を明示できる。 状態機械の遷移・分岐・Retry・Catch で進行を明示できる。",
+        "DNS の配分は業務手順の制御ではない。 状態機械の遷移・分岐・Retry・Catch で進行を明示できる。",
+        "オブジェクトの版管理であり処理順を実行しない。 状態機械の遷移・分岐・Retry・Catch で進行を明示できる。",
+        "イメージの保存であり業務フローを管理しない。 状態機械の遷移・分岐・Retry・Catch で進行を明示できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html"
+    },
+    "study-q129": {
+      "prompt": "申請後に担当者の承認を最大2日待ちたい。関数を動かし続けず進行を保存するには。",
+      "options": [
+        "Lambda で2日間 sleep する",
+        "S3 キャッシュ TTL を2日にする",
+        "同期 HTTP 接続を2日間保持する",
+        "Standard ワークフローのコールバック待機"
+      ],
+      "answer": 3,
+      "reasons": [
+        "標準Lambdaの1回900秒上限を超える。 状態を保持しタスクトークンの応答を待つ構成にできる。",
+        "ワークフローの承認状態を扱わない。 状態を保持しタスクトークンの応答を待つ構成にできる。",
+        "接続切断に弱く持続的な業務状態管理にならない。 状態を保持しタスクトークンの応答を待つ構成にできる。",
+        "状態を保持しタスクトークンの応答を待つ構成にできる。 状態を保持しタスクトークンの応答を待つ構成にできる。"
+      ],
+      "source": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html"
+    },
+    "study-q130": {
+      "prompt": "在庫 API の一時的なエラーには待って再試行し、回数超過後は取消処理へ進めたい。",
+      "options": [
+        "すべての失敗を成功に変換",
+        "DNS TTL を増やす",
+        "Step Functions の Retry と Catch を設定",
+        "常に無制限で再試行する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "在庫未確保の注文を成功扱いにしてしまう。 一時エラーの再試行と回復不能時の遷移を分けて定義できる。",
+        "アプリ処理の例外遷移を制御しない。 一時エラーの再試行と回復不能時の遷移を分けて定義できる。",
+        "一時エラーの再試行と回復不能時の遷移を分けて定義できる。 一時エラーの再試行と回復不能時の遷移を分けて定義できる。",
+        "障害を終わらせられず負荷と処理滞留が増える。 一時エラーの再試行と回復不能時の遷移を分けて定義できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html"
+    },
+    "study-q131": {
+      "prompt": "【基礎復習：q001の転用】Fargate Web タスク1個がある AZ 障害で停止した。AZ 障害への耐性を高める構成は。",
+      "options": [
+        "CPU だけ倍増する",
+        "複数 AZ にタスクを配置し ALB で分散",
+        "同じ AZ にタスクを10個置くだけ",
+        "イメージのタグを増やす"
+      ],
+      "answer": 1,
+      "reasons": [
+        "単一 AZ という共通の障害要因が残る。 障害ドメインを分け、正常なタスクへトラフィックを送れる。",
+        "障害ドメインを分け、正常なタスクへトラフィックを送れる。 障害ドメインを分け、正常なタスクへトラフィックを送れる。",
+        "同じ AZ の障害に同時に影響される。 障害ドメインを分け、正常なタスクへトラフィックを送れる。",
+        "保存されたイメージ数は稼働場所の冗長性ではない。 障害ドメインを分け、正常なタスクへトラフィックを送れる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q132": {
+      "prompt": "ECS コンテナを作り直すたびアップロード済みファイルが消える。複数タスクで共有する永続ファイルシステムが必要。",
+      "options": [
+        "対応構成で EFS をタスクへマウントする",
+        "コンテナ書込み層を正本として継続利用",
+        "イメージタグを latest にする",
+        "ALB の DNS を固定する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "タスク寿命から独立した共有ファイルシステムを利用できる。 タスク寿命から独立した共有ファイルシステムを利用できる。",
+        "タスク置換で消え、別タスクとも共有されない。 タスク寿命から独立した共有ファイルシステムを利用できる。",
+        "タグは実行中の書込みを保存しない。 タスク寿命から独立した共有ファイルシステムを利用できる。",
+        "ロードバランサー名はファイルの保存先ではない。 タスク寿命から独立した共有ファイルシステムを利用できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q133": {
+      "prompt": "ECS のアプリ用タスクロールに加え、エージェントが ECR からイメージを取得してログを送信する権限が必要。この役割は。",
+      "options": [
+        "各利用者の個人アクセスキー",
+        "S3 の公開 ACL",
+        "Route 53 のホストゾーン",
+        "タスク実行ロール"
+      ],
+      "answer": 3,
+      "reasons": [
+        "ワークロード起動に個人の固定秘密を持ち込むべきではない。 タスク起動時等の ECS エージェントによる操作に使う権限。",
+        "イメージ取得やログ送信への権限を定義しない。 タスク起動時等の ECS エージェントによる操作に使う権限。",
+        "DNS ゾーンは IAM の実行権限ではない。 タスク起動時等の ECS エージェントによる操作に使う権限。",
+        "タスク起動時等の ECS エージェントによる操作に使う権限。 タスク起動時等の ECS エージェントによる操作に使う権限。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html"
+    },
+    "study-q134": {
+      "prompt": "毎時1回だけ数秒で動く小さな整形処理がある。専用 EC2 の待機時間を減らしたい。",
+      "options": [
+        "常時稼働の専用ホストへ移す",
+        "S3 の保管クラスだけ変える",
+        "スケジュール起動の Lambda 関数",
+        "専用 EC2 を最大サイズにする"
+      ],
+      "answer": 2,
+      "reasons": [
+        "短時間の処理に対して待機資源が残る。 短い断続的処理を必要時に起動し常時稼働を避けられる。",
+        "EC2 の待機計算費用をなくさない。 短い断続的処理を必要時に起動し常時稼働を避けられる。",
+        "短い断続的処理を必要時に起動し常時稼働を避けられる。 短い断続的処理を必要時に起動し常時稼働を避けられる。",
+        "未使用時間と計算資源費用が増える。 短い断続的処理を必要時に起動し常時稼働を避けられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    "study-q135": {
+      "prompt": "動画を複数解像度へ変換し、全変換が完了した時点で通知したい。フローの設計は。",
+      "options": [
+        "全変換を一つの同期呼出しで無制限待機",
+        "Step Functions の並列処理と合流後の通知",
+        "SNS で通知して完了確認を省く",
+        "DNS の重みを解像度ごとに設定"
+      ],
+      "answer": 1,
+      "reasons": [
+        "長時間処理や障害対応を柔軟に扱いにくい。 独立した変換を同時に進め、完了後に後続処理へ進める。",
+        "独立した変換を同時に進め、完了後に後続処理へ進める。 独立した変換を同時に進め、完了後に後続処理へ進める。",
+        "配信だけでは全変換の終了を待ち合わせない。 独立した変換を同時に進め、完了後に後続処理へ進める。",
+        "映像処理の実行と合流を定義しない。 独立した変換を同時に進め、完了後に後続処理へ進める。"
+      ],
+      "source": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html"
+    },
+    "study-q136": {
+      "prompt": "セールで注文受付が急増するが梱包システムは一定速度でしか処理できない。受付と処理を分離するには。",
+      "options": [
+        "間に SQS キューを置く",
+        "受付から梱包へ毎回同期接続する",
+        "DNS の TTL を長くする",
+        "梱包前の注文を捨てる"
+      ],
+      "answer": 0,
+      "reasons": [
+        "処理待ちを保持し、下流が取り出せる速度で消費できる。 処理待ちを保持し、下流が取り出せる速度で消費できる。",
+        "下流の遅延や障害が受付へ直接波及する。 処理待ちを保持し、下流が取り出せる速度で消費できる。",
+        "処理速度の差を吸収するバッファにはならない。 処理待ちを保持し、下流が取り出せる速度で消費できる。",
+        "負荷は減っても注文保持の要件を満たさない。 処理待ちを保持し、下流が取り出せる速度で消費できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q137": {
+      "prompt": "SQS ワーカーの平均処理時間は90秒。可視性タイムアウト30秒で同じ作業が並行実行される。改善は。",
+      "options": [
+        "メッセージを受け取る前に削除する",
+        "保持期間を30秒にする",
+        "ワーカーの名前を一意にする",
+        "処理に見合う可視性タイムアウトを設定・延長する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "業務処理前に消すと障害時に作業を失う。 処理中に再表示されるのを防ぎ、完了後に削除する。",
+        "処理完了までの不可視期間とは別の設定。 処理中に再表示されるのを防ぎ、完了後に削除する。",
+        "メッセージの再可視化は防げない。 処理中に再表示されるのを防ぎ、完了後に削除する。",
+        "処理中に再表示されるのを防ぎ、完了後に削除する。 処理中に再表示されるのを防ぎ、完了後に削除する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-q138": {
+      "prompt": "SQS メッセージを受信後、DB 更新成功前に削除している。ワーカー停止時に注文が失われる。必要な変更は。",
+      "options": [
+        "SQS キュー名を変更",
+        "DB 更新をログ出力だけに置換",
+        "業務処理成功を確認してからメッセージを削除",
+        "可視性タイムアウトをゼロにするだけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "削除のタイミングは変わらない。 障害時は再度処理できるよう保持し、重複は冪等性で対策する。",
+        "必要な業務更新が行われない。 障害時は再度処理できるよう保持し、重複は冪等性で対策する。",
+        "障害時は再度処理できるよう保持し、重複は冪等性で対策する。 障害時は再度処理できるよう保持し、重複は冪等性で対策する。",
+        "同時受信を増やし、先行削除による消失を直さない。 障害時は再度処理できるよう保持し、重複は冪等性で対策する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-q139": {
+      "prompt": "口座ごとの振替イベントに順序が必要だが、別口座は並列処理したい。SQS FIFO の設定は。",
+      "options": [
+        "メッセージ保持を無効化",
+        "口座IDをメッセージグループIDにする",
+        "全口座で同じグループID",
+        "Standard キューだけにする"
+      ],
+      "answer": 1,
+      "reasons": [
+        "処理順序の保証方法ではない。 同一口座内の順序を維持しつつ、異なるグループを並列に扱える。",
+        "同一口座内の順序を維持しつつ、異なるグループを並列に扱える。 同一口座内の順序を維持しつつ、異なるグループを並列に扱える。",
+        "順序は保てるが口座間の並列性を制限する。 同一口座内の順序を維持しつつ、異なるグループを並列に扱える。",
+        "順序を厳密に維持する前提を満たさない。 同一口座内の順序を維持しつつ、異なるグループを並列に扱える。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q140": {
+      "prompt": "SQS の利用件数が少なく、空の受信要求が大量にある。無駄なポーリングを減らすには。",
+      "options": [
+        "ロングポーリングを使う",
+        "短いポーリングの頻度を上げる",
+        "DLQ を削除する",
+        "すべてのメッセージを複製する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "メッセージ到着を一定時間待つことで空の受信応答を減らせる。 メッセージ到着を一定時間待つことで空の受信応答を減らせる。",
+        "空の要求がさらに増える。 メッセージ到着を一定時間待つことで空の受信応答を減らせる。",
+        "空受信頻度に直接作用しない。 メッセージ到着を一定時間待つことで空の受信応答を減らせる。",
+        "不要な作業を増やし、コスト削減にならない。 メッセージ到着を一定時間待つことで空の受信応答を減らせる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-q141": {
+      "prompt": "一つの注文を請求・配送・分析がそれぞれ必ず独立に処理したい。適切な構成は。",
+      "options": [
+        "単一 SQS を3種類の処理者で共有する",
+        "請求だけが SQS を受信し残りを省く",
+        "Route 53 で3処理者に均等分散",
+        "SNS から各処理者専用の SQS に配信する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "受信競合となり全処理者へ毎回コピーを渡す構成ではない。 各キューが注文コピーを保持し、処理者の速度や障害を分離できる。",
+        "配送と分析の処理要件を満たさない。 各キューが注文コピーを保持し、処理者の速度や障害を分離できる。",
+        "宛先分散でありメッセージ複製ではない。 各キューが注文コピーを保持し、処理者の速度や障害を分離できる。",
+        "各キューが注文コピーを保持し、処理者の速度や障害を分離できる。 各キューが注文コピーを保持し、処理者の速度や障害を分離できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q142": {
+      "prompt": "AWS サービスの状態変更と SaaS イベントを受け、イベント内容に合う対象へ送信したい。",
+      "options": [
+        "EBS スナップショット",
+        "Route 53 レコード",
+        "EventBridge のイベントバスとルール",
+        "S3 ライフサイクル"
+      ],
+      "answer": 2,
+      "reasons": [
+        "ブロックストレージのバックアップで振分けを行わない。 多様なイベントソースを内容パターンでルーティングできる。",
+        "DNS の名前解決でイベント本文を判定しない。 多様なイベントソースを内容パターンでルーティングできる。",
+        "多様なイベントソースを内容パターンでルーティングできる。 多様なイベントソースを内容パターンでルーティングできる。",
+        "保管オブジェクトの階層管理でイベントバスではない。 多様なイベントソースを内容パターンでルーティングできる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q143": {
+      "prompt": "特定の不正な注文だけ解析が失敗し再受信を繰り返す。後続処理を進めつつ調査するには。",
+      "options": [
+        "暗号化を無効にする",
+        "受信回数に基づき DLQ へ隔離する",
+        "全キューのデータを削除する",
+        "無制限に同じメッセージだけ再試行"
+      ],
+      "answer": 1,
+      "reasons": [
+        "データの形式不正を解決せず保護を弱める。 永続的に失敗するデータを分離して調査・修正できる。",
+        "永続的に失敗するデータを分離して調査・修正できる。 永続的に失敗するデータを分離して調査・修正できる。",
+        "正常な未処理注文も失う。 永続的に失敗するデータを分離して調査・修正できる。",
+        "原因が変わらず作業を浪費する。 永続的に失敗するデータを分離して調査・修正できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html"
+    },
+    "study-q144": {
+      "prompt": "バグを直したので DLQ に溜まった注文を処理し直したい。適切な運用は。",
+      "options": [
+        "内容と原因解消を確認し元の処理経路へ再投入する",
+        "DLQ にあるので処理成功とみなす",
+        "修正確認なしに無限再投入する",
+        "処理履歴をすべて消す"
+      ],
+      "answer": 0,
+      "reasons": [
+        "DLQ は隔離先であり、修正後の再処理と重複対策が必要。 DLQ は隔離先であり、修正後の再処理と重複対策が必要。",
+        "隔離は業務成功を意味しない。 DLQ は隔離先であり、修正後の再処理と重複対策が必要。",
+        "障害ループや下流の過負荷を起こし得る。 DLQ は隔離先であり、修正後の再処理と重複対策が必要。",
+        "重複判定や調査に必要な情報を失う。 DLQ は隔離先であり、修正後の再処理と重複対策が必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html"
+    },
+    "study-q145": {
+      "prompt": "ワーカーの CPU は低いが外部 API 待ちで SQS の最古メッセージが古くなっている。監視すべき指標は。",
+      "options": [
+        "DNS のレコード数だけ",
+        "バケット名の文字数",
+        "CPU が低いので異常なしと判断",
+        "キューの待ち時間と滞留数"
+      ],
+      "answer": 3,
+      "reasons": [
+        "キューの作業待ちを表さない。 処理遅延や需要と処理能力の差を直接観測できる。",
+        "処理能力の判断には関係しない。 処理遅延や需要と処理能力の差を直接観測できる。",
+        "I/O 待ちや下流制限による遅延を見落とす。 処理遅延や需要と処理能力の差を直接観測できる。",
+        "処理遅延や需要と処理能力の差を直接観測できる。 処理遅延や需要と処理能力の差を直接観測できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-q146": {
+      "prompt": "画像ファイルそのものをメッセージに含めているため転送負荷が大きい。サイズ制約への依存を減らすには。",
+      "options": [
+        "ファイル名だけ保存して本体を捨てる",
+        "DNS レコードに画像を格納する",
+        "S3 に画像を保存しメッセージにはキーを載せる",
+        "画像を複製して各メッセージを大きくする"
+      ],
+      "answer": 2,
+      "reasons": [
+        "後続処理で画像を取得できない。 メッセージを小さな参照にし、本体は適切なストレージで管理できる。",
+        "大きな業務データの保存先として適さない。 メッセージを小さな参照にし、本体は適切なストレージで管理できる。",
+        "メッセージを小さな参照にし、本体は適切なストレージで管理できる。 メッセージを小さな参照にし、本体は適切なストレージで管理できる。",
+        "サイズと負荷の問題が悪化する。 メッセージを小さな参照にし、本体は適切なストレージで管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q147": {
+      "prompt": "Standard SQS のメッセージがまれに再配信される。業務処理で採るべき対策は。",
+      "options": [
+        "キュー名を毎日変更する",
+        "一意な処理IDを永続記録し重複更新を避ける",
+        "配信が一度だけと仮定する",
+        "毎回受信IDだけで新規注文を作る"
+      ],
+      "answer": 1,
+      "reasons": [
+        "重複配信の特性は変わらない。 少なくとも1回の配信を考慮した冪等処理にする。",
+        "少なくとも1回の配信を考慮した冪等処理にする。 少なくとも1回の配信を考慮した冪等処理にする。",
+        "Standard キューでは重複が発生し得る。 少なくとも1回の配信を考慮した冪等処理にする。",
+        "同じ業務イベントの再配信を別注文にしてしまう。 少なくとも1回の配信を考慮した冪等処理にする。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-q148": {
+      "prompt": "SNS の購読者が自分に関係する注文種別だけを受信したい。送信者を購読者ごとの分岐コードで複雑にしたくない。",
+      "options": [
+        "SNS のサブスクリプションフィルターポリシー",
+        "全購読を解除する",
+        "DNS の位置情報ルーティング",
+        "DLQ の保持時間だけ増やす"
+      ],
+      "answer": 0,
+      "reasons": [
+        "メッセージ属性や本文の条件で購読者ごとの配信を絞れる。 メッセージ属性や本文の条件で購読者ごとの配信を絞れる。",
+        "必要な注文も受け取れなくなる。 メッセージ属性や本文の条件で購読者ごとの配信を絞れる。",
+        "通知内容の選別には作用しない。 メッセージ属性や本文の条件で購読者ごとの配信を絞れる。",
+        "正常配信の購読条件を変えない。 メッセージ属性や本文の条件で購読者ごとの配信を絞れる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q149": {
+      "prompt": "分析担当が数時間停止しても請求処理を止めず、分析用イベントを後で再開したい。適切な構成は。",
+      "options": [
+        "全処理を一つの同期 HTTP リクエストにまとめる",
+        "分析が停止したら請求キューを消す",
+        "CloudFront に注文本文をキャッシュ",
+        "SNS の配信先を請求用・分析用の独立 SQS にする"
+      ],
+      "answer": 3,
+      "reasons": [
+        "分析停止が全処理の応答に波及する。 分析用の滞留を独立キューで吸収し請求を継続できる。",
+        "正常業務まで停止・消失させる。 分析用の滞留を独立キューで吸収し請求を継続できる。",
+        "作業保持と処理分離を提供しない。 分析用の滞留を独立キューで吸収し請求を継続できる。",
+        "分析用の滞留を独立キューで吸収し請求を継続できる。 分析用の滞留を独立キューで吸収し請求を継続できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html"
+    },
+    "study-q150": {
+      "prompt": "キュー滞留を解消するためワーカーを急増させた結果、外部 API のレート上限に達した。必要な調整は。",
+      "options": [
+        "並列数をさらに無制限に増やす",
+        "すべて成功と記録する",
+        "外部制限に合わせた並列上限とバックオフを設定",
+        "上限エラーでも無休止で再試行する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "レート制限が原因なので悪化する。 キューをバッファとして使い、下流の処理可能量に合わせて流す。",
+        "未完了業務を見失う。 キューをバッファとして使い、下流の処理可能量に合わせて流す。",
+        "キューをバッファとして使い、下流の処理可能量に合わせて流す。 キューをバッファとして使い、下流の処理可能量に合わせて流す。",
+        "下流をさらに圧迫して回復を妨げる。 キューをバッファとして使い、下流の処理可能量に合わせて流す。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-q151": {
+      "prompt": "保存データに使う暗号鍵の利用権限を管理し、暗号操作を監査したい。適切なサービスは。",
+      "options": [
+        "Secrets Manager",
+        "AWS KMS",
+        "ACM",
+        "CloudTrailだけ"
+      ],
+      "answer": 1,
+      "reasons": [
+        "DBパスワード等の秘密情報を管理するが汎用暗号操作の鍵管理とは異なる。 暗号鍵の管理とアクセス制御を行い、API 操作を CloudTrail で監査できる。",
+        "暗号鍵の管理とアクセス制御を行い、API 操作を CloudTrail で監査できる。 暗号鍵の管理とアクセス制御を行い、API 操作を CloudTrail で監査できる。",
+        "TLS証明書の管理であり保存データの汎用暗号鍵管理とは対象が異なる。 暗号鍵の管理とアクセス制御を行い、API 操作を CloudTrail で監査できる。",
+        "暗号操作を記録できるが鍵を作成して利用権限を管理する機能は別に必要。 暗号鍵の管理とアクセス制御を行い、API 操作を CloudTrail で監査できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+    },
+    "study-q152": {
+      "prompt": "S3 オブジェクトの読取り権限があるのに SSE-KMS 暗号化データを読めない。確認すべき追加権限は。",
+      "options": [
+        "対応 KMS 鍵の復号権限とキーポリシー",
+        "Route 53 のレコード編集権限",
+        "EC2 起動権限",
+        "CloudWatch ダッシュボード編集権限"
+      ],
+      "answer": 0,
+      "reasons": [
+        "オブジェクトへのアクセスと鍵を利用できることの両方が必要。 オブジェクトへのアクセスと鍵を利用できることの両方が必要。",
+        "DNS を編集しても KMS 復号は許可されない。 オブジェクトへのアクセスと鍵を利用できることの両方が必要。",
+        "計算資源の起動と保存データ復号は別の権限。 オブジェクトへのアクセスと鍵を利用できることの両方が必要。",
+        "観測画面を変更しても暗号鍵の利用は許可されない。 オブジェクトへのアクセスと鍵を利用できることの両方が必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+    },
+    "study-q153": {
+      "prompt": "アプリに埋め込んだ RDS パスワードを集中管理し、定期更新も組み込みたい。",
+      "options": [
+        "公開 Git リポジトリに移す",
+        "EC2 の Name タグに格納",
+        "CloudFront キャッシュに保存",
+        "Secrets Manager に格納しロールで取得する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "秘密の公開となり安全性が低下する。 秘密値をコードから分離し、対応するローテーション処理を設定できる。",
+        "タグは秘密保管と更新のための専用機構ではない。 秘密値をコードから分離し、対応するローテーション処理を設定できる。",
+        "認証情報の保管・更新サービスではない。 秘密値をコードから分離し、対応するローテーション処理を設定できる。",
+        "秘密値をコードから分離し、対応するローテーション処理を設定できる。 秘密値をコードから分離し、対応するローテーション処理を設定できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"
+    },
+    "study-q154": {
+      "prompt": "ALB で HTTPS を終端したい。AWS のマネージド証明書を取得・管理するサービスは。",
+      "options": [
+        "AWS Config",
+        "ECR",
+        "ACM",
+        "Macie"
+      ],
+      "answer": 2,
+      "reasons": [
+        "設定の記録・評価で証明書の発行主体ではない。 TLS 証明書を対応サービスに設定できる。",
+        "イメージレジストリで TLS 証明書管理ではない。 TLS 証明書を対応サービスに設定できる。",
+        "TLS 証明書を対応サービスに設定できる。 TLS 証明書を対応サービスに設定できる。",
+        "機密データの検出で証明書発行ではない。 TLS 証明書を対応サービスに設定できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q155": {
+      "prompt": "Web フォームに SQL インジェクションのリクエストが来ている。ALB 前段で HTTP 内容を検査したい。",
+      "options": [
+        "S3 ライフサイクル",
+        "AWS WAF のルールを設定",
+        "セキュリティグループで SQL 文字列を指定",
+        "CloudTrail の証跡名を変更"
+      ],
+      "answer": 1,
+      "reasons": [
+        "ストレージ階層管理で Web 攻撃対策ではない。 HTTP の内容に基づく検査・遮断を行える。",
+        "HTTP の内容に基づく検査・遮断を行える。 HTTP の内容に基づく検査・遮断を行える。",
+        "セキュリティグループは HTTP 本文の文字列を解析しない。 HTTP の内容に基づく検査・遮断を行える。",
+        "監査記録はリクエスト内容を遮断しない。 HTTP の内容に基づく検査・遮断を行える。"
+      ],
+      "source": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html"
+    },
+    "study-q156": {
+      "prompt": "特定送信元からログイン API へ大量の HTTP 要求が来る。時間当たりの要求に基づき制限したい。",
+      "options": [
+        "WAF のレートベースルール",
+        "RDS のバックアップ保持期間を変更",
+        "S3 の CORS を削除",
+        "CloudTrail のログを圧縮"
+      ],
+      "answer": 0,
+      "reasons": [
+        "リクエスト量の条件を評価して Web 通信を制御できる。 リクエスト量の条件を評価して Web 通信を制御できる。",
+        "ログイン入口への大量要求を抑えない。 リクエスト量の条件を評価して Web 通信を制御できる。",
+        "ブラウザー制御は直接送られる HTTP 洪水を防ぐ機構ではない。 リクエスト量の条件を評価して Web 通信を制御できる。",
+        "保存量は変わるが入口の要求制御にはならない。 リクエスト量の条件を評価して Web 通信を制御できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html"
+    },
+    "study-q157": {
+      "prompt": "インターネット公開サービスが DDoS 攻撃対策を検討している。AWS の DDoS 保護に対応する名称は。",
+      "options": [
+        "AWS Glue",
+        "AWS DMS",
+        "AWS DataSync",
+        "AWS Shield"
+      ],
+      "answer": 3,
+      "reasons": [
+        "データ統合とカタログのサービス。 分散サービス拒否攻撃への保護を提供する。",
+        "データベース移行のサービス。 分散サービス拒否攻撃への保護を提供する。",
+        "ファイルやオブジェクト転送のサービス。 分散サービス拒否攻撃への保護を提供する。",
+        "分散サービス拒否攻撃への保護を提供する。 分散サービス拒否攻撃への保護を提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q158": {
+      "prompt": "AWS 環境で認証情報の不審な利用や脅威の兆候を継続検出したい。",
+      "options": [
+        "ECR の保存容量を増やす",
+        "Route 53 加重ルーティング",
+        "GuardDuty",
+        "Athena だけで全自動の脅威検出を期待"
+      ],
+      "answer": 2,
+      "reasons": [
+        "不審な API 活動の検知にならない。 対応するログやテレメトリを分析し脅威の検出結果を出す。",
+        "DNS 配分は脅威判定ではない。 対応するログやテレメトリを分析し脅威の検出結果を出す。",
+        "対応するログやテレメトリを分析し脅威の検出結果を出す。 対応するログやテレメトリを分析し脅威の検出結果を出す。",
+        "SQL 分析エンジン自体に同等の管理済み脅威検知を期待できない。 対応するログやテレメトリを分析し脅威の検出結果を出す。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q159": {
+      "prompt": "EC2 やコンテナイメージの既知ソフトウェア脆弱性を継続的に調査したい。",
+      "options": [
+        "Amazon SNS",
+        "Amazon Inspector",
+        "Amazon Macie",
+        "AWS DMS"
+      ],
+      "answer": 1,
+      "reasons": [
+        "通知先にはなるが脆弱性を自ら調査しない。 対応するワークロードの脆弱性などを評価する。",
+        "対応するワークロードの脆弱性などを評価する。 対応するワークロードの脆弱性などを評価する。",
+        "主に S3 の機密データ検出を目的とする。 対応するワークロードの脆弱性などを評価する。",
+        "DB データの移行であり脆弱性検査ではない。 対応するワークロードの脆弱性などを評価する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q160": {
+      "prompt": "大量の S3 オブジェクトに個人情報が含まれるか分類・検出したい。",
+      "options": [
+        "Amazon Macie",
+        "Amazon Inspector",
+        "AWS Shield",
+        "Route 53"
+      ],
+      "answer": 0,
+      "reasons": [
+        "S3 内の機密データを識別する用途に適する。 S3 内の機密データを識別する用途に適する。",
+        "OS パッケージなどの脆弱性評価で個人情報分類とは異なる。 S3 内の機密データを識別する用途に適する。",
+        "DDoS 防御で保存文書の内容分類をしない。 S3 内の機密データを識別する用途に適する。",
+        "DNS はオブジェクト本文を検査しない。 S3 内の機密データを識別する用途に適する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q161": {
+      "prompt": "GuardDuty の検出を有効にした。検出された不審なインスタンスを自動隔離したい。正しい理解は。",
+      "options": [
+        "有効化すれば全脅威を必ず完全排除する",
+        "検出結果を無視して停止する",
+        "KMS 鍵を全削除する",
+        "検出結果を契機に別途是正処理を構成する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "検知と遮断・復旧は別で、完全防御の保証でもない。 検知サービスの有効化だけであらゆる隔離が自動実行されるわけではない。",
+        "対応手順がないと脅威への対処につながらない。 検知サービスの有効化だけであらゆる隔離が自動実行されるわけではない。",
+        "業務データの復号を失うなど広範な損害を招く。 検知サービスの有効化だけであらゆる隔離が自動実行されるわけではない。",
+        "検知サービスの有効化だけであらゆる隔離が自動実行されるわけではない。 検知サービスの有効化だけであらゆる隔離が自動実行されるわけではない。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q162": {
+      "prompt": "セキュリティグループを誰が何時変更したかを調べたい。まず参照するサービスは。",
+      "options": [
+        "ECR のイメージ一覧",
+        "Route 53 の TTL",
+        "CloudTrail",
+        "CloudWatch の CPU メトリクスだけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "ネットワーク設定変更の履歴ではない。 AWS API の呼出し主体・時刻・操作などを監査できる。",
+        "名前解決の期限は API 監査記録ではない。 AWS API の呼出し主体・時刻・操作などを監査できる。",
+        "AWS API の呼出し主体・時刻・操作などを監査できる。 AWS API の呼出し主体・時刻・操作などを監査できる。",
+        "性能値から設定変更の主体は特定できない。 AWS API の呼出し主体・時刻・操作などを監査できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+    },
+    "study-q163": {
+      "prompt": "過去のセキュリティグループ設定と、会社の構成ルールへの準拠状態を確認したい。",
+      "options": [
+        "API Gateway の API キー",
+        "AWS Config",
+        "Data Firehose",
+        "S3 Glacier のみ"
+      ],
+      "answer": 1,
+      "reasons": [
+        "設定履歴の管理機構ではない。 構成履歴とルール評価を記録できる。",
+        "構成履歴とルール評価を記録できる。 構成履歴とルール評価を記録できる。",
+        "データ配信は構成の準拠評価そのものではない。 構成履歴とルール評価を記録できる。",
+        "保管階層に移すだけで構成評価は行われない。 構成履歴とルール評価を記録できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+    },
+    "study-q164": {
+      "prompt": "EC2 のメモリ使用率が監視画面にない。OS のメモリ指標を収集する一般的な方法は。",
+      "options": [
+        "CloudWatch Agent 等で OS 指標を送る",
+        "CloudTrail 管理イベントを増やすだけ",
+        "DNS レコードを作る",
+        "EBS 暗号化を解除"
+      ],
+      "answer": 0,
+      "reasons": [
+        "ゲスト OS 内のメモリ指標は追加収集を構成する。 ゲスト OS 内のメモリ指標は追加収集を構成する。",
+        "API 操作の監査ではメモリ時系列を得られない。 ゲスト OS 内のメモリ指標は追加収集を構成する。",
+        "OS 内の計測にはならない。 ゲスト OS 内のメモリ指標は追加収集を構成する。",
+        "監視指標が追加されず保護だけ弱まる。 ゲスト OS 内のメモリ指標は追加収集を構成する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-q165": {
+      "prompt": "ALB の 5xx エラー増加を運用担当へ通知したい。どの組合せが適切か。",
+      "options": [
+        "S3 ライフサイクルから ECR",
+        "DNS の MX レコードから KMS",
+        "AWS Backup だけ",
+        "CloudWatch アラームから SNS 通知"
+      ],
+      "answer": 3,
+      "reasons": [
+        "エラー率の監視・通知を行う構成ではない。 メトリクスのしきい値評価と通知を連携できる。",
+        "メール用 DNS と暗号鍵だけではエラーを監視できない。 メトリクスのしきい値評価と通知を連携できる。",
+        "バックアップ管理は ALB エラー率の通知ではない。 メトリクスのしきい値評価と通知を連携できる。",
+        "メトリクスのしきい値評価と通知を連携できる。 メトリクスのしきい値評価と通知を連携できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-q166": {
+      "prompt": "監査担当は S3 オブジェクトの GetObject 操作も記録したい。通常の管理イベント記録に加えて必要なのは。",
+      "options": [
+        "TTL を延長",
+        "S3 を公開",
+        "対象 S3 のデータイベントを有効化",
+        "バケットのタグを付けるだけ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "DNS やキャッシュの期限で監査イベントは追加されない。 オブジェクトレベル操作の記録はデータイベントとして構成する。",
+        "ログ収集とは無関係でアクセス制限を弱める。 オブジェクトレベル操作の記録はデータイベントとして構成する。",
+        "オブジェクトレベル操作の記録はデータイベントとして構成する。 オブジェクトレベル操作の記録はデータイベントとして構成する。",
+        "タグは操作ログを生成しない。 オブジェクトレベル操作の記録はデータイベントとして構成する。"
+      ],
+      "source": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+    },
+    "study-q167": {
+      "prompt": "KMS 鍵を誤って無効化した後、暗号化データをアプリが読めなくなった。考えられる理由は。",
+      "options": [
+        "S3 の耐久性がゼロになる",
+        "鍵が使えず復号処理が失敗している",
+        "DNS の A レコードが自動削除される",
+        "すべての暗号化データが平文へ変換される"
+      ],
+      "answer": 1,
+      "reasons": [
+        "データ保存と復号可否は別の観点。 暗号化データへの権限だけでなく、有効な鍵を使える必要がある。",
+        "暗号化データへの権限だけでなく、有効な鍵を使える必要がある。 暗号化データへの権限だけでなく、有効な鍵を使える必要がある。",
+        "KMS の無効化が DNS を自動削除するわけではない。 暗号化データへの権限だけでなく、有効な鍵を使える必要がある。",
+        "鍵を無効化しても平文に戻らない。 暗号化データへの権限だけでなく、有効な鍵を使える必要がある。"
+      ],
+      "source": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+    },
+    "study-q168": {
+      "prompt": "パスワード更新後もアプリが古い値を無期限にメモリ保持し接続失敗する。必要な変更は。",
+      "options": [
+        "秘密の再取得・キャッシュ更新を設計する",
+        "秘密管理をやめ全員に同じ値を配る",
+        "証明書のドメイン名を変える",
+        "メモリを増やすだけ"
+      ],
+      "answer": 0,
+      "reasons": [
+        "ローテーションと利用側の取得・再接続を整合させる必要がある。 ローテーションと利用側の取得・再接続を整合させる必要がある。",
+        "更新とアクセス制御の問題を悪化させる。 ローテーションと利用側の取得・再接続を整合させる必要がある。",
+        "DB パスワードの保持状態を解決しない。 ローテーションと利用側の取得・再接続を整合させる必要がある。",
+        "古い値の寿命は変わらない。 ローテーションと利用側の取得・再接続を整合させる必要がある。"
+      ],
+      "source": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"
+    },
+    "study-q169": {
+      "prompt": "S3 は保存時暗号化済みだが、クライアントとの通信も暗号化したい。必要な設計は。",
+      "options": [
+        "保存時暗号化だけで HTTP も暗号化されると考える",
+        "バケット名を推測困難にするだけ",
+        "CloudWatch のログ期間を延ばす",
+        "HTTPS/TLS を利用し安全でない通信を制限する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "保存データの暗号化は通信経路を暗号化しない。 保存時と通信中の暗号化は別の保護で、両方を設計する。",
+        "名前の秘匿は通信内容の暗号化ではない。 保存時と通信中の暗号化は別の保護で、両方を設計する。",
+        "通信プロトコルは変わらない。 保存時と通信中の暗号化は別の保護で、両方を設計する。",
+        "保存時と通信中の暗号化は別の保護で、両方を設計する。 保存時と通信中の暗号化は別の保護で、両方を設計する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html"
+    },
+    "study-q170": {
+      "prompt": "Config で「公開禁止」ルールに違反したバケットを見つけた。評価機能だけを有効にした場合の理解は。",
+      "options": [
+        "準拠なら暗号鍵の権限確認は不要",
+        "履歴があるので今の公開状態は安全",
+        "違反検出と是正実行は別で、是正を追加構成する",
+        "全ルールが自動で設定を元に戻す"
+      ],
+      "answer": 2,
+      "reasons": [
+        "個々のルールの準拠はあらゆる安全性を保証しない。 ルール評価が必ず自動修復するとは限らない。",
+        "過去を記録しても現在の公開を遮断しない。 ルール評価が必ず自動修復するとは限らない。",
+        "ルール評価が必ず自動修復するとは限らない。 ルール評価が必ず自動修復するとは限らない。",
+        "是正の設定がない状態を過大評価している。 ルール評価が必ず自動修復するとは限らない。"
+      ],
+      "source": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html"
+    },
+    "study-q171": {
+      "prompt": "業務要件は「障害から2時間以内にサービスを再開」。この指標は。",
+      "options": [
+        "IOPS",
+        "RTO",
+        "RPO",
+        "TTL"
+      ],
+      "answer": 1,
+      "reasons": [
+        "単位時間当たりの I/O 操作数。 復旧までに許容する停止時間の目標。",
+        "復旧までに許容する停止時間の目標。 復旧までに許容する停止時間の目標。",
+        "どれだけ古い時点までのデータ損失を許すかの目標。 復旧までに許容する停止時間の目標。",
+        "キャッシュの有効期間。 復旧までに許容する停止時間の目標。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q172": {
+      "prompt": "取引システムは最大5分前までのデータ損失を許容する。この5分が表すのは。",
+      "options": [
+        "RPO",
+        "RTO",
+        "CPU 使用率",
+        "キャッシュヒット率"
+      ],
+      "answer": 0,
+      "reasons": [
+        "許容するデータ損失の時間幅。 許容するデータ損失の時間幅。",
+        "復旧に要する時間の目標でありデータの古さではない。 許容するデータ損失の時間幅。",
+        "計算負荷の割合であり復旧点ではない。 許容するデータ損失の時間幅。",
+        "キャッシュで応答できた割合。 許容するデータ損失の時間幅。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q173": {
+      "prompt": "小規模社内システムは数時間の復旧を許容する。平常時の DR 費用を最小限にする基本方式は。",
+      "options": [
+        "複数リージョンで常に全量稼働",
+        "最大容量のウォームスタンバイ",
+        "バックアップなしの単一サーバー",
+        "バックアップと復元"
+      ],
+      "answer": 3,
+      "reasons": [
+        "短い復旧に有利でも通常費用が大きい。 常時アプリを稼働させず、障害時に復元する代わり復旧時間を要する。",
+        "待機資源の稼働費用が必要。 常時アプリを稼働させず、障害時に復元する代わり復旧時間を要する。",
+        "費用は低くても復旧能力を満たさない。 常時アプリを稼働させず、障害時に復元する代わり復旧時間を要する。",
+        "常時アプリを稼働させず、障害時に復元する代わり復旧時間を要する。 常時アプリを稼働させず、障害時に復元する代わり復旧時間を要する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q174": {
+      "prompt": "DR リージョンではデータベースの同期だけ維持し、アプリサーバーは障害時に起動する。この方式は。",
+      "options": [
+        "アクティブ／アクティブ",
+        "DNS キャッシュ",
+        "パイロットライト",
+        "ウォームスタンバイ"
+      ],
+      "answer": 2,
+      "reasons": [
+        "両拠点で平常時から処理していない。 中核を維持し、処理開始時に残りの構成を立ち上げる。",
+        "復旧インフラの準備方式ではない。 中核を維持し、処理開始時に残りの構成を立ち上げる。",
+        "中核を維持し、処理開始時に残りの構成を立ち上げる。 中核を維持し、処理開始時に残りの構成を立ち上げる。",
+        "縮小した全機能が稼働している状態とは異なる。 中核を維持し、処理開始時に残りの構成を立ち上げる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q175": {
+      "prompt": "別リージョンに縮小した全システムが常時稼働し、障害時は容量を増やす。適切な名称は。",
+      "options": [
+        "単一 AZ",
+        "ウォームスタンバイ",
+        "バックアップのみ",
+        "パイロットライト"
+      ],
+      "answer": 1,
+      "reasons": [
+        "拠点数・復旧方針を表す名称ではない。 全機能を小さい規模で動かし、復旧時に拡張する。",
+        "全機能を小さい規模で動かし、復旧時に拡張する。 全機能を小さい規模で動かし、復旧時に拡張する。",
+        "既に稼働する全体構成があるのでバックアップだけではない。 全機能を小さい規模で動かし、復旧時に拡張する。",
+        "中核のみを維持し残りを起動する方式との違いがある。 全機能を小さい規模で動かし、復旧時に拡張する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q176": {
+      "prompt": "本番 DB の誤更新が待機レプリカにも反映された。誤更新前へ戻すため追加すべき備えは。",
+      "options": [
+        "時点復元できるバックアップ",
+        "レプリカへの同期速度だけを上げる",
+        "DNS を変更するだけ",
+        "キャッシュを永久保存する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "複製は誤更新も伝えるため、以前の状態を保持する必要がある。 複製は誤更新も伝えるため、以前の状態を保持する必要がある。",
+        "誤更新がさらに速く複製されるだけ。 複製は誤更新も伝えるため、以前の状態を保持する必要がある。",
+        "待機系も壊れていればデータは戻らない。 複製は誤更新も伝えるため、以前の状態を保持する必要がある。",
+        "正確な全データの復元を保証できない。 複製は誤更新も伝えるため、以前の状態を保持する必要がある。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q177": {
+      "prompt": "バックアップ成功の通知は毎日届く。RTO 内に復旧できるか確認する最も確実な方法は。",
+      "options": [
+        "通知件数だけ数える",
+        "ファイル名を長くする",
+        "本番のバックアップを消して空き容量を増やす",
+        "実際に復元し起動・整合性・時間を検証する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "データが使えることや起動時間を確認できない。 取得成功だけでは復旧の依存関係や所要時間を保証しない。",
+        "復元可能性と無関係。 取得成功だけでは復旧の依存関係や所要時間を保証しない。",
+        "復旧手段を失う。 取得成功だけでは復旧の依存関係や所要時間を保証しない。",
+        "取得成功だけでは復旧の依存関係や所要時間を保証しない。 取得成功だけでは復旧の依存関係や所要時間を保証しない。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q178": {
+      "prompt": "複数サービスのバックアップ頻度と保持期間を統一して管理したい。対応リソースを集約管理するサービスは。",
+      "options": [
+        "API Gateway",
+        "Route 53",
+        "AWS Backup",
+        "ECR"
+      ],
+      "answer": 2,
+      "reasons": [
+        "API 公開のサービスでバックアップ管理ではない。 対応サービスのバックアップポリシーやジョブを集中管理できる。",
+        "名前解決はバックアップ方針を管理しない。 対応サービスのバックアップポリシーやジョブを集中管理できる。",
+        "対応サービスのバックアップポリシーやジョブを集中管理できる。 対応サービスのバックアップポリシーやジョブを集中管理できる。",
+        "イメージ保管は複数サービスのバックアップ統制ではない。 対応サービスのバックアップポリシーやジョブを集中管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q179": {
+      "prompt": "オンプレミス DB の稼働を続けながら初期データと変更差分を AWS 側へ送り、切替停止を短くしたい。",
+      "options": [
+        "DNS TTL を増やすだけ",
+        "DMS の初期ロードと CDC",
+        "一度だけ CSV をコピーし同期を行わない",
+        "CloudFront を DB の前に置く"
+      ],
+      "answer": 1,
+      "reasons": [
+        "データを移行しない。 初期移行後も変更を追随させ、切替時の差分を抑えられる。",
+        "初期移行後も変更を追随させ、切替時の差分を抑えられる。 初期移行後も変更を追随させ、切替時の差分を抑えられる。",
+        "コピー後の更新が移行先へ反映されない。 初期移行後も変更を追随させ、切替時の差分を抑えられる。",
+        "DB トランザクション移行の仕組みではない。 初期移行後も変更を追随させ、切替時の差分を抑えられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"
+    },
+    "study-q180": {
+      "prompt": "Oracle から PostgreSQL へ移行する。DMS でデータを転送できればストアドプロシージャも無変更で動くか。",
+      "options": [
+        "別途スキーマ・SQL・アプリ互換性を検証する",
+        "常に全機能が自動互換になる",
+        "全テーブルを公開すれば互換になる",
+        "DNS の名前を同じにすれば変換不要"
+      ],
+      "answer": 0,
+      "reasons": [
+        "データ転送と異種エンジンの機能変換は同じ作業ではない。 データ転送と異種エンジンの機能変換は同じ作業ではない。",
+        "エンジン固有機能や型の差がある。 データ転送と異種エンジンの機能変換は同じ作業ではない。",
+        "アクセス権では SQL 方言を解決できない。 データ転送と異種エンジンの機能変換は同じ作業ではない。",
+        "接続名と DB 機能の互換性は別。 データ転送と異種エンジンの機能変換は同じ作業ではない。"
+      ],
+      "source": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html"
+    },
+    "study-q181": {
+      "prompt": "NAS の大量ファイルを EFS へオンライン転送し、転送処理の管理負荷を減らしたい。",
+      "options": [
+        "DMS の CDC",
+        "Route 53",
+        "Secrets Manager",
+        "AWS DataSync"
+      ],
+      "answer": 3,
+      "reasons": [
+        "DB の変更同期であり一般的な NAS ファイル転送ではない。 対応ストレージ間のファイル転送と検証を管理できる。",
+        "DNS の宛先を管理するがファイルを運ばない。 対応ストレージ間のファイル転送と検証を管理できる。",
+        "認証情報の管理でファイル転送基盤ではない。 対応ストレージ間のファイル転送と検証を管理できる。",
+        "対応ストレージ間のファイル転送と検証を管理できる。 対応ストレージ間のファイル転送と検証を管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html"
+    },
+    "study-q182": {
+      "prompt": "既存オンプレミスのサーバーアプリを大きく改修せず EC2 へリホストしたい。適切な移行サービスは。",
+      "options": [
+        "Athena",
+        "CloudFront",
+        "Application Migration Service",
+        "Macie"
+      ],
+      "answer": 2,
+      "reasons": [
+        "SQL 分析でアプリサーバーを複製しない。 サーバーのリホスト移行を支援する。",
+        "配信キャッシュはサーバー移行ツールではない。 サーバーのリホスト移行を支援する。",
+        "サーバーのリホスト移行を支援する。 サーバーのリホスト移行を支援する。",
+        "S3 の機密データ検出でサーバー移行ではない。 サーバーのリホスト移行を支援する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q183": {
+      "prompt": "オンプレミスのサーバーを継続的に複製し、災害時に AWS で復旧させたい。",
+      "options": [
+        "API Gateway",
+        "Elastic Disaster Recovery",
+        "CloudTrail",
+        "WAF"
+      ],
+      "answer": 1,
+      "reasons": [
+        "API 入口で災害復旧の複製エンジンではない。 ブロックレベルの継続複製と復旧起動を支援する。",
+        "ブロックレベルの継続複製と復旧起動を支援する。 ブロックレベルの継続複製と復旧起動を支援する。",
+        "API 監査ログはサーバーの復旧コピーではない。 ブロックレベルの継続複製と復旧起動を支援する。",
+        "Web 要求検査でサーバー複製をしない。 ブロックレベルの継続複製と復旧起動を支援する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q184": {
+      "prompt": "リージョン障害へ備えて別リージョンへデータを複製したが、アプリ設定とインフラ手順が残っていない。必要な追加作業は。",
+      "options": [
+        "インフラ定義・アプリ・権限を再現して復旧テストする",
+        "データがあるので必ず即時起動できると判断",
+        "複製先の名前だけ変える",
+        "すべての権限を公開する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "データだけでなく、起動する環境と依存関係が復旧に必要。 データだけでなく、起動する環境と依存関係が復旧に必要。",
+        "設定や接続・権限がなければ正常稼働しない。 データだけでなく、起動する環境と依存関係が復旧に必要。",
+        "実行環境を再現しない。 データだけでなく、起動する環境と依存関係が復旧に必要。",
+        "安全な復旧ではなく不適切なアクセスを招く。 データだけでなく、起動する環境と依存関係が復旧に必要。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q185": {
+      "prompt": "管理者アカウント侵害で本番と同じ権限範囲のバックアップも削除されることを懸念している。改善は。",
+      "options": [
+        "本番管理者に全バックアップの削除権限を追加",
+        "同じディスクにバックアップ名だけ別に保存",
+        "バックアップ取得をやめる",
+        "別アカウント等へ保管し削除権限を分離する"
+      ],
+      "answer": 3,
+      "reasons": [
+        "侵害時の影響を拡大する。 侵害された本番権限の影響範囲から復旧コピーを隔離する。",
+        "障害・侵害の共通要因を分離できない。 侵害された本番権限の影響範囲から復旧コピーを隔離する。",
+        "復旧能力がなくなる。 侵害された本番権限の影響範囲から復旧コピーを隔離する。",
+        "侵害された本番権限の影響範囲から復旧コピーを隔離する。 侵害された本番権限の影響範囲から復旧コピーを隔離する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-q186": {
+      "prompt": "アプリの応答が遅い。Web の CPU は低く DB の読取り待ちが長い。最初に行うべきことは。",
+      "options": [
+        "DNS レコードを増やす",
+        "すべてのログを停止する",
+        "DB クエリと読取り負荷を調査して改善する",
+        "Web サーバーだけ最大サイズにする"
+      ],
+      "answer": 2,
+      "reasons": [
+        "DB の読取り待ちを直接減らさない。 観測されたボトルネックに対して索引・キャッシュ等を検討する。",
+        "原因観測が難しくなり対策根拠を失う。 観測されたボトルネックに対して索引・キャッシュ等を検討する。",
+        "観測されたボトルネックに対して索引・キャッシュ等を検討する。 観測されたボトルネックに対して索引・キャッシュ等を検討する。",
+        "DB 待ちが主因なら効果が限定的。 観測されたボトルネックに対して索引・キャッシュ等を検討する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+    },
+    "study-q187": {
+      "prompt": "商品カタログは繰り返し読まれ、数分の古さを許容できる。DB の負荷削減に適切なのは。",
+      "options": [
+        "キャッシュを無期限にして更新を反映しない",
+        "ElastiCache に TTL 付きでキャッシュする",
+        "同じ問合せを必ず2回 DB に送る",
+        "全読取りを同期書込みにする"
+      ],
+      "answer": 1,
+      "reasons": [
+        "数分という許容範囲を超えて古い値が残る。 再利用される読取りを低遅延で返し、鮮度要件を TTL 等で管理できる。",
+        "再利用される読取りを低遅延で返し、鮮度要件を TTL 等で管理できる。 再利用される読取りを低遅延で返し、鮮度要件を TTL 等で管理できる。",
+        "DB の負荷が増える。 再利用される読取りを低遅延で返し、鮮度要件を TTL 等で管理できる。",
+        "業務要件に合わず処理負荷も増える。 再利用される読取りを低遅延で返し、鮮度要件を TTL 等で管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
+    },
+    "study-q188": {
+      "prompt": "アプリがキャッシュを正本として扱い、消失すると注文が復元できない。必要な変更は。",
+      "options": [
+        "永続 DB を正本にしキャッシュは再生成可能にする",
+        "TTL を長くするだけ",
+        "キャッシュ名を変更",
+        "キャッシュミスを成功として返す"
+      ],
+      "answer": 0,
+      "reasons": [
+        "キャッシュの寿命や削除に業務データの耐久性を依存させない。 キャッシュの寿命や削除に業務データの耐久性を依存させない。",
+        "永久保存やバックアップを保証しない。 キャッシュの寿命や削除に業務データの耐久性を依存させない。",
+        "データ保持の性質は変わらない。 キャッシュの寿命や削除に業務データの耐久性を依存させない。",
+        "注文データを復元できないまま。 キャッシュの寿命や削除に業務データの耐久性を依存させない。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html"
+    },
+    "study-q189": {
+      "prompt": "適正化後も毎時一定のコンピューティング利用が続く。利用額のコミットメントで割引を受ける方式は。",
+      "options": [
+        "Spot を全時間保証とみなす",
+        "S3 Versioning",
+        "CloudTrail",
+        "Savings Plans"
+      ],
+      "answer": 3,
+      "reasons": [
+        "Spot は中断され得て継続容量の保証ではない。 対象サービスの一定額利用を期間中コミットして割引を得る。",
+        "版管理は計算資源の購入割引ではない。 対象サービスの一定額利用を期間中コミットして割引を得る。",
+        "監査サービスで利用額コミットメントではない。 対象サービスの一定額利用を期間中コミットして割引を得る。",
+        "対象サービスの一定額利用を期間中コミットして割引を得る。 対象サービスの一定額利用を期間中コミットして割引を得る。"
+      ],
+      "source": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html"
+    },
+    "study-q190": {
+      "prompt": "【基礎復習：q008の転用】チェックポイントから再開できる大量の画像変換バッチがある。時間に余裕があり中断を許容できる。コストを抑える選択は。",
+      "options": [
+        "すべてオンデマンドで常時待機",
+        "バックアップを削除してエラーを無視",
+        "Spot インスタンスと再試行を組み合わせる",
+        "常に最大の専有ホストを確保"
+      ],
+      "answer": 2,
+      "reasons": [
+        "実行していない時間の資源を減らせない。 中断可能な余剰容量を使い、停止に備えた設計で費用を抑えられる。",
+        "処理の再実行性とデータ保護を損なう。 中断可能な余剰容量を使い、停止に備えた設計で費用を抑えられる。",
+        "中断可能な余剰容量を使い、停止に備えた設計で費用を抑えられる。 中断可能な余剰容量を使い、停止に備えた設計で費用を抑えられる。",
+        "中断許容の条件を費用削減に生かしていない。 中断可能な余剰容量を使い、停止に備えた設計で費用を抑えられる。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html"
+    },
+    "study-q191": {
+      "prompt": "開発用 EC2 が夜間・休日にも稼働し、誰も利用していない。契約割引の前に検討することは。",
+      "options": [
+        "CloudWatch を無効にするだけ",
+        "未利用時間に停止するスケジュール",
+        "未使用分まで長期コミットを増やす",
+        "インスタンスサイズを常に倍増"
+      ],
+      "answer": 1,
+      "reasons": [
+        "主な計算資源の稼働費用は残る。 不要な使用量そのものを減らす。停止後も EBS 等の費用は別途残る。",
+        "不要な使用量そのものを減らす。停止後も EBS 等の費用は別途残る。 不要な使用量そのものを減らす。停止後も EBS 等の費用は別途残る。",
+        "不要な使用量を固定化し得る。 不要な使用量そのものを減らす。停止後も EBS 等の費用は別途残る。",
+        "費用が増え要件にも不要。 不要な使用量そのものを減らす。停止後も EBS 等の費用は別途残る。"
+      ],
+      "source": "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html"
+    },
+    "study-q192": {
+      "prompt": "監査文書は7年保存しほぼ読まない。取出しに半日かかってもよい。保管クラス選択で重視するのは。",
+      "options": [
+        "長期低頻度向け階層と取出し・最低保管期間を比較する",
+        "アクセスしないのでデータを削除する",
+        "最速の階層だけを無条件に選ぶ",
+        "ファイル名だけを短くする"
+      ],
+      "answer": 0,
+      "reasons": [
+        "保存単価に加え取出し時間や費用が要件を満たすか確認する。 保存単価に加え取出し時間や費用が要件を満たすか確認する。",
+        "7年保存という要件に違反する。 保存単価に加え取出し時間や費用が要件を満たすか確認する。",
+        "許容される取出し時間を費用削減へ活用しない。 保存単価に加え取出し時間や費用が要件を満たすか確認する。",
+        "保管量や料金構造を本質的に変えない。 保存単価に加え取出し時間や費用が要件を満たすか確認する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+    },
+    "study-q193": {
+      "prompt": "S3 に貯めたアクセスログを週に数回 SQL で調べたい。常時 DB サーバーを運用したくない。",
+      "options": [
+        "RDS へ全ログを逐次ロードするだけ",
+        "Route 53",
+        "AWS Shield",
+        "Athena"
+      ],
+      "answer": 3,
+      "reasons": [
+        "可能でも今回の直接分析と運用負荷削減には余計な管理がある。 S3 上のデータへサーバーレスの SQL 分析を実行できる。",
+        "名前解決サービスで SQL 分析は行わない。 S3 上のデータへサーバーレスの SQL 分析を実行できる。",
+        "DDoS 防御でログ集計エンジンではない。 S3 上のデータへサーバーレスの SQL 分析を実行できる。",
+        "S3 上のデータへサーバーレスの SQL 分析を実行できる。 S3 上のデータへサーバーレスの SQL 分析を実行できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q194": {
+      "prompt": "Athena は毎日1日分しか必要ないのに全期間の CSV を読んでいる。スキャン量を減らすには。",
+      "options": [
+        "同じ CSV を複数コピーして全件参照する",
+        "S3 バケット名を変更する",
+        "日付でパーティション化し列指向形式を検討する",
+        "不要列をさらに追加する"
+      ],
+      "answer": 2,
+      "reasons": [
+        "スキャン対象を増やす。 対象期間と必要列の読取りに絞りやすくする。",
+        "データの読込み範囲は減らない。 対象期間と必要列の読取りに絞りやすくする。",
+        "対象期間と必要列の読取りに絞りやすくする。 対象期間と必要列の読取りに絞りやすくする。",
+        "読込み対象が増え得る。 対象期間と必要列の読取りに絞りやすくする。"
+      ],
+      "source": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html"
+    },
+    "study-q195": {
+      "prompt": "データレイクのテーブル定義を共通カタログにし、データ変換ジョブも管理したい。",
+      "options": [
+        "Amazon SNS",
+        "AWS Glue",
+        "AWS KMS",
+        "AWS Shield"
+      ],
+      "answer": 1,
+      "reasons": [
+        "通知配信だけではデータ統合処理を定義しない。 Data Catalog と ETL を提供する。",
+        "Data Catalog と ETL を提供する。 Data Catalog と ETL を提供する。",
+        "鍵管理でテーブルスキーマのカタログではない。 Data Catalog と ETL を提供する。",
+        "DDoS 対策で ETL を行わない。 Data Catalog と ETL を提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q196": {
+      "prompt": "売上明細と複数の大規模テーブルを継続的に集計する分析基盤が必要。データウェアハウスとして適切なのは。",
+      "options": [
+        "Amazon Redshift",
+        "Secrets Manager",
+        "Route 53",
+        "SQS"
+      ],
+      "answer": 0,
+      "reasons": [
+        "分析向けのデータウェアハウスで大規模な集計に対応する。 分析向けのデータウェアハウスで大規模な集計に対応する。",
+        "秘密値の管理で分析データウェアハウスではない。 分析向けのデータウェアハウスで大規模な集計に対応する。",
+        "DNS サービスで JOIN を実行しない。 分析向けのデータウェアハウスで大規模な集計に対応する。",
+        "メッセージ保持で SQL 集計基盤ではない。 分析向けのデータウェアハウスで大規模な集計に対応する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q197": {
+      "prompt": "センサーデータをストリームで受け、複数の処理アプリが保持期間内に再読込したい。",
+      "options": [
+        "SQS の受信後すぐ削除する単一キュー",
+        "DNS TXT に蓄積",
+        "ACM",
+        "Kinesis Data Streams"
+      ],
+      "answer": 3,
+      "reasons": [
+        "独立した過去ストリームの再読込という要件と合わない。 ストリームを保持して複数のコンシューマーが処理できる。",
+        "高頻度ストリーム収集の設計ではない。 ストリームを保持して複数のコンシューマーが処理できる。",
+        "証明書管理で時系列データを保持しない。 ストリームを保持して複数のコンシューマーが処理できる。",
+        "ストリームを保持して複数のコンシューマーが処理できる。 ストリームを保持して複数のコンシューマーが処理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q198": {
+      "prompt": "ストリームデータをバッファリングして S3 に届けたい。配信ワーカーの運用を最小化するには。",
+      "options": [
+        "AWS Config",
+        "Amazon ECR",
+        "Amazon Data Firehose",
+        "CloudTrail"
+      ],
+      "answer": 2,
+      "reasons": [
+        "リソース構成の記録・評価サービス。 対応する宛先へのデータ配信を管理するサービス。",
+        "イメージ保存でストリームを配信しない。 対応する宛先へのデータ配信を管理するサービス。",
+        "対応する宛先へのデータ配信を管理するサービス。 対応する宛先へのデータ配信を管理するサービス。",
+        "AWS API 操作の監査で任意の配信パイプラインとは異なる。 対応する宛先へのデータ配信を管理するサービス。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q199": {
+      "prompt": "商品名の全文検索と検索結果の絞込みを提供したい。検索用の索引を扱うサービスは。",
+      "options": [
+        "Route 53",
+        "Amazon OpenSearch Service",
+        "AWS Backup",
+        "AWS DMS"
+      ],
+      "answer": 1,
+      "reasons": [
+        "DNS の名前解決と全文検索は異なる。 全文検索や分析のための検索エンジンを提供する。",
+        "全文検索や分析のための検索エンジンを提供する。 全文検索や分析のための検索エンジンを提供する。",
+        "バックアップを管理するが全文索引を提供しない。 全文検索や分析のための検索エンジンを提供する。",
+        "移行サービスで検索画面のエンジンではない。 全文検索や分析のための検索エンジンを提供する。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-q200": {
+      "prompt": "S3 データレイクのテーブルへの分析者アクセスをまとめて管理したい。データレイク権限管理に特化したサービスは。",
+      "options": [
+        "AWS Lake Formation",
+        "Global Accelerator",
+        "AWS Shield",
+        "ECR"
+      ],
+      "answer": 0,
+      "reasons": [
+        "データレイクのアクセス許可を集中管理できる。 データレイクのアクセス許可を集中管理できる。",
+        "通信経路の最適化でテーブル認可ではない。 データレイクのアクセス許可を集中管理できる。",
+        "DDoS 防御で分析データの権限管理ではない。 データレイクのアクセス許可を集中管理できる。",
+        "コンテナイメージ用レジストリでテーブル認可ではない。 データレイクのアクセス許可を集中管理できる。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html"
+    },
+    "study-rr07-02": {
+      "prompt": "世界中へ同じ版付き商品画像をHTTP配信する。更新は新URLで行い、同一URLの内容は変えない。オリジンへの転送と要求を減らす構成はどれか。",
+      "options": [
+        "CloudFrontで適切なTTLを設定し版付きURLをキャッシュ",
+        "Global Acceleratorだけで画像オブジェクトを保存する",
+        "Route 53のTTLだけで画像本体をキャッシュする",
+        "すべての画像でキャッシュを無効にし毎回オリジンへ送る"
+      ],
+      "answer": 0,
+      "reasons": [
+        "同じ画像の再取得をエッジから提供してオリジン要求を減らす。 同じ画像の再取得をエッジから提供してオリジン要求を減らす。 条件変更：同じURLで頻繁に内容を変えるなら鮮度・失効方針を再設計する。",
+        "経路最適化は画像キャッシュではない。 同じ画像の再取得をエッジから提供してオリジン要求を減らす。 条件変更：同じURLで頻繁に内容を変えるなら鮮度・失効方針を再設計する。",
+        "DNSキャッシュはコンテンツ本体を保存しない。 同じ画像の再取得をエッジから提供してオリジン要求を減らす。 条件変更：同じURLで頻繁に内容を変えるなら鮮度・失効方針を再設計する。",
+        "要求削減という目的と逆になる。 同じ画像の再取得をエッジから提供してオリジン要求を減らす。 条件変更：同じURLで頻繁に内容を変えるなら鮮度・失効方針を再設計する。"
+      ],
+      "source": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html"
+    },
+    "study-rr08-01": {
+      "prompt": "既存コンテナの1ジョブは40分かかり分割できない。ホストOSの保守を減らしたい。候補のLambdaはManaged Instancesを使わない標準実行に限る。最も適するものはどれか。",
+      "options": [
+        "ECSのFargateタスクとして必要CPU・メモリを設定する",
+        "標準Lambdaのタイムアウトを2400秒にする",
+        "標準Lambdaのメモリだけ増やして時間制限を解除する",
+        "EC2へ移しホストOS保守をすべて不要とする"
+      ],
+      "answer": 0,
+      "reasons": [
+        "コンテナの長時間実行とホスト管理削減の条件に合う。 コンテナの長時間実行とホスト管理削減の条件に合う。 条件変更：数秒で終わるイベント処理なら標準Lambdaが有力候補になる。",
+        "標準実行の上限900秒を超える設定にはできない。 コンテナの長時間実行とホスト管理削減の条件に合う。 条件変更：数秒で終わるイベント処理なら標準Lambdaが有力候補になる。",
+        "メモリ設定は実行時間の上限解除ではない。 コンテナの長時間実行とホスト管理削減の条件に合う。 条件変更：数秒で終わるイベント処理なら標準Lambdaが有力候補になる。",
+        "EC2のゲストOS保守は利用者側に残る。 コンテナの長時間実行とホスト管理削減の条件に合う。 条件変更：数秒で終わるイベント処理なら標準Lambdaが有力候補になる。"
+      ],
+      "source": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html"
+    },
+    "study-rr09-01": {
+      "prompt": "学習用の仮定：SQS到着率120件/秒、処理能力80件/秒で5分経過した。その後160件/秒へ増強した。到着は120件/秒のまま、初期滞留ゼロなら、増強後の解消時間はどれか。",
+      "options": [
+        "300秒",
+        "75秒",
+        "100秒",
+        "解消しない"
+      ],
+      "answer": 0,
+      "reasons": [
+        "滞留40×300=12000件を差分160-120=40件/秒で解消する。 滞留40×300=12000件を差分160-120=40件/秒で解消する。 条件変更：増強後に新規到着ゼロなら12000÷160=75秒。",
+        "到着が継続する条件を落とし12000÷160と計算している。 滞留40×300=12000件を差分160-120=40件/秒で解消する。 条件変更：増強後に新規到着ゼロなら12000÷160=75秒。",
+        "処理率と到着率の差を使っていない。 滞留40×300=12000件を差分160-120=40件/秒で解消する。 条件変更：増強後に新規到着ゼロなら12000÷160=75秒。",
+        "増強後は到着率より処理率が高く有限時間で減る。 滞留40×300=12000件を差分160-120=40件/秒で解消する。 条件変更：増強後に新規到着ゼロなら12000÷160=75秒。"
+      ],
+      "source": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html"
+    },
+    "study-rr10-02": {
+      "prompt": "ALBで使う証明書AはACM発行・DNS検証済み、証明書Bは外部CAからインポートした。期限切れを防ぐ運用として適切なのはどれか。",
+      "options": [
+        "Aは更新条件とCNAMEを維持し、Bは外部で更新して再インポートする",
+        "AもBも設定なしで必ず自動更新される",
+        "AのCNAMEを発行直後に削除しておく",
+        "KMSのローテーションだけを設定する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "ACM発行とインポートでは更新責任が異なる。 ACM発行とインポートでは更新責任が異なる。 期限監視と更新後の接続確認も行う。",
+        "インポート証明書はACM自動更新の対象ではない。 ACM発行とインポートでは更新責任が異なる。 期限監視と更新後の接続確認も行う。",
+        "DNS検証による更新条件を損なう。 ACM発行とインポートでは更新責任が異なる。 期限監視と更新後の接続確認も行う。",
+        "保存鍵の更新はTLS証明書の有効期限を延長しない。 ACM発行とインポートでは更新責任が異なる。 期限監視と更新後の接続確認も行う。"
+      ],
+      "source": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html"
+    },
+    "study-rr11-01": {
+      "prompt": "学習用の実測：RTO30分・RPO5分に対し、障害検知3分、昇格5分、拡張8分、切替と業務確認6分、直前の複製遅延2分だった。適切な評価はどれか。",
+      "options": [
+        "今回の訓練ではRTO22分・データ遅延2分で両要件内",
+        "復旧は複製遅延2分だけなのでRTO2分",
+        "RPOは手順合計22分なので不合格",
+        "一度成功したので今後も必ず同じ時間を保証できる"
+      ],
+      "answer": 0,
+      "reasons": [
+        "復旧手順を合算しデータ損失の時間幅を別に評価する。 復旧手順を合算しデータ損失の時間幅を別に評価する。 条件変更：拡張が20分かかれば合計34分でRTOを超える。",
+        "検知・昇格・拡張・検証の時間を無視している。 復旧手順を合算しデータ損失の時間幅を別に評価する。 条件変更：拡張が20分かかれば合計34分でRTOを超える。",
+        "復旧の所要時間とデータ損失の時間幅を混同している。 復旧手順を合算しデータ損失の時間幅を別に評価する。 条件変更：拡張が20分かかれば合計34分でRTOを超える。",
+        "負荷・依存先・容量・変更によって実際の時間は変わる。 復旧手順を合算しデータ損失の時間幅を別に評価する。 条件変更：拡張が20分かかれば合計34分でRTOを超える。"
+      ],
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+    },
+    "study-rr12-01": {
+      "prompt": "センサーイベントを複数アプリが独立に数秒単位で処理し、翌日に保持期間内のデータを再読込したい。最も合う取り込み方式はどれか。",
+      "options": [
+        "Kinesis Data Streamsで保持期間とコンシューマーを設計",
+        "FirehoseからS3へのバッファ配信だけで即時処理を保証",
+        "単一SQSを全アプリが競合して読む",
+        "日次バッチのCSVだけを翌朝公開する"
+      ],
+      "answer": 0,
+      "reasons": [
+        "独立した読取りとストリーム再読込の要件に対応できる。 独立した読取りとストリーム再読込の要件に対応できる。 条件変更：数分待ててS3配信管理を減らしたいならFirehoseを比較する。",
+        "配信待ちがあり独立ストリーム処理と同じ保証ではない。 独立した読取りとストリーム再読込の要件に対応できる。 条件変更：数分待ててS3配信管理を減らしたいならFirehoseを比較する。",
+        "全アプリへ同じ全イベントを独立配信する構成ではない。 独立した読取りとストリーム再読込の要件に対応できる。 条件変更：数分待ててS3配信管理を減らしたいならFirehoseを比較する。",
+        "数秒単位の処理という鮮度の要件を満たさない。 独立した読取りとストリーム再読込の要件に対応できる。 条件変更：数分待ててS3配信管理を減らしたいならFirehoseを比較する。"
+      ],
+      "source": "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html"
+    },
+    "study-rr12-03": {
+      "prompt": "学習用の見積り：同じ性能・可用性のDB構成Aは固定100単位＋I/O60単位、Bは固定140単位でI/O別料金なし。現在最安の候補と、I/Oが10単位に減る場合の候補はどれか。",
+      "options": [
+        "現在B、減少後A",
+        "どちらもB",
+        "どちらもA",
+        "現在A、減少後B"
+      ],
+      "answer": 0,
+      "reasons": [
+        "現在160対140でB、減少後110対140でAとなる。 現在160対140でB、減少後110対140でAとなる。 仮定の単位でありAWSの実料金表ではない。実際は構成ごとの全費用を見積もる。",
+        "低I/O時のAの総額110を比較から落としている。 現在160対140でB、減少後110対140でAとなる。 仮定の単位でありAWSの実料金表ではない。実際は構成ごとの全費用を見積もる。",
+        "現在AのI/O込み160はBの140より高い。 現在160対140でB、減少後110対140でAとなる。 仮定の単位でありAWSの実料金表ではない。実際は構成ごとの全費用を見積もる。",
+        "合計費用の大小を逆に評価している。 現在160対140でB、減少後110対140でAとなる。 仮定の単位でありAWSの実料金表ではない。実際は構成ごとの全費用を見積もる。"
+      ],
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html"
     }
   },
   "counts": {
-    "publishedTerms": 21,
+    "publishedTerms": 153,
     "additionalTerms": 3,
-    "publishedQuestions": 20,
-    "skippedQuestions": 1
+    "publishedQuestions": 355,
+    "skippedQuestions": 143
   },
   "sourceRefs": [
     "src/content/index.ts",
     "src/content/starter.ts",
     "knowledge/game-supplement.json"
   ],
-  "version": "bc603555ef9ea626"
+  "version": "2cdc283d85b5a5a0"
 }

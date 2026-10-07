@@ -1,11 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { chapters, questions, terms, release } from '../src/content';
-test('先行学習版は確認済み2章・20問、未制作の模試を提供しない', () => {
-  assert.equal(chapters.length, 2);
-  assert.equal(questions.filter(q => !q.exam).length, 20);
-  assert.equal(questions.filter(q => q.exam).length, 0);
-  assert.equal(release.mocksReady, false);
+test('12章・通常225問と65問の模試2回を提供する', () => {
+  assert.equal(chapters.length, 12);
+  assert.equal(questions.filter(q => !q.exam).length, 225);
+  assert.equal(questions.filter(q => q.exam).length, 130);
+  assert.equal(release.mocksReady, true);
 });
 test('問題ID・文章の重複がなく、選択肢・正解・解説・出典が有効', () => {
   assert.equal(new Set(questions.map(q => q.id)).size, questions.length);
@@ -20,7 +20,7 @@ test('問題ID・文章の重複がなく、選択肢・正解・解説・出典
     assert.ok(q.answers.every(a => q.options.some(o => o.id === a)), q.id);
     assert.ok(q.options.every(o => o.text && o.explanation.length >= 8), q.id);
     assert.ok(q.explanation.length >= 10 && q.conceptIds.length > 0, q.id);
-    assert.ok(q.sources.length > 0 && q.sources.every(s => /^https:\/\/(docs\.)?aws\.amazon\.com\//.test(s.url) && s.checked === '2026-10-05'), q.id);
+    assert.ok(q.sources.length > 0 && q.sources.every(s => /^https:\/\/(docs\.)?aws\.amazon\.com\//.test(s.url) && /^2026-10-0[578]$/.test(s.checked)), q.id);
   }
 });
 test('教材に図・比較・根拠があり用語参照が有効', () => {
@@ -40,3 +40,16 @@ test('用語に重複がなく、単一と複数選択の両方がある', () =>
   assert.ok(questions.some(q => q.answers.length > 1));
   assert.ok(questions.some(q => q.answers.length === 1));
 });
+test('模試は各65問で4分野と複数選択を含み、対の条件変更で正答が変わる', () => {
+  for (const exam of ['mock1','mock2']) {
+    const qs = questions.filter(q=>q.exam===exam);
+    assert.equal(qs.length,65);
+    assert.deepEqual([1,2,3,4].map(d=>qs.filter(q=>q.domain===d).length),[20,17,15,13]);
+    for(const d of [1,2,3,4]) assert.ok(qs.some(q=>q.domain===d&&q.answers.length>1));
+  }
+  const a=questions.filter(q=>q.exam==='mock1'), b=questions.filter(q=>q.exam==='mock2');
+  a.forEach((q,i)=>assert.notDeepEqual(q.answers,b[i].answers,q.id));
+  for(const d of [1,2,3,4]) assert.ok(questions.some(q=>!q.exam&&q.domain===d&&q.answers.length>1));
+});
+
+test("全問題の各概念が同じ章の本文に対応する",()=>{ for(const q of questions) for(const id of q.conceptIds) assert.ok(chapters.find(c=>c.id===q.chapterId)!.lessons.some(l=>l.conceptIds.includes(id)),q.id+":"+id); });

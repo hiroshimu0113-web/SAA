@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import {chromium} from '@playwright/test';
+import {preview} from 'vite';
+const server=await preview({base:'/SAA/',preview:{host:'127.0.0.1',port:4193,strictPort:true}});
+const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||undefined});
+const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+const base='http://127.0.0.1:4193/SAA/';
+const nav=label=>page.getByRole('navigation',{name:'メインナビゲーション'}).getByRole('button',{name:label,exact:true}).click();
+async function state(expire=false){return page.evaluate(expire=>new Promise((resolve,reject)=>{const r=indexedDB.open('saa-learning',1);r.onerror=()=>reject(r.error);r.onsuccess=()=>{const db=r.result,t=db.transaction('state',expire?'readwrite':'readonly'),s=t.objectStore('state'),g=s.get('progress');let value;g.onsuccess=()=>{value=g.result;if(expire){value.exam.startedAt=Date.now()-131*60000;value.exam.deadline=value.exam.startedAt+130*60000;s.put(value,'progress');}};t.oncomplete=()=>{db.close();resolve(value)};t.onerror=()=>reject(t.error)}}),expire)}
+try {
+ await page.goto(base+'study/2026-10-07/questions.html');
+ assert.equal(await page.locator('section').filter({hasText:'Q4｜複数選択'}).locator('li').count(),5);
+ await page.getByRole('link',{name:'関連する条件変更問題を解き、振り返りを学習アプリに記録する'}).click();
+ await page.locator('.question h2').waitFor();assert.ok(await page.getByRole('checkbox',{name:'自信なし・後で復習したい'}).isChecked());
+ const required=Number((await page.locator('.selection-hint').innerText()).match(/選択中 0 \/ (\d+)/)[1]);
+ for(let i=0;i<required;i++)await page.locator('.choice').nth(i).click();
+ await page.getByRole('button',{name:'回答して解説を見る'}).click();
+ await page.getByRole('heading',{name:'考え方',exact:true}).waitFor();
+ assert.ok((await state()).attempts.some(a=>a.questionId==='rr01-02'&&a.unsure));
+ await page.locator('.explanation').getByRole('button').first().click();await page.getByRole('button',{name:'読了にする',exact:true}).waitFor();
+ await nav('問題集');await page.getByRole('button',{name:'模擬試験',exact:true}).click();
+ await page.getByRole('button',{name:'模擬試験 1 を開始',exact:true}).click();
+ assert.equal(await page.locator('.exam-status').count(),1);
+ assert.equal(await page.locator('.question select option').count(),65);
+ assert.equal(await page.locator('.explanation').count(),0);
+ const order=await page.locator('.choice').allTextContents();await page.locator('.choice').first().click();
+ const saved=await state();assert.equal(saved.exam.deadline-saved.exam.startedAt,130*60000);
+ await page.reload();await nav('問題集');await page.getByRole('button',{name:'模擬試験',exact:true}).click();
+ assert.deepEqual(await page.locator('.choice').allTextContents(),order);assert.equal(await page.locator('.choice[aria-pressed=true]').count(),1);
+ await page.locator('.question select').selectOption('9');assert.equal(await page.locator('.choice').count(),5);
+ await page.locator('.choice').nth(0).click();await page.locator('.choice').nth(1).click();await page.locator('.choice').nth(2).click();assert.equal(await page.locator('.choice[aria-pressed=true]').count(),2);
+ await state(true);await page.reload();await nav('問題集');await page.getByRole('button',{name:'模擬試験',exact:true}).click();
+ await page.getByRole('heading',{name:'模擬試験の結果'}).waitFor();assert.equal(await page.locator('.exam-review').count(),65);assert.equal(await page.locator('.domain-results > div').count(),4);
+ await page.locator('.exam-review summary').first().click();assert.ok(await page.locator('.exam-review').first().getByRole('button').count()>0);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ page.on('dialog',d=>d.accept());await page.getByRole('button',{name:'模擬試験 2 を開始',exact:true}).click();assert.equal((await state()).exam.id,'mock2');assert.equal(await page.locator('.question select option').count(),65);
+ await page.locator('.question select').selectOption('64');assert.ok((await page.locator('.question h2').innerText()).includes('月100単位'));
+ assert.deepEqual(errors,[]);console.log('PASS readiness: HTML reflection, 5-choice multi-select, lesson links, 65-question mocks, stable saved option order, 130-minute deadline/auto-submit, four-domain results, mobile layout.');
+} finally {await browser.close();await server.httpServer.close();}

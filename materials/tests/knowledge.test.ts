@@ -26,6 +26,6 @@ test('公開済み教材と原稿を正確に分け、全体原稿の存在を�
   const released=graph.nodes.filter((n:any)=>n.kind==='lesson'&&n.release==='published').map((n:any)=>n.id).sort();
   assert.deepEqual(released,published.flatMap(c=>c.lessons.map(l=>'lesson:'+l.id)).sort());
   assert.deepEqual(graph.nodes.filter((n:any)=>n.kind==='question'&&n.release==='published').map((n:any)=>n.id).sort(),publishedQuestions.map(q=>'question:'+q.id).sort());
-  assert.ok(graph.nodes.some((n:any)=>n.kind==='lesson'&&n.release==='draft'));
+  assert.equal(graph.nodes.filter((n:any)=>n.kind==='lesson'&&n.release==='draft').length, 0); // All 12 chapters are now released; unit audit state remains separate.
   for(const u of units)assert.equal(graph.nodes.find((n:any)=>n.id==='concept:'+u.id).unit.learner_state,'unassessed');
 });

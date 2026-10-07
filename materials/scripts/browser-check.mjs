@@ -52,15 +52,15 @@ try {
   await page.getByRole('button', { name: 'この内容で復元' }).click();
   await nav('問題集');
   await page.getByRole('button', { name: '模擬試験', exact: true }).click();
-  assert.equal(await page.getByRole('button', { name: '模擬試験 1 を開始', exact: true }).isDisabled(), true);
-  assert.equal(await page.getByRole('button', { name: '模擬試験 2 を開始', exact: true }).isDisabled(), true);
+  assert.equal(await page.getByRole('button', { name: '模擬試験 1 を開始', exact: true }).isDisabled(), false);
+  assert.equal(await page.getByRole('button', { name: '模擬試験 2 を開始', exact: true }).isDisabled(), false);
   // A newly created page must also load the complete shell without a network.
   const fresh = await context.newPage(); await fresh.goto(base); await fresh.getByRole('heading', { name: '今日の一歩が、', exact: false }).waitFor(); await fresh.close();
   await context.setOffline(false);
   await page.setViewportSize({ width: 1440, height: 1000 });
   await nav('今日'); await page.screenshot({ path: 'artifacts/home-desktop.png', fullPage: true });
   assert.deepEqual(errors, [], 'runtime errors');
-  console.log('PASS: mobile layout, lesson state, service worker install, offline reload/new page, unseen content, answer/explanation, backup reject/restore, unfinished exams disabled, no runtime errors.');
+  console.log('PASS: mobile layout, lesson state, service worker install, offline reload/new page, unseen content, answer/explanation, backup reject/restore, two mock exams enabled, no runtime errors.');
 } catch (error) {
   console.log('PAGE:', await page.locator('body').innerText().catch(() => 'unavailable'));
   console.log('ERRORS:', errors);

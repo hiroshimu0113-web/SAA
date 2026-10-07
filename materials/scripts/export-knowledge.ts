@@ -28,7 +28,7 @@ for(const chapter of chapters){
   const path='src/content/'+(Number(chapter.id.slice(2))<=6?'part1.ts':'part2.ts');
   nodes.push({id:'chapter:'+chapter.id,kind:'chapter',title:chapter.title,source_file:path});
   for(const lesson of chapter.lessons){
-    nodes.push({id:'lesson:'+lesson.id,kind:'lesson',title:lesson.title,release:publishedLessons.has(lesson.id)?'published':'draft',source_file:publishedLessons.has(lesson.id)?'src/content/index.ts':path,original_source_file:path,sources:lesson.sources});
+    nodes.push({id:'lesson:'+lesson.id,kind:'lesson',title:lesson.title,release:publishedLessons.has(lesson.id)?'published':'draft',source_file:publishedLessons.has(lesson.id)?'src/content/index.ts':path,original_source_file:Number(lesson.id.split('-l')[1])>=4?`src/content/readiness/${chapter.id}.ts`:path,sources:lesson.sources});
     edge('chapter:'+chapter.id,'lesson:'+lesson.id,'contains');
     for(const id of new Set(lesson.conceptIds))edge('concept:'+id,'lesson:'+lesson.id,'covered_by');
   }
@@ -45,9 +45,9 @@ validateGraph(graph);
 await mkdir(new URL('public/knowledge/',root),{recursive:true});
 await save('public/knowledge/graph.json',JSON.stringify(graph,null,2)+'\n');
 const gaps:Record<string,string[]>= {ch01:['CR-001'],ch02:['CR-001','CR-004'],ch03:['CR-003'],ch04:[],ch05:['CR-002'],ch06:['CR-002'],ch07:['CR-003','CR-009'],ch08:['CR-008','CR-009'],ch09:['CR-009'],ch10:['CR-005','CR-006','CR-009'],ch11:['CR-006','CR-007','CR-009'],ch12:['CR-002','CR-003','CR-007','CR-009']};
-let markdown='# 教材の棚卸し（自動生成）\n\n`pnpm exec tsx scripts/export-knowledge.ts` で更新。教材数は内容監査や理解度を意味しません。既存原稿の概念タグも未監査を含みます。\n\n| 章 | レッスン（公開 / 全体） | 問題（公開 / 全体） | 関連する詳細単位 | 既存監査の未解決指摘 |\n|---|---:|---:|---|---|\n';
+let markdown='# 教材の棚卸し（自動生成）\n\n`pnpm exec tsx scripts/export-knowledge.ts` で更新。教材数は内容監査や理解度を意味しません。既存原稿の概念タグも未監査を含みます。\n\n| 章 | レッスン（公開 / 全体） | 問題（公開 / 全体） | 関連する詳細単位 | 既存監査の関連指摘（改訂履歴参照） |\n|---|---:|---:|---|---|\n';
 for(const c of chapters){const qs=questions.filter(q=>q.chapterId===c.id);const ids=c.lessons.map(l=>l.id);markdown+=`| ${c.id} ${c.title} | ${ids.filter(id=>publishedLessons.has(id)).length} / ${ids.length} | ${qs.filter(q=>publishedQuestionIds.has(q.id)).length} / ${qs.length} | ${units.filter(u=>u.lesson_ids.some(id=>ids.includes(id))).map(u=>u.id).join(', ')||'未細分化'} | ${(gaps[c.id]??[]).join(', ')||'個別指摘なし（監査済みとは限らない）'} |\n`;}
-markdown+='\n指摘本文は [CONTENT_REVIEW.md](../docs/CONTENT_REVIEW.md)。第3章以降は全体監査待ち。詳細単位のない概念は `inventory_only` として保持しています。\n';
+markdown+='\n指摘本文は [CONTENT_REVIEW.md](../docs/CONTENT_REVIEW.md)。章別の補強と自己照合は [SAA_REVISION_LOG.md](../docs/SAA_REVISION_LOG.md) に記録。独立した全体監査は未実施。詳細単位のない概念は `inventory_only` として保持しています。\n';
 markdown+='\n## レッスンタグとの対応を要確認の概念ID\n\n以下は問題・細分化単位にあるが、既存レッスンのconceptIdsにはないIDです。本文中に説明がないという断定ではありません。自動統合せず対応を確認してください。\n\n';
 for(const id of allConcepts.filter(id=>!lessons.some(l=>l.conceptIds.includes(id))))markdown+=`- ${id}: ${questions.filter(q=>q.conceptIds.includes(id)).map(q=>q.id).join(', ')||'今回追加した判断単位'}\n`;
 await save('knowledge/INVENTORY.md',markdown);
