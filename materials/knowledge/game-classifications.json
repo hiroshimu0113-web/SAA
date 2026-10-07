@@ -11937,6 +11937,308 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-lambda-concurrency-allocation",
+      "title": "Lambdaの同時実行上限と割当状態",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "関数全体の容量上限と対象版/エイリアスの割当状態を説明・適用する概念。",
+      "objective": "予約済みの関数全体の上限と、プロビジョニング済みの版/エイリアス割当の要求・利用可能状態を分ける。",
+      "unit_ids": [
+        "lambda-concurrency"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/lambda-concurrency.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "compute",
+        "operations"
+      ],
+      "capabilities": [
+        "scale",
+        "process"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Lambda"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "lambda"
+      ],
+      "conditions": [
+        "第1問は同一関数の全版を合算し、既存5実行が進行中で他条件は正常。",
+        "第2問は要求数/利用可能数/割当中を応答の既知条件として与える。"
+      ],
+      "limitations": [
+        "通常Lambdaの予約済み同時実行とプロビジョニング済み割当の設定範囲/状態。初期化遅延短縮の詳細・料金・上限超過時の全再試行・イベントソース流量制御・耐久/テナント分離等の互換性は対象外。"
+      ],
+      "misconceptions": [
+        "予約済みの枠は各公開バージョンに別々に付く。",
+        "アカウントの空き枠があれば関数の予約上限を超えてよい。",
+        "プロビジョニング要求数がそのまま利用可能数になる。",
+        "関数の予約上限を設定すれば全割当が即時に完了する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/lambda-concurrency.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "通常Lambdaの同時実行設定を扱う。2問は別構成の独立判断。数値と版/エイリアス名は教材用の仮定。",
+        "counterexample": "第1問の既存実行が1つ完了し、Fの合計同時実行数が4になる。他の上限・権限・容量条件は正常。 予約済み5という境界だけでは、新しい1実行を上限超過とは扱わない。ただし業務成功の確認は別。",
+        "comparison": {
+          "path": "knowledge/lessons/lambda-concurrency.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-lambda-concurrency-allocation",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go",
+          "claim": "予約済み同時実行は関数全体（全公開バージョンと未公開版）の同時実行の容量を予約し、その上限を超えて拡大することを防ぐ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+          "claim": "同時実行上限の超過はTooManyRequestsExceptionとなり、アカウントと関数予約上限のエラーを区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go",
+          "claim": "プロビジョニング済み同時実行の割当はバージョンまたはエイリアスに設定。応答はRequested/Allocated/Availableの各数と割当処理Status/失敗StatusReasonを持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_GetProvisionedConcurrencyConfig.go",
+          "claim": "特定バージョン/エイリアスの設定で要求数・割当数・利用可能数と処理Status/失敗理由を取得できる。要求数だけで利用可能数は判断しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/types/enums.go",
+          "claim": "ProvisionedConcurrencyStatusEnumの既知の割当状態はIN_PROGRESS/READY/FAILED。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "同時実行の範囲と割当状態を判断するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/lambda-concurrency.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの同時実行数・遅延・費用・下流保護を保証しない。",
+        "simplifications": [
+          "通常Lambdaの予約済み同時実行とプロビジョニング済み割当の設定範囲/状態。初期化遅延短縮の詳細・料金・上限超過時の全再試行・イベントソース流量制御・耐久/テナント分離等の互換性は対象外。"
+        ],
+        "mislearning_risks": [
+          "予約済みの枠は各公開バージョンに別々に付く。",
+          "アカウントの空き枠があれば関数の予約上限を超えてよい。",
+          "プロビジョニング要求数がそのまま利用可能数になる。",
+          "関数の予約上限を設定すれば全割当が即時に完了する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-lambda-concurrency-allocation",
+      "title": "Lambdaの関数上限と容量割当を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "予約済みの関数全体の上限と、プロビジョニング済みの版/エイリアス割当の要求・利用可能状態を分ける。",
+      "unit_ids": [
+        "lambda-concurrency"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "lambda-concurrency-allocation"
+        }
+      ],
+      "domains": [
+        "compute",
+        "operations"
+      ],
+      "capabilities": [
+        "scale",
+        "process"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Lambda"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "lambda"
+      ],
+      "conditions": [
+        "第1問は同一関数の全版を合算し、既存5実行が進行中で他条件は正常。",
+        "第2問は要求数/利用可能数/割当中を応答の既知条件として与える。"
+      ],
+      "limitations": [
+        "通常Lambdaの予約済み同時実行とプロビジョニング済み割当の設定範囲/状態。初期化遅延短縮の詳細・料金・上限超過時の全再試行・イベントソース流量制御・耐久/テナント分離等の互換性は対象外。"
+      ],
+      "misconceptions": [
+        "予約済みの枠は各公開バージョンに別々に付く。",
+        "アカウントの空き枠があれば関数の予約上限を超えてよい。",
+        "プロビジョニング要求数がそのまま利用可能数になる。",
+        "関数の予約上限を設定すれば全割当が即時に完了する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "lambda-concurrency-allocation.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "lambda-concurrency-allocation.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "lambda-concurrency-allocation.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "lambda-concurrency-allocation.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go",
+          "claim": "予約済み同時実行は関数全体（全公開バージョンと未公開版）の同時実行の容量を予約し、その上限を超えて拡大することを防ぐ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+          "claim": "同時実行上限の超過はTooManyRequestsExceptionとなり、アカウントと関数予約上限のエラーを区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go",
+          "claim": "プロビジョニング済み同時実行の割当はバージョンまたはエイリアスに設定。応答はRequested/Allocated/Availableの各数と割当処理Status/失敗StatusReasonを持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_GetProvisionedConcurrencyConfig.go",
+          "claim": "特定バージョン/エイリアスの設定で要求数・割当数・利用可能数と処理Status/失敗理由を取得できる。要求数だけで利用可能数は判断しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/types/enums.go",
+          "claim": "ProvisionedConcurrencyStatusEnumの既知の割当状態はIN_PROGRESS/READY/FAILED。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/lambda-concurrency.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの数値はAWSの同時実行数・遅延・費用・下流保護を保証しない。",
+        "simplifications": [
+          "通常Lambdaの予約済み同時実行とプロビジョニング済み割当の設定範囲/状態。初期化遅延短縮の詳細・料金・上限超過時の全再試行・イベントソース流量制御・耐久/テナント分離等の互換性は対象外。"
+        ],
+        "mislearning_risks": [
+          "予約済みの枠は各公開バージョンに別々に付く。",
+          "アカウントの空き枠があれば関数の予約上限を超えてよい。",
+          "プロビジョニング要求数がそのまま利用可能数になる。",
+          "関数の予約上限を設定すれば全割当が即時に完了する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "lambda-reserved-version-sum, lambda-provisioned-requested-available"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

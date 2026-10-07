@@ -717,3 +717,24 @@
 - 利用残量：開始・区切りとも取得可能なツールなし、不明。ユーザー申告の余力を踏まえて継続するが使用率は推測しない。
 - 未完了：既存確認待ち4単位、各本文に残した範囲外の詳細、カード効果設計、独立レビュー、公開後確認。
 - 次：同じ第8章lambda-concurrencyを詳述し、予約済みの関数全体の上限とプロビジョニング済みの割当状態を区別する。
+
+### 継続単位：Lambdaの同時実行上限と割当状態
+- 完了：既存lambda-concurrency素材の詳細本文・仕組み・条件・限界・比較・用語・全誤答理由・条件変更を作成。無料のAWS公式SDK固定コミットへ原稿作成後に照合。同一担当確認、独立監査・実AWS実験・本人理解評価は未実施。
+- 分類：concept-lambda-concurrency-allocationは確認・分類済みカード素材候補。case-lambda-concurrency-allocationは確認・分類済み、ゲーム取り込み済み。関連章はdeck-plan.jsonに記録。
+- 数量：詳細35単位、確認済み31、確認待ち4。分類92件/取り込み59件。連続2問ケース35件/70問、既存4問を含めゲーム計74問。155素材中確認済みカード素材31、新カード効果0。12テーマ案の各章20枚目標は未達。
+- 検証：48テスト、型検査/ビルド、分類/生成/進捗整合検査、Chromiumの全ケース・全解説・320px・回答/結果再開・オフライン・報酬重複防止成功。知識地図の35ノード・検索・前提導線・キーボード・320pxも成功。
+- 保存：codex/content-expansion-20261006へコミット・送信。公開状態unpublished、main/Pages未反映。既知のAWS文書サイト/Pages/WebKitの確認待ちは維持。
+- 利用残量：開始・区切りとも取得可能なツールなし、不明。ユーザー申告の余力を踏まえて継続するが使用率は推測しない。
+- 未完了：既存確認待ち4単位、各本文に残した範囲外の詳細、カード効果設計、独立レビュー、公開後確認。
+- 次：第6章RDSのMulti-AZとリードレプリカの構成判断を公式根拠から調査する。
+
+### 第8章Lambdaの拡充引き継ぎ（2026-10-07）
+- 完了：lambda/lambda-concurrencyの既存素材を2詳細単位・教材本文2本・2ケース/4問へ詳述。直接Invokeの同期200/FunctionErrorと非同期202の受理、DryRun、非同期の関数エラー再試行/重複可能性、予約済み上限の関数全体への適用、版/エイリアスへのプロビジョニング済み割当状態を確認。
+- 根拠：無料AWS公式SDK固定コミット2ba0e39015ddf9c91c6c378f8a4fb79dcb4353daのInvoke/PutFunctionEventInvokeConfig/PutFunctionConcurrency/PutProvisionedConcurrencyConfig/GetProvisionedConcurrencyConfig/enums。原稿作成後に主張・全選択肢・条件変更を照合。同一担当、独立レビュー・実AWS試験・本人理解評価は未実施。awsdocsの旧configuration-concurrency.mdは現HEADで取得不可、READMEには補助資材のリポジトリとあるため根拠に採用せず、初期化遅延短縮の詳細は確認待ちとして保持。
+- 分類：concept-lambda-invocation-result、concept-lambda-concurrency-allocationは確認・分類済みカード素材候補。case-lambda-invocation-result、case-lambda-concurrency-allocationは確認・分類済み/取り込み済み。冪等性の既存教材は共有し、再作成しない。関連章はdeck-plan.jsonへ記録。
+- 累計：詳細35単位/確認31/確認待ち4、分類92件/取り込み59件、連続2問ケース35件/70問（既存4問込みゲーム74問）。12テーマ案、共有カード素材155/確認31/新効果0、各章20枚目標は未達。現行20カード・3役の数値は維持。
+- 検証：48テスト、型検査/ビルド、分類/生成/進捗整合チェック成功。Chromiumで全35ケースの両問・全解説・320px・回答/結果再開・オフライン・報酬重複防止成功。知識地図35ノード・検索・前提導線・キーボード・320px成功。既存単位/ケースのID・選択肢順は維持。
+- 保存：小単位ごとにcodex/content-expansion-20261006へコミット・GitHub送信。公開状態unpublished、main/Pages未反映。公開後確認とWebKitは未完了。
+- 未完了：イベントソース別の再試行/並列度、非同期の送信先の権限/完全な配信規則、初期化遅延短縮と費用、予約/割当の全数値制約、耐久関数等の互換性、カード/役/ビルド効果、独立レビュー/実AWS試験。確認待ち4単位（instance-store/region/az/availability）は根拠不足を維持し、learner_stateはunassessed。
+- 次：第6章RDSのMulti-AZとリードレプリカを公式根拠から調査し、可用性と読取り拡張の構成判断を補う。既存PITRやGSIの本文は再作成しない。
+- 利用残量：開始と両単位区切りで取得ツールなし、不明。使用率は推測しない。過去の定時報告や時間経過を今回の実績へ計上しない。

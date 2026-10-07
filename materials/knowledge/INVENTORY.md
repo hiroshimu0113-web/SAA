@@ -11,7 +11,7 @@
 | ch05 ストレージを選ぶ | 0 / 3 | 0 / 20 | ebs, ebs-snapshot, efs | CR-002 |
 | ch06 データベースとキャッシュ | 0 / 3 | 0 / 15 | point-in-time-recovery, gsi | CR-002 |
 | ch07 名前解決と世界への配信 | 0 / 3 | 0 / 15 | route53 | CR-003, CR-009 |
-| ch08 サーバーレスとコンテナ | 0 / 3 | 0 / 20 | idempotency, lambda | CR-008, CR-009 |
+| ch08 サーバーレスとコンテナ | 0 / 3 | 0 / 20 | idempotency, lambda, lambda-concurrency | CR-008, CR-009 |
 | ch09 疎結合とメッセージ | 0 / 3 | 0 / 15 | visibility-timeout, idempotency, dlq | CR-009 |
 | ch10 暗号化・保護・監視 | 0 / 3 | 0 / 20 | kms, secrets-manager | CR-005, CR-006, CR-009 |
 | ch11 災害復旧と移行 | 0 / 3 | 0 / 15 | ebs-snapshot, dms, cdc | CR-006, CR-007, CR-009 |

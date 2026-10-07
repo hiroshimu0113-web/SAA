@@ -4156,6 +4156,143 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "lambda-concurrency-allocation",
+      "title": "Lambdaの関数上限と容量割当を判断する",
+      "premise": "通常Lambdaの同時実行設定を扱う。2問は別構成の独立判断。数値と版/エイリアス名は教材用の仮定。",
+      "unit_ids": [
+        "lambda-concurrency"
+      ],
+      "chapter_ids": [
+        "ch08",
+        "ch06",
+        "ch12"
+      ],
+      "constraints": [
+        "第1問は同一関数の全版を合算し、既存5実行が進行中で他条件は正常。",
+        "第2問は要求数/利用可能数/割当中を応答の既知条件として与える。"
+      ],
+      "questions": [
+        {
+          "id": "lambda-reserved-version-sum",
+          "objective": "予約上限を関数全体で判断する。",
+          "prompt": "通常Lambda関数Fの予約済み同時実行は5。公開バージョンv1で3実行、v2で2実行が同時に進行中で、いずれも終了していない。別の直接Invokeを受ける。アカウントの空き枠、呼出し権限等は正常。バージョンが違えば合計6実行へ増やせる？",
+          "options": [
+            {
+              "id": "lambda-reserved-version-sum-a",
+              "text": "各バージョンで別々に5枠なので、合計10まで必ず増やせる",
+              "explanation": "予約済み同時実行の設定はバージョン単位ではなく関数全体に適用されます。"
+            },
+            {
+              "id": "lambda-reserved-version-sum-b",
+              "text": "増やせない。5は関数全体の上限で、追加実行はその関数上限に制約される",
+              "explanation": "既に合計5実行が進行中です。アカウントに空きがあっても、この関数の予約上限とは別です。"
+            },
+            {
+              "id": "lambda-reserved-version-sum-c",
+              "text": "公開バージョンの実行は同時実行数へ数えない",
+              "explanation": "予約設定には全公開バージョンと未公開版が含まれます。"
+            }
+          ],
+          "correct_option_id": "lambda-reserved-version-sum-b",
+          "runtime_option_order": [
+            "lambda-reserved-version-sum-a",
+            "lambda-reserved-version-sum-b",
+            "lambda-reserved-version-sum-c"
+          ],
+          "rationale": "既に合計5実行が進行中です。アカウントに空きがあっても、この関数の予約上限とは別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go"
+          ]
+        },
+        {
+          "id": "lambda-provisioned-requested-available",
+          "objective": "要求数と利用可能な割当数を分ける。",
+          "prompt": "別の通常Lambdaのエイリアスprodへプロビジョニング済み同時実行5を要求した。設定取得の応答はRequested=5、Available=0、割当Status=IN_PROGRESS。5枠が利用可能かを確認したい。判断は？ Requested/Availableは応答項目の略記。",
+          "options": [
+            {
+              "id": "lambda-provisioned-requested-available-a",
+              "text": "要求が受け付けられたので、Availableに関係なく5枠利用可能とする",
+              "explanation": "要求数と利用可能数を区別します。要求値だけで割当完了とは判断できません。"
+            },
+            {
+              "id": "lambda-provisioned-requested-available-b",
+              "text": "予約済み上限を5にすると、その取得応答のAvailableも必ず即時5になる",
+              "explanation": "関数全体の予約上限と、特定エイリアスへの割当・利用可能数は別の設定/状態です。"
+            },
+            {
+              "id": "lambda-provisioned-requested-available-c",
+              "text": "まだ5枠利用可能とは扱わず、対象エイリアスの割当状態と利用可能数を確認する",
+              "explanation": "割当処理とAvailableを確認します。失敗ならStatusReasonも読み取り、要求数だけで準備完了としません。"
+            }
+          ],
+          "correct_option_id": "lambda-provisioned-requested-available-c",
+          "runtime_option_order": [
+            "lambda-provisioned-requested-available-a",
+            "lambda-provisioned-requested-available-b",
+            "lambda-provisioned-requested-available-c"
+          ],
+          "rationale": "割当処理とAvailableを確認します。失敗ならStatusReasonも読み取り、要求数だけで準備完了としません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_GetProvisionedConcurrencyConfig.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/types/enums.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の既存実行が1つ完了し、Fの合計同時実行数が4になる。他の上限・権限・容量条件は正常。",
+        "answer": "予約済み5という境界だけでは、新しい1実行を上限超過とは扱わない。ただし業務成功の確認は別。",
+        "reason": "同時に進行中の実行数が変わる。累計呼出し回数の上限ではない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go",
+          "claim": "予約済み同時実行は関数全体（全公開バージョンと未公開版）の同時実行の容量を予約し、その上限を超えて拡大することを防ぐ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+          "claim": "同時実行上限の超過はTooManyRequestsExceptionとなり、アカウントと関数予約上限のエラーを区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go",
+          "claim": "プロビジョニング済み同時実行の割当はバージョンまたはエイリアスに設定。応答はRequested/Allocated/Availableの各数と割当処理Status/失敗StatusReasonを持つ。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_GetProvisionedConcurrencyConfig.go",
+          "claim": "特定バージョン/エイリアスの設定で要求数・割当数・利用可能数と処理Status/失敗理由を取得できる。要求数だけで利用可能数は判断しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/types/enums.go",
+          "claim": "ProvisionedConcurrencyStatusEnumの既知の割当状態はIN_PROGRESS/READY/FAILED。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

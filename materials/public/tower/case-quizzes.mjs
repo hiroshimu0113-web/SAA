@@ -1019,6 +1019,36 @@ export const CASE_QUIZZES={
       "関数実行のエラーを読み取り、再試行の主体・条件と副作用を確認して対処します。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go"
+  },
+  "lambda-reserved-version-sum": {
+    "prompt": "通常Lambdaの同時実行設定を扱う。2問は別構成の独立判断。数値と版/エイリアス名は教材用の仮定。 通常Lambda関数Fの予約済み同時実行は5。公開バージョンv1で3実行、v2で2実行が同時に進行中で、いずれも終了していない。別の直接Invokeを受ける。アカウントの空き枠、呼出し権限等は正常。バージョンが違えば合計6実行へ増やせる？",
+    "options": [
+      "各バージョンで別々に5枠なので、合計10まで必ず増やせる",
+      "増やせない。5は関数全体の上限で、追加実行はその関数上限に制約される",
+      "公開バージョンの実行は同時実行数へ数えない"
+    ],
+    "answer": 1,
+    "reasons": [
+      "予約済み同時実行の設定はバージョン単位ではなく関数全体に適用されます。",
+      "既に合計5実行が進行中です。アカウントに空きがあっても、この関数の予約上限とは別です。",
+      "予約設定には全公開バージョンと未公開版が含まれます。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go"
+  },
+  "lambda-provisioned-requested-available": {
+    "prompt": "通常Lambdaの同時実行設定を扱う。2問は別構成の独立判断。数値と版/エイリアス名は教材用の仮定。 別の通常Lambdaのエイリアスprodへプロビジョニング済み同時実行5を要求した。設定取得の応答はRequested=5、Available=0、割当Status=IN_PROGRESS。5枠が利用可能かを確認したい。判断は？ Requested/Availableは応答項目の略記。",
+    "options": [
+      "要求が受け付けられたので、Availableに関係なく5枠利用可能とする",
+      "予約済み上限を5にすると、その取得応答のAvailableも必ず即時5になる",
+      "まだ5枠利用可能とは扱わず、対象エイリアスの割当状態と利用可能数を確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "要求数と利用可能数を区別します。要求値だけで割当完了とは判断できません。",
+      "関数全体の予約上限と、特定エイリアスへの割当・利用可能数は別の設定/状態です。",
+      "割当処理とAvailableを確認します。失敗ならStatusReasonも読み取り、要求数だけで準備完了としません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1157,5 +1187,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "lambda-async-accepted",
     "lambda-sync-function-error"
+  ],
+  [
+    "lambda-reserved-version-sum",
+    "lambda-provisioned-requested-available"
   ]
 ];

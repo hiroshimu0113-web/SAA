@@ -2322,6 +2322,91 @@
         "同時実行と下流保護",
         "サービスごとのイベントソースマッピング"
       ]
+    },
+    {
+      "id": "lambda-concurrency",
+      "title": "Lambdaの同時実行上限と割当状態",
+      "group": "processing",
+      "objective": "予約済みの関数全体の上限と、プロビジョニング済みの版/エイリアス割当の要求・利用可能状態を分ける。",
+      "estimated_minutes": 7,
+      "scope": "通常Lambdaの予約済み同時実行とプロビジョニング済み割当の設定範囲/状態。初期化遅延短縮の詳細・料金・上限超過時の全再試行・イベントソース流量制御・耐久/テナント分離等の互換性は対象外。",
+      "prerequisites": [
+        "lambda"
+      ],
+      "misconceptions": [
+        "予約済みの枠は各公開バージョンに別々に付く。",
+        "アカウントの空き枠があれば関数の予約上限を超えてよい。",
+        "プロビジョニング要求数がそのまま利用可能数になる。",
+        "関数の予約上限を設定すれば全割当が即時に完了する。"
+      ],
+      "checks": [
+        {
+          "id": "lambda-concurrency-explain",
+          "level": "explain",
+          "prompt": "予約済みとプロビジョニング済みの設定対象はどう違う？",
+          "expected_points": [
+            "予約済みは関数全体の容量と上限",
+            "全公開版と未公開版を含む",
+            "プロビジョニング済みは版/エイリアスの割当と状態"
+          ]
+        },
+        {
+          "id": "lambda-concurrency-apply",
+          "level": "apply",
+          "prompt": "要求5、利用可能0、割当中なら何を確認する？",
+          "expected_points": [
+            "要求だけで5枠準備完了としない",
+            "対象版/エイリアスの割当状態と利用可能数",
+            "失敗時のStatusReasonを確認"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch08-l01"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/lambda-concurrency.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionConcurrency.go",
+            "claim": "予約済み同時実行は関数全体（全公開バージョンと未公開版）の同時実行の容量を予約し、その上限を超えて拡大することを防ぐ。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+            "claim": "同時実行上限の超過はTooManyRequestsExceptionとなり、アカウントと関数予約上限のエラーを区別する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go",
+            "claim": "プロビジョニング済み同時実行の割当はバージョンまたはエイリアスに設定。応答はRequested/Allocated/Availableの各数と割当処理Status/失敗StatusReasonを持つ。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_GetProvisionedConcurrencyConfig.go",
+            "claim": "特定バージョン/エイリアスの設定で要求数・割当数・利用可能数と処理Status/失敗理由を取得できる。要求数だけで利用可能数は判断しない。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/types/enums.go",
+            "claim": "ProvisionedConcurrencyStatusEnumの既知の割当状態はIN_PROGRESS/READY/FAILED。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "初期化遅延短縮と費用の公式根拠",
+        "予約/割当の数値制約",
+        "イベントソース別の並列度と下流負荷"
+      ]
     }
   ]
 }
