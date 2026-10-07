@@ -1,4 +1,4 @@
-export function openOptions(root,views){
+export function openOptions(root,views,actions={}){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
  overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="back" hidden>戻る</button><h2 id="options-title">オプション</h2><button data-menu="close" aria-label="オプションを閉じる">閉じる</button></header><div class="options-content"></div></section>';
@@ -6,7 +6,7 @@ export function openOptions(root,views){
  const priorHidden=root.getAttribute('aria-hidden');root.setAttribute('aria-hidden','true');root.inert=true;document.body.style.overflow='hidden';
  let view='',detail=null,hold=null,pointer=null,suppressUntil=0;
  function clearHold(){clearTimeout(hold);hold=null;pointer=null;}
- function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||'オプション';back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();}
+ function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||'オプション';back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+x+'</button>').join('')+Object.keys(actions).map(x=>'<button data-command="'+x+'">'+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();const current=content.querySelector('.route-row.current');if(current)panel.scrollTop+=current.getBoundingClientRect().bottom-panel.getBoundingClientRect().bottom+20;}
  function inspect(card){
   if(detail||!card?.isConnected)return;
   clearHold();detail={nodes:[...content.childNodes],scroll:panel.scrollTop,card};
@@ -23,7 +23,7 @@ export function openOptions(root,views){
  function move(e){if(pointer&&e.pointerId===pointer.id&&(Math.abs(e.clientX-pointer.x)>12||Math.abs(e.clientY-pointer.y)>12))clearHold();}
  overlay.addEventListener('pointerdown',e=>{const card=e.target.closest('[data-inspect]');if(pointer){clearHold();return;}if(!card||e.button!==0)return;pointer={id:e.pointerId,x:e.clientX,y:e.clientY};hold=setTimeout(()=>{inspect(card);suppressUntil=Date.now()+500;},450);},{passive:true});
  overlay.addEventListener('contextmenu',e=>{if(e.target.closest('[data-inspect]'))e.preventDefault();});
- overlay.addEventListener('click',e=>{if(Date.now()<suppressUntil){e.preventDefault();return;}const el=e.target.closest('button');if(e.target===overlay||el?.dataset.menu==='close')close();else if(el?.dataset.menu==='back')goBack();else if(el?.dataset.view)show(el.dataset.view);});
+ overlay.addEventListener('click',e=>{if(Date.now()<suppressUntil){e.preventDefault();return;}const el=e.target.closest('button');if(e.target===overlay||el?.dataset.menu==='close')close();else if(el?.dataset.menu==='back')goBack();else if(el?.dataset.view)show(el.dataset.view);else if(el?.dataset.command&&actions[el.dataset.command]?.()!==false)close();});
  window.addEventListener('pointermove',move,{passive:true});window.addEventListener('pointerup',clearHold);window.addEventListener('pointercancel',clearHold);window.addEventListener('blur',clearHold);
  document.body.append(overlay);document.addEventListener('keydown',keys,true);show();
 }

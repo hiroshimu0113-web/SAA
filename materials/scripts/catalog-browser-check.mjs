@@ -51,7 +51,7 @@ try{
  await p.route('**/learning-catalog.json?update=*',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(newer)}));
  await p.getByRole('button',{name:'教材からカード・クイズを更新',exact:true}).click();await p.getByRole('status').filter({hasText:'次の冒険から反映'}).waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),raw);
  await p.reload();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),raw);await p.locator('.catalog-pending').waitFor();
- p.on('dialog',d=>d.accept());await p.getByRole('button',{name:'最初から',exact:true}).click();saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,newer.version);assert.equal(saved.deck.length,7);assert.equal(saved.learningCatalog.vocabulary.enemies.noise.name,'更新された課題名');
+ p.on('dialog',d=>d.accept());await p.locator('[data-action=options]').click();await p.getByRole('button',{name:'はじめから',exact:true}).click();saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,newer.version);assert.equal(saved.deck.length,7);assert.equal(saved.learningCatalog.vocabulary.enemies.noise.name,'更新された課題名');
  // Bad JSON and failed fetch leave both the run and pending catalogue intact.
  const prior=await p.evaluate(()=>({run:localStorage.getItem('saa-tower-run-v1'),pack:localStorage.getItem('saa-tower-catalog-v1')}));
  await p.unroute('**/learning-catalog.json?update=*');await p.route('**/learning-catalog.json?update=*',r=>r.fulfill({status:200,body:'bad json'}));await p.getByRole('button',{name:'教材からカード・クイズを更新',exact:true}).click();await p.getByRole('status').filter({hasText:'更新できませんでした'}).waitFor();

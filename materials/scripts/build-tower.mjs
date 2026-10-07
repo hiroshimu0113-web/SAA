@@ -64,3 +64,5 @@ await writeFile('dist/tower/vocabulary.html',html);
 await writeFile("dist/tower/options.html",html);
 
 await writeFile("dist/tower/header.html",html);
+
+await writeFile("dist/tower/ascent.html",html);

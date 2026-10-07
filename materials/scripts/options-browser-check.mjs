@@ -12,7 +12,7 @@ export async function checkOptions(browser,base){
   const option=await p.locator('.battle-hud [data-action=options]').boundingBox(),hp=await p.locator('.hud-hp').boundingBox(),journey=await p.locator('.battle-hud .journey-stats').boundingBox();assert.ok(option.x+option.width<=hp.x);assert.ok(hp.x+hp.width<=journey.x);assert.equal(await p.locator('.run-header').count(),0);await p.screenshot({path:'artifacts/header-battle.png'});
   const saved=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));
   await p.locator('[data-action=options]').tap();const dialog=p.getByRole('dialog');
-  assert.deepEqual(await dialog.locator('nav button').allTextContents(),['マップ','役一覧','デッキ','コレクション']);
+  assert.deepEqual(await dialog.locator('nav button').allTextContents(),['マップ','役一覧','デッキ','コレクション','はじめから']);
   await dialog.getByRole('button',{name:'マップ',exact:true}).tap();assert.equal(await dialog.locator('.route-row').count(),8);assert.equal(await dialog.locator('[data-action=node]').count(),0);assert.match(await dialog.locator('.route-row.current').innerText(),/1F/);
   await dialog.getByRole('button',{name:'戻る',exact:true}).tap();await dialog.getByRole('button',{name:'役一覧',exact:true}).tap();assert.equal(await dialog.locator('.combo-guide section').count(),3);
   await dialog.getByRole('button',{name:'戻る',exact:true}).tap();await dialog.getByRole('button',{name:'デッキ',exact:true}).tap();assert.equal(await dialog.locator('.options-cards .card').count(),s.deck.length);assert.match(await dialog.locator('.card strong').first().innerText(),/＋/);assert.equal(await dialog.locator('.options-cards .effect').first().isVisible(),false);
@@ -27,6 +27,7 @@ export async function checkOptions(browser,base){
   await p.screenshot({path:'artifacts/options-mobile.png'});await p.keyboard.press('Escape');assert.equal(await p.locator('.options-overlay').count(),0);assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),saved);assert.equal(await p.locator('[data-action=options]').evaluate(e=>e===document.activeElement),true);
   assert.equal(await p.locator('[data-action=hand-next],[data-action=hand-prev]').count(),0);
   await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),fixedRun(1,pack));await p.reload();const header=p.locator('.run-header');assert.equal(await header.locator('[data-action=options]').count(),1);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'artifacts/header-map.png'});
-  console.log('PASS options: four menus, read-only current map, five-column cards, long-press and keyboard details, drag cancellation, unified headers, 320px, Escape/focus, unchanged save.');
+  assert.deepEqual(await p.locator('.floor-label').allTextContents(),['8F','7F','6F','5F','4F','3F','2F','1F']);await p.waitForFunction(()=>{const r=document.querySelector('.scene .current').getBoundingClientRect();return r.top>0&&r.bottom<=innerHeight;});assert.equal(await p.locator('footer [data-action=new]').count(),0);
+  console.log('PASS options: five menus, ascending floors and current-floor focus, read-only current map, five-column cards, long-press and keyboard details, drag cancellation, unified headers, 320px, Escape/focus, unchanged save.');
  }finally{await c.close();activateCatalog(null);}
 }
