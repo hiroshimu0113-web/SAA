@@ -73,3 +73,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [Lambdaの同期・非同期呼出しと成功判定](../knowledge/lessons/lambda.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [Lambdaの同時実行上限と割当状態](../knowledge/lessons/lambda-concurrency.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [第6章RDS Multi-AZ](../knowledge/lessons/rds-multi-az.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

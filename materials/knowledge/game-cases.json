@@ -4293,6 +4293,129 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "rds-multi-az-standby",
+      "title": "RDS Multi-AZの待機系と接続復旧を判断する",
+      "premise": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。",
+      "unit_ids": [
+        "rds-multi-az"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch11",
+        "ch12"
+      ],
+      "constraints": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "questions": [
+        {
+          "id": "rds-standby-read-target",
+          "objective": "待機系と読取り先を区別する。",
+          "prompt": "通常のRDS PostgreSQLで、単一スタンバイ型のMulti-AZ DBインスタンスを利用する。AuroraやMulti-AZ DBクラスターではない。分析の読取り負荷をプライマリから分離したい。選択は？",
+          "options": [
+            {
+              "id": "rds-standby-read-target-a",
+              "text": "スタンバイへ分析クエリを送り、読取り先として使う",
+              "explanation": "この配置のスタンバイは読取り処理を提供しません。"
+            },
+            {
+              "id": "rds-standby-read-target-b",
+              "text": "読取り用リードレプリカを別途検討し、分析の接続先と許容遅延を設計する",
+              "explanation": "Multi-AZの待機系は可用性、リードレプリカは読取り分離のために使います。"
+            },
+            {
+              "id": "rds-standby-read-target-c",
+              "text": "Multi-AZにした時点で分析の接続先が自動分散されると扱う",
+              "explanation": "待機系への同期複製は分析クエリの自動分散を意味しません。"
+            }
+          ],
+          "correct_option_id": "rds-standby-read-target-b",
+          "runtime_option_order": [
+            "rds-standby-read-target-a",
+            "rds-standby-read-target-b",
+            "rds-standby-read-target-c"
+          ],
+          "rationale": "Multi-AZの待機系は可用性、リードレプリカは読取り分離のために使います。",
+          "source_urls": [
+            "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md"
+          ]
+        },
+        {
+          "id": "rds-failover-reconnect",
+          "objective": "切替後の接続を復旧する。",
+          "prompt": "同じ単一スタンバイ型RDS PostgreSQLで、切替後に古いDB接続が切断された。DBエンドポイントのDNS更新は完了し、権限と経路は正常。アプリは古いIPを固定している。対処は？",
+          "options": [
+            {
+              "id": "rds-failover-reconnect-a",
+              "text": "古いIPと切断された接続を使い続ける",
+              "explanation": "切替でDNSの参照先が変わり、既存接続の再確立が必要です。"
+            },
+            {
+              "id": "rds-failover-reconnect-b",
+              "text": "スタンバイを読取り専用のまま手動で書込み先にする",
+              "explanation": "この切替はRDSが扱います。待機系への直接接続を設計する対処ではありません。"
+            },
+            {
+              "id": "rds-failover-reconnect-c",
+              "text": "DBエンドポイントを再解決して接続を再確立し、未確定処理の結果を確認する",
+              "explanation": "新しい参照先へ接続を復旧します。切断前の処理結果は別途確認し、書込みを無条件に二重実行しません。"
+            }
+          ],
+          "correct_option_id": "rds-failover-reconnect-c",
+          "runtime_option_order": [
+            "rds-failover-reconnect-a",
+            "rds-failover-reconnect-b",
+            "rds-failover-reconnect-c"
+          ],
+          "rationale": "新しい参照先へ接続を復旧します。切断前の処理結果は別途確認し、書込みを無条件に二重実行しません。",
+          "source_urls": [
+            "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RebootDBInstance.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "対象を、読取り可能なリーダーを持つMulti-AZ DBクラスターへ変更する。",
+        "answer": "この単一スタンバイ型の結論を流用せず、クラスターのリーダーと接続先の仕様を確認する。",
+        "reason": "Multi-AZという名前だけで配置モデルを同一視しない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md",
+          "claim": "AWS公式アーカイブ版：単一スタンバイのMulti-AZ DBインスタンスは別AZへ同期複製し、スタンバイは読取りに使えない。切替時にDNSを変更し既存接続の再確立が必要。現行エンジン対応・時間・料金の根拠には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RebootDBInstance.go",
+          "claim": "再起動は一時的な停止を伴う。ForceFailoverはMulti-AZの切替による再起動で、Multi-AZでないインスタンスには有効化できない。DBクラスターの再起動は別API。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "MultiAZとAvailabilityZoneを同時指定できない。AuroraのAZはクラスターで管理し、この指定は適用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

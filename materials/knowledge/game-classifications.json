@@ -12239,6 +12239,276 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-rds-multi-az-standby",
+      "title": "RDS Multi-AZの待機系と接続復旧",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "RDSの配置・複製・接続先の条件から対処を判断する概念。",
+      "objective": "単一スタンバイ型の可用性と読取り拡張を区別し、切替後の接続復旧を説明する。",
+      "unit_ids": [
+        "rds-multi-az"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/rds-multi-az.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon RDS"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "limitations": [
+        "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+      ],
+      "misconceptions": [
+        "単一スタンバイを分析の読取り先にできる。",
+        "Multi-AZなら既存TCP接続は切断されない。",
+        "DBインスタンスとDBクラスターのMulti-AZは同じ構成。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/rds-multi-az.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。",
+        "counterexample": "対象を、読取り可能なリーダーを持つMulti-AZ DBクラスターへ変更する。 この単一スタンバイ型の結論を流用せず、クラスターのリーダーと接続先の仕様を確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/rds-multi-az.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-rds-multi-az-standby",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md",
+          "claim": "AWS公式アーカイブ版：単一スタンバイのMulti-AZ DBインスタンスは別AZへ同期複製し、スタンバイは読取りに使えない。切替時にDNSを変更し既存接続の再確立が必要。現行エンジン対応・時間・料金の根拠には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RebootDBInstance.go",
+          "claim": "再起動は一時的な停止を伴う。ForceFailoverはMulti-AZの切替による再起動で、Multi-AZでないインスタンスには有効化できない。DBクラスターの再起動は別API。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "MultiAZとAvailabilityZoneを同時指定できない。AuroraのAZはクラスターで管理し、この指定は適用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "RDSの可用性と読取り条件を説明するカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/rds-multi-az.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの復旧時間・複製遅延・データ損失・費用を保証しない。",
+        "simplifications": [
+          "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+        ],
+        "mislearning_risks": [
+          "単一スタンバイを分析の読取り先にできる。",
+          "Multi-AZなら既存TCP接続は切断されない。",
+          "DBインスタンスとDBクラスターのMulti-AZは同じ構成。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-rds-multi-az-standby",
+      "title": "RDS Multi-AZの待機系と接続復旧を判断する",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "単一スタンバイ型の可用性と読取り拡張を区別し、切替後の接続復旧を説明する。",
+      "unit_ids": [
+        "rds-multi-az"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-multi-az-standby"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon RDS"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "Aurora、Multi-AZ DBクラスター、RDS Customは対象外。",
+        "設問の既知状態から判断し、現行の数値上限や費用は扱わない。"
+      ],
+      "limitations": [
+        "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+      ],
+      "misconceptions": [
+        "単一スタンバイを分析の読取り先にできる。",
+        "Multi-AZなら既存TCP接続は切断されない。",
+        "DBインスタンスとDBクラスターのMulti-AZは同じ構成。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-multi-az-standby.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-multi-az-standby.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-multi-az-standby.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "rds-multi-az-standby.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md",
+          "claim": "AWS公式アーカイブ版：単一スタンバイのMulti-AZ DBインスタンスは別AZへ同期複製し、スタンバイは読取りに使えない。切替時にDNSを変更し既存接続の再確立が必要。現行エンジン対応・時間・料金の根拠には用いない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RebootDBInstance.go",
+          "claim": "再起動は一時的な停止を伴う。ForceFailoverはMulti-AZの切替による再起動で、Multi-AZでないインスタンスには有効化できない。DBクラスターの再起動は別API。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+          "claim": "MultiAZとAvailabilityZoneを同時指定できない。AuroraのAZはクラスターで管理し、この指定は適用しない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/rds-multi-az.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲーム効果はAWSの復旧時間・複製遅延・データ損失・費用を保証しない。",
+        "simplifications": [
+          "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。"
+        ],
+        "mislearning_risks": [
+          "単一スタンバイを分析の読取り先にできる。",
+          "Multi-AZなら既存TCP接続は切断されない。",
+          "DBインスタンスとDBクラスターのMulti-AZは同じ構成。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "rds-standby-read-target, rds-failover-reconnect"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

@@ -2407,6 +2407,75 @@
         "予約/割当の数値制約",
         "イベントソース別の並列度と下流負荷"
       ]
+    },
+    {
+      "id": "rds-multi-az",
+      "title": "RDS Multi-AZの待機系と接続復旧",
+      "group": "storage",
+      "objective": "単一スタンバイ型の可用性と読取り拡張を区別し、切替後の接続復旧を説明する。",
+      "estimated_minutes": 7,
+      "scope": "通常RDS PostgreSQLのDBインスタンス。Aurora/DBクラスター/Custom・現行の料金と数値上限は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "単一スタンバイを分析の読取り先にできる。",
+        "Multi-AZなら既存TCP接続は切断されない。",
+        "DBインスタンスとDBクラスターのMulti-AZは同じ構成。"
+      ],
+      "checks": [
+        {
+          "id": "rds-multi-az-explain",
+          "level": "explain",
+          "prompt": "可用性と読取り分離、鮮度はどう違う？",
+          "expected_points": [
+            "配置の種類を確認",
+            "待機系と読取り先を区別",
+            "最新反映と接続先を確認"
+          ]
+        },
+        {
+          "id": "rds-multi-az-apply",
+          "level": "apply",
+          "prompt": "ケースの前提が変わったら何を見直す？",
+          "expected_points": [
+            "明示された構成と状態",
+            "目的と必要な鮮度",
+            "対処の対象と限界"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch06-l01"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式アーカイブの範囲を明記して仕組みを照合し、現行SDK固定コミットでAPI条件を確認。同一担当の別工程確認、独立レビュー・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/rds-multi-az.md",
+        "evidence": [
+          {
+            "url": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md",
+            "claim": "AWS公式アーカイブ版：単一スタンバイのMulti-AZ DBインスタンスは別AZへ同期複製し、スタンバイは読取りに使えない。切替時にDNSを変更し既存接続の再確立が必要。現行エンジン対応・時間・料金の根拠には用いない。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_RebootDBInstance.go",
+            "claim": "再起動は一時的な停止を伴う。ForceFailoverはMulti-AZの切替による再起動で、Multi-AZでないインスタンスには有効化できない。DBクラスターの再起動は別API。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/rds/api_op_CreateDBInstance.go",
+            "claim": "MultiAZとAvailabilityZoneを同時指定できない。AuroraのAZはクラスターで管理し、この指定は適用しない。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "現行エンジン対応・料金・制限の確認",
+        "実AWSによる切替・複製遅延の観測"
+      ]
     }
   ]
 }

@@ -1049,6 +1049,36 @@ export const CASE_QUIZZES={
       "割当処理とAvailableを確認します。失敗ならStatusReasonも読み取り、要求数だけで準備完了としません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutProvisionedConcurrencyConfig.go"
+  },
+  "rds-standby-read-target": {
+    "prompt": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。 通常のRDS PostgreSQLで、単一スタンバイ型のMulti-AZ DBインスタンスを利用する。AuroraやMulti-AZ DBクラスターではない。分析の読取り負荷をプライマリから分離したい。選択は？",
+    "options": [
+      "スタンバイへ分析クエリを送り、読取り先として使う",
+      "読取り用リードレプリカを別途検討し、分析の接続先と許容遅延を設計する",
+      "Multi-AZにした時点で分析の接続先が自動分散されると扱う"
+    ],
+    "answer": 1,
+    "reasons": [
+      "この配置のスタンバイは読取り処理を提供しません。",
+      "Multi-AZの待機系は可用性、リードレプリカは読取り分離のために使います。",
+      "待機系への同期複製は分析クエリの自動分散を意味しません。"
+    ],
+    "source": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md"
+  },
+  "rds-failover-reconnect": {
+    "prompt": "通常RDS PostgreSQLのDBインスタンスを扱う。2問は別状況の独立判断。 同じ単一スタンバイ型RDS PostgreSQLで、切替後に古いDB接続が切断された。DBエンドポイントのDNS更新は完了し、権限と経路は正常。アプリは古いIPを固定している。対処は？",
+    "options": [
+      "古いIPと切断された接続を使い続ける",
+      "スタンバイを読取り専用のまま手動で書込み先にする",
+      "DBエンドポイントを再解決して接続を再確立し、未確定処理の結果を確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "切替でDNSの参照先が変わり、既存接続の再確立が必要です。",
+      "この切替はRDSが扱います。待機系への直接接続を設計する対処ではありません。",
+      "新しい参照先へ接続を復旧します。切断前の処理結果は別途確認し、書込みを無条件に二重実行しません。"
+    ],
+    "source": "https://github.com/awsdocs/amazon-rds-user-guide/blob/f2e9ed35fba2cb7e3942a1c23ed5b37162222d41/doc_source/Concepts.MultiAZSingleStandby.md"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1191,5 +1221,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "lambda-reserved-version-sum",
     "lambda-provisioned-requested-available"
+  ],
+  [
+    "rds-standby-read-target",
+    "rds-failover-reconnect"
   ]
 ];
