@@ -15,9 +15,9 @@ export const ENEMIES={
  elite:{tier:'elite',name:'断絶の騎士',hp:65,glyph:'⛨',pattern:[['debuff',2,'misconfig'],['attack',15],['attack',19],['guard',12]]},
  elite_fire:{tier:'elite',name:'炎上の番人',hp:65,glyph:'♨',pattern:[['debuff',3,'burn'],['attack',14],['guard',12],['attack',18]]},
  elite_drain:{tier:'elite',name:'枯渇の収集者',hp:65,glyph:'◈',pattern:[['debuff',2,'depletion'],['attack',15],['guard',10],['attack',19]]},
- boss:{tier:'boss',name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay'],['attack',13],['debuff',3,'burn'],['guard',18],['debuff',2,'overload'],['attack',24]]},
- boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion'],['attack',16],['debuff',2,'misconfig'],['attack',18],['guard',18],['attack',22]]},
- boss_stagnation:{tier:'boss',name:'停滞の支配者',hp:125,glyph:'⌛',pattern:[['debuff',2,'overload'],['attack',16],['debuff',1,'delay'],['guard',18],['attack',22],['attack',14]]}
+ boss:{tier:'boss',name:'連鎖障害の王',hp:125,glyph:'♜',pattern:[['debuff',1,'delay',10],['attack',16],['debuff',3,'burn',10],['guard',18],['debuff',2,'overload',10],['attack',27]]},
+ boss_resource:{tier:'boss',name:'資源喰らいの巨塔',hp:125,glyph:'▥',pattern:[['debuff',2,'depletion',10],['attack',19],['debuff',2,'misconfig',10],['attack',21],['guard',18],['attack',25]]},
+ boss_stagnation:{tier:'boss',name:'停滞の支配者',hp:125,glyph:'⌛',pattern:[['debuff',2,'overload',10],['attack',19],['debuff',1,'delay',10],['guard',18],['attack',25],['attack',17]]}
 };
 export const ENEMY_POOLS=Object.fromEntries(['battle','elite','boss'].map(tier=>[tier,Object.keys(ENEMIES).filter(id=>ENEMIES[id].tier===tier)]));
 export const enemyDebuffTypes=id=>[...new Set(ENEMIES[id].pattern.filter(a=>a[0]==='debuff').map(a=>a[2]))];
@@ -76,9 +76,9 @@ export function intentActions(s){
  const b=s.battle;if(delayPaused(b.enemyDebuffs.delay))return [{type:'wait',value:0}];
  let strength=b.strength;const actions=[],target={...b.playerDebuffs};
  for(let n=0;n<(b.enemyDebuffs.delay===2?2:1);n++){
-  const [type,base,status]=ENEMIES[b.enemy].pattern[(b.enemyStep+n)%ENEMIES[b.enemy].pattern.length];
+  const [type,base,status,damage]=ENEMIES[b.enemy].pattern[(b.enemyStep+n)%ENEMIES[b.enemy].pattern.length];
   const value=type==='attack'?attackAmount(base+strength,b.enemyDebuffs,target):type==='guard'?blockAmount(base,b.enemyDebuffs):base;
-  actions.push({type,value,...(status?{status}:{})});if(type==='buff')strength+=base;if(type==='debuff')applyDebuff(target,status,base);
+  actions.push({type,value,...(status?{status}:{}),...(damage?{damage:attackAmount(damage+strength,b.enemyDebuffs,target)}:{})});if(type==='buff')strength+=base;if(type==='debuff')applyDebuff(target,status,base);
  }
  return actions;
 }
@@ -154,9 +154,9 @@ export function act(state,action){
    const count=b.enemyDebuffs.delay===2?2:1;
    for(let n=0;n<count&&s.hp>0;n++){
     // Recompute each action after prior buffs/debuffs; the cursor advances only on action.
-    const [type,base,status]=ENEMIES[b.enemy].pattern[b.enemyStep%ENEMIES[b.enemy].pattern.length];b.enemyStep++;
-    if(type==='attack'){
-     const value=attackAmount(base+b.strength,b.enemyDebuffs,b.playerDebuffs),blocked=Math.min(value,b.playerBlock),loss=Math.min(s.hp,value-blocked);
+    const [type,base,status,damage]=ENEMIES[b.enemy].pattern[b.enemyStep%ENEMIES[b.enemy].pattern.length];b.enemyStep++;
+    if(type==='attack'||damage){
+     const value=attackAmount((damage||base)+b.strength,b.enemyDebuffs,b.playerDebuffs),blocked=Math.min(value,b.playerBlock),loss=Math.min(s.hp,value-blocked);
      b.playerBlock-=blocked;s.hp-=loss;
      if(blocked)emit(b,'player','guard',blocked,(blocked===value?'完全ガード ':'防御 ')+blocked);
      if(loss)emit(b,'player','hit',loss,'−'+loss);
@@ -164,7 +164,7 @@ export function act(state,action){
     }
     if(type==='guard'){const value=blockAmount(base,b.enemyDebuffs);b.block+=value;emit(b,'enemy','shield',value,'◇ ＋'+value);log(s,'敵は'+value+'ブロック。');}
     if(type==='buff'){b.strength+=base;emit(b,'enemy','power',base,'攻撃力 ＋'+base);log(s,'敵の強化＋'+base+'。');}
-    if(type==='debuff'){
+    if(type==='debuff'&&s.hp>0){
      if(applyDebuff(b.playerDebuffs,status,base)){refreshed.push(status);emit(b,'player','debuff',base,DEBUFFS[status].name+(status==='delay'?' 付与':' ＋'+base));log(s,'自分に'+DEBUFFS[status].name+'。');}
     }
    }

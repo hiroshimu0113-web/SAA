@@ -10,7 +10,7 @@ export async function checkDebuffs(browser,base){
   await p.goto(base+'tower/debuff.html');
   const read=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
   const setup=async s=>{await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();};
-  await setup(battle('boss'));assert.match(await p.locator('.intent').innerText(),/遅延/);
+  await setup(battle('boss'));assert.match(await p.locator('.intent').innerText(),/攻撃 10.*遅延/);
   await p.locator('.end-turn').tap();assert.match(await p.locator('.delay-notice').innerText(),/前半/);assert.equal((await read()).battle.playerActions,2);assert.equal((await read()).battle.playerDebuffs.delay,2);assert.equal((await read()).battle.enemyStep,2);
   const before=await read();await p.reload();await p.locator('.end-turn').tap();const after=await read();assert.equal(after.battle.enemyStep,before.battle.enemyStep);assert.equal(after.hp,before.hp);assert.equal(after.battle.playerActions,1);assert.match(await p.locator('.delay-notice').innerText(),/後半/);
   await p.evaluate(()=>window.scrollTo(0,0));await p.screenshot({path:'artifacts/player-double-action.png'});await p.locator('.end-turn').tap();assert.equal((await read()).battle.playerDebuffs.delay,0);assert.equal(await p.locator('.player-column [data-debuff="burn"]').getAttribute('aria-label'),'炎上 3');
