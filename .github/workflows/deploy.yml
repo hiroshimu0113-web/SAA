@@ -37,6 +37,9 @@ jobs:
       - run: pnpm test
       - run: pnpm knowledge:check
       - run: pnpm build
+      # The Azure HTTP mirror can stall apt even when the official HTTPS mirror works.
+      - name: Use the official Ubuntu HTTPS package mirror
+        run: printf '%s\n' 'https://archive.ubuntu.com/ubuntu/' | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
       - name: Install WebKit for Safari regression tests
         timeout-minutes: 7
         run: |
