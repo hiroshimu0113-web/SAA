@@ -9,7 +9,7 @@ export async function checkHeroes(browser,base){
   await page.evaluate(seed=>{crypto.getRandomValues=a=>{a[0]=seed;return a;};},seed);
   await page.getByRole('button',{name:seed===0?'冒険を始める':'最初から',exact:true}).tap();
   await page.locator('.hero-profile').filter({hasText:HEROES[id].name}).waitFor();
-  let saved=JSON.parse(await page.evaluate(()=>localStorage.getItem('saa-tower-run-v1')));assert.equal(saved.hero,id);assert.deepEqual(saved.relics,[HEROES[id].relic]);
+  let saved=JSON.parse(await page.evaluate(()=>localStorage.getItem('saa-tower-run-v1')));assert.equal(saved.hero,id);assert.equal(saved.deck.length,7);assert.equal(saved.deck.filter(c=>c.id==='strike').length,3);assert.equal(saved.deck.filter(c=>c.id==='guard').length,3);assert.deepEqual(saved.relics,[HEROES[id].relic]);
   const rows=page.locator('.route-row');assert.equal(await rows.count(),8);for(let floor=0;floor<8;floor++){const nodes=rows.nth(floor).locator('.node');assert.equal(await nodes.count(),saved.routes[floor].length);for(let lane=0;lane<saved.routes[floor].length;lane++)assert.ok((await nodes.nth(lane).getAttribute('class')).split(' ').includes(saved.routes[floor][lane]));}assert.equal(await rows.last().locator('.node.boss').count(),1);
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.reload();await page.locator('.hero-profile').waitFor();saved=JSON.parse(await page.evaluate(()=>localStorage.getItem('saa-tower-run-v1')));assert.equal(saved.hero,id);

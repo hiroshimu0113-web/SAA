@@ -57,7 +57,7 @@ export function newRun(seed=Date.now(),catalog=null){
  const heroIds=Object.keys(HEROES);s.hero=heroIds[(seed>>>0)%heroIds.length];s.relics=[HEROES[s.hero].relic];s.log=[HEROES[s.hero].name+'として、尖塔へ。'];
  s.routes=generateRoutes(s.seed);s.cardPurchases=0;s.shopRelic=null;s.rewardPicks=0;
  if(catalog)s.learningCatalog=JSON.parse(JSON.stringify(catalog));
- for(let i=0;i<5;i++)add(s,'strike');for(let i=0;i<4;i++)add(s,'guard');add(s,'probe');return s;
+ for(let i=0;i<3;i++)add(s,'strike');for(let i=0;i<3;i++)add(s,'guard');add(s,'probe');return s;
 }
 export function cardValues(card){const d=CARDS[card.id],v={...d,...(d.debuff?{debuff:{...d.debuff}}:{})};if(card.plus){if(d.kind==='power'){v.cost=Math.max(0,d.cost-1);}else{for(const k of ['block','heal','draw','energy','armor','strength'])v[k]=(v[k]||0)+(v['up'+k[0].toUpperCase()+k.slice(1)]||0);if(d.damage)v.damage=Math.ceil(d.damage*1.5);if(d.debuff)v.debuff.amount=d.debuff.amount+1;}}return v;}
 export function describe(card){const d=cardValues(card),parts=[];if(d.battleOnly)return d.text;if(d.damage)parts.push(d.damage+(d.perBlock?'＋ブロック分':'')+'ダメージ'+(d.hits?' × '+d.hits:''));if(d.block)parts.push(d.block+'ブロック');if(d.draw)parts.push(d.draw+'枚引く');if(d.heal)parts.push('HPを'+d.heal+'回復');if(d.debuff)parts.push('敵に'+DEBUFFS[d.debuff.id].name+(d.debuff.id==='delay'?'（休止'+d.debuff.amount+'ターン）':d.debuff.amount));if(d.strength)parts.push('強化＋'+d.strength);if(d.armor)parts.push('毎ターン'+d.armor+'ブロック');if(d.energy)parts.push('エナジー＋'+d.energy);if(d.self)parts.push('HPを'+d.self+'失う');if(d.exhaust)parts.push('戦闘中除外');return parts.join('。')+'。';}

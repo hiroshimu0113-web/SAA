@@ -10,7 +10,7 @@ const pack=JSON.parse(await readFile('public/tower/learning-catalog.json','utf8'
 try{
  const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const p=await c.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
  await p.goto(base+'tower/learning.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).click();
- let saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,pack.version);assert.equal(saved.deck.length,10);
+ let saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,pack.version);assert.equal(saved.deck.length,7);
  await p.locator('.learning-cards > summary').click();await p.getByRole('heading',{name:'切り分け｜責任共有（スターター）',exact:true}).waitFor();await p.getByRole('heading',{name:'IAMロール',exact:true}).waitFor();
  await p.setViewportSize({width:320,height:740});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.locator('.learning-cards > summary').click();
  // Update during a half-answered quiz: preserve run JSON byte-for-byte and use staged data only next run.
@@ -20,7 +20,7 @@ try{
  await p.route('**/learning-catalog.json?update=*',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(newer)}));
  await p.getByRole('button',{name:'教材からカード・クイズを更新',exact:true}).click();await p.getByRole('status').filter({hasText:'次の冒険から反映'}).waitFor();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),raw);
  await p.reload();assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),raw);await p.locator('.catalog-pending').waitFor();
- p.on('dialog',d=>d.accept());await p.getByRole('button',{name:'最初から',exact:true}).click();saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,newer.version);assert.equal(saved.deck.length,10);
+ p.on('dialog',d=>d.accept());await p.getByRole('button',{name:'最初から',exact:true}).click();saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,newer.version);assert.equal(saved.deck.length,7);
  // Bad JSON and failed fetch leave both the run and pending catalogue intact.
  const prior=await p.evaluate(()=>({run:localStorage.getItem('saa-tower-run-v1'),pack:localStorage.getItem('saa-tower-catalog-v1')}));
  await p.unroute('**/learning-catalog.json?update=*');await p.route('**/learning-catalog.json?update=*',r=>r.fulfill({status:200,body:'bad json'}));await p.getByRole('button',{name:'教材からカード・クイズを更新',exact:true}).click();await p.getByRole('status').filter({hasText:'更新できませんでした'}).waitFor();

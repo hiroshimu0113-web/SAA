@@ -412,3 +412,8 @@
 - 炎上・自傷を含む実ダメージに反応。戦闘結果や保存データを変更しない。次の効果表示やタイマーで解除。OSのprefers-reduced-motionでは振動なし。
 - fixed要素の基準を変えるtransformを親に適用せず、スクロール中のHP/結果表示を維持。新入口 tower/impact.html。
 - 教材本文・分類変更なし。89テスト・ビルドとChromiumで発動条件、固定UI、解除、スクロール、自動ターン終了、再読込、軽減設定を検証成功。完了：CI WebKitの新演出・操作/オフライン回帰・教材更新検証成功。実装769cf6a、[Actions 37569876028](https://github.com/hiroshimu0113-web/SAA/actions/runs/37569876028) build/deploy成功。公開HTML・effects・CSS・Service WorkerがローカルとSHA256一致。次は実機で揺れの強さを試遊評価。
+
+## スターターデッキの小型化（2026-10-07）
+- 新規冒険を攻撃strike3枚・防御guard3枚・観測probe1枚の計7枚に変更。全主人公・教材名差し替え時に共通。カード効果と主人公レリックは維持。
+- 保存済みのデッキは削減しない。「最初から」で適用。旧10枚デッキのシナリオ検証はlegacy fixtureとして保持し、新規7枚構成は実newRunとブラウザーで検証。
+- 教材本文・分類変更なし。89テスト・ビルド・Chromiumの3主人公開始/再読込と獲得・削除検証成功。CI WebKit・公開は進行中。新入口 tower/starter.html。次は実機でデッキの回転と難易度を試遊評価。

@@ -1,12 +1,12 @@
 import {fixedRun as newRun} from '../scripts/fixed-run-fixture.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {act,parseRun,HEROES,REWARD_RELICS,CARDS} from '../public/tower/engine.mjs';
+import {newRun as createRun,act,parseRun,HEROES,REWARD_RELICS,CARDS} from '../public/tower/engine.mjs';
 const battle=seed=>act(newRun(seed),{type:'node',lane:0});
 const round=s=>parseRun(JSON.stringify(s));
 function win(s){s.battle.hp=1;const c=s.deck.find(c=>s.battle.hand.includes(c.uid)&&CARDS[c.id].damage);assert.ok(c);return act(s,{type:'play',uid:c.uid});}
-test('heroes: all three assigned by seed, persist through saves; starter deck unchanged',()=>{
- const seen=new Set();for(let seed=0;seed<90;seed++){const s=newRun(seed);seen.add(s.hero);assert.deepEqual(round(s),s);assert.deepEqual(s,newRun(seed));assert.deepEqual(s.relics,[HEROES[s.hero].relic]);assert.equal(s.deck.length,10);}
+test('heroes: all three assigned by seed, persist through saves; three attacks, three guards and one probe in new runs',()=>{
+ const seen=new Set();for(let seed=0;seed<90;seed++){const s=createRun(seed);seen.add(s.hero);assert.deepEqual(round(s),s);assert.deepEqual(s,createRun(seed));assert.deepEqual(s.relics,[HEROES[s.hero].relic]);assert.equal(s.deck.length,7);assert.equal(s.deck.filter(c=>c.id==='strike').length,3);assert.equal(s.deck.filter(c=>c.id==='guard').length,3);assert.equal(s.deck.filter(c=>c.id==='probe').length,1);}
  assert.equal(seen.size,3);
  for(const mutate of [s=>s.hero='constructor',s=>s.hero=null,s=>s.relics=[],s=>s.relics.push('runbook')]){const s=newRun(0);mutate(s);assert.throws(()=>round(s));}
 });

@@ -38,11 +38,11 @@ test('expansion: winning grows max HP, heals rounded percent and grants coins on
  let s=win(enter('battle',['growth']));assert.equal(s.hp,40);assert.equal(s.maxHp,77);
 });
 test('expansion: four candidates and two distinct picks survive partial backup; skip and repeated picks safe',()=>{
- let s=win(enter('battle',['choice','double']));assert.equal(s.reward.length,4);assert.equal(s.rewardPicks,2);const first=s.reward[0];s=round(act(s,{type:'reward',id:first}));assert.equal(s.deck.length,11);assert.equal(s.reward.length,3);assert.equal(s.rewardPicks,1);assert.equal(s.phase,'reward');assert.equal(act(s,{type:'reward',id:first}),s);s=round(act(s,{type:'reward',id:s.reward[0]}));assert.equal(s.phase,'map');assert.equal(s.deck.length,12);
- s=win(enter('battle',['double']));assert.equal(s.reward.length,3);s=act(s,{type:'reward',id:s.reward[0]});s=round(act(s,{type:'reward',id:null}));assert.equal(s.deck.length,11);
+ let s=win(enter('battle',['choice','double']));assert.equal(s.reward.length,4);assert.equal(s.rewardPicks,2);const first=s.reward[0];s=round(act(s,{type:'reward',id:first}));assert.equal(s.deck.length,8);assert.equal(s.reward.length,3);assert.equal(s.rewardPicks,1);assert.equal(s.phase,'reward');assert.equal(act(s,{type:'reward',id:first}),s);s=round(act(s,{type:'reward',id:s.reward[0]}));assert.equal(s.phase,'map');assert.equal(s.deck.length,9);
+ s=win(enter('battle',['double']));assert.equal(s.reward.length,3);s=act(s,{type:'reward',id:s.reward[0]});s=round(act(s,{type:'reward',id:null}));assert.equal(s.deck.length,8);
 });
 test('expansion: rest removal is free, mutually exclusive with heal/upgrade and enforces five-card minimum',()=>{
- let s=enter('rest',['prune']);const gold=s.gold;s=round(act(s,{type:'rest-remove',uid:s.deck[0].uid}));assert.equal(s.deck.length,9);assert.equal(s.gold,gold);assert.equal(s.phase,'map');assert.equal(act(s,{type:'heal'}),s);
+ let s=enter('rest',['prune']);const gold=s.gold;s=round(act(s,{type:'rest-remove',uid:s.deck[0].uid}));assert.equal(s.deck.length,6);assert.equal(s.gold,gold);assert.equal(s.phase,'map');assert.equal(act(s,{type:'heal'}),s);
  s=enter('rest');assert.equal(act(s,{type:'rest-remove',uid:s.deck[0].uid}),s);s=enter('rest',['prune']);s.deck=s.deck.slice(0,5);assert.equal(act(s,{type:'rest-remove',uid:s.deck[0].uid}),s);
 });
 test('expansion: shop has one unowned reward relic at 100; sale is once and prices recalculate',()=>{
