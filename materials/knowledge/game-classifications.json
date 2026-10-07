@@ -9437,6 +9437,262 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-dms-start-migration",
+      "title": "DMSの初期ロードと変更追従の開始",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "初期データと変更追従の方式、タスク開始の条件を適用する概念。",
+      "objective": "初期データと変更追従に合う移行方式を選び、初回起動を再開・再ロードと区別する。",
+      "unit_ids": [
+        "dms"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/dms.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Database Migration Service"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "DMSが対応するDB。ソースCDC設定・権限・通信とテーブルマッピングは確認済み。",
+        "第2問は別の未実行タスク。実行済みの再開ケースを初回へ当てはめない。"
+      ],
+      "limitations": [
+        "DMSのレプリケーションインスタンス/タスクを使うfull-load-and-cdcが中心。対応DB・CDC設定・権限等は確認済みの前提。Serverless全般、スキーマ変換、切替の完了条件は別途確認。"
+      ],
+      "misconceptions": [
+        "full-loadだけで初期ロード後の変更も必ず追従する。",
+        "cdcだけで空の移行先へ既存全行も必ず入る。",
+        "作成直後の初回タスクへresume-processingを指定する。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/dms.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "稼働中DBの初期データを移し、切替前の変更を追従する。",
+        "counterexample": "第2問のタスクは既に実行され、初期ロード後に停止した。全件再ロードではなく停止位置からの変更追従を再開したい。 条件とデータ状態を確認してresume-processingを使う。全テーブルを再ロードするreload-targetとは分ける。",
+        "comparison": {
+          "path": "knowledge/lessons/dms.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-dms-start-migration",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_CreateReplicationTask.go",
+          "claim": "タスクは移行方式、送信元/移行先エンドポイント、レプリケーションインスタンス、テーブルマッピングを指定して作成する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "full-load-and-cdcはテーブルデータ移行後にソース変更を適用。full-load/full-load-and-cdc/cdcの初回実行はstart-replicationのみ。resume-processingは実行済みタスク用。reload-targetは全テーブルを再ロードして変更取得を開始する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/dms.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの移動や報酬はDB移行完了・整合性・停止時間を保証しない。",
+        "simplifications": [
+          "DMSのレプリケーションインスタンス/タスクを使うfull-load-and-cdcが中心。対応DB・CDC設定・権限等は確認済みの前提。Serverless全般、スキーマ変換、切替の完了条件は別途確認。"
+        ],
+        "mislearning_risks": [
+          "full-loadだけで初期ロード後の変更も必ず追従する。",
+          "cdcだけで空の移行先へ既存全行も必ず入る。",
+          "作成直後の初回タスクへresume-processingを指定する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-dms-start-migration",
+      "title": "初期データと継続更新の移行",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "初期データと変更追従に合う移行方式を選び、初回起動を再開・再ロードと区別する。",
+      "unit_ids": [
+        "dms"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "dms-start-migration"
+        }
+      ],
+      "domains": [
+        "database",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Database Migration Service"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "DMSが対応するDB。ソースCDC設定・権限・通信とテーブルマッピングは確認済み。",
+        "第2問は別の未実行タスク。実行済みの再開ケースを初回へ当てはめない。"
+      ],
+      "limitations": [
+        "DMSのレプリケーションインスタンス/タスクを使うfull-load-and-cdcが中心。対応DB・CDC設定・権限等は確認済みの前提。Serverless全般、スキーマ変換、切替の完了条件は別途確認。"
+      ],
+      "misconceptions": [
+        "full-loadだけで初期ロード後の変更も必ず追従する。",
+        "cdcだけで空の移行先へ既存全行も必ず入る。",
+        "作成直後の初回タスクへresume-processingを指定する。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dms-start-migration.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dms-start-migration.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dms-start-migration.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "dms-start-migration.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_CreateReplicationTask.go",
+          "claim": "タスクは移行方式、送信元/移行先エンドポイント、レプリケーションインスタンス、テーブルマッピングを指定して作成する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "full-load-and-cdcはテーブルデータ移行後にソース変更を適用。full-load/full-load-and-cdc/cdcの初回実行はstart-replicationのみ。resume-processingは実行済みタスク用。reload-targetは全テーブルを再ロードして変更取得を開始する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/dms.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの移動や報酬はDB移行完了・整合性・停止時間を保証しない。",
+        "simplifications": [
+          "DMSのレプリケーションインスタンス/タスクを使うfull-load-and-cdcが中心。対応DB・CDC設定・権限等は確認済みの前提。Serverless全般、スキーマ変換、切替の完了条件は別途確認。"
+        ],
+        "mislearning_risks": [
+          "full-loadだけで初期ロード後の変更も必ず追従する。",
+          "cdcだけで空の移行先へ既存全行も必ず入る。",
+          "作成直後の初回タスクへresume-processingを指定する。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "dms-initial-and-changes, dms-first-start-action"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

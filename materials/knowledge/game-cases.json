@@ -3059,6 +3059,122 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "dms-start-migration",
+      "title": "初期データと継続更新の移行",
+      "premise": "稼働中DBの初期データを移し、切替前の変更を追従する。",
+      "unit_ids": [
+        "dms"
+      ],
+      "chapter_ids": [
+        "ch06",
+        "ch11"
+      ],
+      "constraints": [
+        "DMSが対応するDB。ソースCDC設定・権限・通信とテーブルマッピングは確認済み。",
+        "第2問は別の未実行タスク。実行済みの再開ケースを初回へ当てはめない。"
+      ],
+      "questions": [
+        {
+          "id": "dms-initial-and-changes",
+          "objective": "初期データと継続変更に合う方式を選ぶ。",
+          "prompt": "対応するソースDBから空の移行先DBへ初期データを移し、その間や移行後の更新も切替前まで追従したい。必要な権限・通信・ソースCDC設定とテーブルマッピングは確認済み。どのMigrationTypeを選ぶ？",
+          "options": [
+            {
+              "id": "dms-initial-and-changes-a",
+              "text": "full-loadのみを選び、その完了後の更新も必ず自動追従するとみなす",
+              "explanation": "初期ロードだけと継続変更の追従は区別します。全件と継続変更にはfull-load-and-cdcを選びます。"
+            },
+            {
+              "id": "dms-initial-and-changes-b",
+              "text": "full-load-and-cdcを選ぶ。移行後の変更適用と切替前の検証は別に確認する",
+              "explanation": "テーブルデータを移し、その後にソースの変更を適用します。方式の選択だけで切替成功を保証しません。"
+            },
+            {
+              "id": "dms-initial-and-changes-c",
+              "text": "初期データを入れずにcdcのみを選び、既存の全行も必ずロードされるとみなす",
+              "explanation": "変更だけを扱う方式で初期データの移行も済んだと考えてはいけません。"
+            }
+          ],
+          "correct_option_id": "dms-initial-and-changes-b",
+          "runtime_option_order": [
+            "dms-initial-and-changes-a",
+            "dms-initial-and-changes-b",
+            "dms-initial-and-changes-c"
+          ],
+          "rationale": "テーブルデータを移し、その後にソースの変更を適用します。方式の選択だけで切替成功を保証しません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_CreateReplicationTask.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
+          ]
+        },
+        {
+          "id": "dms-first-start-action",
+          "objective": "初回と再開の操作を区別する。",
+          "prompt": "別の新しいfull-load-and-cdcタスクを作成した。まだ一度も実行しておらず、開始可能な状態と必要設定を確認済み。StartReplicationTaskの初回のStartReplicationTaskTypeは？",
+          "options": [
+            {
+              "id": "dms-first-start-action-a",
+              "text": "resume-processing。作成しただけでも実行済みタスクと同じ扱いになる",
+              "explanation": "resume-processingは以前に実行したタスク用で、初回には使いません。"
+            },
+            {
+              "id": "dms-first-start-action-b",
+              "text": "reload-target。初回は必ず再ロード操作から始める",
+              "explanation": "初回にreload-targetなどの別操作を使うとデータエラーになります。"
+            },
+            {
+              "id": "dms-first-start-action-c",
+              "text": "start-replication。開始要求の成功後も移行状況を確認する",
+              "explanation": "この方式を含めたタスクの初回にはstart-replicationを使います。要求成功とデータ移行の完了は別です。"
+            }
+          ],
+          "correct_option_id": "dms-first-start-action-c",
+          "runtime_option_order": [
+            "dms-first-start-action-a",
+            "dms-first-start-action-b",
+            "dms-first-start-action-c"
+          ],
+          "rationale": "この方式を含めたタスクの初回にはstart-replicationを使います。要求成功とデータ移行の完了は別です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問のタスクは既に実行され、初期ロード後に停止した。全件再ロードではなく停止位置からの変更追従を再開したい。",
+        "answer": "条件とデータ状態を確認してresume-processingを使う。全テーブルを再ロードするreload-targetとは分ける。",
+        "reason": "full-load-and-cdcの実行済みタスクでは停止位置からの再開が可能。初回とは操作条件が違う。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_CreateReplicationTask.go",
+          "claim": "タスクは移行方式、送信元/移行先エンドポイント、レプリケーションインスタンス、テーブルマッピングを指定して作成する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go",
+          "claim": "full-load-and-cdcはテーブルデータ移行後にソース変更を適用。full-load/full-load-and-cdc/cdcの初回実行はstart-replicationのみ。resume-processingは実行済みタスク用。reload-targetは全テーブルを再ロードして変更取得を開始する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

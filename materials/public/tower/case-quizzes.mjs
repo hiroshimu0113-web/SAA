@@ -749,6 +749,36 @@ export const CASE_QUIZZES={
       "APIの要求成功は復元の可否やアプリ整合性を検証したことにはなりません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateSnapshot.go"
+  },
+  "dms-initial-and-changes": {
+    "prompt": "稼働中DBの初期データを移し、切替前の変更を追従する。 対応するソースDBから空の移行先DBへ初期データを移し、その間や移行後の更新も切替前まで追従したい。必要な権限・通信・ソースCDC設定とテーブルマッピングは確認済み。どのMigrationTypeを選ぶ？",
+    "options": [
+      "full-loadのみを選び、その完了後の更新も必ず自動追従するとみなす",
+      "full-load-and-cdcを選ぶ。移行後の変更適用と切替前の検証は別に確認する",
+      "初期データを入れずにcdcのみを選び、既存の全行も必ずロードされるとみなす"
+    ],
+    "answer": 1,
+    "reasons": [
+      "初期ロードだけと継続変更の追従は区別します。全件と継続変更にはfull-load-and-cdcを選びます。",
+      "テーブルデータを移し、その後にソースの変更を適用します。方式の選択だけで切替成功を保証しません。",
+      "変更だけを扱う方式で初期データの移行も済んだと考えてはいけません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_CreateReplicationTask.go"
+  },
+  "dms-first-start-action": {
+    "prompt": "稼働中DBの初期データを移し、切替前の変更を追従する。 別の新しいfull-load-and-cdcタスクを作成した。まだ一度も実行しておらず、開始可能な状態と必要設定を確認済み。StartReplicationTaskの初回のStartReplicationTaskTypeは？",
+    "options": [
+      "resume-processing。作成しただけでも実行済みタスクと同じ扱いになる",
+      "reload-target。初回は必ず再ロード操作から始める",
+      "start-replication。開始要求の成功後も移行状況を確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "resume-processingは以前に実行したタスク用で、初回には使いません。",
+      "初回にreload-targetなどの別操作を使うとデータエラーになります。",
+      "この方式を含めたタスクの初回にはstart-replicationを使います。要求成功とデータ移行の完了は別です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/databasemigrationservice/api_op_StartReplicationTask.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -851,5 +881,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "snapshot-unwritten-buffer",
     "snapshot-pending-resume"
+  ],
+  [
+    "dms-initial-and-changes",
+    "dms-first-start-action"
   ]
 ];
