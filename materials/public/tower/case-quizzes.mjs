@@ -959,6 +959,36 @@ export const CASE_QUIZZES={
       "同じVPCという条件だけではOne Zoneの同じAZという条件を満たしません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateMountTarget.go"
+  },
+  "efs-access-point-identity": {
+    "prompt": "EFSのアクセスポイント経由でマウントする。各設問のID・パスは教材用の仮定。2問は別構成の独立した判断。 EFSアクセスポイントでPosixUserのUID/GIDを1001/1001、RootDirectory.Pathを/apps/team-aへ設定済み。このアクセスポイントでマウントするクライアントのOS上のUID/GIDは2000/2000。対象パスは存在し、ネットワーク・IAM・マウント条件は正常。ファイル操作のIDと公開ルートは？",
+    "options": [
+      "必ず2000/2000を使い、EFS全体のルートを公開する",
+      "1001/1001を使い、/apps/team-aをその経路のルートとして扱う。書込み可否は権限も確認する",
+      "設定とクライアントのIDを加算し、3001/3001として新しいファイルシステムを作る"
+    ],
+    "answer": 1,
+    "reasons": [
+      "アクセスポイントで設定したPOSIX IDがクライアントIDを上書きし、設定パスがその経路のルートになります。",
+      "設定IDとルートを適用します。ただしIDの上書きだけで全ファイルの書込み権限が付くわけではありません。",
+      "IDは加算されず、アクセスポイント作成は別のファイルシステム作成ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateAccessPoint.go"
+  },
+  "efs-access-point-missing-root": {
+    "prompt": "EFSのアクセスポイント経由でマウントする。各設問のID・パスは教材用の仮定。2問は別構成の独立した判断。 別のEFSアクセスポイントでRootDirectory.Path=/apps/new-team。対象ディレクトリは存在せず、CreationInfoも未設定。まだクライアントは接続していない。ネットワーク・IAM等の他条件は正常。これを使って初回マウントする前の適切な対応は？",
+    "options": [
+      "パスを指定すれば所有者や権限なしで必ず自動作成されるので、何も確認しない",
+      "マウントターゲットを同じAZに増やせばディレクトリも自動作成される",
+      "適切な所有者UID/GID・Permissionsを含むCreationInfoでアクセスポイントを作成するか、事前に適切な権限でディレクトリを作り確認する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "未存在パスの自動作成にはCreationInfoの所有者UID/GIDとPermissionsが必要です。指定パスだけでは足りません。",
+      "ネットワーク接続先の配置は、アクセスポイントのルート作成条件を変更しません。",
+      "未存在かつCreationInfoなしではそのアクセスポイントのマウントが失敗します。自動作成はクライアント接続時の動作です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1089,5 +1119,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "efs-same-az-subnets",
     "efs-one-zone-target"
+  ],
+  [
+    "efs-access-point-identity",
+    "efs-access-point-missing-root"
   ]
 ];

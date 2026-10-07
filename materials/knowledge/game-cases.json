@@ -3920,6 +3920,125 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "efs-access-point-scope",
+      "title": "EFSアクセスポイントの操作IDと初回マウント",
+      "premise": "EFSのアクセスポイント経由でマウントする。各設問のID・パスは教材用の仮定。2問は別構成の独立した判断。",
+      "unit_ids": [
+        "efs",
+        "least-privilege"
+      ],
+      "chapter_ids": [
+        "ch02",
+        "ch05",
+        "ch08",
+        "ch10"
+      ],
+      "constraints": [
+        "対象のアクセスポイント経由の動作を問い、別のマウント経路まで保証しない。",
+        "第2問はパス未存在、CreationInfoなし、初回接続前で他条件は正常。"
+      ],
+      "questions": [
+        {
+          "id": "efs-access-point-identity",
+          "objective": "クライアントIDと強制するPOSIX IDを分ける。",
+          "prompt": "EFSアクセスポイントでPosixUserのUID/GIDを1001/1001、RootDirectory.Pathを/apps/team-aへ設定済み。このアクセスポイントでマウントするクライアントのOS上のUID/GIDは2000/2000。対象パスは存在し、ネットワーク・IAM・マウント条件は正常。ファイル操作のIDと公開ルートは？",
+          "options": [
+            {
+              "id": "efs-access-point-identity-a",
+              "text": "必ず2000/2000を使い、EFS全体のルートを公開する",
+              "explanation": "アクセスポイントで設定したPOSIX IDがクライアントIDを上書きし、設定パスがその経路のルートになります。"
+            },
+            {
+              "id": "efs-access-point-identity-b",
+              "text": "1001/1001を使い、/apps/team-aをその経路のルートとして扱う。書込み可否は権限も確認する",
+              "explanation": "設定IDとルートを適用します。ただしIDの上書きだけで全ファイルの書込み権限が付くわけではありません。"
+            },
+            {
+              "id": "efs-access-point-identity-c",
+              "text": "設定とクライアントのIDを加算し、3001/3001として新しいファイルシステムを作る",
+              "explanation": "IDは加算されず、アクセスポイント作成は別のファイルシステム作成ではありません。"
+            }
+          ],
+          "correct_option_id": "efs-access-point-identity-b",
+          "runtime_option_order": [
+            "efs-access-point-identity-a",
+            "efs-access-point-identity-b",
+            "efs-access-point-identity-c"
+          ],
+          "rationale": "設定IDとルートを適用します。ただしIDの上書きだけで全ファイルの書込み権限が付くわけではありません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateAccessPoint.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go"
+          ]
+        },
+        {
+          "id": "efs-access-point-missing-root",
+          "objective": "存在しない公開ルートの作成条件を判断する。",
+          "prompt": "別のEFSアクセスポイントでRootDirectory.Path=/apps/new-team。対象ディレクトリは存在せず、CreationInfoも未設定。まだクライアントは接続していない。ネットワーク・IAM等の他条件は正常。これを使って初回マウントする前の適切な対応は？",
+          "options": [
+            {
+              "id": "efs-access-point-missing-root-a",
+              "text": "パスを指定すれば所有者や権限なしで必ず自動作成されるので、何も確認しない",
+              "explanation": "未存在パスの自動作成にはCreationInfoの所有者UID/GIDとPermissionsが必要です。指定パスだけでは足りません。"
+            },
+            {
+              "id": "efs-access-point-missing-root-b",
+              "text": "マウントターゲットを同じAZに増やせばディレクトリも自動作成される",
+              "explanation": "ネットワーク接続先の配置は、アクセスポイントのルート作成条件を変更しません。"
+            },
+            {
+              "id": "efs-access-point-missing-root-c",
+              "text": "適切な所有者UID/GID・Permissionsを含むCreationInfoでアクセスポイントを作成するか、事前に適切な権限でディレクトリを作り確認する",
+              "explanation": "未存在かつCreationInfoなしではそのアクセスポイントのマウントが失敗します。自動作成はクライアント接続時の動作です。"
+            }
+          ],
+          "correct_option_id": "efs-access-point-missing-root-c",
+          "runtime_option_order": [
+            "efs-access-point-missing-root-a",
+            "efs-access-point-missing-root-b",
+            "efs-access-point-missing-root-c"
+          ],
+          "rationale": "未存在かつCreationInfoなしではそのアクセスポイントのマウントが失敗します。自動作成はクライアント接続時の動作です。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第2問のパスが既に存在し、対象操作IDに必要な権限があり、他のマウント条件も満たす。CreationInfoはない。",
+        "answer": "未存在パスを作るためのCreationInfo欠落という理由では失敗しない。パスの存在と必要な権限を確認する。",
+        "reason": "対象パスが存在しないという作成条件が変わる。CreationInfoがないだけで全構成のマウント失敗とはしない。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateAccessPoint.go",
+          "claim": "アクセスポイントはOSユーザー/グループとパスをその経由の要求へ適用し、NFSクライアントのID情報を上書きする。指定パスをクライアントのルートとして公開する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go",
+          "claim": "PosixUserのUid/Gidはアクセスポイント経由のファイル操作へ使うID。RootDirectoryのパスが未存在ならCreationInfoの所有者UID/GID/Permissionsでクライアント接続時に作成。未存在かつCreationInfoなしではそのアクセスポイントでのマウントが失敗する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後にPOSIX ID上書き・公開ルート・未存在パスの作成条件と全誤答を公式SDKへ照合。同一担当確認、独立監査・実AWSマウント試験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

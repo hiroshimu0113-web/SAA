@@ -11401,6 +11401,280 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "system-efs-access-point-scope",
+      "title": "EFSの接続経路とアクセスポイントの適用設定",
+      "aliases": [],
+      "kind": "system",
+      "classification_reason": "クライアント/接続先/アクセスポイント/ルート作成の設定と流れを追う構成教材。",
+      "objective": "接続経路と操作ID・公開ルート・初回作成条件を分けて追う。",
+      "unit_ids": [
+        "efs",
+        "least-privilege"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "storage",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic File System"
+      ],
+      "game_targets": [
+        "case",
+        "build"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "EFSのマウント条件",
+        "OSのユーザーID/グループIDとファイル権限"
+      ],
+      "conditions": [
+        "対象のアクセスポイント経由の動作を問い、別のマウント経路まで保証しない。",
+        "第2問はパス未存在、CreationInfoなし、初回接続前で他条件は正常。"
+      ],
+      "limitations": [
+        "アクセスポイント経由の要求。別経路と完全なIAM/POSIX評価は対象外。"
+      ],
+      "misconceptions": [
+        "クライアントIDが常に優先する。",
+        "未存在パスでもパス指定だけで作成できる。",
+        "アクセスポイントを作れば全経路の隔離が保証される。"
+      ],
+      "content": {
+        "components": {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "構成要素"
+        },
+        "input": "アクセスポイント経由のNFS要求とPOSIX ID/ルート/作成設定",
+        "flow": {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "仕組み"
+        },
+        "output": "設定された操作IDと公開ルート以下のファイル操作",
+        "dependencies": [
+          "対象のアクセスポイント経由の動作を問い、別のマウント経路まで保証しない。",
+          "第2問はパス未存在、CreationInfoなし、初回接続前で他条件は正常。"
+        ],
+        "failure_behavior": {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "異常時・限界"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-efs-access-point-scope",
+          "reason": "IDの上書きと未存在パスの条件を独立2問で確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateAccessPoint.go",
+          "claim": "アクセスポイントはOSユーザー/グループとパスをその経由の要求へ適用し、NFSクライアントのID情報を上書きする。指定パスをクライアントのルートとして公開する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go",
+          "claim": "PosixUserのUid/Gidはアクセスポイント経由のファイル操作へ使うID。RootDirectoryのパスが未存在ならCreationInfoの所有者UID/GID/Permissionsでクライアント接続時に作成。未存在かつCreationInfoなしではそのアクセスポイントでのマウントが失敗する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存efs/least-privilegeを共有しsystemとcaseを分類。新カード素材へ重複計上しない。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後にPOSIX ID上書き・公開ルート・未存在パスの作成条件と全誤答を公式SDKへ照合。同一担当確認、独立監査・実AWSマウント試験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "経路と操作ID・パスの構成判断をケース、将来のビルドへ再利用する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はファイル権限やテナント隔離の保証を表さない。",
+        "simplifications": [
+          "アクセスポイント経由の要求。別経路と完全なIAM/POSIX評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "クライアントIDが常に優先する。",
+          "未存在パスでもパス指定だけで作成できる。",
+          "アクセスポイントを作れば全経路の隔離が保証される。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "完全なIAM/POSIX評価・別経路の制限・実AWS試験は未実施。"
+      ]
+    },
+    {
+      "id": "case-efs-access-point-scope",
+      "title": "EFSアクセスポイントの操作IDと初回マウント",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "明示条件で操作IDと初回マウントの対処を判断するケース。",
+      "objective": "接続経路と操作ID・公開ルート・初回作成条件を分けて追う。",
+      "unit_ids": [
+        "efs",
+        "least-privilege"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-access-point-scope"
+        }
+      ],
+      "domains": [
+        "storage",
+        "security"
+      ],
+      "capabilities": [
+        "store",
+        "protect",
+        "coordinate"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic File System"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "EFSのマウント条件",
+        "OSのユーザーID/グループIDとファイル権限"
+      ],
+      "conditions": [
+        "対象のアクセスポイント経由の動作を問い、別のマウント経路まで保証しない。",
+        "第2問はパス未存在、CreationInfoなし、初回接続前で他条件は正常。"
+      ],
+      "limitations": [
+        "アクセスポイント経由の要求。別経路と完全なIAM/POSIX評価は対象外。"
+      ],
+      "misconceptions": [
+        "クライアントIDが常に優先する。",
+        "未存在パスでもパス指定だけで作成できる。",
+        "アクセスポイントを作れば全経路の隔離が保証される。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-access-point-scope.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-access-point-scope.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-access-point-scope.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "efs-access-point-scope.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/api_op_CreateAccessPoint.go",
+          "claim": "アクセスポイントはOSユーザー/グループとパスをその経由の要求へ適用し、NFSクライアントのID情報を上書きする。指定パスをクライアントのルートとして公開する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go",
+          "claim": "PosixUserのUid/Gidはアクセスポイント経由のファイル操作へ使うID。RootDirectoryのパスが未存在ならCreationInfoの所有者UID/GID/Permissionsでクライアント接続時に作成。未存在かつCreationInfoなしではそのアクセスポイントでのマウントが失敗する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存efs/least-privilegeを共有しsystemとcaseを分類。新カード素材へ重複計上しない。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後にPOSIX ID上書き・公開ルート・未存在パスの作成条件と全誤答を公式SDKへ照合。同一担当確認、独立監査・実AWSマウント試験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全33ケースの両問・全解説・320px・回答/結果保存再開・オフライン・報酬重複防止成功。知識地図33ノード・検索・前提導線・キーボード・320px成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "独立2問ケースへ取り込み、全解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/efs-access-point.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの報酬はファイル権限やテナント隔離の保証を表さない。",
+        "simplifications": [
+          "アクセスポイント経由の要求。別経路と完全なIAM/POSIX評価は対象外。"
+        ],
+        "mislearning_risks": [
+          "クライアントIDが常に優先する。",
+          "未存在パスでもパス指定だけで作成できる。",
+          "アクセスポイントを作れば全経路の隔離が保証される。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "efs-access-point-identity, efs-access-point-missing-root"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

@@ -67,3 +67,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [ターゲット追跡の目標指標と縮退の範囲](../knowledge/lessons/target-tracking.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [EFSの共有ファイルとマウントターゲット配置](../knowledge/lessons/efs.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
+
+- [EFSアクセスポイントのユーザーとルート制御](../knowledge/lessons/efs-access-point.md)：確認・分類済みの構成本文。efs/least-privilegeを共有し、新カード素材・詳細単位へ重複計上しない。ケース取り込み済み、公開未実施。

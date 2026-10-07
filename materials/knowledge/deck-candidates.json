@@ -222,6 +222,7 @@
         "candidate-idempotency",
         "candidate-lambda",
         "candidate-lambda-concurrency",
+        "candidate-least-privilege",
         "candidate-secrets-manager",
         "candidate-step-functions",
         "candidate-task-role",
@@ -266,6 +267,7 @@
         "candidate-cloudtrail",
         "candidate-cloudwatch",
         "candidate-durability",
+        "candidate-efs",
         "candidate-guardduty",
         "candidate-iam-role",
         "candidate-inspector",
@@ -1702,7 +1704,8 @@
       "related_chapter_ids": [
         "ch04",
         "ch05",
-        "ch08"
+        "ch08",
+        "ch10"
       ],
       "material_refs": [
         {
@@ -2600,6 +2603,7 @@
       "related_chapter_ids": [
         "ch02",
         "ch05",
+        "ch08",
         "ch10",
         "ch12"
       ],
