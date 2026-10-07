@@ -902,3 +902,14 @@
 - 更新作業の指示は公式サイトへの反映までを含み、完了回答に公開リンクを提供する。AGENTS.mdとGAME_CONTENT_UPDATE.mdへ記録。
 - 前回までの名称更新（通常44カード、戦闘限定1カード、敵12種、レリック24種、役3種）を既存GitHub Pagesへ公開する。主人公とデバフは固定。92テスト・ローカルビルド・Chromium検証は前回完了済み。
 - 公開の入口：https://hiroshimu0113-web.github.io/SAA/tower/vocabulary.html 。公開処理中。Actions/公開確認の結果は後記する。
+
+## 公開完了（2026-10-07、用語更新）
+- 更新依頼に公式サイト反映と回答リンク提供を含めるユーザー指示を作業ルールへ保存し、前回までの未公開更新を公開した。
+- 実装コミット：d3ba611bdc30e91affe62ae0060c41ffe622c634。既存の本人所有公開リポジトリhiroshimu0113-web/SAAのmainへ反映済み。
+- Actions 37602772444：https://github.com/hiroshimu0113-web/SAA/actions/runs/37602772444 。build/deployともsuccess。92テスト、knowledge:check、ビルド、WebKitのモバイル操作/旧保存/オフライン回帰と教材更新/次回適用/途中クイズ保持の検証成功。
+- 公開リンク：https://hiroshimu0113-web.github.io/SAA/tower/vocabulary.html 。新しい冒険から教材の名称を適用。旧冒険は保存された名称を保持。主人公3種とデバフ5種は固定。
+- 配信用GitHub Pages成果物（artifact 11473771310）を取得し、tower/vocabulary.html、learning-catalog.json、app.mjs、engine.mjs、catalog.mjs、enemy-definitions.mjs、sw.jsの7ファイルのSHA256がローカルの検証済みdistと一致。教材パックbc603555ef9ea626。
+- 公開URLの直接HTTPS取得は本環境で403（HTTPコード000）となり確認できなかった。公開処理の成功と実際に配信した成果物の一致を確認した。公開URLの実端末操作は未検証で、公開HTMLを直接取得できたという記録にはしない。
+- 初回送信は宛先/全体承認の不足として自動承認レビューに拒否された。連携GitHubアカウントと公開リポジトリの所有者一致・既存Pages有効・mainとローカル基点の一致・依頼範囲内の20ファイルであることを確認し、同じ送信方式の再審査で承認された。未解決の承認待ちはない。
+- 保存と同期：materials/の教材対応表・分類・ゲーム実装・検証・作業ルールをGitHubへ同期済み。進捗は分類70件（imported70件）。新規/改訂補足は独立監査待ち。旧配布ZIP/教材音声は保持。
+- 次：本人のiPhoneで新名称・長押し補足・新しい冒険への反映を試遊。今後の更新依頼では同様に検証→公式公開→公開リンク提供まで進める。
