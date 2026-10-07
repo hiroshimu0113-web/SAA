@@ -24,3 +24,10 @@ test('junk clears on victory and death, cannot persist outside battle or enter r
  s=act(start(),{type:'end'});s.deck.find(c=>c.id==='junk').plus=true;assert.throws(()=>parseRun(JSON.stringify(s)));
  for(let seed=0;seed<20;seed++){let r=act(fixedRun(seed),{type:'node',lane:0});r.battle.hp=1;const c=r.deck.find(c=>c.id==='strike');hand(r,c.uid);r=act(r,{type:'play',uid:c.uid});assert.ok(!r.reward.includes('junk'));}
 });
+
+test('every normal enemy generates two junk cards without attacking on its fourth action',()=>{
+ for(const [id,e] of Object.entries(ENEMIES).filter(([,e])=>e.tier==='battle')){
+  let s=act(fixedRun(1),{type:'node',lane:0});s.battle.enemy=id;s.battle.hp=s.battle.maxHp=e.hp;s.battle.enemyStep=3;s.battle.strength=5;
+  assert.deepEqual(intent(s),{type:'junk',value:2});const n=round(act(s,{type:'end'}));assert.equal(n.hp,s.hp);assert.equal(n.deck.length,s.deck.length+2);assert.equal(n.deck.filter(c=>c.id==='junk').length,2);assert.equal(n.battle.enemyStep,4);assert.ok(!n.battle.events.some(e=>e.kind==='hit'));assert.deepEqual(intent(n).type,e.pattern[0][0]);
+ }
+});

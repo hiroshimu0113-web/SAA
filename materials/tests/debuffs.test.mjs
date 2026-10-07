@@ -75,8 +75,8 @@ test('debuffs: old saves migrate weak to overload, preserve deck and reject corr
  }
 });
 test('debuffs: double attacks consume block once, and delay followed by lethal attack remains loadable',()=>{
- let s=start('deadlock');s.battle.enemyStep=2;s.battle.enemyDebuffs.delay=2;s.battle.playerBlock=15;
- s=round(end(s));assert.equal(s.hp,63);assert.equal(s.battle.enemyStep,4);
+ let s=start('leak');s.battle.enemyStep=0;s.battle.enemyDebuffs.delay=2;s.battle.playerBlock=9;
+ s=round(end(s));assert.equal(s.hp,69);assert.equal(s.battle.enemyStep,2);
  s=start('boss');s.battle.enemyDebuffs.delay=2;s.hp=11;s=round(end(s));assert.equal(s.phase,'lost');assert.equal(s.battle.enemyStep,2);
  // Enemy can apply delay and then die from burn before the next player turn starts.
  s=start('boss');s.battle.hp=1;s.battle.enemyDebuffs.burn=1;s=round(end(s));assert.equal(s.phase,'won');
