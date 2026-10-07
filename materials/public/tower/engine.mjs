@@ -31,7 +31,15 @@ const owns=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
 function rnd(s){s.rng=(Math.imul(s.rng,1664525)+1013904223)>>>0;return s.rng/4294967296;}
 function shuffle(s,arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd(s)*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export const routesFor=s=>s.routes||ROUTES;
-export function generateRoutes(seed){const r={rng:(seed^0x9e3779b9)>>>0};return [['battle','battle'],...shuffle(r,ROUTES.slice(1,6)).map(row=>shuffle(r,row)),['rest','rest'],['boss']];}
+export function generateRoutes(seed){
+ const r={rng:(seed^0x9e3779b9)>>>0},pool=['battle','battle','battle','event','event','shop','rest','elite'];
+ const pick=except=>{const choices=pool.filter(t=>t!==except);return choices[Math.floor(rnd(r)*choices.length)];};
+ const middle=Array.from({length:5},()=>{const first=pick();return [first,pick(first)];});
+ // Guarantee useful choices without fixing the room counts or their floors.
+ const anchors=shuffle(r,[0,1,2,3,4]);
+ for(const [i,type] of ['event','shop','elite'].entries())middle[anchors[i]]=shuffle(r,[type,pick(type)]);
+ return [['battle','battle'],...middle,shuffle(r,['rest',pick('rest')]),['boss']];
+}
 const has=(s,id)=>s.relics.includes(id);
 export const defenseBonus=s=>(has(s,'plating')?1:0)-(has(s,'escalation')?2:0);
 export const playerBlockGain=(s,n)=>n>0?blockAmount(Math.max(0,n+defenseBonus(s)),s.battle.playerDebuffs):0;

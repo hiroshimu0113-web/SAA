@@ -7,7 +7,7 @@ function force(s,id){const c=s.deck.find(c=>c.id===id);s.battle.hand=[c.uid];s.b
 function win(s){s.battle.hp=1;return round(act(s,{type:'play',uid:force(s,'strike')}));}
 function quiet(s){s.battle.enemy='noise';s.battle.maxHp=32;s.battle.hp=32;s.battle.enemyStep=1;return s;}
 test('expansion: seeded random maps vary, preserve guaranteed endpoints and legacy fixed maps',()=>{
- const maps=new Set();for(let seed=0;seed<80;seed++){const s=newRun(seed);round(s);maps.add(JSON.stringify(s.routes));assert.deepEqual(s,newRun(seed));assert.deepEqual(s.routes[0],['battle','battle']);assert.deepEqual(s.routes[6],['rest','rest']);assert.deepEqual(s.routes[7],['boss']);for(const t of ['shop','elite','event'])assert.ok(s.routes.flat().includes(t));}
+ const maps=new Set();for(let seed=0;seed<80;seed++){const s=newRun(seed);round(s);maps.add(JSON.stringify(s.routes));assert.deepEqual(s,newRun(seed));assert.deepEqual(s.routes[0],['battle','battle']);assert.ok(s.routes[6].includes('rest'));assert.notEqual(s.routes[6][0],s.routes[6][1]);assert.deepEqual(s.routes[7],['boss']);for(const t of ['shop','elite','event'])assert.ok(s.routes.flat().includes(t));}
  assert.ok(maps.size>30);const old=newRun(1);delete old.routes;old.floor=1;old.history=[{floor:0,lane:0,type:'battle'}];assert.equal(act(round(old),{type:'node',lane:0}).phase,'event');
  for(const routes of [[],[['constructor']],Array(8).fill(['boss'])]){const s=newRun(1);s.routes=routes;assert.throws(()=>round(s));}
 });
