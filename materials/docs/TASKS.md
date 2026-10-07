@@ -819,6 +819,6 @@
 - 新入口 https://hiroshimu0113-web.github.io/SAA/tower/reactor.html 。実機での強さの調整は未実施。
 
 ## G-RU 強化・クイズ・デバフUI
-- 状態: 検証中
+- 状態: 完了
 - 成果物: 強化倍率とコスト変更、2ターン遅延、クイズ規則v2と旧保存互換、デバフアイコン、RULES_UPDATE.md。
-- 検証: 74テストとビルド成功、Chrome検証。CI/WebKitと配信確認を続行。
+- 検証: 74テスト・ビルド・Chrome/WebKit成功。Actions 37560360402成功、公開5ファイルの一致を確認。320pxの表示を目視、実機試遊は未実施。
