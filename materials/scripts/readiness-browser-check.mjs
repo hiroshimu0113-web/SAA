@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {chromium} from '@playwright/test';
+import {chromium,webkit} from '@playwright/test';
 import {preview} from 'vite';
 const server=await preview({base:'/SAA/',preview:{host:'127.0.0.1',port:4193,strictPort:true}});
-const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||undefined});
+const browser=await (process.env.BROWSER==='webkit'?webkit:chromium).launch(process.env.BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH||undefined});
 const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
 const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const base='http://127.0.0.1:4193/SAA/';

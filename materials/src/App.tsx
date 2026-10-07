@@ -60,7 +60,7 @@ export default function App() {
   const review = reviewQuestions(practiceQuestions, progress.attempts);
   const pool = (quizMode === 'review' ? review : practiceQuestions).filter(q => filter === 'all' || q.chapterId === filter);
   const question = questions.find(q => q.id === questionId);
-  function openQuestion(q: Question) { setOptionSeed(crypto.randomUUID()); setQuestionId(q.id); setSelected([]); setAnswered(false); setUnsure(false); }
+  function openQuestion(q: Question) { setOptionSeed(Array.from(crypto.getRandomValues(new Uint32Array(2))).join('-')); setQuestionId(q.id); setSelected([]); setAnswered(false); setUnsure(false); }
   function answer() { if (!question || selected.length !== question.answers.length || answered) return; update(p => ({ ...p, attempts: [...p.attempts, { questionId: question.id, selected, correct: isCorrect(question, selected), unsure, at: new Date().toISOString() }] })); setAnswered(true); }
   function toggleSelection(values: string[], id: string, count: number) { return count === 1 ? [id] : values.includes(id) ? values.filter(value => value !== id) : values.length < count ? [...values, id] : values; }
   const exam = progress.exam;

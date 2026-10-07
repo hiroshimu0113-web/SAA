@@ -62,6 +62,10 @@ jobs:
           catch (error) { console.log('::error::' + String(error.stack).replaceAll('%', '%25').replaceAll('\n', '%0A').replaceAll('\r', '%0D')); process.exitCode = 1; }"
         env:
           BROWSER: webkit
+      - name: Verify chapter and exam flows in Safari
+        run: node scripts/readiness-browser-check.mjs
+        env:
+          BROWSER: webkit
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
