@@ -1,18 +1,18 @@
 export const BASE_FLAVOR={
   "strike": {
-    "note": "指標を他の情報と照合し、問題の箇所を絞り込みます。",
-    "limit": "切り分けそのものが障害を修復するとは限りません。",
-    "source": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html"
+    "note": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+    "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+    "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "guard": {
-    "note": "運用上の対応は、利用者や事業への影響を基準に優先します。",
-    "limit": "防壁は特定のAWSサービス名ではなく、ブロックは架空の防御値です。",
-    "source": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html"
+    "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+    "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+    "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "probe": {
-    "note": "データを集めるだけでなく、基準値や変化を読み取ることが重要です。",
-    "limit": "監視を置くだけで障害が解消するわけではありません。",
-    "source": "https://docs.aws.amazon.com/wellarchitected/latest/operational-excellence-pillar/operate.html"
+    "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+    "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+    "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "burst": {
     "note": "ワークロードの要件に合わせ、資源の種類や大きさを選びます。",

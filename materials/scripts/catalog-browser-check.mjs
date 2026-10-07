@@ -13,6 +13,13 @@ try{
  let saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,pack.version);assert.equal(saved.deck.length,7);
  await p.locator('.learning-cards > summary').click();await p.getByRole('heading',{name:'責任共有モデル（スターター）',exact:true}).waitFor();await p.getByRole('heading',{name:'IAMロール',exact:true}).first().waitFor();
  await p.setViewportSize({width:320,height:740});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.locator('.learning-cards > summary').click();
+ // A saved old pack must show corrected starter names without rewriting the run.
+ const oldLabels=JSON.parse(JSON.stringify(saved));oldLabels.learningCatalog.starterNames={strike:'切り分け',guard:'防壁',probe:'観測'};
+ const oldRaw=JSON.stringify(oldLabels);await p.evaluate(({key,raw})=>localStorage.setItem(key,raw),{key,raw:oldRaw});await p.reload();
+ await p.locator('.learning-cards > summary').click();
+ for(const name of ['責任共有モデル','最小権限','ヘルスチェック'])await p.getByRole('heading',{name:name+'（スターター）',exact:true}).waitFor();
+ assert.equal(await p.evaluate(k=>localStorage.getItem(k),key),oldRaw);
+ await p.evaluate(({key,saved})=>localStorage.setItem(key,JSON.stringify(saved)),{key,saved});await p.reload();
  // All additional entities expose their published teaching text at mobile width.
  const initial=JSON.stringify(saved);
  await p.locator('.learning-vocabulary > summary').click();

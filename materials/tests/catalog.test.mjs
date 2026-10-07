@@ -13,7 +13,7 @@ const pack=JSON.parse(readFileSync(new URL('../public/tower/learning-catalog.jso
 const clone=x=>JSON.parse(JSON.stringify(x));
 test('catalog: published terms/questions are playable; starter effects and initial deck are unchanged',()=>{
  const legacy=newRun(42),current=newRun(42,pack);assert.deepEqual(current.deck,legacy.deck);
- for(const id of STARTERS){const {name,...actual}=CARDS[id],{name:old,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);assert.notEqual(name,old);}
+ for(const id of STARTERS){const {name,...actual}=CARDS[id],{name:old,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);assert.equal(name,pack.starterNames[id]);}
  assert.equal(Object.keys(CARDS).filter(id=>!CARDS[id].battleOnly).length,Object.keys(pack.cards).length+3);assert.equal(Object.keys(QUIZZES).length,Object.keys(pack.quizzes).length);
  const expected=questions.filter(q=>!q.exam&&q.answers.length===1).map(q=>'study-'+q.id).sort();
  assert.deepEqual(Object.keys(QUIZZES).filter(id=>/^study-(q[0-9]+|rr[0-9]+-[0-9]+)$/.test(id)).sort(),expected);
@@ -27,8 +27,8 @@ test('catalog: old/ongoing quiz snapshot survives a changed answer and backup im
  s=act(s,{type:'quiz-answer',questionId:id,choice:answer});const raw=JSON.stringify(s),newer=clone(pack);newer.version='aaaaaaaaaaaaaaaa';
  if(newer.quizzes[id])newer.quizzes[id].answer=(answer+1)%newer.quizzes[id].options.length;
  newRun(4,newer);const restored=parseRun(raw);assert.deepEqual(restored,s);assert.equal(QUIZZES[id].answer,answer);
- const legacy=newRun(4);newRun(5,pack);assert.deepEqual(parseRun(JSON.stringify(legacy)),legacy);assert.equal(CARDS.strike.name,'切り分け');
- const bad=clone(s);bad.hp=-1;assert.throws(()=>parseRun(JSON.stringify(bad)));assert.equal(CARDS.strike.name,'切り分け');
+ const legacy=newRun(4);newRun(5,pack);assert.deepEqual(parseRun(JSON.stringify(legacy)),legacy);assert.equal(CARDS.strike.name,'責任共有モデル');
+ const bad=clone(s);bad.hp=-1;assert.throws(()=>parseRun(JSON.stringify(bad)));assert.equal(CARDS.strike.name,'責任共有モデル');
  activateCatalog(null);
 });
 test('catalog: malformed packs cannot redefine starters, inject links or corrupt score/card shapes',()=>{
@@ -100,4 +100,13 @@ test('catalog: 30-card pool remains capped while retired cards in old adventures
  assert.deepEqual(parseRun(saved),old);assert.equal(CARDS['study-root'].name,'ルートユーザー');
  newRun(53,pack);assert.equal(CARDS['study-root'],undefined);
  activateCatalog(null);
+});
+
+test('catalog: old starter labels are corrected without changing saved adventure or effects',()=>{
+ const old=clone(pack);old.version='ffffffffffffffff';old.starterNames={strike:'切り分け',guard:'防壁',probe:'観測'};
+ const s=newRun(77,old),raw=JSON.stringify(s);
+ assert.deepEqual(parseRun(raw),s);
+ for(const id of STARTERS){assert.equal(CARDS[id].name,pack.starterNames[id]);const {name,...actual}=CARDS[id],{name:ignored,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);}
+ assert.equal(JSON.stringify(s),raw);activateCatalog(null);
+ for(const id of STARTERS)assert.equal(CARDS[id].name,pack.starterNames[id]);
 });
