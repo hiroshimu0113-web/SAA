@@ -69,3 +69,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [EFSの共有ファイルとマウントターゲット配置](../knowledge/lessons/efs.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。
 
 - [EFSアクセスポイントのユーザーとルート制御](../knowledge/lessons/efs-access-point.md)：確認・分類済みの構成本文。efs/least-privilegeを共有し、新カード素材・詳細単位へ重複計上しない。ケース取り込み済み、公開未実施。
+
+- [Lambdaの同期・非同期呼出しと成功判定](../knowledge/lessons/lambda.md)：確認範囲と対象外を本文で明示。ケースは分類台帳へ対応し、公開状態は別管理。

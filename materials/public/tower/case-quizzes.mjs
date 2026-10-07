@@ -989,6 +989,36 @@ export const CASE_QUIZZES={
       "未存在かつCreationInfoなしではそのアクセスポイントのマウントが失敗します。自動作成はクライアント接続時の動作です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/efs/types/types.go"
+  },
+  "lambda-async-accepted": {
+    "prompt": "通常LambdaをInvokeで直接呼び出す。SQS等のイベントソースマッピング経由ではない。2問は別構成の独立判断。 通常のLambdaをInvokeで直接呼び出し、InvocationType=Event。APIはHTTP 202を返した。まだ関数の実行結果や業務更新の完了は確認していない。この応答から何を判断する？",
+    "options": [
+      "依頼は受理された。関数実行結果と業務の完了は別に確認する",
+      "注文の業務更新まで成功したので、結果確認は不要",
+      "HTTP 202は同期の関数エラーを意味し、必ず2回だけ再試行済み"
+    ],
+    "answer": 0,
+    "reasons": [
+      "非同期のAPI応答は処理完了を待った関数結果ではありません。受理成功を業務完了へ読み替えません。",
+      "HTTP 202だけでは関数の処理結果やその業務更新を確認できません。",
+      "呼出し方式とHTTPコード、実際の処理結果・再試行回数を混同しています。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go"
+  },
+  "lambda-sync-function-error": {
+    "prompt": "通常LambdaをInvokeで直接呼び出す。SQS等のイベントソースマッピング経由ではない。2問は別構成の独立判断。 別の通常LambdaをRequestResponseで直接呼び出した。APIはHTTP 200を返したがFunctionErrorがあり、Payloadに関数エラー情報がある。呼出し側が業務更新の成功扱いにしてよい？",
+    "options": [
+      "HTTP 200なので関数エラー情報を無視して成功扱いにする",
+      "同期でも非同期と同じ既定2回の再試行が必ず完了したので成功扱いにする",
+      "成功扱いにせず、関数エラーと業務結果を確認する。再試行する場合は呼出し方式と重複更新への対策を設計する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "HTTPコードは関数内のエラーを反映しません。FunctionErrorとPayloadを確認します。",
+      "非同期の関数エラー再試行の規則を、この同期応答の成功証拠へ流用できません。",
+      "関数実行のエラーを読み取り、再試行の主体・条件と副作用を確認して対処します。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1123,5 +1153,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "efs-access-point-identity",
     "efs-access-point-missing-root"
+  ],
+  [
+    "lambda-async-accepted",
+    "lambda-sync-function-error"
   ]
 ];

@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 33,
-    "rubric_checks": 66
+    "detailed_units": 34,
+    "rubric_checks": 68
   },
   "nodes": [
     {
@@ -1903,9 +1903,75 @@
     {
       "id": "concept:lambda",
       "kind": "concept",
-      "title": "lambda",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "Lambdaの同期・非同期呼出しと成功判定",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "lambda",
+        "title": "Lambdaの同期・非同期呼出しと成功判定",
+        "group": "processing",
+        "objective": "直接Invokeの応答から受理・関数エラー・業務完了を分け、方式ごとの再試行条件を確認する。",
+        "estimated_minutes": 7,
+        "scope": "通常関数のInvoke直接呼出し。耐久関数・レスポンスストリーミング・SQS等のイベントソースマッピング、SDKの全再試行アルゴリズムは対象外。",
+        "prerequisites": [
+          "idempotency"
+        ],
+        "misconceptions": [
+          "HTTP 200なら関数エラーはない。",
+          "非同期202は業務処理完了を保証する。",
+          "どの呼出しも同じ回数で再試行される。",
+          "成功した非同期イベントは必ず1回だけ届く。"
+        ],
+        "checks": [
+          {
+            "id": "lambda-explain",
+            "level": "explain",
+            "prompt": "同期HTTP 200と非同期HTTP 202は何を保証しない？",
+            "expected_points": [
+              "HTTPコードと関数エラーは別",
+              "非同期は関数完了を待った結果ではない",
+              "業務結果と再試行条件を別に確認"
+            ]
+          },
+          {
+            "id": "lambda-apply",
+            "level": "apply",
+            "prompt": "同期応答にFunctionErrorがあるとき何を確認する？",
+            "expected_points": [
+              "Payloadのエラー情報",
+              "業務の完了/副作用",
+              "呼出し方式と重複に備えた再試行設計"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch08-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/lambda.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+              "claim": "RequestResponseは同期（既定）で応答を待つ。Eventは非同期でAPI応答はステータスのみ。成功要求のコードは同期200/非同期202/DryRun204。HTTPコードは関数エラーを表さず、FunctionErrorとPayloadへ関数エラーが返る。非同期ではイベントをキューへ入れ、無エラーでも同一イベントが複数回届く場合がある。再試行はエラー種別/クライアント/イベントソース/呼出し方式で変わる。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionEventInvokeConfig.go",
+              "claim": "非同期の関数エラーは既定で2回再試行、イベントを最大6時間キューへ保持。設定で関数エラーの最大再試行回数と最大イベント年齢を指定できる。全試行失敗や保持期限超過で破棄し、DLQ/送信先で保持を検討する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "非同期の送信先と期限",
+          "同時実行と下流保護",
+          "サービスごとのイベントソースマッピング"
+        ]
+      }
     },
     {
       "id": "concept:lambda-concurrency",
@@ -10065,6 +10131,16 @@
     {
       "from": "concept:efs",
       "to": "lesson:ch05-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:idempotency",
+      "to": "concept:lambda",
+      "type": "learn_before"
+    },
+    {
+      "from": "concept:lambda",
+      "to": "lesson:ch08-l01",
       "type": "unit_reference"
     },
     {

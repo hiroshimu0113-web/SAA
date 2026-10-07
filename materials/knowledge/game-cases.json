@@ -4039,6 +4039,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "lambda-invocation-result",
+      "title": "Lambdaの応答と処理結果を判断する",
+      "premise": "通常LambdaをInvokeで直接呼び出す。SQS等のイベントソースマッピング経由ではない。2問は別構成の独立判断。",
+      "unit_ids": [
+        "lambda"
+      ],
+      "chapter_ids": [
+        "ch08",
+        "ch09",
+        "ch12"
+      ],
+      "constraints": [
+        "第1問はEventで202、実行結果/業務完了が未確認。",
+        "第2問はRequestResponseで200かつFunctionError/エラーPayloadがある。"
+      ],
+      "questions": [
+        {
+          "id": "lambda-async-accepted",
+          "objective": "非同期の受理と業務完了を分ける。",
+          "prompt": "通常のLambdaをInvokeで直接呼び出し、InvocationType=Event。APIはHTTP 202を返した。まだ関数の実行結果や業務更新の完了は確認していない。この応答から何を判断する？",
+          "options": [
+            {
+              "id": "lambda-async-accepted-a",
+              "text": "依頼は受理された。関数実行結果と業務の完了は別に確認する",
+              "explanation": "非同期のAPI応答は処理完了を待った関数結果ではありません。受理成功を業務完了へ読み替えません。"
+            },
+            {
+              "id": "lambda-async-accepted-b",
+              "text": "注文の業務更新まで成功したので、結果確認は不要",
+              "explanation": "HTTP 202だけでは関数の処理結果やその業務更新を確認できません。"
+            },
+            {
+              "id": "lambda-async-accepted-c",
+              "text": "HTTP 202は同期の関数エラーを意味し、必ず2回だけ再試行済み",
+              "explanation": "呼出し方式とHTTPコード、実際の処理結果・再試行回数を混同しています。"
+            }
+          ],
+          "correct_option_id": "lambda-async-accepted-a",
+          "runtime_option_order": [
+            "lambda-async-accepted-a",
+            "lambda-async-accepted-b",
+            "lambda-async-accepted-c"
+          ],
+          "rationale": "非同期のAPI応答は処理完了を待った関数結果ではありません。受理成功を業務完了へ読み替えません。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go"
+          ]
+        },
+        {
+          "id": "lambda-sync-function-error",
+          "objective": "同期HTTP成功と関数エラーを分ける。",
+          "prompt": "別の通常LambdaをRequestResponseで直接呼び出した。APIはHTTP 200を返したがFunctionErrorがあり、Payloadに関数エラー情報がある。呼出し側が業務更新の成功扱いにしてよい？",
+          "options": [
+            {
+              "id": "lambda-sync-function-error-a",
+              "text": "HTTP 200なので関数エラー情報を無視して成功扱いにする",
+              "explanation": "HTTPコードは関数内のエラーを反映しません。FunctionErrorとPayloadを確認します。"
+            },
+            {
+              "id": "lambda-sync-function-error-b",
+              "text": "同期でも非同期と同じ既定2回の再試行が必ず完了したので成功扱いにする",
+              "explanation": "非同期の関数エラー再試行の規則を、この同期応答の成功証拠へ流用できません。"
+            },
+            {
+              "id": "lambda-sync-function-error-c",
+              "text": "成功扱いにせず、関数エラーと業務結果を確認する。再試行する場合は呼出し方式と重複更新への対策を設計する",
+              "explanation": "関数実行のエラーを読み取り、再試行の主体・条件と副作用を確認して対処します。"
+            }
+          ],
+          "correct_option_id": "lambda-sync-function-error-c",
+          "runtime_option_order": [
+            "lambda-sync-function-error-a",
+            "lambda-sync-function-error-b",
+            "lambda-sync-function-error-c"
+          ],
+          "rationale": "関数実行のエラーを読み取り、再試行の主体・条件と副作用を確認して対処します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionEventInvokeConfig.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "第1問の呼出し方式がDryRunで、応答はHTTP 204に変わる。",
+        "answer": "パラメータと呼出し権限の検証として扱う。関数コードの実行や業務完了の証拠ではない。",
+        "reason": "DryRunは実行結果取得や非同期依頼の受付とは違う検証方式。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_Invoke.go",
+          "claim": "RequestResponseは同期（既定）で応答を待つ。Eventは非同期でAPI応答はステータスのみ。成功要求のコードは同期200/非同期202/DryRun204。HTTPコードは関数エラーを表さず、FunctionErrorとPayloadへ関数エラーが返る。非同期ではイベントをキューへ入れ、無エラーでも同一イベントが複数回届く場合がある。再試行はエラー種別/クライアント/イベントソース/呼出し方式で変わる。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/lambda/api_op_PutFunctionEventInvokeConfig.go",
+          "claim": "非同期の関数エラーは既定で2回再試行、イベントを最大6時間キューへ保持。設定で関数エラーの最大再試行回数と最大イベント年齢を指定できる。全試行失敗や保持期限超過で破棄し、DLQ/送信先で保持を検討する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }
