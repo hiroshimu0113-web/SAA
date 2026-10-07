@@ -699,7 +699,7 @@
     {
       "id": "candidate-aws-config",
       "concept_id": "aws-config",
-      "title": "aws-config",
+      "title": "AWS Configの記録済み構成・評価・修復",
       "related_chapter_ids": [
         "ch10"
       ],
@@ -715,16 +715,21 @@
         {
           "node_id": "question:q170",
           "relation": "practised_by"
+        },
+        {
+          "node_id": "lesson:ch10-l03",
+          "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "unreviewed",
+      "classification_ids": [
+        "concept-config-known-state-remediation"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

@@ -1379,6 +1379,36 @@ export const CASE_QUIZZES={
       "両方の指定はできません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/cloudtrail/api_op_PutEventSelectors.go"
+  },
+  "config-last-known-state": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 通常AWS Configのカスタムルールは、渡された記録済み構成だけを評価し、タグEnvがprodなら適合とする。関数から現物のタグを取得するAPIは呼ばない。最後の記録はEnv=dev。現在の資源はprodへ変更済みだが再記録はなく、StartConfigRulesEvaluationだけを呼ぶ。どの状態で再評価する？",
+    "options": [
+      "このAPIは必ず最新タグを再取得し、prodで評価する",
+      "最後の記録devを対象にする。最新状態の確認・記録と再評価を分ける",
+      "API開始時にタグを自動的にprodへ書き換える"
+    ],
+    "answer": 1,
+    "reasons": [
+      "この操作は最新構成を再記録せず、最後に把握した構成で評価します。",
+      "記録の鮮度を確認します。再評価だけを最新構成の取得と扱いません。",
+      "評価はこのタグを書き換える修復操作ではありません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_PutConfigRule.go"
+  },
+  "config-evaluation-not-remediation": {
+    "prompt": "2問は別状況の独立判断。例の状態・タグは教材用。 別のConfigルールがNON_COMPLIANTを返した。ルールによる評価のみを構成し、修復設定や他の自動対処は一切ない。この評価結果だけで資源が自動修復されたと言える？",
+    "options": [
+      "NON_COMPLIANTが出れば、希望する構成へ必ず自動修復済み",
+      "修復は別途設計し、対象・権限・影響と修復後の状態を確認する",
+      "不適合を適合表示に変更するだけで、実際の資源も必ず変わる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "不適合の検出と資源の修復は別です。",
+      "この前提で修復完了を示す操作はありません。評価と対処の実行・結果を分けます。",
+      "表示や評価結果を変更することと資源の状態を変更することは別です。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_PutConfigRule.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1565,5 +1595,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "cloudtrail-s3-object-events",
     "cloudtrail-advanced-replaces-basic"
+  ],
+  [
+    "config-last-known-state",
+    "config-evaluation-not-remediation"
   ]
 ];

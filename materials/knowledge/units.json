@@ -3145,6 +3145,74 @@
         "本文の確認範囲外の詳細条件",
         "実AWSでの動作・権限検証"
       ]
+    },
+    {
+      "id": "aws-config",
+      "title": "AWS Configの記録済み構成・評価・修復",
+      "group": "operations",
+      "objective": "構成の記録・準拠評価・修復を分け、評価に使った構成の鮮度を確認する。",
+      "estimated_minutes": 7,
+      "scope": "通常Configルールとオンデマンド再評価。全記録モード・管理ルール詳細・組織ルール/修復条件・全権限・料金は対象外。",
+      "prerequisites": [],
+      "misconceptions": [
+        "オンデマンド再評価は必ず最新構成を再記録する。",
+        "NON_COMPLIANTなら自動修復も完了している。",
+        "評価結果を変えれば資源の状態も変わる。"
+      ],
+      "checks": [
+        {
+          "id": "aws-config-explain",
+          "level": "explain",
+          "prompt": "この判断で何を分けて確認する？",
+          "expected_points": [
+            "再評価は最後の記録済み構成を対象にする",
+            "構成記録と準拠評価は別",
+            "検出と修復は別の設定・実行"
+          ]
+        },
+        {
+          "id": "aws-config-apply",
+          "level": "apply",
+          "prompt": "第1問で最新のprod状態がConfigへ正しく記録され、対象は変化していない。 どう判断する？",
+          "expected_points": [
+            "新しい記録を対象に再評価する。この例のルール条件なら適合と判断できる。",
+            "評価に使う記録の状態がdevからprodへ変わる。"
+          ]
+        }
+      ],
+      "lesson_ids": [
+        "ch10-l03"
+      ],
+      "review": {
+        "status": "reviewed",
+        "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+        "source_document": "knowledge/lessons/aws-config.md",
+        "evidence": [
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_PutConfigRule.go",
+            "claim": "ルールは希望する構成への準拠を評価。管理ルールとカスタムルールがあり、カスタムLambda/Guard等を設定する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_StartConfigRulesEvaluation.go",
+            "claim": "オンデマンド評価は最後に把握した構成を対象にし、最新構成を再記録しない。同じルールの既存評価が完了してから再度開始する。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          },
+          {
+            "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_PutRemediationConfigurations.go",
+            "claim": "修復設定は既存ルールと対象SSM文書・権限等を別に設定。自動修復は古い評価スナップショットにより現在適合した資源へも開始され得る。",
+            "checked_on": "2026-10-07",
+            "reviewer": "Codex"
+          }
+        ]
+      },
+      "learner_state": "unassessed",
+      "next_enrichment": [
+        "本文の確認範囲外の詳細条件",
+        "実AWSでの動作・権限検証"
+      ]
     }
   ]
 }
