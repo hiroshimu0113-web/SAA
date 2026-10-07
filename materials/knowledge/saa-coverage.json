@@ -48,9 +48,11 @@
       "gaps": [
         {
           "id": "ch01-gap-01",
-          "requirement": "region/az/availability/instance-storeの確認待ちと用語不足",
+          "requirement": "region/az/availabilityの確認待ちと用語不足。instance-storeは寿命・保存判断の詳細確認済み。",
           "status": "open",
-          "resolution_refs": [],
+          "resolution_refs": [
+            "knowledge/lessons/instance-store.md"
+          ],
           "review": null
         },
         {

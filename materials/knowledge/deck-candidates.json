@@ -135,6 +135,7 @@
         "candidate-efs",
         "candidate-fsx-windows",
         "candidate-gp3",
+        "candidate-instance-store",
         "candidate-intelligent-tiering",
         "candidate-kms",
         "candidate-least-privilege",
@@ -2415,10 +2416,11 @@
     {
       "id": "candidate-instance-store",
       "concept_id": "instance-store",
-      "title": "インスタンスストアの寿命",
+      "title": "インスタンスストアの寿命と保存判断",
       "related_chapter_ids": [
         "ch01",
-        "ch04"
+        "ch04",
+        "ch05"
       ],
       "material_refs": [
         {
@@ -2434,14 +2436,15 @@
           "relation": "unit_reference"
         }
       ],
-      "classification_ids": [],
-      "candidate_status": "inventory_seed",
-      "content_status": "draft",
+      "classification_ids": [
+        "concept-instance-store-lifetime"
+      ],
+      "candidate_status": "reviewed_material",
+      "content_status": "reviewed",
       "effect_status": "not_designed",
       "implementation_ids": [],
       "open_questions": [
-        "原稿の目標・条件・例外を内容確認して分類する。",
-        "概念IDの表記揺れや複合概念を確認してからカード化の可否を決める。"
+        "実務の条件と限界を保つカード効果・役・ビルドを設計し検証する。"
       ]
     },
     {

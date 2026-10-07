@@ -1409,6 +1409,36 @@ export const CASE_QUIZZES={
       "表示や評価結果を変更することと資源の状態を変更することは別です。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/configservice/api_op_PutConfigRule.go"
+  },
+  "instance-store-stop": {
+    "prompt": "EBSルートのEC2に追加インスタンスストアがある。元データはS3に保存済み。 EBSルートのEC2に追加のインスタンスストアがある。元写真はS3に保存済み。再計算できる加工中間ファイルと、再取得できない納品結果を処理する。夜間にEC2を停止する。保存方針は？",
+    "options": [
+      "中間ファイルは一時領域を使い、納品結果は停止前にS3へ正常保存を確認する",
+      "納品結果も一時領域だけに置く。EBSルートなら全ディスクが停止をまたいで残る",
+      "AMIだけ作れば追加一時領域の納品結果も次のEC2で復元できる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "失ってよい再生成可能なデータと、失えない結果を分けます。停止で一時領域は失われるため、保存の成功確認が必要です。",
+      "EBSルートでも追加インスタンスストアは停止時に失われます。",
+      "AMIはインスタンスストアの内容を保存しません。"
+    ],
+    "source": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md"
+  },
+  "instance-store-reboot": {
+    "prompt": "EBSルートのEC2に追加インスタンスストアがある。元データはS3に保存済み。 EBSルートEC2の追加インスタンスストアについて、停止・休止・終了・ディスク障害を伴わず再起動だけを行う。データの扱いと、長期保存の設計判断は？",
+    "options": [
+      "再起動だけならデータは維持されるが、長期保存の唯一の保管先にはしない",
+      "再起動だけでも必ず全データが消える",
+      "一度再起動で残れば、ディスク障害や終了でも残る保証になる"
+    ],
+    "answer": 0,
+    "reasons": [
+      "再起動と停止は異なります。維持される条件でも、ディスク障害や終了等による喪失のリスクは残ります。",
+      "再起動のみではデータが維持されるという条件を見落としています。",
+      "再起動時の維持は、他の障害や終了に対する永続保証ではありません。"
+    ],
+    "source": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -1599,5 +1629,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "config-last-known-state",
     "config-evaluation-not-remediation"
+  ],
+  [
+    "instance-store-stop",
+    "instance-store-reboot"
   ]
 ];

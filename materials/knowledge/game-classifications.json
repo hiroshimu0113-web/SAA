@@ -15401,6 +15401,278 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-instance-store-lifetime",
+      "title": "インスタンスストアの寿命と保存判断",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "寿命と再生成条件から保管先を選ぶ概念。",
+      "objective": "再生成可能性と停止・再起動・終了の違いから一時領域の利用を判断する。",
+      "unit_ids": [
+        "instance-store"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/instance-store.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "compute",
+        "storage"
+      ],
+      "capabilities": [
+        "store"
+      ],
+      "concerns": [
+        "durability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ec2"
+      ],
+      "conditions": [
+        "第1問は夜間停止、第2問は停止等を伴わない再起動のみ。",
+        "S3への書込み権限と正常保存を確認できる前提。"
+      ],
+      "limitations": [
+        "インスタンスストアの寿命とEBSルートとの区別。現行の機種・性能・料金の一覧は未確認。"
+      ],
+      "misconceptions": [
+        "EBSルートなら追加一時領域も停止をまたいで残る。",
+        "AMIに追加一時領域の内容も保存される。",
+        "再起動と停止の寿命が同じ。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/instance-store.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "EBSルートのEC2に追加インスタンスストアがある。元データはS3に保存済み。",
+        "counterexample": "中間結果は再生成できるが8時間必要で、納期は1時間。 再生成可能というだけでは足りず、結果の外部保存と復旧時間を確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/instance-store.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-instance-store-lifetime",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+          "claim": "一時ブロック領域はホスト直結。再起動で維持、停止・休止・終了・ディスク障害で喪失。切り離し再接続不可、AMIに内容を保存しない。アーカイブされた公式説明、現行機種一覧・性能・料金の根拠ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go",
+          "claim": "インスタンスストアをルートにしたインスタンスは停止・休止できない。EBSルートと追加一時領域を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/terminating-instances.md",
+          "claim": "EBSの終了時削除はボリュームのDeleteOnTermination属性で決まり、保持したボリュームは課金が続く。アーカイブ説明で現行料金は対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後、公式EC2アーカイブの寿命・AMI・終了時EBS属性と公式SDKの停止制約を照合。設問条件と全選択肢を確認。同一担当の別工程確認、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存単位を重複作成せず詳細化。寿命判断の概念と条件付き2問ケースに分類。関連第1・4・5章で共有。"
+        }
+      ],
+      "game_design": {
+        "proposal": "一時領域の寿命と保管判断を説明する素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/instance-store.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの保存や耐久値は実際のデータ永続性を保証しない。",
+        "simplifications": [
+          "インスタンスストアの寿命とEBSルートとの区別。現行の機種・性能・料金の一覧は未確認。"
+        ],
+        "mislearning_risks": [
+          "EBSルートなら追加一時領域も停止をまたいで残る。",
+          "AMIに追加一時領域の内容も保存される。",
+          "再起動と停止の寿命が同じ。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-instance-store-lifetime",
+      "title": "加工ファイルの寿命と夜間停止",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "再生成可能性と停止・再起動・終了の違いから一時領域の利用を判断する。",
+      "unit_ids": [
+        "instance-store"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "instance-store-lifetime"
+        }
+      ],
+      "domains": [
+        "compute",
+        "storage"
+      ],
+      "capabilities": [
+        "store"
+      ],
+      "concerns": [
+        "durability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "ec2"
+      ],
+      "conditions": [
+        "第1問は夜間停止、第2問は停止等を伴わない再起動のみ。",
+        "S3への書込み権限と正常保存を確認できる前提。"
+      ],
+      "limitations": [
+        "インスタンスストアの寿命とEBSルートとの区別。現行の機種・性能・料金の一覧は未確認。"
+      ],
+      "misconceptions": [
+        "EBSルートなら追加一時領域も停止をまたいで残る。",
+        "AMIに追加一時領域の内容も保存される。",
+        "再起動と停止の寿命が同じ。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "instance-store-lifetime.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "instance-store-lifetime.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "instance-store-lifetime.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "instance-store-lifetime.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+          "claim": "一時ブロック領域はホスト直結。再起動で維持、停止・休止・終了・ディスク障害で喪失。切り離し再接続不可、AMIに内容を保存しない。アーカイブされた公式説明、現行機種一覧・性能・料金の根拠ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go",
+          "claim": "インスタンスストアをルートにしたインスタンスは停止・休止できない。EBSルートと追加一時領域を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/terminating-instances.md",
+          "claim": "EBSの終了時削除はボリュームのDeleteOnTermination属性で決まり、保持したボリュームは課金が続く。アーカイブ説明で現行料金は対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後、公式EC2アーカイブの寿命・AMI・終了時EBS属性と公式SDKの停止制約を照合。設問条件と全選択肢を確認。同一担当の別工程確認、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存単位を重複作成せず詳細化。寿命判断の概念と条件付き2問ケースに分類。関連第1・4・5章で共有。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き2問ケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/instance-store.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの保存や耐久値は実際のデータ永続性を保証しない。",
+        "simplifications": [
+          "インスタンスストアの寿命とEBSルートとの区別。現行の機種・性能・料金の一覧は未確認。"
+        ],
+        "mislearning_risks": [
+          "EBSルートなら追加一時領域も停止をまたいで残る。",
+          "AMIに追加一時領域の内容も保存される。",
+          "再起動と停止の寿命が同じ。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "instance-store-stop, instance-store-reboot"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }

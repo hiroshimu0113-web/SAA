@@ -17,5 +17,5 @@ test('quiz: reject corrupt questions, answers, scores and stale question actions
  for(const mutate of [s=>s.quiz.ids[1]=s.quiz.ids[0],s=>s.quiz.ids[0]='bad',s=>s.quiz.answers=[99],s=>s.quiz.step=2]){const s=enter();mutate(s);assert.throws(()=>parseRun(JSON.stringify(s)));}
  const result=finish(enter(),1);result.quiz.result.correct=2;assert.throws(()=>parseRun(JSON.stringify(result)));
  let s=enter();const id=s.quiz.ids[0];s=act(s,{type:'quiz-answer',questionId:id,choice:0});s=act(s,{type:'quiz-next',questionId:id});assert.equal(act(s,{type:'quiz-answer',questionId:id,choice:0}),s);
- for(const q of Object.values(QUIZZES)){assert.equal(q.options.length,3);assert.equal(q.reasons.length,3);assert.ok(q.options[q.answer]);assert.match(q.source,/^https:\/\/(docs\.aws\.amazon\.com\/|github\.com\/aws\/aws-sdk-go-v2\/blob\/[a-f0-9]{40}\/|github\.com\/awsdocs\/amazon-rds-user-guide\/blob\/[a-f0-9]{40}\/doc_source\/)/);}
+ for(const q of Object.values(QUIZZES)){assert.equal(q.options.length,3);assert.equal(q.reasons.length,3);assert.ok(q.options[q.answer]);assert.match(q.source,/^https:\/\/(docs\.aws\.amazon\.com\/|github\.com\/aws\/aws-sdk-go-v2\/blob\/[a-f0-9]{40}\/|github\.com\/awsdocs\/amazon-(?:rds|ec2)-user-guide\/blob\/[a-f0-9]{40}\/doc_source\/)/);}
 });

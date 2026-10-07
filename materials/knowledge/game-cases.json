@@ -5726,6 +5726,130 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "instance-store-lifetime",
+      "title": "加工ファイルの寿命と夜間停止",
+      "premise": "EBSルートのEC2に追加インスタンスストアがある。元データはS3に保存済み。",
+      "unit_ids": [
+        "instance-store"
+      ],
+      "chapter_ids": [
+        "ch01",
+        "ch04",
+        "ch05"
+      ],
+      "constraints": [
+        "第1問は夜間停止、第2問は停止等を伴わない再起動のみ。",
+        "S3への書込み権限と正常保存を確認できる前提。"
+      ],
+      "questions": [
+        {
+          "id": "instance-store-stop",
+          "objective": "停止時の一時領域喪失に備える。",
+          "prompt": "EBSルートのEC2に追加のインスタンスストアがある。元写真はS3に保存済み。再計算できる加工中間ファイルと、再取得できない納品結果を処理する。夜間にEC2を停止する。保存方針は？",
+          "options": [
+            {
+              "id": "instance-store-stop-a",
+              "text": "中間ファイルは一時領域を使い、納品結果は停止前にS3へ正常保存を確認する",
+              "explanation": "失ってよい再生成可能なデータと、失えない結果を分けます。停止で一時領域は失われるため、保存の成功確認が必要です。"
+            },
+            {
+              "id": "instance-store-stop-b",
+              "text": "納品結果も一時領域だけに置く。EBSルートなら全ディスクが停止をまたいで残る",
+              "explanation": "EBSルートでも追加インスタンスストアは停止時に失われます。"
+            },
+            {
+              "id": "instance-store-stop-c",
+              "text": "AMIだけ作れば追加一時領域の納品結果も次のEC2で復元できる",
+              "explanation": "AMIはインスタンスストアの内容を保存しません。"
+            }
+          ],
+          "correct_option_id": "instance-store-stop-a",
+          "runtime_option_order": [
+            "instance-store-stop-a",
+            "instance-store-stop-b",
+            "instance-store-stop-c"
+          ],
+          "rationale": "失ってよい再生成可能なデータと、失えない結果を分けます。停止で一時領域は失われるため、保存の成功確認が必要です。",
+          "source_urls": [
+            "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go"
+          ]
+        },
+        {
+          "id": "instance-store-reboot",
+          "objective": "再起動と永続保証を区別する。",
+          "prompt": "EBSルートEC2の追加インスタンスストアについて、停止・休止・終了・ディスク障害を伴わず再起動だけを行う。データの扱いと、長期保存の設計判断は？",
+          "options": [
+            {
+              "id": "instance-store-reboot-a",
+              "text": "再起動だけならデータは維持されるが、長期保存の唯一の保管先にはしない",
+              "explanation": "再起動と停止は異なります。維持される条件でも、ディスク障害や終了等による喪失のリスクは残ります。"
+            },
+            {
+              "id": "instance-store-reboot-b",
+              "text": "再起動だけでも必ず全データが消える",
+              "explanation": "再起動のみではデータが維持されるという条件を見落としています。"
+            },
+            {
+              "id": "instance-store-reboot-c",
+              "text": "一度再起動で残れば、ディスク障害や終了でも残る保証になる",
+              "explanation": "再起動時の維持は、他の障害や終了に対する永続保証ではありません。"
+            }
+          ],
+          "correct_option_id": "instance-store-reboot-a",
+          "runtime_option_order": [
+            "instance-store-reboot-a",
+            "instance-store-reboot-b",
+            "instance-store-reboot-c"
+          ],
+          "rationale": "再起動と停止は異なります。維持される条件でも、ディスク障害や終了等による喪失のリスクは残ります。",
+          "source_urls": [
+            "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "中間結果は再生成できるが8時間必要で、納期は1時間。",
+        "answer": "再生成可能というだけでは足りず、結果の外部保存と復旧時間を確認する。",
+        "reason": "喪失後に再計算する時間が要件を超える。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+          "claim": "一時ブロック領域はホスト直結。再起動で維持、停止・休止・終了・ディスク障害で喪失。切り離し再接続不可、AMIに内容を保存しない。アーカイブされた公式説明、現行機種一覧・性能・料金の根拠ではない。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go",
+          "claim": "インスタンスストアをルートにしたインスタンスは停止・休止できない。EBSルートと追加一時領域を区別する。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/terminating-instances.md",
+          "claim": "EBSの終了時削除はボリュームのDeleteOnTermination属性で決まり、保持したボリュームは課金が続く。アーカイブ説明で現行料金は対象外。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後、公式EC2アーカイブの寿命・AMI・終了時EBS属性と公式SDKの停止制約を照合。設問条件と全選択肢を確認。同一担当の別工程確認、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

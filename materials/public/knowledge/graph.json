@@ -2239,38 +2239,42 @@
     {
       "id": "concept:instance-store",
       "kind": "concept",
-      "title": "インスタンスストアの寿命",
-      "detail_status": "draft_unit",
+      "title": "インスタンスストアの寿命と保存判断",
+      "detail_status": "reviewed_unit",
       "unit": {
         "id": "instance-store",
-        "title": "インスタンスストアの寿命",
+        "title": "インスタンスストアの寿命と保存判断",
         "group": "processing",
-        "objective": "停止・終了で失って困るデータを一時領域だけに置かない。",
-        "estimated_minutes": 5,
-        "scope": "入門の判断単位。SAA全範囲・例外・性能や料金の定量判断は未網羅。",
+        "objective": "再生成可能性と停止・再起動・終了の違いから一時領域の利用を判断する。",
+        "estimated_minutes": 7,
+        "scope": "インスタンスストアの寿命とEBSルートとの区別。現行の機種・性能・料金の一覧は未確認。",
         "prerequisites": [
           "ec2"
         ],
         "misconceptions": [
-          "EC2を再起動しても停止しても保存領域の扱いは同じ。"
+          "EBSルートなら追加一時領域も停止をまたいで残る。",
+          "AMIに追加一時領域の内容も保存される。",
+          "再起動と停止の寿命が同じ。"
         ],
         "checks": [
           {
             "id": "instance-store-explain",
             "level": "explain",
-            "prompt": "インスタンスストアを唯一の保管先にしない理由は？",
+            "prompt": "一時領域を唯一の保管先にしない理由は？",
             "expected_points": [
-              "停止・終了などでデータを失う",
-              "再生成できる一時データに適する"
+              "停止・休止・終了・ディスク故障で喪失する",
+              "再起動だけなら維持する",
+              "AMIもデータ保管の代替ではない"
             ]
           },
           {
             "id": "instance-store-apply",
             "level": "apply",
-            "prompt": "加工中間ファイルと納品済み写真をどこへ置く？",
+            "prompt": "中間ファイルと納品写真はどこへ保存する？",
             "expected_points": [
-              "再生成可能な中間ファイルは一時領域の候補",
-              "納品写真はS3など別の永続保存先へ"
+              "再生成できる中間ファイルは一時領域に置ける",
+              "納品写真は外部保存し成功確認",
+              "再生成時間が要件を満たすか確認"
             ]
           }
         ],
@@ -2278,14 +2282,33 @@
           "ch01-l03"
         ],
         "review": {
-          "status": "draft",
-          "basis": "既存教材・音声・ゲームから学習目標を整理。独立した内容監査と実学習者への適用は未実施。",
-          "source_document": "docs/STARTER_REVIEW.md"
+          "status": "reviewed",
+          "basis": "原稿作成後、公式EC2アーカイブの寿命・AMI・終了時EBS属性と公式SDKの停止制約を照合。設問条件と全選択肢を確認。同一担当の別工程確認、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/instance-store.md",
+          "evidence": [
+            {
+              "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/InstanceStorage.md",
+              "claim": "一時ブロック領域はホスト直結。再起動で維持、停止・休止・終了・ディスク障害で喪失。切り離し再接続不可、AMIに内容を保存しない。アーカイブされた公式説明、現行機種一覧・性能・料金の根拠ではない。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_StopInstances.go",
+              "claim": "インスタンスストアをルートにしたインスタンスは停止・休止できない。EBSルートと追加一時領域を区別する。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/awsdocs/amazon-ec2-user-guide/blob/e3707c431483ec0ffffcabebd36cf799ba682cd0/doc_source/terminating-instances.md",
+              "claim": "EBSの終了時削除はボリュームのDeleteOnTermination属性で決まり、保持したボリュームは課金が続く。アーカイブ説明で現行料金は対象外。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
         },
         "learner_state": "unassessed",
         "next_enrichment": [
-          "条件を1つ変えた転移問題を追加する",
-          "境界条件と公式根拠を照合してから公開教材へ反映する"
+          "現行機種の対応条件・性能と終了時EBS設定を確認する。"
         ]
       }
     },
