@@ -8,7 +8,7 @@
 | ch02 IAMとアクセス制御 | 3 / 3 | 10 / 20 | authentication, authorization, temporary-credentials, iam-role, least-privilege, mfa | CR-001, CR-004 |
 | ch03 VPCとネットワーク | 0 / 3 | 0 / 20 | security-group, network-acl, route | CR-003 |
 | ch04 EC2・負荷分散・Auto Scaling | 0 / 3 | 0 / 15 | alb | 個別指摘なし（監査済みとは限らない） |
-| ch05 ストレージを選ぶ | 0 / 3 | 0 / 20 | 未細分化 | CR-002 |
+| ch05 ストレージを選ぶ | 0 / 3 | 0 / 20 | ebs | CR-002 |
 | ch06 データベースとキャッシュ | 0 / 3 | 0 / 15 | point-in-time-recovery, gsi | CR-002 |
 | ch07 名前解決と世界への配信 | 0 / 3 | 0 / 15 | route53 | CR-003, CR-009 |
 | ch08 サーバーレスとコンテナ | 0 / 3 | 0 / 20 | idempotency | CR-008, CR-009 |

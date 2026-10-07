@@ -13,8 +13,8 @@
     "published_lessons": 6,
     "published_questions": 20,
     "concepts": 155,
-    "detailed_units": 25,
-    "rubric_checks": 50
+    "detailed_units": 26,
+    "rubric_checks": 52
   },
   "nodes": [
     {
@@ -769,9 +769,71 @@
     {
       "id": "concept:ebs",
       "kind": "concept",
-      "title": "ebs",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "EBSのスナップショット復元とAZ配置",
+      "detail_status": "reviewed_unit",
+      "unit": {
+        "id": "ebs",
+        "title": "EBSのスナップショット復元とAZ配置",
+        "group": "storage",
+        "objective": "復旧先EC2と同じAZに新しいボリュームを作り、容量と接続後の利用条件を確認する。",
+        "estimated_minutes": 7,
+        "scope": "同一リージョンの通常AZ、完了済みスナップショットからの非ルートデータボリューム復旧。権限・容量・接続枠は確保済み。Local Zone/Outposts、OS別手順、Multi-Attach、復旧性能は対象外。",
+        "prerequisites": [],
+        "misconceptions": [
+          "元のEBSを異なるAZへ直接通常接続できる。",
+          "ファイル使用量が少なければスナップショットから直接小容量に復元できる。",
+          "AttachVolume成功だけでファイルシステムの利用確認も済む。"
+        ],
+        "checks": [
+          {
+            "id": "ebs-explain",
+            "level": "explain",
+            "prompt": "別AZのEC2へEBSデータを復元するには？",
+            "expected_points": [
+              "スナップショットから新ボリュームを作る",
+              "EC2と新ボリュームのAZを合わせる",
+              "接続後のOSでの利用可能化と確認が必要"
+            ]
+          },
+          {
+            "id": "ebs-apply",
+            "level": "apply",
+            "prompt": "100 GiBのスナップショットで使用量20 GiBなら50 GiBへ直接復元できる？",
+            "expected_points": [
+              "容量はスナップショットと同じか大きい値",
+              "ファイル使用量とボリューム容量を分ける",
+              "縮小が必要なら別の移行設計"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch05-l01"
+        ],
+        "review": {
+          "status": "reviewed",
+          "basis": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。",
+          "source_document": "knowledge/lessons/ebs.md",
+          "evidence": [
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go",
+              "claim": "スナップショットから新しいEBSボリュームを作成できる。ボリュームは接続するインスタンスと同じAZに必要。指定容量はスナップショットと同じか大きい値。暗号化スナップショットからのボリュームも暗号化される。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            },
+            {
+              "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+              "claim": "接続はデバイスをインスタンスへ提示する操作で、接続後に使用可能にする作業が必要。接続数上限やMarketplace製品コードなどの制約がある。",
+              "checked_on": "2026-10-07",
+              "reviewer": "Codex"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "EBSスナップショット作成とアプリ/OSの未書込みデータを別単位で確認する。",
+          "復元性能・OS別利用手順・暗号化鍵権限を別途検証する。"
+        ]
+      }
     },
     {
       "id": "concept:ebs-snapshot",
@@ -9447,6 +9509,11 @@
     {
       "from": "concept:secrets-manager",
       "to": "lesson:ch10-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:ebs",
+      "to": "lesson:ch05-l01",
       "type": "unit_reference"
     },
     {

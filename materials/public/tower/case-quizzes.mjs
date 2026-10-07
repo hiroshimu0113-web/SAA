@@ -689,6 +689,36 @@ export const CASE_QUIZZES={
       "falseでも設定をテストします。テストと予定された更新本体を混同しません。"
     ],
     "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/secretsmanager/api_op_RotateSecret.go"
+  },
+  "ebs-restore-target-az": {
+    "prompt": "EBSスナップショットから、復旧先EC2へ非ルートデータボリュームを作成・接続する。 同じリージョンのAZ-AのEBSを、AZ-BのEC2で復旧する。利用可能な完了済みスナップショットがあり、必要な権限・容量・接続枠は十分。Marketplace製品コードはなく暗号化条件も満たす。適切な手順は？",
+    "options": [
+      "AZ-Aの元ボリュームを、通常のAttachVolumeでAZ-BのEC2へ直接接続する",
+      "スナップショットからAZ-Bに新ボリュームを作り、AZ-BのEC2へ接続してOSで利用を確認する",
+      "EC2のNameタグをAZ-Aに変えれば、ボリュームと同じAZになる"
+    ],
+    "answer": 1,
+    "reasons": [
+      "通常のEBS接続は同じAZが必要です。異なるAZへ元ボリュームを直接接続しません。",
+      "復旧先EC2と同じAZで新しいボリュームを作成し、接続後の利用可能化も確認します。",
+      "表示用タグの変更はEC2の配置を変更しません。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go"
+  },
+  "ebs-snapshot-capacity": {
+    "prompt": "EBSスナップショットから、復旧先EC2へ非ルートデータボリュームを作成・接続する。 別の復元で、スナップショットのボリューム容量は100 GiB。保存済みファイルの使用量は20 GiBという教材用の仮定。CreateVolumeで、100 GiBまたは50 GiBを指定できると考えてよい？ファイル縮小やデータ移行はまだ行っていない。",
+    "options": [
+      "使用量が20 GiBなら、同じスナップショットから50 GiBを指定して直接縮小できる",
+      "どちらも必ず禁止され、元より大きい値しか使えない",
+      "100 GiBは容量条件を満たす。50 GiBへの直接縮小は不可で、必要なら別途移行を設計する"
+    ],
+    "answer": 2,
+    "reasons": [
+      "指定容量はスナップショットの容量以上です。ファイルの使用量だけで直接縮小できません。",
+      "同じ容量も許可されます。必ず大きくする条件ではありません。",
+      "スナップショットと同じか大きい容量が必要です。縮小移行は別の作業になります。"
+    ],
+    "source": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go"
   }
 };
 export const QUIZ_CASE_PAIRS=[
@@ -783,5 +813,9 @@ export const QUIZ_CASE_PAIRS=[
   [
     "secret-current-cache",
     "secret-test-not-noop"
+  ],
+  [
+    "ebs-restore-target-az",
+    "ebs-snapshot-capacity"
   ]
 ];

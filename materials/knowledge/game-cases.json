@@ -2833,6 +2833,123 @@
         "deployment_ref": null,
         "checked_on": null
       }
+    },
+    {
+      "id": "ebs-restore-placement",
+      "title": "別AZへのデータボリューム復旧",
+      "premise": "EBSスナップショットから、復旧先EC2へ非ルートデータボリュームを作成・接続する。",
+      "unit_ids": [
+        "ebs"
+      ],
+      "chapter_ids": [
+        "ch04",
+        "ch05",
+        "ch11"
+      ],
+      "constraints": [
+        "同一リージョンの通常AZ。完了済みスナップショットを利用する。",
+        "必要な権限・暗号化条件・接続数上限は満たし、Marketplace製品コードはない。"
+      ],
+      "questions": [
+        {
+          "id": "ebs-restore-target-az",
+          "objective": "復旧先AZに新しいボリュームを作る。",
+          "prompt": "同じリージョンのAZ-AのEBSを、AZ-BのEC2で復旧する。利用可能な完了済みスナップショットがあり、必要な権限・容量・接続枠は十分。Marketplace製品コードはなく暗号化条件も満たす。適切な手順は？",
+          "options": [
+            {
+              "id": "ebs-restore-target-az-a",
+              "text": "AZ-Aの元ボリュームを、通常のAttachVolumeでAZ-BのEC2へ直接接続する",
+              "explanation": "通常のEBS接続は同じAZが必要です。異なるAZへ元ボリュームを直接接続しません。"
+            },
+            {
+              "id": "ebs-restore-target-az-b",
+              "text": "スナップショットからAZ-Bに新ボリュームを作り、AZ-BのEC2へ接続してOSで利用を確認する",
+              "explanation": "復旧先EC2と同じAZで新しいボリュームを作成し、接続後の利用可能化も確認します。"
+            },
+            {
+              "id": "ebs-restore-target-az-c",
+              "text": "EC2のNameタグをAZ-Aに変えれば、ボリュームと同じAZになる",
+              "explanation": "表示用タグの変更はEC2の配置を変更しません。"
+            }
+          ],
+          "correct_option_id": "ebs-restore-target-az-b",
+          "runtime_option_order": [
+            "ebs-restore-target-az-a",
+            "ebs-restore-target-az-b",
+            "ebs-restore-target-az-c"
+          ],
+          "rationale": "復旧先EC2と同じAZで新しいボリュームを作成し、接続後の利用可能化も確認します。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go",
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go"
+          ]
+        },
+        {
+          "id": "ebs-snapshot-capacity",
+          "objective": "スナップショットから作る容量の条件を選ぶ。",
+          "prompt": "別の復元で、スナップショットのボリューム容量は100 GiB。保存済みファイルの使用量は20 GiBという教材用の仮定。CreateVolumeで、100 GiBまたは50 GiBを指定できると考えてよい？ファイル縮小やデータ移行はまだ行っていない。",
+          "options": [
+            {
+              "id": "ebs-snapshot-capacity-a",
+              "text": "使用量が20 GiBなら、同じスナップショットから50 GiBを指定して直接縮小できる",
+              "explanation": "指定容量はスナップショットの容量以上です。ファイルの使用量だけで直接縮小できません。"
+            },
+            {
+              "id": "ebs-snapshot-capacity-b",
+              "text": "どちらも必ず禁止され、元より大きい値しか使えない",
+              "explanation": "同じ容量も許可されます。必ず大きくする条件ではありません。"
+            },
+            {
+              "id": "ebs-snapshot-capacity-c",
+              "text": "100 GiBは容量条件を満たす。50 GiBへの直接縮小は不可で、必要なら別途移行を設計する",
+              "explanation": "スナップショットと同じか大きい容量が必要です。縮小移行は別の作業になります。"
+            }
+          ],
+          "correct_option_id": "ebs-snapshot-capacity-c",
+          "runtime_option_order": [
+            "ebs-snapshot-capacity-a",
+            "ebs-snapshot-capacity-b",
+            "ebs-snapshot-capacity-c"
+          ],
+          "rationale": "スナップショットと同じか大きい容量が必要です。縮小移行は別の作業になります。",
+          "source_urls": [
+            "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go"
+          ]
+        }
+      ],
+      "variant": {
+        "condition": "復旧先EC2がAZ-BではなくAZ-Aになる。",
+        "answer": "復旧先と同じAZ-Aに復元用の新ボリュームを作成し、容量・接続後の利用を確認する。",
+        "reason": "対象AZは固定のBではなく、実際の接続先EC2と合わせる条件。"
+      },
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go",
+          "claim": "スナップショットから新しいEBSボリュームを作成できる。ボリュームは接続するインスタンスと同じAZに必要。指定容量はスナップショットと同じか大きい値。暗号化スナップショットからのボリュームも暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "接続はデバイスをインスタンスへ提示する操作で、接続後に使用可能にする作業が必要。接続数上限やMarketplace製品コードなどの制約がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "release": {
+        "status": "unpublished",
+        "deployment_ref": null,
+        "checked_on": null
+      }
     }
   ]
 }

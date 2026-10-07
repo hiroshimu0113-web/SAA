@@ -8933,6 +8933,262 @@
       },
       "import_status": "imported",
       "open_questions": []
+    },
+    {
+      "id": "concept-ebs-restore-placement",
+      "title": "EBSのスナップショット復元とAZ配置",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "EBS復旧を成立させる配置・容量・接続条件を適用する概念。",
+      "objective": "復旧先EC2と同じAZに新しいボリュームを作り、容量と接続後の利用条件を確認する。",
+      "unit_ids": [
+        "ebs"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/lessons/ebs.md",
+          "locator": "仕組み"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "card",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "同一リージョンの通常AZ。完了済みスナップショットを利用する。",
+        "必要な権限・暗号化条件・接続数上限は満たし、Marketplace製品コードはない。"
+      ],
+      "limitations": [
+        "同一リージョンの通常AZ、完了済みスナップショットからの非ルートデータボリューム復旧。権限・容量・接続枠は確保済み。Local Zone/Outposts、OS別手順、Multi-Attach、復旧性能は対象外。"
+      ],
+      "misconceptions": [
+        "元のEBSを異なるAZへ直接通常接続できる。",
+        "ファイル使用量が少なければスナップショットから直接小容量に復元できる。",
+        "AttachVolume成功だけでファイルシステムの利用確認も済む。"
+      ],
+      "content": {
+        "principle": {
+          "path": "knowledge/lessons/ebs.md",
+          "locator": "仕組み"
+        },
+        "applicable_when": "EBSスナップショットから、復旧先EC2へ非ルートデータボリュームを作成・接続する。",
+        "counterexample": "復旧先EC2がAZ-BではなくAZ-Aになる。 復旧先と同じAZ-Aに復元用の新ボリュームを作成し、容量・接続後の利用を確認する。",
+        "comparison": {
+          "path": "knowledge/lessons/ebs.md",
+          "locator": "比較・条件"
+        }
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-ebs-restore-placement",
+          "reason": "明示した条件での判断と条件変更を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go",
+          "claim": "スナップショットから新しいEBSボリュームを作成できる。ボリュームは接続するインスタンスと同じAZに必要。指定容量はスナップショットと同じか大きい値。暗号化スナップショットからのボリュームも暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "接続はデバイスをインスタンスへ提示する操作で、接続後に使用可能にする作業が必要。接続数上限やMarketplace製品コードなどの制約がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "条件付き通信制御のカード詳細素材。数値効果は未実装。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/ebs.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの回復値はデータの復元・整合性や復旧時間を保証しない。",
+        "simplifications": [
+          "同一リージョンの通常AZ、完了済みスナップショットからの非ルートデータボリューム復旧。権限・容量・接続枠は確保済み。Local Zone/Outposts、OS別手順、Multi-Attach、復旧性能は対象外。"
+        ],
+        "mislearning_risks": [
+          "元のEBSを異なるAZへ直接通常接続できる。",
+          "ファイル使用量が少なければスナップショットから直接小容量に復元できる。",
+          "AttachVolume成功だけでファイルシステムの利用確認も済む。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "カード数値効果の設計・検証は未実施。"
+      ]
+    },
+    {
+      "id": "case-ebs-restore-placement",
+      "title": "別AZへのデータボリューム復旧",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件から対処を選び、独立した第2問で理由と境界を問うケース。",
+      "objective": "復旧先EC2と同じAZに新しいボリュームを作り、容量と接続後の利用条件を確認する。",
+      "unit_ids": [
+        "ebs"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-restore-placement"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Elastic Block Store"
+      ],
+      "game_targets": [
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "同一リージョンの通常AZ。完了済みスナップショットを利用する。",
+        "必要な権限・暗号化条件・接続数上限は満たし、Marketplace製品コードはない。"
+      ],
+      "limitations": [
+        "同一リージョンの通常AZ、完了済みスナップショットからの非ルートデータボリューム復旧。権限・容量・接続枠は確保済み。Local Zone/Outposts、OS別手順、Multi-Attach、復旧性能は対象外。"
+      ],
+      "misconceptions": [
+        "元のEBSを異なるAZへ直接通常接続できる。",
+        "ファイル使用量が少なければスナップショットから直接小容量に復元できる。",
+        "AttachVolume成功だけでファイルシステムの利用確認も済む。"
+      ],
+      "content": {
+        "premise": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-restore-placement.premise"
+        },
+        "constraints": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-restore-placement.constraints"
+        },
+        "questions": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-restore-placement.questions"
+        },
+        "variant": {
+          "path": "knowledge/game-cases.json",
+          "locator": "ebs-restore-placement.variant"
+        }
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_CreateVolume.go",
+          "claim": "スナップショットから新しいEBSボリュームを作成できる。ボリュームは接続するインスタンスと同じAZに必要。指定容量はスナップショットと同じか大きい値。暗号化スナップショットからのボリュームも暗号化される。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        },
+        {
+          "url": "https://github.com/aws/aws-sdk-go-v2/blob/2ba0e39015ddf9c91c6c378f8a4fb79dcb4353da/service/ec2/api_op_AttachVolume.go",
+          "claim": "接続はデバイスをインスタンスへ提示する操作で、接続後に使用可能にする作業が必要。接続数上限やMarketplace製品コードなどの制約がある。",
+          "checked_on": "2026-10-07",
+          "reviewer": "Codex"
+        }
+      ],
+      "classification_status": "reviewed",
+      "content_status": "reviewed",
+      "review_notes": [
+        {
+          "scope": "classification",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "既存素材IDを詳細化し、関連章へ共有する。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "原稿作成後に公式SDK/CDKの該当説明と各主張・設問条件・全誤答を照合。同一担当の別工程確認であり、独立監査・実AWS実験は未実施。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-07",
+          "summary": "48テスト・型検査/ビルド成功。Chromiumで全ケースの両問・全解説・320px・保存再開・オフライン・報酬重複防止を確認。知識地図の全ノード数・検索・前提導線・キーボード・320px検証成功。未公開。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2問のゲームケースへ取り込み、解説と保存再開を検証する。",
+        "mechanism_note": {
+          "path": "knowledge/lessons/ebs.md",
+          "locator": "仕組み"
+        },
+        "metaphor_limit": "ゲームの回復値はデータの復元・整合性や復旧時間を保証しない。",
+        "simplifications": [
+          "同一リージョンの通常AZ、完了済みスナップショットからの非ルートデータボリューム復旧。権限・容量・接続枠は確保済み。Local Zone/Outposts、OS別手順、Multi-Attach、復旧性能は対象外。"
+        ],
+        "mislearning_risks": [
+          "元のEBSを異なるAZへ直接通常接続できる。",
+          "ファイル使用量が少なければスナップショットから直接小容量に復元できる。",
+          "AttachVolume成功だけでファイルシステムの利用確認も済む。"
+        ],
+        "implementation_refs": [
+          {
+            "path": "public/tower/case-quizzes.mjs",
+            "locator": "ebs-restore-target-az, ebs-snapshot-capacity"
+          },
+          {
+            "path": "public/tower/engine.mjs",
+            "locator": "startQuiz"
+          }
+        ]
+      },
+      "import_status": "imported",
+      "open_questions": []
     }
   ]
 }
