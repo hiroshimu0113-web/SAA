@@ -40,5 +40,5 @@ export function submitStudy(p,now=Date.now()){
  const s=p.session;if(!s||s.submitted)return p;let next=copy(p);next.session.submitted=true;
  if(s.mode==='assessment'){for(let i=0;i<s.questions.length;i++)next=recordAnswer(next,{key:s.id+':'+i,question:s.questions[i],selected:s.answers[i]||[],mode:'assessment',at:now});next.attempts.find(a=>a.id===s.id).finishedAt=now;}return next;
 }
-export function abandonStudy(p,now=Date.now()){if(!p.session)return p;let next=p.session.mode==='assessment'?submitStudy(p,now):copy(p);next.session=null;return next;}
+export function abandonStudy(p,now=Date.now()){if(!p.session)return p;let next=copy(p.session.mode==='assessment'?submitStudy(p,now):p);next.session=null;return next;}
 export function progressFor(p,questions){return questions.map(q=>{const all=p.records.filter(r=>r.question.id===q.id),current=all.filter(r=>r.question.revision===q.revision),last=current[current.length-1];return {q,count:current.length,ever:all.length,last,first:current[0]};});}

@@ -43,3 +43,8 @@ test('room option order is a persisted permutation; old index-based saves and ne
 test('room answer timestamps survive backup and a legacy caller can append another answer',()=>{
  let s=fixedRun(2);s.floor=1;s.history=[{floor:0,lane:0,type:'battle'}];s=act(s,{type:'node',lane:0});const id=s.quiz.ids[0];s=act(s,{type:'quiz-answer',questionId:id,choice:QUIZZES[id].answer,answeredAt:1234});s=parseRun(JSON.stringify(s));assert.deepEqual(s.quiz.answerTimes,[1234]);s=act(s,{type:'quiz-next',questionId:id});const second=s.quiz.ids[1];s=act(s,{type:'quiz-answer',questionId:second,choice:QUIZZES[second].answer});assert.deepEqual(parseRun(JSON.stringify(s)).quiz.answerTimes,[1234,0]);
 });
+
+test('closing a submitted assessment is immutable even if the next save fails',()=>{
+ const p=submitStudy(startStudy(emptyStudy(),pack.assessment,{...options,mode:'assessment'}),2000),before=JSON.stringify(p),next=abandonStudy(p);
+ assert.equal(next.session,null);assert.equal(JSON.stringify(p),before);assert.throws(()=>persistStudy({setItem(){throw Error('quota');}},next));assert.equal(JSON.stringify(p),before);
+});
