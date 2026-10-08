@@ -718,3 +718,10 @@
 - ChromiumのローカルHTTP検証成功：60案/枚数・効果・判断・検索/再読み込み保存/JSON入出力・不正入力/320・390・1024px/JS無効読書。
 - `scripts/role-effects-browser-check.mjs` を配信CIのWebKit検証へ追加。実配信照合へHTML/JSONを追加。
 - 次：GitHub同期、CI WebKitとPages配信、公式URLのHTTP200とSHA256一致確認。公開成功は結果確認後に記録する。
+
+
+### 役の効果資料・公開確認完了（2026-10-08 UTC）
+- 共有URL：https://hiroshimu0113-web.github.io/SAA/design/role-effects.html 。JSONも同ディレクトリで配信。
+- 実装コミット `96bd526`、Actions `37730269872` のbuild/deploy成功。資料専用のWebKit検証も成功。
+- deployジョブの実配信検証で新HTML/JSONを含めHTTP200・配信成果物とのSHA256一致を確認（05:05 UTC）。
+- 完了：Safariから開けるHTTPS共有。本人のSafari実機確認は未実施。役は設計段階でゲーム実装なし。
