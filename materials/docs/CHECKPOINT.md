@@ -759,3 +759,9 @@
 ### 扇状手札・公開確認完了（2026-10-08）
 - 実装 `a77164f` / Actions `37742969932` のbuild・deploy成功。122テスト、WebKitで扇状表示/ホバー/中央追従/保存不変/動き軽減を含む全操作回帰、アイコン・教材・模試・学習室の検証成功。ローカルChromiumの全操作回帰も完了。
 - 公開URL：https://hiroshimu0113-web.github.io/SAA/tower/fan.html 。HTTP200とローカル配信ビルドのSHA256一致を確認。GitHub main同期済み。iPhone実機は本人の確認待ち。
+
+
+## クイズの一巡出題（2026-10-08）
+- 知識の間250問を未出題から抽選、全問後にリセット。表示した問題だけ記録し、「はじめから」でも継続。冒険保存・バックアップ・旧保存に対応。
+- 詳細：GAME_QUIZ_CYCLE_CHANGE.md。教材・分類の内容変更なし。
+- 全126テスト・build・knowledge/game/progress check・Chromiumの一巡/学習室回帰成功。GitHub同期・WebKit・公開確認を進行中。次：公開結果を記録。

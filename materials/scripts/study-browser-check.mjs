@@ -1,3 +1,4 @@
+import {checkQuizCycle} from './quiz-cycle-browser-check.mjs';
 import {chromium,webkit} from '@playwright/test';import {preview} from 'vite';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
 import {fixedRun} from './fixed-run-fixture.mjs';import {act} from '../public/tower/engine.mjs';
 const server=await preview({base:'/SAA/',preview:{host:'127.0.0.1',port:4203,strictPort:true}}),browser=await(process.env.BROWSER==='webkit'?webkit:chromium).launch(process.env.BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH||undefined}),context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),p=await context.newPage(),errors=[];
@@ -31,5 +32,6 @@ try{
   const bad=JSON.parse(JSON.stringify(valid));mutate(bad);await p.locator('#study-import').setInputFiles({name:'inconsistent.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(bad))});await p.getByRole('alert').waitFor();assert.match(await p.getByRole('alert').innerText(),/元の記録は上書きしていません/);assert.equal(await p.evaluate(key=>localStorage.getItem(key),key),original);
  }
  await p.locator('#study-import').setInputFiles({name:'valid.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(valid))});assert.deepEqual(await get(),valid);await click('resume');assert.match(await p.locator('.study-dialog [role=status]').innerText(),/0 \/ 65/);
+ await click('close');await checkQuizCycle(p);
  assert.deepEqual(errors,[]);console.log('PASS game study: GQR draft finalization and contradictory import protection, multiple/draft/backup, held-out/no early explanations, timeout/repeat, unseen/wrong/skills, room shuffle/preserved combat, 320px, failed update.');
 }finally{await browser.close();await server.httpServer.close();}

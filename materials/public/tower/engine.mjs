@@ -1,3 +1,4 @@
+import {validQuizCycle,normalizeCycle,markQuestion,pickQuestion,cycleForRun} from './quiz-cycle.mjs';
 import {DEBUFFS,delayPaused,delayRemaining,advanceDelay,emptyDebuffs,applyDebuff,attackAmount,blockAmount,decayDebuffs} from './debuffs.mjs';
 import {COMBOS} from './combos.mjs';
 import {QUIZZES,QUIZ_RULES,LEGACY_QUIZ_RULES,quizScore} from './quiz.mjs';
@@ -39,10 +40,11 @@ function turnStart(s){const b=s.battle;if(has(s,'escalation')){b.playerStrength+
 function log(s,t){s.log=[...s.log,t].slice(-5);}
 function heal(s,n){s.hp=Math.min(s.maxHp,s.hp+n);}
 function add(s,id){s.deck.push({uid:s.nextId++,id,plus:false});}
-export function newRun(seed=Date.now(),catalog=null){
+export function newRun(seed=Date.now(),catalog=null,quizCycle=undefined){
  activateCatalog(catalog);
  const s={version:4,seed:seed>>>0,rng:seed>>>0,nextId:0,hp:72,maxHp:72,gold:60,floor:0,phase:'map',deck:[],relics:['lantern'],history:[],log:['観測灯を携えて、尖塔へ。'],battle:null,reward:[],stock:[],removed:false,quiz:null};
  const heroIds=Object.keys(HEROES);s.hero=heroIds[(seed>>>0)%heroIds.length];s.relics=[HEROES[s.hero].relic];s.log=[HEROES[s.hero].name+'として、尖塔へ。'];
+ s.quizCycle=normalizeCycle(quizCycle,Object.keys(QUIZZES));
  s.routes=generateRoutes(s.seed);s.cardPurchases=0;s.shopRelic=null;s.rewardPicks=0;
  if(catalog)s.learningCatalog=JSON.parse(JSON.stringify(catalog));
  for(let i=0;i<3;i++)add(s,'strike');for(let i=0;i<3;i++)add(s,'guard');add(s,'probe');return s;
@@ -96,11 +98,18 @@ function win(s){
  if(elite){const relic=shuffle(s,REWARD_RELICS.filter(x=>!has(s,x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}
  s.phase='reward';log(s,'勝利。カードを'+s.rewardPicks+'枚まで選ぶか、見送れます。');
 }
-function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};const orderRng={rng:(s.rng^0x9e3779b9)>>>0};s.quiz.orders=s.quiz.ids.map(id=>shuffle(orderRng,QUIZZES[id].options.map((_,i)=>i)));}
+function startQuiz(s){
+ const ids=Object.keys(QUIZZES),cycle=cycleForRun(s,ids),first=pickQuestion(cycle,ids,()=>rnd(s));
+ s.quizCycle=markQuestion(cycle,first,ids);
+ const second=pickQuestion(s.quizCycle,ids,()=>rnd(s),[first]);
+ s.quiz={ids:[first,second],answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};
+ const orderRng={rng:(s.rng^0x9e3779b9)>>>0};s.quiz.orders=s.quiz.ids.map(id=>shuffle(orderRng,QUIZZES[id].options.map((_,i)=>i)));
+}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];s.rewardPicks=0;s.shopRelic=null;}
 export function act(state,action){
  if(activeVersion()!==(state.learningCatalog?.version||null))activateCatalog(state.learningCatalog||null);
  const s=clone(state),a=action,b=s.battle;
+ if(s.quizCycle===undefined)s.quizCycle=cycleForRun(s,Object.keys(QUIZZES));
  if(a.type==='node'&&s.phase==='map'&&Number.isInteger(a.lane)&&routesFor(s)[s.floor]?.[a.lane]){
   const type=routesFor(s)[s.floor][a.lane];s.history.push({floor:s.floor,lane:a.lane,type});s.floor++;log(s,s.floor+'階：'+NODE_NAMES[type]);
   if(['battle','elite','boss'].includes(type)){const pool=ENEMY_POOLS[type],id=pool[Math.floor(rnd(s)*pool.length)];startBattle(s,id);}
@@ -184,7 +193,9 @@ export function act(state,action){
   if(!q)return state;
   if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){if(q.answerTimes!==undefined||Number.isFinite(a.answeredAt))q.answerTimes=[...(q.answerTimes||q.answers.map(()=>0)),Number.isFinite(a.answeredAt)&&a.answeredAt>=0?a.answeredAt:0];q.answers.push(a.choice);if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
   if(a.type==='quiz-next'&&q.step<2&&q.answers.length===q.step+1&&a.questionId===q.ids[q.step]){
+   const cycle=cycleForRun(s,Object.keys(QUIZZES));
    q.step++;
+   if(q.step===1)s.quizCycle=markQuestion(cycle,q.ids[1],Object.keys(QUIZZES));
    if(q.step===2){
     const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:q.rulesVersion===2?q.damageTaken:0};
     if(correct===2){const relic=shuffle(s,REWARD_RELICS.filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else if(q.rulesVersion!==2){q.result.gold=LEGACY_QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
@@ -223,6 +234,7 @@ function validateRun(raw){
  if(owns(s,'routes')&&(!Array.isArray(s.routes)||s.routes.length!==8||!s.routes.every((row,i)=>Array.isArray(row)&&row.length===(i===7?1:2)&&row.every(t=>i===7?t==='boss':i===0?t==='battle':['battle','elite','event','rest','shop'].includes(t)))))throw Error('マップが不正です。');
  if(owns(s,'rewardPicks')&&(!num(s.rewardPicks,2)||(s.phase==='reward'?(s.rewardPicks<1||s.reward.length<s.rewardPicks):s.rewardPicks!==0)))throw Error('獲得回数が不正です。');
  if(owns(s,'shopRelic')&&s.shopRelic!==null&&(s.phase!=='shop'||!REWARD_RELICS.includes(s.shopRelic)||s.relics.includes(s.shopRelic)))throw Error('交換所の遺物が不正です。');
+ if(owns(s,'quizCycle')&&!validQuizCycle(s.quizCycle))throw Error('クイズ出題履歴が不正です。');
  if(owns(s,'cardPurchases')&&!num(s.cardPurchases,1000))throw Error('購入記録が不正です。');
  if(!Array.isArray(s.history)||s.history.length!==s.floor||!s.history.every((h,i)=>h.floor===i&&num(h.lane,1)&&routesFor(s)[i]?.[h.lane]===h.type)||!Array.isArray(s.log)||s.log.length>5||!s.log.every(t=>typeof t==='string'&&t.length<200)||typeof s.removed!=='boolean')throw Error('進行記録が不正です。');
  if(s.phase==='map'&&s.floor>=8)throw Error('ルートが不正です。');
