@@ -7,10 +7,12 @@ export function parseBackup(text: string): Progress {
   const p: unknown = JSON.parse(text);
   if (!object(p) || p.version !== 1 || !Array.isArray(p.attempts) || !strings(p.bookmarks) || !strings(p.readLessons)) throw new Error('対応していないバックアップ形式です。');
   if (!p.attempts.every(a => object(a) && typeof a.questionId === 'string' && strings(a.selected) && typeof a.correct === 'boolean' && typeof a.unsure === 'boolean' && typeof a.at === 'string' && Number.isFinite(Date.parse(a.at)))) throw new Error('回答履歴が不正です。');
-  if (p.exam !== null) {
-    const e = p.exam;
-    if (!object(e) || !['mock1', 'mock2'].includes(String(e.id)) || typeof e.startedAt !== 'number' || !Number.isFinite(e.startedAt) || typeof e.deadline !== 'number' || !Number.isFinite(e.deadline) || e.deadline < e.startedAt || typeof e.submitted !== 'boolean' || !object(e.answers) || !Object.values(e.answers).every(strings)) throw new Error('模擬試験データが不正です。');
-  }
+  const validExam = (e: unknown): boolean => object(e) && ['mock1', 'mock2', 'assessment1'].includes(String(e.id)) && typeof e.startedAt === 'number' && Number.isFinite(e.startedAt) && typeof e.deadline === 'number' && Number.isFinite(e.deadline) && e.deadline >= e.startedAt && typeof e.submitted === 'boolean' && object(e.answers) && Object.values(e.answers).every(strings)
+    && (e.revision === undefined || typeof e.revision === 'string')
+    && (e.attemptNumber === undefined || (Number.isSafeInteger(e.attemptNumber) && Number(e.attemptNumber) > 0))
+    && (e.exposure === undefined || ['unseen-self-reported', 'seen-or-unknown'].includes(String(e.exposure)));
+  if (p.exam !== null && !validExam(p.exam)) throw new Error('模擬試験データが不正です。');
+  if (p.examArchive !== undefined && (!Array.isArray(p.examArchive) || !p.examArchive.every(validExam))) throw new Error('試験履歴が不正です。');
   if (p.game !== null && !object(p.game)) throw new Error('冒険の保存データが不正です。');
   if (!('game' in p)) throw new Error('保存項目が不足しています。');
   return p as unknown as Progress;

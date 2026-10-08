@@ -279,3 +279,7 @@ connectLessons(chapters1, questions1);
 
 import { mock1 } from './readiness/mocks';
 questions1.push(...mock1);
+
+import {supplement, questions as nrQuestions} from "./rereview";
+supplement(chapters1);
+questions1.push(...nrQuestions.filter(q=>chapters1.some(c=>c.id===q.chapterId)));

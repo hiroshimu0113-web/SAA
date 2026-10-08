@@ -36,3 +36,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 公開済み教材はテスト/ビルド時にカード・クイズへ変換し、ゲーム画面の更新ボタンで取得できる。[連携仕様と教材担当の手順](GAME_CONTENT_UPDATE.md)を参照。独立HTMLは構造化補足の登録が必要。未公開原稿は取り込まない。
 
 今回のレビュー対応は [SAA_REVISION_LOG.md](SAA_REVISION_LOG.md)、提供された報告書は [SAA_READINESS_REVIEW.md](SAA_READINESS_REVIEW.md)。報告書は改訂前の評価として保存する。
+
+再レビュー [SAA_REREVIEW.md](SAA_REREVIEW.md) への対応：[SAA_REREVIEW_RESPONSE.md](SAA_REREVIEW_RESPONSE.md)。追加本文・通常問・独立セットは [src/content/rereview](../src/content/rereview/) に保管し、part1/part2から公開へ統合。詳細スキルは [SAA_DETAIL_SKILLS.md](SAA_DETAIL_SKILLS.md)。

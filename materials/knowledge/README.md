@@ -14,8 +14,8 @@
 - [units.json](units.json)：手で更新する14個の細分化単位。1単位に1つの判断目標を置き、説明と適用の確認を各1問用意。
 - [units.schema.json](units.schema.json)：後続の制作者が使うJSON Schema。レッスン参照や循環などは生成時にも検証。
 - [relations.json](relations.json)：混同しやすい概念と、組み合わせる概念の関係。
-- [INVENTORY.md](INVENTORY.md)：全12章・36レッスン・200問の棚卸し。公開範囲は2章6レッスン・20問。
-- [graph.json](../public/knowledge/graph.json)：自動生成する407ノード・609エッジのスナップショット。数は教材更新で変わる。
+- [INVENTORY.md](INVENTORY.md)：現行本文・問題と公開範囲の棚卸し。教材更新時に再生成。
+- [graph.json](../public/knowledge/graph.json)：自動生成する教材・概念・参照のスナップショット。数は教材更新で変わる。
 - [EXPANSION_PLAN.md](EXPANSION_PLAN.md)：内容を厚くする順序と引き継ぎ。
 
 ## 「理解」を分ける型

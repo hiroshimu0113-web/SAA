@@ -8,11 +8,11 @@
   ],
   "counts": {
     "chapters": 12,
-    "lessons": 50,
-    "questions": 355,
-    "published_lessons": 50,
-    "published_questions": 355,
-    "concepts": 177,
+    "lessons": 58,
+    "questions": 430,
+    "published_lessons": 58,
+    "published_questions": 430,
+    "concepts": 195,
     "detailed_units": 14,
     "rubric_checks": 28
   },
@@ -374,9 +374,23 @@
       "unit": null
     },
     {
+      "id": "concept:batch-upload",
+      "kind": "concept",
+      "title": "batch-upload",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:block-public-access",
       "kind": "concept",
       "title": "S3 Block Public Access",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:budgets",
+      "kind": "concept",
+      "title": "AWS Budgets",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -465,6 +479,13 @@
       "unit": null
     },
     {
+      "id": "concept:columnar",
+      "kind": "concept",
+      "title": "columnar",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:consistency",
       "kind": "concept",
       "title": "読取り整合性",
@@ -479,6 +500,20 @@
       "unit": null
     },
     {
+      "id": "concept:cost-allocation",
+      "kind": "concept",
+      "title": "コスト配分タグ",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:cost-explorer",
+      "kind": "concept",
+      "title": "AWS Cost Explorer",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:cost-optimization",
       "kind": "concept",
       "title": "コスト最適化",
@@ -489,6 +524,13 @@
       "id": "concept:cross-account",
       "kind": "concept",
       "title": "クロスアカウントアクセス",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:cur",
+      "kind": "concept",
+      "title": "Cost and Usage Report（CUR）",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -607,6 +649,13 @@
       "unit": null
     },
     {
+      "id": "concept:dynamodb-capacity",
+      "kind": "concept",
+      "title": "dynamodb-capacity",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:dynamodb-on-demand",
       "kind": "concept",
       "title": "DynamoDBオンデマンド容量",
@@ -691,6 +740,20 @@
           "境界条件と公式根拠を照合してから公開教材へ反映する"
         ]
       }
+    },
+    {
+      "id": "concept:ec2-hibernation",
+      "kind": "concept",
+      "title": "EC2休止",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:ec2-stop",
+      "kind": "concept",
+      "title": "EC2停止",
+      "detail_status": "inventory_only",
+      "unit": null
     },
     {
       "id": "concept:ecr",
@@ -822,6 +885,13 @@
       "id": "concept:guardduty",
       "kind": "concept",
       "title": "GuardDuty",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:gwlb",
+      "kind": "concept",
+      "title": "Gateway Load Balancer（GWLB）",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -1348,6 +1418,13 @@
       "unit": null
     },
     {
+      "id": "concept:rcu",
+      "kind": "concept",
+      "title": "RCU",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:rds",
       "kind": "concept",
       "title": "Amazon RDS",
@@ -1451,6 +1528,20 @@
       "id": "concept:replication",
       "kind": "concept",
       "title": "レプリケーション",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:requester-pays",
+      "kind": "concept",
+      "title": "Requester Pays",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:reserved-instances",
+      "kind": "concept",
+      "title": "Reserved Instances（RI）",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -1704,6 +1795,13 @@
       "unit": null
     },
     {
+      "id": "concept:storage-autoscaling",
+      "kind": "concept",
+      "title": "storage-autoscaling",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
       "id": "concept:storage-class",
       "kind": "concept",
       "title": "storage-class",
@@ -1728,6 +1826,13 @@
       "id": "concept:storage-performance",
       "kind": "concept",
       "title": "IOPSとスループット",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:storage-sizing",
+      "kind": "concept",
+      "title": "storage-sizing",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -1804,6 +1909,20 @@
           "境界条件と公式根拠を照合してから公開教材へ反映する"
         ]
       }
+    },
+    {
+      "id": "concept:throttling",
+      "kind": "concept",
+      "title": "スロットリング",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:time-series",
+      "kind": "concept",
+      "title": "time-series",
+      "detail_status": "inventory_only",
+      "unit": null
     },
     {
       "id": "concept:tls",
@@ -1893,6 +2012,13 @@
       "id": "concept:warm-standby",
       "kind": "concept",
       "title": "ウォームスタンバイ",
+      "detail_status": "inventory_only",
+      "unit": null
+    },
+    {
+      "id": "concept:wcu",
+      "kind": "concept",
+      "title": "WCU",
       "detail_status": "inventory_only",
       "unit": null
     },
@@ -2346,6 +2472,71 @@
       ]
     },
     {
+      "id": "lesson:ch04-l05",
+      "kind": "lesson",
+      "title": "購入方式は適用範囲・契約期間・容量確保で比較する",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch04.ts",
+      "sources": [
+        {
+          "title": "RIの属性・期間・支払い",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RIのリージョン・AZスコープ",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Savings Plansの種類と対象",
+          "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "lesson:ch04-l06",
+      "kind": "lesson",
+      "title": "停止と休止を状態保持・再開時間・残る費用で選ぶ",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch04.ts",
+      "sources": [
+        {
+          "title": "EC2休止の状態保持と課金",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EC2の状態遷移",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "lesson:ch04-l07",
+      "kind": "lesson",
+      "title": "負荷分散の役割と増減方法を費用へ結び付ける",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch04.ts",
+      "sources": [
+        {
+          "title": "Gateway Load Balancerの役割",
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EC2 Auto Scaling",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
       "id": "chapter:ch05",
       "kind": "chapter",
       "title": "ストレージを選ぶ",
@@ -2512,6 +2703,31 @@
       ]
     },
     {
+      "id": "lesson:ch05-l06",
+      "kind": "lesson",
+      "title": "保存量の増加・転送単位・費用負担を見積もる",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch05.ts",
+      "sources": [
+        {
+          "title": "S3 Requester Pays",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RDSストレージ自動拡張",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.Autoscaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "S3転送の設計",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance-design-patterns.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
       "id": "chapter:ch06",
       "kind": "chapter",
       "title": "データベースとキャッシュ",
@@ -2638,6 +2854,51 @@
       ]
     },
     {
+      "id": "lesson:ch06-l05",
+      "kind": "lesson",
+      "title": "RCU/WCUを項目サイズと整合性から見積もる",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch06.ts",
+      "sources": [
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBプロビジョンド容量",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "lesson:ch06-l06",
+      "kind": "lesson",
+      "title": "DBの形式・エンジン・移行費用を比較する",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch06.ts",
+      "sources": [
+        {
+          "title": "Redshift列指向ストレージ",
+          "url": "https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "時系列DBの保持・分析",
+          "url": "https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "AWS DMS",
+          "url": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
       "id": "chapter:ch07",
       "kind": "chapter",
       "title": "名前解決と世界への配信",
@@ -2719,6 +2980,26 @@
         {
           "title": "Global Acceleratorの固定IPと正常な到達先",
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "lesson:ch07-l05",
+      "kind": "lesson",
+      "title": "流量制御と帯域を下流の能力・再試行から決める",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch07.ts",
+      "sources": [
+        {
+          "title": "API Gatewayスロットリング",
+          "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Site-to-Site VPN",
+          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
           "checked": "2026-10-08"
         }
       ]
@@ -3239,6 +3520,36 @@
         {
           "title": "S3保存階層の取得・保持条件",
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "lesson:ch12-l06",
+      "kind": "lesson",
+      "title": "費用の調査・予算通知・配賦分析を使い分ける",
+      "release": "published",
+      "source_file": "src/content/index.ts",
+      "original_source_file": "src/content/readiness/ch12.ts",
+      "sources": [
+        {
+          "title": "Cost Explorerの費用分析",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Budgetsの実績・予測通知と遅延",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Cost and Usage Reportの明細",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Data ExportsとCUR 2.0",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
           "checked": "2026-10-08"
         }
       ]
@@ -5585,7 +5896,7 @@
     {
       "id": "question:m1-035",
       "kind": "question",
-      "title": "バックアップはあるが手動でインフラ設定を再作成し、毎回SGやロールの漏れで復旧が遅れる。改善を2つ選べ。（2つ選択）",
+      "title": "暗号化バックアップの復元権限、KMSキーの利用可能性、秘密情報の取得権限と到達性は復旧先で検証済み。しかしSGとアプリ用ロールを手作業で再作成し、構成漏れで業務再開が遅れる。未解決の設定再現性と業務再開時間を改善する施策を2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch11",
       "sources": [
@@ -5765,7 +6076,7 @@
     {
       "id": "question:m1-045",
       "kind": "question",
-      "title": "標準LambdaのCPU中心処理が遅い。メモリ増加に伴うCPU配分の変化を使って改善を調べたい。測定方針は。",
+      "title": "標準LambdaのCPU中心処理でp95が目標を超えている。メモリには余裕があるが、メモリ変更に伴うCPU配分で実行時間が変わるかは未測定。性能目標を満たす設定の費用を比較するため、最初に行う測定は。",
       "release": "published",
       "chapter_id": "ch08",
       "sources": [
@@ -5913,7 +6224,7 @@
     {
       "id": "question:m1-052",
       "kind": "question",
-      "title": "商品画像はURLごとに不変で、更新時は別URLを発行する。CDNのヒット率を上げる方針は。",
+      "title": "公開の商品画像はURLごとに不変で、更新時は新URLを配る。個人情報は含まれず、CloudFrontで多くの利用者が同じ画像を取得する。オリジンへのアクセスを減らしながら新版を正しく取得させる設定は。",
       "release": "published",
       "chapter_id": "ch07",
       "sources": [
@@ -6064,13 +6375,18 @@
     {
       "id": "question:m1-061",
       "kind": "question",
-      "title": "Athenaで毎回全期間・全列を読み、結果画面だけで当日分へ絞っている。オンデマンドスキャン量を下げる施策を2つ選べ。（2つ選択）",
+      "title": "AthenaでS3の全期間・全列を走査し、表示後に当日分へ絞っている。毎回最新データを読み、実行回数・結果再利用の無効設定・共有方法は変更しない。1回のクエリが読む期間と列を減らす変更を2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch12",
       "sources": [
         {
           "title": "スキャン量最適化",
           "url": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Athenaの結果再利用と鮮度の制約",
+          "url": "https://docs.aws.amazon.com/athena/latest/ug/reusing-query-results.html",
           "checked": "2026-10-08"
         }
       ]
@@ -6152,6 +6468,144 @@
         {
           "title": "NAT費用要因",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr04-01",
+      "kind": "question",
+      "title": "今後1年は一定の計算利用額が見込まれるが、EC2の一部をFargateへ移す。EC2以外も含む同一の割引コミットメントを比較したい。どれが適切か。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "RIの属性・期間・支払い",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Savings Plansの種類と対象",
+          "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr04-02",
+      "kind": "question",
+      "title": "夜間停止する解析EC2は翌朝RAMの処理状態から再開したい。対応AMI・種類で休止を有効化し、暗号化EBS容量も確保済み。適切な運用と費用の説明は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "EC2休止の状態保持と課金",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EC2の状態遷移",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr06-01",
+      "kind": "question",
+      "title": "学習用の容量計算。6KB項目を強いGetItemで毎秒100回読み、別の1.5KB新規項目を通常PutItemで毎秒80回書く。GSI・複製・余裕分を除く基礎容量は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr06-02",
+      "kind": "question",
+      "title": "DynamoDBの単一項目読取りは結果整合性でも業務を満たし、書込みは通常PutItemのままでよい。容量・費用の見積りとして正しいものを2つ選べ。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBプロビジョンド容量",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr05-01",
+      "kind": "question",
+      "title": "RDSの保存量は増加中で、対応するストレージ自動拡張を有効にした。月末に古い行を削除する運用で、割当容量と費用をどう計画するべきか。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "RDSストレージ自動拡張",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.Autoscaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "S3 Requester Pays",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "S3転送の設計",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance-design-patterns.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr04-03",
+      "kind": "question",
+      "title": "既存の仮想検査アプライアンスを複数台へ分散したい。HTTPのパス振分けではなく、検査装置への透過的なIPトラフィックの分配が目的である。第一候補は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "Gateway Load Balancerの役割",
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EC2 Auto Scaling",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr06-03",
+      "kind": "question",
+      "title": "PostgreSQLの会計DBを単価の安い別エンジンへ移す案がある。拡張機能と独自SQLを利用しており、業務停止を短くしたい。移行費を含めた判断は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "Redshift列指向ストレージ",
+          "url": "https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "時系列DBの保持・分析",
+          "url": "https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "AWS DMS",
+          "url": "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html",
           "checked": "2026-10-08"
         }
       ]
@@ -8080,7 +8534,7 @@
     {
       "id": "question:m2-012",
       "kind": "question",
-      "title": "データキーの漏えいが確認された。KMS鍵素材を更新しただけで保存データ全体の保護も回復したと主張している。適切な評価は。",
+      "title": "エンベロープ暗号化で使う平文データキーが漏えいした。KMS鍵素材のローテーションは完了したが、まだ同じデータキーを使っている。過去に持ち出された平文は回収できない前提で、今後の利用と保持データへの影響を抑えるために追加で計画すべき対応は。",
       "release": "published",
       "chapter_id": "ch10",
       "sources": [
@@ -8687,7 +9141,7 @@
     {
       "id": "question:m2-045",
       "kind": "question",
-      "title": "標準Lambdaのメモリを倍にしたが実行時間は変わらず、必要メモリにも余裕がある。他の課金条件は同じ。費用面の評価は。",
+      "title": "標準Lambdaのメモリを倍にして測定したが、実行時間は変わらず、元の設定も応答目標と必要メモリを満たした。実行数とGB秒単価は同じで、無料枠等の割引は除く。今回の2設定のメモリ時間による実行料金の評価は。",
       "release": "published",
       "chapter_id": "ch08",
       "sources": [
@@ -8948,7 +9402,7 @@
     {
       "id": "question:m2-059",
       "kind": "question",
-      "title": "大きなファイルを半年保存し月1回だけ読む。即時取得が必要。Standard-IAを検討する際の評価は。",
+      "title": "S3に各10MiBのオブジェクトを必ず180日保持し、月1回程度読み、即時取得が必要である。期間・サイズの最低課金条件を満たすことは確認した。StandardとStandard-IAの次の比較として最も適切なのは。",
       "release": "published",
       "chapter_id": "ch05",
       "sources": [
@@ -9074,6 +9528,2308 @@
         {
           "title": "NAT費用要因",
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr12-01",
+      "kind": "question",
+      "title": "先月の費用増の内訳をサービス別に調べ、今月の予測額が予算を超える場合に担当者へ通知したい。最も直接的な組合せは。",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "Cost Explorerの費用分析",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Budgetsの実績・予測通知と遅延",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr12-02",
+      "kind": "question",
+      "title": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。詳細明細をS3に保存しSQL処理したい。最適な出発点は。",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "Cost and Usage Reportの明細",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Data ExportsとCUR 2.0",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:nr07-01",
+      "kind": "question",
+      "title": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。適切な改善は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "API Gatewayスロットリング",
+          "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Site-to-Site VPN",
+          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-001",
+      "kind": "question",
+      "title": "外部保守会社が多数の顧客へ同じ運用サービスを提供する。顧客Aの監査ロールは保守会社のアカウントを信頼しているが、別顧客がAのロールARNを指定して操作を誘導するリスクを防ぎたい。長期キーを配らず、委任先を保守会社に限定したうえで追加する条件は。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: iam",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: role",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: sts",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-002",
+      "kind": "question",
+      "title": "開発用OUでは特定リージョンへの新規EC2作成を禁止したい。各メンバーアカウントの管理者がAdministratorAccessを持っても制限を維持し、既存社員への実際の利用許可は今のIAMで管理する。選ぶ統制は。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: policy",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: scp",
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: boundary",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: abac",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Control Towerによる複数アカウント統制",
+          "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SAML認証とSCIMプロビジョニング",
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "主体ポリシーとリソースポリシー",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-003",
+      "kind": "question",
+      "title": "買収した会社を含む社員が既存IdPで複数AWSアカウントを利用する。入退社はIdP側で管理し、部署グループ単位で本番の読取りと開発の更新権限を分けたい。個別IAMユーザーを各アカウントに大量作成せず構成するには。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: external",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: identity",
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cognito",
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: access",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: s3block",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cognitoid",
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SCPは付与ではなく上限、管理アカウントは対象外",
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Control Towerによる複数アカウント統制",
+          "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SAML認証とSCIMプロビジョニング",
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "主体ポリシーとリソースポリシー",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-004",
+      "kind": "question",
+      "title": "分析アカウントのロールから別アカウントのSSE-S3バケットのreports/だけを読みたい。SCP等の拒否はなく、ロールの信頼関係も有効である。別アカウントのロールへ切り替えず直接GetObjectする構成で、両側に必要な許可を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "SCPは付与ではなく上限、管理アカウントは対象外",
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Control Towerによる複数アカウント統制",
+          "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SAML認証とSCIMプロビジョニング",
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "主体ポリシーとリソースポリシー",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-005",
+      "kind": "question",
+      "title": "ALB配下のアプリはAuto ScalingでIPが変わる。DBは同じVPC内にあり、アプリのTCP5432だけを受けたい。ルートは正しく、運用者は増減のたびにIP一覧を更新したくない。最小範囲を保つ構成は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: sg",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: acl",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: flow",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ssm",
+          "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-006",
+      "kind": "question",
+      "title": "公開WebサブネットのSGとルートは検証済み。独自NACLで443の受信だけを許可したところ、利用者のTLS接続がタイムアウトする。既定Denyは維持し、正当なHTTPS要求への応答を通す修正は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: sg",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: acl",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: flow",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ssm",
+          "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-007",
+      "kind": "question",
+      "title": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: endpoint",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: privatelink",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: peering",
+          "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: tgw",
+          "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: vpn",
+          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: direct",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-008",
+      "kind": "question",
+      "title": "教材動画をCloudFrontで会員へ配信する。S3 RESTオリジンは非公開で、オリジンURLからの直接取得と未購入会員の視聴をどちらも防ぎたい。TLSは設定済み。必要な組合せは。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "CloudFront オリジン",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-009",
+      "kind": "question",
+      "title": "別リージョンへコピー済みの暗号化バックアップを隔離アカウントで復元する。保存先S3には到達できるが、KMSのAccessDeniedで失敗した。キーは利用可能で、SCP等の拒否はない。最初に整合させる権限は。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "AWS KMS",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Secrets Manager",
+          "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "KMSローテーションは既存データを再暗号化しない",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "KMSキー削除と復号不能の影響",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ACMの更新対象とインポート証明書",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DNS検証証明書の更新条件",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "分散トレースによる要求経路の調査",
+          "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-010",
+      "kind": "question",
+      "title": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。秘密の定期変更とアプリへの取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "AWS KMS",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Secrets Manager",
+          "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-011",
+      "kind": "question",
+      "title": "2つのALBで、AはACM発行のDNS検証済み証明書、Bは外部CAの証明書をインポートして使う。毎年の更新漏れを防ぎ、ドメイン検証を維持したい。適切な運用は。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "KMSローテーションは既存データを再暗号化しない",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "KMSキー削除と復号不能の影響",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ACMの更新対象とインポート証明書",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DNS検証証明書の更新条件",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "分散トレースによる要求経路の調査",
+          "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-012",
+      "kind": "question",
+      "title": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。適切な調査先の組合せは。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "CloudWatch",
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "CloudTrail",
+          "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS Config",
+          "url": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-013",
+      "kind": "question",
+      "title": "公開APIはALBで受け、SQLインジェクションと同一送信元からの大量HTTP要求が問題になっている。正常ユーザーのTCP接続は維持したい。アプリ修正と並行して導入する最も直接的な防御は。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "セキュリティサービス",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS WAF",
+          "url": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-014",
+      "kind": "question",
+      "title": "監査ファイルは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "AWS公式: version",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: lock",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: replication",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: signed",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: fsx",
+          "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: snapshot",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-015",
+      "kind": "question",
+      "title": "Projectタグが一致するリソースだけを開発者が更新できるABACを導入する。開発者は自分の主体タグや資源タグも自由に書き換えられる現状である。認可条件の迂回を防ぐ追加設計は。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: policy",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: scp",
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: boundary",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: abac",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-016",
+      "kind": "question",
+      "title": "運用チームにロール作成を委任するが、作成したロールで自分以上の権限へ昇格させたくない。チームはポリシーを付け替えられる。アクセス許可の境界を使う場合、抜け道を避ける設計は。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: policy",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: scp",
+          "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: boundary",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: abac",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-017",
+      "kind": "question",
+      "title": "スマートフォン会員アプリでログイン後、利用者ごとに限定したS3領域へ直接アップロードさせたい。AWSの長期キーは端末へ埋め込まない。選ぶ構成は。",
+      "release": "published",
+      "chapter_id": "ch02",
+      "sources": [
+        {
+          "title": "AWS公式: external",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: identity",
+          "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cognito",
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: access",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: s3block",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cognitoid",
+          "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-018",
+      "kind": "question",
+      "title": "工場とAWS間に専用線がある。回線の帯域は十分だが、機密データについてアプリ端点間の暗号化が監査要件である。専用線の利用を継続しながら要件を満たす方針は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "Direct Connectの既定は通信暗号化なし",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Direct Connectの冗長経路設計",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "CloudFront TTLとオリジン負荷",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Global Acceleratorの固定IPと正常な到達先",
+          "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-019",
+      "kind": "question",
+      "title": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけを利用させたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: endpoint",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: privatelink",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: peering",
+          "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: tgw",
+          "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: vpn",
+          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: direct",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "NATの時間・処理量・AZ間転送の費用要因",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ゾーン型NATのAZ障害と同一AZ経路",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-020",
+      "kind": "question",
+      "title": "暗号化バックアップを10年保持する一方、KMSキーの削除を検討している。復元試験は旧キーを利用して成功しており、別キーへの再暗号化はしていない。削除前の判断として適切なのは。",
+      "release": "published",
+      "chapter_id": "ch10",
+      "sources": [
+        {
+          "title": "AWS KMS",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Secrets Manager",
+          "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "KMSローテーションは既存データを再暗号化しない",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "KMSキー削除と復号不能の影響",
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ACMの更新対象とインポート証明書",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DNS検証証明書の更新条件",
+          "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "分散トレースによる要求経路の調査",
+          "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-021",
+      "kind": "question",
+      "title": "注文APIは3 AZに均等配置し、各AZの処理能力は毎秒600件である。ピークは毎秒1,000件、障害時の追加起動は保証されない。単一AZ停止後もピークを処理するという条件について、正しい評価は。",
+      "release": "published",
+      "chapter_id": "ch01",
+      "sources": [
+        {
+          "title": "AWS公式: regions",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ec2",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: spot",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "EC2インスタンスストア",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "障害後も新規起動に依存しない残存容量",
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_withstand_component_failures_static_stability.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ALBの正常ターゲット選択と全異常時のfail-open",
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-022",
+      "kind": "question",
+      "title": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで継続できる構成は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "AWS公式: asg",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: scaling",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: health",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-checks-overview.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-023",
+      "kind": "question",
+      "title": "受注DBは単一リージョンのRDS for PostgreSQLで、AZ障害時の自動切替を優先する。読取り負荷は十分低く、アプリは再接続に対応する。同期スタンバイを使う従来型構成として適切なのは。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "AWS公式: multi",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: replica",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-024",
+      "kind": "question",
+      "title": "決済ワーカーはSQS Standardから受信後、DBへの記録には成功したがDeleteMessage前に停止した。再配信で二重計上を防ぎながら未処理の要求は再実行したい。選ぶ設計は。",
+      "release": "published",
+      "chapter_id": "ch09",
+      "sources": [
+        {
+          "title": "SQS の可視性タイムアウト",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQS・SNS・EventBridge の選択",
+          "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "DLQの調査・再投入・保持期間",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "1台当たりバックログによるスケーリング",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "LambdaのSQS部分バッチ応答",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-025",
+      "kind": "question",
+      "title": "LambdaがSQS Standardの10件をまとめて処理する。1件だけ形式不正で、成功した9件まで毎回再処理される。障害メッセージを調査用に残し、正常処理の反復を減らす施策を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch09",
+      "sources": [
+        {
+          "title": "SQS のデッドレターキュー",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "CloudWatch",
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQSの不可視期間・再受信と削除",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "1台当たりバックログによるスケーリング",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "LambdaのSQS部分バッチ応答",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-026",
+      "kind": "question",
+      "title": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は夜間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
+      "release": "published",
+      "chapter_id": "ch09",
+      "sources": [
+        {
+          "title": "SQS の可視性タイムアウト",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQS・SNS・EventBridge の選択",
+          "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-027",
+      "kind": "question",
+      "title": "店舗システムはRPO15分・RTO60分が要件である。現状は毎時バックアップ、復元25分、設定再現20分、業務確認10分で、工程は順次実行する。検証値どおりに復旧できるとした場合の評価は。",
+      "release": "published",
+      "chapter_id": "ch11",
+      "sources": [
+        {
+          "title": "災害復旧戦略",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "S3 File GatewayのNFS/SMBとキャッシュ",
+          "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約とクォータの区別",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DataSyncの移行・継続転送",
+          "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Transfer Familyのファイル転送プロトコル",
+          "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-028",
+      "kind": "question",
+      "title": "リージョン障害後のRTOは10分である。全環境の新規構築には40分、縮小稼働環境の拡張と切替は訓練で8分だった。複製遅延はRPO以内で、復旧先のクォータ・容量も検証済み。適切な戦略は。",
+      "release": "published",
+      "chapter_id": "ch11",
+      "sources": [
+        {
+          "title": "災害復旧戦略",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "S3 File GatewayのNFS/SMBとキャッシュ",
+          "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約とクォータの区別",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DataSyncの移行・継続転送",
+          "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Transfer Familyのファイル転送プロトコル",
+          "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-029",
+      "kind": "question",
+      "title": "暗号化バックアップを別アカウントへ隔離した。削除耐性と復元手順の実効性を確かめたい。復元時の鍵利用を含め、本番障害前に行う最も適切な確認は。",
+      "release": "published",
+      "chapter_id": "ch11",
+      "sources": [
+        {
+          "title": "災害復旧戦略",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "S3 File GatewayのNFS/SMBとキャッシュ",
+          "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約とクォータの区別",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DataSyncの移行・継続転送",
+          "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Transfer Familyのファイル転送プロトコル",
+          "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-030",
+      "kind": "question",
+      "title": "ファイルの誤上書きから直前版へ戻すことと、リージョン障害時に別リージョンで利用することを両立したい。非同期複製の未反映時間は許容する。必要な構成として適切なのは。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "AWS公式: classes",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: lifecycle",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: glacier",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: replication",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: s3encrypt",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: version",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: lock",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: signed",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: fsx",
+          "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: snapshot",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-031",
+      "kind": "question",
+      "title": "2 AZのプライベートワーカーが外部のライセンスAPIへ定期通信する。片方のAZが失われても残ったワーカーが外へ出られることを求める。AZ間転送も避けたい。最も適切な出口構成は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: route",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: nat",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: egress",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "NATの時間・処理量・AZ間転送の費用要因",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ゾーン型NATのAZ障害と同一AZ経路",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Gateway endpointの対象・ルート・追加料金なし",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-032",
+      "kind": "question",
+      "title": "2リージョンのAPIをDNSフェイルオーバーで切り替える。セカンダリは復旧済みでも、一部クライアントは旧アドレスへ接続して失敗する。ヘルスチェックが正常に検出している場合の説明と対策は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "Route 53 ルーティング",
+          "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-033",
+      "kind": "question",
+      "title": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信は毎秒300 Mbps、VPNは試験で安定して200 Mbpsまでしか処理できなかった。適切な評価は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "Direct Connectの既定は通信暗号化なし",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Direct Connectの冗長経路設計",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "CloudFront TTLとオリジン負荷",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Global Acceleratorの固定IPと正常な到達先",
+          "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-034",
+      "kind": "question",
+      "title": "Lambdaから接続するDBは安全に同時100接続まで処理できる。1実行1接続で、イベントが急増するとDBが過負荷になる。バッファと再試行は設計済み。下流を守る施策は。",
+      "release": "published",
+      "chapter_id": "ch08",
+      "sources": [
+        {
+          "title": "Lambda",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQS の可視性タイムアウト",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lambdaのメモリに比例するCPU配分",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SQSイベントソースの最大同時実行制御",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Batchのジョブキューと実行基盤",
+          "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-035",
+      "kind": "question",
+      "title": "業務アプリが誤ったUPDATEを大量実行した。Multi-AZへの同期は正常で、接続数にも余裕がある。事故前の時刻へデータを戻し、内容を確認してからアプリを切り替えたい。適切な対応は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "AWS公式: backup",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: proxy",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cache",
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: dax",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-036",
+      "kind": "question",
+      "title": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。再発を減らす施策を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch11",
+      "sources": [
+        {
+          "title": "S3 File GatewayのNFS/SMBとキャッシュ",
+          "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DR方式・IaC・復元検証の条件",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約とクォータの区別",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DataSyncの移行・継続転送",
+          "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Transfer Familyのファイル転送プロトコル",
+          "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-037",
+      "kind": "question",
+      "title": "夜間の画像解析はチェックポイントから再開でき、翌日までに完了すればよい。一方、制御APIには中断が許されず、特定AZの起動容量も確保したい。適切な役割分担は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "AWS公式: ec2",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: store",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: capacity",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "資源特性によるEC2ファミリー選択",
+          "url": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "負荷と台数に対応するターゲット追跡指標",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "クラスタ・パーティション・スプレッド配置",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RIの属性・期間・支払い",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RIのリージョン・AZスコープ",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Savings Plansの種類と対象",
+          "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-038",
+      "kind": "question",
+      "title": "分析EC2はgp3の容量に余裕があるが、連続読取りでボリュームの転送量上限に達している。必要IOPSは既に満たし、EC2側のEBS帯域にも余裕がある。最初の調整は。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "gp3は容量とIOPS・スループットを独立設定",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "io2の低遅延・IOPS用途",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/provisioned-iops.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EFS性能とスループットモード",
+          "url": "https://docs.aws.amazon.com/efs/latest/ug/performance.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-039",
+      "kind": "question",
+      "title": "Windowsの業務サーバーを複数AZへ移す。共有サービスも単一AZ障害に耐える必要がある。既存アプリはSMB共有とActive Directoryのアクセス制御を使い、Linux向けへの改修はできない。適切な共有ストレージは。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "AWS公式: s3",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ebs",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: efs",
+          "url": "https://docs.aws.amazon.com/efs/latest/ug/features.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: fsx",
+          "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: multipart",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: transfer",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: s3consistency",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: version",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: lock",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: replication",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: signed",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: snapshot",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "gp3は容量とIOPS・スループットを独立設定",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "io2の低遅延・IOPS用途",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/provisioned-iops.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EFS性能とスループットモード",
+          "url": "https://docs.aws.amazon.com/efs/latest/ug/performance.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-040",
+      "kind": "question",
+      "title": "海外拠点からS3へ数十GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "AWS公式: s3",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ebs",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: efs",
+          "url": "https://docs.aws.amazon.com/efs/latest/ug/features.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: fsx",
+          "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: multipart",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: transfer",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: s3consistency",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-041",
+      "kind": "question",
+      "title": "DynamoDBの書込みを増やしたところ、全体の設定容量には余裕があるのに、同じ顧客IDへ集中する処理がスロットリングされる。ほかの顧客は正常である。優先する改善は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "AWS公式: dynamo",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: key",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: index",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ttl",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: transactions",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBプロビジョンド容量",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-042",
+      "kind": "question",
+      "title": "商品検索の読取り負荷がRDSを圧迫する。商品説明は数十秒の古さを許容するが、購入直後の注文確認は最新が必要である。適切な分離は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "AWS公式: multi",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: replica",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: backup",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: proxy",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: cache",
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: dax",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-043",
+      "kind": "question",
+      "title": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲で絞りたい。適切な設計は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "AWS公式: dynamo",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: key",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: index",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: ttl",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: transactions",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-044",
+      "kind": "question",
+      "title": "画像変換LambdaのCPU処理が長く、p95の応答目標を超えている。入出力待ちは短く、メモリ使用量だけではCPU配分を判断できない。費用も含めて設定を決める方法は。",
+      "release": "published",
+      "chapter_id": "ch08",
+      "sources": [
+        {
+          "title": "Lambda",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQS の可視性タイムアウト",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lambdaのメモリに比例するCPU配分",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SQSイベントソースの最大同時実行制御",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Batchのジョブキューと実行基盤",
+          "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-045",
+      "kind": "question",
+      "title": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。ホスト管理を抑えてキューで順次投入する候補は。",
+      "release": "published",
+      "chapter_id": "ch08",
+      "sources": [
+        {
+          "title": "Amazon ECS",
+          "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lambdaのメモリに比例するCPU配分",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SQSイベントソースの最大同時実行制御",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Batchのジョブキューと実行基盤",
+          "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-046",
+      "kind": "question",
+      "title": "同じ公開画像をCloudFrontで配信するが、追跡用Cookieを全てキャッシュキーへ含めたためヒット率が低い。Cookie値で画像内容は変わらず、画像は版付きURLで更新する。適切な改善は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "CloudFront",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Global Accelerator",
+          "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Direct Connectの既定は通信暗号化なし",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Direct Connectの冗長経路設計",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "CloudFront TTLとオリジン負荷",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-047",
+      "kind": "question",
+      "title": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントは固定IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "CloudFront",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Global Accelerator",
+          "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Direct Connectの既定は通信暗号化なし",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Direct Connectの冗長経路設計",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "CloudFront TTLとオリジン負荷",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-048",
+      "kind": "question",
+      "title": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "分析サービス",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Athena の最適化",
+          "url": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Kinesisのストリーム保持と複数コンシューマー",
+          "url": "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Firehoseの宛先へのバッファ配信",
+          "url": "https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "QuickSightの対応データソース",
+          "url": "https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lake Formationのデータレイク権限",
+          "url": "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-049",
+      "kind": "question",
+      "title": "S3のクリックログをAthenaで分析する。毎日のクエリは特定の日付と数列だけを読むが、現状は非圧縮CSVを全件走査する。結果再利用と実行頻度は変えず、読取り対象を減らす施策を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "分析サービス",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Athena の最適化",
+          "url": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Kinesisのストリーム保持と複数コンシューマー",
+          "url": "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Firehoseの宛先へのバッファ配信",
+          "url": "https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "QuickSightの対応データソース",
+          "url": "https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lake Formationのデータレイク権限",
+          "url": "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-050",
+      "kind": "question",
+      "title": "変換ワーカー1台の処理能力は毎秒20件、到着は毎秒100件である。滞留3,000件を新規到着も処理しながら5分以内に解消したい。下流容量と並列化には余裕があり、能力は一定とする。必要最小台数は。",
+      "release": "published",
+      "chapter_id": "ch09",
+      "sources": [
+        {
+          "title": "SQS のデッドレターキュー",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "CloudWatch",
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQSの不可視期間・再受信と削除",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "1台当たりバックログによるスケーリング",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "LambdaのSQS部分バッチ応答",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-051",
+      "kind": "question",
+      "title": "会計アプリは複数表JOINと複数行トランザクションを使い、PostgreSQL互換SQLの変更を最小化したい。ミリ秒の単一キー参照だけでなく既存の整合性を維持する。第一候補は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "アクセスパターンとデータモデルによるDB選択",
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RDS単一スタンバイの同期複製と読取り不可",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDB容量方式の課金と負荷特性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBテーブル・GSI・リージョン間整合性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Aurora StandardとI/O-Optimizedの課金要素",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-052",
+      "kind": "question",
+      "title": "申請処理は承認待ち、課金、失敗時の補償、最大数日の待機からなる。実行状態と再試行を追跡し、待機中の計算資源を占有したくない。適切な構成は。",
+      "release": "published",
+      "chapter_id": "ch08",
+      "sources": [
+        {
+          "title": "Lambda",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "SQS の可視性タイムアウト",
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "API Gateway",
+          "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Step Functions",
+          "url": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Lambdaのメモリに比例するCPU配分",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "SQSイベントソースの最大同時実行制御",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Batchのジョブキューと実行基盤",
+          "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-053",
+      "kind": "question",
+      "title": "財務部は月次の費用増加サービスを対話的に調べ、予測額が予算を超えそうなら担当へ通知したい。詳細な独自配賦は今回不要で、通知を利用停止の保証とは扱わない。最も直接的な組合せは。",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "Cost Explorerの費用分析",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Budgetsの実績・予測通知と遅延",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Cost and Usage Reportの明細",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Data ExportsとCUR 2.0",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-054",
+      "kind": "question",
+      "title": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、S3上の詳細データから再計算できることが必要である。適切な基盤は。",
+      "release": "published",
+      "chapter_id": "ch12",
+      "sources": [
+        {
+          "title": "Cost Explorerの費用分析",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Budgetsの実績・予測通知と遅延",
+          "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Cost and Usage Reportの明細",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Data ExportsとCUR 2.0",
+          "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-055",
+      "kind": "question",
+      "title": "安定した計算利用を1年間コミットできるが、今後EC2のファミリーやリージョンを変え、一部をFargate・Lambdaへ移す予定がある。固定AZの容量確保は別途扱う。柔軟な割引対象として第一候補は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "AWS公式: ec2",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: store",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: capacity",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "RIの属性・期間・支払い",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RIのリージョン・AZスコープ",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Savings Plansの種類と対象",
+          "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-056",
+      "kind": "question",
+      "title": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。夜間費用と状態保持の評価として適切なのは。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "EC2休止の状態保持と課金",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "EC2の状態遷移",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-057",
+      "kind": "question",
+      "title": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いたRCU/WCUを2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBプロビジョンド容量",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-058",
+      "kind": "question",
+      "title": "短命な小オブジェクトをStandard-IAへ移す案を検討する。仮定として1個40KiB、保存は10日、移行・取得も発生する。即時読取りが必要である。適切な費用比較は。",
+      "release": "published",
+      "chapter_id": "ch05",
+      "sources": [
+        {
+          "title": "S3階層のアクセス・最小期間・取得費",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-059",
+      "kind": "question",
+      "title": "同じ性能・可用性を満たすAuroraの2候補を比較する。仮定の月額はStandardが計算70・保存20・I/O45単位、I/O-Optimizedが計算90・保存25・I/O0単位で、他費用は同額である。選ぶ評価は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "アクセスパターンとデータモデルによるDB選択",
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RDS単一スタンバイの同期複製と読取り不可",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDB容量方式の課金と負荷特性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBテーブル・GSI・リージョン間整合性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Aurora StandardとI/O-Optimizedの課金要素",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-060",
+      "kind": "question",
+      "title": "プライベートEC2のS3転送が大きく、同一リージョンのS3通信がNAT Gatewayを通っている。外部API通信は引き続きNATを使う。到達性を維持してS3部分のNAT処理費を減らすには。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "AWS公式: endpoint",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: privatelink",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: peering",
+          "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: tgw",
+          "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: vpn",
+          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: direct",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "NATの時間・処理量・AZ間転送の費用要因",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ゾーン型NATのAZ障害と同一AZ経路",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-061",
+      "kind": "question",
+      "title": "Webサービスは平日の昼にCPU負荷が高く、夜間はほぼ無通信である。メモリは常時余裕があり、2 AZの最低台数と応答目標を維持したい。適切な費用改善は。",
+      "release": "published",
+      "chapter_id": "ch04",
+      "sources": [
+        {
+          "title": "AWS公式: asg",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: scaling",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS公式: health",
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-checks-overview.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "資源特性によるEC2ファミリー選択",
+          "url": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約と割引方式の違い",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "クラスタ・パーティション・スプレッド配置",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-062",
+      "kind": "question",
+      "title": "世界向けの公開マニュアルはURLごとに同じ内容で、1日以内の更新反映を許容する。S3オリジンへの反復取得を減らし、費用は配信量とリクエストを含め評価したい。適切な施策を2つ選べ。（2つ選択）",
+      "release": "published",
+      "chapter_id": "ch07",
+      "sources": [
+        {
+          "title": "CloudFront",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Global Accelerator",
+          "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "Direct Connectの既定は通信暗号化なし",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Direct Connectの冗長経路設計",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "CloudFront TTLとオリジン負荷",
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-063",
+      "kind": "question",
+      "title": "DBのバックアップ費を減らしたい。規程は日次復元点を35日、月末復元点を7年保持し、旧月末データは24時間以内の復元でよい。適切な見直しは。",
+      "release": "published",
+      "chapter_id": "ch11",
+      "sources": [
+        {
+          "title": "災害復旧戦略",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "checked": "2026-10-05"
+        },
+        {
+          "title": "S3 File GatewayのNFS/SMBとキャッシュ",
+          "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "容量予約とクォータの区別",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DataSyncの移行・継続転送",
+          "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Transfer Familyのファイル転送プロトコル",
+          "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-064",
+      "kind": "question",
+      "title": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
+      "release": "published",
+      "chapter_id": "ch06",
+      "sources": [
+        {
+          "title": "アクセスパターンとデータモデルによるDB選択",
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "RDS単一スタンバイの同期複製と読取り不可",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDB容量方式の課金と負荷特性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBテーブル・GSI・リージョン間整合性",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Aurora StandardとI/O-Optimizedの課金要素",
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBの読取り・書込み単位",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "DynamoDBプロビジョンド容量",
+          "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
+          "checked": "2026-10-08"
+        }
+      ]
+    },
+    {
+      "id": "question:assessment-065",
+      "kind": "question",
+      "title": "2 AZの外向き経路を比較する。候補AはAZ-AのNATへ集約し月60単位、候補Bは各AZのNATを使い月90単位。必要な費用を全て含む仮定で、AZ-A障害中もAZ-Bの外部通信を継続することが必須である。適切な判断は。",
+      "release": "published",
+      "chapter_id": "ch03",
+      "sources": [
+        {
+          "title": "NATの時間・処理量・AZ間転送の費用要因",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "ゾーン型NATのAZ障害と同一AZ経路",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
+          "checked": "2026-10-08"
+        },
+        {
+          "title": "Gateway endpointの対象・ルート・追加料金なし",
+          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "checked": "2026-10-08"
         }
       ]
@@ -9555,6 +12311,76 @@
       "type": "covered_by"
     },
     {
+      "from": "chapter:ch04",
+      "to": "lesson:ch04-l05",
+      "type": "contains"
+    },
+    {
+      "from": "concept:reserved-instances",
+      "to": "lesson:ch04-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:savings-plans",
+      "to": "lesson:ch04-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:capacity-reservation",
+      "to": "lesson:ch04-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "lesson:ch04-l06",
+      "type": "contains"
+    },
+    {
+      "from": "concept:ec2-hibernation",
+      "to": "lesson:ch04-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:ec2-stop",
+      "to": "lesson:ch04-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:ec2",
+      "to": "lesson:ch04-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "lesson:ch04-l07",
+      "type": "contains"
+    },
+    {
+      "from": "concept:gwlb",
+      "to": "lesson:ch04-l07",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:alb",
+      "to": "lesson:ch04-l07",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:nlb",
+      "to": "lesson:ch04-l07",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:scaling",
+      "to": "lesson:ch04-l07",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:instance-family",
+      "to": "lesson:ch04-l07",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch05",
       "to": "lesson:ch05-l01",
       "type": "contains"
@@ -9705,6 +12531,36 @@
       "type": "covered_by"
     },
     {
+      "from": "chapter:ch05",
+      "to": "lesson:ch05-l06",
+      "type": "contains"
+    },
+    {
+      "from": "concept:storage-sizing",
+      "to": "lesson:ch05-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:storage-autoscaling",
+      "to": "lesson:ch05-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:batch-upload",
+      "to": "lesson:ch05-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:requester-pays",
+      "to": "lesson:ch05-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:storage-cost",
+      "to": "lesson:ch05-l06",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch06",
       "to": "lesson:ch06-l01",
       "type": "contains"
@@ -9815,6 +12671,56 @@
       "type": "covered_by"
     },
     {
+      "from": "chapter:ch06",
+      "to": "lesson:ch06-l05",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rcu",
+      "to": "lesson:ch06-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:wcu",
+      "to": "lesson:ch06-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:dynamodb-capacity",
+      "to": "lesson:ch06-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:dynamodb",
+      "to": "lesson:ch06-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "lesson:ch06-l06",
+      "type": "contains"
+    },
+    {
+      "from": "concept:database-selection",
+      "to": "lesson:ch06-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:columnar",
+      "to": "lesson:ch06-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:time-series",
+      "to": "lesson:ch06-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:database-cost",
+      "to": "lesson:ch06-l06",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch07",
       "to": "lesson:ch07-l01",
       "type": "contains"
@@ -9892,6 +12798,26 @@
     {
       "from": "concept:hybrid-network",
       "to": "lesson:ch07-l04",
+      "type": "covered_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "lesson:ch07-l05",
+      "type": "contains"
+    },
+    {
+      "from": "concept:throttling",
+      "to": "lesson:ch07-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:hybrid-network",
+      "to": "lesson:ch07-l05",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:network-cost",
+      "to": "lesson:ch07-l05",
       "type": "covered_by"
     },
     {
@@ -10445,6 +13371,31 @@
       "type": "covered_by"
     },
     {
+      "from": "chapter:ch12",
+      "to": "lesson:ch12-l06",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cost-explorer",
+      "to": "lesson:ch12-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:budgets",
+      "to": "lesson:ch12-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:cur",
+      "to": "lesson:ch12-l06",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:cost-allocation",
+      "to": "lesson:ch12-l06",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch01",
       "to": "question:q001",
       "type": "contains"
@@ -12212,6 +15163,116 @@
     {
       "from": "concept:network-cost",
       "to": "question:m1-065",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:nr04-01",
+      "type": "contains"
+    },
+    {
+      "from": "concept:reserved-instances",
+      "to": "question:nr04-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:savings-plans",
+      "to": "question:nr04-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:nr04-02",
+      "type": "contains"
+    },
+    {
+      "from": "concept:ec2-hibernation",
+      "to": "question:nr04-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:ec2-stop",
+      "to": "question:nr04-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:nr06-01",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rcu",
+      "to": "question:nr06-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:wcu",
+      "to": "question:nr06-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:nr06-02",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rcu",
+      "to": "question:nr06-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:wcu",
+      "to": "question:nr06-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:nr05-01",
+      "type": "contains"
+    },
+    {
+      "from": "concept:storage-autoscaling",
+      "to": "question:nr05-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:storage-sizing",
+      "to": "question:nr05-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:nr04-03",
+      "type": "contains"
+    },
+    {
+      "from": "concept:gwlb",
+      "to": "question:nr04-03",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:alb",
+      "to": "question:nr04-03",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:nlb",
+      "to": "question:nr04-03",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:nr06-03",
+      "type": "contains"
+    },
+    {
+      "from": "concept:database-selection",
+      "to": "question:nr06-03",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:database-cost",
+      "to": "question:nr06-03",
       "type": "practised_by"
     },
     {
@@ -13992,6 +17053,946 @@
     {
       "from": "concept:network-cost",
       "to": "question:m2-065",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:nr12-01",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cost-explorer",
+      "to": "question:nr12-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:budgets",
+      "to": "question:nr12-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:nr12-02",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cur",
+      "to": "question:nr12-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cost-allocation",
+      "to": "question:nr12-02",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:nr07-01",
+      "type": "contains"
+    },
+    {
+      "from": "concept:throttling",
+      "to": "question:nr07-01",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-001",
+      "type": "contains"
+    },
+    {
+      "from": "concept:iam-role",
+      "to": "question:assessment-001",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-002",
+      "type": "contains"
+    },
+    {
+      "from": "concept:scp",
+      "to": "question:assessment-002",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:organizations",
+      "to": "question:assessment-002",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-003",
+      "type": "contains"
+    },
+    {
+      "from": "concept:identity-center",
+      "to": "question:assessment-003",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-004",
+      "type": "contains"
+    },
+    {
+      "from": "concept:resource-policy",
+      "to": "question:assessment-004",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-005",
+      "type": "contains"
+    },
+    {
+      "from": "concept:security-group",
+      "to": "question:assessment-005",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-006",
+      "type": "contains"
+    },
+    {
+      "from": "concept:network-acl",
+      "to": "question:assessment-006",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-007",
+      "type": "contains"
+    },
+    {
+      "from": "concept:private-link",
+      "to": "question:assessment-007",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-008",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cloudfront-oac",
+      "to": "question:assessment-008",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-009",
+      "type": "contains"
+    },
+    {
+      "from": "concept:kms",
+      "to": "question:assessment-009",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-010",
+      "type": "contains"
+    },
+    {
+      "from": "concept:secrets-manager",
+      "to": "question:assessment-010",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-011",
+      "type": "contains"
+    },
+    {
+      "from": "concept:acm-renewal",
+      "to": "question:assessment-011",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-012",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cloudtrail",
+      "to": "question:assessment-012",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:aws-config",
+      "to": "question:assessment-012",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-013",
+      "type": "contains"
+    },
+    {
+      "from": "concept:waf",
+      "to": "question:assessment-013",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-014",
+      "type": "contains"
+    },
+    {
+      "from": "concept:object-lock",
+      "to": "question:assessment-014",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:versioning",
+      "to": "question:assessment-014",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-015",
+      "type": "contains"
+    },
+    {
+      "from": "concept:abac",
+      "to": "question:assessment-015",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-016",
+      "type": "contains"
+    },
+    {
+      "from": "concept:permissions-boundary",
+      "to": "question:assessment-016",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch02",
+      "to": "question:assessment-017",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cognito",
+      "to": "question:assessment-017",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cognito-identity",
+      "to": "question:assessment-017",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-018",
+      "type": "contains"
+    },
+    {
+      "from": "concept:direct-connect",
+      "to": "question:assessment-018",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-019",
+      "type": "contains"
+    },
+    {
+      "from": "concept:vpc-endpoint",
+      "to": "question:assessment-019",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch10",
+      "to": "question:assessment-020",
+      "type": "contains"
+    },
+    {
+      "from": "concept:kms",
+      "to": "question:assessment-020",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch01",
+      "to": "question:assessment-021",
+      "type": "contains"
+    },
+    {
+      "from": "concept:residual-capacity",
+      "to": "question:assessment-021",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:availability",
+      "to": "question:assessment-021",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:assessment-022",
+      "type": "contains"
+    },
+    {
+      "from": "concept:stateless",
+      "to": "question:assessment-022",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:auto-scaling",
+      "to": "question:assessment-022",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-023",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rds-multi-az",
+      "to": "question:assessment-023",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:read-replica",
+      "to": "question:assessment-023",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch09",
+      "to": "question:assessment-024",
+      "type": "contains"
+    },
+    {
+      "from": "concept:sqs",
+      "to": "question:assessment-024",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:visibility-timeout",
+      "to": "question:assessment-024",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:idempotency",
+      "to": "question:assessment-024",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch09",
+      "to": "question:assessment-025",
+      "type": "contains"
+    },
+    {
+      "from": "concept:dlq",
+      "to": "question:assessment-025",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:partial-batch",
+      "to": "question:assessment-025",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch09",
+      "to": "question:assessment-026",
+      "type": "contains"
+    },
+    {
+      "from": "concept:fanout",
+      "to": "question:assessment-026",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:sns",
+      "to": "question:assessment-026",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:sqs",
+      "to": "question:assessment-026",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch11",
+      "to": "question:assessment-027",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rpo",
+      "to": "question:assessment-027",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:rto",
+      "to": "question:assessment-027",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch11",
+      "to": "question:assessment-028",
+      "type": "contains"
+    },
+    {
+      "from": "concept:warm-standby",
+      "to": "question:assessment-028",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:pilot-light",
+      "to": "question:assessment-028",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:recovery-quota",
+      "to": "question:assessment-028",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch11",
+      "to": "question:assessment-029",
+      "type": "contains"
+    },
+    {
+      "from": "concept:restore-test",
+      "to": "question:assessment-029",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:backup",
+      "to": "question:assessment-029",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-030",
+      "type": "contains"
+    },
+    {
+      "from": "concept:versioning",
+      "to": "question:assessment-030",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:s3-replication",
+      "to": "question:assessment-030",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-031",
+      "type": "contains"
+    },
+    {
+      "from": "concept:nat-gateway",
+      "to": "question:assessment-031",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:route",
+      "to": "question:assessment-031",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-032",
+      "type": "contains"
+    },
+    {
+      "from": "concept:dns-ttl",
+      "to": "question:assessment-032",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:route53",
+      "to": "question:assessment-032",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-033",
+      "type": "contains"
+    },
+    {
+      "from": "concept:direct-connect",
+      "to": "question:assessment-033",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:site-to-site-vpn",
+      "to": "question:assessment-033",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch08",
+      "to": "question:assessment-034",
+      "type": "contains"
+    },
+    {
+      "from": "concept:lambda-concurrency",
+      "to": "question:assessment-034",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:lambda",
+      "to": "question:assessment-034",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-035",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rds-proxy",
+      "to": "question:assessment-035",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:point-in-time-recovery",
+      "to": "question:assessment-035",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch11",
+      "to": "question:assessment-036",
+      "type": "contains"
+    },
+    {
+      "from": "concept:iac",
+      "to": "question:assessment-036",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:recovery-quota",
+      "to": "question:assessment-036",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:assessment-037",
+      "type": "contains"
+    },
+    {
+      "from": "concept:spot",
+      "to": "question:assessment-037",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:capacity-reservation",
+      "to": "question:assessment-037",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-038",
+      "type": "contains"
+    },
+    {
+      "from": "concept:gp3",
+      "to": "question:assessment-038",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:storage-performance",
+      "to": "question:assessment-038",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-039",
+      "type": "contains"
+    },
+    {
+      "from": "concept:efs",
+      "to": "question:assessment-039",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:fsx-windows",
+      "to": "question:assessment-039",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-040",
+      "type": "contains"
+    },
+    {
+      "from": "concept:multipart-upload",
+      "to": "question:assessment-040",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:transfer-acceleration",
+      "to": "question:assessment-040",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-041",
+      "type": "contains"
+    },
+    {
+      "from": "concept:partition-key",
+      "to": "question:assessment-041",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:dynamodb",
+      "to": "question:assessment-041",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-042",
+      "type": "contains"
+    },
+    {
+      "from": "concept:read-replica",
+      "to": "question:assessment-042",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cache",
+      "to": "question:assessment-042",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-043",
+      "type": "contains"
+    },
+    {
+      "from": "concept:gsi",
+      "to": "question:assessment-043",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:consistency",
+      "to": "question:assessment-043",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch08",
+      "to": "question:assessment-044",
+      "type": "contains"
+    },
+    {
+      "from": "concept:lambda-memory",
+      "to": "question:assessment-044",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:lambda",
+      "to": "question:assessment-044",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch08",
+      "to": "question:assessment-045",
+      "type": "contains"
+    },
+    {
+      "from": "concept:fargate",
+      "to": "question:assessment-045",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:batch",
+      "to": "question:assessment-045",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-046",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cloudfront",
+      "to": "question:assessment-046",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cache-key",
+      "to": "question:assessment-046",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-047",
+      "type": "contains"
+    },
+    {
+      "from": "concept:global-accelerator",
+      "to": "question:assessment-047",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cloudfront",
+      "to": "question:assessment-047",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:assessment-048",
+      "type": "contains"
+    },
+    {
+      "from": "concept:kinesis",
+      "to": "question:assessment-048",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:firehose",
+      "to": "question:assessment-048",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:assessment-049",
+      "type": "contains"
+    },
+    {
+      "from": "concept:athena",
+      "to": "question:assessment-049",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:glue",
+      "to": "question:assessment-049",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch09",
+      "to": "question:assessment-050",
+      "type": "contains"
+    },
+    {
+      "from": "concept:queue-scaling",
+      "to": "question:assessment-050",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-051",
+      "type": "contains"
+    },
+    {
+      "from": "concept:database-selection",
+      "to": "question:assessment-051",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch08",
+      "to": "question:assessment-052",
+      "type": "contains"
+    },
+    {
+      "from": "concept:step-functions",
+      "to": "question:assessment-052",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:lambda",
+      "to": "question:assessment-052",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:assessment-053",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cost-explorer",
+      "to": "question:assessment-053",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:budgets",
+      "to": "question:assessment-053",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cur",
+      "to": "question:assessment-053",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch12",
+      "to": "question:assessment-054",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cur",
+      "to": "question:assessment-054",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cost-allocation",
+      "to": "question:assessment-054",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:assessment-055",
+      "type": "contains"
+    },
+    {
+      "from": "concept:reserved-instances",
+      "to": "question:assessment-055",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:savings-plans",
+      "to": "question:assessment-055",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:assessment-056",
+      "type": "contains"
+    },
+    {
+      "from": "concept:ec2-stop",
+      "to": "question:assessment-056",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:ec2-hibernation",
+      "to": "question:assessment-056",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-057",
+      "type": "contains"
+    },
+    {
+      "from": "concept:rcu",
+      "to": "question:assessment-057",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:wcu",
+      "to": "question:assessment-057",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch05",
+      "to": "question:assessment-058",
+      "type": "contains"
+    },
+    {
+      "from": "concept:standard-ia",
+      "to": "question:assessment-058",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:storage-cost",
+      "to": "question:assessment-058",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-059",
+      "type": "contains"
+    },
+    {
+      "from": "concept:database-cost",
+      "to": "question:assessment-059",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-060",
+      "type": "contains"
+    },
+    {
+      "from": "concept:vpc-endpoint",
+      "to": "question:assessment-060",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:network-cost",
+      "to": "question:assessment-060",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch04",
+      "to": "question:assessment-061",
+      "type": "contains"
+    },
+    {
+      "from": "concept:auto-scaling",
+      "to": "question:assessment-061",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:instance-family",
+      "to": "question:assessment-061",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch07",
+      "to": "question:assessment-062",
+      "type": "contains"
+    },
+    {
+      "from": "concept:cloudfront",
+      "to": "question:assessment-062",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:cache-key",
+      "to": "question:assessment-062",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch11",
+      "to": "question:assessment-063",
+      "type": "contains"
+    },
+    {
+      "from": "concept:backup",
+      "to": "question:assessment-063",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:restore-test",
+      "to": "question:assessment-063",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch06",
+      "to": "question:assessment-064",
+      "type": "contains"
+    },
+    {
+      "from": "concept:dynamodb-on-demand",
+      "to": "question:assessment-064",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:dynamodb-capacity",
+      "to": "question:assessment-064",
+      "type": "practised_by"
+    },
+    {
+      "from": "chapter:ch03",
+      "to": "question:assessment-065",
+      "type": "contains"
+    },
+    {
+      "from": "concept:network-cost",
+      "to": "question:assessment-065",
+      "type": "practised_by"
+    },
+    {
+      "from": "concept:nat-gateway",
+      "to": "question:assessment-065",
       "type": "practised_by"
     },
     {

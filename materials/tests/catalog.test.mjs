@@ -16,7 +16,7 @@ test('catalog: published terms/questions are playable; starter effects and initi
  for(const id of STARTERS){const {name,...actual}=CARDS[id],{name:old,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);assert.equal(name,pack.starterNames[id]);}
  assert.equal(Object.keys(CARDS).filter(id=>!CARDS[id].battleOnly).length,Object.keys(pack.cards).length+3);assert.equal(Object.keys(QUIZZES).length,Object.keys(pack.quizzes).length);
  const expected=questions.filter(q=>!q.exam&&q.answers.length===1).map(q=>'study-'+q.id).sort();
- assert.deepEqual(Object.keys(QUIZZES).filter(id=>/^study-(q[0-9]+|rr[0-9]+-[0-9]+)$/.test(id)).sort(),expected);
+ assert.deepEqual(Object.keys(QUIZZES).filter(id=>/^study-(q[0-9]+|rr[0-9]+-[0-9]+|nr[0-9]+-[0-9]+)$/.test(id)).sort(),expected);
  for(const id of Object.keys(pack.cards).filter(id=>id.startsWith('study-'))){
   let s=newRun(42,pack);s.deck[0].id=id;s=act(s,{type:'node',lane:0});const card=s.deck[0];s.battle.hand=s.battle.hand.filter(x=>x!==card.uid);s.battle.draw=s.battle.draw.filter(x=>x!==card.uid);s.battle.hand.push(card.uid);const hp=s.hp;const next=act(s,{type:'play',uid:card.uid});assert.notEqual(next,s);assert.equal(next.hp,hp);assert.deepEqual(parseRun(JSON.stringify(next)),next);
  }

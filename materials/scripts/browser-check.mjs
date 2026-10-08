@@ -51,9 +51,9 @@ try {
   await page.locator('input[type=file]').setInputFiles('artifacts/backup.json');
   await page.getByRole('button', { name: 'この内容で復元' }).click();
   await nav('問題集');
-  await page.getByRole('button', { name: '模擬試験', exact: true }).click();
-  assert.equal(await page.getByRole('button', { name: '模擬試験 1 を開始', exact: true }).isDisabled(), false);
-  assert.equal(await page.getByRole('button', { name: '模擬試験 2 を開始', exact: true }).isDisabled(), false);
+  await page.getByRole('button', { name: '到達度確認・演習', exact: true }).click();
+  assert.equal(await page.getByRole('button', { name: '条件変更演習 1 を開始', exact: true }).isDisabled(), false);
+  assert.equal(await page.getByRole('button', { name: '条件変更演習 2 を開始', exact: true }).isDisabled(), false);
   // A newly created page must also load the complete shell without a network.
   const fresh = await context.newPage(); await fresh.goto(base); await fresh.getByRole('heading', { name: '今日の一歩が、', exact: false }).waitFor(); await fresh.close();
   await context.setOffline(false);

@@ -233,3 +233,13 @@ questions2.push(...mock2);
 
 import { addChecks } from './readiness/checks';
 addChecks(chapters2);
+
+import {supplement, questions as nrQuestions} from "./rereview";
+supplement(chapters2);
+questions2.push(...nrQuestions.filter(q=>chapters2.some(c=>c.id===q.chapterId)));
+
+import {assessment} from "./rereview/assessment";
+questions2.push(...assessment);
+
+import {terms as nrTerms} from "./rereview/terms";
+terms2.push(...nrTerms);

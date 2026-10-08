@@ -23,8 +23,9 @@ let md=`# 教材制作の進捗表
 | 章 | ${chapters.length}章 | ${published.length}章を公開 |
 | テキスト | ${chapters.flatMap(c=>c.lessons).length}レッスン | ${lessonIds.size}レッスンを公開 |
 | 通常問題 | ${practice.length}問 | ${publishedPractice.length}問を公開、残り${practice.length-publishedPractice.length}問は原稿 |
-| 模試1 | ${questions.filter(q=>q.exam==='mock1').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock1').length}問を公開 |
-| 模試2 | ${questions.filter(q=>q.exam==='mock2').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock2').length}問を公開 |
+| 条件変更演習1 | ${questions.filter(q=>q.exam==='mock1').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock1').length}問を公開 |
+| 条件変更演習2 | ${questions.filter(q=>q.exam==='mock2').length}問 / 計画65問 | ${released.filter(q=>q.exam==='mock2').length}問を公開 |
+| 到達度確認（独立セット） | ${questions.filter(q=>q.exam==='assessment1').length}問 / 計画65問 | ${released.filter(q=>q.exam==='assessment1').length}問を公開 |
 | 細分化した知識単位 | ${units.length}単位 | 確認済み${reviewed}、確認待ち${units.length-reviewed} |
 | ゲーム利用の分類 | ${items.length}件 | 取り込み済み${items.filter(i=>i.import_status==='imported').length}件（教材全体の分類完了ではない） |
 

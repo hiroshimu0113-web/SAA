@@ -1,10 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { chapters, questions, terms, release } from '../src/content';
-test('12章・通常225問と65問の模試2回を提供する', () => {
+test('12章・通常235問と65問の演習・到達度確認3セットを提供する', () => {
   assert.equal(chapters.length, 12);
-  assert.equal(questions.filter(q => !q.exam).length, 225);
-  assert.equal(questions.filter(q => q.exam).length, 130);
+  assert.equal(questions.filter(q => !q.exam).length, 235);
+  assert.equal(questions.filter(q => q.exam).length, 195);
   assert.equal(release.mocksReady, true);
 });
 test('問題ID・文章の重複がなく、選択肢・正解・解説・出典が有効', () => {
@@ -41,7 +41,7 @@ test('用語に重複がなく、単一と複数選択の両方がある', () =>
   assert.ok(questions.some(q => q.answers.length === 1));
 });
 test('模試は各65問で4分野と複数選択を含み、対の条件変更で正答が変わる', () => {
-  for (const exam of ['mock1','mock2']) {
+  for (const exam of ['mock1','mock2','assessment1']) {
     const qs = questions.filter(q=>q.exam===exam);
     assert.equal(qs.length,65);
     assert.deepEqual([1,2,3,4].map(d=>qs.filter(q=>q.domain===d).length),[20,17,15,13]);
