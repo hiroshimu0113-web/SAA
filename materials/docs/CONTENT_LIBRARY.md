@@ -56,3 +56,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [ゲーム内問題・受入レビュー対応表](SAA_GAME_READINESS_RESPONSE_REVIEW_RESPONSE.md)：GQR-001/002、練習終了とバックアップの結果・履歴整合性修正（2026-10-08）。
 
 - [クイズ一巡出題の変更記録](GAME_QUIZ_CYCLE_CHANGE.md)：250問の出題フラグ・冒険間継続・全問後のリセット（2026-10-08）。
+
+キャラ・ビルド相談資料：[単一HTML](../public/design/character-builds.html)。ビルド59案・複合16案・現行3キャラと割り振り案。設計段階の提案でゲーム未実装、SAA学習教材の追加ではない。公開先 `/SAA/design/character-builds.html`。
