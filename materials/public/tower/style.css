@@ -195,3 +195,11 @@ body{background:#111c28}
 .shop-empty{border:1px dashed #526270;border-radius:7px;justify-content:center;font-size:10px;color:#9caeb7;min-height:134px}
 .shop-removal{margin:20px 0}.scene .cards-grid.remove-list{display:grid}
 @media(max-width:400px){.scene .cards-grid,.shop-shelf{gap:4px}.scene .cards-grid .card .card-title,.shop-shelf .card .card-title{font-size:9px}}
+
+/* Native horizontal scrolling with a stable layout beneath the fan transforms. */
+.hand.fan-hand{position:relative;gap:0;padding:24px max(3px,calc(50% - 49px)) 64px;scroll-padding-inline:calc(50% - 49px);scroll-snap-type:x proximity;overflow-y:hidden;isolation:isolate}
+.hand.fan-hand .card{flex:0 0 98px;margin-right:-18px;min-height:136px;scroll-snap-align:center;transform-origin:50% 90%;transform:translateY(var(--fan-drop,0px)) rotate(var(--fan-angle,0deg)) scale(var(--fan-scale,1));transition:transform .16s ease,border-color .16s ease;position:relative}
+.hand.fan-hand .card:last-child{margin-right:0}
+.hand.fan-hand .card.fan-active{border-color:#e7cf96}
+.hand.fan-hand .card.combo-ready{border-color:#eed481;border-width:2px}
+@media(prefers-reduced-motion:reduce){.hand.fan-hand .card{transition:none}}

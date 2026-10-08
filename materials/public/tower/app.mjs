@@ -1,3 +1,4 @@
+import {mountFanHand} from './fan-hand.mjs';
 import {openStudy,recordRoomAnswers} from './study-ui.mjs';
 import {icon} from './icons.mjs';
 import {CARD_TYPES,cardIcon} from './card-icons.mjs';
@@ -124,7 +125,7 @@ async function animateTurns(flow){
  });}catch(error){console.error(error);notice='ターン演出を省略しました。保存済みの結果から続けられます。';}
  finally{turnBusy=false;presentationView=null;blocker.remove();render();}
 }
-let mapFocusFrame;
+let mapFocusFrame,disposeFanHand;
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 function focusCurrentFloor(){cancelAnimationFrame(mapFocusFrame);mapFocusFrame=requestAnimationFrame(()=>{mapFocusFrame=requestAnimationFrame(()=>{if(state?.phase==='map')root.querySelector('.scene .route-row.current')?.scrollIntoView({block:'end',behavior:'auto'});});});}
 window.addEventListener('pageshow',focusCurrentFloor);
@@ -134,13 +135,13 @@ function renderCurrent(){
  root.classList.toggle('in-map',state?.phase==='map');
  clearTimeout(holdTimer);holdTimer=null;
  const activeCombo=root.querySelector('.combo-toast');
- const handScroll=root.querySelector('.hand')?.scrollLeft||0;
+ const previousHand=root.querySelector('.hand'),handScroll=previousHand?.scrollLeft??null;disposeFanHand?.();
  const revealEnd=state?.phase==='battle'&&state.battle.energy===0&&!root.querySelector('.hand-end');
  root.innerHTML=battleHud()+(!state?'<section class="title-screen"><p class="eyebrow">CLOUD SPIRE / DECKBUILDING ROGUELIKE</p><div class="tower-art" aria-hidden="true"><i></i><i></i><i></i><i></i><span>✧</span></div><h1>クラウドの尖塔</h1><p>一枚の選択が、次の階を変える。</p><p>SE・SRE・クラウドアーキテクト。<br>新しい冒険ごとに主人公をランダムで選びます。</p><p class="muted">'+Object.values(CARDS).filter(c=>!c.battleOnly).length+'種のカード。分岐する8階。<br>手札を育て、最上階のボスに挑もう。</p>'+(loadError?'<p class="warning" role="alert">'+loadError+'</p>':'')+btn(loadError?'保存を破棄して新しく始める':'冒険を始める','new','class="primary"')+'</section>':runHeader()+'<section class="scene">'+upgradeResult()+({map:map,battle:battle,reward:reward,rest:rest,shop:shop,event:event,won:ending,lost:ending}[state.phase])()+'</section><aside class="log" aria-label="直近の行動">'+state.log.map(x=>'<p>'+esc(x)+'</p>').join('')+'</aside>')+catalogPanel()+help()+'<footer class="controls">'+(state?btn('バックアップ','export'):'')+'<label class="import">'+icon('upload')+'記録を読み込む<input type="file" accept=".json" id="import"></label>'+btn('オフライン保存を確認','offline')+'<a href="../index.html">'+icon('home')+'学習ホームへ</a></footer><p class="muted">ゲーム記録は教材の学習記録とは別に保存されます。端末間の自動同期はありません。</p><p id="notice" class="'+(saveFailed?'warning':'muted')+'" role="status">'+esc(notice||(state?'自動保存済み':'保存した記録は次回起動時に再開します。'))+'</p>'+'<div class="game-tools"><span><span>演出 v2</span> · クイズ追加</span>'+btn('演出を試す','demo-fx')+'</div>';
 
  if(focusMap)focusCurrentFloor();
  if(activeCombo&&['battle','reward','won'].includes(state?.phase))root.append(activeCombo);
- const hand=root.querySelector('.hand');if(hand){hand.scrollLeft=revealEnd?0:handScroll;for(const el of hand.querySelectorAll('.card')){const picked=Number(el.dataset.uid)===selectedUid;el.classList.toggle('selected',picked);el.setAttribute('aria-expanded',String(picked));}}
+ const hand=root.querySelector('.hand');if(hand){disposeFanHand=mountFanHand(hand,{scrollLeft:revealEnd?0:handScroll});for(const el of hand.querySelectorAll('.card')){const picked=Number(el.dataset.uid)===selectedUid;el.classList.toggle('selected',picked);el.setAttribute('aria-expanded',String(picked));}}
 }
 function showDetails(uid){
  if(state?.phase!=='battle'||!state.battle.hand.includes(uid))return;

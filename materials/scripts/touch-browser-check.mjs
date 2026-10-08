@@ -1,3 +1,4 @@
+import {checkFan} from './fan-browser-check.mjs';
 import {checkCompact} from './compact-browser-check.mjs';
 import {checkOptions} from './options-browser-check.mjs';
 import {checkImpact} from './impact-browser-check.mjs';
@@ -37,7 +38,7 @@ try{
  const touchSession=kind==='chromium'?await c.newCDPSession(p):null;
  async function holdCard(){const card=p.locator('.hand .card').first();await card.scrollIntoViewIfNeeded();const box=await card.boundingBox();if(touchSession)await touchSession.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+box.width/2,y:box.y+box.height/2}]});else{await p.mouse.move(box.x+box.width/2,box.y+box.height/2);await p.mouse.down();}await p.waitForTimeout(550);await p.locator('.card-preview').waitFor();if(touchSession)await touchSession.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});else await p.mouse.up();await p.waitForTimeout(550);}
  await holdCard();assert.equal(await readSave(),before,'long press and release must not play');
- const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(compact.width<=100&&expanded.width>=compact.width*2);
+ const compact=await p.locator('.hand .card').first().boundingBox(),expanded=await p.locator('.card-preview .card').boundingBox();assert.ok(await p.locator('.hand .card').first().evaluate(e=>e.offsetWidth<=100)&&expanded.width>=196);
  await p.locator('.card-preview .card').tap();assert.equal(await readSave(),before,'detail is read-only');
  await p.getByRole('button',{name:'閉じる',exact:true}).tap();assert.equal(await p.locator('.card-preview').count(),0);
  assert.equal(await p.locator('[data-action=hand-next],[data-action=hand-prev]').count(),0);await p.locator('.hand').evaluate(e=>e.scrollLeft=100);await p.waitForFunction(()=>document.querySelector('.hand').scrollLeft>50);
@@ -72,7 +73,7 @@ try{
  await checkTurnBanners(browser,base);
  await checkJunk(browser,base);
  await checkHeroes(browser,base);
- await checkExpansion(browser,base);await checkCompact(browser,base);
+ await checkExpansion(browser,base);await checkCompact(browser,base);await checkFan(browser,base);
  await checkRules(browser,base);
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
