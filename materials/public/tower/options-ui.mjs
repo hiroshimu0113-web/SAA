@@ -1,6 +1,6 @@
 import {icon} from './icons.mjs';
 const menuIcons={'デッキ':'cards','所持レリック':'choice','マップ':'map','役一覧':'combo','コレクション':'cards'};
-export function openOptions(root,views,actions={},title='冒険者'){
+export function openOptions(root,views,actions={},title='冒険者',initialView=''){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
  overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="back" hidden>戻る</button><h2 id="options-title"></h2><button data-menu="close" aria-label="オプションを閉じる"><span aria-hidden="true">×</span></button></header><div class="options-content"></div></section>';
@@ -27,5 +27,5 @@ export function openOptions(root,views,actions={},title='冒険者'){
  overlay.addEventListener('contextmenu',e=>{if(e.target.closest('[data-inspect]'))e.preventDefault();});
  overlay.addEventListener('click',e=>{if(Date.now()<suppressUntil){e.preventDefault();return;}const el=e.target.closest('button');if(e.target===overlay||el?.dataset.menu==='close')close();else if(el?.dataset.menu==='back')goBack();else if(el?.dataset.view)show(el.dataset.view);else if(el?.dataset.command&&actions[el.dataset.command]?.()!==false)close();});
  window.addEventListener('pointermove',move,{passive:true});window.addEventListener('pointerup',clearHold);window.addEventListener('pointercancel',clearHold);window.addEventListener('blur',clearHold);
- document.body.append(overlay);document.addEventListener('keydown',keys,true);show();
+ document.body.append(overlay);document.addEventListener('keydown',keys,true);show(initialView);
 }

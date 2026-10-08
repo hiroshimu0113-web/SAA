@@ -1,3 +1,4 @@
+import {checkCompact} from './compact-browser-check.mjs';
 import {checkOptions} from './options-browser-check.mjs';
 import {checkImpact} from './impact-browser-check.mjs';
 import {checkTurnBanners} from './turn-browser-check.mjs';
@@ -71,7 +72,7 @@ try{
  await checkTurnBanners(browser,base);
  await checkJunk(browser,base);
  await checkHeroes(browser,base);
- await checkExpansion(browser,base);
+ await checkExpansion(browser,base);await checkCompact(browser,base);
  await checkRules(browser,base);
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
