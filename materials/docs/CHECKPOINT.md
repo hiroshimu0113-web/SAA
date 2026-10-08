@@ -796,3 +796,10 @@
 - 分類：`concept-combo-genre-multiset` 1件。classification/content=draft、import=candidate。仕様相談でAWS主張・ゲーム取り込み認定なし。
 - 検証：全161表示パターンの一意性/枚数/65・65・31集計、Chromeの順序入替・分類/内訳絞り込み・12軸・JS無効・320/390/1024px、保存変更なし。progress生成/照合成功。CIにWebKit資料検証とHTML/JSON実配信照合を追加。
 - 次：GitHub同期とCI/Pages実配信確認、その後ユーザーとジャンル・採用セット・レア度等の使い方を絞る。
+
+
+### 役のジャンル相談資料・公開確認完了（2026-10-08 UTC）
+- 公式共有URL：https://hiroshimu0113-web.github.io/SAA/design/role-combinations.html 。JSONも同じディレクトリで公開。
+- `87c2149` / Actions `37755613339` のbuild/deploy成功。資料のWebKit検証で全組み合わせの一意性、順序不変、分類/内訳切替、12軸、JS無効読書、320/390/1024px、ゲーム保存不変を確認。
+- 実配信照合は新HTML/JSONを対象に含め、09:23 UTCにHTTP200・配信成果物とのSHA256一致を確認。GitHub mainに同期。
+- 分類 `concept-combo-genre-multiset` はdraft/candidateのまま。設計相談の共有は完了。実カード分類・役の採用・効果・発動方式の最終決定とゲーム実装、本人のSafari実機確認は未実施。
