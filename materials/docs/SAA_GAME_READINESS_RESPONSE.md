@@ -48,7 +48,10 @@
 | knowledge/game/progress | export/updateとcheck成功。学習室用カタログもgame:checkで一致確認 |
 | Chromium | 学習室の全操作・複数選択の途中復元・バックアップ・未出題/誤答・技能別結果・途中解説非表示・時間切れ/再回答・部屋の順序とHP維持・320px・更新失敗を確認 |
 | 既存回帰 | タッチ/メニュー/報酬/オフライン、教材カタログ更新、章/模試フロー成功。最新フラットアイコン更新を統合 |
-| 公開 | CI WebKit・公式サイトへの反映とHTTP/SHA256照合を実施中 |
+| CI WebKit | アイコン/レイアウト・タッチ/保存/オフライン・教材更新・章/模試・ゲーム学習室の全5工程成功 |
+| 公開 | `e18179d6f30353f2a87ae950625e4ff56a51728c` / [Actions 37726397124](https://github.com/hiroshimu0113-web/SAA/actions/runs/37726397124) のbuild/deploy/実配信検証成功。CIが公式URLから取得し、HTTP 200・公開成果物とのSHA256一致を確認 |
+
+公開入口：[ゲーム内学習室対応版](https://hiroshimu0113-web.github.io/SAA/tower/study.html)。通常のゲーム入口にも反映済み。照合対象には新入口と`study-catalog.json`、従来カタログ、既存入口、教材グラフ、アプリ本体とService Workerを含む。修正・対応表はGitHub mainへ同期済み。先行CI2件は後続修正でキャンセルされ、成功扱いしていない。
 
 ## 残る評価
 
