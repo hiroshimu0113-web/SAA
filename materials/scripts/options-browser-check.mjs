@@ -2,7 +2,7 @@ import {activateCatalog} from '../public/tower/catalog.mjs';
 import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {fixedRun} from './fixed-run-fixture.mjs';
-import {act,CARDS} from '../public/tower/engine.mjs';
+import {act,CARDS,HEROES} from '../public/tower/engine.mjs';
 export async function checkOptions(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();
  try{
@@ -12,10 +12,10 @@ export async function checkOptions(browser,base){
   const option=await p.locator('.battle-hud [data-action=options]').boundingBox(),hp=await p.locator('.hud-hp').boundingBox(),journey=await p.locator('.battle-hud .journey-stats').boundingBox();assert.ok(option.x+option.width<=hp.x);assert.ok(hp.x+hp.width<=journey.x);assert.equal(await p.locator('.run-header').count(),0);await p.screenshot({path:'artifacts/header-battle.png'});
   assert.equal(await p.locator('#game .hero-profile,#game .relic-details').count(),0);assert.equal((await p.locator('[data-action=options]').innerText()).trim(),'☰');
   const saved=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));
-  await p.locator('[data-action=options]').tap();const dialog=p.getByRole('dialog');
-  assert.deepEqual(await dialog.locator('nav button').allTextContents(),['マップ','キャラ・レリック','役一覧','デッキ','コレクション','はじめから']);
+  await p.locator('[data-action=options]').tap();const dialog=p.getByRole('dialog');assert.equal(await dialog.locator('#options-title').innerText(),HEROES[s.hero].name);assert.equal(await dialog.locator('[data-menu=close]').innerText(),'×');
+  assert.deepEqual(await dialog.locator('nav button').allTextContents(),['デッキ','所持レリック','マップ','役一覧','コレクション','はじめから']);
   await dialog.getByRole('button',{name:'マップ',exact:true}).tap();assert.equal(await dialog.locator('.route-row').count(),8);assert.equal(await dialog.locator('[data-action=node]').count(),0);assert.match(await dialog.locator('.route-row.current').innerText(),/1F/);
-  await dialog.getByRole('button',{name:'戻る',exact:true}).tap();await dialog.getByRole('button',{name:'役一覧',exact:true}).tap();assert.equal(await dialog.locator('.combo-guide > section').count(),3);assert.equal(await dialog.locator('.combo-guide .options-cards .card').count(),9);await dialog.locator('.combo-guide .card').first().focus();await p.keyboard.press('Enter');assert.equal(await dialog.locator('.options-card-detail').count(),1);await p.keyboard.press('Escape');
+  await dialog.getByRole('button',{name:'戻る',exact:true}).tap();assert.equal(await dialog.locator('#options-title').innerText(),HEROES[s.hero].name);await dialog.getByRole('button',{name:'役一覧',exact:true}).tap();assert.equal(await dialog.locator('.combo-guide > section').count(),3);assert.equal(await dialog.locator('.combo-guide .options-cards .card').count(),9);await dialog.locator('.combo-guide .card').first().focus();await p.keyboard.press('Enter');assert.equal(await dialog.locator('.options-card-detail').count(),1);await p.keyboard.press('Escape');
   await dialog.getByRole('button',{name:'戻る',exact:true}).tap();await dialog.getByRole('button',{name:'デッキ',exact:true}).tap();assert.equal(await dialog.locator('.options-cards .card').count(),s.deck.length);assert.match(await dialog.locator('.card strong').first().innerText(),/＋/);assert.equal(await dialog.locator('.options-cards .effect').first().isVisible(),false);
   const cards=dialog.locator('.options-cards .card'),boxes=await cards.evaluateAll(es=>es.slice(0,6).map(e=>({x:e.getBoundingClientRect().x,y:e.getBoundingClientRect().y,width:e.getBoundingClientRect().width})));
   assert.equal(new Set(boxes.slice(0,5).map(b=>b.y)).size,1);assert.ok(boxes[5].y>boxes[0].y);assert.ok(boxes[0].width>=44);

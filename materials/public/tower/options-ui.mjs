@@ -1,12 +1,12 @@
-export function openOptions(root,views,actions={}){
+export function openOptions(root,views,actions={},title='冒険者'){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
- overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="back" hidden>戻る</button><h2 id="options-title">オプション</h2><button data-menu="close" aria-label="オプションを閉じる">閉じる</button></header><div class="options-content"></div></section>';
+ overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="back" hidden>戻る</button><h2 id="options-title"></h2><button data-menu="close" aria-label="オプションを閉じる"><span aria-hidden="true">×</span></button></header><div class="options-content"></div></section>';
  const content=overlay.querySelector('.options-content'),heading=overlay.querySelector('h2'),back=overlay.querySelector('[data-menu=back]'),panel=overlay.querySelector('.options-dialog');
  const priorHidden=root.getAttribute('aria-hidden');root.setAttribute('aria-hidden','true');root.inert=true;document.body.style.overflow='hidden';
  let view='',detail=null,hold=null,pointer=null,suppressUntil=0;
  function clearHold(){clearTimeout(hold);hold=null;pointer=null;}
- function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||'オプション';back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+x+'</button>').join('')+Object.keys(actions).map(x=>'<button data-command="'+x+'">'+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();const current=content.querySelector('.route-row.current');if(current)panel.scrollTop+=current.getBoundingClientRect().bottom-panel.getBoundingClientRect().bottom+20;}
+ function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||title;back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+x+'</button>').join('')+Object.keys(actions).map(x=>'<button data-command="'+x+'">'+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();const current=content.querySelector('.route-row.current');if(current)panel.scrollTop+=current.getBoundingClientRect().bottom-panel.getBoundingClientRect().bottom+20;}
  function inspect(card){
   if(detail||!card?.isConnected)return;
   clearHold();detail={nodes:[...content.childNodes],scroll:panel.scrollTop,card};

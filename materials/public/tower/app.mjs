@@ -60,12 +60,12 @@ function collectionCards(cards,showHint=true){return (showHint?'<p class="collec
 function restartRun(){state=newRun(crypto.getRandomValues(new Uint32Array(1))[0],nextCatalog);selectedUid=null;upgradeNotice=null;loadError='';notice='';save();delete root.dataset.mapFloor;render();announceHero();return true;}
 function showOptions(){
  openOptions(root,{
-  'マップ':()=>map(true),
-  'キャラ・レリック':()=>relics(),
-  '役一覧':()=>comboGuide().replace('<details class="combo-guide">','<details class="combo-guide" open>')+'<p>このターンに1種類使用すると弱く、2種類使用すると強く光ります。今の手札とエナジーで、このカードから役を完成できるときだけ光ります。ドローやエナジー回復後に再判定します。</p>',
   'デッキ':()=>'<p>持ち札 '+state.deck.length+'枚（重複・強化・戦闘限定カードを含む）</p>'+collectionCards(state.deck),
+  '所持レリック':()=>relics(),
+  'マップ':()=>map(true),
+  '役一覧':()=>comboGuide().replace('<details class="combo-guide">','<details class="combo-guide" open>')+'<p>このターンに1種類使用すると弱く、2種類使用すると強く光ります。今の手札とエナジーで、このカードから役を完成できるときだけ光ります。ドローやエナジー回復後に再判定します。</p>',
   'コレクション':()=>'<p>今回の冒険の教材カード '+Object.keys(CARDS).length+'種類（戦闘限定カードを含む）</p>'+collectionCards(Object.entries(CARDS).map(([id],uid)=>({id,uid,plus:false})))
- },{'はじめから':restartRun});
+ },{'はじめから':restartRun},state.hero?HEROES[state.hero].name:'冒険者');
 }
 
 function previewCard(){
