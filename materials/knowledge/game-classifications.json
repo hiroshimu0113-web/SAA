@@ -50956,6 +50956,3754 @@
         "同一ターンの複数候補・入れ子候補・即時発動か終了時発動の方式を決める。",
         "レア度や役タグは現在のカードに未付与。"
       ]
+    },
+    {
+      "id": "build-aws-game-multi-az",
+      "title": "複数AZ・残存容量ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "1つのAZが使えなくても処理を継続する。",
+      "unit_ids": [
+        "az",
+        "alb",
+        "availability",
+        "s3"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-multi-az"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "compute",
+        "networking",
+        "storage"
+      ],
+      "capabilities": [
+        "process",
+        "route",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "cost"
+      ],
+      "service_names": [
+        "Application Load Balancer",
+        "Amazon Virtual Private Cloud"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "AZ障害が対象。切替先からデータを読め、障害後の容量が需要を満たす。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "複数拠点の維持費と待機容量。監視・経路・データ層の設計も必要。"
+      ],
+      "misconceptions": [
+        "同一AZへの偏り、容量不足、共有DBの停止で継続できない。リージョン全体の停止は別対策。"
+      ],
+      "content": {
+        "goal": "1つのAZが使えなくても処理を継続する。",
+        "constraints": [
+          "AZ障害が対象。切替先からデータを読め、障害後の容量が需要を満たす。"
+        ],
+        "components": [
+          {
+            "name": "利用者",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "ALB",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "AZ-A／AZ-Bの処理先",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "共有可能なデータ層",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "正常先へ振り分ける仕組みと障害境界の分散を組み合わせる。",
+        "alternatives": [
+          "単一AZ＋復旧を許容する案／より広い障害には別リージョン。"
+        ],
+        "tradeoffs": [
+          "複数拠点の維持費と待機容量。監視・経路・データ層の設計も必要。"
+        ],
+        "failure_behavior": "同一AZへの偏り、容量不足、共有DBの停止で継続できない。リージョン全体の停止は別対策。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-az",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "正常ターゲットへの振り分け、判定間隔、全ターゲット異常時のフェイルオープン。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html",
+          "claim": "SGはステートフル、NACLはステートレス。PrivateLinkはプライベート接続を提供する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "2つの独立した処理枠を持ち、片方の停止後も残る枠で攻撃＝処理を続ける。枠ごとに維持費を払う。",
+        "mechanism_note": "配置だけでなく、正常先・利用可能なデータ・許可と経路・必要容量が揃った時だけ継続ボーナス。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-autoscaling",
+      "title": "負荷追従ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "変動する需要に処理容量を追従させる。",
+      "unit_ids": [
+        "ec2"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-autoscaling"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "scale",
+        "observe",
+        "process"
+      ],
+      "concerns": [
+        "performance",
+        "cost",
+        "availability"
+      ],
+      "service_names": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "並列化でき、状態を処理先の外に持てる。起動時間と上限を含めて計画する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "拡張までの待ち、増えたリソースの維持費、下流DBの限界。"
+      ],
+      "misconceptions": [
+        "突然のピーク、誤った指標、容量上限やDB詰まりで追いつかない。"
+      ],
+      "content": {
+        "goal": "変動する需要に処理容量を追従させる。",
+        "constraints": [
+          "並列化でき、状態を処理先の外に持てる。起動時間と上限を含めて計画する。"
+        ],
+        "components": [
+          {
+            "name": "CloudWatchの負荷指標",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "Auto Scaling",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "処理先の増減",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "一定容量を常時買うより需要に合わせて調整しやすい。",
+        "alternatives": [
+          "既知ピークの事前増設／最低容量を厚くする。"
+        ],
+        "tradeoffs": [
+          "拡張までの待ち、増えたリソースの維持費、下流DBの限界。"
+        ],
+        "failure_behavior": "突然のピーク、誤った指標、容量上限やDB詰まりで追いつかない。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-az",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
+          "claim": "適切な利用率指標と目標値、インスタンスのウォームアップを使う。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+          "claim": "メトリクスに基づく通知・アクションを設定する。アクションの存在・成功は別途確認する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "負荷に応じて次ターン以降の処理枠が増える。需要減少時は減らして維持費を回収する。",
+        "mechanism_note": "観測指標・拡張方針・増設可能な処理枠・上限が揃う。追加枠は起動待ち後に有効。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-serverless",
+      "title": "イベント駆動サーバーレスビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "短い処理を要求時に実行し、サーバー管理の負担を減らす。",
+      "unit_ids": [
+        "ec2"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-serverless"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "compute",
+        "integration"
+      ],
+      "capabilities": [
+        "process",
+        "scale"
+      ],
+      "concerns": [
+        "performance",
+        "operability",
+        "cost"
+      ],
+      "service_names": [
+        "AWS Lambda"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "実行時間・同時実行・依存先の容量に収まり、状態と再実行を扱える。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "実行・要求・周辺サービスの費用、初期化遅延、クォータ。常に最安ではない。"
+      ],
+      "misconceptions": [
+        "同時実行や拡張速度の上限で絞られる。DB接続や外部APIの上限にも詰まる。"
+      ],
+      "content": {
+        "goal": "短い処理を要求時に実行し、サーバー管理の負担を減らす。",
+        "constraints": [
+          "実行時間・同時実行・依存先の容量に収まり、状態と再実行を扱える。"
+        ],
+        "components": [
+          {
+            "name": "イベント／API",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "Lambda",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "データ層",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "サーバーの台数管理を減らし、イベント単位で処理できる。",
+        "alternatives": [
+          "常駐EC2やコンテナ／遅延が厳しければ事前初期化を検討。"
+        ],
+        "tradeoffs": [
+          "実行・要求・周辺サービスの費用、初期化遅延、クォータ。常に最安ではない。"
+        ],
+        "failure_behavior": "同時実行や拡張速度の上限で絞られる。DB接続や外部APIの上限にも詰まる。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html",
+          "claim": "同時実行・拡張速度の上限があり、予約済み同時実行とプロビジョンド同時実行は異なる。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要求がある時に一時的な処理効果を発動。同時実行枠を超えると待ちや失敗になる。",
+        "mechanism_note": "イベントと実行役と利用可能なデータが揃う。予約済み同時実行は上限枠、事前初期化は別効果。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-cdn",
+      "title": "エッジ配信ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "繰り返し参照するコンテンツを利用者に近い場所で配信する。",
+      "unit_ids": [
+        "s3"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-cdn"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "networking",
+        "storage"
+      ],
+      "capabilities": [
+        "route",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon CloudFront"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "キャッシュできる要求で、キー・TTL・アクセス制御を設計する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "鮮度との調整、ミス時の負荷、配信・要求の費用。"
+      ],
+      "misconceptions": [
+        "更新直後も古いキャッシュが残り得る。個別データの誤共有を避ける。"
+      ],
+      "content": {
+        "goal": "繰り返し参照するコンテンツを利用者に近い場所で配信する。",
+        "constraints": [
+          "キャッシュできる要求で、キー・TTL・アクセス制御を設計する。"
+        ],
+        "components": [
+          {
+            "name": "利用者",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "CloudFront",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "ミス時にS3等のオリジン",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "キャッシュヒットでオリジンの処理と往復を減らす。",
+        "alternatives": [
+          "オリジン直接配信／キャッシュ対象を絞る。"
+        ],
+        "tradeoffs": [
+          "鮮度との調整、ミス時の負荷、配信・要求の費用。"
+        ],
+        "failure_behavior": "更新直後も古いキャッシュが残り得る。個別データの誤共有を避ける。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-freshness",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "claim": "TTLでキャッシュの保持期間を制御し、オリジン負荷と鮮度を調整する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "同じデータ要求には低コストで処理。更新時は古いコピーを無効化する判断が必要。",
+        "mechanism_note": "同一キーの要求・有効なコピー・鮮度条件を満たした時だけ割引。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-cache",
+      "title": "DBキャッシュビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "よく読むデータの取得を速め、原本DBへの負荷を減らす。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-cache"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "store",
+        "optimize"
+      ],
+      "concerns": [
+        "performance",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon ElastiCache"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "再利用率があり、古さの許容と更新・無効化を定義できる。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "キャッシュの維持費、ミス時の追加往復、整合性の扱い。TTLだけで常に最新とはならない。"
+      ],
+      "misconceptions": [
+        "失効が集中すると原本へ負荷が戻る。古い値を許せない取引を誤って通す。"
+      ],
+      "content": {
+        "goal": "よく読むデータの取得を速め、原本DBへの負荷を減らす。",
+        "constraints": [
+          "再利用率があり、古さの許容と更新・無効化を定義できる。"
+        ],
+        "components": [
+          {
+            "name": "アプリ",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "ElastiCache",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "ミス時に原本DB",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "キャッシュ補充",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "原本への同じ読み取りを繰り返さずに済む。",
+        "alternatives": [
+          "原本の性能改善／読み取りレプリカ。"
+        ],
+        "tradeoffs": [
+          "キャッシュの維持費、ミス時の追加往復、整合性の扱い。TTLだけで常に最新とはならない。"
+        ],
+        "failure_behavior": "失効が集中すると原本へ負荷が戻る。古い値を許せない取引を誤って通す。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-db",
+          "reason": "条件付き構成選択を確認する。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-freshness",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html",
+          "claim": "キャッシュミス時の原本取得と補充、古いデータ、TTLの限界。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "既読要求を省エナジー化。期限切れ・更新イベント後は再取得が必要。",
+        "mechanism_note": "原本・キャッシュ・更新／失効方針が揃う。最新必須の要求は原本確認を省略しない。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-rds-ha",
+      "title": "DBフェイルオーバービルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "DB障害後に待機系へ切り替え、業務を再開する。",
+      "unit_ids": [
+        "availability"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-rds-ha"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "recover",
+        "store"
+      ],
+      "concerns": [
+        "availability",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon Relational Database Service"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "RDSの単一待機系を持つMulti-AZ DBインスタンスを対象にする。アプリの再接続も考える。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "待機系の費用、同期複製に伴う遅延、切替中の停止。"
+      ],
+      "misconceptions": [
+        "待機系は通常の読取火力を増やさない。論理誤削除を過去へ戻す機能でもない。"
+      ],
+      "content": {
+        "goal": "DB障害後に待機系へ切り替え、業務を再開する。",
+        "constraints": [
+          "RDSの単一待機系を持つMulti-AZ DBインスタンスを対象にする。アプリの再接続も考える。"
+        ],
+        "components": [
+          {
+            "name": "書込／読取",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "主DB",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "別AZの同期待機系",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "データの冗長化とフェイルオーバーをサービス側に任せる。",
+        "alternatives": [
+          "読取拡張はレプリカ／Multi-AZ DBクラスター等を別評価。"
+        ],
+        "tradeoffs": [
+          "待機系の費用、同期複製に伴う遅延、切替中の停止。"
+        ],
+        "failure_behavior": "待機系は通常の読取火力を増やさない。論理誤削除を過去へ戻す機能でもない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "claim": "別AZへ同期複製する待機系は読み取り処理に使わない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "待機枠は平常時の攻撃に参加せず、主DB停止後の切替待ちを経て処理を引き継ぐ。",
+        "mechanism_note": "別AZ待機系・必要データ・アプリ再接続が揃った時に切替。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-read-replica",
+      "title": "読み取り分散ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "読み取り需要を原本DBから分散する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-read-replica"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "database"
+      ],
+      "capabilities": [
+        "scale",
+        "store"
+      ],
+      "concerns": [
+        "performance",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon Relational Database Service"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "data_acceleration"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "読取中心で、非同期複製の遅延を許容し、アプリが適切な読取先を使う。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "レプリカ費用、遅延の監視、接続先の選択。"
+      ],
+      "misconceptions": [
+        "直前の更新が見えないことがある。書込能力を同じように増やすものではない。"
+      ],
+      "content": {
+        "goal": "読み取り需要を原本DBから分散する。",
+        "constraints": [
+          "読取中心で、非同期複製の遅延を許容し、アプリが適切な読取先を使う。"
+        ],
+        "components": [
+          {
+            "name": "書込",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "主DB",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "非同期複製",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "読取レプリカへ参照を分散",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "読取処理の容量を増やし、原本の負担を減らす。",
+        "alternatives": [
+          "キャッシュ／書込や可用性の要件は別構成。"
+        ],
+        "tradeoffs": [
+          "レプリカ費用、遅延の監視、接続先の選択。"
+        ],
+        "failure_behavior": "直前の更新が見えないことがある。書込能力を同じように増やすものではない。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-db",
+          "reason": "条件付き構成選択を確認する。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-freshness",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+          "claim": "非同期複製する読み取り先で、遅延・エンジンごとの制約を考慮する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "claim": "別AZへ同期複製する待機系は読み取り処理に使わない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "読取属性の要求へ追加火力。最新必須・書込属性には同じ追加火力を付けない。",
+        "mechanism_note": "主DB・レプリカ・読取ルーティング・許容鮮度が揃う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-queue",
+      "title": "キュー・平準化ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "急増した非同期仕事を受け止め、順次処理する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-queue"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "integration",
+        "compute"
+      ],
+      "capabilities": [
+        "coordinate",
+        "process"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "即時完了でなく受理後の遅延を許容し、再処理を安全に扱える。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "待ち時間、キュー保存と処理の費用、可視性タイムアウト等の調整。"
+      ],
+      "misconceptions": [
+        "投入が処理を上回り続ければ滞留。標準キューでは重複・順序の変化があり得る。"
+      ],
+      "content": {
+        "goal": "急増した非同期仕事を受け止め、順次処理する。",
+        "constraints": [
+          "即時完了でなく受理後の遅延を許容し、再処理を安全に扱える。"
+        ],
+        "components": [
+          {
+            "name": "受付",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "SQS",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "ワーカー",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "完了後にメッセージ削除",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "受付と処理の速度・停止を切り離す。",
+        "alternatives": [
+          "同期応答が必要なら受付と結果参照を分ける。順序要件に応じた別設計。"
+        ],
+        "tradeoffs": [
+          "待ち時間、キュー保存と処理の費用、可視性タイムアウト等の調整。"
+        ],
+        "failure_behavior": "投入が処理を上回り続ければ滞留。標準キューでは重複・順序の変化があり得る。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-async",
+          "reason": "条件付き構成選択を確認する。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-spot",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html",
+          "claim": "少なくとも1回の配送で、重複・順序の入れ替わりがあり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_prevent_interaction_failure_idempotent.html",
+          "claim": "同じ識別子による再要求で業務上の副作用を重複させない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "今処理できない仕事を保留枠へ移す。保留は敵を倒した扱いにせず、期限までに完了させる。",
+        "mechanism_note": "受付・キュー・処理役・安全な再処理・期限管理が揃う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-least-privilege",
+      "title": "最小権限・多層防御ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "必要な処理を許しながら、不正アクセスと侵害時の影響を減らす。",
+      "unit_ids": [
+        "iam-role",
+        "least-privilege",
+        "authorization"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-least-privilege"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "security",
+        "networking"
+      ],
+      "capabilities": [
+        "protect",
+        "route"
+      ],
+      "concerns": [
+        "security",
+        "operability"
+      ],
+      "service_names": [
+        "AWS Identity and Access Management",
+        "Amazon Virtual Private Cloud",
+        "AWS WAF",
+        "AWS Shield"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "役割ごとの操作・資源を特定し、通信許可と操作権限を別に設計する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "権限・ルールの維持、誤拒否、運用の確認。WAFで全ての攻撃は防げない。"
+      ],
+      "misconceptions": [
+        "SGだけではIAM権限を制限できない。全拒否は安全でも業務を完了できない。"
+      ],
+      "content": {
+        "goal": "必要な処理を許しながら、不正アクセスと侵害時の影響を減らす。",
+        "constraints": [
+          "役割ごとの操作・資源を特定し、通信許可と操作権限を別に設計する。"
+        ],
+        "components": [
+          {
+            "name": "利用者／処理役",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "通信制御＋IAMロール",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "許可された資源",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "一時認証情報と最小権限、HTTP検査等で異なる層を守る。",
+        "alternatives": [
+          "強さを全開放で得る案は推奨しない。権限の調整・対象の分離を行う。"
+        ],
+        "tradeoffs": [
+          "権限・ルールの維持、誤拒否、運用の確認。WAFで全ての攻撃は防げない。"
+        ],
+        "failure_behavior": "SGだけではIAM権限を制限できない。全拒否は安全でも業務を完了できない。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-permissions",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "一時認証情報を使うロールと最小権限を採用する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html",
+          "claim": "SGはステートフル、NACLはステートレス。PrivateLinkはプライベート接続を提供する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html",
+          "claim": "WAFはHTTP/HTTPS要求を検査・制御し、ShieldはDDoS保護を扱う。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "脅威属性ごとに防御し、必要な業務要求は通す。正規要求の遮断にも失点を与える。",
+        "mechanism_note": "有効なロール・必要最小の許可・通る経路。WAFの検査は適用対象のWeb要求に限定。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-private-access",
+      "title": "プライベート接続ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "不要な公開経路を減らし、必要なサービスへ到達する。",
+      "unit_ids": [
+        "authorization"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-private-access"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "networking",
+        "security"
+      ],
+      "capabilities": [
+        "route",
+        "protect"
+      ],
+      "concerns": [
+        "security",
+        "cost",
+        "operability"
+      ],
+      "service_names": [
+        "Amazon Virtual Private Cloud",
+        "AWS Identity and Access Management"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "access_control"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "対応サービスとエンドポイント種別に合う経路・名前解決・許可を用意する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "エンドポイントの費用、種別・対応サービスの確認、DNSと許可の運用。"
+      ],
+      "misconceptions": [
+        "プライベートであるだけでは認可されない。経路や名前解決が不備なら正規処理も止まる。"
+      ],
+      "content": {
+        "goal": "不要な公開経路を減らし、必要なサービスへ到達する。",
+        "constraints": [
+          "対応サービスとエンドポイント種別に合う経路・名前解決・許可を用意する。"
+        ],
+        "components": [
+          {
+            "name": "プライベートな処理先",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "対応するVPCエンドポイント",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "AWSサービス",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "公開経路を減らし、接続経路の設計を明示できる。",
+        "alternatives": [
+          "必要な外向き接続はNAT等を要件に応じて選ぶ。"
+        ],
+        "tradeoffs": [
+          "エンドポイントの費用、種別・対応サービスの確認、DNSと許可の運用。"
+        ],
+        "failure_behavior": "プライベートであるだけでは認可されない。経路や名前解決が不備なら正規処理も止まる。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-permissions",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html",
+          "claim": "SGはステートフル、NACLはステートレス。PrivateLinkはプライベート接続を提供する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "一時認証情報を使うロールと最小権限を採用する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "外部公開の脅威へ防御を得るが、接続の前提が欠けると必要なカードを使えない。",
+        "mechanism_note": "対応する経路・名前解決・通信許可・IAM許可がすべて揃う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-backup",
+      "title": "バックアップ・世代保全ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "誤削除・破損から、許容範囲の時点へ復元する。",
+      "unit_ids": [
+        "durability",
+        "s3"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-backup"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "storage",
+        "operations"
+      ],
+      "capabilities": [
+        "store",
+        "recover"
+      ],
+      "concerns": [
+        "durability",
+        "availability",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon Simple Storage Service"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "復元したい時点の正常なデータがあり、保持・権限・復元先と手順を用意する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "保管費用、復元の時間、バックアップ後の更新損失。"
+      ],
+      "misconceptions": [
+        "複製先にも誤りが反映されることがある。世代や保持設定を失えば戻せない。"
+      ],
+      "content": {
+        "goal": "誤削除・破損から、許容範囲の時点へ復元する。",
+        "constraints": [
+          "復元したい時点の正常なデータがあり、保持・権限・復元先と手順を用意する。"
+        ],
+        "components": [
+          {
+            "name": "データ",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "世代／バックアップ保持",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "正常時点を選択",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "復元・検証",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "稼働系の冗長化で解決しない論理障害に備える。",
+        "alternatives": [
+          "低RTOなら稼働待機系も組み合わせる。"
+        ],
+        "tradeoffs": [
+          "保管費用、復元の時間、バックアップ後の更新損失。"
+        ],
+        "failure_behavior": "複製先にも誤りが反映されることがある。世代や保持設定を失えば戻せない。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-dr",
+          "reason": "条件付き構成選択を確認する。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-spot",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+          "claim": "オブジェクトの世代保持により誤削除・上書きから戻せる。各世代の保存費用を考慮する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
+          "claim": "Versioning有効バケットの特定バージョンを保持し、モードと権限によって削除保護の条件が変わる。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "保存した時点まで復帰する。以後の成果は失い、復元にターンと資源を使う。",
+        "mechanism_note": "正常な復元点・利用権限・復元先・検証が揃う。Object Lockは保護対象バージョンとモードを扱う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-disaster-recovery",
+      "title": "RTO・RPO適合ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "広域障害でも許容停止時間とデータ損失内で再開する。",
+      "unit_ids": [
+        "region",
+        "az",
+        "availability"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-disaster-recovery"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations",
+        "storage",
+        "networking"
+      ],
+      "capabilities": [
+        "recover",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "durability",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "RTO＝復旧時間の目標、RPO＝戻ってよいデータ時点の目標を定義する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "一般に事前稼働を増やすほど維持費・同期と切替の複雑さが増える。固定の復旧時間は保証しない。"
+      ],
+      "misconceptions": [
+        "リージョン停止、権限・経路・容量の不足、未検証の手順で目標を超える。"
+      ],
+      "content": {
+        "goal": "広域障害でも許容停止時間とデータ損失内で再開する。",
+        "constraints": [
+          "RTO＝復旧時間の目標、RPO＝戻ってよいデータ時点の目標を定義する。"
+        ],
+        "components": [
+          {
+            "name": "正常データ保全",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "別の復旧先",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "起動／拡張",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "接続切替",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "業務検証",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "バックアップ復元／パイロットライト／ウォームスタンバイ／複数拠点稼働から要件に合う方式を選ぶ。",
+        "alternatives": [
+          "復旧要件が緩ければ全拠点常時稼働を過剰装備として扱う。"
+        ],
+        "tradeoffs": [
+          "一般に事前稼働を増やすほど維持費・同期と切替の複雑さが増える。固定の復旧時間は保証しない。"
+        ],
+        "failure_behavior": "リージョン停止、権限・経路・容量の不足、未検証の手順で目標を超える。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-dr",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "準備量に応じて維持費と復旧待ちが変わる。厳しいRTOなら待機費用を払い、緩ければ低費用復元を選ぶ。",
+        "mechanism_note": "復旧先のデータ・容量・経路・権限・切替・検証が揃い、実測して目標内か判定。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-safe-retry",
+      "title": "冪等性・再試行ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "一時的な失敗を安全に再処理して完了させる。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-safe-retry"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "integration",
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate",
+        "recover"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "event_driven"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "再試行可能な失敗を区別し、識別子・副作用の重複防止・待機と上限を用意する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "待ち時間と再試行資源。恒久的な権限不足は再試行だけで直らない。"
+      ],
+      "misconceptions": [
+        "連打で過負荷を増幅。成功済み処理を再実行すると副作用が重複する。"
+      ],
+      "content": {
+        "goal": "一時的な失敗を安全に再処理して完了させる。",
+        "constraints": [
+          "再試行可能な失敗を区別し、識別子・副作用の重複防止・待機と上限を用意する。"
+        ],
+        "components": [
+          {
+            "name": "要求IDを記録",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "処理",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "一時失敗時に待機",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "同じIDで再試行",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "やり直せる一方で、二重注文等を起こさない。",
+        "alternatives": [
+          "恒久エラーは修正／長期停止はサーキットブレーカー。"
+        ],
+        "tradeoffs": [
+          "待ち時間と再試行資源。恒久的な権限不足は再試行だけで直らない。"
+        ],
+        "failure_behavior": "連打で過負荷を増幅。成功済み処理を再実行すると副作用が重複する。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-async",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_limit_retries.html",
+          "claim": "バックオフ・ジッター・上限で再試行を制御する。無制限再試行は負荷を増幅する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_prevent_interaction_failure_idempotent.html",
+          "claim": "同じ識別子による再要求で業務上の副作用を重複させない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "失敗した処理を一定回数再使用できる。同じ要求IDの成功報酬は1回だけ。",
+        "mechanism_note": "要求ID・冪等処理・再試行対象の判別・バックオフ／ジッター・上限が揃う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-isolation",
+      "title": "障害隔離・縮退ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "一部の依存先が壊れても主要機能を維持する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-isolation"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations",
+        "integration"
+      ],
+      "capabilities": [
+        "recover",
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "独立させる境界と、欠けても業務要件を満たせる補助機能を定義する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "提供機能の減少、境界管理、復帰判定と運用負担。"
+      ],
+      "misconceptions": [
+        "必須の決済等を成功したことにして省略すると要件違反。共有依存があれば隔離が崩れる。"
+      ],
+      "content": {
+        "goal": "一部の依存先が壊れても主要機能を維持する。",
+        "constraints": [
+          "独立させる境界と、欠けても業務要件を満たせる補助機能を定義する。"
+        ],
+        "components": [
+          {
+            "name": "異常検出",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "依存先呼出停止",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "代替／縮退",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "回復確認",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "再開",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "サーキットブレーカーと隔離で連鎖障害を抑える。",
+        "alternatives": [
+          "短い一時失敗なら安全な再試行。"
+        ],
+        "tradeoffs": [
+          "提供機能の減少、境界管理、復帰判定と運用負担。"
+        ],
+        "failure_behavior": "必須の決済等を成功したことにして省略すると要件違反。共有依存があれば隔離が崩れる。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+          "claim": "失敗が続く依存先への呼び出しを止め、回復を確認して再開する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_use_bulkhead.html",
+          "claim": "独立セルの境界で障害の広がりを抑える。共有依存は隔離を弱める。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "壊れた補助枠への資源消費を止め、主力枠を守る。必要な機能まで止めると未達になる。",
+        "mechanism_note": "独立枠・失敗検出・縮退を許す契約・回復確認。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-observability",
+      "title": "観測・復旧自動化ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "異常を検知し、適切な対処までの時間を短くする。",
+      "unit_ids": [
+        "availability"
+      ],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-observability"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "observability",
+        "operations"
+      ],
+      "capabilities": [
+        "observe",
+        "recover"
+      ],
+      "concerns": [
+        "operability",
+        "availability",
+        "cost"
+      ],
+      "service_names": [
+        "Amazon CloudWatch"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "観測対象・閾値・アクション・実行権限・結果確認を決める。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "監視費用、誤検知と通知過多、誤った自動対処の影響。"
+      ],
+      "misconceptions": [
+        "監視だけでは修復しない。アラームのアクションが存在しない／失敗する場合もある。"
+      ],
+      "content": {
+        "goal": "異常を検知し、適切な対処までの時間を短くする。",
+        "constraints": [
+          "観測対象・閾値・アクション・実行権限・結果確認を決める。"
+        ],
+        "components": [
+          {
+            "name": "メトリクス／ログ",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "アラーム",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "通知／対処",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "結果確認",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "検知と対処をつなぎ、見えない障害への対応を改善する。",
+        "alternatives": [
+          "必要な範囲から監視を増やす。常に全監視を最大化しない。"
+        ],
+        "tradeoffs": [
+          "監視費用、誤検知と通知過多、誤った自動対処の影響。"
+        ],
+        "failure_behavior": "監視だけでは修復しない。アラームのアクションが存在しない／失敗する場合もある。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-operations",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+          "claim": "メトリクスに基づく通知・アクションを設定する。アクションの存在・成功は別途確認する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "敵の状態・次の負荷を把握し、対応札を選びやすくする。修復は別の対処札で行う。",
+        "mechanism_note": "観測・判断・実行可能な対処・結果確認が揃う。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-iac",
+      "title": "構成再現・安全な変更ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "再現可能な構成を作り、変更の影響を小さくする。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-iac"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate",
+        "recover"
+      ],
+      "concerns": [
+        "operability",
+        "availability"
+      ],
+      "service_names": [
+        "AWS CloudFormation",
+        "AWS CodeDeploy"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "resilience"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "テンプレート・状態・テスト・権限・段階導入・戻す手順を用意する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "事前テスト、二重稼働や段階導入の費用、データ互換性の設計。"
+      ],
+      "misconceptions": [
+        "IaCの誤りも複製される。ドリフト検出の対象外がある。DB変更は単純な巻戻しができないこともある。"
+      ],
+      "content": {
+        "goal": "再現可能な構成を作り、変更の影響を小さくする。",
+        "constraints": [
+          "テンプレート・状態・テスト・権限・段階導入・戻す手順を用意する。"
+        ],
+        "components": [
+          {
+            "name": "CloudFormation等の定義",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "差分確認",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "小さく導入",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "検証",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "拡大／戻す",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "手作業の差異を減らし、変更時の失敗を早く発見する。",
+        "alternatives": [
+          "単純な構成の手順化から始める。複雑化の運用費も比較。"
+        ],
+        "tradeoffs": [
+          "事前テスト、二重稼働や段階導入の費用、データ互換性の設計。"
+        ],
+        "failure_behavior": "IaCの誤りも複製される。ドリフト検出の対象外がある。DB変更は単純な巻戻しができないこともある。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-operations",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+          "claim": "実際の構成とテンプレートの差異を検出する。非対応リソースや未明示プロパティは検査対象外になり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html",
+          "claim": "正常ホスト数やトラフィック移行などの成功・失敗条件を設定し、方式は実行基盤によって異なる。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "検証済みの構成セットを再展開し、少数の処理枠へ先行適用。失敗時は影響を限定して戻す。",
+        "mechanism_note": "構成定義・テスト・観測・戻す手順・互換性が揃った時だけ安全な複製。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-spot",
+      "title": "中断許容バッチビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "中断できる仕事を低い費用で処理する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-spot"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "compute",
+        "cost",
+        "storage"
+      ],
+      "capabilities": [
+        "process",
+        "optimize",
+        "recover"
+      ],
+      "concerns": [
+        "cost",
+        "availability"
+      ],
+      "service_names": [
+        "Amazon EC2",
+        "Amazon Simple Queue Service"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "仕事を分割でき、途中結果を保存し、期限内の再開や別容量への切替が可能。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "中断・供給変動、チェックポイントの費用、締切の余裕。"
+      ],
+      "misconceptions": [
+        "通知に必ず2分の猶予があると仮定しない。未保存成果を失い、即応業務を止める恐れ。"
+      ],
+      "content": {
+        "goal": "中断できる仕事を低い費用で処理する。",
+        "constraints": [
+          "仕事を分割でき、途中結果を保存し、期限内の再開や別容量への切替が可能。"
+        ],
+        "components": [
+          {
+            "name": "キュー",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "Spotワーカー",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "チェックポイント",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "中断時に再開",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "安価な容量を、再実行可能な用途へ使う。",
+        "alternatives": [
+          "停止を許せない基礎容量はOn-Demand等を組み合わせる。"
+        ],
+        "tradeoffs": [
+          "中断・供給変動、チェックポイントの費用、締切の余裕。"
+        ],
+        "failure_behavior": "通知に必ず2分の猶予があると仮定しない。未保存成果を失い、即応業務を止める恐れ。"
+      },
+      "relations": [
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-async",
+          "reason": "条件付き構成選択を確認する。"
+        },
+        {
+          "type": "assessed_by",
+          "target_id": "case-aws-game-spot",
+          "reason": "条件付き構成選択を確認する。"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html",
+          "claim": "中断への備えが必要。通知はベストエフォートで通常2分前、休止には同じ猶予がない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html",
+          "claim": "少なくとも1回の配送で、重複・順序の入れ替わりがあり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "安い一時処理枠を使うが中断イベントで消える。保存済み成果から再開できれば損失を限定。",
+        "mechanism_note": "再実行可能な仕事・永続チェックポイント・代替容量・期限管理。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "build-aws-game-rightsizing",
+      "title": "適正容量・契約ビルド",
+      "aliases": [],
+      "kind": "build",
+      "classification_reason": "目的・制約・構成選択・代替案・代償を扱い、条件適合からゲームの勝ち筋を設計する。",
+      "objective": "要件を満たす範囲で費用と無駄な資源を減らす。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "build-rightsizing"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "cost",
+        "compute",
+        "observability"
+      ],
+      "capabilities": [
+        "optimize",
+        "observe"
+      ],
+      "concerns": [
+        "cost",
+        "performance",
+        "availability"
+      ],
+      "service_names": [
+        "AWS Savings Plans"
+      ],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [
+        "elasticity"
+      ],
+      "prerequisites": [
+        "処理量・障害範囲・許容停止・データ条件と費用を区別する。"
+      ],
+      "conditions": [
+        "利用実績・ピーク・障害時余力を測り、安定した基礎需要と変動需要を分ける。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。",
+        "小さくしすぎると性能・復旧余力不足。契約の未使用分と最適化の運用労力。"
+      ],
+      "misconceptions": [
+        "割引契約を容量保証と混同する。低費用だけで正規要求・障害要件を落とす。"
+      ],
+      "content": {
+        "goal": "要件を満たす範囲で費用と無駄な資源を減らす。",
+        "constraints": [
+          "利用実績・ピーク・障害時余力を測り、安定した基礎需要と変動需要を分ける。"
+        ],
+        "components": [
+          {
+            "name": "観測",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "種類／サイズ／数を選択",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "負荷試験",
+            "role": "構成の流れにおける要素"
+          },
+          {
+            "name": "再評価",
+            "role": "構成の流れにおける要素"
+          }
+        ],
+        "selection_reason": "必要性能を満たす最小十分な資源を選ぶ。安定需要へのコミットは別の料金判断。",
+        "alternatives": [
+          "不確実な需要には柔軟な購入。余力が必要なら保持する。"
+        ],
+        "tradeoffs": [
+          "小さくしすぎると性能・復旧余力不足。契約の未使用分と最適化の運用労力。"
+        ],
+        "failure_behavior": "割引契約を容量保証と混同する。低費用だけで正規要求・障害要件を落とす。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/select-the-correct-resource-type-size-and-number.html",
+          "claim": "技術要件を満たすリソースを費用と調整の労力を考慮して選ぶ。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-ris.html",
+          "claim": "Savings Plansは1年・3年の利用額コミットであり、容量予約ではない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/sustainability-pillar/sus_sus_hardware_a3.html",
+          "claim": "単位処理あたり資源の測定、適切なサイズと効率的なインスタンスを評価する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "未使用枠の維持費を削る。契約で単価を下げる代わりに最低支払を持つ。処理容量は増えない。",
+        "mechanism_note": "性能・安全・復旧の必須条件を満たしてから費用を比較。Savings Plansと容量予約は別。 独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-az",
+      "title": "AZ停止を耐えるWeb",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "配置の分散と残存容量の両方が必要。反応型の増設は停止直後の不足を必ず埋めるとは限らない。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-az"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "仮定値。片AZ停止直後も需要160を処理したい。追加資源の予算はある。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "平常の需要160単位／ターン、2つのAZの処理容量は各100。ALBがあり、データ・権限・経路はどちらでも利用可能。",
+        "constraints": "仮定値。片AZ停止直後も需要160を処理したい。追加資源の予算はある。",
+        "questions": [
+          {
+            "id": "az-1",
+            "objective": "残存容量で判断する。",
+            "prompt": "片AZ停止直後に不足する容量はいくつか。",
+            "options": [
+              {
+                "id": "a",
+                "text": "60単位",
+                "explanation": "残る100に対し需要160なので60不足。"
+              },
+              {
+                "id": "b",
+                "text": "0単位",
+                "explanation": "複数AZという配置だけで容量不足は解消しない。"
+              },
+              {
+                "id": "c",
+                "text": "160単位",
+                "explanation": "正常側100は利用可能という前提。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "残存容量で判断する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html"
+            ]
+          },
+          {
+            "id": "az-2",
+            "objective": "停止直後の要件と拡張待ちを区別する。",
+            "prompt": "同じ2AZ構成で、停止直後から160を処理するための変更は。",
+            "options": [
+              {
+                "id": "b",
+                "text": "ALBだけを追加する",
+                "explanation": "すでにALBがあり処理容量は増えない。"
+              },
+              {
+                "id": "c",
+                "text": "Auto Scalingを使えば起動待ちを考えなくてよい",
+                "explanation": "増設には時間・上限があり即時の容量保証ではない。"
+              },
+              {
+                "id": "a",
+                "text": "どちらが残っても160を処理できる事前容量を持つ",
+                "explanation": "各側の容量・データ・経路が使える前提で直後の処理を守る。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "停止直後の要件と拡張待ちを区別する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+              "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+            ]
+          }
+        ],
+        "variant": "停止後の遅延を許容できるなら、事前余力を減らし段階的な増設を使う比較も可能。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+          "claim": "正常ターゲットへの振り分け、判定間隔、全ターゲット異常時のフェイルオープン。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
+          "claim": "適切な利用率指標と目標値、インスタンスのウォームアップを使う。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-db",
+      "title": "DBの読み取り集中",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "読み取り拡張と障害時切替を区別する。必要なら両方を組み合わせる。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-db"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "同一エンジンで利用可能なリードレプリカを比較する。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "RDSの主DBは書込を処理できるが、閲覧が集中している。数秒の古さを許容し、アプリは読取先を選べる。",
+        "constraints": "同一エンジンで利用可能なリードレプリカを比較する。",
+        "questions": [
+          {
+            "id": "db-1",
+            "objective": "可用性と読み取り拡張を分ける。",
+            "prompt": "読み取り容量を増やすための候補は。",
+            "options": [
+              {
+                "id": "b",
+                "text": "単一待機系のMulti-AZ DBインスタンスの待機系へ読取を送る",
+                "explanation": "この待機系は通常の読取処理に使えない。"
+              },
+              {
+                "id": "c",
+                "text": "原本の書込だけを増やす",
+                "explanation": "閲覧集中というボトルネックを直接解消しない。"
+              },
+              {
+                "id": "a",
+                "text": "リードレプリカへ適切な読取を分散",
+                "explanation": "許容鮮度と読取先の選択という前提に合う。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "可用性と読み取り拡張を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+              "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+            ]
+          },
+          {
+            "id": "db-2",
+            "objective": "障害対策と履歴復元を分ける。",
+            "prompt": "RDS Multi-AZ DBインスタンスで主DB停止時の自動切替を優先したい場合、通常の待機系の役割は。",
+            "options": [
+              {
+                "id": "c",
+                "text": "過去の誤削除前の状態だけを保存する",
+                "explanation": "同期待機系は過去世代を戻すバックアップとは別。"
+              },
+              {
+                "id": "a",
+                "text": "同期複製を受けて障害時の切替先になる",
+                "explanation": "読み取り拡張ではなく高可用性の目的。"
+              },
+              {
+                "id": "b",
+                "text": "常に主DBと同じだけの読取を処理する",
+                "explanation": "単一待機系のDBインスタンス構成では読取を扱わない。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "障害対策と履歴復元を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html"
+            ]
+          }
+        ],
+        "variant": "主DBの障害時継続が中心ならMulti-AZ DBインスタンス等を比較。直前更新の即時参照には原本確認等を設計。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+          "claim": "非同期複製する読み取り先で、遅延・エンジンごとの制約を考慮する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+          "claim": "別AZへ同期複製する待機系は読み取り処理に使わない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html",
+          "claim": "キャッシュミス時の原本取得と補充、古いデータ、TTLの限界。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-async",
+      "title": "画像処理の集中受付",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "仕事を保留して後で処理し、再配送による副作用はアプリの冪等性で抑える。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-async"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "非同期完了を許容する。受付だけでは仕事完了と扱わない。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "大量の画像処理要求を短時間に受け、結果は数分後でよい。各仕事にIDがあり、重複した業務処理を避けたい。",
+        "constraints": "非同期完了を許容する。受付だけでは仕事完了と扱わない。",
+        "questions": [
+          {
+            "id": "async-1",
+            "objective": "受付と完了を区別する。",
+            "prompt": "受付の急増を処理側から切り離す候補は。",
+            "options": [
+              {
+                "id": "c",
+                "text": "受付後にメッセージをすぐ削除し、完了扱いにする",
+                "explanation": "未処理の仕事を失う。"
+              },
+              {
+                "id": "a",
+                "text": "SQSとワーカーを使い、結果は後で返す",
+                "explanation": "非同期完了を許容する条件に合う。"
+              },
+              {
+                "id": "b",
+                "text": "すべての処理を受付の応答中に完了させる",
+                "explanation": "受付と処理の速度を切り離さない。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "受付と完了を区別する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html"
+            ]
+          },
+          {
+            "id": "async-2",
+            "objective": "再配送と業務上の重複防止を分ける。",
+            "prompt": "SQS標準キューで仕事の再配送があり得る場合、同じ仕事の二重確定を防ぐ設計は。",
+            "options": [
+              {
+                "id": "a",
+                "text": "仕事IDによる冪等処理と確定済み状態の管理",
+                "explanation": "重複配送があっても同じ副作用を増やさない。"
+              },
+              {
+                "id": "b",
+                "text": "重複しないと仮定する",
+                "explanation": "標準キューでは重複があり得る。"
+              },
+              {
+                "id": "c",
+                "text": "すべての再配送に追加成功報酬を与える",
+                "explanation": "ゲームでも二重処理を正解としてしまう。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "再配送と業務上の重複防止を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html",
+              "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_prevent_interaction_failure_idempotent.html"
+            ]
+          }
+        ],
+        "variant": "即時結果が必要ならキューに入れたことだけで要件達成にはならない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html",
+          "claim": "少なくとも1回の配送で、重複・順序の入れ替わりがあり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_prevent_interaction_failure_idempotent.html",
+          "claim": "同じ識別子による再要求で業務上の副作用を重複させない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_mitigate_interaction_failure_limit_retries.html",
+          "claim": "バックオフ・ジッター・上限で再試行を制御する。無制限再試行は負荷を増幅する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html",
+          "claim": "中断への備えが必要。通知はベストエフォートで通常2分前、休止には同じ猶予がない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-freshness",
+      "title": "閲覧の高速化と鮮度",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "キャッシュで閲覧の負荷を減らし、最新必須処理には別の確認経路を残す。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-freshness"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "説明文の配信と、在庫確定処理を分ける。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "同じ商品説明を多数が読む。説明文は1分程度の古さを許容するが、在庫確定は最新確認が必要。",
+        "constraints": "説明文の配信と、在庫確定処理を分ける。",
+        "questions": [
+          {
+            "id": "freshness-1",
+            "objective": "要求ごとの鮮度条件を区別する。",
+            "prompt": "高速化を優先できる対象は。",
+            "options": [
+              {
+                "id": "a",
+                "text": "許容鮮度を満たす商品説明の参照",
+                "explanation": "繰り返しの閲覧でキャッシュの条件に合う。"
+              },
+              {
+                "id": "b",
+                "text": "在庫確定を古いキャッシュだけで成功させる",
+                "explanation": "最新確認という要件に反する。"
+              },
+              {
+                "id": "c",
+                "text": "個人ごとの値を共通キーで無条件共有する",
+                "explanation": "キー設計が適切でなく他人の情報を返し得る。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "要求ごとの鮮度条件を区別する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+              "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html"
+            ]
+          },
+          {
+            "id": "freshness-2",
+            "objective": "TTLと最新性の保証を分ける。",
+            "prompt": "TTLを設定したDBキャッシュは、更新直後の最新値を必ず返すか。",
+            "options": [
+              {
+                "id": "b",
+                "text": "TTLがあれば常に原本と一致する",
+                "explanation": "TTLは即時同期の保証ではない。"
+              },
+              {
+                "id": "c",
+                "text": "キャッシュは原本より新しい値を自動生成する",
+                "explanation": "原本更新を自動的に先取りするものではない。"
+              },
+              {
+                "id": "a",
+                "text": "必ずではない。失効や更新・無効化の設計が必要",
+                "explanation": "期限内は古い値が残り得る。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "TTLと最新性の保証を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html"
+            ]
+          }
+        ],
+        "variant": "すべての要求で更新直後の最新値が必須なら、同じキャッシュ効果を無条件に付けない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+          "claim": "TTLでキャッシュの保持期間を制御し、オリジン負荷と鮮度を調整する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html",
+          "claim": "キャッシュミス時の原本取得と補充、古いデータ、TTLの限界。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
+          "claim": "非同期複製する読み取り先で、遅延・エンジンごとの制約を考慮する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-dr",
+      "title": "復旧時間と費用の比較",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "まず復旧要件を満たす方式を選ぶ。費用だけで不適合構成を推奨しない。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-dr"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "RTOは2ターン以内、RPOは2ターン以内。予算は待機構成を許容。AWSの実測保証値ではない。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "教材の架空計測：バックアップ復元は6ターン・直近2ターン分損失・維持費1。待機構成は1ターン・損失0・維持費4。両方とも権限・容量・切替を検証済み。",
+        "constraints": "RTOは2ターン以内、RPOは2ターン以内。予算は待機構成を許容。AWSの実測保証値ではない。",
+        "questions": [
+          {
+            "id": "dr-1",
+            "objective": "RTO・RPOを別々に判定する。",
+            "prompt": "提示された2候補で、RTO2以内・RPO2以内を満たすものは。",
+            "options": [
+              {
+                "id": "b",
+                "text": "バックアップ復元",
+                "explanation": "損失2は範囲内だが復旧6がRTOを超える。"
+              },
+              {
+                "id": "c",
+                "text": "どちらでも同じ",
+                "explanation": "RTOの差を無視している。"
+              },
+              {
+                "id": "a",
+                "text": "待機構成",
+                "explanation": "1ターンで戻れ、損失0なので両要件を満たす。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "RTO・RPOを別々に判定する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+            ]
+          },
+          {
+            "id": "dr-2",
+            "objective": "条件変更で推奨構成が変わる。",
+            "prompt": "同じ計測条件でRTOを8に緩め、RPO2・維持費最小化を優先すると。",
+            "options": [
+              {
+                "id": "c",
+                "text": "バックアップなしでよい",
+                "explanation": "許容データ損失の条件を満たす根拠がない。"
+              },
+              {
+                "id": "a",
+                "text": "バックアップ復元",
+                "explanation": "6ターン・損失2で適合し、維持費1が低い。"
+              },
+              {
+                "id": "b",
+                "text": "要件が緩くても常に待機構成だけが理想",
+                "explanation": "両候補が適合するので費用比較が変わる。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "条件変更で推奨構成が変わる。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html"
+            ]
+          }
+        ],
+        "variant": "RTOを8ターンに緩め、他条件を維持して維持費を最小化するならバックアップ復元が候補へ変わる。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
+          "claim": "バックアップ復元、パイロットライト、ウォームスタンバイ、アクティブ／アクティブを要件に合わせて選び復旧テストする。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-spot",
+      "title": "中断できるバッチ",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "安さと再実行可能性を組にする。停止できない処理とは扱いを分ける。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-spot"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "中断可能な仕事だけを安価な容量へ置く。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "夜間バッチは分割でき、チェックポイントを永続化して再開できる。期限には余裕があり、中断時の代替容量も用意する。",
+        "constraints": "中断可能な仕事だけを安価な容量へ置く。",
+        "questions": [
+          {
+            "id": "spot-1",
+            "objective": "中断リスクを構成で管理する。",
+            "prompt": "このバッチでSpotを使うなら、揃えたいものは。",
+            "options": [
+              {
+                "id": "c",
+                "text": "Spotは中断しないとみなす",
+                "explanation": "提供容量は回収され得る。"
+              },
+              {
+                "id": "a",
+                "text": "永続チェックポイントと安全な再開・代替容量",
+                "explanation": "中断時の損失と遅延を管理できる。"
+              },
+              {
+                "id": "b",
+                "text": "ローカル一時領域にだけ全進捗を置く",
+                "explanation": "中断・終了で再開点を失う可能性がある。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "中断リスクを構成で管理する。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html"
+            ]
+          },
+          {
+            "id": "spot-2",
+            "objective": "通知を保証時間として学ばない。",
+            "prompt": "Spotの中断通知について正しい前提は。",
+            "options": [
+              {
+                "id": "a",
+                "text": "ベストエフォートで、すべての中断に必ず2分の猶予があるとはしない",
+                "explanation": "停止・終了は通常2分前。休止には同じ猶予がなく、通知保証にも頼らない。"
+              },
+              {
+                "id": "b",
+                "text": "常に2分が保証され、その間だけ保存すればよい",
+                "explanation": "通知の性質と休止例外を無視する。"
+              },
+              {
+                "id": "c",
+                "text": "通知があるので中断はキャンセルできる",
+                "explanation": "通知は容量回収を取り消す保証ではない。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "通知を保証時間として学ばない。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html"
+            ]
+          }
+        ],
+        "variant": "期限が厳しく中断や再開待ちを許せない業務なら基礎容量をOn-Demand等へ変更する。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html",
+          "claim": "中断への備えが必要。通知はベストエフォートで通常2分前、休止には同じ猶予がない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html",
+          "claim": "少なくとも1回の配送で、重複・順序の入れ替わりがあり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-permissions",
+      "title": "正常な通信でもアクセス拒否",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "通信到達とサービス操作の権限は別。全権限や全通信開放で解決しない。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-permissions"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "必要なバケット・対象プレフィックスだけを読む。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "EC2上のアプリがS3を読む。経路とセキュリティグループは必要通信を許可しているが、ロールにGetObjectのAllowがない。他のポリシーによる許可もなく、明示的Denyはなく、今回はSSE-S3を使う。",
+        "constraints": "必要なバケット・対象プレフィックスだけを読む。",
+        "questions": [
+          {
+            "id": "permissions-1",
+            "objective": "経路と認可を分ける。",
+            "prompt": "不足を補う変更は。",
+            "options": [
+              {
+                "id": "a",
+                "text": "対象資源のGetObjectをロールへ最小範囲で許可する",
+                "explanation": "ネットワークは通り、操作権限の不足という前提。"
+              },
+              {
+                "id": "b",
+                "text": "全ポートをインターネットへ開く",
+                "explanation": "S3操作の認可不足を補わず公開面を増やす。"
+              },
+              {
+                "id": "c",
+                "text": "待機EC2を追加する",
+                "explanation": "認可不足という原因を直さない。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "経路と認可を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+              "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html"
+            ]
+          },
+          {
+            "id": "permissions-2",
+            "objective": "暗号化と鍵使用権限を分ける。",
+            "prompt": "SSE-KMSのオブジェクトを読むケースで、S3の取得許可だけがあるなら。",
+            "options": [
+              {
+                "id": "b",
+                "text": "暗号化済みなら誰でも読める",
+                "explanation": "暗号化は認可の代わりではない。"
+              },
+              {
+                "id": "c",
+                "text": "SGがあればKMSポリシーは不要",
+                "explanation": "通信制御と鍵使用の認可は別。"
+              },
+              {
+                "id": "a",
+                "text": "KMSの復号に必要な許可も確認する",
+                "explanation": "鍵ポリシー等も関係し、S3許可だけで十分とは限らない。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "暗号化と鍵使用権限を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html",
+              "https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html"
+            ]
+          }
+        ],
+        "variant": "SSE-KMSへ変えるなら、データへの許可に加えKMS鍵使用の許可も確認する。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+          "claim": "一時認証情報を使うロールと最小権限を採用する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html",
+          "claim": "SGはステートフル、NACLはステートレス。PrivateLinkはプライベート接続を提供する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html",
+          "claim": "暗号鍵の使用にも許可が必要で、IAM許可だけで鍵を使えるとは限らない。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html",
+          "claim": "S3の新規オブジェクトは標準で保存時暗号化される。暗号化とアクセス許可は別の条件。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "case-aws-game-operations",
+      "title": "観測と再現性",
+      "aliases": [],
+      "kind": "case",
+      "classification_reason": "条件付きの構成選択と条件変更後の判断を評価する2問のケース。",
+      "objective": "検知・対処・結果確認をつなぎ、コード化の限界も残す。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "case-operations"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "availability",
+        "performance",
+        "cost"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "対処可能性を確認し、検査対象外を安全と断定しない。"
+      ],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "premise": "メトリクスで異常を検知できるが、通知先と復旧アクションは未設定。構成はCloudFormationで管理し、一部リソースはドリフト検出非対応。",
+        "constraints": "対処可能性を確認し、検査対象外を安全と断定しない。",
+        "questions": [
+          {
+            "id": "operations-1",
+            "objective": "観測を回復能力と混同しない。",
+            "prompt": "監視で異常を検知しただけで、復旧は完了したか。",
+            "options": [
+              {
+                "id": "b",
+                "text": "CloudWatchがあれば必ず直る",
+                "explanation": "設定されたアクション等が必要。"
+              },
+              {
+                "id": "c",
+                "text": "検知したのでデータ損失も必ず回復する",
+                "explanation": "監視はデータの復元機能そのものではない。"
+              },
+              {
+                "id": "a",
+                "text": "未完了。対処と結果確認を用意する",
+                "explanation": "検知と修復は別の段階。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "観測を回復能力と混同しない。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html"
+            ]
+          },
+          {
+            "id": "operations-2",
+            "objective": "再現・検知と正しさの保証を分ける。",
+            "prompt": "CloudFormationのドリフト検出で非対応リソースがある場合、その状態は。",
+            "options": [
+              {
+                "id": "c",
+                "text": "ドリフト検出は必ず全差分を修復する",
+                "explanation": "検出と是正は別。全項目が対象でもない。"
+              },
+              {
+                "id": "a",
+                "text": "検査対象外が残るので別途確認が必要",
+                "explanation": "検出範囲の限界を考慮する。"
+              },
+              {
+                "id": "b",
+                "text": "コード化した構成はすべて常に正しい",
+                "explanation": "誤設定や検査対象外を無視する。"
+              }
+            ],
+            "correct_option_id": "a",
+            "rationale": "再現・検知と正しさの保証を分ける。",
+            "source_urls": [
+              "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html"
+            ]
+          }
+        ],
+        "variant": "アクションを用意しても実行権限や手順のテストが欠ければ、復旧成功は保証しない。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+          "claim": "メトリクスに基づく通知・アクションを設定する。アクションの存在・成功は別途確認する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+          "claim": "実際の構成とテンプレートの差異を検出する。非対応リソースや未明示プロパティは検査対象外になり得る。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
+    },
+    {
+      "id": "concept-aws-game-requirement-fit",
+      "title": "要件適合性をゲーム評価へ対応させる",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "AWS構成の要件適合性をゲームの評価原理へ対応させる。",
+      "objective": "安全・性能・復旧等の必須条件を満たしてから費用や運用を比較する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/aws-builds.html",
+          "locator": "principles"
+        },
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "architectureBuildResearch"
+        }
+      ],
+      "domains": [
+        "operations",
+        "cost"
+      ],
+      "capabilities": [
+        "coordinate",
+        "optimize"
+      ],
+      "concerns": [
+        "availability",
+        "security",
+        "performance",
+        "cost",
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "build",
+        "case"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [],
+      "limitations": [
+        "ゲーム数値は架空の教材モデル。AWS性能・料金・復旧時間の保証ではない。"
+      ],
+      "misconceptions": [],
+      "content": {
+        "principle": "要件の違いで推奨構成は変わる。必須条件の未達を火力点で埋めない。",
+        "applicable_when": "SAAで扱う構築手法をゲームのルールと勝ち筋へ変換するとき。",
+        "counterexample": "停止不可の要求を、安いが中断する資源だけで処理する。",
+        "comparison": "固定の最強ビルドやサービス名の組み合わせ暗記とは評価対象が異なる。"
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html",
+          "claim": "運用・安全性・信頼性・性能・費用・持続可能性で構成を評価する。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03.html",
+          "claim": "安全・回復力・高性能・費用最適化の構成設計を扱う。",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex・公式資料自己照合"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex・自己照合",
+          "checked_on": "2026-10-08",
+          "summary": "記載したAWSの条件・例外を無料の公式資料で照合。独立した内容監査・試遊・本人理解の確認は未実施。"
+        }
+      ],
+      "game_design": {
+        "proposal": "要件に適合する構成選択を推奨ビルドへ結びつける。",
+        "mechanism_note": "独立した設計資料のみ。現行30カード・効果・役・部屋クイズ・学習室は変更しない。",
+        "metaphor_limit": "実際の処理は要求や障害への対応であり、AWSサービス同士が攻撃するわけではない。",
+        "simplifications": [
+          "時間・負荷・費用を教材の単位に置換する。"
+        ],
+        "mislearning_risks": [
+          "一つのサービスや構成を全条件で最強と認識する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した技術レビューとゲームバランス検証。",
+        "ゲームへの実装と採用はユーザーと別途設計する。"
+      ]
     }
   ]
 }

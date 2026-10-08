@@ -1210,3 +1210,14 @@
 ### 役の割符・公開確認完了（2026-10-08）
 - 実装 `b5ae69f` / Actions `37763256452` のbuild・deploy成功。128テスト、Chromium全操作、WebKitの割符対応・複数役/役なし・配置/幅/詳細/役一覧/保存不変を含む全操作、画面監査・教材・学習室検証成功。
 - 公式URL：https://hiroshimu0113-web.github.io/SAA/tower/role-seams.html 。HTTP200とローカル配信ビルドのSHA256一致を確認。main同期・Pages配信完了。iPhone実機は本人確認待ち。
+
+
+## AWS構築手法→ゲームビルド調査設計（2026-10-08）
+- 依頼：SAAで理想的なインフラ構成がゲームでも推奨されるよう、実構築手法を調査設計。
+- 資料：public/design/aws-builds.html（外部依存のない単一HTML）。18ビルド・8ケース16問・29AWS公式出典・要件適合の評価・架空の戦闘ルール例・初期3キャラへの案。
+- 正本：knowledge/game-supplement.json architectureBuildResearch。生成：scripts/export-aws-build-design.py。出典は2026-10-08に無料公式資料で自己照合。独立内容監査は未実施。
+- 分類：build-aws-game-* 18件、case-aws-game-* 8件、concept-aws-game-requirement-fit 1件。classification/content=draft、import=candidate。新用語カード・部屋/学習室問題・ゲーム効果は変更しない。
+- 推奨の核：必須条件を満たす構成でクリア、適合後に費用/資源/運用を比較。冗長化と性能・復元と継続・キャッシュと鮮度・受付と完了・経路と権限を区別。
+- 次：ブラウザー/構造/生成物/進捗検証、GitHub同期、CI WebKitと実配信照合。採用ビルドと本体ルールの変更は今後の設計相談。
+
+- ローカル検証完了：18ビルド・8ケース16問の固定ID採点、検索/分類/ケースリンク、条件変更と容量/費用計算、JS無効、320/390/1024px、保存不変。27分類の一意性/固定語彙/出典/参照と関係先を照合。進捗更新511分類、build成功。新HTMLと生成元一致。ゲームカタログ2種は変更前とbyte一致。公開・CI WebKitは次工程。
