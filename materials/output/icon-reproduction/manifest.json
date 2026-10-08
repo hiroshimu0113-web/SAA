@@ -1,5 +1,5 @@
 {
-  "base_commit": "17f3ce2a3db89e2145e065e5c248eb45dc70e141",
+  "base_commit": "8fecd44d062c520684c32e9cf14e6db65808ed30",
   "format_version": 1,
   "scope": "SVG presentation adapted to current game; original supplied kit unavailable",
   "files": [
@@ -121,7 +121,7 @@
     },
     {
       "path": "materials/scripts/icon-fixtures.mjs",
-      "sha256": "67171260d368bbf1f8caafcef41492d57603d925bab2404b6eb30dd2e9f5ce4c"
+      "sha256": "089aa4722794ce297cf70e93d9caff0ec0328f12db1d4e7c78fd86b98f362861"
     },
     {
       "path": "materials/scripts/icons-audit.mjs",
@@ -129,7 +129,7 @@
     },
     {
       "path": "materials/scripts/icons-browser-check.mjs",
-      "sha256": "9a976183106881b0fdd36757639b45406a8647c0e9087f8789bd736357dd9997"
+      "sha256": "181c4b639e1a8a1106acf10cab2bd2193dbdbcc8ef7be3b565def4aea24cd6f2"
     },
     {
       "path": "materials/scripts/junk-browser-check.mjs",

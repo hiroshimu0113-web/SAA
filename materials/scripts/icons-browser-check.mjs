@@ -19,7 +19,7 @@ try{
  await mkdir('artifacts',{recursive:true});const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:4179/tower/icons.html');
  await load(p,fixture('map'));assert.equal(await p.locator('.node').count(),15);
  for(const node of await p.locator('.node').all()){
-  const label=node.locator('.node-name'),svg=label.locator('svg'),text=label.locator('span');assert.equal(await svg.count(),1);const a=await svg.boundingBox(),b=await text.boundingBox();assert.ok(a.x+a.width<=b.x+1&&Math.abs((a.y+a.height/2)-(b.y+b.height/2))<3,'map horizontal label');
+  const label=node.locator('.node-name'),svg=label.locator('svg'),text=label.locator('span');assert.equal(await svg.count(),1);const {a,b}=await label.evaluate(e=>{const rect=x=>{const r=x.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height};};return {a:rect(e.querySelector('svg')),b:rect(e.querySelector('span'))};});assert.ok(a.x+a.width<=b.x+1&&Math.abs((a.y+a.height/2)-(b.y+b.height/2))<3,'map horizontal label: '+JSON.stringify({a,b}));
  }
  const before=await p.evaluate(k=>localStorage.getItem(k),KEY);await p.reload();assert.equal(await p.evaluate(k=>localStorage.getItem(k),KEY),before);
  for(const id of Object.keys(ENEMIES)){
