@@ -17628,13 +17628,13 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "NAT配置と可用性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NAT費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -17651,6 +17651,12 @@
           "reviewer": "Codex（改訂作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR-001/002/005に従い条件・近接候補・除外理由を改訂。正解IDは維持。独立した再監査は未実施。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -25813,13 +25819,13 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "NAT配置と可用性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NAT費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -25836,6 +25842,12 @@
           "reviewer": "Codex（改訂作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR-001/002/005に従い条件・近接候補・除外理由を改訂。正解IDは維持。独立した再監査は未実施。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39298,11 +39310,11 @@
     },
     {
       "id": "case-rereview-nr12-02",
-      "title": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。詳細明細をS3に保存しSQL処理したい。最適な出発点は。",
+      "title": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。部門小計ではなく個々の使用明細をS3に保存しSQL処理したい。最適な出発点は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。詳細明細をS3に保存しSQL処理したい。最適な出発点は。",
+      "objective": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。部門小計ではなく個々の使用明細をS3に保存しSQL処理したい。最適な出発点は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -39356,13 +39368,13 @@
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
           "claim": "Cost and Usage Reportの明細",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
           "claim": "Data ExportsとCUR 2.0",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39379,6 +39391,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "通常単一選択の既存自動変換。設問・解答・全選択肢解説の一致を検証対象とする。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39406,11 +39424,11 @@
     },
     {
       "id": "case-rereview-nr07-01",
-      "title": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。適切な改善は。",
+      "title": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。受付後の応答喪失に備え、注文の二重登録も防ぐ改善は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。適切な改善は。",
+      "objective": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。受付後の応答喪失に備え、注文の二重登録も防ぐ改善は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -39463,13 +39481,13 @@
           "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html",
           "claim": "API Gatewayスロットリング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
           "claim": "Site-to-Site VPN",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39486,6 +39504,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "通常単一選択の既存自動変換。設問・解答・全選択肢解説の一致を検証対象とする。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39570,19 +39594,19 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
           "claim": "AWS公式: iam",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
           "claim": "AWS公式: role",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html",
           "claim": "AWS公式: sts",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39593,6 +39617,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39673,43 +39703,43 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
           "claim": "AWS公式: policy",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
           "claim": "AWS公式: scp",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
           "claim": "AWS公式: boundary",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
           "claim": "AWS公式: abac",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
           "claim": "Control Towerによる複数アカウント統制",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
           "claim": "SAML認証とSCIMプロビジョニング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
           "claim": "主体ポリシーとリソースポリシー",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39720,6 +39750,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39800,61 +39836,61 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
           "claim": "AWS公式: external",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
           "claim": "AWS公式: identity",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
           "claim": "AWS公式: cognito",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html",
           "claim": "AWS公式: access",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
           "claim": "AWS公式: s3block",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html",
           "claim": "AWS公式: cognitoid",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
           "claim": "SCPは付与ではなく上限、管理アカウントは対象外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
           "claim": "Control Towerによる複数アカウント統制",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
           "claim": "SAML認証とSCIMプロビジョニング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
           "claim": "主体ポリシーとリソースポリシー",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39865,6 +39901,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -39945,25 +39987,25 @@
           "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
           "claim": "SCPは付与ではなく上限、管理アカウントは対象外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html",
           "claim": "Control Towerによる複数アカウント統制",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-idp.html",
           "claim": "SAML認証とSCIMプロビジョニング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html",
           "claim": "主体ポリシーとリソースポリシー",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -39974,6 +40016,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40054,25 +40102,25 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
           "claim": "AWS公式: sg",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
           "claim": "AWS公式: acl",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
           "claim": "AWS公式: flow",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html",
           "claim": "AWS公式: ssm",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40083,6 +40131,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40163,25 +40217,25 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
           "claim": "AWS公式: sg",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
           "claim": "AWS公式: acl",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
           "claim": "AWS公式: flow",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html",
           "claim": "AWS公式: ssm",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40192,6 +40246,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40272,37 +40332,37 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "claim": "AWS公式: endpoint",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
           "claim": "AWS公式: privatelink",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
           "claim": "AWS公式: peering",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
           "claim": "AWS公式: tgw",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
           "claim": "AWS公式: vpn",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
           "claim": "AWS公式: direct",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40313,6 +40373,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40393,7 +40459,7 @@
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html",
           "claim": "CloudFront オリジン",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40404,6 +40470,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40485,43 +40557,43 @@
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
           "claim": "AWS KMS",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
           "claim": "Secrets Manager",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
           "claim": "KMSローテーションは既存データを再暗号化しない",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
           "claim": "KMSキー削除と復号不能の影響",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
           "claim": "ACMの更新対象とインポート証明書",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
           "claim": "DNS検証証明書の更新条件",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
           "claim": "分散トレースによる要求経路の調査",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40532,6 +40604,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40555,11 +40633,11 @@
     },
     {
       "id": "case-rereview-assessment-010",
-      "title": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。秘密の定期変更とアプリへの取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
+      "title": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。イメージへの埋込みを解消し、30日以内ごとの秘密変更と取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。秘密の定期変更とアプリへの取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
+      "objective": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。イメージへの埋込みを解消し、30日以内ごとの秘密変更と取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -40613,13 +40691,19 @@
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
           "claim": "AWS KMS",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
           "claim": "Secrets Manager",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/secrets-envvar-secrets-manager.html",
+          "claim": "ECS環境変数への秘密注入と更新",
+          "checked_on": "2026-10-08",
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40630,6 +40714,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40711,31 +40801,31 @@
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
           "claim": "KMSローテーションは既存データを再暗号化しない",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
           "claim": "KMSキー削除と復号不能の影響",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
           "claim": "ACMの更新対象とインポート証明書",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
           "claim": "DNS検証証明書の更新条件",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
           "claim": "分散トレースによる要求経路の調査",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40746,6 +40836,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40769,11 +40865,11 @@
     },
     {
       "id": "case-rereview-assessment-012",
-      "title": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。適切な調査先の組合せは。",
+      "title": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。直近1週間の構成スナップショットの履歴で開放期間を裏付ける場合、適切な調査先の組合せは。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。適切な調査先の組合せは。",
+      "objective": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。直近1週間の構成スナップショットの履歴で開放期間を裏付ける場合、適切な調査先の組合せは。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -40827,19 +40923,19 @@
           "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
           "claim": "CloudWatch",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
           "claim": "CloudTrail",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
           "claim": "AWS Config",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40850,6 +40946,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40931,13 +41033,13 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/security-services.html",
           "claim": "セキュリティサービス",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html",
           "claim": "AWS WAF",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -40948,6 +41050,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -40971,11 +41079,11 @@
     },
     {
       "id": "case-rereview-assessment-014",
-      "title": "監査ファイルは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
+      "title": "元バケットの監査ファイル各バージョンは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "監査ファイルは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
+      "objective": "元バケットの監査ファイル各バージョンは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
       "unit_ids": [],
       "material_refs": [
         {
@@ -41029,37 +41137,37 @@
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
           "claim": "AWS公式: version",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
           "claim": "AWS公式: lock",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
           "claim": "AWS公式: replication",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
           "claim": "AWS公式: signed",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
           "claim": "AWS公式: fsx",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
           "claim": "AWS公式: snapshot",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41070,6 +41178,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41150,25 +41264,25 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
           "claim": "AWS公式: policy",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
           "claim": "AWS公式: scp",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
           "claim": "AWS公式: boundary",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
           "claim": "AWS公式: abac",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41179,6 +41293,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41259,25 +41379,25 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
           "claim": "AWS公式: policy",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html",
           "claim": "AWS公式: scp",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
           "claim": "AWS公式: boundary",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_attribute-based-access-control.html",
           "claim": "AWS公式: abac",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41288,6 +41408,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41368,37 +41494,37 @@
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html",
           "claim": "AWS公式: external",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html",
           "claim": "AWS公式: identity",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html",
           "claim": "AWS公式: cognito",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html",
           "claim": "AWS公式: access",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
           "claim": "AWS公式: s3block",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html",
           "claim": "AWS公式: cognitoid",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41409,6 +41535,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41489,25 +41621,25 @@
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
           "claim": "Direct Connectの既定は通信暗号化なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
           "claim": "Direct Connectの冗長経路設計",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
           "claim": "CloudFront TTLとオリジン負荷",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
           "claim": "Global Acceleratorの固定IPと正常な到達先",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41518,6 +41650,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41541,11 +41679,11 @@
     },
     {
       "id": "case-rereview-assessment-019",
-      "title": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけを利用させたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
+      "title": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけをGetObjectさせたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけを利用させたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
+      "objective": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけをGetObjectさせたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -41598,49 +41736,49 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "claim": "AWS公式: endpoint",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
           "claim": "AWS公式: privatelink",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
           "claim": "AWS公式: peering",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
           "claim": "AWS公式: tgw",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
           "claim": "AWS公式: vpn",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
           "claim": "AWS公式: direct",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NATの時間・処理量・AZ間転送の費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "ゾーン型NATのAZ障害と同一AZ経路",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41651,6 +41789,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41732,43 +41876,43 @@
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
           "claim": "AWS KMS",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
           "claim": "Secrets Manager",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html",
           "claim": "KMSローテーションは既存データを再暗号化しない",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html",
           "claim": "KMSキー削除と復号不能の影響",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
           "claim": "ACMの更新対象とインポート証明書",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-renewal-validation.html",
           "claim": "DNS検証証明書の更新条件",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html",
           "claim": "分散トレースによる要求経路の調査",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41779,6 +41923,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41802,11 +41952,11 @@
     },
     {
       "id": "case-rereview-assessment-021",
-      "title": "注文APIは3 AZに均等配置し、各AZの処理能力は毎秒600件である。ピークは毎秒1,000件、障害時の追加起動は保証されない。単一AZ停止後もピークを処理するという条件について、正しい評価は。",
+      "title": "注文APIはピーク毎秒1,000件で、単一AZ停止後も同じ量を処理する。障害時の追加起動は計画に含めない。入口・状態・DBは要件を満たし、計算費は確保する総処理能力に比例する学習用モデルとする。平常時と障害後の容量を満たす、最も低費用の配置は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "注文APIは3 AZに均等配置し、各AZの処理能力は毎秒600件である。ピークは毎秒1,000件、障害時の追加起動は保証されない。単一AZ停止後もピークを処理するという条件について、正しい評価は。",
+      "objective": "注文APIはピーク毎秒1,000件で、単一AZ停止後も同じ量を処理する。障害時の追加起動は計画に含めない。入口・状態・DBは要件を満たし、計算費は確保する総処理能力に比例する学習用モデルとする。平常時と障害後の容量を満たす、最も低費用の配置は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -41860,37 +42010,37 @@
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html",
           "claim": "AWS公式: regions",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
           "claim": "AWS公式: ec2",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html",
           "claim": "AWS公式: spot",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
           "claim": "EC2インスタンスストア",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_withstand_component_failures_static_stability.html",
           "claim": "障害後も新規起動に依存しない残存容量",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
           "claim": "ALBの正常ターゲット選択と全異常時のfail-open",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -41901,6 +42051,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -41924,11 +42080,11 @@
     },
     {
       "id": "case-rereview-assessment-022",
-      "title": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで継続できる構成は。",
+      "title": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで、運用者の作業を待たずカート内容を引き継げる構成は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで継続できる構成は。",
+      "objective": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで、運用者の作業を待たずカート内容を引き継げる構成は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -41982,19 +42138,19 @@
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
           "claim": "AWS公式: asg",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html",
           "claim": "AWS公式: scaling",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-checks-overview.html",
           "claim": "AWS公式: health",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42005,6 +42161,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42086,13 +42248,13 @@
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
           "claim": "AWS公式: multi",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
           "claim": "AWS公式: replica",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42103,6 +42265,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42183,31 +42351,31 @@
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQS の可視性タイムアウト",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html",
           "claim": "SQS・SNS・EventBridge の選択",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
           "claim": "DLQの調査・再投入・保持期間",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
           "claim": "1台当たりバックログによるスケーリング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
           "claim": "LambdaのSQS部分バッチ応答",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42218,6 +42386,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42241,11 +42415,11 @@
     },
     {
       "id": "case-rereview-assessment-025",
-      "title": "LambdaがSQS Standardの10件をまとめて処理する。1件だけ形式不正で、成功した9件まで毎回再処理される。障害メッセージを調査用に残し、正常処理の反復を減らす施策を2つ選べ。（2つ選択）",
+      "title": "LambdaがSQS Standardの10件をまとめて処理し、バッチ全体の成否を返している。1件の形式不正で成功した9件も再処理される。処理時間は上限内でタイムアウトはない。10件のバッチサイズを維持し、成功済み項目を再配信対象から外し、不正メッセージ本体を自動隔離して後で再投入したい。組み合わせる施策を2つ選べ。（2つ選択）",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "LambdaがSQS Standardの10件をまとめて処理する。1件だけ形式不正で、成功した9件まで毎回再処理される。障害メッセージを調査用に残し、正常処理の反復を減らす施策を2つ選べ。（2つ選択）",
+      "objective": "LambdaがSQS Standardの10件をまとめて処理し、バッチ全体の成否を返している。1件の形式不正で成功した9件も再処理される。処理時間は上限内でタイムアウトはない。10件のバッチサイズを維持し、成功済み項目を再配信対象から外し、不正メッセージ本体を自動隔離して後で再投入したい。組み合わせる施策を2つ選べ。（2つ選択）",
       "unit_ids": [],
       "material_refs": [
         {
@@ -42298,31 +42472,31 @@
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
           "claim": "SQS のデッドレターキュー",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
           "claim": "CloudWatch",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQSの不可視期間・再受信と削除",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
           "claim": "1台当たりバックログによるスケーリング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
           "claim": "LambdaのSQS部分バッチ応答",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42333,6 +42507,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42356,11 +42536,11 @@
     },
     {
       "id": "case-rereview-assessment-026",
-      "title": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は夜間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
+      "title": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は毎晩8時間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は夜間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
+      "objective": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は毎晩8時間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -42413,13 +42593,13 @@
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQS の可視性タイムアウト",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/sns-or-sqs-or-eventbridge.html",
           "claim": "SQS・SNS・EventBridge の選択",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42430,6 +42610,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42453,11 +42639,11 @@
     },
     {
       "id": "case-rereview-assessment-027",
-      "title": "店舗システムはRPO15分・RTO60分が要件である。現状は毎時バックアップ、復元25分、設定再現20分、業務確認10分で、工程は順次実行する。検証値どおりに復旧できるとした場合の評価は。",
+      "title": "店舗システムはRPO15分・RTO60分が要件である。バックアップ間隔が最大データ損失幅に相当し、復元・設定再現・業務確認は順次実行する学習用モデルとする。検証値どおりに復旧できる場合、両要件を満たす案は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "店舗システムはRPO15分・RTO60分が要件である。現状は毎時バックアップ、復元25分、設定再現20分、業務確認10分で、工程は順次実行する。検証値どおりに復旧できるとした場合の評価は。",
+      "objective": "店舗システムはRPO15分・RTO60分が要件である。バックアップ間隔が最大データ損失幅に相当し、復元・設定再現・業務確認は順次実行する学習用モデルとする。検証値どおりに復旧できる場合、両要件を満たす案は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -42511,31 +42697,31 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "claim": "災害復旧戦略",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
           "claim": "S3 File GatewayのNFS/SMBとキャッシュ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約とクォータの区別",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
           "claim": "DataSyncの移行・継続転送",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "claim": "Transfer Familyのファイル転送プロトコル",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42546,6 +42732,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42627,31 +42819,31 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "claim": "災害復旧戦略",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
           "claim": "S3 File GatewayのNFS/SMBとキャッシュ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約とクォータの区別",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
           "claim": "DataSyncの移行・継続転送",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "claim": "Transfer Familyのファイル転送プロトコル",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42662,6 +42854,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42743,31 +42941,31 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "claim": "災害復旧戦略",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
           "claim": "S3 File GatewayのNFS/SMBとキャッシュ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約とクォータの区別",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
           "claim": "DataSyncの移行・継続転送",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "claim": "Transfer Familyのファイル転送プロトコル",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42778,6 +42976,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -42859,61 +43063,61 @@
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
           "claim": "AWS公式: classes",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html",
           "claim": "AWS公式: lifecycle",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects.html",
           "claim": "AWS公式: glacier",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
           "claim": "AWS公式: replication",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html",
           "claim": "AWS公式: s3encrypt",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
           "claim": "AWS公式: version",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
           "claim": "AWS公式: lock",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
           "claim": "AWS公式: signed",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
           "claim": "AWS公式: fsx",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
           "claim": "AWS公式: snapshot",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -42924,6 +43128,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43004,37 +43214,37 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html",
           "claim": "AWS公式: route",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
           "claim": "AWS公式: nat",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html",
           "claim": "AWS公式: egress",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NATの時間・処理量・AZ間転送の費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "ゾーン型NATのAZ障害と同一AZ経路",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "claim": "Gateway endpointの対象・ルート・追加料金なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43045,6 +43255,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43125,7 +43341,7 @@
           "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html",
           "claim": "Route 53 ルーティング",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43136,6 +43352,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43159,11 +43381,11 @@
     },
     {
       "id": "case-rereview-assessment-033",
-      "title": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信は毎秒300 Mbps、VPNは試験で安定して200 Mbpsまでしか処理できなかった。適切な評価は。",
+      "title": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信300Mbpsを障害時も維持し、回線変更は必要最小限にしたい。単一VPN経路は試験で安定して200Mbpsまでだった。学習用の実測値に基づき次に進める案は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信は毎秒300 Mbps、VPNは試験で安定して200 Mbpsまでしか処理できなかった。適切な評価は。",
+      "objective": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信300Mbpsを障害時も維持し、回線変更は必要最小限にしたい。単一VPN経路は試験で安定して200Mbpsまでだった。学習用の実測値に基づき次に進める案は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -43216,25 +43438,25 @@
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
           "claim": "Direct Connectの既定は通信暗号化なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
           "claim": "Direct Connectの冗長経路設計",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
           "claim": "CloudFront TTLとオリジン負荷",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
           "claim": "Global Acceleratorの固定IPと正常な到達先",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43245,6 +43467,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43326,37 +43554,43 @@
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
           "claim": "Lambda",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQS の可視性タイムアウト",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
           "claim": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
           "claim": "Lambdaのメモリに比例するCPU配分",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
           "claim": "SQSイベントソースの最大同時実行制御",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "claim": "Batchのジョブキューと実行基盤",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html",
+          "claim": "予約済み同時実行とプロビジョニング済み同時実行",
+          "checked_on": "2026-10-08",
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43367,6 +43601,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43448,25 +43688,25 @@
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
           "claim": "AWS公式: backup",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html",
           "claim": "AWS公式: proxy",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
           "claim": "AWS公式: cache",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html",
           "claim": "AWS公式: dax",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43477,6 +43717,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43500,11 +43746,11 @@
     },
     {
       "id": "case-rereview-assessment-036",
-      "title": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。再発を減らす施策を2つ選べ。（2つ選択）",
+      "title": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。手作業の再作成と障害後の増枠待ちを減らす施策を2つ選べ。（2つ選択）",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。再発を減らす施策を2つ選べ。（2つ選択）",
+      "objective": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。手作業の再作成と障害後の増枠待ちを減らす施策を2つ選べ。（2つ選択）",
       "unit_ids": [],
       "material_refs": [
         {
@@ -43558,31 +43804,31 @@
           "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
           "claim": "S3 File GatewayのNFS/SMBとキャッシュ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "claim": "DR方式・IaC・復元検証の条件",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約とクォータの区別",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
           "claim": "DataSyncの移行・継続転送",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "claim": "Transfer Familyのファイル転送プロトコル",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43593,6 +43839,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43674,55 +43926,55 @@
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
           "claim": "AWS公式: ec2",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
           "claim": "AWS公式: store",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "AWS公式: capacity",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html",
           "claim": "資源特性によるEC2ファミリー選択",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
           "claim": "負荷と台数に対応するターゲット追跡指標",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
           "claim": "クラスタ・パーティション・スプレッド配置",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
           "claim": "RIの属性・期間・支払い",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html",
           "claim": "RIのリージョン・AZスコープ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
           "claim": "Savings Plansの種類と対象",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43733,6 +43985,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43814,19 +44072,19 @@
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html",
           "claim": "gp3は容量とIOPS・スループットを独立設定",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/provisioned-iops.html",
           "claim": "io2の低遅延・IOPS用途",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/efs/latest/ug/performance.html",
           "claim": "EFS性能とスループットモード",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -43837,6 +44095,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -43918,91 +44182,91 @@
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
           "claim": "AWS公式: s3",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html",
           "claim": "AWS公式: ebs",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/efs/latest/ug/features.html",
           "claim": "AWS公式: efs",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
           "claim": "AWS公式: fsx",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html",
           "claim": "AWS公式: multipart",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html",
           "claim": "AWS公式: transfer",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel",
           "claim": "AWS公式: s3consistency",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
           "claim": "AWS公式: version",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html",
           "claim": "AWS公式: lock",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html",
           "claim": "AWS公式: replication",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html",
           "claim": "AWS公式: signed",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html",
           "claim": "AWS公式: snapshot",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html",
           "claim": "gp3は容量とIOPS・スループットを独立設定",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/provisioned-iops.html",
           "claim": "io2の低遅延・IOPS用途",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/efs/latest/ug/performance.html",
           "claim": "EFS性能とスループットモード",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44013,6 +44277,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44036,11 +44306,11 @@
     },
     {
       "id": "case-rereview-assessment-040",
-      "title": "海外拠点からS3へ数十GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
+      "title": "海外拠点からS3へ2GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "海外拠点からS3へ数十GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
+      "objective": "海外拠点からS3へ2GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -44094,43 +44364,49 @@
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
           "claim": "AWS公式: s3",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html",
           "claim": "AWS公式: ebs",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/efs/latest/ug/features.html",
           "claim": "AWS公式: efs",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html",
           "claim": "AWS公式: fsx",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html",
           "claim": "AWS公式: multipart",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html",
           "claim": "AWS公式: transfer",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel",
           "claim": "AWS公式: s3consistency",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html",
+          "claim": "S3単一PUTとマルチパートアップロード",
+          "checked_on": "2026-10-08",
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44141,6 +44417,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44222,43 +44504,43 @@
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
           "claim": "AWS公式: dynamo",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html",
           "claim": "AWS公式: key",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html",
           "claim": "AWS公式: index",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html",
           "claim": "AWS公式: ttl",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html",
           "claim": "AWS公式: transactions",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
           "claim": "DynamoDBの読取り・書込み単位",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
           "claim": "DynamoDBプロビジョンド容量",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44269,6 +44551,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44292,11 +44580,11 @@
     },
     {
       "id": "case-rereview-assessment-042",
-      "title": "商品検索の読取り負荷がRDSを圧迫する。商品説明は数十秒の古さを許容するが、購入直後の注文確認は最新が必要である。適切な分離は。",
+      "title": "商品検索の読取り負荷がRDSを圧迫する。商品説明は最大30秒の古さを許容するが、購入直後の注文確認は完了済み更新を反映する必要がある。非同期Read Replicaの遅延は最大60秒を観測した。商品と注文の読取り経路として、検索負荷を減らし両方の鮮度を満たす構成は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "商品検索の読取り負荷がRDSを圧迫する。商品説明は数十秒の古さを許容するが、購入直後の注文確認は最新が必要である。適切な分離は。",
+      "objective": "商品検索の読取り負荷がRDSを圧迫する。商品説明は最大30秒の古さを許容するが、購入直後の注文確認は完了済み更新を反映する必要がある。非同期Read Replicaの遅延は最大60秒を観測した。商品と注文の読取り経路として、検索負荷を減らし両方の鮮度を満たす構成は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -44350,37 +44638,37 @@
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
           "claim": "AWS公式: multi",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html",
           "claim": "AWS公式: replica",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
           "claim": "AWS公式: backup",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html",
           "claim": "AWS公式: proxy",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
           "claim": "AWS公式: cache",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html",
           "claim": "AWS公式: dax",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44391,6 +44679,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44414,11 +44708,11 @@
     },
     {
       "id": "case-rereview-assessment-043",
-      "title": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲で絞りたい。適切な設計は。",
+      "title": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲を索引のキー条件で絞り、返す前に読む量を減らしたい。適切な設計は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲で絞りたい。適切な設計は。",
+      "objective": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲を索引のキー条件で絞り、返す前に読む量を減らしたい。適切な設計は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -44472,31 +44766,31 @@
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
           "claim": "AWS公式: dynamo",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html",
           "claim": "AWS公式: key",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html",
           "claim": "AWS公式: index",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html",
           "claim": "AWS公式: ttl",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html",
           "claim": "AWS公式: transactions",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44507,6 +44801,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44588,37 +44888,37 @@
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
           "claim": "Lambda",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQS の可視性タイムアウト",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
           "claim": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
           "claim": "Lambdaのメモリに比例するCPU配分",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
           "claim": "SQSイベントソースの最大同時実行制御",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "claim": "Batchのジョブキューと実行基盤",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44629,6 +44929,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44652,11 +44958,11 @@
     },
     {
       "id": "case-rereview-assessment-045",
-      "title": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。ホスト管理を抑えてキューで順次投入する候補は。",
+      "title": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。FargateのCPU・メモリ・機能の対応範囲に収まることは検証済みである。ホスト管理を抑えてキューで順次投入する候補は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。ホスト管理を抑えてキューで順次投入する候補は。",
+      "objective": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。FargateのCPU・メモリ・機能の対応範囲に収まることは検証済みである。ホスト管理を抑えてキューで順次投入する候補は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -44710,31 +45016,31 @@
           "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html",
           "claim": "Amazon ECS",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
           "claim": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
           "claim": "Lambdaのメモリに比例するCPU配分",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
           "claim": "SQSイベントソースの最大同時実行制御",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "claim": "Batchのジョブキューと実行基盤",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44745,6 +45051,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44825,31 +45137,31 @@
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
           "claim": "CloudFront",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
           "claim": "Global Accelerator",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
           "claim": "Direct Connectの既定は通信暗号化なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
           "claim": "Direct Connectの冗長経路設計",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
           "claim": "CloudFront TTLとオリジン負荷",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44860,6 +45172,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44883,11 +45201,11 @@
     },
     {
       "id": "case-rereview-assessment-047",
-      "title": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントは固定IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
+      "title": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントはリージョン追加時も変更しない共通の固定入口IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントは固定IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
+      "objective": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントはリージョン追加時も変更しない共通の固定入口IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -44940,31 +45258,31 @@
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
           "claim": "CloudFront",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
           "claim": "Global Accelerator",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
           "claim": "Direct Connectの既定は通信暗号化なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
           "claim": "Direct Connectの冗長経路設計",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
           "claim": "CloudFront TTLとオリジン負荷",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -44975,6 +45293,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -44998,11 +45322,11 @@
     },
     {
       "id": "case-rereview-assessment-048",
-      "title": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
+      "title": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを読み、正常処理済みのイベントも保持期間内で任意時点から再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
+      "objective": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを読み、正常処理済みのイベントも保持期間内で任意時点から再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -45056,37 +45380,37 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html",
           "claim": "分析サービス",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html",
           "claim": "Athena の最適化",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
           "claim": "Kinesisのストリーム保持と複数コンシューマー",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html",
           "claim": "Firehoseの宛先へのバッファ配信",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html",
           "claim": "QuickSightの対応データソース",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html",
           "claim": "Lake Formationのデータレイク権限",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45097,6 +45421,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45178,37 +45508,37 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/analytics.html",
           "claim": "分析サービス",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/athena/latest/ug/performance-tuning-data-optimization-techniques.html",
           "claim": "Athena の最適化",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html",
           "claim": "Kinesisのストリーム保持と複数コンシューマー",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html",
           "claim": "Firehoseの宛先へのバッファ配信",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/quicksight/latest/user/supported-data-sources.html",
           "claim": "QuickSightの対応データソース",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html",
           "claim": "Lake Formationのデータレイク権限",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45219,6 +45549,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45299,31 +45635,31 @@
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
           "claim": "SQS のデッドレターキュー",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
           "claim": "CloudWatch",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQSの不可視期間・再受信と削除",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html",
           "claim": "1台当たりバックログによるスケーリング",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-errorhandling.html",
           "claim": "LambdaのSQS部分バッチ応答",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45334,6 +45670,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45415,31 +45757,31 @@
           "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
           "claim": "アクセスパターンとデータモデルによるDB選択",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
           "claim": "RDS単一スタンバイの同期複製と読取り不可",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
           "claim": "DynamoDB容量方式の課金と負荷特性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
           "claim": "DynamoDBテーブル・GSI・リージョン間整合性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
           "claim": "Aurora StandardとI/O-Optimizedの課金要素",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45450,6 +45792,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45531,49 +45879,55 @@
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html",
           "claim": "Lambda",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html",
           "claim": "SQS の可視性タイムアウト",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html",
           "claim": "API Gateway",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html",
           "claim": "Step Functions",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
           "claim": "標準Lambdaの900秒とManaged Instancesの条件付き例外",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html",
           "claim": "Lambdaのメモリに比例するCPU配分",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html",
           "claim": "SQSイベントソースの最大同時実行制御",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "claim": "Batchのジョブキューと実行基盤",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html",
+          "claim": "StandardとExpressの実行時間・用途",
+          "checked_on": "2026-10-08",
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45584,6 +45938,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45665,25 +46025,25 @@
           "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
           "claim": "Cost Explorerの費用分析",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
           "claim": "Budgetsの実績・予測通知と遅延",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
           "claim": "Cost and Usage Reportの明細",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
           "claim": "Data ExportsとCUR 2.0",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45694,6 +46054,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45717,11 +46083,11 @@
     },
     {
       "id": "case-rereview-assessment-054",
-      "title": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、S3上の詳細データから再計算できることが必要である。適切な基盤は。",
+      "title": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、サービス別・部門別の小計だけでなく、個々の使用明細を保持したS3上のデータから再計算できることが必要である。適切な基盤は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、S3上の詳細データから再計算できることが必要である。適切な基盤は。",
+      "objective": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、サービス別・部門別の小計だけでなく、個々の使用明細を保持したS3上のデータから再計算できることが必要である。適切な基盤は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -45775,25 +46141,25 @@
           "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html",
           "claim": "Cost Explorerの費用分析",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
           "claim": "Budgetsの実績・予測通知と遅延",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html",
           "claim": "Cost and Usage Reportの明細",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html",
           "claim": "Data ExportsとCUR 2.0",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45804,6 +46170,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45885,37 +46257,37 @@
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
           "claim": "AWS公式: ec2",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
           "claim": "AWS公式: store",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "AWS公式: capacity",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html",
           "claim": "RIの属性・期間・支払い",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html",
           "claim": "RIのリージョン・AZスコープ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html",
           "claim": "Savings Plansの種類と対象",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -45926,6 +46298,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -45949,11 +46327,11 @@
     },
     {
       "id": "case-rereview-assessment-056",
-      "title": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。夜間費用と状態保持の評価として適切なのは。",
+      "title": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。RAM状態を保持しながら、夜間の通常の計算利用料を抑える運用は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。夜間費用と状態保持の評価として適切なのは。",
+      "objective": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。RAM状態を保持しながら、夜間の通常の計算利用料を抑える運用は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -46007,13 +46385,13 @@
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html",
           "claim": "EC2休止の状態保持と課金",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html",
           "claim": "EC2の状態遷移",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46024,6 +46402,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46047,11 +46431,11 @@
     },
     {
       "id": "case-rereview-assessment-057",
-      "title": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いたRCU/WCUを2つ選べ。（2つ選択）",
+      "title": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いた必要最小のRCU/WCUを2つ選べ。（2つ選択）",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いたRCU/WCUを2つ選べ。（2つ選択）",
+      "objective": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いた必要最小のRCU/WCUを2つ選べ。（2つ選択）",
       "unit_ids": [],
       "material_refs": [
         {
@@ -46105,13 +46489,13 @@
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
           "claim": "DynamoDBの読取り・書込み単位",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
           "claim": "DynamoDBプロビジョンド容量",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46122,6 +46506,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46203,7 +46593,7 @@
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
           "claim": "S3階層のアクセス・最小期間・取得費",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46214,6 +46604,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46237,11 +46633,11 @@
     },
     {
       "id": "case-rereview-assessment-059",
-      "title": "同じ性能・可用性を満たすAuroraの2候補を比較する。仮定の月額はStandardが計算70・保存20・I/O45単位、I/O-Optimizedが計算90・保存25・I/O0単位で、他費用は同額である。選ぶ評価は。",
+      "title": "Auroraの学習用見積りで、同じ性能・可用性を満たすStandardは計算70・保存20・I/O45単位/月、I/O-Optimizedは計算90・保存25・I/O0単位/月である。Standardの小型案は計算50・保存20・I/O45だが応答目標を超過する。分析用Replicaを追加するとどちらも月30単位増え、今回は不要である。目標を満たす最小費用の案は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "同じ性能・可用性を満たすAuroraの2候補を比較する。仮定の月額はStandardが計算70・保存20・I/O45単位、I/O-Optimizedが計算90・保存25・I/O0単位で、他費用は同額である。選ぶ評価は。",
+      "objective": "Auroraの学習用見積りで、同じ性能・可用性を満たすStandardは計算70・保存20・I/O45単位/月、I/O-Optimizedは計算90・保存25・I/O0単位/月である。Standardの小型案は計算50・保存20・I/O45だが応答目標を超過する。分析用Replicaを追加するとどちらも月30単位増え、今回は不要である。目標を満たす最小費用の案は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -46295,31 +46691,31 @@
           "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
           "claim": "アクセスパターンとデータモデルによるDB選択",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
           "claim": "RDS単一スタンバイの同期複製と読取り不可",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
           "claim": "DynamoDB容量方式の課金と負荷特性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
           "claim": "DynamoDBテーブル・GSI・リージョン間整合性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
           "claim": "Aurora StandardとI/O-Optimizedの課金要素",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46330,6 +46726,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46410,49 +46812,49 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "claim": "AWS公式: endpoint",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
           "claim": "AWS公式: privatelink",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
           "claim": "AWS公式: peering",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
           "claim": "AWS公式: tgw",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
           "claim": "AWS公式: vpn",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
           "claim": "AWS公式: direct",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NATの時間・処理量・AZ間転送の費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "ゾーン型NATのAZ障害と同一AZ経路",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46463,6 +46865,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46544,37 +46952,37 @@
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html",
           "claim": "AWS公式: asg",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html",
           "claim": "AWS公式: scaling",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-checks-overview.html",
           "claim": "AWS公式: health",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html",
           "claim": "資源特性によるEC2ファミリー選択",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約と割引方式の違い",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html",
           "claim": "クラスタ・パーティション・スプレッド配置",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46585,6 +46993,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46665,31 +47079,31 @@
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
           "claim": "CloudFront",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html",
           "claim": "Global Accelerator",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html",
           "claim": "Direct Connectの既定は通信暗号化なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html",
           "claim": "Direct Connectの冗長経路設計",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
           "claim": "CloudFront TTLとオリジン負荷",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46700,6 +47114,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46781,31 +47201,31 @@
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "claim": "災害復旧戦略",
           "checked_on": "2026-10-05",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html",
           "claim": "S3 File GatewayのNFS/SMBとキャッシュ",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "claim": "容量予約とクォータの区別",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html",
           "claim": "DataSyncの移行・継続転送",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "claim": "Transfer Familyのファイル転送プロトコル",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46816,6 +47236,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46839,11 +47265,11 @@
     },
     {
       "id": "case-rereview-assessment-064",
-      "title": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
+      "title": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は余剰の固定容量・長期コミットと容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
+      "objective": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は余剰の固定容量・長期コミットと容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -46897,43 +47323,43 @@
           "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-managed-postgresql/db-selection.html",
           "claim": "アクセスパターンとデータモデルによるDB選択",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
           "claim": "RDS単一スタンバイの同期複製と読取り不可",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html",
           "claim": "DynamoDB容量方式の課金と負荷特性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html",
           "claim": "DynamoDBテーブル・GSI・リージョン間整合性",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/User_DBInstanceBilling.html",
           "claim": "Aurora StandardとI/O-Optimizedの課金要素",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html",
           "claim": "DynamoDBの読取り・書込み単位",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html",
           "claim": "DynamoDBプロビジョンド容量",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -46944,6 +47370,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {
@@ -46967,11 +47399,11 @@
     },
     {
       "id": "case-rereview-assessment-065",
-      "title": "2 AZの外向き経路を比較する。候補AはAZ-AのNATへ集約し月60単位、候補Bは各AZのNATを使い月90単位。必要な費用を全て含む仮定で、AZ-A障害中もAZ-Bの外部通信を継続することが必須である。適切な判断は。",
+      "title": "2 AZのプライベートワーカーが外部APIへ通信する。学習用の各月額は必要な費用をすべて含み、NATの能力は十分、障害時の経路自動変更は行わない。AZ-A停止中もAZ-Bの通信を継続できる、最も低費用の案を選べ。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "2 AZの外向き経路を比較する。候補AはAZ-AのNATへ集約し月60単位、候補Bは各AZのNATを使い月90単位。必要な費用を全て含む仮定で、AZ-A障害中もAZ-Bの外部通信を継続することが必須である。適切な判断は。",
+      "objective": "2 AZのプライベートワーカーが外部APIへ通信する。学習用の各月額は必要な費用をすべて含み、NATの能力は十分、障害時の経路自動変更は行わない。AZ-A停止中もAZ-Bの通信を継続できる、最も低費用の案を選べ。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -47024,19 +47456,19 @@
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html",
           "claim": "NATの時間・処理量・AZ間転送の費用要因",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html",
           "claim": "ゾーン型NATのAZ障害と同一AZ経路",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         },
         {
           "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
           "claim": "Gateway endpointの対象・ルート・追加料金なし",
           "checked_on": "2026-10-08",
-          "reviewer": "教材の作成者照合記録を継承。全選択肢の独立監査は未実施"
+          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
         }
       ],
       "classification_status": "reviewed",
@@ -47047,6 +47479,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "NR対応として目的・分類・参照・タグを確認。独立した内容監査とは別。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
         }
       ],
       "game_design": {

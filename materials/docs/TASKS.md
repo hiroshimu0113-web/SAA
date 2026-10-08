@@ -1031,3 +1031,8 @@
 - 素材と仕様は `docs/GAME_ICONS.md`、`public/tower/icons/game-atlas-v1.png`。新入口 `tower/icons.html`。
 - 109テスト・ビルド・Chromiumタッチ回帰・6種実表示/PNG HTTP200/320px幅検証成功。保存・性能・教材・別担当のUIを維持。
 - GitHub同期・公開は次工程。CIの実配信検証に新入口とPNGを追加。手順書は未受領。
+## FR-001/002対応（2026-10-08 JST）
+
+- 修正：m1/m2-065の解説整合、独立65問267候補の点検（59問改訂）、通常2問、試験版更新。
+- 記録：[対応表](SAA_FR_RESPONSE.md)、[候補単位点検表](SAA_FR_OPTION_AUDIT.md)。分類69件更新、content_status=draftを維持。
+- 現在：生成物更新・検証・公開確認へ進む。独立監査と本人評価は未実施。ゲーム設計は別担当。

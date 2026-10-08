@@ -9554,7 +9554,7 @@
     {
       "id": "question:nr12-02",
       "kind": "question",
-      "title": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。詳細明細をS3に保存しSQL処理したい。最適な出発点は。",
+      "title": "経理が複数アカウントの費用を顧客コードと独自の共有費比率で配賦する。部門小計ではなく個々の使用明細をS3に保存しSQL処理したい。最適な出発点は。",
       "release": "published",
       "chapter_id": "ch12",
       "sources": [
@@ -9573,7 +9573,7 @@
     {
       "id": "question:nr07-01",
       "kind": "question",
-      "title": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。適切な改善は。",
+      "title": "API Gateway配下の注文APIで429が増え、クライアントの即時無制限再試行がさらに負荷を上げている。下流の能力は今すぐ増やせない。受付後の応答喪失に備え、注文の二重登録も防ぐ改善は。",
       "release": "published",
       "chapter_id": "ch07",
       "sources": [
@@ -9903,7 +9903,7 @@
     {
       "id": "question:assessment-010",
       "kind": "question",
-      "title": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。秘密の定期変更とアプリへの取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
+      "title": "Fargate上のアプリがDBパスワードをイメージへ焼き込んでいる。イメージへの埋込みを解消し、30日以内ごとの秘密変更と取得経路を整えたい。ホストを管理せず、パスワード更新後にアプリが新しい値を使える設計は。",
       "release": "published",
       "chapter_id": "ch10",
       "sources": [
@@ -9916,6 +9916,11 @@
           "title": "Secrets Manager",
           "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "ECS環境変数への秘密注入と更新",
+          "url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/secrets-envvar-secrets-manager.html",
+          "checked": "2026-10-08"
         }
       ]
     },
@@ -9956,7 +9961,7 @@
     {
       "id": "question:assessment-012",
       "kind": "question",
-      "title": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。適切な調査先の組合せは。",
+      "title": "監査担当は「誰がSGを開放したか」と「開放状態がいつから続いたか」を調べたい。API履歴の記録と構成変更の記録はあらかじめ有効にしている。直近1週間の構成スナップショットの履歴で開放期間を裏付ける場合、適切な調査先の組合せは。",
       "release": "published",
       "chapter_id": "ch10",
       "sources": [
@@ -9999,7 +10004,7 @@
     {
       "id": "question:assessment-014",
       "kind": "question",
-      "title": "監査ファイルは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
+      "title": "元バケットの監査ファイル各バージョンは保存後7年間、管理者の操作でも保持期間を短くして消せないことが要件である。上書き前の版も残したい。新規バケットの設計として必要な施策を2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch05",
       "sources": [
@@ -10164,7 +10169,7 @@
     {
       "id": "question:assessment-019",
       "kind": "question",
-      "title": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけを利用させたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
+      "title": "S3へのGateway endpointを作りネットワーク経路は通る。監査では特定バケットだけをGetObjectさせたいが、対象ロールにS3権限はまだない。エンドポイントポリシーで対象をAllowした後の正しい理解は。",
       "release": "published",
       "chapter_id": "ch03",
       "sources": [
@@ -10257,7 +10262,7 @@
     {
       "id": "question:assessment-021",
       "kind": "question",
-      "title": "注文APIは3 AZに均等配置し、各AZの処理能力は毎秒600件である。ピークは毎秒1,000件、障害時の追加起動は保証されない。単一AZ停止後もピークを処理するという条件について、正しい評価は。",
+      "title": "注文APIはピーク毎秒1,000件で、単一AZ停止後も同じ量を処理する。障害時の追加起動は計画に含めない。入口・状態・DBは要件を満たし、計算費は確保する総処理能力に比例する学習用モデルとする。平常時と障害後の容量を満たす、最も低費用の配置は。",
       "release": "published",
       "chapter_id": "ch01",
       "sources": [
@@ -10296,7 +10301,7 @@
     {
       "id": "question:assessment-022",
       "kind": "question",
-      "title": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで継続できる構成は。",
+      "title": "チケット販売サイトは2 AZのALB配下で自動増減するが、カートを各EC2のローカルメモリに置いている。通常時の粘着セッションは有効でも、インスタンス障害でカートが消える。障害後の別ノードで、運用者の作業を待たずカート内容を引き継げる構成は。",
       "release": "published",
       "chapter_id": "ch04",
       "sources": [
@@ -10373,7 +10378,7 @@
     {
       "id": "question:assessment-025",
       "kind": "question",
-      "title": "LambdaがSQS Standardの10件をまとめて処理する。1件だけ形式不正で、成功した9件まで毎回再処理される。障害メッセージを調査用に残し、正常処理の反復を減らす施策を2つ選べ。（2つ選択）",
+      "title": "LambdaがSQS Standardの10件をまとめて処理し、バッチ全体の成否を返している。1件の形式不正で成功した9件も再処理される。処理時間は上限内でタイムアウトはない。10件のバッチサイズを維持し、成功済み項目を再配信対象から外し、不正メッセージ本体を自動隔離して後で再投入したい。組み合わせる施策を2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch09",
       "sources": [
@@ -10407,7 +10412,7 @@
     {
       "id": "question:assessment-026",
       "kind": "question",
-      "title": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は夜間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
+      "title": "注文イベントを請求・発送・分析の3サービスがそれぞれ全件処理する。分析は毎晩8時間停止するが、他のサービスは継続し、分析は翌朝追い付く必要がある。適切な構成は。",
       "release": "published",
       "chapter_id": "ch09",
       "sources": [
@@ -10426,7 +10431,7 @@
     {
       "id": "question:assessment-027",
       "kind": "question",
-      "title": "店舗システムはRPO15分・RTO60分が要件である。現状は毎時バックアップ、復元25分、設定再現20分、業務確認10分で、工程は順次実行する。検証値どおりに復旧できるとした場合の評価は。",
+      "title": "店舗システムはRPO15分・RTO60分が要件である。バックアップ間隔が最大データ損失幅に相当し、復元・設定再現・業務確認は順次実行する学習用モデルとする。検証値どおりに復旧できる場合、両要件を満たす案は。",
       "release": "published",
       "chapter_id": "ch11",
       "sources": [
@@ -10640,7 +10645,7 @@
     {
       "id": "question:assessment-033",
       "kind": "question",
-      "title": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信は毎秒300 Mbps、VPNは試験で安定して200 Mbpsまでしか処理できなかった。適切な評価は。",
+      "title": "拠点はDirect Connectを使い、切断時はSite-to-Site VPNへ切り替わる。重要通信300Mbpsを障害時も維持し、回線変更は必要最小限にしたい。単一VPN経路は試験で安定して200Mbpsまでだった。学習用の実測値に基づき次に進める案は。",
       "release": "published",
       "chapter_id": "ch07",
       "sources": [
@@ -10702,6 +10707,11 @@
           "title": "Batchのジョブキューと実行基盤",
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "checked": "2026-10-08"
+        },
+        {
+          "title": "予約済み同時実行とプロビジョニング済み同時実行",
+          "url": "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html",
+          "checked": "2026-10-08"
         }
       ]
     },
@@ -10737,7 +10747,7 @@
     {
       "id": "question:assessment-036",
       "kind": "question",
-      "title": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。再発を減らす施策を2つ選べ。（2つ選択）",
+      "title": "バックアップと秘密・鍵の復元は確認済みだが、災害訓練で復旧先のSG再現とEC2上限調整に長時間を要した。データ複製方式は維持する。手作業の再作成と障害後の増枠待ちを減らす施策を2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch11",
       "sources": [
@@ -10933,7 +10943,7 @@
     {
       "id": "question:assessment-040",
       "kind": "question",
-      "title": "海外拠点からS3へ数十GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
+      "title": "海外拠点からS3へ2GiBのファイルをアップロードする。回線の瞬断で全体の再送が多い。転送高速化サービスの効果は拠点別に計測する方針である。まず再送範囲を小さくする手段は。",
       "release": "published",
       "chapter_id": "ch05",
       "sources": [
@@ -10971,6 +10981,11 @@
           "title": "AWS公式: s3consistency",
           "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "S3単一PUTとマルチパートアップロード",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html",
+          "checked": "2026-10-08"
         }
       ]
     },
@@ -11021,7 +11036,7 @@
     {
       "id": "question:assessment-042",
       "kind": "question",
-      "title": "商品検索の読取り負荷がRDSを圧迫する。商品説明は数十秒の古さを許容するが、購入直後の注文確認は最新が必要である。適切な分離は。",
+      "title": "商品検索の読取り負荷がRDSを圧迫する。商品説明は最大30秒の古さを許容するが、購入直後の注文確認は完了済み更新を反映する必要がある。非同期Read Replicaの遅延は最大60秒を観測した。商品と注文の読取り経路として、検索負荷を減らし両方の鮮度を満たす構成は。",
       "release": "published",
       "chapter_id": "ch06",
       "sources": [
@@ -11060,7 +11075,7 @@
     {
       "id": "question:assessment-043",
       "kind": "question",
-      "title": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲で絞りたい。適切な設計は。",
+      "title": "DynamoDBで商品IDを主キーにしているが、カテゴリ別一覧のため毎回全表Scanして遅くなった。一覧は結果整合でよく、カテゴリと価格範囲を索引のキー条件で絞り、返す前に読む量を減らしたい。適切な設計は。",
       "release": "published",
       "chapter_id": "ch06",
       "sources": [
@@ -11133,7 +11148,7 @@
     {
       "id": "question:assessment-045",
       "kind": "question",
-      "title": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。ホスト管理を抑えてキューで順次投入する候補は。",
+      "title": "既存コンテナの科学計算は1ジョブ平均40分で、ジョブごとのCPU・メモリ要求も異なる。標準Lambdaの実行時間制限に合わせた分割は難しい。FargateのCPU・メモリ・機能の対応範囲に収まることは検証済みである。ホスト管理を抑えてキューで順次投入する候補は。",
       "release": "published",
       "chapter_id": "ch08",
       "sources": [
@@ -11201,7 +11216,7 @@
     {
       "id": "question:assessment-047",
       "kind": "question",
-      "title": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントは固定IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
+      "title": "多地域の利用者がリアルタイム対戦サーバーへUDP接続する。クライアントはリージョン追加時も変更しない共通の固定入口IPを許可リストに登録し、正常なリージョンへ新規接続を誘導したい。コンテンツキャッシュは不要である。適切な入口は。",
       "release": "published",
       "chapter_id": "ch07",
       "sources": [
@@ -11235,7 +11250,7 @@
     {
       "id": "question:assessment-048",
       "kind": "question",
-      "title": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
+      "title": "センサーを秒単位で監視し、2つの独立処理系が同じイベントを読み、正常処理済みのイベントも保持期間内で任意時点から再読取りする。障害後のリプレイ期間を設定し、S3への配送だけでは足りない。適切な中心サービスは。",
       "release": "published",
       "chapter_id": "ch12",
       "sources": [
@@ -11424,6 +11439,11 @@
           "title": "Batchのジョブキューと実行基盤",
           "url": "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html",
           "checked": "2026-10-08"
+        },
+        {
+          "title": "StandardとExpressの実行時間・用途",
+          "url": "https://docs.aws.amazon.com/step-functions/latest/dg/choosing-workflow-type.html",
+          "checked": "2026-10-08"
         }
       ]
     },
@@ -11459,7 +11479,7 @@
     {
       "id": "question:assessment-054",
       "kind": "question",
-      "title": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、S3上の詳細データから再計算できることが必要である。適切な基盤は。",
+      "title": "複数アカウントの費用を部門別に配賦し、社内の配賦表とSQLで結合したい。管理対象タグを有効化し、サービス別・部門別の小計だけでなく、個々の使用明細を保持したS3上のデータから再計算できることが必要である。適切な基盤は。",
       "release": "published",
       "chapter_id": "ch12",
       "sources": [
@@ -11527,7 +11547,7 @@
     {
       "id": "question:assessment-056",
       "kind": "question",
-      "title": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。夜間費用と状態保持の評価として適切なのは。",
+      "title": "平日だけ使う対応EC2で、翌朝にプロセスのRAM状態を復元したい。休止条件は満たし暗号化EBSにも空きがある。未使用のコミット契約はない。RAM状態を保持しながら、夜間の通常の計算利用料を抑える運用は。",
       "release": "published",
       "chapter_id": "ch04",
       "sources": [
@@ -11546,7 +11566,7 @@
     {
       "id": "question:assessment-057",
       "kind": "question",
-      "title": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いたRCU/WCUを2つ選べ。（2つ選択）",
+      "title": "DynamoDBの容量計画で、8KiB項目の強い整合性GetItemを毎秒60件、1.2KiB項目の非トランザクションPutItemを毎秒40件実行する。GSI・再試行・余裕率を除いた必要最小のRCU/WCUを2つ選べ。（2つ選択）",
       "release": "published",
       "chapter_id": "ch06",
       "sources": [
@@ -11579,7 +11599,7 @@
     {
       "id": "question:assessment-059",
       "kind": "question",
-      "title": "同じ性能・可用性を満たすAuroraの2候補を比較する。仮定の月額はStandardが計算70・保存20・I/O45単位、I/O-Optimizedが計算90・保存25・I/O0単位で、他費用は同額である。選ぶ評価は。",
+      "title": "Auroraの学習用見積りで、同じ性能・可用性を満たすStandardは計算70・保存20・I/O45単位/月、I/O-Optimizedは計算90・保存25・I/O0単位/月である。Standardの小型案は計算50・保存20・I/O45だが応答目標を超過する。分析用Replicaを追加するとどちらも月30単位増え、今回は不要である。目標を満たす最小費用の案は。",
       "release": "published",
       "chapter_id": "ch06",
       "sources": [
@@ -11769,7 +11789,7 @@
     {
       "id": "question:assessment-064",
       "kind": "question",
-      "title": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
+      "title": "新規サービスのDynamoDB利用は日による変動が大きく、まだ安定利用量を予測できない。初期は余剰の固定容量・長期コミットと容量管理を抑え、実績が固まった後に購入・容量方式を見直す方針である。適切な進め方は。",
       "release": "published",
       "chapter_id": "ch06",
       "sources": [
@@ -11813,7 +11833,7 @@
     {
       "id": "question:assessment-065",
       "kind": "question",
-      "title": "2 AZの外向き経路を比較する。候補AはAZ-AのNATへ集約し月60単位、候補Bは各AZのNATを使い月90単位。必要な費用を全て含む仮定で、AZ-A障害中もAZ-Bの外部通信を継続することが必須である。適切な判断は。",
+      "title": "2 AZのプライベートワーカーが外部APIへ通信する。学習用の各月額は必要な費用をすべて含み、NATの能力は十分、障害時の経路自動変更は行わない。AZ-A停止中もAZ-Bの通信を継続できる、最も低費用の案を選べ。",
       "release": "published",
       "chapter_id": "ch03",
       "sources": [

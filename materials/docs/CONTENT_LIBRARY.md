@@ -38,3 +38,8 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 今回のレビュー対応は [SAA_REVISION_LOG.md](SAA_REVISION_LOG.md)、提供された報告書は [SAA_READINESS_REVIEW.md](SAA_READINESS_REVIEW.md)。報告書は改訂前の評価として保存する。
 
 再レビュー [SAA_REREVIEW.md](SAA_REREVIEW.md) への対応：[SAA_REREVIEW_RESPONSE.md](SAA_REREVIEW_RESPONSE.md)。追加本文・通常問・独立セットは [src/content/rereview](../src/content/rereview/) に保管し、part1/part2から公開へ統合。詳細スキルは [SAA_DETAIL_SKILLS.md](SAA_DETAIL_SKILLS.md)。
+
+## FRレビュー対応記録
+
+- [SAA_FR_RESPONSE.md](SAA_FR_RESPONSE.md)：FR-001/002の対応表、検証・公開記録。
+- [SAA_FR_OPTION_AUDIT.md](SAA_FR_OPTION_AUDIT.md)：独立65問267候補とm1/m2-065の候補点検。作成者確認であり独立監査ではない。正答を含む。

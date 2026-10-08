@@ -1,6 +1,6 @@
 import type { ExamId, ExamSession, Progress, Question } from './types';
 import { isCorrect } from './learning';
-export const EXAM_REVISION = '2026-10-08-rereview';
+export const EXAM_REVISION = '2026-10-08-fr-review';
 export const examNames: Record<ExamId, string> = { mock1: '条件変更演習 1', mock2: '条件変更演習 2', assessment1: '到達度確認（独立セット）' };
 export function beginExam(p: Progress, id: ExamId, now: number, unseen: boolean): Progress {
   const archive = [...(p.examArchive ?? []), ...(p.exam ? [p.exam] : [])];
