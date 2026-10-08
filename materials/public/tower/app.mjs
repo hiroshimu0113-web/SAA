@@ -142,6 +142,7 @@ function showDetails(uid){
  selectedUid=uid;root.querySelector('#card-detail-slot').innerHTML=previewCard();
  for(const el of root.querySelectorAll('.hand .card')){const picked=Number(el.dataset.uid)===uid;el.classList.toggle('selected',picked);el.setAttribute('aria-expanded',String(picked));}
 }
+function focusCardDetails(){const el=root.querySelector('.card-preview');if(!el)return;const gap=(root.querySelector('.battle-hud')?.getBoundingClientRect().height||0)+12;window.scrollTo({top:window.scrollY+el.getBoundingClientRect().top-gap,behavior:'auto'});}
 function closeStatus(){const d=root.querySelector('.status-dialog');if(!d)return;if(d.close)d.close();else d.removeAttribute('open');}
 function showStatus(side){
  if(state?.phase!=='battle')return;
@@ -161,11 +162,11 @@ window.addEventListener('pointermove',e=>{if(swipe&&e.pointerId===swipe.id&&(Mat
 for(const type of ['pointerup','pointercancel'])window.addEventListener(type,e=>{
  if(!swipe||e.pointerId!==swipe.id)return;clearHold();const held=swipe.held;
  if(swipe.moved||held||type==='pointercancel')suppressUntil=Date.now()+500;
- swipe=null;if(held)root.querySelector('.card-preview')?.scrollIntoView({block:'nearest',behavior:'smooth'});
+ swipe=null;if(held)focusCardDetails();
 },{passive:true});
 window.addEventListener('blur',()=>{clearHold();swipe=null;suppressUntil=Date.now()+500;});
 root.addEventListener('contextmenu',e=>{const el=e.target.closest('.hand .card, .hand-end, [data-status]');if(el)e.preventDefault();});
-root.addEventListener('keydown',e=>{if(turnBusy||document.querySelector('.options-overlay')){e.preventDefault();e.stopImmediatePropagation();return;}const open=root.querySelector('.status-dialog[open]');if(open&&e.key==='Escape'){e.preventDefault();closeStatus();return;}if(open&&e.key==='Tab'&&open.classList.contains('legacy-dialog')){e.preventDefault();open.querySelector('button').focus();return;}const target=e.target.closest('[data-status]');if(target&&(['Enter',' ','ContextMenu'].includes(e.key)||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showStatus(target.dataset.status);return;}const el=e.target.closest('.hand .card');if(el&&(e.key==='ContextMenu'||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showDetails(Number(el.dataset.uid));root.querySelector('.card-preview')?.scrollIntoView({block:'nearest'});}if(e.key==='Escape'&&selectedUid!==null){selectedUid=null;render();}});
+root.addEventListener('keydown',e=>{if(turnBusy||document.querySelector('.options-overlay')){e.preventDefault();e.stopImmediatePropagation();return;}const open=root.querySelector('.status-dialog[open]');if(open&&e.key==='Escape'){e.preventDefault();closeStatus();return;}if(open&&e.key==='Tab'&&open.classList.contains('legacy-dialog')){e.preventDefault();open.querySelector('button').focus();return;}const target=e.target.closest('[data-status]');if(target&&(['Enter',' ','ContextMenu'].includes(e.key)||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showStatus(target.dataset.status);return;}const el=e.target.closest('.hand .card');if(el&&(e.key==='ContextMenu'||(e.shiftKey&&e.key==='F10'))){e.preventDefault();showDetails(Number(el.dataset.uid));focusCardDetails();}if(e.key==='Escape'&&selectedUid!==null){selectedUid=null;render();}});
 root.addEventListener('click',e=>{if(document.querySelector('.options-overlay')||turnBusy||Date.now()<suppressUntil||swipe?.held||swipe?.moved){e.preventDefault();e.stopImmediatePropagation();}},true);
 root.addEventListener('click',async e=>{
  const el=e.target.closest('[data-action]');if(document.querySelector('.options-overlay')||turnBusy||!el||el.disabled)return;let type=el.dataset.action,uid=Number(el.dataset.uid);const id=el.dataset.id;let next;

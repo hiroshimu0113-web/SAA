@@ -1,5 +1,5 @@
 {
-  "base_commit": "8fecd44d062c520684c32e9cf14e6db65808ed30",
+  "base_commit": "42b534e7d5320c5e4ad8706668e5cdf9629e5f8a",
   "format_version": 1,
   "scope": "SVG presentation adapted to current game; original supplied kit unavailable",
   "files": [
@@ -13,7 +13,7 @@
     },
     {
       "path": "materials/public/tower/app.mjs",
-      "sha256": "abab35180a91db2b3b0ac00a3456bbf8d9b872d76bc52a3b587898da0541e985"
+      "sha256": "b0e873aa742f5c6ab078ba12c927b060af289874fefad2278551c3aa662745b4"
     },
     {
       "path": "materials/public/tower/card-definitions.mjs",
@@ -125,7 +125,7 @@
     },
     {
       "path": "materials/scripts/icons-audit.mjs",
-      "sha256": "c7ebc42628705be4614a5d52d8d44fed2ed6ed0f4d4a93c7bc8049b51e024b40"
+      "sha256": "9397128df895664b9c59f2df8ed52bb094417b8301bbc6ff23b2a7da37f0458c"
     },
     {
       "path": "materials/scripts/icons-browser-check.mjs",
