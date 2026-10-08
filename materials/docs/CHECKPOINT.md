@@ -682,3 +682,14 @@
 - 旧クエスト試験の標準4187は使用中のため、APP_URLで検証用4197を指定。通常の再現手順/製品のポートは変更なし。
 - 新入口tower/icons-v2.html。CIにWebKitのアイコン全件検証と33画面/93詳細の監査を追加。公開一致確認にも新入口とSVG2ファイルを追加。GitHub同期・公式公開は次工程。
 - 未確認：元ZIPとの完全一致、Windows新規環境、本人のiPhone実機。閲覧fixtureは本人の実績ではない。
+
+
+### 手順書対応SVGアイコン：公式公開完了（2026-10-08 UTC）
+- 公開版6d952fa（実装03f574e、判定修正42b534e、詳細スクロール9fbe863）/Actions 37723712347のbuild/deployともsuccess。
+- 111テスト、WebKitの全件アイコン対応/一意性/所持獲得と敵詳細/15ノード横並び、33画面/93カード詳細、全操作回帰、教材更新、章/模試検証を通過。Safariでは別々の座標取得と詳細スクロールの差を確認し、同時取得/レイアウト待ちとHPバー下への先頭スクロールで修正。検査条件を外して通過扱いにはしていない。
+- deployログのHTTPS取得でHTTP200/SHA256一致。対象はtower/icons.html、tower/icons-v2.html、tower/icons.mjs、tower/card-icons.mjs、既存入口/アプリ/教材/Service Worker。公式入口 https://hiroshimu0113-web.github.io/SAA/tower/icons-v2.html 。旧クエストは https://hiroshimu0113-web.github.io/SAA/ 。
+- 最終キットをoutput/icon-reproductionへ保存・GitHub同期。基準42b534e7d5320c5e4ad8706668e5cdf9629e5f8a、ZIP SHA256 42bb1ba57057d1a6b007ea5de1213880d00ed033732741dfc48192cf78caf781。最終版でも新規clone→全SHA256/CRC→依存導入→111テスト→ビルド→アイコン試験を確認。新入口/SVG2ファイル/sw.jsは検証済み作業環境と一致。
+- SVG上の座標クリックでマップ/カードが動作し、SVGのpointer-events:none、新入口とSVGのオフライン再読込を確認。
+- 別担当のGRレビュー資料b3676fcとゲーム設問レビュー03752cfをマージして保持。教材本文/分類/エンジン/カード性能/保存形式の変更なし。
+- 初回pushは自動承認レビューが送信承認の明確さを理由に拒否。本人/公開先所有者一致とAGENTS.md:29の既存ユーザー公開依頼・検証済み差分を示し、同じ通常pushの再審査で承認。承認ブロックは解消済み。先行CI 37722686912/37723171665は失敗のため成功扱いしない。
+- 完了：実装、Chrome/WebKit、新規clone復元、GitHub同期、公式公開。未確認：元の未共有キットとのバイト一致、Windows新規環境、本人のiPhone実機。元PNG/配布教材ZIP/個人保存を保護。

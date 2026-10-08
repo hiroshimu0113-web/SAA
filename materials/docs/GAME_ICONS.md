@@ -14,3 +14,6 @@
 検証：111テスト、ビルド、33画面＋93カード詳細、Chromium操作/旧クエスト、オフライン。新規cloneへキットを展開し、SHA256一致、111テスト/ビルド/アイコン試験/サーバー起動を確認。2環境のゲーム入口・SVG2定義・Service WorkerのSHA256一致。
 
 新入口tower/icons-v2.html。公開の最終結果はCHECKPOINT.md末尾に記録。
+
+
+公開完了：6d952fa / Actions 37723712347。ChromeとWebKitで全件/33画面/93詳細、111テストと操作回帰を確認。公式入口：https://hiroshimu0113-web.github.io/SAA/tower/icons-v2.html 。元キットのSVGとの完全一致と実機iPhoneは未確認。
