@@ -803,3 +803,9 @@
 - `87c2149` / Actions `37755613339` のbuild/deploy成功。資料のWebKit検証で全組み合わせの一意性、順序不変、分類/内訳切替、12軸、JS無効読書、320/390/1024px、ゲーム保存不変を確認。
 - 実配信照合は新HTML/JSONを対象に含め、09:23 UTCにHTTP200・配信成果物とのSHA256一致を確認。GitHub mainに同期。
 - 分類 `concept-combo-genre-multiset` はdraft/candidateのまま。設計相談の共有は完了。実カード分類・役の採用・効果・発動方式の最終決定とゲーム実装、本人のSafari実機確認は未実施。
+### キャラ・ビルド相談HTMLの公開完了（2026-10-08）
+- 作成 e4897bc、並行資料更新を含む公開版87c2149 / Actions 37755613339のbuild・deploy・実配信照合がsuccess。
+- Chromiumの320px/検索/分類/空結果/目次/展開/JS無効全文表示、CI WebKitの同検証、既存ゲーム・教材回帰、ローカルbuild/progress:check成功。
+- 公開HTMLをCIでHTTP200・SHA256一致確認。HTMLのSHA256：5a0e16fbe243895a18df407ec46cccd7a793ec29f2eea09a49d6dd2b55dd7479。
+- 公式URL：https://hiroshimu0113-web.github.io/SAA/design/character-builds.html 。単一HTML、59ビルド・16複合案・初期3キャラ・割り振り案を公開済み。
+- 先行Actions 37755461294は並行pushでキャンセル。最新版のWebKit資料検証・全配信をもって完了とする。本人のSafari実機評価と採用候補の絞り込みは次の相談。ゲーム実装・性能変更はなし。
