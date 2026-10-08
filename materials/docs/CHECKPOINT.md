@@ -731,8 +731,8 @@
 
 - 練習終了時の下書き・未回答を履歴へ確定し、結果との不整合を修正。再保存で重複させない。
 - 評価バックアップの受験ID重複、65件の記録欠落、保存中の問題版/回答/終了状態の不一致を保存前に拒否。旧版の正規記録は復元可能。
-- 全122テスト・build成功。ブラウザー/配信確認は進行中。
-- 対応表：SAA_GAME_READINESS_RESPONSE_REVIEW_RESPONSE.md。教材・分類の改訂なし。次：実画面・公開確認、独立受入レビュー。
+- 全122テスト・build・knowledge/game/progress check・Chromiumの学習室回帰成功。CI WebKit全6工程・deploy・HTTP 200/SHA256実配信検証成功。
+- 対応表：SAA_GAME_READINESS_RESPONSE_REVIEW_RESPONSE.md。教材・分類の改訂なし。公開：`68ebeec` / Actions `37738270100`、https://hiroshimu0113-web.github.io/SAA/tower/study.html 。GitHub mainへ同期済み。次：独立受入レビュー。
 
 
 ## 縮小カードの標準化・交換所5枠（2026-10-08）

@@ -21,7 +21,10 @@
 ## 検証と公開
 
 - 全122テスト成功、型検査・build成功。
-- knowledge/game/progressの整合性検査、Chromiumの実画面検証とCI WebKit・公開配信検証は結果確認後に追記する。
-- 公開先：[ゲーム内学習室](https://hiroshimu0113-web.github.io/SAA/tower/study.html)。現時点の修正の公開は未確認。
+- knowledge/game/progressの整合性検査成功。
+- Chromiumの実画面検証成功：1問の下書き終了・再読込・結果再表示・再保存、26問中の途中下書きと未回答の履歴、矛盾するバックアップ3種類の拒否と元保存値の完全一致、正規バックアップの再取込。既存の複数選択・時間切れ・旧冒険連携等も通過。
+- CI WebKit：学習室の新しい再現テストを含む全6工程成功（アイコン/画面配置、役資料、タッチ/保存、教材更新、章/模試、学習室）。
+- 公開：実装コミット `68ebeecdfd9e07edac33c8871f4635e79a7c76cf` / [Actions 37738270100](https://github.com/hiroshimu0113-web/SAA/actions/runs/37738270100) のbuild/deploy成功。実配信検証が公式URLを取得し、HTTP 200・公開成果物とのSHA256一致を確認。ローカル環境から全公開ファイルを再取得したという意味ではない。
+- 公開先：[ゲーム内学習室](https://hiroshimu0113-web.github.io/SAA/tower/study.html)。通常入口も含め公開反映確認済み。対応表と修正はGitHub mainへ同期済み。
 
 教材は追加・改訂していないため分類IDの追加・監査状態の変更はない。独立した受入レビュー、実受験者の成績、実機iPhone確認は別工程。
