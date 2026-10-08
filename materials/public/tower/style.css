@@ -157,3 +157,19 @@ html.screen-shaking{overflow-x:hidden}
 .header-options>.ui-icon{width:22px;height:22px;margin:0}.combat-resources .ui-icon,.journey-stats .ui-icon{width:14px;height:14px}
 .card-preview{scroll-margin-top:90px}.fx-event .ui-icon,.combat-toast .ui-icon{width:1.1em;height:1.1em}.combo-icons>span{display:inline-flex;align-items:center}
 @media(max-width:400px){.options-cards .card .card-title{font-size:9px;gap:2px}.options-cards .card-title>.ui-icon{width:11px;height:11px}.node .node-name{font-size:11px;gap:3px}.node .node-name>.ui-icon{width:16px;height:16px}.in-battle .battle-meta{gap:4px}.in-battle .end-turn{min-width:80px;padding:8px 5px;font-size:11px}.in-battle .end-turn>.ui-icon{width:12px;height:12px;margin-right:2px}.in-battle .intent{font-size:10px;padding:6px 4px;white-space:nowrap}.in-battle .double-intent{white-space:normal;max-width:155px}.battle-meta>span:not(.intent){font-size:9px}.card-preview{scroll-margin-top:85px}}
+
+/* Flat web UI: solid surfaces and strokes, without decorative depth. */
+body{background:#111c28}
+.card{background:#302c36;box-shadow:none;border-color:#705b64}
+.card.skill{background:#20343e;border-color:#49717c}
+.card.power{background:#302e43;border-color:#75648f}
+.card.junk{background:#2d3038;border-color:#63707c}
+.arena{background:none}
+.enemy-glyph,.operator span{text-shadow:none}
+.operator .hero-model,.operator.hero-sre .hero-model,.operator.hero-architect .hero-model{filter:none}
+.tower-art{filter:none}.tower-art i{background:#345262}
+.operator i{background:#376278}
+.current .node,.battle-hud,.in-map .run-header,.combat-toast,.hero-arrival,.turn-banner,.combo-toast{box-shadow:none}
+.hand .card.selected{box-shadow:none;transform:none}
+.hand .card.combo-ready,.hand .card.combo-progress{box-shadow:none}
+.ui-icon{filter:none;fill:none}

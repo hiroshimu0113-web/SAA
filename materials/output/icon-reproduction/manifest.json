@@ -1,5 +1,5 @@
 {
-  "base_commit": "42b534e7d5320c5e4ad8706668e5cdf9629e5f8a",
+  "base_commit": "7a8427d314d2ad00e4aade779656f625d645c86a",
   "format_version": 1,
   "scope": "SVG presentation adapted to current game; original supplied kit unavailable",
   "files": [
@@ -9,7 +9,7 @@
     },
     {
       "path": "materials/docs/ICON_REPRODUCTION.md",
-      "sha256": "5028e9e4f52f08e94d2e083fb0398602b477d6ae093cc6959423547dc8cdc852"
+      "sha256": "ccd977d53221986598d6720c6f551e90007469d963ce91f116aa688a2b094603"
     },
     {
       "path": "materials/public/tower/app.mjs",
@@ -69,7 +69,7 @@
     },
     {
       "path": "materials/public/tower/icons.mjs",
-      "sha256": "49291410a3c1d21f455a194463a24a903894fe753fabdc0a903c22f622780b69"
+      "sha256": "ff8a98d5ab5ea41a67275314751cb403b3f98c6d18cecf56f3befba3d4b3dc10"
     },
     {
       "path": "materials/public/tower/index.html",
@@ -97,7 +97,7 @@
     },
     {
       "path": "materials/public/tower/style.css",
-      "sha256": "68f78b228794ac7f7059180b54a691d7d47bf063e1384f61563fa18c7f6bd2f4"
+      "sha256": "eb0aedeec3274314c4ac6b337f421a698f8d4b2d105f487d50730de7f9847580"
     },
     {
       "path": "materials/public/tower/touch-version.json",
@@ -113,7 +113,7 @@
     },
     {
       "path": "materials/scripts/build-tower.mjs",
-      "sha256": "d4afe7f6a974c01603034ea64e890b4f0aa70dfbaee80a14d69de52e4b09f2d8"
+      "sha256": "1ba94a9233a4233e8d4571dd21221bc8ab46efa71b700eae8cf61fdf1b03e504"
     },
     {
       "path": "materials/scripts/effects-browser-check.mjs",
@@ -145,7 +145,7 @@
     },
     {
       "path": "materials/scripts/verify-publication.py",
-      "sha256": "b0c399c5828e95102880d09656030999d37a82e06b941ca48e26b827eb629c49"
+      "sha256": "12235b26836a0b594d943313e4b9a2e0b4520a4d7a3db106abb649b9c10ca730"
     },
     {
       "path": "materials/src/DesignQuest.tsx",

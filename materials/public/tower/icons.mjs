@@ -1,6 +1,6 @@
-// Original 24px line drawings; these are not AWS service logos.
+// Flat, front-facing 24px line drawings; these are not AWS service logos.
 export const ICON_PATHS={
- battle:'M4 3l13 13m-6-2 5-5M3 4l2 5 10 10 4-4L9 5zM14 18l5 3 2-2-3-5',
+ battle:'M14 3h7v7L10 21l-7-7zM14 3v7h7M6 17l-3 4M3 14l7 7',
  skill:'M12 3l8 3v6c0 5-8 9-8 9s-8-4-8-9V6zM8 12l3 3 5-6',
  power:'M13 2 5 13h6l-1 9 9-13h-6z',
  junk:'M5 3h10l4 4v14H5zM14 3v5h5M8 11l7 7m0-7-7 7',
@@ -46,8 +46,8 @@ export const ICON_PATHS={
  blueprint:'M3 3h18v18H3zM7 7h10v10H7zM7 12h10M12 7v10',
  runbook:'M5 3h14v18H5zM8 7h8M8 11l2 2 5-4M8 17h8',
  capacity:'M3 13h18v8H3zM5 17h4m3 0h4M12 10V2m-4 4 4-4 4 4',
- edge:'M4 18 18 4l2 2-14 14zM3 21h5M14 4l2-2m4 12 2-2',
- plating:'M3 8l9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5',
+ edge:'M5 19 19 5M12 5h7v7M4 4v6m-3-3h6M18 18v4m-2-2h4',
+ plating:'M4 3h16v18H4zM8 7h8M8 12h8M8 17h8',
  battery:'M5 5h14v17H5zM9 2h6v3M13 8l-4 6h4l-1 5 4-7h-4z',
  opener:'M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3zM12 9v6m-3-3h6',
  dusk:'M19 3a8 8 0 0 0-6 14 8 8 0 0 1-10-7M12 11l8 3v3l-8 5-5-5v-3z',
