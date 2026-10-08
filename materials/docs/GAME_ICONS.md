@@ -17,3 +17,8 @@
 
 
 公開完了：6d952fa / Actions 37723712347。ChromeとWebKitで全件/33画面/93詳細、111テストと操作回帰を確認。公式入口：https://hiroshimu0113-web.github.io/SAA/tower/icons-v2.html 。元キットのSVGとの完全一致と実機iPhoneは未確認。
+
+## 2D Webデザインへの調整
+2026-10-08の追加希望に対応。アイコンは正面向きの単色線画。奥行き表現を含む攻撃・刃・積層の図形を整理し、カードは種類別の単色背景と細い境界線へ変更。常時の影・発光・背景グラデーションを除去し、選択と役成立は枠線と文字で表示。操作時の短い戦闘演出は維持。最新入口は `tower/icons-flat.html`。
+
+- 公式公開完了：f791b6e / Actions 37724790265 のbuild・deploy成功。WebKitのアイコン/33画面/93詳細・タッチ/保存/オフライン・教材更新・章/模試の検証成功。deployで新入口を含むHTTPS HTTP200/SHA256一致確認。公式URL：https://hiroshimu0113-web.github.io/SAA/tower/icons-flat.html 。実機iPhoneは未確認。

@@ -1087,3 +1087,5 @@
 - 検証：111テスト・build、Chromeの全件アイコン/一意性/15マップノード、320/390/1000pxの33画面と93カード詳細が成功。横はみ出し/HPバー重なりなし、閲覧で保存が不変。実機iPhone未確認。
 - 再現キット39ファイルを更新、CRC/SHA256確認済み。新入口 tower/icons-flat.html を追加し公開一致検証の対象にした。
 - エンジン/性能/保存形式/教材/分類の変更なし。次工程：GitHub同期と公式公開の確認。
+
+- 公式公開完了：f791b6e / Actions 37724790265 のbuild・deploy成功。WebKitのアイコン/33画面/93詳細・タッチ/保存/オフライン・教材更新・章/模試の検証成功。deployで新入口を含むHTTPS HTTP200/SHA256一致確認。公式URL：https://hiroshimu0113-web.github.io/SAA/tower/icons-flat.html 。実機iPhoneは未確認。
