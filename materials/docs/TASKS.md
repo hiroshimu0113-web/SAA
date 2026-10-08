@@ -1054,4 +1054,6 @@
 
 - assessment-007の出口新設禁止・私設経路限定を明記し、NAT案と解説・点検表・索引を同期。
 - 分類`case-rereview-assessment-007`を更新（draft/deferred維持）、試験版GRへ更新。対応表：[SAA_GR_RESPONSE.md](SAA_GR_RESPONSE.md)。
-- 状態：修正済み、検証・公式公開確認中。独立監査・本人評価は別工程。
+- 完了：111テスト・build・knowledge/game/progress check、Chromiumの試験/保存/旧版除外、CI WebKit全3工程成功。
+- 公開：`17f3ce2` / Actions `37721574742` のbuild/deploy/実配信検証成功。公式 https://hiroshimu0113-web.github.io/SAA/ のHTTP 200・成果物SHA256一致をCIで確認。教材・対応表をGitHub mainへ同期。
+- 次工程：GR-001の独立した受入確認。全問技術監査・本人の初回未読評価は別工程。
