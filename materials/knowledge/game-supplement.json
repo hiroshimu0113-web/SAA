@@ -72,9 +72,9 @@
     }
   },
   "cardTerms": {
-    "strike": "shared-responsibility",
-    "guard": "least-privilege",
-    "probe": "health-check",
+    "strike": "ec2",
+    "guard": "security-group",
+    "probe": "cloudwatch",
     "burst": "scaling",
     "parallel": "az",
     "retry": "spot",
@@ -209,11 +209,11 @@
     "combos": {
       "incident": {
         "term": "shared-responsibility",
-        "lesson": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。"
+        "lesson": "EC2を使う場合、利用者はゲストOSやアプリの保守、セキュリティグループによる通信許可、CloudWatchによる監視などを設計します。AWSが管理する物理基盤とは責任範囲が異なります。この3枚だけで安全性や運用が完結するという意味ではありません。"
       },
       "balancing": {
         "term": "availability",
-        "lesson": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。"
+        "lesson": "ALBによる振り分け、複数AZへの配置、CloudWatchによるメトリクス監視を組み合わせて可用性を考えます。CloudWatchの監視はALBのターゲットヘルスチェックとは別です。正常先で利用できるデータと残存容量、ALBのヘルスチェックと全異常時のフェイルオープンも別途確認します。追加攻撃はゲーム上の報酬です。"
       },
       "caching": {
         "term": "cross-account",

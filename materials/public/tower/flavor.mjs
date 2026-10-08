@@ -1,17 +1,17 @@
 export const BASE_FLAVOR={
   "strike": {
-    "note": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
-    "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+    "note": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+    "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
     "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "guard": {
-    "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
-    "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+    "note": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+    "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
     "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "probe": {
-    "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
-    "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+    "note": "メトリクス、ログ、アラーム等の可観測性サービス。",
+    "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
     "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
   },
   "burst": {

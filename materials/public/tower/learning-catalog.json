@@ -224,13 +224,13 @@
     "combos": {
       "incident": {
         "name": "責任共有モデル",
-        "note": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。",
+        "note": "EC2を使う場合、利用者はゲストOSやアプリの保守、セキュリティグループによる通信許可、CloudWatchによる監視などを設計します。AWSが管理する物理基盤とは責任範囲が異なります。この3枚だけで安全性や運用が完結するという意味ではありません。",
         "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
       "balancing": {
         "name": "可用性",
-        "note": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。",
+        "note": "ALBによる振り分け、複数AZへの配置、CloudWatchによるメトリクス監視を組み合わせて可用性を考えます。CloudWatchの監視はALBのターゲットヘルスチェックとは別です。正常先で利用できるデータと残存容量、ALBのヘルスチェックと全異常時のフェイルオープンも別途確認します。追加攻撃はゲーム上の報酬です。",
         "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
         "limit": "名称は教材の復習用です。獲得効果・戦闘効果・3枚の成立条件はゲーム固有で、AWSの機能・性能・設定要件を表しません。"
       },
@@ -251,9 +251,9 @@
     }
   },
   "starterNames": {
-    "strike": "責任共有モデル",
-    "guard": "最小権限",
-    "probe": "ヘルスチェック"
+    "strike": "Amazon EC2",
+    "guard": "セキュリティグループ",
+    "probe": "CloudWatch"
   },
   "cards": {
     "burst": {
@@ -522,18 +522,18 @@
   },
   "notes": {
     "strike": {
-      "note": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
-      "source": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+      "note": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "guard": {
-      "note": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
-      "source": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+      "note": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+      "source": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "probe": {
-      "note": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
-      "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
+      "note": "メトリクス、ログ、アラーム等の可観測性サービス。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
       "limit": "教材の用語を復習するカードです。攻撃・防御・回復・状態異常などの数値効果はゲーム固有であり、AWSの機能・性能・保証を表しません。"
     },
     "burst": {
@@ -4394,5 +4394,5 @@
     "src/content/starter.ts",
     "knowledge/game-supplement.json"
   ],
-  "version": "2fb600df0384a8b1"
+  "version": "554ae80c4884f082"
 }

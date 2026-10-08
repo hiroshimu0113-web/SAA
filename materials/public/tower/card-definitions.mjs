@@ -1,7 +1,7 @@
 export const BASE_CARDS={
- strike:{name:'責任共有モデル',cost:1,kind:'attack',damage:6,upDamage:3,text:'6ダメージ。'},
- guard:{name:'最小権限',cost:1,kind:'skill',block:5,upBlock:3,text:'5ブロック。'},
- probe:{name:'ヘルスチェック',cost:1,kind:'attack',damage:4,upDamage:2,draw:1,text:'4ダメージ。1枚引く。'},
+ strike:{name:'Amazon EC2',cost:1,kind:'attack',damage:6,upDamage:3,text:'6ダメージ。'},
+ guard:{name:'セキュリティグループ',cost:1,kind:'skill',block:5,upBlock:3,text:'5ブロック。'},
+ probe:{name:'CloudWatch',cost:1,kind:'attack',damage:4,upDamage:2,draw:1,text:'4ダメージ。1枚引く。'},
  burst:{name:'集中処理',cost:2,kind:'attack',damage:18,upDamage:7,debuff:{id:'burn',amount:3},text:'18ダメージ。炎上3。'},
  parallel:{name:'並列処理',cost:1,kind:'attack',damage:4,hits:2,upDamage:2,text:'4ダメージを2回。強化の効果も2回。'},
  retry:{name:'再試行',cost:0,kind:'attack',damage:3,upDamage:2,text:'3ダメージ。'},

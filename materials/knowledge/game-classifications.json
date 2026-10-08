@@ -3,11 +3,11 @@
   "items": [
     {
       "id": "concept-strike-metaphor",
-      "title": "責任共有モデルの教材カードへの対応",
+      "title": "Amazon EC2の教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "責任共有モデルの意味とゲーム固有の数値効果を区別する。",
+      "objective": "Amazon EC2の意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -20,15 +20,11 @@
         },
         {
           "path": "knowledge/game-supplement.json",
-          "locator": "notes.strike"
-        },
-        {
-          "path": "knowledge/game-supplement.json",
           "locator": "cardTerms.strike"
         },
         {
-          "path": "src/content/starter.ts",
-          "locator": "shared-responsibility"
+          "path": "src/content/index.ts",
+          "locator": "terms.ec2"
         }
       ],
       "domains": [
@@ -55,7 +51,7 @@
       ],
       "content": {
         "principle": {
-          "path": "knowledge/game-supplement.json",
+          "path": "public/tower/learning-catalog.json",
           "locator": "notes.strike.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
@@ -67,17 +63,12 @@
           "type": "part_of",
           "target_id": "combo-incident-role",
           "reason": "このカードを含む3種類で役を構成する。"
-        },
-        {
-          "type": "used_in",
-          "target_id": "term-game-shared-responsibility",
-          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
-          "claim": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html",
+          "claim": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
           "checked_on": null,
           "reviewer": null
         }
@@ -120,6 +111,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-08",
+          "summary": "スターターも更新対象との訂正を反映。公開教材の用語へ再対応。性能・成立IDは維持。内容の独立監査は未実施。"
         }
       ],
       "game_design": {
@@ -160,11 +157,11 @@
     },
     {
       "id": "concept-guard-metaphor",
-      "title": "最小権限の教材カードへの対応",
+      "title": "セキュリティグループの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "最小権限の意味とゲーム固有の数値効果を区別する。",
+      "objective": "セキュリティグループの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -177,15 +174,11 @@
         },
         {
           "path": "knowledge/game-supplement.json",
-          "locator": "notes.guard"
-        },
-        {
-          "path": "knowledge/game-supplement.json",
           "locator": "cardTerms.guard"
         },
         {
-          "path": "src/content/starter.ts",
-          "locator": "least-privilege"
+          "path": "src/content/index.ts",
+          "locator": "terms.security-group"
         }
       ],
       "domains": [
@@ -212,7 +205,7 @@
       ],
       "content": {
         "principle": {
-          "path": "knowledge/game-supplement.json",
+          "path": "public/tower/learning-catalog.json",
           "locator": "notes.guard.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
@@ -224,17 +217,12 @@
           "type": "part_of",
           "target_id": "combo-incident-role",
           "reason": "このカードを含む3種類で役を構成する。"
-        },
-        {
-          "type": "used_in",
-          "target_id": "term-game-least-privilege",
-          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
-          "claim": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+          "claim": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
           "checked_on": null,
           "reviewer": null
         }
@@ -277,6 +265,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-08",
+          "summary": "スターターも更新対象との訂正を反映。公開教材の用語へ再対応。性能・成立IDは維持。内容の独立監査は未実施。"
         }
       ],
       "game_design": {
@@ -317,11 +311,11 @@
     },
     {
       "id": "concept-probe-metaphor",
-      "title": "ヘルスチェックの教材カードへの対応",
+      "title": "CloudWatchの教材カードへの対応",
       "aliases": [],
       "kind": "concept",
       "classification_reason": "名称暗記ではなく、運用の考え方とゲーム上の表現の違いを説明する。",
-      "objective": "ヘルスチェックの意味とゲーム固有の数値効果を区別する。",
+      "objective": "CloudWatchの意味とゲーム固有の数値効果を区別する。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -334,15 +328,15 @@
         },
         {
           "path": "knowledge/game-supplement.json",
-          "locator": "notes.probe"
-        },
-        {
-          "path": "knowledge/game-supplement.json",
           "locator": "cardTerms.probe"
         },
         {
           "path": "knowledge/game-supplement.json",
           "locator": "health-check"
+        },
+        {
+          "path": "src/content/index.ts",
+          "locator": "terms.cloudwatch"
         }
       ],
       "domains": [
@@ -369,7 +363,7 @@
       ],
       "content": {
         "principle": {
-          "path": "knowledge/game-supplement.json",
+          "path": "public/tower/learning-catalog.json",
           "locator": "notes.probe.note"
         },
         "applicable_when": "ゲームのカードから仕組みや運用の考え方を補足するとき。",
@@ -386,17 +380,12 @@
           "type": "part_of",
           "target_id": "combo-balancing-role",
           "reason": "このカードを含む3種類で役を構成する。"
-        },
-        {
-          "type": "used_in",
-          "target_id": "term-game-health-check",
-          "reason": "公開教材の用語・定義をカードへ再利用。"
         }
       ],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html",
-          "claim": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
+          "claim": "メトリクス、ログ、アラーム等の可観測性サービス。",
           "checked_on": null,
           "reviewer": null
         }
@@ -439,6 +428,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "公開用語IDから名称・定義・既存出典を再利用する方式へ変更。過去のレビューは旧説明に対する記録。新しい数値上のAWS主張は追加しない。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-08",
+          "summary": "スターターも更新対象との訂正を反映。公開教材の用語へ再対応。性能・成立IDは維持。内容の独立監査は未実施。"
         }
       ],
       "game_design": {
@@ -3051,7 +3046,7 @@
       "sources": [
         {
           "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
-          "claim": "責任共有モデル・最小権限・ヘルスチェックをまとめて復習する役です。責任の境界、必要な操作への権限の絞り込み、処理先の応答確認は別の観点です。この3枚だけで障害対応や安全性が成立するという意味ではありません。",
+          "claim": "EC2を使う場合、利用者はゲストOSやアプリの保守、セキュリティグループによる通信許可、CloudWatchによる監視などを設計します。AWSが管理する物理基盤とは責任範囲が異なります。この3枚だけで安全性や運用が完結するという意味ではありません。",
           "checked_on": null,
           "reviewer": null
         }
@@ -3082,6 +3077,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "教材語彙へ名称と補足を更新。カードID・発動条件・追加効果は維持。過去の内容レビューは旧説明への記録。新補足は独立監査待ち。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-08",
+          "summary": "EC2・セキュリティグループ・CloudWatchへのスターター変更と補足を連動。CloudWatchとALBヘルスチェックの違いを明示。成立ID・効果・回数は維持。独立内容監査待ち。"
         }
       ],
       "game_design": {
@@ -3175,7 +3176,7 @@
       "sources": [
         {
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html",
-          "claim": "ALBによる振り分け、複数AZへの配置、ヘルスチェックを組み合わせて可用性を考えます。正常先のデータと残存容量も必要で、全ターゲット異常時のフェイルオープンという例外もあります。追加攻撃はゲーム上の報酬です。",
+          "claim": "ALBによる振り分け、複数AZへの配置、CloudWatchによるメトリクス監視を組み合わせて可用性を考えます。CloudWatchの監視はALBのターゲットヘルスチェックとは別です。正常先で利用できるデータと残存容量、ALBのヘルスチェックと全異常時のフェイルオープンも別途確認します。追加攻撃はゲーム上の報酬です。",
           "checked_on": null,
           "reviewer": null
         }
@@ -3206,6 +3207,12 @@
           "reviewer": "Codex",
           "checked_on": "2026-10-07",
           "summary": "教材語彙へ名称と補足を更新。カードID・発動条件・追加効果は維持。過去の内容レビューは旧説明への記録。新補足は独立監査待ち。"
+        },
+        {
+          "scope": "game",
+          "reviewer": "Codex",
+          "checked_on": "2026-10-08",
+          "summary": "EC2・セキュリティグループ・CloudWatchへのスターター変更と補足を連動。CloudWatchとALBヘルスチェックの違いを明示。成立ID・効果・回数は維持。独立内容監査待ち。"
         }
       ],
       "game_design": {

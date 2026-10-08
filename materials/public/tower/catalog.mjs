@@ -58,6 +58,7 @@ export function activateCatalog(pack){
  }
  // Starter labels are a presentation correction, including pre-catalog saved runs.
  for(const k of STARTERS){CARDS[k].name=BASE_CARDS[k].name;FLAVOR[k]=copy(BASE_FLAVOR[k]);}
+ for(const k of ['incident','balancing'])COMBOS[k].lesson=BASE_COMBOS[k].lesson;
  active=pack?copy(pack):null;
 }
 export const getActiveCatalog=()=>active?copy(active):null;

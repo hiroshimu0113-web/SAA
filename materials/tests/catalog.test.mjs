@@ -27,8 +27,8 @@ test('catalog: old/ongoing quiz snapshot survives a changed answer and backup im
  s=act(s,{type:'quiz-answer',questionId:id,choice:answer});const raw=JSON.stringify(s),newer=clone(pack);newer.version='aaaaaaaaaaaaaaaa';
  if(newer.quizzes[id])newer.quizzes[id].answer=(answer+1)%newer.quizzes[id].options.length;
  newRun(4,newer);const restored=parseRun(raw);assert.deepEqual(restored,s);assert.equal(QUIZZES[id].answer,answer);
- const legacy=newRun(4);newRun(5,pack);assert.deepEqual(parseRun(JSON.stringify(legacy)),legacy);assert.equal(CARDS.strike.name,'責任共有モデル');
- const bad=clone(s);bad.hp=-1;assert.throws(()=>parseRun(JSON.stringify(bad)));assert.equal(CARDS.strike.name,'責任共有モデル');
+ const legacy=newRun(4);newRun(5,pack);assert.deepEqual(parseRun(JSON.stringify(legacy)),legacy);assert.equal(CARDS.strike.name,pack.starterNames.strike);
+ const bad=clone(s);bad.hp=-1;assert.throws(()=>parseRun(JSON.stringify(bad)));assert.equal(CARDS.strike.name,pack.starterNames.strike);
  activateCatalog(null);
 });
 test('catalog: malformed packs cannot redefine starters, inject links or corrupt score/card shapes',()=>{
@@ -109,4 +109,14 @@ test('catalog: old starter labels are corrected without changing saved adventure
  for(const id of STARTERS){assert.equal(CARDS[id].name,pack.starterNames[id]);const {name,...actual}=CARDS[id],{name:ignored,...expected}=BASE_CARDS[id];assert.deepEqual(actual,expected);}
  assert.equal(JSON.stringify(s),raw);activateCatalog(null);
  for(const id of STARTERS)assert.equal(CARDS[id].name,pack.starterNames[id]);
+});
+
+test('catalog: renamed starters preserve both related roles and their teaching boundaries',()=>{
+ activateCatalog(pack);assert.deepEqual(pack.starterNames,{strike:'Amazon EC2',guard:'セキュリティグループ',probe:'CloudWatch'});
+ assert.deepEqual(COMBOS.incident.cards,['probe','strike','guard']);assert.equal(COMBOS.incident.block,5);
+ assert.deepEqual(COMBOS.balancing.cards,['balance','parallel','probe']);assert.equal(COMBOS.balancing.damage,3);
+ assert.match(COMBOS.incident.lesson,/セキュリティグループ/);assert.match(COMBOS.incident.lesson,/CloudWatch/);
+ assert.match(COMBOS.balancing.lesson,/CloudWatchの監視はALBのターゲットヘルスチェックとは別/);
+ const old=clone(pack);old.version='1111111111111111';old.vocabulary.combos.balancing.note='旧ヘルスチェックの説明';
+ activateCatalog(old);assert.match(COMBOS.balancing.lesson,/CloudWatch/);activateCatalog(null);
 });
