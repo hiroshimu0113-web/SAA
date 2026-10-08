@@ -10,7 +10,7 @@ export async function checkOptions(browser,base){
   const s=act(fixedRun(1,pack),{type:'node',lane:0});s.deck[0].plus=true;
   await p.goto(base+'tower/options.html');await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();
   const option=await p.locator('.battle-hud [data-action=options]').boundingBox(),hp=await p.locator('.hud-hp').boundingBox(),journey=await p.locator('.battle-hud .journey-stats').boundingBox();assert.ok(option.x+option.width<=hp.x);assert.ok(hp.x+hp.width<=journey.x);assert.equal(await p.locator('.run-header').count(),0);await p.screenshot({path:'artifacts/header-battle.png'});
-  assert.equal(await p.locator('#game .hero-profile,#game .relic-details').count(),0);assert.equal((await p.locator('[data-action=options]').innerText()).trim(),'☰');
+  assert.equal(await p.locator('#game .hero-profile,#game .relic-details').count(),0);assert.equal(await p.locator('[data-action=options] [data-icon=menu]').count(),1);
   const saved=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));
   await p.locator('[data-action=options]').tap();const dialog=p.getByRole('dialog');assert.equal(await dialog.locator('#options-title').innerText(),HEROES[s.hero].name);assert.equal(await dialog.locator('[data-menu=close]').innerText(),'×');
   assert.deepEqual(await dialog.locator('nav button').allTextContents(),['デッキ','所持レリック','マップ','役一覧','コレクション','はじめから']);

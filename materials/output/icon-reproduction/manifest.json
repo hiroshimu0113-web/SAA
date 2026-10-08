@@ -1,0 +1,163 @@
+{
+  "base_commit": "17f3ce2a3db89e2145e065e5c248eb45dc70e141",
+  "format_version": 1,
+  "scope": "SVG presentation adapted to current game; original supplied kit unavailable",
+  "files": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "sha256": "ccd9beced3d2049187e9f90b8b98e95230f7552ebd275a53799425f1517cfeed"
+    },
+    {
+      "path": "materials/docs/ICON_REPRODUCTION.md",
+      "sha256": "5028e9e4f52f08e94d2e083fb0398602b477d6ae093cc6959423547dc8cdc852"
+    },
+    {
+      "path": "materials/public/tower/app.mjs",
+      "sha256": "abab35180a91db2b3b0ac00a3456bbf8d9b872d76bc52a3b587898da0541e985"
+    },
+    {
+      "path": "materials/public/tower/card-definitions.mjs",
+      "sha256": "610fc312cb72ca31a474b5c0bea230d0f1ecd8b2ebf6ca18438f23c688a8257d"
+    },
+    {
+      "path": "materials/public/tower/card-icons.mjs",
+      "sha256": "480655fd58904130bf6a379285b9659f2b66e27a15137da428521f6307b5e5ea"
+    },
+    {
+      "path": "materials/public/tower/catalog.mjs",
+      "sha256": "4acad4e1a99ed93f59b952714479c6b49ea8578edbe98880da29a50b21091994"
+    },
+    {
+      "path": "materials/public/tower/combo-hints.mjs",
+      "sha256": "322c37a8c1dd448a3b50c654711a68a9318b1aa7997d3d1998b689d087f209ac"
+    },
+    {
+      "path": "materials/public/tower/combo-ui.mjs",
+      "sha256": "e233d8997d220b457c377fd2b7b069acbfd2a9e8a79fe14167a2d7f36505b864"
+    },
+    {
+      "path": "materials/public/tower/combos.mjs",
+      "sha256": "d300c77c437f3cf39a409700f8d0ba95becb1208961d95196696a5be4100fded"
+    },
+    {
+      "path": "materials/public/tower/debuffs.mjs",
+      "sha256": "2e8e3bc542b9944f42c32bea622207d07cf29b510452e094957c5c73cd25ff25"
+    },
+    {
+      "path": "materials/public/tower/effects.mjs",
+      "sha256": "a5a88ffe76f052e41a15838b9a932962427c41b6a522dd52e3c2ddc0c12e0c27"
+    },
+    {
+      "path": "materials/public/tower/enemy-definitions.mjs",
+      "sha256": "1c45d173651a359dabc2d8e1fd0be7e40a5a16f343813e013e0f8e8de443f940"
+    },
+    {
+      "path": "materials/public/tower/engine.mjs",
+      "sha256": "c3306ace1eadfde8b2b42c7b957ae18531bd5036cd06b42fbd5388d06e13a403"
+    },
+    {
+      "path": "materials/public/tower/flavor.mjs",
+      "sha256": "71e1f3a952548d7849b3b1e98a55d19a3a0ca522099f702fd3c6ce65edc7b250"
+    },
+    {
+      "path": "materials/public/tower/hero-visuals.mjs",
+      "sha256": "b6ba3d9f58cbf973e4389483a163c6d9934c1dfa15d0a23b11f0e71d2f04e3a4"
+    },
+    {
+      "path": "materials/public/tower/icons/game-atlas-v1.png",
+      "sha256": "79836d6aff1de99d00918f0b25bb90cf716a89d7b2484112e4886eeb0bf19a27"
+    },
+    {
+      "path": "materials/public/tower/icons.mjs",
+      "sha256": "49291410a3c1d21f455a194463a24a903894fe753fabdc0a903c22f622780b69"
+    },
+    {
+      "path": "materials/public/tower/index.html",
+      "sha256": "fc38d2e0e686462da0426b66b7d07683a810c10cc9b182411a1b297b3d85632e"
+    },
+    {
+      "path": "materials/public/tower/learning-catalog.json",
+      "sha256": "4965bace7a0d72d29e580708929fef6e8fa9efceeba3b6a57665159b85d28e99"
+    },
+    {
+      "path": "materials/public/tower/options-ui.mjs",
+      "sha256": "776b0df7a4599245b6bb8033cb8f10059126b518313abb15807bf5bc1ec1e01c"
+    },
+    {
+      "path": "materials/public/tower/quiz.mjs",
+      "sha256": "1b1e106755ec5b61c82250b6c9621790d62a8b257e75af325a3e99df96fc1c79"
+    },
+    {
+      "path": "materials/public/tower/relics.mjs",
+      "sha256": "65de72c565a4435867f7c0e1b613b330e8b17182af5237fc9dbed9f9dd6c63ca"
+    },
+    {
+      "path": "materials/public/tower/strategy.mjs",
+      "sha256": "1cd64d719f5fe5bff12247b0c8582b2c935d6b8eff9c7e5a537c14e8195c49bc"
+    },
+    {
+      "path": "materials/public/tower/style.css",
+      "sha256": "68f78b228794ac7f7059180b54a691d7d47bf063e1384f61563fa18c7f6bd2f4"
+    },
+    {
+      "path": "materials/public/tower/touch-version.json",
+      "sha256": "664bf0c60694b507c675f4cb9b056a359825d8e7da0de86cc4fb90ad3191ed1d"
+    },
+    {
+      "path": "materials/public/tower/turn-flow.mjs",
+      "sha256": "b9a5148109ba759a129a6ceb3d00c1cbd712b0c58d61c2e41d59d618533605d5"
+    },
+    {
+      "path": "materials/public/tower/turn-presentation.mjs",
+      "sha256": "ac4f802efe4217a20527c6da9511e5cab5ad640fa95a5646919dff0afd05ff9d"
+    },
+    {
+      "path": "materials/scripts/build-tower.mjs",
+      "sha256": "d4afe7f6a974c01603034ea64e890b4f0aa70dfbaee80a14d69de52e4b09f2d8"
+    },
+    {
+      "path": "materials/scripts/effects-browser-check.mjs",
+      "sha256": "75da4434ba1def079ba4ca6a7ad2e1b17d04b60a95d1bc7fe5e6b141158ddb6b"
+    },
+    {
+      "path": "materials/scripts/icon-fixtures.mjs",
+      "sha256": "67171260d368bbf1f8caafcef41492d57603d925bab2404b6eb30dd2e9f5ce4c"
+    },
+    {
+      "path": "materials/scripts/icons-audit.mjs",
+      "sha256": "c7ebc42628705be4614a5d52d8d44fed2ed6ed0f4d4a93c7bc8049b51e024b40"
+    },
+    {
+      "path": "materials/scripts/icons-browser-check.mjs",
+      "sha256": "9a976183106881b0fdd36757639b45406a8647c0e9087f8789bd736357dd9997"
+    },
+    {
+      "path": "materials/scripts/junk-browser-check.mjs",
+      "sha256": "34cf46415d94689df9d1ba7e11870e60d0352c56f68f3bf9f85074e82d02e85f"
+    },
+    {
+      "path": "materials/scripts/options-browser-check.mjs",
+      "sha256": "e5514c7e6c8a72f580b42b1a9a8ca35aa6a186ef157ca18817a6dd9568fb81b6"
+    },
+    {
+      "path": "materials/scripts/package-icons.py",
+      "sha256": "01e2d097af2eceee07f896a93d2ec4682d9249b439065cfcc55058a614759528"
+    },
+    {
+      "path": "materials/scripts/verify-publication.py",
+      "sha256": "b0c399c5828e95102880d09656030999d37a82e06b941ca48e26b827eb629c49"
+    },
+    {
+      "path": "materials/src/DesignQuest.tsx",
+      "sha256": "b9b18baf9b146014d1a24fb5a25deba4fa2a6fc9cd163aa3befb670ffbd97fc3"
+    },
+    {
+      "path": "materials/src/QuestIcon.tsx",
+      "sha256": "2aee8a4417b3becb8e3808cce7cc3557a6ee3253db16fa57e0d108c68c2a460e"
+    },
+    {
+      "path": "materials/src/game.css",
+      "sha256": "8bc80193270a8b2e8ed45c4361177fd93c3d963bcd196863b332efcddaebd85e"
+    }
+  ]
+}

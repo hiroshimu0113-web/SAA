@@ -1,3 +1,4 @@
+import {icon} from './icons.mjs';
 import {DEBUFFS} from './debuffs.mjs';
 import {triggeredCombos} from './combos.mjs';
 import {cardValues} from './engine.mjs';
@@ -15,8 +16,8 @@ export function combatEffects(before,after,action){
    if(loss)add('enemy','hit',loss,'−'+loss+(hits>1&&!triggeredCombos(before,after).length?' / '+hits+' HIT':''));
    if(blocked)add('enemy','guard',blocked,'防御 '+blocked);
   }
-  if(n.playerBlock>b.playerBlock)add('player','shield',n.playerBlock-b.playerBlock,'◇ ＋'+(n.playerBlock-b.playerBlock));
-  if(d.strength||d.armor||d.energy)add('player','power',0,d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御 ＋'+d.armor:'⚡ ＋'+d.energy);
+  if(n.playerBlock>b.playerBlock)add('player','shield',n.playerBlock-b.playerBlock,'防御 ＋'+(n.playerBlock-b.playerBlock));
+  if(d.strength||d.armor||d.energy)add('player','power',0,d.strength?'攻撃力 ＋'+d.strength:d.armor?'毎ターン防御 ＋'+d.armor:'エナジー ＋'+d.energy);
   if(d.debuff){const {id,amount}=d.debuff;if(n.enemyDebuffs[id]>b.enemyDebuffs[id])add('enemy','debuff',amount,DEBUFFS[id].name+(id==='delay'?' 付与':' ＋'+amount));}
  }
  if(after.hp<before.hp)add('player','hit',before.hp-after.hp,'−'+(before.hp-after.hp));
@@ -24,6 +25,8 @@ export function combatEffects(before,after,action){
  if(n.hp===0&&b.hp>0)add('enemy','finish',0,'撃破！');
  return out;
 }
+const effectIcon=f=>icon(({hit:'hit',guard:'shield',shield:'shield',heal:'heal',power:'power',debuff:'misconfig',finish:'boss'})[f.kind]||'result');
+const effectLabel=f=>f.label.replace('◇','防御').replace('⚡','エナジー');
 let clearEffects=()=>{};
 function shakeScreen(root){
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return ()=>{};
@@ -40,14 +43,14 @@ export function showCombatEffects(root,effects,demo=false){
  const layer=document.createElement('div');layer.className='combat-fx';layer.setAttribute('aria-hidden','true');
  const counts={player:0,enemy:0};
  for(const fx of effects){
-  const el=document.createElement('div');el.className='fx-event fx-'+fx.kind+' fx-'+fx.side;el.dataset.kind=fx.kind;el.style.setProperty('--row',counts[fx.side]++);el.textContent=fx.label;layer.append(el);
+  const el=document.createElement('div');el.className='fx-event fx-'+fx.kind+' fx-'+fx.side;el.dataset.kind=fx.kind;el.style.setProperty('--row',counts[fx.side]++);el.innerHTML=effectIcon(fx);el.append(document.createTextNode(effectLabel(fx))); layer.append(el);
   const target=root.querySelector(fx.side==='enemy'?'.enemy':'.operator');
   if(target){target.classList.add('react-'+fx.kind);}
  }
  stage.append(layer);
  const info=document.createElement('div');info.className='combat-toast';info.setAttribute('role','status');
- const heading=document.createElement('strong');heading.textContent=demo?'演出テスト（記録は変わりません）':'戦闘結果';info.append(heading);
- for(const fx of effects){const row=document.createElement('div');row.className='toast-'+fx.kind;row.textContent=(fx.side==='enemy'?'敵：':'自分：')+fx.label;info.append(row);}
+ const heading=document.createElement('strong');heading.innerHTML=icon('result');heading.append(document.createTextNode(demo?'演出テスト（記録は変わりません）':'戦闘結果'));info.append(heading);
+ for(const fx of effects){const row=document.createElement('div');row.className='toast-'+fx.kind;row.innerHTML=effectIcon(fx);row.append(document.createTextNode((fx.side==='enemy'?'敵：':'自分：')+effectLabel(fx)));info.append(row);}
  root.append(info);
  // The fixed result remains visible even when the arena is above the viewport.
  const targets=[...stage.querySelectorAll('[class*="react-"]')];

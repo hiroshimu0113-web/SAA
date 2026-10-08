@@ -51,6 +51,12 @@ jobs:
             node --input-type=module -e "import {readFileSync} from 'node:fs'; const log=readFileSync('/tmp/webkit-install.log','utf8').slice(-12000); console.log('::error::WebKit installation failed or timed out: '+log.replaceAll('%','%25').replaceAll('\\n','%0A').replaceAll('\\r','%0D'));"
           fi
           exit "$result"
+      - name: Verify SVG icon coverage and layouts in Safari
+        run: |
+          node scripts/icons-browser-check.mjs
+          node scripts/icons-audit.mjs
+        env:
+          BROWSER: webkit
       - name: Verify touch controls and Safari startup
         run: node scripts/touch-browser-check.mjs
         env:

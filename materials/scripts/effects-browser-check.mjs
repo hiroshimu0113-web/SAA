@@ -15,7 +15,7 @@ export async function checkCombatEffects(browser,base){
  await p.screenshot({path:'artifacts/combat-hit.png'});
  // Play again immediately: feedback must not lock input or defer persistence.
  await p.locator('.hand .card').first().tap();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.energy),1);
- await setup('guard');await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.fx-shield').innerText(),'◇ ＋5');
+ await setup('guard');await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.fx-shield').innerText(),'防御 ＋5');assert.equal(await p.locator('.fx-shield [data-icon=shield]').count(),1);
  await setup('strike',20);await p.locator('.end-turn').tap();assert.equal(await p.locator('.fx-guard').innerText(),'完全ガード 7');assert.equal(await p.locator('.fx-hit').count(),0);await p.screenshot({path:'artifacts/combat-guard.png'});
  await setup('strike',3);await p.locator('.end-turn').tap();assert.equal(await p.locator('.fx-guard').innerText(),'防御 3');assert.equal(await p.locator('.fx-hit').innerText(),'−4');
  await setup('restore');await p.locator('.hand .card').first().tap();assert.equal(await p.locator('.fx-heal').innerText(),'回復 ＋7');

@@ -142,9 +142,18 @@ html.screen-shaking{overflow-x:hidden}
 .options-content>.hero-profile{display:block;font-size:18px;color:#e8d5a6;margin:12px 0}.options-content>.relic-details{font-size:14px;line-height:1.8}.options-content>.relic-details li{margin-bottom:16px}.combo-guide .options-cards{margin:12px 0}.combo-guide .options-cards .card{min-height:104px}
 .options-dialog>header{grid-template-columns:minmax(0,1fr) 44px;align-items:center;gap:8px}.options-dialog>header h2{grid-column:1;grid-row:1;margin:4px 0;overflow-wrap:anywhere}.options-dialog>header [data-menu=close]{grid-column:2;grid-row:1;width:44px;height:44px;padding:0;font-size:30px;line-height:1}.options-dialog>header [data-menu=back]{grid-column:1/-1;grid-row:2;justify-self:start;min-width:80px}
 
-/* Six shared UI icons: fixed atlas coordinates keep all views consistent. */
-.game-icon{display:inline-block;width:1em;height:1em;flex:none;vertical-align:middle;background-image:url('./icons/game-atlas-v1.png');background-size:300% 200%;background-repeat:no-repeat;border-radius:18%;pointer-events:none}
-.icon-attack{background-position:0 0}.icon-skill{background-position:50% 0}.icon-power{background-position:100% 0}.icon-junk{background-position:0 100%}.icon-relic{background-position:50% 100%}.icon-enemy{background-position:100% 100%}
-.card .sigil{line-height:1;flex:none}.card .sigil .game-icon{vertical-align:top}
-.enemy-glyph{position:relative;line-height:1;width:1.25em;margin-inline:auto}.enemy-glyph .game-icon{width:1.1em;height:1.1em}.enemy-mark{position:absolute;right:-.08em;bottom:0;font-size:.32em;line-height:1;background:#172b37;border:1px solid #f5a19a;border-radius:50%;min-width:1.5em;padding:.15em;color:#ffe5db}
-.relic-details .game-icon,.shop-relic .game-icon{font-size:28px;margin-right:8px}
+
+/* Original currentColor SVGs; icon and label form a single presentation unit. */
+.ui-icon{display:inline-block;width:1.2em;height:1.2em;vertical-align:middle;flex:none;pointer-events:none;margin-right:.3em}
+.icon-label{display:flex;align-items:center;gap:.35em}.icon-label>.ui-icon{margin:0}
+.card .card-title{width:100%;justify-content:center;align-items:flex-start;margin-top:14px;min-height:40px}.card-title>span{min-width:0;overflow-wrap:anywhere}.card-title>.ui-icon{width:1.25em;height:1.25em;color:#efbca7}
+.skill .card-title>.ui-icon{color:#93d5e1}.power .card-title>.ui-icon{color:#c6adea}.junk .card-title>.ui-icon{color:#a7b5c4}
+.hand .card .card-title{margin-top:14px;min-height:48px}.card-preview .card .card-title,.options-card-detail>.card .card-title{margin-top:24px}
+.options-cards .card .card-title{display:flex;-webkit-line-clamp:unset;overflow:visible;margin-top:21px;min-height:52px;font-size:11px}.options-cards .card-title>span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.options-cards .card-title>.ui-icon{width:13px;height:13px}
+.node .node-name{justify-content:center;white-space:nowrap;font-size:14px}.node .node-name>.ui-icon{width:20px;height:20px}.node small{display:block;margin-top:6px}.node{min-width:0}
+.enemy-glyph{line-height:1;width:auto;margin-inline:auto}.enemy-glyph>.ui-icon{width:1.15em;height:1.15em;margin:0;color:#f49f92}
+.relic-details strong>.ui-icon,.shop-relic strong>.ui-icon,.hero-arrival p>.ui-icon{color:#e3c27d;width:24px;height:24px}
+.status-badge>.ui-icon{width:20px;height:20px;margin:0}.status-dialog h2>.ui-icon{width:30px;height:30px;color:#f49f92}
+.header-options>.ui-icon{width:22px;height:22px;margin:0}.combat-resources .ui-icon,.journey-stats .ui-icon{width:14px;height:14px}
+.card-preview{scroll-margin-top:90px}.fx-event .ui-icon,.combat-toast .ui-icon{width:1.1em;height:1.1em}.combo-icons>span{display:inline-flex;align-items:center}
+@media(max-width:400px){.options-cards .card .card-title{font-size:9px;gap:2px}.options-cards .card-title>.ui-icon{width:11px;height:11px}.node .node-name{font-size:11px;gap:3px}.node .node-name>.ui-icon{width:16px;height:16px}.in-battle .battle-meta{gap:4px}.in-battle .end-turn{min-width:80px;padding:8px 5px;font-size:11px}.in-battle .end-turn>.ui-icon{width:12px;height:12px;margin-right:2px}.in-battle .intent{font-size:10px;padding:6px 4px;white-space:nowrap}.in-battle .double-intent{white-space:normal;max-width:155px}.battle-meta>span:not(.intent){font-size:9px}.card-preview{scroll-margin-top:85px}}

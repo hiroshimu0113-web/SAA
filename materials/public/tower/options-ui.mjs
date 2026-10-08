@@ -1,3 +1,5 @@
+import {icon} from './icons.mjs';
+const menuIcons={'デッキ':'cards','所持レリック':'choice','マップ':'map','役一覧':'combo','コレクション':'cards'};
 export function openOptions(root,views,actions={},title='冒険者'){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
@@ -6,7 +8,7 @@ export function openOptions(root,views,actions={},title='冒険者'){
  const priorHidden=root.getAttribute('aria-hidden');root.setAttribute('aria-hidden','true');root.inert=true;document.body.style.overflow='hidden';
  let view='',detail=null,hold=null,pointer=null,suppressUntil=0;
  function clearHold(){clearTimeout(hold);hold=null;pointer=null;}
- function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||title;back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+x+'</button>').join('')+Object.keys(actions).map(x=>'<button data-command="'+x+'">'+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();const current=content.querySelector('.route-row.current');if(current)panel.scrollTop+=current.getBoundingClientRect().bottom-panel.getBoundingClientRect().bottom+20;}
+ function show(name){clearHold();view=name||'';detail=null;heading.textContent=name||title;back.hidden=!name;content.innerHTML=name?views[name]():'<nav class="options-menu">'+Object.keys(views).map(x=>'<button data-view="'+x+'">'+icon(menuIcons[x]||'restart')+x+'</button>').join('')+Object.keys(actions).map(x=>'<button data-command="'+x+'">'+icon(menuIcons[x]||'restart')+x+'</button>').join('')+'</nav>';panel.scrollTop=0;(name?back:content.querySelector('button')).focus();const current=content.querySelector('.route-row.current');if(current)panel.scrollTop+=current.getBoundingClientRect().bottom-panel.getBoundingClientRect().bottom+20;}
  function inspect(card){
   if(detail||!card?.isConnected)return;
   clearHold();detail={nodes:[...content.childNodes],scroll:panel.scrollTop,card};
