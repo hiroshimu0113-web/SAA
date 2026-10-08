@@ -643,11 +643,14 @@
 - 素材と仕様は `docs/GAME_ICONS.md`、`public/tower/icons/game-atlas-v1.png`。新入口 `tower/icons.html`。
 - 109テスト・ビルド・Chromiumタッチ回帰・6種実表示/PNG HTTP200/320px幅検証成功。保存・性能・教材・別担当のUIを維持。
 - GitHub同期・公開は次工程。CIの実配信検証に新入口とPNGを追加。手順書は未受領。
+
 ## FR-001/002対応（2026-10-08 JST）
 
 - 修正：m1/m2-065の解説整合、独立65問267候補の点検（59問改訂）、通常2問、試験版更新。
 - 記録：[対応表](SAA_FR_RESPONSE.md)、[候補単位点検表](SAA_FR_OPTION_AUDIT.md)。分類69件更新、content_status=draftを維持。
-- 現在：生成物更新・検証・公開確認へ進む。独立監査と本人評価は未実施。ゲーム設計は別担当。
+- 完了：110テスト、build、knowledge/game/progress check、ChromiumとCI WebKitの教材・試験・保存・更新検証成功。
+- 公開：`a7e66bb` / [Actions 37717112027](https://github.com/hiroshimu0113-web/SAA/actions/runs/37717112027) build/deploy/実配信検証成功。公式URLのHTTP 200・成果物SHA256一致。https://hiroshimu0113-web.github.io/SAA/ 。GitHub main同期済み。
+- 別担当の `4be3187` までのゲーム更新を保持。分類69件はdraftのまま。残作業は独立した受入レビュー、全430問の技術監査と本人の初回未読評価。本対応の実装・記録・公開は完了。
 
 
 ### 6種アイコンの公開完了（2026-10-08 UTC）

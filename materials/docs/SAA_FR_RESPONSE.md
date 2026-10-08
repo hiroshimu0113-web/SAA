@@ -41,7 +41,10 @@
 | 型検査・ビルド | 成功 |
 | Chromium | 章・模試・初回/再回答・旧版除外・保存・教材更新・オフライン成功 |
 | 全65問のID・正答キー比較 | 改訂前から不変。59問改訂・6問維持を差分で確認 |
-| GitHub Pages | 公開処理・CI WebKit・実配信照合は実施中。確定後に追記 |
+| CI WebKit | 操作・教材更新・章/模試フローの全3工程成功 |
+| GitHub Pages | `a7e66bb1424593b3314d3030b1e204b3c2e54246` / [Actions 37717112027](https://github.com/hiroshimu0113-web/SAA/actions/runs/37717112027) のbuild・deploy・実配信検証成功。HTTP 200・公開成果物とのSHA256一致 |
+
+公開先：[SAA学習教材](https://hiroshimu0113-web.github.io/SAA/)。上記はCIの公開検証工程が公式URLから実際に取得して照合した結果。教材・対応表はGitHub mainへ同期済み。別担当の `4be3187` までの更新を統合し、最終110テスト・build・生成物check成功。
 
 ## 残す評価工程
 
