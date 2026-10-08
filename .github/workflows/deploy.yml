@@ -62,7 +62,9 @@ jobs:
         env:
           BROWSER: webkit
       - name: Verify role effect design document in Safari
-        run: node scripts/role-effects-browser-check.mjs
+        run: |
+          node scripts/role-effects-browser-check.mjs
+          node scripts/role-combinations-browser-check.mjs
         env:
           BROWSER: webkit
       - name: Verify touch controls and Safari startup

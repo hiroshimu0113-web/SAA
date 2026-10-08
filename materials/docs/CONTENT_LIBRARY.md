@@ -58,3 +58,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [クイズ一巡出題の変更記録](GAME_QUIZ_CYCLE_CHANGE.md)：250問の出題フラグ・冒険間継続・全問後のリセット（2026-10-08）。
 
 キャラ・ビルド相談資料：[単一HTML](../public/design/character-builds.html)。ビルド59案・複合16案・現行3キャラと割り振り案。設計段階の提案でゲーム未実装、SAA学習教材の追加ではない。公開先 `/SAA/design/character-builds.html`。
+
+役のジャンル/別軸の組み合わせ相談： [HTML](../public/design/role-combinations.html) / [JSON](../public/design/role-combinations.json)。重複のない2〜4枚パターンとレア度等12軸を比較。ゲーム未実装の設計資料。

@@ -50875,6 +50875,87 @@
       "open_questions": [
         "内容の独立監査と本人の理解確認は未実施。"
       ]
+    },
+    {
+      "id": "concept-combo-genre-multiset",
+      "title": "ジャンル内訳で役の重複をなくす設計",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "固有カードIDや役名ではなく、ジャンルの多重集合で同じセットを識別するゲーム設計原則。",
+      "objective": "順番とカード個体が違ってもジャンル別枚数が同じなら同じセットと説明できる。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "public/design/role-combinations.html",
+          "locator": "example / patterns / alternatives / recommendation"
+        },
+        {
+          "path": "public/design/role-combinations.json",
+          "locator": "schemes / patterns / alternative_axes"
+        },
+        {
+          "path": "public/tower/card-icons.mjs",
+          "locator": "CARD_TYPES"
+        },
+        {
+          "path": "public/tower/card-definitions.mjs",
+          "locator": "BASE_CARDS"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [],
+      "service_names": [],
+      "game_targets": [
+        "combo"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "同一ターンの2〜4枚を対象にする設計案。",
+        "役用主ジャンルを1枚につき1つ決め、別コピーは別札として数える。"
+      ],
+      "limitations": [
+        "仮のアタック/ブロック/補助/パワーは現行4分類とは異なる未採用の案。",
+        "全パターン数は実際の入手可能枚数やコストを考慮しない。",
+        "資料はゲーム設計相談で、AWS構成や学習者の理解を認定しない。"
+      ],
+      "misconceptions": [
+        "順番の違いだけでジャンル内訳の同じ役を別々に登録する。",
+        "複合効果1枚を2ジャンル各1枚として数える。"
+      ],
+      "content": {
+        "principle": "ジャンル別枚数のベクトルでセットを一意にする。4分類の2/3/4枚は10/20/35通り。",
+        "applicable_when": "役名とカード採用を決める前の組み合わせ検討。",
+        "counterexample": "順序役を採るなら順序の違いは区別され、本案とは別契約になる。",
+        "comparison": "ジャンル内訳ごとに1役、抽象形だけで1役、レア度を上位報酬条件にする方式を比較。"
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "全組み合わせを重複なく提示し、レア度/コスト等12軸と比較。",
+        "mechanism_note": {
+          "path": "public/design/role-combinations.html",
+          "locator": "example"
+        },
+        "metaphor_limit": "ゲーム上のセット判定のみ。実AWSの要件・性能を表さない。",
+        "simplifications": [],
+        "mislearning_risks": [
+          "仮の分類を現在の実装へ導入済みと扱う。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "役用ジャンル数と実カードへの分類を決める。",
+        "同一ターンの複数候補・入れ子候補・即時発動か終了時発動の方式を決める。",
+        "レア度や役タグは現在のカードに未付与。"
+      ]
     }
   ]
 }

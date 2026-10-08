@@ -1,0 +1,2258 @@
+{
+  "schema_version": 1,
+  "status": "design-draft",
+  "rule": "役用主ジャンルを各カードに1つ付け、同一ターンの2〜4物理札をジャンル別枚数で数える。順番・名称・IDをジャンル役の区別に使わない。",
+  "schemes": [
+    {
+      "id": "proposal",
+      "label": "ブロックを分ける案",
+      "genres": [
+        "アタック",
+        "ブロック",
+        "補助",
+        "パワー"
+      ],
+      "note": "相談用の仮分類。アタック＝攻撃中心、ブロック＝防御中心、補助＝ドロー・エナジー・状態異常など、パワー＝戦闘中の持続効果。複合効果の札にも役用の主ジャンルを1つだけ付ける案です。現在のゲーム分類を変更したものではありません。"
+    },
+    {
+      "id": "current",
+      "label": "現在のゲームの分類",
+      "genres": [
+        "攻撃",
+        "スキル",
+        "パワー",
+        "お邪魔"
+      ],
+      "note": "現在のカード表示の4分類。ブロックやドローは効果であり、独立ジャンルではありません。お邪魔を役の素材に使うかは別途検討。これは数学上の全パターンで、現在のエンジンに実装された役ではありません。"
+    },
+    {
+      "id": "playable",
+      "label": "現在の分類・お邪魔を除く",
+      "genres": [
+        "攻撃",
+        "スキル",
+        "パワー"
+      ],
+      "note": "役の対象を通常の3分類に絞る案。2枚6通り・3枚10通り・4枚15通り、計31通り。お邪魔を報酬素材にしない場合の比較です。"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "proposal-2-2000",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "shape": "2",
+      "label": "アタック × 2"
+    },
+    {
+      "id": "proposal-2-1100",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "shape": "1+1",
+      "label": "アタック × 1 ＋ ブロック × 1"
+    },
+    {
+      "id": "proposal-2-1010",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "shape": "1+1",
+      "label": "アタック × 1 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-2-1001",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "shape": "1+1",
+      "label": "アタック × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-2-0200",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        2,
+        0,
+        0
+      ],
+      "shape": "2",
+      "label": "ブロック × 2"
+    },
+    {
+      "id": "proposal-2-0110",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "shape": "1+1",
+      "label": "ブロック × 1 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-2-0101",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "shape": "1+1",
+      "label": "ブロック × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-2-0020",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "shape": "2",
+      "label": "補助 × 2"
+    },
+    {
+      "id": "proposal-2-0011",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "shape": "1+1",
+      "label": "補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-2-0002",
+      "scheme": "proposal",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "shape": "2",
+      "label": "パワー × 2"
+    },
+    {
+      "id": "proposal-3-3000",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "shape": "3",
+      "label": "アタック × 3"
+    },
+    {
+      "id": "proposal-3-2100",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "shape": "2+1",
+      "label": "アタック × 2 ＋ ブロック × 1"
+    },
+    {
+      "id": "proposal-3-2010",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "shape": "2+1",
+      "label": "アタック × 2 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-3-2001",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        2,
+        0,
+        0,
+        1
+      ],
+      "shape": "2+1",
+      "label": "アタック × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-1200",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "shape": "2+1",
+      "label": "アタック × 1 ＋ ブロック × 2"
+    },
+    {
+      "id": "proposal-3-1110",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "shape": "1+1+1",
+      "label": "アタック × 1 ＋ ブロック × 1 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-3-1101",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "アタック × 1 ＋ ブロック × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-1020",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "shape": "2+1",
+      "label": "アタック × 1 ＋ 補助 × 2"
+    },
+    {
+      "id": "proposal-3-1011",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "アタック × 1 ＋ 補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-1002",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        0,
+        2
+      ],
+      "shape": "2+1",
+      "label": "アタック × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-3-0300",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        3,
+        0,
+        0
+      ],
+      "shape": "3",
+      "label": "ブロック × 3"
+    },
+    {
+      "id": "proposal-3-0210",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        2,
+        1,
+        0
+      ],
+      "shape": "2+1",
+      "label": "ブロック × 2 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-3-0201",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        2,
+        0,
+        1
+      ],
+      "shape": "2+1",
+      "label": "ブロック × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-0120",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "shape": "2+1",
+      "label": "ブロック × 1 ＋ 補助 × 2"
+    },
+    {
+      "id": "proposal-3-0111",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "ブロック × 1 ＋ 補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-0102",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "shape": "2+1",
+      "label": "ブロック × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-3-0030",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        3,
+        0
+      ],
+      "shape": "3",
+      "label": "補助 × 3"
+    },
+    {
+      "id": "proposal-3-0021",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "shape": "2+1",
+      "label": "補助 × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-3-0012",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "shape": "2+1",
+      "label": "補助 × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-3-0003",
+      "scheme": "proposal",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "shape": "3",
+      "label": "パワー × 3"
+    },
+    {
+      "id": "proposal-4-4000",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "shape": "4",
+      "label": "アタック × 4"
+    },
+    {
+      "id": "proposal-4-3100",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        3,
+        1,
+        0,
+        0
+      ],
+      "shape": "3+1",
+      "label": "アタック × 3 ＋ ブロック × 1"
+    },
+    {
+      "id": "proposal-4-3010",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        3,
+        0,
+        1,
+        0
+      ],
+      "shape": "3+1",
+      "label": "アタック × 3 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-4-3001",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "shape": "3+1",
+      "label": "アタック × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-2200",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "shape": "2+2",
+      "label": "アタック × 2 ＋ ブロック × 2"
+    },
+    {
+      "id": "proposal-4-2110",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 2 ＋ ブロック × 1 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-4-2101",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 2 ＋ ブロック × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-2020",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "shape": "2+2",
+      "label": "アタック × 2 ＋ 補助 × 2"
+    },
+    {
+      "id": "proposal-4-2011",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 2 ＋ 補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-2002",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        0,
+        2
+      ],
+      "shape": "2+2",
+      "label": "アタック × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-1300",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        3,
+        0,
+        0
+      ],
+      "shape": "3+1",
+      "label": "アタック × 1 ＋ ブロック × 3"
+    },
+    {
+      "id": "proposal-4-1210",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        2,
+        1,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ ブロック × 2 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-4-1201",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        2,
+        0,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ ブロック × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-1120",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        2,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ ブロック × 1 ＋ 補助 × 2"
+    },
+    {
+      "id": "proposal-4-1111",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "shape": "1+1+1+1",
+      "label": "アタック × 1 ＋ ブロック × 1 ＋ 補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-1102",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        0,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ ブロック × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-1030",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        3,
+        0
+      ],
+      "shape": "3+1",
+      "label": "アタック × 1 ＋ 補助 × 3"
+    },
+    {
+      "id": "proposal-4-1021",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ 補助 × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-1012",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "アタック × 1 ＋ 補助 × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-1003",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        0,
+        3
+      ],
+      "shape": "3+1",
+      "label": "アタック × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "proposal-4-0400",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        4,
+        0,
+        0
+      ],
+      "shape": "4",
+      "label": "ブロック × 4"
+    },
+    {
+      "id": "proposal-4-0310",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        3,
+        1,
+        0
+      ],
+      "shape": "3+1",
+      "label": "ブロック × 3 ＋ 補助 × 1"
+    },
+    {
+      "id": "proposal-4-0301",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        3,
+        0,
+        1
+      ],
+      "shape": "3+1",
+      "label": "ブロック × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-0220",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        2,
+        0
+      ],
+      "shape": "2+2",
+      "label": "ブロック × 2 ＋ 補助 × 2"
+    },
+    {
+      "id": "proposal-4-0211",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "ブロック × 2 ＋ 補助 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-0202",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "shape": "2+2",
+      "label": "ブロック × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-0130",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        3,
+        0
+      ],
+      "shape": "3+1",
+      "label": "ブロック × 1 ＋ 補助 × 3"
+    },
+    {
+      "id": "proposal-4-0121",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "ブロック × 1 ＋ 補助 × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-0112",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "ブロック × 1 ＋ 補助 × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-0103",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        0,
+        3
+      ],
+      "shape": "3+1",
+      "label": "ブロック × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "proposal-4-0040",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        4,
+        0
+      ],
+      "shape": "4",
+      "label": "補助 × 4"
+    },
+    {
+      "id": "proposal-4-0031",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        3,
+        1
+      ],
+      "shape": "3+1",
+      "label": "補助 × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "proposal-4-0022",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "shape": "2+2",
+      "label": "補助 × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "proposal-4-0013",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        1,
+        3
+      ],
+      "shape": "3+1",
+      "label": "補助 × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "proposal-4-0004",
+      "scheme": "proposal",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "shape": "4",
+      "label": "パワー × 4"
+    },
+    {
+      "id": "current-2-2000",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "shape": "2",
+      "label": "攻撃 × 2"
+    },
+    {
+      "id": "current-2-1100",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "shape": "1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1"
+    },
+    {
+      "id": "current-2-1010",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "shape": "1+1",
+      "label": "攻撃 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "current-2-1001",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "shape": "1+1",
+      "label": "攻撃 × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-2-0200",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        2,
+        0,
+        0
+      ],
+      "shape": "2",
+      "label": "スキル × 2"
+    },
+    {
+      "id": "current-2-0110",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "shape": "1+1",
+      "label": "スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "current-2-0101",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "shape": "1+1",
+      "label": "スキル × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-2-0020",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        2,
+        0
+      ],
+      "shape": "2",
+      "label": "パワー × 2"
+    },
+    {
+      "id": "current-2-0011",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "shape": "1+1",
+      "label": "パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-2-0002",
+      "scheme": "current",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "shape": "2",
+      "label": "お邪魔 × 2"
+    },
+    {
+      "id": "current-3-3000",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "shape": "3",
+      "label": "攻撃 × 3"
+    },
+    {
+      "id": "current-3-2100",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 2 ＋ スキル × 1"
+    },
+    {
+      "id": "current-3-2010",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "current-3-2001",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        2,
+        0,
+        0,
+        1
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-1200",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 1 ＋ スキル × 2"
+    },
+    {
+      "id": "current-3-1110",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "shape": "1+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "current-3-1101",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-1020",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        2,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "current-3-1011",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "攻撃 × 1 ＋ パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-1002",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        0,
+        2
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-3-0300",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        3,
+        0,
+        0
+      ],
+      "shape": "3",
+      "label": "スキル × 3"
+    },
+    {
+      "id": "current-3-0210",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        2,
+        1,
+        0
+      ],
+      "shape": "2+1",
+      "label": "スキル × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "current-3-0201",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        2,
+        0,
+        1
+      ],
+      "shape": "2+1",
+      "label": "スキル × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-0120",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "shape": "2+1",
+      "label": "スキル × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "current-3-0111",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "スキル × 1 ＋ パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-0102",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "shape": "2+1",
+      "label": "スキル × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-3-0030",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        3,
+        0
+      ],
+      "shape": "3",
+      "label": "パワー × 3"
+    },
+    {
+      "id": "current-3-0021",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        2,
+        1
+      ],
+      "shape": "2+1",
+      "label": "パワー × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-3-0012",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "shape": "2+1",
+      "label": "パワー × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-3-0003",
+      "scheme": "current",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "shape": "3",
+      "label": "お邪魔 × 3"
+    },
+    {
+      "id": "current-4-4000",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        4,
+        0,
+        0,
+        0
+      ],
+      "shape": "4",
+      "label": "攻撃 × 4"
+    },
+    {
+      "id": "current-4-3100",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        3,
+        1,
+        0,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 3 ＋ スキル × 1"
+    },
+    {
+      "id": "current-4-3010",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        3,
+        0,
+        1,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "current-4-3001",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        3,
+        0,
+        0,
+        1
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 3 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-2200",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        2,
+        0,
+        0
+      ],
+      "shape": "2+2",
+      "label": "攻撃 × 2 ＋ スキル × 2"
+    },
+    {
+      "id": "current-4-2110",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        1,
+        1,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 2 ＋ スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "current-4-2101",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        1,
+        0,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 2 ＋ スキル × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-2020",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        2,
+        0
+      ],
+      "shape": "2+2",
+      "label": "攻撃 × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "current-4-2011",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        1,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 2 ＋ パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-2002",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        0,
+        2
+      ],
+      "shape": "2+2",
+      "label": "攻撃 × 2 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-1300",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        3,
+        0,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 1 ＋ スキル × 3"
+    },
+    {
+      "id": "current-4-1210",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        2,
+        1,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "current-4-1201",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        2,
+        0,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-1120",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        2,
+        0
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "current-4-1111",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "shape": "1+1+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-1102",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        0,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-1030",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        3,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "current-4-1021",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        2,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ パワー × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-1012",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        1,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ パワー × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-1003",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        0,
+        3
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 1 ＋ お邪魔 × 3"
+    },
+    {
+      "id": "current-4-0400",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        4,
+        0,
+        0
+      ],
+      "shape": "4",
+      "label": "スキル × 4"
+    },
+    {
+      "id": "current-4-0310",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        3,
+        1,
+        0
+      ],
+      "shape": "3+1",
+      "label": "スキル × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "current-4-0301",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        3,
+        0,
+        1
+      ],
+      "shape": "3+1",
+      "label": "スキル × 3 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-0220",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        2,
+        0
+      ],
+      "shape": "2+2",
+      "label": "スキル × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "current-4-0211",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "スキル × 2 ＋ パワー × 1 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-0202",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "shape": "2+2",
+      "label": "スキル × 2 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-0130",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        3,
+        0
+      ],
+      "shape": "3+1",
+      "label": "スキル × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "current-4-0121",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        2,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "スキル × 1 ＋ パワー × 2 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-0112",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "スキル × 1 ＋ パワー × 1 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-0103",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        0,
+        3
+      ],
+      "shape": "3+1",
+      "label": "スキル × 1 ＋ お邪魔 × 3"
+    },
+    {
+      "id": "current-4-0040",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        4,
+        0
+      ],
+      "shape": "4",
+      "label": "パワー × 4"
+    },
+    {
+      "id": "current-4-0031",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        3,
+        1
+      ],
+      "shape": "3+1",
+      "label": "パワー × 3 ＋ お邪魔 × 1"
+    },
+    {
+      "id": "current-4-0022",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "shape": "2+2",
+      "label": "パワー × 2 ＋ お邪魔 × 2"
+    },
+    {
+      "id": "current-4-0013",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        1,
+        3
+      ],
+      "shape": "3+1",
+      "label": "パワー × 1 ＋ お邪魔 × 3"
+    },
+    {
+      "id": "current-4-0004",
+      "scheme": "current",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        0,
+        4
+      ],
+      "shape": "4",
+      "label": "お邪魔 × 4"
+    },
+    {
+      "id": "playable-2-200",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        2,
+        0,
+        0
+      ],
+      "shape": "2",
+      "label": "攻撃 × 2"
+    },
+    {
+      "id": "playable-2-110",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        1,
+        1,
+        0
+      ],
+      "shape": "1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1"
+    },
+    {
+      "id": "playable-2-101",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        1,
+        0,
+        1
+      ],
+      "shape": "1+1",
+      "label": "攻撃 × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-2-020",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        0,
+        2,
+        0
+      ],
+      "shape": "2",
+      "label": "スキル × 2"
+    },
+    {
+      "id": "playable-2-011",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        0,
+        1,
+        1
+      ],
+      "shape": "1+1",
+      "label": "スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-2-002",
+      "scheme": "playable",
+      "size": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "shape": "2",
+      "label": "パワー × 2"
+    },
+    {
+      "id": "playable-3-300",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        3,
+        0,
+        0
+      ],
+      "shape": "3",
+      "label": "攻撃 × 3"
+    },
+    {
+      "id": "playable-3-210",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        2,
+        1,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 2 ＋ スキル × 1"
+    },
+    {
+      "id": "playable-3-201",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        2,
+        0,
+        1
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-3-120",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        1,
+        2,
+        0
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 1 ＋ スキル × 2"
+    },
+    {
+      "id": "playable-3-111",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        1,
+        1,
+        1
+      ],
+      "shape": "1+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-3-102",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        1,
+        0,
+        2
+      ],
+      "shape": "2+1",
+      "label": "攻撃 × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "playable-3-030",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        0,
+        3,
+        0
+      ],
+      "shape": "3",
+      "label": "スキル × 3"
+    },
+    {
+      "id": "playable-3-021",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        0,
+        2,
+        1
+      ],
+      "shape": "2+1",
+      "label": "スキル × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-3-012",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        0,
+        1,
+        2
+      ],
+      "shape": "2+1",
+      "label": "スキル × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "playable-3-003",
+      "scheme": "playable",
+      "size": 3,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "shape": "3",
+      "label": "パワー × 3"
+    },
+    {
+      "id": "playable-4-400",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        4,
+        0,
+        0
+      ],
+      "shape": "4",
+      "label": "攻撃 × 4"
+    },
+    {
+      "id": "playable-4-310",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        3,
+        1,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 3 ＋ スキル × 1"
+    },
+    {
+      "id": "playable-4-301",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        3,
+        0,
+        1
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-4-220",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        2,
+        2,
+        0
+      ],
+      "shape": "2+2",
+      "label": "攻撃 × 2 ＋ スキル × 2"
+    },
+    {
+      "id": "playable-4-211",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        2,
+        1,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 2 ＋ スキル × 1 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-4-202",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        2,
+        0,
+        2
+      ],
+      "shape": "2+2",
+      "label": "攻撃 × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "playable-4-130",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        1,
+        3,
+        0
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 1 ＋ スキル × 3"
+    },
+    {
+      "id": "playable-4-121",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        1,
+        2,
+        1
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 2 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-4-112",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        1,
+        1,
+        2
+      ],
+      "shape": "2+1+1",
+      "label": "攻撃 × 1 ＋ スキル × 1 ＋ パワー × 2"
+    },
+    {
+      "id": "playable-4-103",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        1,
+        0,
+        3
+      ],
+      "shape": "3+1",
+      "label": "攻撃 × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "playable-4-040",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        0,
+        4,
+        0
+      ],
+      "shape": "4",
+      "label": "スキル × 4"
+    },
+    {
+      "id": "playable-4-031",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        0,
+        3,
+        1
+      ],
+      "shape": "3+1",
+      "label": "スキル × 3 ＋ パワー × 1"
+    },
+    {
+      "id": "playable-4-022",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        0,
+        2,
+        2
+      ],
+      "shape": "2+2",
+      "label": "スキル × 2 ＋ パワー × 2"
+    },
+    {
+      "id": "playable-4-013",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        0,
+        1,
+        3
+      ],
+      "shape": "3+1",
+      "label": "スキル × 1 ＋ パワー × 3"
+    },
+    {
+      "id": "playable-4-004",
+      "scheme": "playable",
+      "size": 4,
+      "counts": [
+        0,
+        0,
+        4
+      ],
+      "shape": "4",
+      "label": "パワー × 4"
+    }
+  ],
+  "alternative_axes": [
+    {
+      "id": "rarity",
+      "label": "レア度",
+      "forms": "同じレア度2枚／同じレア度3枚／2枚ずつの2組／4枚すべて同じレア度",
+      "example": "コモン×2。アンコモン×2＋レア×2。",
+      "benefit": "レア札を集めるデッキ方針が役につながる。レアが高いほど強いという規則だけでなく、コモンで狙える役も用意できる。",
+      "requirement": "カードごとのレア度が必要。現行カード定義にはレア度項目がない。例のレア度名も仮案。",
+      "caution": "レア度一致は揃いやすさで強さを調整。低レア札を捨てる一択にしない。",
+      "implementation": "新しい属性が必要",
+      "priority": "先行候補"
+    },
+    {
+      "id": "cost",
+      "label": "印字された基本コスト",
+      "forms": "同じコスト／異なるコスト／合計コストが指定値",
+      "example": "1＋1、0＋1＋2、0＋1＋2＋3。",
+      "benefit": "レア度よりも行動資源の使い方に直接つながる。低コスト札にも役への価値が生まれる。",
+      "requirement": "基本コストは現行にある。3コスト札を含む連番は通常札で成立するか未確認で、拡張例。割引後の実消費と混ぜない。",
+      "caution": "まずは基本コスト固定を推奨。合計値の条件とジャンル役を両方発動させると報酬が増えすぎる。",
+      "implementation": "既存属性を利用可能",
+      "priority": "先行候補"
+    },
+    {
+      "id": "upgrade",
+      "label": "強化状態",
+      "forms": "全て未強化／全て強化済み／強化済み2＋未強化2",
+      "example": "強化済み×2。強化済み×2＋未強化×2。",
+      "benefit": "強化する札と残す札に選択肢ができる。役の条件が見た目でも確認しやすい。",
+      "requirement": "現行カードには強化状態がある。判定は使用時の状態で固定する案。",
+      "caution": "強化すると未強化の役が失われる可能性を明示。強化しない方が常に得にならない調整が必要。",
+      "implementation": "既存属性を利用可能",
+      "priority": "先行候補"
+    },
+    {
+      "id": "identity",
+      "label": "カードIDの一致",
+      "forms": "同じ種類の2枚／同じ種類の3枚／2種類を2枚ずつ／4枚全て別種類",
+      "example": "同種×2。同種A×2＋同種B×2。",
+      "benefit": "ポーカーのペア・スリーカード・ツーペアに近い揃え方。固有の役名や札名を指定せず重複採用を楽しめる。",
+      "requirement": "同じIDの別コピーを2枚使えば2枚。1枚を回収して再使用しただけでは2枚にしない案。",
+      "caution": "同一IDだけに寄るデッキを強制しない。1枚で戦闘中除外される札は揃えにくい。",
+      "implementation": "既存属性と使用札の記録を利用",
+      "priority": "先行候補"
+    },
+    {
+      "id": "keyword",
+      "label": "共通の効果・キーワード",
+      "forms": "ドロー効果持ち2枚／除外される札3枚／状態異常付与札2枚",
+      "example": "ドロー効果あり×2。戦闘中除外あり×3。",
+      "benefit": "主ジャンルをまたいだ役を作れる。攻撃札と防御札が共通の補助効果でつながる。",
+      "requirement": "現行効果から一部は判別可能。判定用キーワード一覧と、多効果札の扱いを定義する。",
+      "caution": "1枚が複数条件を持っても物理札は1枚。キーワードごとの役を全て重ねて発動しない。",
+      "implementation": "効果の整理・タグ付けが必要",
+      "priority": "先行候補"
+    },
+    {
+      "id": "domain",
+      "label": "教材の分野・タグ",
+      "forms": "同じ分野を揃える／異なる分野を集める",
+      "example": "セキュリティ系×3。計算＋保存＋ネットワーク。",
+      "benefit": "学習内容とのつながりを保ったまま、個別のサービス名に固定しない構成選びができる。",
+      "requirement": "分野は分類台帳にあるが、役判定用の全カードタグは未整備。1枚の複数タグへの割り当て規則も必要。",
+      "caution": "タグだけで実際に連携できるとは限らない。ゲーム上の成立と実AWS構成を区別する。",
+      "implementation": "役用のカードタグが必要",
+      "priority": "拡張候補"
+    },
+    {
+      "id": "family",
+      "label": "キャラ系統・デッキ系統",
+      "forms": "同じ系統を揃える／系統を混ぜる",
+      "example": "回復系×3。防御系×2＋展開系×2。",
+      "benefit": "主人公やデッキの得意な戦い方を役へつなげられる。",
+      "requirement": "系統名は仮案。教材分類のcharacter_familiesとゲームの札の所属を結ぶ設計が必要。",
+      "caution": "特定キャラだけが全ての強い役を作れる状態を避ける。ジャンルとの差を明確にする。",
+      "implementation": "所属データが必要",
+      "priority": "拡張候補"
+    },
+    {
+      "id": "source",
+      "label": "入手経路",
+      "forms": "同じ経路の札を揃える／異なる経路を混ぜる",
+      "example": "報酬札×2。初期札＋店札＋イベント札。",
+      "benefit": "冒険中の選択履歴が役の素材になる。",
+      "requirement": "コピーごとの入手経路記録が必要。現在の全デッキ札が保持している属性ではない。",
+      "caution": "同じ種類なのに入手経路で扱いが違うと見分けにくい。カード画面で常に表示する必要がある。",
+      "implementation": "コピー単位の履歴が必要",
+      "priority": "慎重に検討"
+    },
+    {
+      "id": "number",
+      "label": "専用の番号・色・記号",
+      "forms": "同じ記号／全て異なる記号／連番",
+      "example": "同色×3。番号1＋2＋3＋4。",
+      "benefit": "ポーカーのスートやストレートに近い。ジャンルとは別軸の収集目標を作れる。",
+      "requirement": "新しい属性が必要。例の色や番号は実カードに未付与。",
+      "caution": "役専用に覚える記号が増える。色だけに頼らず文字や形も併記する。",
+      "implementation": "新しい属性と表示が必要",
+      "priority": "拡張候補"
+    },
+    {
+      "id": "sequence",
+      "label": "使用する順番",
+      "forms": "指定の順番で使う／交互に使う",
+      "example": "防御→攻撃→防御。低コスト→高コスト。",
+      "benefit": "同じ札の集合でも操作の順序で違いを作れる。",
+      "requirement": "現在の「順不同で同じセットは1つ」という方針とは異なる設計。採るなら別ルールと明記する。",
+      "caution": "偶然揃う楽しさより操作パズル寄りになる。今回は基本案に混ぜず、比較案として残す。",
+      "implementation": "順序を記録する判定が必要",
+      "priority": "別ルール候補"
+    },
+    {
+      "id": "history",
+      "label": "過去の使用実績",
+      "forms": "この戦闘で初めて使う札を2枚／前ターンと違うジャンルを使う",
+      "example": "初使用の異なる札×2。",
+      "benefit": "毎ターン同じ札だけを使う以外の選択肢ができる。",
+      "requirement": "今回の役の必須札は全て同一ターンに使用。過去に使った札は現在の役の枚数へ加えない。",
+      "caution": "履歴を覚える負担がある。カードに対象状態を表示できる場合だけ採用する。",
+      "implementation": "戦闘履歴と対象表示が必要",
+      "priority": "拡張候補"
+    },
+    {
+      "id": "context",
+      "label": "HP・エナジーなどの状況",
+      "forms": "カードの組み合わせ＋状況条件",
+      "example": "防御札2枚＋HPが半分以下。",
+      "benefit": "追い込まれた時に狙える役や、余裕がある時の役を作れる。",
+      "requirement": "カード同士の属性組み合わせではなく追加条件。HPを見る時点は最後の必須札を使う直前などに固定する。",
+      "caution": "役を狙うための自傷が得になる危険。判定時点と回復後の再判定を明確にする。",
+      "implementation": "状況条件の追加判定が必要",
+      "priority": "補助条件候補"
+    }
+  ],
+  "default_scheme": "proposal",
+  "counts": {
+    "proposal": {
+      "2": 10,
+      "3": 20,
+      "4": 35,
+      "total": 65
+    },
+    "current": {
+      "2": 10,
+      "3": 20,
+      "4": 35,
+      "total": 65
+    },
+    "playable": {
+      "2": 6,
+      "3": 10,
+      "4": 15,
+      "total": 31
+    }
+  }
+}
