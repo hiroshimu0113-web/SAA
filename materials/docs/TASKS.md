@@ -1152,7 +1152,7 @@
 ## クイズの一巡出題（2026-10-08）
 - 知識の間250問を未出題から抽選、全問後にリセット。表示した問題だけ記録し、「はじめから」でも継続。冒険保存・バックアップ・旧保存に対応。
 - 詳細：GAME_QUIZ_CYCLE_CHANGE.md。教材・分類の内容変更なし。
-- 全126テスト・build・knowledge/game/progress check・Chromiumの一巡/学習室回帰成功。GitHub同期・WebKit・公開確認を進行中。次：公開結果を記録。
+- 全126テスト・build・knowledge/game/progress check・Chromiumの一巡/学習室回帰成功。GitHub main同期済み。公開版 `fe5ef80` / Actions `37748366347` のWebKit全6工程・deploy・HTTP 200/SHA256一致確認成功。公開：https://hiroshimu0113-web.github.io/SAA/tower/fan.html 。先行CIのキャンセル/説明段落テスト失敗と修正は変更記録に記載。次：本人の実機確認。
 
 
 ## 手札位置・詳細操作・カード効果アイコン（2026-10-08）

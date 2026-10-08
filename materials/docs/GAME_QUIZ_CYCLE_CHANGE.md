@@ -24,4 +24,9 @@
 - 単体回帰：[quiz-cycle.test.mjs](../tests/quiz-cycle.test.mjs)。250問×2巡の無重複、保存を挟む冒険間継続、残り1問の境界、未表示の問題の保持、致死回答、旧保存、教材追加・削除、不正保存の拒否。
 - 画面回帰：[quiz-cycle-browser-check.mjs](../scripts/quiz-cycle-browser-check.mjs)。既存の学習室ブラウザー検証から実行し、CI WebKitにも含める。
 - ローカル検証：全126テスト、型検査・build、knowledge/game/progress check成功。Chromiumで上記画面回帰と既存の学習室回帰が成功。
-- GitHub同期・CI WebKit・公開確認は完了後に追記する。
+- GitHub mainへ同期済み。公開版 `fe5ef803ff498090cadd885983493cec41f0caa1` / [Actions 37748366347](https://github.com/hiroshimu0113-web/SAA/actions/runs/37748366347) のbuild/deploy成功。WebKit全6工程に含まれる一巡出題テストも成功。
+- CIの実配信検証でHTTP 200・配信成果物とのSHA256一致を確認。[公開ゲーム](https://hiroshimu0113-web.github.io/SAA/tower/fan.html)（既存入口にも反映）。iPhone実機での確認は未実施。
+
+### 公開前検証での修正
+
+出題方式の説明を追加したことで、既存のクイズ画面テストが「説明は1段落」と仮定していた箇所で失敗した。説明2段落の両方について開閉時の表示/非表示と保存不変を検証するよう修正し、Chromiumで正答数別報酬・再開・旧保存移行・320px表示まで再確認した。最初のCI `37747451446` は後続更新でキャンセル、統合版の `37747724152` は上記テストで失敗しており、公開成功として扱わない。
