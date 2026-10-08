@@ -11,7 +11,7 @@ base = sys.argv[2].rstrip('/') + '/'
 index = (root / 'index.html').read_text()
 assets = re.findall(r'(?:src|href)="\./(assets/[^"?]+)"', index)
 assert assets, 'No app assets in built index'
-paths = ['index.html', 'knowledge/graph.json', 'tower/learning-catalog.json', 'tower/starters.html', 'tower/starter-update.html', 'tower/icons.html', 'tower/icons-v2.html', 'tower/icons-flat.html', 'tower/icons.mjs', 'tower/card-icons.mjs',
+paths = ['index.html', 'knowledge/graph.json', 'tower/learning-catalog.json', 'tower/study-catalog.json', 'tower/study.html', 'tower/starters.html', 'tower/starter-update.html', 'tower/icons.html', 'tower/icons-v2.html', 'tower/icons-flat.html', 'tower/icons.mjs', 'tower/card-icons.mjs',
          'study/2026-10-07/questions.html', 'sw.js', *assets]
 for attempt in range(12):
     try:

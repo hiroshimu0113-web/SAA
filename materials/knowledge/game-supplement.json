@@ -56,17 +56,17 @@
       "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html"
     },
     "study-data-access": {
-      "prompt": "別AZの正常なEC2へ要求を切り替えましたが、必要な写真は停止中のEC2にしかありません。何が不足していますか？",
+      "prompt": "写真をEC2ローカルだけに保存していたため、AZ障害で別AZの正常なEC2へ切り替えても処理を継続できなかった。写真はアプリからオブジェクトAPIで利用できる。次の構成改善で必要なのは。",
       "options": [
-        "ALBの名前の長さ",
-        "同じAZのEC2の台数だけ",
-        "切り替え先から必要なデータを使える設計"
+        "ALBのヘルスチェック間隔を短くする",
+        "別AZのEC2の処理容量を増やす",
+        "写真をS3等へ保存し、切替先のロールと経路から読めるようにする"
       ],
       "answer": 2,
       "reasons": [
-        "名前では必要データを取り出せません。",
-        "台数だけでは失われたデータへのアクセスを成立させられません。",
-        "振り分け先が動いていても、必要データがなければ処理は続けられません。"
+        "異常検知は速くなるが、失われたAZの写真へ切替先からアクセスできるようにはならない。",
+        "残存計算容量は増えるが、必要データを取得できない問題は解消しない。",
+        "計算先の切替に加え、AZ障害後にも必要なデータを権限・経路込みで利用できる設計が必要。"
       ],
       "source": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions-availability-zones.html"
     }

@@ -139,3 +139,10 @@ materialsで `pnpm test`、`pnpm game:check`、`pnpm knowledge:check`、`pnpm pr
 ## スターターも教材更新の対象（2026-10-08）
 ユーザーの訂正を受け、最初の3種類も固定名とせず選び直す。現行対応：strike=Amazon EC2、guard=セキュリティグループ、probe=CloudWatch。補足・出典は公開用語から取得。責任共有モデルの役はEC2利用者の保守/通信許可/監視の責任を説明し、可用性の役はALB/複数AZ/CloudWatchを説明する。監視とALBターゲットヘルスチェックは区別する。
 内部ID・役の成立3種類・回数・報酬・カード性能・通常30種類・初期7枚は維持。旧保存にもスターター名/補足と関連2役の補足を適用し、保存パックや回答は書き換えない。今後スターター用語を変更する場合はcardTerms、旧保存用のBASE_CARDS/BASE_FLAVOR、および関連する役の補足も同時に更新・検証する。新入口tower/starter-update.html。
+
+## ゲーム学習室の追加（2026-10-08、GQ対応）
+
+- 部屋の出題は250問の単一選択。学習室の練習は268問（複数選択18）、到達度確認は独立65問（複数選択7）。従来の複数選択・試験全除外は部屋用の仕様履歴。学習室では通常の複数選択と独立セットを取り込む。条件変更演習130問は対象外。
+- 正本にknowledge/game-design-questions.jsonを追加。game:exportはlearning-catalog.jsonとstudy-catalog.jsonを生成する。学習室の更新は独自ボタン、保存済みセッションは当時の問題を保持する。通常カード30種類を維持。
+- 学習履歴は冒険と別のsaa-tower-study-v1。専用バックアップを使用。部屋の選択肢順を保存し、旧添字採点と報酬を維持。
+- [対応表](SAA_GAME_READINESS_RESPONSE.md)、[詳細スキル](SAA_GAME_SKILL_MAP.md)、[更新後全件索引](SAA_GAME_QUESTION_INVENTORY_UPDATED.md)。追加回帰試験：scripts/study-browser-check.mjs。

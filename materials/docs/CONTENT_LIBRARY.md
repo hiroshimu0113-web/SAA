@@ -45,3 +45,8 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 - [SAA_FR_OPTION_AUDIT.md](SAA_FR_OPTION_AUDIT.md)：独立65問267候補とm1/m2-065の候補点検。作成者確認であり独立監査ではない。正答を含む。
 
 - [SAA_GR_RESPONSE.md](SAA_GR_RESPONSE.md)：assessment-007の条件明記（GR-001）の対応・検証・公開記録。
+
+## ゲーム内学習室の教材・対応記録
+
+- 正本：[ゲーム設計演習26問](../knowledge/game-design-questions.json)。通常教材と合わせ、学習室用カタログへ生成。
+- [レビュー対応表](SAA_GAME_READINESS_RESPONSE.md)、[詳細スキル・候補点検](SAA_GAME_SKILL_MAP.md)、[更新後全件索引](SAA_GAME_QUESTION_INVENTORY_UPDATED.md)。独立監査・本人理解度とは区別する。

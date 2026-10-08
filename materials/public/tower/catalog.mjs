@@ -33,6 +33,12 @@ export function validateCatalog(p){
  assert([...Object.keys(p.cards),...STARTERS].every(k=>Object.prototype.hasOwnProperty.call(p.notes,k)));
  assert(Object.keys(BASE_QUIZZES).every(k=>Object.prototype.hasOwnProperty.call(p.quizzes,k)));
  for(const [k,q] of Object.entries(p.quizzes))assert(id(k)&&obj(q)&&text(q.prompt)&&Array.isArray(q.options)&&q.options.length>=2&&q.options.length<=8&&q.options.every(s=>text(s))&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length&&Array.isArray(q.reasons)&&q.reasons.length===q.options.length&&q.reasons.every(s=>text(s))&&source(q.source));
+ for(const q of Object.values(p.quizzes)){
+  if(q.domain!==undefined)assert([1,2,3,4].includes(q.domain));
+  if(q.skills!==undefined)assert(Array.isArray(q.skills)&&q.skills.every(s=>typeof s==='string'&&/^\d\.\d$/.test(s)));
+  if(q.level!==undefined)assert(['basic','design'].includes(q.level));
+  if(q.revision!==undefined)assert(typeof q.revision==='string'&&/^[a-f0-9]{16}$/.test(q.revision));
+ }
  if(p.vocabulary!==undefined){
   assert(obj(p.vocabulary)&&Object.keys(p.vocabulary).sort().join()==='combos,enemies,junk,relics');
   for(const [group,base] of Object.entries({enemies:BASE_ENEMIES,relics:BASE_RELICS,combos:BASE_COMBOS,junk:{junk:JUNK}})){

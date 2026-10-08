@@ -10,6 +10,8 @@ import {BASE_CARDS} from '../public/tower/card-definitions.mjs';
 import {validateCatalog,STARTERS} from '../public/tower/catalog.mjs';
 const root=new URL('../',import.meta.url);
 const supplement=JSON.parse(await readFile(new URL('knowledge/game-supplement.json',root),'utf8'));
+const designs=JSON.parse(await readFile(new URL('knowledge/game-design-questions.json',root),'utf8'));
+const revision=q=>createHash('sha256').update(JSON.stringify(q)).digest('hex').slice(0,16);
 const cards=Object.fromEntries(Object.entries(BASE_CARDS).filter(([id])=>!STARTERS.includes(id)));
 const notes={};
 const sourceFor=(term)=>questions.find(q=>q.conceptIds.includes(term.id))?.sources[0]?.url || chapters.find(c=>c.id===term.chapterId)?.lessons.find(l=>l.conceptIds.includes(term.id))?.sources[0]?.url;
@@ -40,6 +42,16 @@ for(const q of questions){
  const source=q.sources.find(s=>/^https:\/\/(docs\.)?aws\.amazon\.com\//.test(s.url))?.url;
  quizzes['study-'+q.id]={prompt:q.prompt,options:q.options.map(o=>o.text),answer:q.options.findIndex(o=>o.id===q.answers[0]),reasons:q.options.map(o=>o.explanation+' '+q.explanation),source};
 }
+for(const q of designs){
+ if(q.answers.length===1)quizzes[q.id]={prompt:q.prompt,options:q.options,answer:q.answers[0],reasons:q.reasons,source:q.source};
+}
+// Carry learning metadata in room snapshots too, so updates never misclassify old answers.
+for(const [id,item] of Object.entries(quizzes)){
+ const original=questions.find(q=>'study-'+q.id===id),design=designs.find(q=>q.id===id);
+ Object.assign(item,{domain:original?.domain||design?.domain||2,skills:design?.skills||[],level:design?'design':'basic'});
+ const question={id,prompt:item.prompt,options:item.options,reasons:item.reasons,answers:[item.answer],source:item.source,domain:item.domain,skills:item.skills,level:item.level};
+ item.revision=revision(question);
+}
 const vocabulary={};
 const publishedText=JSON.stringify({chapters,questions,terms,supplementTerms:supplement.terms});
 for(const [group,base] of Object.entries({enemies:BASE_ENEMIES,relics:BASE_RELICS,combos:BASE_COMBOS,junk:{junk:{}}})){
@@ -63,4 +75,22 @@ const pack={...data,version:createHash('sha256').update(JSON.stringify(data)).di
 const output=JSON.stringify(pack,null,2)+'\n';
 const path=new URL('public/tower/learning-catalog.json',root);
 if(process.argv.includes('--check')){if(await readFile(path,'utf8')!==output)throw Error('pnpm game:export が必要です');}else await writeFile(path,output);
-console.log(`Game catalog ${pack.version}: ${Object.keys(cards).length+3} cards, ${Object.keys(quizzes).length} quizzes (${skipped} multiple-answer/exam questions deferred)`);
+console.log(`Game catalog ${pack.version}: ${Object.keys(cards).length+3} cards, ${Object.keys(quizzes).length} quizzes (${skipped} regular multiple-answer/exam questions excluded from rooms)`);
+
+// The learning room is embedded in the game; assessment questions never enter random rooms.
+const {validateStudyCatalog}=await import('../public/tower/study-catalog.mjs');
+const practice=Object.entries(quizzes).map(([id,item])=>{
+ const original=questions.find(q=>'study-'+q.id===id),design=designs.find(q=>q.id===id);
+ const q={id,prompt:item.prompt,options:item.options,reasons:item.reasons,answers:[item.answer],source:item.source,domain:original?.domain||design?.domain||2,skills:design?.skills||[],level:design?'design':'basic'};
+ return {...q,revision:revision(q)};
+});
+const convert=q=>{const data={id:'study-'+q.id,prompt:q.prompt,options:q.options.map(o=>o.text),answers:q.answers.map(id=>q.options.findIndex(o=>o.id===id)),reasons:q.options.map(o=>o.explanation),source:q.sources[0].url,domain:q.domain,skills:[],level:q.exam?'assessment':'basic'};return {...data,revision:revision(data)};};
+practice.push(...questions.filter(q=>!q.exam&&q.answers.length>1).map(convert));
+practice.push(...designs.filter(q=>q.answers.length>1).map(q=>({...q,revision:revision(q)})));
+practice.sort((a,b)=>a.id.localeCompare(b.id,'en',{numeric:true}));
+const assessment=questions.filter(q=>q.exam==='assessment1').map(convert);
+const studyData={schema:1,practice,assessment};
+const study={...studyData,version:revision(studyData)};validateStudyCatalog(study);
+const studyOutput=JSON.stringify(study,null,2)+'\n',studyPath=new URL('public/tower/study-catalog.json',root);
+if(process.argv.includes('--check')){if(await readFile(studyPath,'utf8')!==studyOutput)throw Error('pnpm game:export が必要です（学習室）');}else await writeFile(studyPath,studyOutput);
+console.log(`Learning room: ${practice.length} practice / ${assessment.length} assessment questions`);

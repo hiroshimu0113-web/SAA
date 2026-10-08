@@ -124,27 +124,27 @@ export const questions: Question[] = [
     "conceptIds": [
       "cloudfront"
     ],
-    "prompt": "世界中へ同じ版付き商品画像をHTTP配信する。更新は新URLで行い、同一URLの内容は変えない。オリジンへの転送と要求を減らす構成はどれか。",
+    "prompt": "世界中へ同じ版付き商品画像をHTTP配信する。更新は新URLで行い、同一URLの内容は変えない。利用者識別Cookieによる画像内容の違いはない。オリジンへの転送と要求を減らす構成はどれか。",
     "options": [
       {
         "id": "a",
-        "text": "CloudFrontで適切なTTLを設定し版付きURLをキャッシュ",
+        "text": "CloudFrontで適切なTTLを設定し、版付きURLをキーにして不要な利用者識別Cookieを除外する",
         "explanation": "同じ画像の再取得をエッジから提供してオリジン要求を減らす。"
       },
       {
         "id": "b",
-        "text": "Global Acceleratorだけで画像オブジェクトを保存する",
-        "explanation": "経路最適化は画像キャッシュではない。"
+        "text": "CloudFrontで同じTTLを設定し、全利用者の識別Cookieもキャッシュキーに含める",
+        "explanation": "エッジに保存できるが、内容を変えないCookieで同じ画像のキャッシュが分割され、再利用が減る。"
       },
       {
         "id": "c",
-        "text": "Route 53のTTLだけで画像本体をキャッシュする",
-        "explanation": "DNSキャッシュはコンテンツ本体を保存しない。"
+        "text": "CloudFrontで画像を保存し、TTLを0にして毎回オリジンへ再検証する",
+        "explanation": "変更なしの応答で転送量を抑え得るが、オリジンへの再検証要求を毎回行う。"
       },
       {
         "id": "d",
-        "text": "すべての画像でキャッシュを無効にし毎回オリジンへ送る",
-        "explanation": "要求削減という目的と逆になる。"
+        "text": "Global AcceleratorでHTTPの経路を最適化し、複数リージョンのオリジンへ要求を送る",
+        "explanation": "通信経路と到達性を改善できるが、画像キャッシュによるオリジン要求削減を提供しない。"
       }
     ],
     "answers": [

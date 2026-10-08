@@ -96,7 +96,7 @@ function win(s){
  if(elite){const relic=shuffle(s,REWARD_RELICS.filter(x=>!has(s,x)))[0];if(relic){s.relics.push(relic);log(s,'遺物「'+RELICS[relic].name+'」を獲得。');}else{s.gold+=30;log(s,'遺物収集済み：30コインを獲得。');}}
  s.phase='reward';log(s,'勝利。カードを'+s.rewardPicks+'枚まで選ぶか、見送れます。');
 }
-function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};}
+function startQuiz(s){s.quiz={ids:shuffle(s,Object.keys(QUIZZES)).slice(0,2),answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};const orderRng={rng:(s.rng^0x9e3779b9)>>>0};s.quiz.orders=s.quiz.ids.map(id=>shuffle(orderRng,QUIZZES[id].options.map((_,i)=>i)));}
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];s.rewardPicks=0;s.shopRelic=null;}
 export function act(state,action){
  if(activeVersion()!==(state.learningCatalog?.version||null))activateCatalog(state.learningCatalog||null);
@@ -182,7 +182,7 @@ export function act(state,action){
  if(s.phase==='event'){
   const q=s.quiz;
   if(!q)return state;
-  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){q.answers.push(a.choice);if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
+  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){if(q.answerTimes!==undefined||Number.isFinite(a.answeredAt))q.answerTimes=[...(q.answerTimes||q.answers.map(()=>0)),Number.isFinite(a.answeredAt)&&a.answeredAt>=0?a.answeredAt:0];q.answers.push(a.choice);if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
   if(a.type==='quiz-next'&&q.step<2&&q.answers.length===q.step+1&&a.questionId===q.ids[q.step]){
    q.step++;
    if(q.step===2){
@@ -231,6 +231,8 @@ function validateRun(raw){
  const q=s.quiz;
  if(q!==null){
   if(!['event','lost'].includes(s.phase)||s.history[s.history.length-1]?.type!=='event'||!Array.isArray(q.ids)||q.ids.length!==2||new Set(q.ids).size!==2||!q.ids.every(id=>owns(QUIZZES,id))||!Array.isArray(q.answers)||!num(q.step,2)||q.answers.length<q.step||q.answers.length>Math.min(2,q.step+1)||!q.answers.every((v,i)=>num(v,QUIZZES[q.ids[i]].options.length-1)))throw Error('クイズの記録が不正です。');
+  if(q.answerTimes!==undefined&&(!Array.isArray(q.answerTimes)||q.answerTimes.length!==q.answers.length||!q.answerTimes.every(t=>Number.isFinite(t)&&t>=0)))throw Error('回答日時が不正です。');
+  if(q.orders!==undefined&&(!Array.isArray(q.orders)||q.orders.length!==2||!q.orders.every((order,i)=>Array.isArray(order)&&order.length===QUIZZES[q.ids[i]].options.length&&new Set(order).size===order.length&&order.every(n=>Number.isInteger(n)&&n>=0&&n<order.length))))throw Error('選択肢の表示順が不正です。');
   if(q.rulesVersion===2){
    const wrong=q.answers.filter((v,i)=>v!==QUIZZES[q.ids[i]].answer).length,damage=Math.min(q.startHp,wrong*q.penalty);
    if(!num(q.startHp,s.maxHp)||q.startHp<1||q.penalty!==Math.ceil(s.maxHp*QUIZ_RULES.wrongRate)||q.damageTaken!==damage||s.hp!==q.startHp-damage)throw Error('クイズのダメージ記録が不正です。');
