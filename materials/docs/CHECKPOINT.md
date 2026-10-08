@@ -1,6 +1,6 @@
 # 現在のチェックポイント
 
-更新：2026-10-08 JST。最新依頼はSAA_REREVIEW.mdへのレビュー対応。教材修正・追加とローカル検証を完了、公開確認へ進行。詳細は末尾とSAA_REREVIEW_RESPONSE.md。
+更新：2026-10-08 JST。最新依頼はSAA_REREVIEW.mdへのレビュー対応。教材修正・追加・109テスト・WebKit検証・Pages実配信照合まで完了。詳細は末尾とSAA_REREVIEW_RESPONSE.md。
 
 ## 今回できたこと
 
@@ -614,3 +614,12 @@
 - 実装23ac75eは後続の教材更新a0e4bd2/d834abaにも引き継がれている。途中の公開ジョブ2件は後続更新でキャンセルされたが、最新のActions 37706377203（d834aba）のbuild/deploy/公開検証が成功。
 - Chromiumでオプション/ボス勝利後の再スタートに確認が出ないことを検証し、CIのWebKit全操作・教材更新・章/模試検証も成功。
 - https://hiroshimu0113-web.github.io/SAA/tower/restart.html と通常index.htmlをHTTP 200で取得。各391286 bytesで最新ローカル配布物とSHA256一致。公開完了。
+
+## 再レビュー対応：公開完了（2026-10-08 JST）
+
+- main公開コミット `d834aba` / Actions `37706377203` success。別担当の `a0e4bd2` までのゲーム更新を保持。
+- 最終統合109テスト・build・knowledge/game/progress check成功。ChromiumとCI WebKitで教材・初回/再回答・保存・旧版除外・カタログ更新を確認。
+- CIの実配信取得でHTTP 200・公開成果物とのSHA256一致。公開先 https://hiroshimu0113-web.github.io/SAA/ 。
+- 対応記録：`docs/SAA_REREVIEW_RESPONSE.md`。12章58本文235通常問＋65問3セット、165用語。新規95分類、既存13ケース更新。独立監査・本人理解は未評価。
+- 通常カード30種類は維持。追加12用語はcandidate、通常単一選択9問は自動変換、独立セットと複数選択はdeferred。
+- 本タスクの実装・記録・公開は完了。次の評価は独立した設問/主張の再レビューと学習者の実読・到達度確認。
