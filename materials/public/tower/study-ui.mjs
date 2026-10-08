@@ -51,6 +51,7 @@ export function openStudy(root){
   if(action==='home')view='home';if(action==='history')view='history';if(action==='resume')view='session';
   if(action==='list-prev')page--;if(action==='list-next')page++;
   if(['start','single','assessment'].includes(action)){const isExam=action==='assessment',qs=isExam?pack.assessment:action==='single'?pack.practice.filter(q=>q.id===el.dataset.id):rows().map(x=>x.q),unseen=!!body.querySelector('#study-unseen')?.checked;commit(startStudy(p,qs,{mode:isExam?'assessment':'practice',version:isExam?assessmentVersion():pack.version,id:'s'+Date.now().toString(36)+Math.random().toString(36).slice(2),unseen}));view='session';}
+  if(['answer','revise','prev','next'].includes(action)&&p.session?.mode==='assessment'&&!p.session.submitted&&Date.now()>=p.session.deadline){commit(submitStudy(p));view='session';render();return;}
   if(action==='answer'){const selected=[...body.querySelectorAll('[name="study-choice"]:checked')].map(x=>Number(x.value));commit(answerStudy(p,selected));}
   if(action==='revise'&&p.session?.mode==='assessment'&&!p.session.submitted){const next=copy(p);next.session.confirmed[next.session.index]=false;commit(next);}
   if(action==='prev'||action==='next'){const next=copy(p);next.session.index+=action==='prev'?-1:1;commit(next);}
@@ -59,7 +60,7 @@ export function openStudy(root){
   if(action==='abandon'&&confirm('保存した学習を終了しますか？到達度確認は未回答を含めて提出し、開始履歴を残します。')){commit(abandonStudy(p));view='home';}
  }catch(e){error=e.message;}render();});
  overlay.addEventListener('change',async e=>{if(e.target.id==='study-unseen')return;error='';try{if(e.target.dataset.filter){const key=e.target.dataset.filter;if(key==='filter')filter=e.target.value;if(key==='domain')domain=e.target.value;if(key==='skill')skill=e.target.value;if(key==='level')level=e.target.value;page=0;render();return;}
-  if(e.target.name==='study-choice'){const next=copy(p);next.session.answers[next.session.index]=[...body.querySelectorAll('[name="study-choice"]:checked')].map(x=>Number(x.value));commit(next);return;}
+  if(e.target.name==='study-choice'){if(p.session?.mode==='assessment'&&!p.session.submitted&&Date.now()>=p.session.deadline){commit(submitStudy(p));view='session';render();return;}const next=copy(p);next.session.answers[next.session.index]=[...body.querySelectorAll('[name="study-choice"]:checked')].map(x=>Number(x.value));commit(next);return;}
   if(e.target.id==='study-import'){const file=e.target.files?.[0];if(!file)return;if(file.size>20000000)throw Error('20MB以内のJSONを選んでください。');const imported=parseStudy(await file.text());if(confirm('学習記録をこのバックアップに置き換えますか？冒険は変わりません。')){persistStudy(localStorage,imported);p=imported;broken=false;view='home';}}
  }catch(e){error=e.message;}render();});
  const timer=setInterval(tick,1000);render();overlay.querySelector('[data-study=close]').focus();
