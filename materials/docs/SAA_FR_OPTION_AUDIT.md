@@ -99,18 +99,18 @@ ALB配下のアプリはAuto ScalingでIPが変わる。DBは同じVPC内にあ�
 
 ## assessment-007
 
-判断軸：アプリの名前変更なし・インターネット経由なしの秘密取得。改訂。
+判断軸：既定DNS名を維持し、インターネット出口を新設せずプライベートな経路で秘密を取得する。GR-001で現状と変更禁止条件を区別して追補。
 
-インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。
+インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定したい。必要なネットワーク構成は。
 
 | 保存ID | 判定 | 候補 | 条件との照合・理由 |
 |---|---|---|---|
-| a | 採用 | Secrets ManagerのInterface endpointを作り、プライベートDNSとタスクからの443を許可するSGを設定する | IAM許可に加えてプライベートな到達経路とDNS・通信許可を整える。 |
+| a | 採用 | Secrets ManagerのInterface endpointを作り、プライベートDNSとタスクからの443を許可するSGを設定する | Interface endpointとプライベートDNSにより、インターネット出口を新設せず既定のサービスDNS名で接続できる。タスクからの443をSGで許可し、プライベートな通信経路を成立させる。 |
 | b | 除外 | Secrets ManagerのInterface endpointを作り、タスクの設定をエンドポイント固有DNS名へ変更する | インターネットを通らない接続はできるが、既定のサービスDNS名を使い続ける条件に反する。 |
-| c | 除外 | タスク用のNAT Gatewayを配置し、既定DNS名でSecrets Managerの公開エンドポイントへ接続する | 既定DNS名でAPIへ接続できるが、インターネット出口を設けない条件を満たさない。 |
+| c | 除外 | Public NAT Gateway、IGWと必要な経路を構成し、既定DNS名でSecrets Managerの公開エンドポイントへ接続する | Public NAT、IGWと必要な経路を整えれば既定DNS名でAPIへ接続できる。しかし本問では出口の新設を禁じ、通信をプライベートな経路に限定しているため除外する。 |
 | d | 除外 | Interface endpointとプライベートDNSを有効にし、エンドポイントのSGでは運用端末のSGから443を許可する | DNSと私設経路は用意できるが、接続元であるタスクのSGからの通信が許可されていない。 |
 
-出典：[AWS公式: endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html) / [AWS公式: privatelink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) / [AWS公式: peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) / [AWS公式: tgw](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) / [AWS公式: vpn](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) / [AWS公式: direct](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html)
+出典：[Secrets ManagerのInterface endpointとプライベートDNS](https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html) / [Public NAT Gateway・IGW・経路による外向き接続](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)
 
 ## assessment-008
 

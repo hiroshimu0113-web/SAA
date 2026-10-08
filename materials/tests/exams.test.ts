@@ -56,10 +56,11 @@ test('独立セットは既存セットの選択肢一式を再利用せず、�
   assert.equal(new Set(independent.map(fingerprint)).size,65);
   for (const q of independent) assert.ok(!prior.has(fingerprint(q)),q.id);
 });
-test('FR改訂前の版付き回答も保全し、改訂後の問題で再採点しない', () => {
+for (const priorRevision of ['2026-10-08-rereview', '2026-10-08-fr-review']) {
+test(`${priorRevision}の版付き回答も保全し、改訂後の問題で再採点しない`, () => {
   const p = beginExam(emptyProgress(), 'assessment1', 1000, true);
   const q = questions.find(q => q.id === 'assessment-065')!;
-  p.exam!.revision = '2026-10-08-rereview';
+  p.exam!.revision = priorRevision;
   p.exam!.answers[q.id] = [...q.answers];
   p.exam!.submitted = true;
   const restored = parseBackup(exportBackup(p));
@@ -73,3 +74,4 @@ test('FR改訂前の版付き回答も保全し、改訂後の問題で再採点
   assert.equal(next.exam!.exposure, 'seen-or-unknown');
   assert.equal(next.exam!.revision, EXAM_REVISION);
 });
+}

@@ -402,12 +402,12 @@ export const assessment: Question[] = [
     "conceptIds": [
       "private-link"
     ],
-    "prompt": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。",
+    "prompt": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定したい。必要なネットワーク構成は。",
     "options": [
       {
         "id": "a",
         "text": "Secrets ManagerのInterface endpointを作り、プライベートDNSとタスクからの443を許可するSGを設定する",
-        "explanation": "IAM許可に加えてプライベートな到達経路とDNS・通信許可を整える。"
+        "explanation": "Interface endpointとプライベートDNSにより、インターネット出口を新設せず既定のサービスDNS名で接続できる。タスクからの443をSGで許可し、プライベートな通信経路を成立させる。"
       },
       {
         "id": "b",
@@ -416,8 +416,8 @@ export const assessment: Question[] = [
       },
       {
         "id": "c",
-        "text": "タスク用のNAT Gatewayを配置し、既定DNS名でSecrets Managerの公開エンドポイントへ接続する",
-        "explanation": "既定DNS名でAPIへ接続できるが、インターネット出口を設けない条件を満たさない。"
+        "text": "Public NAT Gateway、IGWと必要な経路を構成し、既定DNS名でSecrets Managerの公開エンドポイントへ接続する",
+        "explanation": "Public NAT、IGWと必要な経路を整えれば既定DNS名でAPIへ接続できる。しかし本問では出口の新設を禁じ、通信をプライベートな経路に限定しているため除外する。"
       },
       {
         "id": "d",
@@ -428,37 +428,17 @@ export const assessment: Question[] = [
     "answers": [
       "a"
     ],
-    "explanation": "IAM許可に加えてプライベートな到達経路とDNS・通信許可を整える。",
+    "explanation": "Interface endpointとプライベートDNSにより、インターネット出口を新設せず既定のサービスDNS名で接続できる。タスクからの443をSGで許可し、プライベートな通信経路を成立させる。",
     "sources": [
       {
-        "title": "AWS公式: endpoint",
-        "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
-        "checked": "2026-10-05"
+        "title": "Secrets ManagerのInterface endpointとプライベートDNS",
+        "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html",
+        "checked": "2026-10-08"
       },
       {
-        "title": "AWS公式: privatelink",
-        "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
-        "checked": "2026-10-05"
-      },
-      {
-        "title": "AWS公式: peering",
-        "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
-        "checked": "2026-10-05"
-      },
-      {
-        "title": "AWS公式: tgw",
-        "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
-        "checked": "2026-10-05"
-      },
-      {
-        "title": "AWS公式: vpn",
-        "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
-        "checked": "2026-10-05"
-      },
-      {
-        "title": "AWS公式: direct",
-        "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
-        "checked": "2026-10-05"
+        "title": "Public NAT Gateway・IGW・経路による外向き接続",
+        "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+        "checked": "2026-10-08"
       }
     ],
     "exam": "assessment1"

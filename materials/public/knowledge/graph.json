@@ -9806,39 +9806,19 @@
     {
       "id": "question:assessment-007",
       "kind": "question",
-      "title": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。",
+      "title": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定したい。必要なネットワーク構成は。",
       "release": "published",
       "chapter_id": "ch03",
       "sources": [
         {
-          "title": "AWS公式: endpoint",
-          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
-          "checked": "2026-10-05"
+          "title": "Secrets ManagerのInterface endpointとプライベートDNS",
+          "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html",
+          "checked": "2026-10-08"
         },
         {
-          "title": "AWS公式: privatelink",
-          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
-          "checked": "2026-10-05"
-        },
-        {
-          "title": "AWS公式: peering",
-          "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
-          "checked": "2026-10-05"
-        },
-        {
-          "title": "AWS公式: tgw",
-          "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
-          "checked": "2026-10-05"
-        },
-        {
-          "title": "AWS公式: vpn",
-          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
-          "checked": "2026-10-05"
-        },
-        {
-          "title": "AWS公式: direct",
-          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
-          "checked": "2026-10-05"
+          "title": "Public NAT Gateway・IGW・経路による外向き接続",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+          "checked": "2026-10-08"
         }
       ]
     },

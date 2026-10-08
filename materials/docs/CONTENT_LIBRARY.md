@@ -43,3 +43,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 
 - [SAA_FR_RESPONSE.md](SAA_FR_RESPONSE.md)：FR-001/002の対応表、検証・公開記録。
 - [SAA_FR_OPTION_AUDIT.md](SAA_FR_OPTION_AUDIT.md)：独立65問267候補とm1/m2-065の候補点検。作成者確認であり独立監査ではない。正答を含む。
+
+- [SAA_GR_RESPONSE.md](SAA_GR_RESPONSE.md)：assessment-007の条件明記（GR-001）の対応・検証・公開記録。

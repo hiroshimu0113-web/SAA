@@ -40275,11 +40275,11 @@
     },
     {
       "id": "case-rereview-assessment-007",
-      "title": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。",
+      "title": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定したい。必要なネットワーク構成は。",
       "aliases": [],
       "kind": "case",
       "classification_reason": "状況の必須条件を全選択肢と比較して判断する設問。",
-      "objective": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。必要なネットワーク構成は。",
+      "objective": "インターネット出口のないVPC内のECSタスクがSecrets Managerを呼ぶ。タスクロールには対象Secretの読取り許可があり、既定のサービスDNS名を使い続けたい。インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定したい。必要なネットワーク構成は。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -40305,7 +40305,9 @@
         "対応する章の基礎本文"
       ],
       "conditions": [
-        "本文・設問で明示された条件に基づく。"
+        "既定のサービスDNS名を維持する。",
+        "インターネット出口を新設せず、Secrets Managerへの通信をプライベートな経路に限定する。",
+        "対象Secretの読取り権限はタスクロールに付与済み。"
       ],
       "limitations": [
         "構造検証は技術主張の独立監査ではない。"
@@ -40329,40 +40331,16 @@
       "relations": [],
       "sources": [
         {
-          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html",
-          "claim": "AWS公式: endpoint",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+          "url": "https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html",
+          "claim": "Secrets ManagerのInterface endpointとプライベートDNS",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex（作成者）：GR-001の接続条件を公式資料で照合"
         },
         {
-          "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html",
-          "claim": "AWS公式: privatelink",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
-        },
-        {
-          "url": "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html",
-          "claim": "AWS公式: peering",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
-        },
-        {
-          "url": "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html",
-          "claim": "AWS公式: tgw",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
-        },
-        {
-          "url": "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html",
-          "claim": "AWS公式: vpn",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
-        },
-        {
-          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html",
-          "claim": "AWS公式: direct",
-          "checked_on": "2026-10-05",
-          "reviewer": "作成者の出典記録。全主張の独立監査は未実施"
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html",
+          "claim": "Public NAT Gateway・IGW・経路による外向き接続",
+          "checked_on": "2026-10-08",
+          "reviewer": "Codex（作成者）：GR-001の接続条件を公式資料で照合"
         }
       ],
       "classification_status": "reviewed",
@@ -40379,6 +40357,12 @@
           "reviewer": "Codex（作成者）",
           "checked_on": "2026-10-08",
           "summary": "FR対応：問題条件と全候補の採否を点検。SAA_FR_OPTION_AUDIT.md / SAA_FR_RESPONSE.mdを参照。独立監査済みへの昇格ではない。"
+        },
+        {
+          "scope": "content",
+          "reviewer": "Codex（作成者）",
+          "checked_on": "2026-10-08",
+          "summary": "GR-001：現状と出口新設禁止を区別し、Public NAT/IGW/経路の成立部分と明示制約による除外を確認。内容の独立監査状態は変更しない。"
         }
       ],
       "game_design": {
