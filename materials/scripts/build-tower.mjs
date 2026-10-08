@@ -70,3 +70,5 @@ await writeFile("dist/tower/ascent.html",html);
 await writeFile("dist/tower/refined.html",html);
 
 await writeFile("dist/tower/starters.html",html);
+
+await writeFile("dist/tower/restart.html",html);
