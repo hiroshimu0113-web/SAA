@@ -710,3 +710,11 @@
 - 完了：119テスト・build・knowledge/game/progress check、Chromiumの学習室/教材更新/章・模試/既存ゲーム回帰、CI WebKit全5工程成功。
 - 公開：`e18179d` / Actions `37726397124` のbuild/deploy/実配信検証成功。新入口と学習室カタログを含むHTTP 200・SHA256一致をCIで確認。https://hiroshimu0113-web.github.io/SAA/tower/study.html 。GitHub mainへ同期済み。
 - 別担当のフラットアイコン更新`f791b6e`を保持。先行CI2件は修正更新でキャンセル。次工程は独立した受入レビューと本人の初回未読評価。全技術主張・全Skills in・実機の監査は未認定。
+
+
+## 役の効果設計HTMLをSafariから共有（2026-10-08 UTC）
+- 前回のワークスペース内リンクは端末のSafariで開けないため、`public/design/role-effects.html` に資料を置き、既存GitHub PagesからHTTPS配信する。
+- 2/3/4枚ごとに20案・計60案、仮数値、比較/判断保存/JSON入出力。設計案のみでゲームのカード・役・性能は変更しない。構造化案は `public/design/role-effects.json`。
+- ChromiumのローカルHTTP検証成功：60案/枚数・効果・判断・検索/再読み込み保存/JSON入出力・不正入力/320・390・1024px/JS無効読書。
+- `scripts/role-effects-browser-check.mjs` を配信CIのWebKit検証へ追加。実配信照合へHTML/JSONを追加。
+- 次：GitHub同期、CI WebKitとPages配信、公式URLのHTTP200とSHA256一致確認。公開成功は結果確認後に記録する。

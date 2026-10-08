@@ -50,3 +50,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 
 - 正本：[ゲーム設計演習26問](../knowledge/game-design-questions.json)。通常教材と合わせ、学習室用カタログへ生成。
 - [レビュー対応表](SAA_GAME_READINESS_RESPONSE.md)、[詳細スキル・候補点検](SAA_GAME_SKILL_MAP.md)、[更新後全件索引](SAA_GAME_QUESTION_INVENTORY_UPDATED.md)。独立監査・本人理解度とは区別する。
+
+役の追加効果設計資料： [HTML](../public/design/role-effects.html) / [構造化JSON](../public/design/role-effects.json)。2/3/4枚ごとに20案・計60案。公開先は `/SAA/design/role-effects.html`、設計段階でゲーム未実装。

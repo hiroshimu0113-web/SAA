@@ -57,6 +57,10 @@ jobs:
           node scripts/icons-audit.mjs
         env:
           BROWSER: webkit
+      - name: Verify role effect design document in Safari
+        run: node scripts/role-effects-browser-check.mjs
+        env:
+          BROWSER: webkit
       - name: Verify touch controls and Safari startup
         run: node scripts/touch-browser-check.mjs
         env:

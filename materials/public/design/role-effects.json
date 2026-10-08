@@ -1,0 +1,970 @@
+{
+  "schema_version": 1,
+  "status": "design-draft",
+  "effect_families": [
+    {
+      "id": "E2-01",
+      "size": 2,
+      "category": "攻撃",
+      "label": "小追撃",
+      "effect": "敵へ6ダメージ。",
+      "implementation": "既存効果",
+      "tradeoff": "単純で分かりやすいが、通常攻撃との差が小さい。"
+    },
+    {
+      "id": "E2-02",
+      "size": 2,
+      "category": "防御",
+      "label": "防御補助",
+      "effect": "ブロックを5得る。",
+      "implementation": "既存効果",
+      "tradeoff": "高頻度で積み上がるため、複数の2枚役の重複に注意。"
+    },
+    {
+      "id": "E2-03",
+      "size": 2,
+      "category": "手札",
+      "label": "手札補充",
+      "effect": "1枚引く。",
+      "implementation": "既存効果",
+      "tradeoff": "次の役へつながる。手札上限10枚では不発になり得る。"
+    },
+    {
+      "id": "E2-04",
+      "size": 2,
+      "category": "資源",
+      "label": "次ターン準備",
+      "effect": "次の自分のターン開始時にエナジーを1得る。",
+      "implementation": "追加処理",
+      "tradeoff": "即時の連鎖を抑えられる。戦闘終了直前では価値が低い。"
+    },
+    {
+      "id": "E2-05",
+      "size": 2,
+      "category": "攻撃",
+      "label": "一撃補強",
+      "effect": "このターンの次の攻撃カード1枚の各ヒットにダメージ+3。",
+      "implementation": "追加処理",
+      "tradeoff": "多段攻撃で強くなる。役による追撃には適用しない。"
+    },
+    {
+      "id": "E2-06",
+      "size": 2,
+      "category": "防御",
+      "label": "一度だけ軽減",
+      "effect": "次に受ける攻撃ダメージを3減らす。未使用なら次の自分のターン開始時に失効。",
+      "implementation": "追加処理",
+      "tradeoff": "ブロック後のHP損失を軽減。炎上や自傷には適用しない。"
+    },
+    {
+      "id": "E2-07",
+      "size": 2,
+      "category": "状態異常",
+      "label": "短い攻撃抑制",
+      "effect": "敵に過負荷1を付与する。",
+      "implementation": "追加処理",
+      "tradeoff": "敵の攻撃を25%減らす。敵が非攻撃行動なら価値が小さい。"
+    },
+    {
+      "id": "E2-08",
+      "size": 2,
+      "category": "状態異常",
+      "label": "短い防御崩し",
+      "effect": "敵に設定不備1を付与する。",
+      "implementation": "追加処理",
+      "tradeoff": "敵の被攻撃ダメージを25%増やす。残りの攻撃札が必要。"
+    },
+    {
+      "id": "E2-09",
+      "size": 2,
+      "category": "状態異常",
+      "label": "防御の穴",
+      "effect": "敵に枯渇1を付与する。",
+      "implementation": "追加処理",
+      "tradeoff": "敵が新たに得るブロックを50%減らす。既存ブロックは減らさない。"
+    },
+    {
+      "id": "E2-10",
+      "size": 2,
+      "category": "手札",
+      "label": "山札調整",
+      "effect": "山札の上から2枚を見て順序を選ぶ。",
+      "implementation": "新規選択UI",
+      "tradeoff": "引く枚数は増えない。山札が足りなければ存在する札だけ。"
+    },
+    {
+      "id": "E2-11",
+      "size": 2,
+      "category": "手札",
+      "label": "手札交換",
+      "effect": "手札1枚を選んで捨て、1枚引く。手札がなければ何もしない。",
+      "implementation": "新規選択UI",
+      "tradeoff": "手札総数は増えないが、組み合わせ探しに向く。"
+    },
+    {
+      "id": "E2-12",
+      "size": 2,
+      "category": "手札",
+      "label": "札を残す",
+      "effect": "手札1枚を選び、このターン終了時だけ捨てずに残す。",
+      "implementation": "新規選択UI",
+      "tradeoff": "次ターンの役を予約できる。手札上限への影響を確認する。"
+    },
+    {
+      "id": "E2-13",
+      "size": 2,
+      "category": "防御",
+      "label": "次ターンの守り",
+      "effect": "次の自分のターン開始時にブロックを4得る。",
+      "implementation": "追加処理",
+      "tradeoff": "役が完成したターンの防御は増えない。"
+    },
+    {
+      "id": "E2-14",
+      "size": 2,
+      "category": "防御",
+      "label": "小さな反撃",
+      "effect": "このターン、敵の攻撃でHPが減った最初の1回だけ敵へ4ダメージ。",
+      "implementation": "追加処理",
+      "tradeoff": "完全防御では発動しない。反撃による再帰は発生させない。"
+    },
+    {
+      "id": "E2-15",
+      "size": 2,
+      "category": "回復",
+      "label": "小回復",
+      "effect": "HPを2回復する。この役の回復は1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "低リスク戦での回復稼ぎを制限する。最大HPは超えない。"
+    },
+    {
+      "id": "E2-16",
+      "size": 2,
+      "category": "状態異常",
+      "label": "炎上対処",
+      "effect": "自分の炎上を2減らす。",
+      "implementation": "追加処理",
+      "tradeoff": "炎上がなければ不発。敵の炎上を消す効果ではない。"
+    },
+    {
+      "id": "E2-17",
+      "size": 2,
+      "category": "攻撃",
+      "label": "構えを崩す",
+      "effect": "敵の現在のブロックを5減らす。",
+      "implementation": "追加処理",
+      "tradeoff": "ブロックがない敵には効かない。HPへ繰り越さない。"
+    },
+    {
+      "id": "E2-18",
+      "size": 2,
+      "category": "攻撃",
+      "label": "攻守の小報酬",
+      "effect": "敵へ3ダメージを与え、ブロックを3得る。",
+      "implementation": "既存効果",
+      "tradeoff": "万能すぎないよう単機能案より各値を低くする。"
+    },
+    {
+      "id": "E2-19",
+      "size": 2,
+      "category": "資源",
+      "label": "限定値引き",
+      "effect": "このターンの次のスキルカード1枚のコストを1下げる。最低0。",
+      "implementation": "追加処理",
+      "tradeoff": "エナジーを生む0コスト札には得がない。コピー札への重複は禁止。"
+    },
+    {
+      "id": "E2-20",
+      "size": 2,
+      "category": "状態異常",
+      "label": "一時的な復調",
+      "effect": "自分の過負荷・枯渇・設定不備のうち1種類を選び、残りターンを1減らす。",
+      "implementation": "新規選択UI",
+      "tradeoff": "炎上と遅延は対象外。異常がなければ不発。"
+    },
+    {
+      "id": "E3-01",
+      "size": 3,
+      "category": "攻撃",
+      "label": "中追撃",
+      "effect": "敵へ14ダメージ。",
+      "implementation": "既存効果",
+      "tradeoff": "2枚の6を明確に上回る。攻撃力補正の扱いは共通ルールに従う。"
+    },
+    {
+      "id": "E3-02",
+      "size": 3,
+      "category": "防御",
+      "label": "厚い守り",
+      "effect": "ブロックを12得る。",
+      "implementation": "既存効果",
+      "tradeoff": "3枚を揃えた際に攻撃予告へ対応できる。"
+    },
+    {
+      "id": "E3-03",
+      "size": 3,
+      "category": "手札",
+      "label": "追加展開",
+      "effect": "2枚引く。",
+      "implementation": "既存効果",
+      "tradeoff": "手札上限10枚で余りを無理に引かない。"
+    },
+    {
+      "id": "E3-04",
+      "size": 3,
+      "category": "資源",
+      "label": "攻めの再開",
+      "effect": "エナジーを1得て、1枚引く。",
+      "implementation": "既存効果",
+      "tradeoff": "その役を同じターンに再発動できない前提。"
+    },
+    {
+      "id": "E3-05",
+      "size": 3,
+      "category": "攻撃",
+      "label": "攻撃2枚を補強",
+      "effect": "このターンの次の攻撃カード2枚の各ヒットにダメージ+4。",
+      "implementation": "追加処理",
+      "tradeoff": "多段攻撃と相性がよい。役の追撃は消費しない。"
+    },
+    {
+      "id": "E3-06",
+      "size": 3,
+      "category": "防御",
+      "label": "防御と持ち越し",
+      "effect": "ブロックを8得て、ターン境界で残ったブロックを最大5だけ次ターンへ残す。",
+      "implementation": "追加処理",
+      "tradeoff": "持ち越しは今回の1回のみ。毎ターン残り続けない。"
+    },
+    {
+      "id": "E3-07",
+      "size": 3,
+      "category": "状態異常",
+      "label": "攻撃抑制",
+      "effect": "敵に過負荷2を付与する。",
+      "implementation": "追加処理",
+      "tradeoff": "強度は25%のまま。延びるのは持続ターン。"
+    },
+    {
+      "id": "E3-08",
+      "size": 3,
+      "category": "状態異常",
+      "label": "攻撃機会を作る",
+      "effect": "敵に設定不備2を付与し、1枚引く。",
+      "implementation": "追加処理",
+      "tradeoff": "付与倍率は増やさず、攻撃札を探せる複合案。"
+    },
+    {
+      "id": "E3-09",
+      "size": 3,
+      "category": "状態異常",
+      "label": "防御阻害",
+      "effect": "敵に枯渇2を付与し、現在の敵ブロックを5減らす。",
+      "implementation": "追加処理",
+      "tradeoff": "将来の獲得と現在のブロックを別々に処理する。"
+    },
+    {
+      "id": "E3-10",
+      "size": 3,
+      "category": "手札",
+      "label": "選んで引く",
+      "effect": "山札の上から3枚を見て1枚を手札へ、残りを選んだ順で山札上へ戻す。",
+      "implementation": "新規選択UI",
+      "tradeoff": "手札上限時は使えない。捨て札の再シャッフルは行わない。"
+    },
+    {
+      "id": "E3-11",
+      "size": 3,
+      "category": "手札",
+      "label": "捨て札再利用",
+      "effect": "捨て札から攻撃またはスキル1枚を選び手札へ戻す。コストは変えない。",
+      "implementation": "新規選択UI",
+      "tradeoff": "除外札・パワー札は対象外。手札上限を守る。"
+    },
+    {
+      "id": "E3-12",
+      "size": 3,
+      "category": "手札",
+      "label": "2枚を保存",
+      "effect": "手札から最大2枚を選び、このターン終了時だけ残す。",
+      "implementation": "新規選択UI",
+      "tradeoff": "次ターンの役準備に向く。持ち越しただけでは使用扱いにしない。"
+    },
+    {
+      "id": "E3-13",
+      "size": 3,
+      "category": "防御",
+      "label": "予備の防御",
+      "effect": "今ブロックを6得て、次の自分のターン開始時にブロックを8得る。",
+      "implementation": "追加処理",
+      "tradeoff": "短期と次ターンに効果を分ける。"
+    },
+    {
+      "id": "E3-14",
+      "size": 3,
+      "category": "防御",
+      "label": "攻撃への応答",
+      "effect": "このターンの敵攻撃のうち最初の2回に、1回あたり5のHP損失軽減。",
+      "implementation": "追加処理",
+      "tradeoff": "ブロック後に適用。炎上・自傷は対象外。"
+    },
+    {
+      "id": "E3-15",
+      "size": 3,
+      "category": "回復",
+      "label": "回復と防御",
+      "effect": "HPを5回復し、ブロックを6得る。回復部分は1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "再発動ではブロックだけ。回復が上限に達しても防御は得る。"
+    },
+    {
+      "id": "E3-16",
+      "size": 3,
+      "category": "状態異常",
+      "label": "炎上から立て直す",
+      "effect": "自分の炎上をすべて解除し、ブロックを6得る。",
+      "implementation": "追加処理",
+      "tradeoff": "炎上がなくても防御は得られる。"
+    },
+    {
+      "id": "E3-17",
+      "size": 3,
+      "category": "攻撃",
+      "label": "ブロックを貫く",
+      "effect": "敵のブロックを無視してHPへ10ダメージ。",
+      "implementation": "追加処理",
+      "tradeoff": "通常の攻撃札とは違う特殊ダメージとして扱う。"
+    },
+    {
+      "id": "E3-18",
+      "size": 3,
+      "category": "攻撃",
+      "label": "攻守の転換",
+      "effect": "敵へ8ダメージを与え、ブロックを8得る。",
+      "implementation": "既存効果",
+      "tradeoff": "即効性は高いが手札やエナジーは増えない。"
+    },
+    {
+      "id": "E3-19",
+      "size": 3,
+      "category": "資源",
+      "label": "次ターンの展開",
+      "effect": "次の自分のターン開始時にエナジー+1、通常ドローに加えて1枚引く。",
+      "implementation": "追加処理",
+      "tradeoff": "現在のターンに役を連鎖させない。"
+    },
+    {
+      "id": "E3-20",
+      "size": 3,
+      "category": "状態異常",
+      "label": "状態を整理",
+      "effect": "自分の過負荷・枯渇・設定不備をそれぞれ1減らし、1枚引く。",
+      "implementation": "追加処理",
+      "tradeoff": "遅延と炎上は対象外。"
+    },
+    {
+      "id": "E4-01",
+      "size": 4,
+      "category": "攻撃",
+      "label": "大追撃",
+      "effect": "敵へ30ダメージ。",
+      "implementation": "既存効果",
+      "tradeoff": "4枚完成を一目で感じられる切り札。低HP敵では余剰になる。"
+    },
+    {
+      "id": "E4-02",
+      "size": 4,
+      "category": "防御",
+      "label": "大防御",
+      "effect": "ブロックを28得る。",
+      "implementation": "既存効果",
+      "tradeoff": "大きな攻撃予告を受け切る用途。枯渇中の補正は受ける。"
+    },
+    {
+      "id": "E4-03",
+      "size": 4,
+      "category": "手札",
+      "label": "手札を広げる",
+      "effect": "4枚引き、エナジーを1得る。",
+      "implementation": "既存効果",
+      "tradeoff": "手札上限10枚。4枚役を狙う次の機会を作る。"
+    },
+    {
+      "id": "E4-04",
+      "size": 4,
+      "category": "資源",
+      "label": "再展開",
+      "effect": "エナジーを2得て、2枚引く。この効果は1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "エナジー/ドローの循環を防ぐ強い制限付き案。"
+    },
+    {
+      "id": "E4-05",
+      "size": 4,
+      "category": "攻撃",
+      "label": "攻撃の決定打",
+      "effect": "このターンの次の攻撃カード3枚の各ヒットにダメージ+8。",
+      "implementation": "追加処理",
+      "tradeoff": "追加攻撃札がなければ弱い。多段攻撃による爆発力を検証する。"
+    },
+    {
+      "id": "E4-06",
+      "size": 4,
+      "category": "防御",
+      "label": "防御を次へつなぐ",
+      "effect": "ブロックを20得て、ターン境界で残ったブロックを最大15だけ次ターンへ残す。",
+      "implementation": "追加処理",
+      "tradeoff": "持ち越しは1回のみ。ブロック変換攻撃との相乗効果を検証。"
+    },
+    {
+      "id": "E4-07",
+      "size": 4,
+      "category": "状態異常",
+      "label": "敵の攻勢を落とす",
+      "effect": "敵に過負荷3と枯渇2を付与し、敵の現在のブロックを10減らす。",
+      "implementation": "追加処理",
+      "tradeoff": "攻撃減衰と防御阻害をまとめる。付与数値は強度ではなく期間。"
+    },
+    {
+      "id": "E4-08",
+      "size": 4,
+      "category": "状態異常",
+      "label": "攻撃窓を広げる",
+      "effect": "敵に設定不備3を付与し、敵へ12ダメージ、さらに1枚引く。",
+      "implementation": "追加処理",
+      "tradeoff": "設定不備を先に付与して追撃を処理する。"
+    },
+    {
+      "id": "E4-09",
+      "size": 4,
+      "category": "状態異常",
+      "label": "一時休止を得る",
+      "effect": "敵に遅延1を付与し、ブロックを12得る。遅延部分は1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "休止の次には敵が2回行動する。既存の遅延中は延長しない。"
+    },
+    {
+      "id": "E4-10",
+      "size": 4,
+      "category": "手札",
+      "label": "必要札を選ぶ",
+      "effect": "山札の上から5枚を見て最大2枚を手札へ、残りを選んだ順で山札上へ戻す。",
+      "implementation": "新規選択UI",
+      "tradeoff": "役を作る札へ直接アクセス。足りない札は存在分のみ。"
+    },
+    {
+      "id": "E4-11",
+      "size": 4,
+      "category": "手札",
+      "label": "捨て札から再展開",
+      "effect": "捨て札から攻撃/スキルを最大2枚戻し、それらの今ターンのコストを1ずつ下げる。最低0。",
+      "implementation": "新規選択UI",
+      "tradeoff": "除外札・パワー札・エナジー獲得札を対象外にする。"
+    },
+    {
+      "id": "E4-12",
+      "size": 4,
+      "category": "手札",
+      "label": "手札を次へつなぐ",
+      "effect": "現在の手札をすべてこのターン終了時に残し、次ターン開始時にエナジーを1得る。",
+      "implementation": "追加処理",
+      "tradeoff": "次ターンのドローは空き枠まで。手札10枚を超えない。"
+    },
+    {
+      "id": "E4-13",
+      "size": 4,
+      "category": "防御",
+      "label": "戦闘中の防御基盤",
+      "effect": "この戦闘中、毎ターン開始時にブロックを4追加で得る。この役からは1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "防御パワーの比喩。長期戦で強く、累積獲得は禁止。"
+    },
+    {
+      "id": "E4-14",
+      "size": 4,
+      "category": "攻撃",
+      "label": "戦闘中の攻撃基盤",
+      "effect": "この戦闘中、攻撃力+3。この役からは1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "多段攻撃の各ヒットに加算。重ねがけの戦闘引き延ばしを防ぐ。"
+    },
+    {
+      "id": "E4-15",
+      "size": 4,
+      "category": "回復",
+      "label": "大きく立て直す",
+      "effect": "HPを12回復し、ブロックを12得る。回復部分は1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "強い生存報酬。最大HPを超えず、冒険全体の回復量を検証。"
+    },
+    {
+      "id": "E4-16",
+      "size": 4,
+      "category": "状態異常",
+      "label": "状態異常から再起",
+      "effect": "自分の炎上・過負荷・枯渇・設定不備をすべて解除し、ブロックを12得る。",
+      "implementation": "追加処理",
+      "tradeoff": "遅延は解除しない。既存の2回行動状態を壊さない。"
+    },
+    {
+      "id": "E4-17",
+      "size": 4,
+      "category": "攻撃",
+      "label": "防御を突破",
+      "effect": "敵のブロックを無視してHPへ22ダメージ。",
+      "implementation": "追加処理",
+      "tradeoff": "攻撃力・設定不備・過負荷の補正を受けない特殊ダメージ。"
+    },
+    {
+      "id": "E4-18",
+      "size": 4,
+      "category": "攻撃",
+      "label": "攻守の大報酬",
+      "effect": "敵へ20ダメージを与え、ブロックを16得る。",
+      "implementation": "既存効果",
+      "tradeoff": "大きく戦況を動かすが、持続効果や再展開はない。"
+    },
+    {
+      "id": "E4-19",
+      "size": 4,
+      "category": "資源",
+      "label": "次ターンの切り札",
+      "effect": "次の自分のターン開始時にエナジー+2、追加で2枚引き、ブロックを8得る。",
+      "implementation": "追加処理",
+      "tradeoff": "即効性を捨てた強い予約報酬。戦闘が終わると予約は消える。"
+    },
+    {
+      "id": "E4-20",
+      "size": 4,
+      "category": "防御",
+      "label": "致命傷を一度耐える",
+      "effect": "この戦闘中、敵の攻撃でHPが0になる最初の1回だけHPを1残す。この役からは1戦闘1回。",
+      "implementation": "追加処理",
+      "tradeoff": "同一攻撃の超過分は無効。後続攻撃・炎上・自傷は防がない。"
+    }
+  ],
+  "count": {
+    "families": 60,
+    "tiers": 3,
+    "options_per_tier": 20
+  },
+  "role_directions": [
+    {
+      "combo_id": "combo-plan-ec2-ebs",
+      "title": "Amazon EBS",
+      "card_names": [
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "size": 2,
+      "relation": "EC2の永続ブロックストレージにEBSを使う。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "防御の持ち越しは永続ストレージの比喩。ただしEBS自体が攻撃を防ぐわけではない。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-role",
+      "title": "IAMロール",
+      "card_names": [
+        "Amazon EC2",
+        "IAMロール"
+      ],
+      "size": 2,
+      "relation": "EC2からAWS APIへロールの権限でアクセスする。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "資源",
+      "design_note": "操作に必要な権限を得る連携から、次の行動を助ける報酬を優先。権限は計算資源を増やさない。"
+    },
+    {
+      "combo_id": "combo-plan-role-credentials",
+      "title": "一時認証情報",
+      "card_names": [
+        "IAMロール",
+        "一時認証情報"
+      ],
+      "size": 2,
+      "relation": "ロール引き受けにより期限付き認証情報を得る。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "資源",
+      "design_note": "期限付きの利用という特徴から一時的な行動補助を優先。認証情報そのものはエナジー源ではない。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-monitor",
+      "title": "CloudWatch",
+      "card_names": [
+        "Amazon EC2",
+        "CloudWatch"
+      ],
+      "size": 2,
+      "relation": "EC2の指標を監視し異常や負荷を把握する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "観測から判断材料を増やす連携に合わせて手札/選択効果を優先。監視は修復を保証しない。"
+    },
+    {
+      "combo_id": "combo-plan-alb-az",
+      "title": "可用性",
+      "card_names": [
+        "Application Load Balancer",
+        "アベイラビリティーゾーン（AZ）"
+      ],
+      "size": 2,
+      "relation": "複数AZの処理先へALBで振り分ける。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "障害時の処理継続を考える連携から防御寄り。配置・データ・容量が必要。"
+    },
+    {
+      "combo_id": "combo-plan-s3-cdn",
+      "title": "CloudFront",
+      "card_names": [
+        "Amazon S3",
+        "CloudFront"
+      ],
+      "size": 2,
+      "relation": "S3をオリジンとしてエッジから配信する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "配信しやすくする連携から札へのアクセスを優先。キャッシュは永続保存の代替ではない。"
+    },
+    {
+      "combo_id": "combo-plan-s3-kms",
+      "title": "KMS",
+      "card_names": [
+        "Amazon S3",
+        "KMS"
+      ],
+      "size": 2,
+      "relation": "S3でSSE-KMSによる暗号化を使う。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "保護の連携から防御寄り。暗号化とアクセス制限は別に設計する。"
+    },
+    {
+      "combo_id": "combo-plan-sqs-lambda",
+      "title": "SQS",
+      "card_names": [
+        "SQS",
+        "Lambda"
+      ],
+      "size": 2,
+      "relation": "キューのメッセージをLambdaで非同期処理する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "蓄えた仕事を処理する連携から札の保存/再利用を優先。重複処理対策が必要。"
+    },
+    {
+      "combo_id": "combo-plan-lambda-dynamo",
+      "title": "Amazon DynamoDB",
+      "card_names": [
+        "Lambda",
+        "Amazon DynamoDB"
+      ],
+      "size": 2,
+      "relation": "Lambdaが処理結果をDynamoDBへ保存する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "処理結果を外部へ残す連携から持ち越し効果を優先。DB保存は戦闘防御ではない。"
+    },
+    {
+      "combo_id": "combo-plan-vpc-sg",
+      "title": "セキュリティグループ",
+      "card_names": [
+        "Amazon VPC",
+        "セキュリティグループ"
+      ],
+      "size": 2,
+      "relation": "VPC内のリソースに許可ルールを設定する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "通信境界と許可の連携から防御/軽減を優先。経路設定は別途必要。"
+    },
+    {
+      "combo_id": "combo-plan-spot-sqs",
+      "title": "Spotインスタンス",
+      "card_names": [
+        "Spotインスタンス",
+        "SQS"
+      ],
+      "size": 2,
+      "relation": "SQSに仕事を保持し、中断し得るEC2ワーカーで処理する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "中断しても仕事を再投入する連携から札の再利用を優先。除外札を無条件に復活させない。"
+    },
+    {
+      "combo_id": "combo-plan-scp-deny",
+      "title": "明示的Deny",
+      "card_names": [
+        "サービスコントロールポリシー（SCP）",
+        "明示的Deny"
+      ],
+      "size": 2,
+      "relation": "組織の権限上限と明示的禁止で操作を制限する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "状態異常",
+      "design_note": "操作の制限を表す連携から敵への抑制を優先。SCPが権限を付与する表現は避ける。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-sg-monitor",
+      "title": "責任共有モデル",
+      "card_names": [
+        "Amazon EC2",
+        "セキュリティグループ",
+        "CloudWatch"
+      ],
+      "size": 3,
+      "relation": "EC2利用者が通信許可と監視を設計する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-alb-az-monitor",
+      "title": "可用性",
+      "card_names": [
+        "Application Load Balancer",
+        "アベイラビリティーゾーン（AZ）",
+        "CloudWatch"
+      ],
+      "size": 3,
+      "relation": "AZ分散・要求振り分けとメトリクス監視を組み合わせる。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-cross-role-credentials",
+      "title": "クロスアカウントアクセス",
+      "card_names": [
+        "クロスアカウントアクセス",
+        "IAMロール",
+        "一時認証情報"
+      ],
+      "size": 3,
+      "relation": "信頼関係と操作権限を持つロールを一時認証情報で使用する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "資源",
+      "design_note": "権限を伴う一時的な操作の連携から行動補助を優先。恒久的な権限獲得の比喩にはしない。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-role-s3",
+      "title": "IAMロール",
+      "card_names": [
+        "Amazon EC2",
+        "IAMロール",
+        "Amazon S3"
+      ],
+      "size": 3,
+      "relation": "EC2からロール権限でS3へ結果を保存する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "防御",
+      "design_note": "保存や可用性の連携から防御/持ち越しを優先。役の成立は実AWS構成の完成を意味しない。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-alb-scaling",
+      "title": "スケーリング",
+      "card_names": [
+        "Amazon EC2",
+        "Application Load Balancer",
+        "スケーリング"
+      ],
+      "size": 3,
+      "relation": "EC2群を負荷に合わせて増減しALBで振り分ける。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "防御",
+      "design_note": "保存や可用性の連携から防御/持ち越しを優先。役の成立は実AWS構成の完成を意味しない。"
+    },
+    {
+      "combo_id": "combo-plan-lambda-role-dynamo",
+      "title": "Amazon DynamoDB",
+      "card_names": [
+        "Lambda",
+        "IAMロール",
+        "Amazon DynamoDB"
+      ],
+      "size": 3,
+      "relation": "Lambdaが実行ロールによりDynamoDBへ書き込む。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "保存や可用性の連携から防御/持ち越しを優先。役の成立は実AWS構成の完成を意味しない。"
+    },
+    {
+      "combo_id": "combo-plan-sqs-lambda-monitor",
+      "title": "SQS",
+      "card_names": [
+        "SQS",
+        "Lambda",
+        "CloudWatch"
+      ],
+      "size": 3,
+      "relation": "非同期処理の滞留や失敗を監視する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-ebs-kms",
+      "title": "KMS",
+      "card_names": [
+        "Amazon EC2",
+        "Amazon EBS",
+        "KMS"
+      ],
+      "size": 3,
+      "relation": "EC2のEBSボリュームをKMSで暗号化する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "防御",
+      "design_note": "保護の連携から防御/状態整理を優先。通信・認可・鍵の利用主体を区別する。"
+    },
+    {
+      "combo_id": "combo-plan-s3-cdn-role",
+      "title": "CloudFront",
+      "card_names": [
+        "Amazon S3",
+        "CloudFront",
+        "IAMロール"
+      ],
+      "size": 3,
+      "relation": "ロールでS3へアップロードしCloudFrontで配信する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "配信の連携から札へのアクセス/再展開を優先。オリジン権限とキャッシュ設定は別途必要。"
+    },
+    {
+      "combo_id": "combo-plan-spot-sqs-scaling",
+      "title": "スケーリング",
+      "card_names": [
+        "Spotインスタンス",
+        "SQS",
+        "スケーリング"
+      ],
+      "size": 3,
+      "relation": "キューの仕事量に合わせ中断可能なEC2ワーカー数を調整する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "手札",
+      "design_note": "キューを介した処理から、札の保持/再利用/次ターンへの準備を優先。実処理には冪等性が必要。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-role-credentials-s3",
+      "title": "一時認証情報",
+      "card_names": [
+        "Amazon EC2",
+        "IAMロール",
+        "一時認証情報",
+        "Amazon S3"
+      ],
+      "size": 4,
+      "relation": "EC2がロール由来の一時認証情報でS3を操作する。",
+      "energy_note": "初期3で使用可能（手札と使用順は要確認）",
+      "preferred_category": "資源",
+      "design_note": "権限を伴う一時的な操作の連携から行動補助を優先。恒久的な権限獲得の比喩にはしない。"
+    },
+    {
+      "combo_id": "combo-plan-alb-az-monitor-capacity",
+      "title": "残存容量",
+      "card_names": [
+        "Application Load Balancer",
+        "アベイラビリティーゾーン（AZ）",
+        "CloudWatch",
+        "残存容量"
+      ],
+      "size": 4,
+      "relation": "AZ障害時も残った処理先の必要容量を確保し監視する。",
+      "energy_note": "初期3に加えて2エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-alb-scale-monitor",
+      "title": "スケーリング",
+      "card_names": [
+        "Amazon EC2",
+        "Application Load Balancer",
+        "スケーリング",
+        "CloudWatch"
+      ],
+      "size": 4,
+      "relation": "監視指標を使ってEC2群を増減しALBで振り分ける。",
+      "energy_note": "初期3に加えて2エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-sqs-lambda-role-dynamo",
+      "title": "SQS",
+      "card_names": [
+        "SQS",
+        "Lambda",
+        "IAMロール",
+        "Amazon DynamoDB"
+      ],
+      "size": 4,
+      "relation": "キューからLambdaへ渡し権限を持つ関数がDynamoDBへ保存する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "キューを介した処理から、札の保持/再利用/次ターンへの準備を優先。実処理には冪等性が必要。"
+    },
+    {
+      "combo_id": "combo-plan-ec2-ebs-kms-role",
+      "title": "KMS",
+      "card_names": [
+        "Amazon EC2",
+        "Amazon EBS",
+        "KMS",
+        "IAMロール"
+      ],
+      "size": 4,
+      "relation": "EC2の暗号化EBS利用とアプリのロール権限を整理する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "防御",
+      "design_note": "保護の連携から防御/状態整理を優先。通信・認可・鍵の利用主体を区別する。"
+    },
+    {
+      "combo_id": "combo-plan-s3-cdn-kms-role",
+      "title": "CloudFront",
+      "card_names": [
+        "Amazon S3",
+        "CloudFront",
+        "KMS",
+        "IAMロール"
+      ],
+      "size": 4,
+      "relation": "ロールで暗号化S3へ保存しCloudFrontで配信する。",
+      "energy_note": "初期3に加えて2エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "防御",
+      "design_note": "保護の連携から防御/状態整理を優先。通信・認可・鍵の利用主体を区別する。"
+    },
+    {
+      "combo_id": "combo-plan-spot-sqs-scale-monitor",
+      "title": "Spotインスタンス",
+      "card_names": [
+        "Spotインスタンス",
+        "SQS",
+        "スケーリング",
+        "CloudWatch"
+      ],
+      "size": 4,
+      "relation": "キュー滞留を監視して中断可能なワーカーを増減する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    },
+    {
+      "combo_id": "combo-plan-vpc-ec2-sg-monitor",
+      "title": "責任共有モデル",
+      "card_names": [
+        "Amazon VPC",
+        "Amazon EC2",
+        "セキュリティグループ",
+        "CloudWatch"
+      ],
+      "size": 4,
+      "relation": "VPC内のEC2に通信許可と監視を用意する。",
+      "energy_note": "初期3に加えて1エナジー以上が必要。追加エナジー札は役の必須札に数えない。",
+      "preferred_category": "手札",
+      "design_note": "監視で判断材料を得る連携に合わせ、手札/次ターン準備を優先。観測と自動復旧は区別する。"
+    }
+  ],
+  "policy": "2枚はそこそこの効果、3枚は中間、4枚は強い効果。各役に原則1案を割り当てる。数値未調整・未実装。"
+}
