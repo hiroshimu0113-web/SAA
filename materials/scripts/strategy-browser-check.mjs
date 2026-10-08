@@ -20,7 +20,7 @@ export async function checkStrategy(browser,base){
   assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);await p.screenshot({path:'artifacts/status-'+side+'.png'});await p.getByRole('button',{name:'閉じる',exact:true}).tap();
  }
  await p.locator('[data-status="enemy"]').focus();await p.keyboard.press('Enter');await p.locator('.status-dialog[open]').waitFor();await p.keyboard.press('Escape');assert.equal(await p.locator('.status-dialog[open]').count(),0);
-assert.equal(await p.locator('.hand .card-summary').first().innerText(),'AT ＋6 ×2');
+assert.equal(await p.locator('.hand .card').first().locator('.effect-badge').first().getAttribute('aria-label'),'ダメージ 6 を2回（敵の防御・弱体補正前）');
  await p.locator('[data-action=options]').tap();await p.getByRole('button',{name:'所持レリック',exact:true}).tap();await p.locator('.relic-details').getByText(RELICS[s.relics[0]].name,{exact:true}).waitFor();assert.ok((await p.locator('.relic-details').innerText()).includes(RELICS[s.relics[0]].text));await p.getByRole('button',{name:'オプションを閉じる',exact:true}).tap();
  await p.locator('.hand .card').first().focus();await p.keyboard.press('Shift+F10');assert.match(await p.locator('.card-plan').innerText(),/敵：−9/);assert.match(await p.locator('.card-plan').innerText(),/各ヒット/);assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),raw);
  assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'artifacts/strategy-detail.png',fullPage:true});await p.getByRole('button',{name:'閉じる',exact:true}).tap();await p.locator('.hand .card').first().tap();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('saa-tower-run-v1')).battle.hp),23);

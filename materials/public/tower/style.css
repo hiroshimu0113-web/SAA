@@ -203,3 +203,23 @@ body{background:#111c28}
 .hand.fan-hand .card.fan-active{border-color:#e7cf96}
 .hand.fan-hand .card.combo-ready{border-color:#eed481;border-width:2px}
 @media(prefers-reduced-motion:reduce){.hand.fan-hand .card{transition:none}}
+
+/* Left-hand reach: the fan's focus sits at 38% of the available width. */
+.hand.fan-hand{padding-left:max(3px,calc(38% - 49px));padding-right:max(3px,calc(62% - 49px));scroll-padding-left:calc(38% - 49px);scroll-padding-right:calc(62% - 49px)}
+/* Cost / genre, name, effect glyphs. Full prose stays in the detail view. */
+.card .kind,.hand .card .kind,.options-cards .card .kind,.scene .cards-grid .card .kind,.shop-shelf .card .kind{display:flex;position:absolute;right:5px;top:5px;align-items:center}
+.card .kind>.ui-icon{width:17px;height:17px;margin:0}
+.card .card-title,.hand .card .card-title,.options-cards .card .card-title,.scene .cards-grid .card .card-title,.shop-shelf .card .card-title{display:block;margin:27px 0 7px;overflow-wrap:anywhere;width:100%}
+.card-effect-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 6px;margin:2px 0 6px;width:100%}
+.effect-badge{display:inline-flex;align-items:center;gap:2px;white-space:nowrap;font-size:11px;line-height:1.5;color:#e7d6ab}
+.effect-badge>.ui-icon{width:13px;height:13px;margin:0;flex:none}
+.hand .card .card-summary{display:none}
+.options-cards .card .effect-badge,.scene .cards-grid .card .effect-badge,.shop-shelf .card .effect-badge{font-size:10px}
+.options-cards .card .effect-badge>.ui-icon,.scene .cards-grid .card .effect-badge>.ui-icon,.shop-shelf .card .effect-badge>.ui-icon{width:11px;height:11px}
+.card-preview .card .kind>.ui-icon,.options-card-detail .card .kind>.ui-icon{width:24px;height:24px}
+.card-preview>button.detail-close{align-self:center;margin-left:196px;min-width:44px;width:44px;min-height:44px;padding:10px}
+.card-preview>.detail-close>.ui-icon{margin:0}
+.card-preview>.card,.options-card-detail>.card{cursor:pointer}
+.shop-slot .card,.shop-icon{min-height:150px;padding-bottom:8px}
+.shop-icon{justify-content:flex-start;padding-top:24px;gap:10px}
+.shop-price,.shop-icon .shop-price{display:block;position:static;font-size:11px;line-height:16px;color:#e4c98f;margin-top:auto;padding-top:8px}

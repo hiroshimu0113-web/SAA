@@ -87,3 +87,5 @@ await writeFile('dist/tower/study.html',html);
 await writeFile('dist/tower/compact.html',html);
 
 await writeFile('dist/tower/fan.html',html);
+
+await writeFile('dist/tower/hand-icons.html',html);
