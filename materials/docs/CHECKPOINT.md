@@ -608,3 +608,9 @@
 - 次：GitHub同期、ActionsのWebKitとPages実配信照合、公開結果を本記録と対応表へ追記。別担当のゲームUIは維持。
 
 - 公開前にmain `23ac75e`までの別担当更新を統合。通常カード30種類を維持し、追加12用語はゲームcandidateへ訂正。統合後108テスト・build・生成物照合成功。
+
+
+### 再スタート確認削除の公開完了（2026-10-08 JST）
+- 実装23ac75eは後続の教材更新a0e4bd2/d834abaにも引き継がれている。途中の公開ジョブ2件は後続更新でキャンセルされたが、最新のActions 37706377203（d834aba）のbuild/deploy/公開検証が成功。
+- Chromiumでオプション/ボス勝利後の再スタートに確認が出ないことを検証し、CIのWebKit全操作・教材更新・章/模試検証も成功。
+- https://hiroshimu0113-web.github.io/SAA/tower/restart.html と通常index.htmlをHTTP 200で取得。各391286 bytesで最新ローカル配布物とSHA256一致。公開完了。
