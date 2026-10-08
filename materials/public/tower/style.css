@@ -223,3 +223,12 @@ body{background:#111c28}
 .shop-slot .card,.shop-icon{min-height:150px;padding-bottom:8px}
 .shop-icon{justify-content:flex-start;padding-top:24px;gap:10px}
 .shop-price,.shop-icon .shop-price{display:block;position:static;font-size:11px;line-height:16px;color:#e4c98f;margin-top:auto;padding-top:8px}
+
+/* Matching cut-edge motifs identify role membership; glow still means playable progress. */
+.role-seams{display:flex;flex-direction:column;gap:4px;align-self:stretch;width:100%;margin:3px 0 7px;pointer-events:none}
+.role-seam{display:block;width:100%;height:9px;overflow:visible;fill:none;stroke:currentColor;color:#c8aa79}
+.role-seam path{stroke-width:1.4;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.seam-balancing{color:#9cc3c5}.seam-caching{color:#b6a5cc}
+.role-seam-key{display:block;width:100px;margin:10px 0}
+.card-preview .role-seam,.options-card-detail .role-seam{height:12px}
+.options-cards .role-seam,.shop-shelf .role-seam,.scene .cards-grid .role-seam{height:7px}

@@ -1,3 +1,4 @@
+import {checkRoleSeams} from './role-seams-browser-check.mjs';
 import {checkHandIcons} from './hand-icons-browser-check.mjs';
 import {checkFan} from './fan-browser-check.mjs';
 import {checkCompact} from './compact-browser-check.mjs';
@@ -74,7 +75,7 @@ try{
  await checkTurnBanners(browser,base);
  await checkJunk(browser,base);
  await checkHeroes(browser,base);
- await checkExpansion(browser,base);await checkCompact(browser,base);await checkFan(browser,base);await checkHandIcons(browser,base);
+ await checkExpansion(browser,base);await checkCompact(browser,base);await checkFan(browser,base);await checkHandIcons(browser,base);await checkRoleSeams(browser,base);
  await checkRules(browser,base);
  await checkCombatEffects(browser,base);
  await checkStrategy(browser,base);
