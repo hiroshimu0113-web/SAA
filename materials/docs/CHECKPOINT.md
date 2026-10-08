@@ -636,3 +636,10 @@
 - b415ff8 / Actions 37711558931 のbuild/deploy/実配信検証成功。WebKitのゲーム操作・教材更新・章/模試フローも成功。
 - https://hiroshimu0113-web.github.io/SAA/tower/menu.html と通常index.htmlはHTTP200、各391733 bytesでローカル配布物とSHA256一致。
 - キャラ名見出し・×・指定の6項目順序を公開済み。実機iPhoneの本人確認は未実施。
+
+
+## カード4分類・レリック・敵アイコン（2026-10-08 UTC）
+- 6種の共通アイコンを生成し、カード全表示・所持/販売レリック・敵表示へ実装。敵の既存記号はバッジとして保持。
+- 素材と仕様は `docs/GAME_ICONS.md`、`public/tower/icons/game-atlas-v1.png`。新入口 `tower/icons.html`。
+- 109テスト・ビルド・Chromiumタッチ回帰・6種実表示/PNG HTTP200/320px幅検証成功。保存・性能・教材・別担当のUIを維持。
+- GitHub同期・公開は次工程。CIの実配信検証に新入口とPNGを追加。手順書は未受領。

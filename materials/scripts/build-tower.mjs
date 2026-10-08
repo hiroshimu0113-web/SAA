@@ -75,3 +75,5 @@ await writeFile("dist/tower/restart.html",html);
 await writeFile("dist/tower/starter-update.html",html);
 
 await writeFile("dist/tower/menu.html",html);
+
+await writeFile('dist/tower/icons.html',html);

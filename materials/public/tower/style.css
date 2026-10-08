@@ -141,3 +141,10 @@ html.screen-shaking{overflow-x:hidden}
 .header-options,.run-header .header-options,.battle-hud .header-options{width:44px;height:44px;min-width:44px;padding:7px;font-size:22px;line-height:1}
 .options-content>.hero-profile{display:block;font-size:18px;color:#e8d5a6;margin:12px 0}.options-content>.relic-details{font-size:14px;line-height:1.8}.options-content>.relic-details li{margin-bottom:16px}.combo-guide .options-cards{margin:12px 0}.combo-guide .options-cards .card{min-height:104px}
 .options-dialog>header{grid-template-columns:minmax(0,1fr) 44px;align-items:center;gap:8px}.options-dialog>header h2{grid-column:1;grid-row:1;margin:4px 0;overflow-wrap:anywhere}.options-dialog>header [data-menu=close]{grid-column:2;grid-row:1;width:44px;height:44px;padding:0;font-size:30px;line-height:1}.options-dialog>header [data-menu=back]{grid-column:1/-1;grid-row:2;justify-self:start;min-width:80px}
+
+/* Six shared UI icons: fixed atlas coordinates keep all views consistent. */
+.game-icon{display:inline-block;width:1em;height:1em;flex:none;vertical-align:middle;background-image:url('./icons/game-atlas-v1.png');background-size:300% 200%;background-repeat:no-repeat;border-radius:18%;pointer-events:none}
+.icon-attack{background-position:0 0}.icon-skill{background-position:50% 0}.icon-power{background-position:100% 0}.icon-junk{background-position:0 100%}.icon-relic{background-position:50% 100%}.icon-enemy{background-position:100% 100%}
+.card .sigil{line-height:1;flex:none}.card .sigil .game-icon{vertical-align:top}
+.enemy-glyph{position:relative;line-height:1;width:1.25em;margin-inline:auto}.enemy-glyph .game-icon{width:1.1em;height:1.1em}.enemy-mark{position:absolute;right:-.08em;bottom:0;font-size:.32em;line-height:1;background:#172b37;border:1px solid #f5a19a;border-radius:50%;min-width:1.5em;padding:.15em;color:#ffe5db}
+.relic-details .game-icon,.shop-relic .game-icon{font-size:28px;margin-right:8px}
