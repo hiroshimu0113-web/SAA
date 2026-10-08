@@ -1221,3 +1221,10 @@
 - 次：ブラウザー/構造/生成物/進捗検証、GitHub同期、CI WebKitと実配信照合。採用ビルドと本体ルールの変更は今後の設計相談。
 
 - ローカル検証完了：18ビルド・8ケース16問の固定ID採点、検索/分類/ケースリンク、条件変更と容量/費用計算、JS無効、320/390/1024px、保存不変。27分類の一意性/固定語彙/出典/参照と関係先を照合。進捗更新511分類、build成功。新HTMLと生成元一致。ゲームカタログ2種は変更前とbyte一致。公開・CI WebKitは次工程。
+
+
+### AWS構築ビルド調査HTMLの公開完了（2026-10-08）
+- 公開版23c93f8 / Actions 37766213105のbuild・deployがsuccess。新資料のCI WebKit検証（18ビルド・8ケース16問・検索/分類/ケースリンク・容量/費用・JS無効・320/390/1024px・保存不変）と既存ゲーム/教材回帰が成功。
+- Verify the published learning releaseがsuccess。新HTMLを含めHTTP200・配布成果物とのSHA256一致確認。HTML SHA256：86533228f5e10fba15b38c196df95e437d1da912d7be4b8a7555c02ffb514361。
+- 公式URL：https://hiroshimu0113-web.github.io/SAA/design/aws-builds.html 。資料作成・GitHub同期・公式配信は完了。本人のSafari実機評価は未実施。
+- 27分類はdraft/candidate、AWS公式資料自己照合済み、独立した内容監査・ゲーム実装・本人理解認定は未実施。次は6核ビルドの採用、ステージ要件・維持費・配置/行動のルールをユーザーと具体化。
