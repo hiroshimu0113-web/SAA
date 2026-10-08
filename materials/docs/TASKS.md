@@ -1016,3 +1016,4 @@
 - 再スタート確認削除：公開完了。23ac75eを含むd834aba / Actions 37706377203成功。restart.html/index.htmlのHTTP200・SHA256一致確認済み（2026-10-08 JST）。
 
 - 再レビュー対応の最終検証：109テスト、生成物3種、build、Chromium、CI WebKitと実配信照合成功。対応記録を同じdocsフォルダへ保存・同期。
+- スターター再選定の公開完了：a0e4bd2の変更を同時教材更新d834abaへ保持。最終パックcec16537b6dcc9adでもAmazon EC2/セキュリティグループ/CloudWatch、通常30種類、関連役の新補足を確認。Actions 37706377203のbuild/deploy、WebKit操作/教材更新検証、starter-update.htmlを含む公式HTTP200/SHA256照合成功。ローカルの本変更検証は104テスト/Chromium成功。公開入口 https://hiroshimu0113-web.github.io/SAA/tower/starter-update.html 。

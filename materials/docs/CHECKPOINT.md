@@ -623,3 +623,4 @@
 - 対応記録：`docs/SAA_REREVIEW_RESPONSE.md`。12章58本文235通常問＋65問3セット、165用語。新規95分類、既存13ケース更新。独立監査・本人理解は未評価。
 - 通常カード30種類は維持。追加12用語はcandidate、通常単一選択9問は自動変換、独立セットと複数選択はdeferred。
 - 本タスクの実装・記録・公開は完了。次の評価は独立した設問/主張の再レビューと学習者の実読・到達度確認。
+- スターター再選定の公開完了：a0e4bd2の変更を同時教材更新d834abaへ保持。最終パックcec16537b6dcc9adでもAmazon EC2/セキュリティグループ/CloudWatch、通常30種類、関連役の新補足を確認。Actions 37706377203のbuild/deploy、WebKit操作/教材更新検証、starter-update.htmlを含む公式HTTP200/SHA256照合成功。ローカルの本変更検証は104テスト/Chromium成功。公開入口 https://hiroshimu0113-web.github.io/SAA/tower/starter-update.html 。
