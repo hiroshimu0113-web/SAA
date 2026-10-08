@@ -48,3 +48,48 @@ test('closing a submitted assessment is immutable even if the next save fails',(
  const p=submitStudy(startStudy(emptyStudy(),pack.assessment,{...options,mode:'assessment'}),2000),before=JSON.stringify(p),next=abandonStudy(p);
  assert.equal(next.session,null);assert.equal(JSON.stringify(p),before);assert.throws(()=>persistStudy({setItem(){throw Error('quota');}},next));assert.equal(JSON.stringify(p),before);
 });
+
+test('practice finalizes drafts, skipped and partial answers consistently, once across resume and save',()=>{
+ const single=pack.practice.find(q=>q.answers.length===1),multi=pack.practice.find(q=>q.answers.length>1);
+ let p=startStudy(emptyStudy(),[single,multi,pack.practice[5]],options);
+ p.session.answers[0]=single.answers;p.session.index=1;p.session.answers[1]=[multi.answers[0]];
+ p=parseStudy(JSON.stringify(p));p=submitStudy(p,3000);
+ assert.deepEqual(p.records.map(r=>r.correct),[true,false,false]);assert.deepEqual(p.session.confirmed,[true,true,true]);
+ assert.deepEqual(p.records.map(r=>r.selected),p.session.answers.map(a=>a||[]));
+ assert.equal(progressFor(p,[single])[0].first.correct,true);assert.equal(progressFor(p,[single])[0].count,1);
+ let saved;const storage={setItem:(k,v)=>saved=v};persistStudy(storage,p);p=parseStudy(saved);p=submitStudy(p,4000);persistStudy(storage,p);
+ assert.equal(p.records.length,3);assert.equal(abandonStudy(p).records.length,3);
+ let one=startStudy(emptyStudy(),[single],options);one.session.answers[0]=single.answers;one=submitStudy(one,2000);assert.equal(one.records.length,1);assert.equal(one.records[0].correct,true);
+ let confirmed=answerStudy(startStudy(emptyStudy(),[single],options),single.answers,2000);confirmed=submitStudy(confirmed,3000);assert.equal(confirmed.records.length,1);assert.equal(confirmed.records[0].at,2000);
+});
+
+test('assessment backup rejects contradictory evidence atomically, including closed attempts',()=>{
+ let p=startStudy(emptyStudy(),pack.assessment,{...options,mode:'assessment'});
+ p.session.answers=p.session.questions.map(q=>q.answers);p=submitStudy(p,3000);
+ const mutations=[
+  p=>p.records=[],p=>p.attempts.push(clone(p.attempts[0])),p=>p.attempts[0].finishedAt=null,
+  p=>p.attempts[0].version='other',p=>p.attempts[0].startedAt++,p=>p.records.pop(),
+  p=>p.records[0].question.revision='other',p=>p.records[0].question.prompt+=' changed',
+  p=>p.session.answers[0]=[],p=>p.records[0].at++,p=>p.session.submitted=false,
+  p=>{p.records[0].selected=[];p.records[0].correct=false;},
+  p=>{p.session=null;p.records=[];},p=>{p.session=null;p.records[0].key='orphan:0';},
+  p=>{p.session=null;p.attempts[0].finishedAt=null;},
+ ];
+ for(const mutate of mutations){const bad=clone(p);mutate(bad);let saved=JSON.stringify(p),writes=0;const storage={setItem:(k,v)=>{saved=v;writes++;}};
+  assert.throws(()=>parseStudy(JSON.stringify(bad)));assert.throws(()=>persistStudy(storage,bad));assert.equal(writes,0);assert.equal(saved,JSON.stringify(p));
+ }
+});
+
+test('valid draft, submitted, closed, repeated and old-catalog backups keep their own evidence',()=>{
+ const old=pack.assessment.map(q=>({...q,revision:'old-'+q.revision,prompt:'旧版 '+q.prompt}));
+ let p=startStudy(emptyStudy(),old,{...options,version:'old-catalog',mode:'assessment'});
+ p=answerStudy(p,old[0].answers,2000);assert.deepEqual(parseStudy(JSON.stringify(p)),p);
+ p=submitStudy(p,3000);assert.deepEqual(parseStudy(JSON.stringify(p)),p);
+ p=abandonStudy(p,4000);assert.deepEqual(parseStudy(JSON.stringify(p)),p);
+ p=startStudy(p,pack.assessment,{...options,id:'test1:repeat',now:5000,mode:'assessment'});
+ assert.deepEqual(parseStudy(JSON.stringify(p)),p);p=submitStudy(p,6000);assert.deepEqual(parseStudy(JSON.stringify(p)),p);
+ // Object member order is not evidence; original schema-1 submissions may keep false confirmation flags.
+ p.session.confirmed=p.session.confirmed.map(()=>false);
+ p.session.questions[0]=Object.fromEntries(Object.entries(p.session.questions[0]).reverse());
+ assert.deepEqual(parseStudy(JSON.stringify(p)),p);
+});

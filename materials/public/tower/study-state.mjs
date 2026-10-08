@@ -13,9 +13,37 @@ export function emptyStudy(){return {schema:1,records:[],attempts:[],session:nul
 export function parseStudy(raw){
  const p=JSON.parse(raw);if(!obj(p)||p.schema!==1||!Array.isArray(p.records)||!Array.isArray(p.attempts))fail();
  const ids=new Set(),counts=new Map();for(const r of p.records){if(!obj(r)||!validId(r.key)||ids.has(r.key)||!validQuestion(r.question)||!selection(r.selected,r.question.options.length)||r.correct!==correct(r.question,r.selected)||!Number.isFinite(r.at)||!['room','practice','assessment'].includes(r.mode))fail();ids.add(r.key);const k=r.question.id+':'+r.question.revision,n=(counts.get(k)||0)+1;if(r.attemptNumber!==n)fail();counts.set(k,n);}
- for(const a of p.attempts)if(!obj(a)||!validId(a.id)||typeof a.version!=='string'||!Number.isFinite(a.startedAt)||!['unseen','seen'].includes(a.exposure)||a.finishedAt!==null&&!Number.isFinite(a.finishedAt))fail();
+ const attemptIds=new Set();for(const a of p.attempts){if(!obj(a)||!validId(a.id)||attemptIds.has(a.id)||typeof a.version!=='string'||!Number.isFinite(a.startedAt)||!['unseen','seen'].includes(a.exposure)||a.finishedAt!==null&&(!Number.isFinite(a.finishedAt)||a.finishedAt<a.startedAt))fail();attemptIds.add(a.id);}
  if(p.session!==null){const s=p.session;if(!obj(s)||!validId(s.id)||!['practice','assessment'].includes(s.mode)||typeof s.version!=='string'||!Array.isArray(s.questions)||!s.questions.length||s.questions.length>1000||!s.questions.every(validQuestion)||!Array.isArray(s.orders)||s.orders.length!==s.questions.length||!s.orders.every((a,i)=>selection(a,s.questions[i].options.length)&&a.length===s.questions[i].options.length)||!Array.isArray(s.answers)||s.answers.length!==s.questions.length||!s.answers.every((a,i)=>a===null||selection(a,s.questions[i].options.length))||!Array.isArray(s.confirmed)||s.confirmed.length!==s.questions.length||!s.confirmed.every(x=>typeof x==='boolean')||!Number.isInteger(s.index)||s.index<0||s.index>=s.questions.length||typeof s.submitted!=='boolean'||!Number.isFinite(s.startedAt)||!Number.isFinite(s.deadline))fail();if(s.mode==='assessment'&&!p.attempts.some(a=>a.id===s.id))fail();}
+ // Compare stored evidence with its own snapshots, never with the latest catalog.
+ const records=new Map(p.records.map(r=>[r.key,r])),assessmentKeys=new Set();
+ for(const a of p.attempts){
+  const qs=new Set();
+  for(let i=0;i<65;i++){
+   const key=a.id+':'+i,r=records.get(key);
+   if(a.finishedAt===null){if(r)fail();continue;}
+   if(!r||r.mode!=='assessment'||r.at!==a.finishedAt||qs.has(r.question.id))fail();
+   qs.add(r.question.id);assessmentKeys.add(key);
+  }
+  if(a.finishedAt===null&&!(p.session?.mode==='assessment'&&p.session.id===a.id&&!p.session.submitted))fail();
+ }
+ if(p.records.some(r=>r.mode==='assessment'&&!assessmentKeys.has(r.key)))fail();
+ const s=p.session;
+ if(s?.mode==='assessment'){
+  const a=p.attempts.find(a=>a.id===s.id);
+  if(s.questions.length!==65||new Set(s.questions.map(q=>q.id)).size!==65||a.version!==s.version||a.startedAt!==s.startedAt||s.submitted!==(a.finishedAt!==null))fail();
+  if(s.submitted)for(let i=0;i<s.questions.length;i++){
+   const r=records.get(s.id+':'+i);
+   if(!sameSnapshot(r.question,s.questions[i])||!sameSelection(r.selected,s.answers[i]||[]))fail();
+  }
+ }
  return p;
+}
+function sameSelection(a,b){return a.length===b.length&&a.every(x=>b.includes(x));}
+function sameSnapshot(a,b){
+ if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((x,i)=>sameSnapshot(x,b[i]));
+ if(obj(a)||obj(b))return obj(a)&&obj(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>Object.prototype.hasOwnProperty.call(b,k)&&sameSnapshot(a[k],b[k]));
+ return a===b;
 }
 export function loadStudy(storage){const raw=storage.getItem(STUDY_KEY);return raw?parseStudy(raw):emptyStudy();}
 export function persistStudy(storage,p){parseStudy(JSON.stringify(p));storage.setItem(STUDY_KEY,JSON.stringify(p));return p;}
@@ -26,9 +54,13 @@ export function startStudy(p,questions,{mode='practice',version,now=Date.now(),i
  if(mode==='assessment')next.attempts.push({id,version,startedAt:now,finishedAt:null,exposure:unseen&&next.attempts.length===0?'unseen':'seen'});
  parseStudy(JSON.stringify(next));return next;
 }
-export function recordAnswer(p,{key,question,selected,mode,at=Date.now()}){
- if(p.records.some(r=>r.key===key))return p;
- const next=copy(p);next.records.push({key,question:copy(question),selected:[...selected],correct:correct(question,selected),mode,at,attemptNumber:next.records.filter(r=>r.question.id===question.id&&r.question.revision===question.revision).length+1});parseStudy(JSON.stringify(next));return next;
+function appendAnswer(p,{key,question,selected,mode,at=Date.now()}){
+ if(p.records.some(r=>r.key===key))return;
+ p.records.push({key,question:copy(question),selected:[...selected],correct:correct(question,selected),mode,at,attemptNumber:p.records.filter(r=>r.question.id===question.id&&r.question.revision===question.revision).length+1});
+}
+export function recordAnswer(p,event){
+ if(p.records.some(r=>r.key===event.key))return p;
+ const next=copy(p);appendAnswer(next,event);parseStudy(JSON.stringify(next));return next;
 }
 export function answerStudy(p,selected,now=Date.now()){
  const s=p.session;if(!s||s.submitted||s.confirmed[s.index])return p;if(s.mode==='assessment'&&now>=s.deadline)return submitStudy(p,now);
@@ -37,8 +69,15 @@ export function answerStudy(p,selected,now=Date.now()){
  if(s.mode==='practice')next=recordAnswer(next,{key:s.id+':'+s.index,question:q,selected,mode:'practice',at:now});return next;
 }
 export function submitStudy(p,now=Date.now()){
- const s=p.session;if(!s||s.submitted)return p;let next=copy(p);next.session.submitted=true;
- if(s.mode==='assessment'){for(let i=0;i<s.questions.length;i++)next=recordAnswer(next,{key:s.id+':'+i,question:s.questions[i],selected:s.answers[i]||[],mode:'assessment',at:now});next.attempts.find(a=>a.id===s.id).finishedAt=now;}return next;
+ const s=p.session;if(!s||s.submitted)return p;const next=copy(p);next.session.submitted=true;
+ // Commit all remaining drafts together, including partial/empty answers as incorrect.
+ // Previously confirmed practice answers keep their original record and timestamp.
+ for(let i=0;i<s.questions.length;i++){
+  appendAnswer(next,{key:s.id+':'+i,question:s.questions[i],selected:s.answers[i]||[],mode:s.mode,at:now});
+  next.session.confirmed[i]=true;
+ }
+ if(s.mode==='assessment')next.attempts.find(a=>a.id===s.id).finishedAt=now;
+ parseStudy(JSON.stringify(next));return next;
 }
-export function abandonStudy(p,now=Date.now()){if(!p.session)return p;let next=copy(p.session.mode==='assessment'?submitStudy(p,now):p);next.session=null;return next;}
+export function abandonStudy(p,now=Date.now()){if(!p.session)return p;const next=copy(submitStudy(p,now));next.session=null;return next;}
 export function progressFor(p,questions){return questions.map(q=>{const all=p.records.filter(r=>r.question.id===q.id),current=all.filter(r=>r.question.revision===q.revision),last=current[current.length-1];return {q,count:current.length,ever:all.length,last,first:current[0]};});}
