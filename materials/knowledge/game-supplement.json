@@ -1877,7 +1877,7 @@
       "HPを0にしてタスク完了。追加勝利パラメータは採用しない。",
       "分類はカード効果・排出率・最終プールの実装ではない。",
       "未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。",
-      "役割と用途を独立に分類する。特定条件向けの中核や、幅広く使える橋渡しもあり得る。"
+      "役割と分類を独立に分類する。特定条件向けのキーや、汎用橋渡しもあり得る。"
     ],
     "builds": [
       {
@@ -1890,85 +1890,85 @@
           {
             "candidateId": "candidate-az",
             "termId": "az",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-availability",
             "termId": "availability",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-remaining-capacity",
             "termId": "remaining-capacity",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-alb",
             "termId": "alb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           },
           {
             "candidateId": "candidate-health-check",
             "termId": "health-check",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-subnet",
             "termId": "subnet",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-ec2",
             "termId": "ec2",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "candidateId": "candidate-auto-scaling",
             "termId": "auto-scaling",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           },
           {
             "candidateId": "candidate-placement-group",
             "termId": "placement-group",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。"
           },
           {
             "candidateId": "candidate-nlb",
             "termId": "nlb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "TCP/UDP/TLSや固定IP等の要件がある。"
           },
           {
             "candidateId": "candidate-route53",
             "termId": "route53",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           },
           {
             "candidateId": "candidate-efs",
             "termId": "efs",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "共有NFSファイルアクセスが必要で、モードと到達性を設計する。"
           }
         ],
@@ -1984,50 +1984,50 @@
           {
             "candidateId": "candidate-rds-multi-az",
             "termId": "rds-multi-az",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "RDSを用いる。単一スタンバイとDBクラスターの方式を区別する。"
           },
           {
             "candidateId": "candidate-rds-standby",
             "termId": "rds-standby",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "RDSの単一スタンバイ配置を用いる。平時のSELECTには使わない。"
           },
           {
             "candidateId": "candidate-rds",
             "termId": "rds",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リレーショナルDBを採用する。"
           },
           {
             "candidateId": "candidate-health-check",
             "termId": "health-check",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-availability",
             "termId": "availability",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-rds-proxy",
             "termId": "rds-proxy",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。"
           },
           {
             "candidateId": "candidate-aurora-replica",
             "termId": "aurora-replica",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Auroraを採用し、読取り分散または昇格先を必要とする。"
           }
         ],
@@ -2043,57 +2043,57 @@
           {
             "candidateId": "candidate-placement-group",
             "termId": "placement-group",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。"
           },
           {
             "candidateId": "candidate-subnet",
             "termId": "subnet",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-throttling",
             "termId": "throttling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-dlq",
             "termId": "dlq",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-health-check",
             "termId": "health-check",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-organizations",
             "termId": "organizations",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数アカウントによる分離・統制を採用する。"
           },
           {
             "candidateId": "candidate-scp",
             "termId": "scp",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。"
           },
           {
             "candidateId": "candidate-alb",
             "termId": "alb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           }
         ],
@@ -2109,99 +2109,99 @@
           {
             "candidateId": "candidate-auto-scaling",
             "termId": "auto-scaling",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           },
           {
             "candidateId": "candidate-target-tracking",
             "termId": "target-tracking",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "追跡に適した負荷指標と目標値がある。"
           },
           {
             "candidateId": "candidate-scheduled-scaling",
             "termId": "scheduled-scaling",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "需要が増える時刻を予測できる。"
           },
           {
             "candidateId": "candidate-scaling",
             "termId": "scaling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-ec2",
             "termId": "ec2",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "candidateId": "candidate-cloudwatch",
             "termId": "cloudwatch",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-health-check",
             "termId": "health-check",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-queue-scaling",
             "termId": "queue-scaling",
-            "role": "別構成への橋渡し",
-            "usage": "幅広く使える",
+            "role": "コネクション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-warm-pool",
             "termId": "warm-pool",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の初期化待ちを短縮したい。待機費用も許容する。"
           },
           {
             "candidateId": "candidate-ecs",
             "termId": "ecs",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           },
           {
             "candidateId": "candidate-eks",
             "termId": "eks",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Kubernetesによる実行管理を必要とする。"
           },
           {
             "candidateId": "candidate-nlb",
             "termId": "nlb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "TCP/UDP/TLSや固定IP等の要件がある。"
           },
           {
             "candidateId": "candidate-alb",
             "termId": "alb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           },
           {
             "candidateId": "candidate-capacity-reservation",
             "termId": "capacity-reservation",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           }
         ],
@@ -2217,85 +2217,85 @@
           {
             "candidateId": "candidate-lambda",
             "termId": "lambda",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。"
           },
           {
             "candidateId": "candidate-fargate",
             "termId": "fargate",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。イベントごとの瞬時起動を保証しない。"
           },
           {
             "candidateId": "candidate-lambda-concurrency",
             "termId": "lambda-concurrency",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Lambdaの同時実行数を設計する。"
           },
           {
             "candidateId": "candidate-api-gateway",
             "termId": "api-gateway",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "APIの入口・認証連携・流量管理を必要とする。"
           },
           {
             "candidateId": "candidate-eventbridge",
             "termId": "eventbridge",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "イベントの振り分けが必要。"
           },
           {
             "candidateId": "candidate-dynamodb-on-demand",
             "termId": "dynamodb-on-demand",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの要求ベース容量課金が適する。"
           },
           {
             "candidateId": "candidate-sqs",
             "termId": "sqs",
-            "role": "別構成への橋渡し",
-            "usage": "幅広く使える",
+            "role": "コネクション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-sns",
             "termId": "sns",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "購読先への通知配信を必要とする。"
           },
           {
             "candidateId": "candidate-step-functions",
             "termId": "step-functions",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数ステップの順序・再試行を制御する。"
           },
           {
             "candidateId": "candidate-rds-proxy",
             "termId": "rds-proxy",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。"
           },
           {
             "candidateId": "candidate-ecs",
             "termId": "ecs",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           },
           {
             "candidateId": "candidate-task-role",
             "termId": "task-role",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "ECSアプリからAWS APIへアクセスする。"
           }
         ],
@@ -2311,155 +2311,155 @@
           {
             "candidateId": "candidate-instance-family",
             "termId": "instance-family",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-cost-optimization",
             "termId": "cost-optimization",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-performance",
             "termId": "performance",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-storage-performance",
             "termId": "storage-performance",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-gp3",
             "termId": "gp3",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EBS gp3の性能調整が要件に合う。"
           },
           {
             "candidateId": "candidate-provisioned-iops",
             "termId": "provisioned-iops",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "厳しいIOPS・遅延要件があり、費用を許容する。"
           },
           {
             "candidateId": "candidate-database-selection",
             "termId": "database-selection",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-database-cost",
             "termId": "database-cost",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-network-cost",
             "termId": "network-cost",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-storage-cost",
             "termId": "storage-cost",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-cost-explorer",
             "termId": "cost-explorer",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "費用・使用量を分析する。障害修復とは別。"
           },
           {
             "candidateId": "candidate-budgets",
             "termId": "budgets",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-cur",
             "termId": "cur",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-cost-allocation",
             "termId": "cost-allocation",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-ec2-stop",
             "termId": "ec2-stop",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を止められる時間帯がある。保持費は残る。"
           },
           {
             "candidateId": "candidate-savings-plans",
             "termId": "savings-plans",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "継続利用の予測と利用額コミットが可能。容量予約ではない。"
           },
           {
             "candidateId": "candidate-reserved-instances",
             "termId": "reserved-instances",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "期間・属性等の契約条件が合う。スコープで容量予約の扱いが異なる。"
           },
           {
             "candidateId": "candidate-intelligent-tiering",
             "termId": "intelligent-tiering",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "S3のアクセス変動に適し、監視費・対象条件を許容する。"
           },
           {
             "candidateId": "candidate-rcu",
             "termId": "rcu",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの読取りサイズ・整合性を評価する。"
           },
           {
             "candidateId": "candidate-wcu",
             "termId": "wcu",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの書込みサイズ・トランザクションを評価する。"
           },
           {
             "candidateId": "candidate-ec2-hibernation",
             "termId": "ec2-hibernation",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "休止対応条件を満たし、RAM状態を保持して再開したい。"
           },
           {
             "candidateId": "candidate-instance-store",
             "termId": "instance-store",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "消えてよい一時データに使い、永続データの代替を用意する。"
           }
         ],
@@ -2475,85 +2475,85 @@
           {
             "candidateId": "candidate-cloudfront",
             "termId": "cloudfront",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPS配信が対象。キャッシュ可能性・更新条件を設計する。"
           },
           {
             "candidateId": "candidate-s3",
             "termId": "s3",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "candidateId": "candidate-cache-key",
             "termId": "cache-key",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数要求が同じ結果を共有できる範囲を識別する。"
           },
           {
             "candidateId": "candidate-dns-ttl",
             "termId": "dns-ttl",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。"
           },
           {
             "candidateId": "candidate-cloudfront-oac",
             "termId": "cloudfront-oac",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するCloudFrontオリジンへのアクセスを制限する。"
           },
           {
             "candidateId": "candidate-signed-url",
             "termId": "signed-url",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "期限などを限定した配信アクセスが必要。"
           },
           {
             "candidateId": "candidate-route53",
             "termId": "route53",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           },
           {
             "candidateId": "candidate-tls",
             "termId": "tls",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "通信の暗号化と相手認証が必要。"
           },
           {
             "candidateId": "candidate-waf",
             "termId": "waf",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTPリクエストの検査・制御が必要。"
           },
           {
             "candidateId": "candidate-shield",
             "termId": "shield",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DDoSへの保護が必要。"
           },
           {
             "candidateId": "candidate-transfer-acceleration",
             "termId": "transfer-acceleration",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "遠隔からS3へのアップロード改善が実測で有効。CDNの結果キャッシュとは別。"
           },
           {
             "candidateId": "candidate-global-accelerator",
             "termId": "global-accelerator",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "TCP/UDPの通信経路改善や静的IPが必要。キャッシュではない。"
           }
         ],
@@ -2569,64 +2569,64 @@
           {
             "candidateId": "candidate-cache",
             "termId": "cache",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-dax",
             "termId": "dax",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "DynamoDBの結果整合性の繰り返し読取りに適する。"
           },
           {
             "candidateId": "candidate-cache-key",
             "termId": "cache-key",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数要求が同じ結果を共有できる範囲を識別する。"
           },
           {
             "candidateId": "candidate-dns-ttl",
             "termId": "dns-ttl",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。"
           },
           {
             "candidateId": "candidate-consistency",
             "termId": "consistency",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-s3-consistency",
             "termId": "s3-consistency",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の成功した更新後の読取りを扱う。CDNや複製の鮮度は別。"
           },
           {
             "candidateId": "candidate-dynamodb",
             "termId": "dynamodb",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBのキーアクセスが要件に合う。"
           },
           {
             "candidateId": "candidate-dynamodb-ttl",
             "termId": "dynamodb-ttl",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDB項目の期限後削除が必要。指定秒の削除やキャッシュ失効は保証しない。"
           },
           {
             "candidateId": "candidate-performance",
             "termId": "performance",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -2642,71 +2642,71 @@
           {
             "candidateId": "candidate-read-replica",
             "termId": "read-replica",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応DBの読取り分散が必要で、複製遅延を許容する。"
           },
           {
             "candidateId": "candidate-aurora-replica",
             "termId": "aurora-replica",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "Auroraを採用し、読取り分散または昇格先を必要とする。"
           },
           {
             "candidateId": "candidate-rds",
             "termId": "rds",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リレーショナルDBを採用する。"
           },
           {
             "candidateId": "candidate-replication",
             "termId": "replication",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-consistency",
             "termId": "consistency",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-performance",
             "termId": "performance",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-gsi",
             "termId": "gsi",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBで別キーの問い合わせが必要。結果整合性の索引でありRDSレプリカではない。"
           },
           {
             "candidateId": "candidate-partition-key",
             "termId": "partition-key",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBのキー分散を設計する。"
           },
           {
             "candidateId": "candidate-rcu",
             "termId": "rcu",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの読取りサイズ・整合性を評価する。"
           },
           {
             "candidateId": "candidate-database-cost",
             "termId": "database-cost",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -2722,106 +2722,106 @@
           {
             "candidateId": "candidate-sqs",
             "termId": "sqs",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-visibility-timeout",
             "termId": "visibility-timeout",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQS受信済み仕事の再配信時期を調整する。"
           },
           {
             "candidateId": "candidate-fifo",
             "termId": "fifo",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。"
           },
           {
             "candidateId": "candidate-queue-scaling",
             "termId": "queue-scaling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-dlq",
             "termId": "dlq",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-claim-check",
             "termId": "claim-check",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "メッセージに収まらない等の大きなデータを外部保存して参照を渡す。"
           },
           {
             "candidateId": "candidate-sns",
             "termId": "sns",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "購読先への通知配信を必要とする。"
           },
           {
             "candidateId": "candidate-fanout",
             "termId": "fanout",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "一つの通知を複数の独立した処理先へ配る。"
           },
           {
             "candidateId": "candidate-eventbridge",
             "termId": "eventbridge",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "イベントの振り分けが必要。"
           },
           {
             "candidateId": "candidate-s3",
             "termId": "s3",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "candidateId": "candidate-ec2",
             "termId": "ec2",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "candidateId": "candidate-lambda",
             "termId": "lambda",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。"
           },
           {
             "candidateId": "candidate-ecs",
             "termId": "ecs",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           },
           {
             "candidateId": "candidate-kinesis",
             "termId": "kinesis",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "保持・再読込み等を伴うストリーム処理が必要。SQSと同一ではない。"
           },
           {
             "candidateId": "candidate-firehose",
             "termId": "firehose",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "ストリームを対応先へ配送する。任意の仕事キューではない。"
           }
         ],
@@ -2837,57 +2837,57 @@
           {
             "candidateId": "candidate-idempotency",
             "termId": "idempotency",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-step-functions",
             "termId": "step-functions",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数ステップの順序・再試行を制御する。"
           },
           {
             "candidateId": "candidate-visibility-timeout",
             "termId": "visibility-timeout",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQS受信済み仕事の再配信時期を調整する。"
           },
           {
             "candidateId": "candidate-dlq",
             "termId": "dlq",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-throttling",
             "termId": "throttling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-dynamodb-transactions",
             "termId": "dynamodb-transactions",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDB複数項目の全成功・全失敗が必要。外部処理までの冪等性は別。"
           },
           {
             "candidateId": "candidate-multipart-upload",
             "termId": "multipart-upload",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "大きなS3アップロードで失敗部分を再送する。"
           },
           {
             "candidateId": "candidate-fifo",
             "termId": "fifo",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。"
           }
         ],
@@ -2903,64 +2903,64 @@
           {
             "candidateId": "candidate-spot",
             "termId": "spot",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "中断可能・再開可能な仕事で、代替戦力と期限を用意する。"
           },
           {
             "candidateId": "candidate-ec2",
             "termId": "ec2",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "candidateId": "candidate-ebs",
             "termId": "ebs",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2で永続ブロック保存を使う。"
           },
           {
             "candidateId": "candidate-s3",
             "termId": "s3",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "candidateId": "candidate-auto-scaling",
             "termId": "auto-scaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           },
           {
             "candidateId": "candidate-ami",
             "termId": "ami",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           },
           {
             "candidateId": "candidate-ebs-snapshot",
             "termId": "ebs-snapshot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。"
           },
           {
             "candidateId": "candidate-instance-store",
             "termId": "instance-store",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "消えてよい一時データに使い、永続データの代替を用意する。"
           },
           {
             "candidateId": "candidate-capacity-reservation",
             "termId": "capacity-reservation",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           }
         ],
@@ -2976,120 +2976,120 @@
           {
             "candidateId": "candidate-least-privilege",
             "termId": "least-privilege",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-iam-role",
             "termId": "iam-role",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "人やサービスへロールで権限を委任する。"
           },
           {
             "candidateId": "candidate-temporary-credentials",
             "termId": "temporary-credentials",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-resource-policy",
             "termId": "resource-policy",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース側のPrincipal・許可・拒否を設計する。"
           },
           {
             "candidateId": "candidate-explicit-deny",
             "termId": "explicit-deny",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-implicit-deny",
             "termId": "implicit-deny",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-permissions-boundary",
             "termId": "permissions-boundary",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IAM主体への権限上限を設定する。単独で許可は付与しない。"
           },
           {
             "candidateId": "candidate-abac",
             "termId": "abac",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "属性ベースの認可が適し、タグ変更権限も管理できる。"
           },
           {
             "candidateId": "candidate-task-role",
             "termId": "task-role",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "ECSアプリからAWS APIへアクセスする。"
           },
           {
             "candidateId": "candidate-scp",
             "termId": "scp",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。"
           },
           {
             "candidateId": "candidate-cross-account",
             "termId": "cross-account",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "別アカウントのリソースへアクセスする。"
           },
           {
             "candidateId": "candidate-external-id",
             "termId": "external-id",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "外部事業者が複数顧客のロールを扱う。秘密のパスワードではない。"
           },
           {
             "candidateId": "candidate-kms",
             "termId": "kms",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "KMSの暗号鍵と操作権限を必要とする。"
           },
           {
             "candidateId": "candidate-secrets-manager",
             "termId": "secrets-manager",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "認証情報の保管・更新を必要とする。"
           },
           {
             "candidateId": "candidate-block-public-access",
             "termId": "block-public-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3のパブリックアクセス設定を防御する。"
           },
           {
             "candidateId": "candidate-access-analyzer",
             "termId": "access-analyzer",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するアクセス設定の分析を行う。是正は別の行動。"
           },
           {
             "candidateId": "candidate-lake-formation",
             "termId": "lake-formation",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "データレイクの権限管理を必要とする。"
           }
         ],
@@ -3105,120 +3105,120 @@
           {
             "candidateId": "candidate-vpc-endpoint",
             "termId": "vpc-endpoint",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応AWSサービスへのエンドポイント経路を必要とする。IAM認可は別。"
           },
           {
             "candidateId": "candidate-private-link",
             "termId": "private-link",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応サービスへのプライベートIP接続を使う。Gateway endpointとは別。"
           },
           {
             "candidateId": "candidate-vpc",
             "termId": "vpc",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-subnet",
             "termId": "subnet",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-route",
             "termId": "route",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-security-group",
             "termId": "security-group",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-network-acl",
             "termId": "network-acl",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "サブネット境界でステートレスな許可・拒否を必要とする。"
           },
           {
             "candidateId": "candidate-session-manager",
             "termId": "session-manager",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Agent・IAM・到達性を整えて管理接続する。"
           },
           {
             "candidateId": "candidate-peering",
             "termId": "peering",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "2つのVPCを直接接続する。重複CIDR・推移接続に制約。"
           },
           {
             "candidateId": "candidate-transit-gateway",
             "termId": "transit-gateway",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数VPCや拠点の接続を集約する。"
           },
           {
             "candidateId": "candidate-site-to-site-vpn",
             "termId": "site-to-site-vpn",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "拠点とAWSをIPsecで接続する。"
           },
           {
             "candidateId": "candidate-direct-connect",
             "termId": "direct-connect",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "専用接続が必要。既定では暗号化されない。"
           },
           {
             "candidateId": "candidate-nat-gateway",
             "termId": "nat-gateway",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "プライベート側からの外向き通信を必要とする。閉域接続そのものではない。"
           },
           {
             "candidateId": "candidate-ipv6-egress",
             "termId": "ipv6-egress",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "IPv6の外向き通信を必要とする。"
           },
           {
             "candidateId": "candidate-longest-prefix",
             "termId": "longest-prefix",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "重なる宛先範囲の経路選択を設計する。"
           },
           {
             "candidateId": "candidate-tls",
             "termId": "tls",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "通信の暗号化と相手認証が必要。"
           },
           {
             "candidateId": "candidate-vpc-flow-logs",
             "termId": "vpc-flow-logs",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IP通信メタデータを調査する。パケット本文は記録しない。"
           }
         ],
@@ -3234,33 +3234,33 @@
           {
             "candidateId": "candidate-ami",
             "termId": "ami",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           },
           {
             "candidateId": "candidate-ecr",
             "termId": "ecr",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "コンテナイメージを保管・取得する。"
           },
           {
             "candidateId": "candidate-aws-config",
             "termId": "aws-config",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース設定履歴・準拠を調べる。修復やIaC定義とは別。"
           },
           {
             "candidateId": "candidate-control-tower",
             "termId": "control-tower",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数アカウントのランディングゾーンを整える。任意のIaC定義の代替ではない。"
           }
         ],
-        "gap": "IaCの中核となる教材候補名がない。候補追加またはビルド再検討が必要。"
+        "gap": "IaCのキーとなる教材候補名がない。候補追加またはビルド再検討が必要。"
       },
       {
         "id": "backup",
@@ -3272,99 +3272,99 @@
           {
             "candidateId": "candidate-backup",
             "termId": "backup",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-ebs-snapshot",
             "termId": "ebs-snapshot",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。"
           },
           {
             "candidateId": "candidate-point-in-time-recovery",
             "termId": "point-in-time-recovery",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応DBの保持期間内の時点へ復元したい。"
           },
           {
             "candidateId": "candidate-versioning",
             "termId": "versioning",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3オブジェクトの版を保持する。"
           },
           {
             "candidateId": "candidate-noncurrent-version",
             "termId": "noncurrent-version",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3旧版の保持・削除・費用を管理する。"
           },
           {
             "candidateId": "candidate-object-lock",
             "termId": "object-lock",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の版を一定期間保護し、適切なモードを選ぶ。"
           },
           {
             "candidateId": "candidate-restore-test",
             "termId": "restore-test",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-rpo",
             "termId": "rpo",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-s3",
             "termId": "s3",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "candidateId": "candidate-durability",
             "termId": "durability",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-archive",
             "termId": "archive",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "低頻度の長期保存で復元待ち時間と取得費を許容する。"
           },
           {
             "candidateId": "candidate-standard-ia",
             "termId": "standard-ia",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "低頻度だが即時取得が必要で、取得費等を許容する。"
           },
           {
             "candidateId": "candidate-kms",
             "termId": "kms",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "KMSの暗号鍵と操作権限を必要とする。"
           },
           {
             "candidateId": "candidate-s3-encryption",
             "termId": "s3-encryption",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の保存時暗号化を設計する。認可とは別。"
           }
         ],
@@ -3380,92 +3380,92 @@
           {
             "candidateId": "candidate-pilot-light",
             "termId": "pilot-light",
-            "role": "中核",
-            "usage": "特定条件で使える",
-            "usageCondition": "復旧先は中核だけ維持し、残りの起動時間を許容する。"
+            "role": "キー",
+            "usage": "特化",
+            "usageCondition": "復旧先はキーだけ維持し、残りの起動時間を許容する。"
           },
           {
             "candidateId": "candidate-warm-standby",
             "termId": "warm-standby",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "縮小した全体構成の維持費を払って復旧を速める。"
           },
           {
             "candidateId": "candidate-rto",
             "termId": "rto",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-rpo",
             "termId": "rpo",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-replication",
             "termId": "replication",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-s3-replication",
             "termId": "s3-replication",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3オブジェクトの別拠点への複製が必要。過去分・削除条件を確認。"
           },
           {
             "candidateId": "candidate-region",
             "termId": "region",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-route53",
             "termId": "route53",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           },
           {
             "candidateId": "candidate-restore-test",
             "termId": "restore-test",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-global-tables",
             "termId": "global-tables",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの複数リージョン読み書きが必要。整合性方式の条件を確認。"
           },
           {
             "candidateId": "candidate-ami",
             "termId": "ami",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           },
           {
             "candidateId": "candidate-availability",
             "termId": "availability",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-capacity-reservation",
             "termId": "capacity-reservation",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           }
         ],
@@ -3481,85 +3481,85 @@
           {
             "candidateId": "candidate-cloudwatch",
             "termId": "cloudwatch",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-cloudtrail",
             "termId": "cloudtrail",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "AWS API操作の履歴を調べる。"
           },
           {
             "candidateId": "candidate-aws-config",
             "termId": "aws-config",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース設定履歴・準拠を調べる。修復やIaC定義とは別。"
           },
           {
             "candidateId": "candidate-vpc-flow-logs",
             "termId": "vpc-flow-logs",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IP通信メタデータを調査する。パケット本文は記録しない。"
           },
           {
             "candidateId": "candidate-health-check",
             "termId": "health-check",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-performance",
             "termId": "performance",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "candidateId": "candidate-guardduty",
             "termId": "guardduty",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応範囲の不審な活動・脅威兆候を検出する。"
           },
           {
             "candidateId": "candidate-inspector",
             "termId": "inspector",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応ワークロードの脆弱性を調べる。"
           },
           {
             "candidateId": "candidate-macie",
             "termId": "macie",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の機密データを検出する。"
           },
           {
             "candidateId": "candidate-access-analyzer",
             "termId": "access-analyzer",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するアクセス設定の分析を行う。是正は別の行動。"
           },
           {
             "candidateId": "candidate-cost-explorer",
             "termId": "cost-explorer",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "費用・使用量を分析する。障害修復とは別。"
           },
           {
             "candidateId": "candidate-opensearch",
             "termId": "opensearch",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "全文検索やログ分析基盤を必要とする。"
           }
         ],
@@ -3579,8 +3579,8 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3600,8 +3600,8 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3635,20 +3635,20 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "rds-ha",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3668,8 +3668,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3689,8 +3689,8 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3710,8 +3710,8 @@
         "memberships": [
           {
             "buildId": "spot",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "中断可能・再開可能な仕事で、代替戦力と期限を用意する。"
           }
         ],
@@ -3731,14 +3731,14 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "消えてよい一時データに使い、永続データの代替を用意する。"
           },
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "消えてよい一時データに使い、永続データの代替を用意する。"
           }
         ],
@@ -3758,26 +3758,26 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           },
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "オブジェクト保存を採用する。"
           }
         ],
@@ -3797,14 +3797,14 @@
         "memberships": [
           {
             "buildId": "rds-ha",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リレーショナルDBを採用する。"
           },
           {
             "buildId": "read-replica",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リレーショナルDBを採用する。"
           }
         ],
@@ -3824,8 +3824,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "人やサービスへロールで権限を委任する。"
           }
         ],
@@ -3845,8 +3845,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3866,8 +3866,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3887,8 +3887,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -3908,14 +3908,14 @@
         "memberships": [
           {
             "buildId": "isolation",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。"
           },
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。"
           }
         ],
@@ -3935,8 +3935,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "別アカウントのリソースへアクセスする。"
           }
         ],
@@ -3956,8 +3956,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "外部事業者が複数顧客のロールを扱う。秘密のパスワードではない。"
           }
         ],
@@ -4033,8 +4033,8 @@
         "memberships": [
           {
             "buildId": "isolation",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数アカウントによる分離・統制を採用する。"
           }
         ],
@@ -4054,8 +4054,8 @@
         "memberships": [
           {
             "buildId": "iac",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数アカウントのランディングゾーンを整える。任意のIaC定義の代替ではない。"
           }
         ],
@@ -4075,8 +4075,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IAM主体への権限上限を設定する。単独で許可は付与しない。"
           }
         ],
@@ -4096,8 +4096,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "属性ベースの認可が適し、タグ変更権限も管理できる。"
           }
         ],
@@ -4117,8 +4117,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース側のPrincipal・許可・拒否を設計する。"
           }
         ],
@@ -4138,8 +4138,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4159,14 +4159,14 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するアクセス設定の分析を行う。是正は別の行動。"
           },
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するアクセス設定の分析を行う。是正は別の行動。"
           }
         ],
@@ -4200,8 +4200,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3のパブリックアクセス設定を防御する。"
           }
         ],
@@ -4221,8 +4221,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4242,20 +4242,20 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "isolation",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4275,8 +4275,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4310,8 +4310,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "重なる宛先範囲の経路選択を設計する。"
           }
         ],
@@ -4331,8 +4331,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4352,8 +4352,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "サブネット境界でステートレスな許可・拒否を必要とする。"
           }
         ],
@@ -4373,8 +4373,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "プライベート側からの外向き通信を必要とする。閉域接続そのものではない。"
           }
         ],
@@ -4394,8 +4394,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応AWSサービスへのエンドポイント経路を必要とする。IAM認可は別。"
           }
         ],
@@ -4415,8 +4415,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応サービスへのプライベートIP接続を使う。Gateway endpointとは別。"
           }
         ],
@@ -4436,8 +4436,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "2つのVPCを直接接続する。重複CIDR・推移接続に制約。"
           }
         ],
@@ -4457,8 +4457,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数VPCや拠点の接続を集約する。"
           }
         ],
@@ -4478,8 +4478,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "拠点とAWSをIPsecで接続する。"
           }
         ],
@@ -4499,8 +4499,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "専用接続が必要。既定では暗号化されない。"
           }
         ],
@@ -4520,8 +4520,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "IPv6の外向き通信を必要とする。"
           }
         ],
@@ -4541,14 +4541,14 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IP通信メタデータを調査する。パケット本文は記録しない。"
           },
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "IP通信メタデータを調査する。パケット本文は記録しない。"
           }
         ],
@@ -4568,8 +4568,8 @@
         "memberships": [
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Agent・IAM・到達性を整えて管理接続する。"
           }
         ],
@@ -4589,26 +4589,26 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           },
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を処理基盤に採用する。"
           }
         ],
@@ -4628,14 +4628,14 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "TCP/UDP/TLSや固定IP等の要件がある。"
           },
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "TCP/UDP/TLSや固定IP等の要件がある。"
           }
         ],
@@ -4655,20 +4655,20 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           },
           {
             "buildId": "autoscaling",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           },
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。"
           }
         ],
@@ -4688,8 +4688,8 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "追跡に適した負荷指標と目標値がある。"
           }
         ],
@@ -4709,8 +4709,8 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "需要が増える時刻を予測できる。"
           }
         ],
@@ -4730,8 +4730,8 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の初期化待ちを短縮したい。待機費用も許容する。"
           }
         ],
@@ -4751,20 +4751,20 @@
         "memberships": [
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           },
           {
             "buildId": "iac",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2の起動イメージが必要。業務データの継続バックアップとは別。"
           }
         ],
@@ -4784,20 +4784,20 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           },
           {
             "buildId": "spot",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。"
           }
         ],
@@ -4817,14 +4817,14 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。"
           },
           {
             "buildId": "isolation",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。"
           }
         ],
@@ -4844,8 +4844,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4865,8 +4865,8 @@
         "memberships": [
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2で永続ブロック保存を使う。"
           }
         ],
@@ -4886,8 +4886,8 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "共有NFSファイルアクセスが必要で、モードと到達性を設計する。"
           }
         ],
@@ -4907,8 +4907,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EBS gp3の性能調整が要件に合う。"
           }
         ],
@@ -4928,8 +4928,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "厳しいIOPS・遅延要件があり、費用を許容する。"
           }
         ],
@@ -4949,8 +4949,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -4970,8 +4970,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "低頻度だが即時取得が必要で、取得費等を許容する。"
           }
         ],
@@ -4991,8 +4991,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "S3のアクセス変動に適し、監視費・対象条件を許容する。"
           }
         ],
@@ -5012,8 +5012,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "低頻度の長期保存で復元待ち時間と取得費を許容する。"
           }
         ],
@@ -5033,8 +5033,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3オブジェクトの版を保持する。"
           }
         ],
@@ -5054,8 +5054,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3旧版の保持・削除・費用を管理する。"
           }
         ],
@@ -5075,8 +5075,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の版を一定期間保護し、適切なモードを選ぶ。"
           }
         ],
@@ -5110,14 +5110,14 @@
         "memberships": [
           {
             "buildId": "spot",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。"
           },
           {
             "buildId": "backup",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。"
           }
         ],
@@ -5137,8 +5137,8 @@
         "memberships": [
           {
             "buildId": "safe-retry",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "大きなS3アップロードで失敗部分を再送する。"
           }
         ],
@@ -5158,8 +5158,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "遠隔からS3へのアップロード改善が実測で有効。CDNの結果キャッシュとは別。"
           }
         ],
@@ -5179,8 +5179,8 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の成功した更新後の読取りを扱う。CDNや複製の鮮度は別。"
           }
         ],
@@ -5200,8 +5200,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の保存時暗号化を設計する。認可とは別。"
           }
         ],
@@ -5221,8 +5221,8 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3オブジェクトの別拠点への複製が必要。過去分・削除条件を確認。"
           }
         ],
@@ -5242,8 +5242,8 @@
         "memberships": [
           {
             "buildId": "rds-ha",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "RDSを用いる。単一スタンバイとDBクラスターの方式を区別する。"
           }
         ],
@@ -5263,8 +5263,8 @@
         "memberships": [
           {
             "buildId": "read-replica",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応DBの読取り分散が必要で、複製遅延を許容する。"
           }
         ],
@@ -5284,8 +5284,8 @@
         "memberships": [
           {
             "buildId": "rds-ha",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "RDSの単一スタンバイ配置を用いる。平時のSELECTには使わない。"
           }
         ],
@@ -5305,8 +5305,8 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBのキーアクセスが要件に合う。"
           }
         ],
@@ -5326,8 +5326,8 @@
         "memberships": [
           {
             "buildId": "read-replica",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBのキー分散を設計する。"
           }
         ],
@@ -5347,8 +5347,8 @@
         "memberships": [
           {
             "buildId": "read-replica",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBで別キーの問い合わせが必要。結果整合性の索引でありRDSレプリカではない。"
           }
         ],
@@ -5368,14 +5368,14 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "read-replica",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -5395,8 +5395,8 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの要求ベース容量課金が適する。"
           }
         ],
@@ -5416,8 +5416,8 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDB項目の期限後削除が必要。指定秒の削除やキャッシュ失効は保証しない。"
           }
         ],
@@ -5437,8 +5437,8 @@
         "memberships": [
           {
             "buildId": "safe-retry",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDB複数項目の全成功・全失敗が必要。外部処理までの冪等性は別。"
           }
         ],
@@ -5458,8 +5458,8 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "DynamoDBの結果整合性の繰り返し読取りに適する。"
           }
         ],
@@ -5479,14 +5479,14 @@
         "memberships": [
           {
             "buildId": "rds-ha",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。"
           },
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。"
           }
         ],
@@ -5506,8 +5506,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "対応DBの保持期間内の時点へ復元したい。"
           }
         ],
@@ -5527,14 +5527,14 @@
         "memberships": [
           {
             "buildId": "rds-ha",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Auroraを採用し、読取り分散または昇格先を必要とする。"
           },
           {
             "buildId": "read-replica",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "Auroraを採用し、読取り分散または昇格先を必要とする。"
           }
         ],
@@ -5554,8 +5554,8 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの複数リージョン読み書きが必要。整合性方式の条件を確認。"
           }
         ],
@@ -5575,8 +5575,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -5596,14 +5596,14 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "read-replica",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -5623,8 +5623,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -5644,8 +5644,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -5665,20 +5665,20 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           },
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSによる宛先案内や切替を使う。TTL・検出遅延がある。"
           }
         ],
@@ -5698,14 +5698,14 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。"
           },
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。"
           }
         ],
@@ -5725,8 +5725,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPS配信が対象。キャッシュ可能性・更新条件を設計する。"
           }
         ],
@@ -5746,14 +5746,14 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数要求が同じ結果を共有できる範囲を識別する。"
           },
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数要求が同じ結果を共有できる範囲を識別する。"
           }
         ],
@@ -5773,8 +5773,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "TCP/UDPの通信経路改善や静的IPが必要。キャッシュではない。"
           }
         ],
@@ -5794,8 +5794,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応するCloudFrontオリジンへのアクセスを制限する。"
           }
         ],
@@ -5815,8 +5815,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "期限などを限定した配信アクセスが必要。"
           }
         ],
@@ -5836,14 +5836,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。"
           }
         ],
@@ -5863,8 +5863,8 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "Lambdaの同時実行数を設計する。"
           }
         ],
@@ -5884,20 +5884,20 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           },
           {
             "buildId": "serverless",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。"
           }
         ],
@@ -5917,8 +5917,8 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "コンテナタスクを採用する。イベントごとの瞬時起動を保証しない。"
           }
         ],
@@ -5938,8 +5938,8 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "Kubernetesによる実行管理を必要とする。"
           }
         ],
@@ -5959,8 +5959,8 @@
         "memberships": [
           {
             "buildId": "iac",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "コンテナイメージを保管・取得する。"
           }
         ],
@@ -5980,14 +5980,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "ECSアプリからAWS APIへアクセスする。"
           },
           {
             "buildId": "least-privilege",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "ECSアプリからAWS APIへアクセスする。"
           }
         ],
@@ -6007,8 +6007,8 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "APIの入口・認証連携・流量管理を必要とする。"
           }
         ],
@@ -6028,14 +6028,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "複数ステップの順序・再試行を制御する。"
           },
           {
             "buildId": "safe-retry",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "複数ステップの順序・再試行を制御する。"
           }
         ],
@@ -6055,14 +6055,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "別構成への橋渡し",
-            "usage": "幅広く使える",
+            "role": "コネクション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "queue",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6082,14 +6082,14 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQS受信済み仕事の再配信時期を調整する。"
           },
           {
             "buildId": "safe-retry",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQS受信済み仕事の再配信時期を調整する。"
           }
         ],
@@ -6109,14 +6109,14 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。"
           },
           {
             "buildId": "safe-retry",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。"
           }
         ],
@@ -6136,8 +6136,8 @@
         "memberships": [
           {
             "buildId": "safe-retry",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6157,14 +6157,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "購読先への通知配信を必要とする。"
           },
           {
             "buildId": "queue",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "購読先への通知配信を必要とする。"
           }
         ],
@@ -6184,8 +6184,8 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "一つの通知を複数の独立した処理先へ配る。"
           }
         ],
@@ -6205,14 +6205,14 @@
         "memberships": [
           {
             "buildId": "serverless",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "イベントの振り分けが必要。"
           },
           {
             "buildId": "queue",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "イベントの振り分けが必要。"
           }
         ],
@@ -6232,20 +6232,20 @@
         "memberships": [
           {
             "buildId": "isolation",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "safe-retry",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6265,14 +6265,14 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "別構成への橋渡し",
-            "usage": "幅広く使える",
+            "role": "コネクション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6292,8 +6292,8 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "メッセージに収まらない等の大きなデータを外部保存して参照を渡す。"
           }
         ],
@@ -6313,14 +6313,14 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "KMSの暗号鍵と操作権限を必要とする。"
           },
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "KMSの暗号鍵と操作権限を必要とする。"
           }
         ],
@@ -6340,8 +6340,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "認証情報の保管・更新を必要とする。"
           }
         ],
@@ -6361,14 +6361,14 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "通信の暗号化と相手認証が必要。"
           },
           {
             "buildId": "private-access",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "通信の暗号化と相手認証が必要。"
           }
         ],
@@ -6388,8 +6388,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTPリクエストの検査・制御が必要。"
           }
         ],
@@ -6409,8 +6409,8 @@
         "memberships": [
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応範囲の不審な活動・脅威兆候を検出する。"
           }
         ],
@@ -6430,8 +6430,8 @@
         "memberships": [
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "対応ワークロードの脆弱性を調べる。"
           }
         ],
@@ -6451,8 +6451,8 @@
         "memberships": [
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "S3の機密データを検出する。"
           }
         ],
@@ -6472,8 +6472,8 @@
         "memberships": [
           {
             "buildId": "cdn",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DDoSへの保護が必要。"
           }
         ],
@@ -6493,14 +6493,14 @@
         "memberships": [
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "observability",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6520,8 +6520,8 @@
         "memberships": [
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "AWS API操作の履歴を調べる。"
           }
         ],
@@ -6541,14 +6541,14 @@
         "memberships": [
           {
             "buildId": "iac",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース設定履歴・準拠を調べる。修復やIaC定義とは別。"
           },
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "リソース設定履歴・準拠を調べる。修復やIaC定義とは別。"
           }
         ],
@@ -6568,8 +6568,8 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6589,14 +6589,14 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6608,7 +6608,7 @@
         "id": "candidate-pilot-light",
         "termId": "pilot-light",
         "name": "パイロットライト",
-        "meaning": "復旧先で中核だけを維持し、障害時に残りを起動する戦略。",
+        "meaning": "復旧先でキーだけを維持し、障害時に残りを起動する戦略。",
         "sourceRef": {
           "path": "src/content/index.ts",
           "locator": "pilot-light"
@@ -6616,9 +6616,9 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "中核",
-            "usage": "特定条件で使える",
-            "usageCondition": "復旧先は中核だけ維持し、残りの起動時間を許容する。"
+            "role": "キー",
+            "usage": "特化",
+            "usageCondition": "復旧先はキーだけ維持し、残りの起動時間を許容する。"
           }
         ],
         "commonStarterCandidate": false,
@@ -6637,8 +6637,8 @@
         "memberships": [
           {
             "buildId": "disaster-recovery",
-            "role": "中核",
-            "usage": "特定条件で使える",
+            "role": "キー",
+            "usage": "特化",
             "usageCondition": "縮小した全体構成の維持費を払って復旧を速める。"
           }
         ],
@@ -6658,8 +6658,8 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6679,14 +6679,14 @@
         "memberships": [
           {
             "buildId": "backup",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6706,14 +6706,14 @@
         "memberships": [
           {
             "buildId": "read-replica",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "disaster-recovery",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6789,26 +6789,26 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "cache",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "read-replica",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6828,8 +6828,8 @@
         "memberships": [
           {
             "buildId": "cache",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6849,8 +6849,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "継続利用の予測と利用額コミットが可能。容量予約ではない。"
           }
         ],
@@ -6870,8 +6870,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -6933,8 +6933,8 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "保持・再読込み等を伴うストリーム処理が必要。SQSと同一ではない。"
           }
         ],
@@ -6954,8 +6954,8 @@
         "memberships": [
           {
             "buildId": "queue",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "ストリームを対応先へ配送する。任意の仕事キューではない。"
           }
         ],
@@ -6975,8 +6975,8 @@
         "memberships": [
           {
             "buildId": "observability",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "全文検索やログ分析基盤を必要とする。"
           }
         ],
@@ -6996,8 +6996,8 @@
         "memberships": [
           {
             "buildId": "least-privilege",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "データレイクの権限管理を必要とする。"
           }
         ],
@@ -7017,8 +7017,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "期間・属性等の契約条件が合う。スコープで容量予約の扱いが異なる。"
           }
         ],
@@ -7038,8 +7038,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "休止対応条件を満たし、RAM状態を保持して再開したい。"
           }
         ],
@@ -7059,8 +7059,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "EC2を止められる時間帯がある。保持費は残る。"
           }
         ],
@@ -7080,14 +7080,14 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの読取りサイズ・整合性を評価する。"
           },
           {
             "buildId": "read-replica",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの読取りサイズ・整合性を評価する。"
           }
         ],
@@ -7107,8 +7107,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "DynamoDBの書込みサイズ・トランザクションを評価する。"
           }
         ],
@@ -7128,14 +7128,14 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "費用・使用量を分析する。障害修復とは別。"
           },
           {
             "buildId": "observability",
-            "role": "別構成への橋渡し",
-            "usage": "特定条件で使える",
+            "role": "コネクション",
+            "usage": "特化",
             "usageCondition": "費用・使用量を分析する。障害修復とは別。"
           }
         ],
@@ -7155,8 +7155,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7176,8 +7176,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7197,8 +7197,8 @@
         "memberships": [
           {
             "buildId": "rightsizing",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7246,14 +7246,14 @@
         "memberships": [
           {
             "buildId": "isolation",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "safe-retry",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7273,32 +7273,32 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "rds-ha",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "isolation",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           },
           {
             "buildId": "observability",
-            "role": "強化・安定化",
-            "usage": "幅広く使える",
+            "role": "オプション",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7318,20 +7318,20 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           },
           {
             "buildId": "isolation",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           },
           {
             "buildId": "autoscaling",
-            "role": "強化・安定化",
-            "usage": "特定条件で使える",
+            "role": "オプション",
+            "usage": "特化",
             "usageCondition": "HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。"
           }
         ],
@@ -7351,8 +7351,8 @@
         "memberships": [
           {
             "buildId": "multi-az",
-            "role": "中核",
-            "usage": "幅広く使える",
+            "role": "キー",
+            "usage": "汎用",
             "usageCondition": "このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。"
           }
         ],
@@ -7365,16 +7365,16 @@
       "role": {
         "description": "このビルドに対して何を担うか。強さ・レア度・単独成立を表さない。",
         "values": {
-          "中核": "ビルド固有の仕組みや判断軸を作る。",
-          "強化・安定化": "処理を伸ばす、基盤を用意する、弱点を補う。",
-          "別構成への橋渡し": "別の仕組みや他ビルドへの移行・混成に接続する。"
+          "キー": "ビルド固有の仕組みや判断軸を作る。",
+          "オプション": "処理を伸ばす、基盤を用意する、弱点を補う。",
+          "コネクション": "別の仕組みや他ビルドへの移行・混成に接続する。"
         }
       },
       "usage": {
         "description": "このビルド内での適用範囲。幅広い場合も前提や制約はある。",
         "values": {
-          "幅広く使える": "このビルドの多くの構成で検討できる。",
-          "特定条件で使える": "対象サービス、仕事の性質、接続方式などの追加条件が必要。"
+          "汎用": "このビルドの多くの構成で検討できる。",
+          "特化": "対象サービス、仕事の性質、接続方式などの追加条件が必要。"
         }
       }
     }

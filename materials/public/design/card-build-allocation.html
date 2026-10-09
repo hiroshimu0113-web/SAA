@@ -1,420 +1,420 @@
 <!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>6キャラ・18ビルドと教材カード候補</title><style>body{font:16px/1.75 -apple-system,BlinkMacSystemFont,sans-serif;background:#f4f6fa;color:#17233b;margin:0;padding:24px}main{max-width:1100px;margin:auto}section,article{background:white;padding:20px;margin:18px 0;border-radius:12px}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #dce2ec;text-align:left;padding:10px;vertical-align:top}code{overflow-wrap:anywhere;font-size:12px}input{font:inherit;padding:10px;width:90%}.scroll{overflow-x:auto}a{color:#205db5}.warn{color:#a33}small{display:block;color:#54617a}@media(max-width:600px){body{padding:12px}section,article{padding:12px}td,th{padding:6px}}@media print{input{display:none}article{break-inside:avoid}}</style><main><h1>6キャラ・18ビルドと教材カード候補</h1><p>設計案／ゲーム未実装。教材の名称・意味を保持し、ビルドへの接続を整理。</p>
-<p>候補 <b>168</b>件／ビルド所属 <b>151</b>件／未所属 <b>17</b>件／重複を含む所属 <b>215</b>件。</p><ul><li>6キャラ各3ビルド。所属は重複可。</li><li>共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。</li><li>HPを0にしてタスク完了。追加勝利パラメータは採用しない。</li><li>分類はカード効果・排出率・最終プールの実装ではない。</li><li>未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。</li><li>役割と用途を独立に分類する。特定条件向けの中核や、幅広く使える橋渡しもあり得る。</li></ul><p>役割と用途は別の軸です。中核でも特定条件向けの場合があり、橋渡しでも幅広く使える場合があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav><a href="#b-multi-az">守護者／分散要塞</a>　<a href="#b-rds-ha">守護者／継承</a>　<a href="#b-isolation">守護者／隔離</a>　<a href="#b-autoscaling">調律師／増援</a>　<a href="#b-serverless">調律師／即応</a>　<a href="#b-rightsizing">調律師／精鋭</a>　<a href="#b-cdn">加速者／配信</a>　<a href="#b-cache">加速者／記憶</a>　<a href="#b-read-replica">加速者／読取分散</a>　<a href="#b-queue">指揮者／蓄積</a>　<a href="#b-safe-retry">指揮者／再挑戦</a>　<a href="#b-spot">指揮者／機会活用</a>　<a href="#b-least-privilege">構築士／権限設計</a>　<a href="#b-private-access">構築士／閉域接続</a>　<a href="#b-iac">構築士／再現構築</a>　<a href="#b-backup">復旧者／保存</a>　<a href="#b-disaster-recovery">復旧者／待機</a>　<a href="#b-observability">復旧者／観測</a>　<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>
-<section id="axes"><h2>分類基準：役割 × 用途</h2>
-<p>このビルドに対して何を担うか。強さ・レア度・単独成立を表さない。</p><ul><li><b>中核</b>：ビルド固有の仕組みや判断軸を作る。</li><li><b>強化・安定化</b>：処理を伸ばす、基盤を用意する、弱点を補う。</li><li><b>別構成への橋渡し</b>：別の仕組みや他ビルドへの移行・混成に接続する。</li></ul>
-<p>このビルド内での適用範囲。幅広い場合も前提や制約はある。</p><ul><li><b>幅広く使える</b>：このビルドの多くの構成で検討できる。</li><li><b>特定条件で使える</b>：対象サービス、仕事の性質、接続方式などの追加条件が必要。</li></ul>
-<p>「特定条件で使える」は不要という意味ではありません。条件が合えば中核にもなります。この分類だけでデッキの成立や強さは判定できず、カード効果を決めてから再確認します。未所属候補の2軸は所属先が決まってから設定します。</p></section>
+<p>候補 <b>168</b>件／ビルド所属 <b>151</b>件／未所属 <b>17</b>件／重複を含む所属 <b>215</b>件。</p><ul><li>6キャラ各3ビルド。所属は重複可。</li><li>共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。</li><li>HPを0にしてタスク完了。追加勝利パラメータは採用しない。</li><li>分類はカード効果・排出率・最終プールの実装ではない。</li><li>未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。</li><li>役割と分類を独立に分類する。特定条件向けのキーや、汎用橋渡しもあり得る。</li></ul><p>役割と分類は別の軸です。キーでも特定条件向けの場合があり、コネクションでも汎用場合があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav><a href="#b-multi-az">守護者／分散要塞</a>　<a href="#b-rds-ha">守護者／継承</a>　<a href="#b-isolation">守護者／隔離</a>　<a href="#b-autoscaling">調律師／増援</a>　<a href="#b-serverless">調律師／即応</a>　<a href="#b-rightsizing">調律師／精鋭</a>　<a href="#b-cdn">加速者／配信</a>　<a href="#b-cache">加速者／記憶</a>　<a href="#b-read-replica">加速者／読取分散</a>　<a href="#b-queue">指揮者／蓄積</a>　<a href="#b-safe-retry">指揮者／再挑戦</a>　<a href="#b-spot">指揮者／機会活用</a>　<a href="#b-least-privilege">構築士／権限設計</a>　<a href="#b-private-access">構築士／閉域接続</a>　<a href="#b-iac">構築士／再現構築</a>　<a href="#b-backup">復旧者／保存</a>　<a href="#b-disaster-recovery">復旧者／待機</a>　<a href="#b-observability">復旧者／観測</a>　<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>
+<section id="axes"><h2>分類基準：役割 × 分類</h2>
+<p>このビルドに対して何を担うか。強さ・レア度・単独成立を表さない。</p><ul><li><b>キー</b>：ビルド固有の仕組みや判断軸を作る。</li><li><b>オプション</b>：処理を伸ばす、基盤を用意する、弱点を補う。</li><li><b>コネクション</b>：別の仕組みや他ビルドへの移行・混成に接続する。</li></ul>
+<p>このビルド内での適用範囲。幅広い場合も前提や制約はある。</p><ul><li><b>汎用</b>：このビルドの多くの構成で検討できる。</li><li><b>特化</b>：対象サービス、仕事の性質、接続方式などの追加条件が必要。</li></ul>
+<p>「特化」は不要という意味ではありません。条件が合えばキーにもなります。この分類だけでデッキの成立や強さは判定できず、カード効果を決めてから再確認します。未所属候補の2軸は所属先が決まってから設定します。</p></section>
 <section id="b-multi-az"><h2>守護者：分散要塞ビルド</h2><p>分散した戦力を残して攻撃を継続する。残存容量とデータ到達性が必要。</p>
-<h3>中核（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-az">アベイラビリティーゾーン（AZ）</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-availability">可用性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-remaining-capacity">残存容量</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>キー（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-az">アベイラビリティーゾーン（AZ）</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-availability">可用性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-remaining-capacity">残存容量</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>強化・安定化（7種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-alb">Application Load Balancer</a></td><td>特定条件で使える</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-health-check">ヘルスチェック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-subnet">サブネット</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2">Amazon EC2</a></td><td>特定条件で使える</td><td>EC2を処理基盤に採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-placement-group">プレイスメントグループ</a></td><td>特定条件で使える</td><td>EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-nlb">Network Load Balancer</a></td><td>特定条件で使える</td><td>TCP/UDP/TLSや固定IP等の要件がある。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-efs">Amazon EFS</a></td><td>特定条件で使える</td><td>共有NFSファイルアクセスが必要で、モードと到達性を設計する。</td></tr>
+<h3>オプション（7種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-alb">Application Load Balancer</a></td><td>特化</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-subnet">サブネット</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-placement-group">プレイスメントグループ</a></td><td>特化</td><td>EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-nlb">Network Load Balancer</a></td><td>特化</td><td>TCP/UDP/TLSや固定IP等の要件がある。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-efs">Amazon EFS</a></td><td>特化</td><td>共有NFSファイルアクセスが必要で、モードと到達性を設計する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特定条件で使える</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-route53">Route 53</a></td><td>特定条件で使える</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特化</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-route53">Route 53</a></td><td>特化</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
 </table></div>
 </section>
 <section id="b-rds-ha"><h2>守護者：継承ビルド</h2><p>主力停止後に待機系へ交代する。単一スタンバイは平時の読取り攻撃に使わない。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-rds-multi-az">RDS Multi-AZ</a></td><td>特定条件で使える</td><td>RDSを用いる。単一スタンバイとDBクラスターの方式を区別する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-rds-standby">RDSの単一スタンバイ</a></td><td>特定条件で使える</td><td>RDSの単一スタンバイ配置を用いる。平時のSELECTには使わない。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-rds-multi-az">RDS Multi-AZ</a></td><td>特化</td><td>RDSを用いる。単一スタンバイとDBクラスターの方式を区別する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-rds-standby">RDSの単一スタンバイ</a></td><td>特化</td><td>RDSの単一スタンバイ配置を用いる。平時のSELECTには使わない。</td></tr>
 </table></div>
-<h3>強化・安定化（4種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-rds">Amazon RDS</a></td><td>特定条件で使える</td><td>リレーショナルDBを採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-health-check">ヘルスチェック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-availability">可用性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-rds-proxy">RDS Proxy</a></td><td>特定条件で使える</td><td>対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。</td></tr>
+<h3>オプション（4種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-rds">Amazon RDS</a></td><td>特化</td><td>リレーショナルDBを採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-availability">可用性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-rds-proxy">RDS Proxy</a></td><td>特化</td><td>対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-aurora-replica">Aurora Replica</a></td><td>特定条件で使える</td><td>Auroraを採用し、読取り分散または昇格先を必要とする。</td></tr>
+<h3>コネクション（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-aurora-replica">Aurora Replica</a></td><td>特化</td><td>Auroraを採用し、読取り分散または昇格先を必要とする。</td></tr>
 </table></div>
 </section>
 <section id="b-isolation"><h2>守護者：隔離ビルド</h2><p>妨害の波及を抑える。配置・流量制御・失敗隔離は別の仕組みであり万能な遮断ではない。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-placement-group">プレイスメントグループ</a></td><td>特定条件で使える</td><td>EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-placement-group">プレイスメントグループ</a></td><td>特化</td><td>EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。</td></tr>
 </table></div>
-<h3>強化・安定化（5種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-subnet">サブネット</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-throttling">スロットリング</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-dlq">デッドレターキュー</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-health-check">ヘルスチェック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-alb">Application Load Balancer</a></td><td>特定条件で使える</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
+<h3>オプション（5種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-subnet">サブネット</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-throttling">スロットリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-dlq">デッドレターキュー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-alb">Application Load Balancer</a></td><td>特化</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-organizations">AWS Organizations</a></td><td>特定条件で使える</td><td>複数アカウントによる分離・統制を採用する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-scp">サービスコントロールポリシー（SCP）</a></td><td>特定条件で使える</td><td>Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-organizations">AWS Organizations</a></td><td>特化</td><td>複数アカウントによる分離・統制を採用する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-scp">サービスコントロールポリシー（SCP）</a></td><td>特化</td><td>Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。</td></tr>
 </table></div>
 </section>
 <section id="b-autoscaling"><h2>調律師：増援ビルド</h2><p>負荷に応じ戦力を追加する。起動待ちと下流の容量が弱点。</p>
-<h3>中核（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特定条件で使える</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-target-tracking">ターゲット追跡スケーリング</a></td><td>特定条件で使える</td><td>追跡に適した負荷指標と目標値がある。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-scheduled-scaling">予定スケーリング</a></td><td>特定条件で使える</td><td>需要が増える時刻を予測できる。</td></tr>
+<h3>キー（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特化</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-target-tracking">ターゲット追跡スケーリング</a></td><td>特化</td><td>追跡に適した負荷指標と目標値がある。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-scheduled-scaling">予定スケーリング</a></td><td>特化</td><td>需要が増える時刻を予測できる。</td></tr>
 </table></div>
-<h3>強化・安定化（8種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-scaling">スケーリング</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2">Amazon EC2</a></td><td>特定条件で使える</td><td>EC2を処理基盤に採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-cloudwatch">CloudWatch</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-health-check">ヘルスチェック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-warm-pool">Warm Pool</a></td><td>特定条件で使える</td><td>EC2の初期化待ちを短縮したい。待機費用も許容する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-nlb">Network Load Balancer</a></td><td>特定条件で使える</td><td>TCP/UDP/TLSや固定IP等の要件がある。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-alb">Application Load Balancer</a></td><td>特定条件で使える</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特定条件で使える</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
+<h3>オプション（8種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-scaling">スケーリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-cloudwatch">CloudWatch</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-warm-pool">Warm Pool</a></td><td>特化</td><td>EC2の初期化待ちを短縮したい。待機費用も許容する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-nlb">Network Load Balancer</a></td><td>特化</td><td>TCP/UDP/TLSや固定IP等の要件がある。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-alb">Application Load Balancer</a></td><td>特化</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特化</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="幅広く使える"><td><a href="#c-queue-scaling">キューに基づくスケーリング</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-ecs">ECS</a></td><td>特定条件で使える</td><td>コンテナタスクを採用する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-eks">EKS</a></td><td>特定条件で使える</td><td>Kubernetesによる実行管理を必要とする。</td></tr>
+<h3>コネクション（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="汎用"><td><a href="#c-queue-scaling">キューに基づくスケーリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-ecs">ECS</a></td><td>特化</td><td>コンテナタスクを採用する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-eks">EKS</a></td><td>特化</td><td>Kubernetesによる実行管理を必要とする。</td></tr>
 </table></div>
 </section>
 <section id="b-serverless"><h2>調律師：即応ビルド</h2><p>必要時に処理を起動する。同時実行上限や接続先の限界を消せない。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-lambda">Lambda</a></td><td>特定条件で使える</td><td>関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-fargate">Fargate</a></td><td>特定条件で使える</td><td>コンテナタスクを採用する。イベントごとの瞬時起動を保証しない。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-lambda">Lambda</a></td><td>特化</td><td>関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-fargate">Fargate</a></td><td>特化</td><td>コンテナタスクを採用する。イベントごとの瞬時起動を保証しない。</td></tr>
 </table></div>
-<h3>強化・安定化（6種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-lambda-concurrency">同時実行</a></td><td>特定条件で使える</td><td>Lambdaの同時実行数を設計する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-api-gateway">API Gateway</a></td><td>特定条件で使える</td><td>APIの入口・認証連携・流量管理を必要とする。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-eventbridge">EventBridge</a></td><td>特定条件で使える</td><td>イベントの振り分けが必要。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-dynamodb-on-demand">DynamoDBオンデマンド容量</a></td><td>特定条件で使える</td><td>DynamoDBの要求ベース容量課金が適する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-rds-proxy">RDS Proxy</a></td><td>特定条件で使える</td><td>対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-task-role">タスクロール</a></td><td>特定条件で使える</td><td>ECSアプリからAWS APIへアクセスする。</td></tr>
+<h3>オプション（6種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-lambda-concurrency">同時実行</a></td><td>特化</td><td>Lambdaの同時実行数を設計する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-api-gateway">API Gateway</a></td><td>特化</td><td>APIの入口・認証連携・流量管理を必要とする。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-eventbridge">EventBridge</a></td><td>特化</td><td>イベントの振り分けが必要。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-dynamodb-on-demand">DynamoDBオンデマンド容量</a></td><td>特化</td><td>DynamoDBの要求ベース容量課金が適する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-rds-proxy">RDS Proxy</a></td><td>特化</td><td>対応DBへの接続数・接続再利用が課題になる。SQL結果キャッシュではない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-task-role">タスクロール</a></td><td>特化</td><td>ECSアプリからAWS APIへアクセスする。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（4種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="幅広く使える"><td><a href="#c-sqs">SQS</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-sns">SNS</a></td><td>特定条件で使える</td><td>購読先への通知配信を必要とする。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-step-functions">Step Functions</a></td><td>特定条件で使える</td><td>複数ステップの順序・再試行を制御する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-ecs">ECS</a></td><td>特定条件で使える</td><td>コンテナタスクを採用する。</td></tr>
+<h3>コネクション（4種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="汎用"><td><a href="#c-sqs">SQS</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-sns">SNS</a></td><td>特化</td><td>購読先への通知配信を必要とする。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-step-functions">Step Functions</a></td><td>特化</td><td>複数ステップの順序・再試行を制御する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-ecs">ECS</a></td><td>特化</td><td>コンテナタスクを採用する。</td></tr>
 </table></div>
 </section>
 <section id="b-rightsizing"><h2>調律師：精鋭ビルド</h2><p>能力と維持費を調整する。契約割引は性能強化や容量確保とは別。</p>
-<h3>中核（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-instance-family">インスタンスファミリー</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-cost-optimization">コスト最適化</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-performance">ボトルネック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>キー（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-instance-family">インスタンスファミリー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-cost-optimization">コスト最適化</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-performance">ボトルネック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>強化・安定化（16種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-storage-performance">IOPSとスループット</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-gp3">gp3</a></td><td>特定条件で使える</td><td>EBS gp3の性能調整が要件に合う。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-provisioned-iops">Provisioned IOPS SSD</a></td><td>特定条件で使える</td><td>厳しいIOPS・遅延要件があり、費用を許容する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-database-selection">データモデルによるDB選定</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-database-cost">DBの総費用</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-network-cost">ネットワークの総費用</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-storage-cost">ストレージの総費用</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cost-explorer">AWS Cost Explorer</a></td><td>特定条件で使える</td><td>費用・使用量を分析する。障害修復とは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-budgets">AWS Budgets</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-cur">Cost and Usage Report（CUR）</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-cost-allocation">コスト配分タグ</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2-stop">EC2停止</a></td><td>特定条件で使える</td><td>EC2を止められる時間帯がある。保持費は残る。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-rcu">RCU</a></td><td>特定条件で使える</td><td>DynamoDBの読取りサイズ・整合性を評価する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-wcu">WCU</a></td><td>特定条件で使える</td><td>DynamoDBの書込みサイズ・トランザクションを評価する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2-hibernation">EC2休止</a></td><td>特定条件で使える</td><td>休止対応条件を満たし、RAM状態を保持して再開したい。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-instance-store">インスタンスストア</a></td><td>特定条件で使える</td><td>消えてよい一時データに使い、永続データの代替を用意する。</td></tr>
+<h3>オプション（16種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-storage-performance">IOPSとスループット</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-gp3">gp3</a></td><td>特化</td><td>EBS gp3の性能調整が要件に合う。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-provisioned-iops">Provisioned IOPS SSD</a></td><td>特化</td><td>厳しいIOPS・遅延要件があり、費用を許容する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-database-selection">データモデルによるDB選定</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-database-cost">DBの総費用</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-network-cost">ネットワークの総費用</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-storage-cost">ストレージの総費用</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cost-explorer">AWS Cost Explorer</a></td><td>特化</td><td>費用・使用量を分析する。障害修復とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-budgets">AWS Budgets</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-cur">Cost and Usage Report（CUR）</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-cost-allocation">コスト配分タグ</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2-stop">EC2停止</a></td><td>特化</td><td>EC2を止められる時間帯がある。保持費は残る。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-rcu">RCU</a></td><td>特化</td><td>DynamoDBの読取りサイズ・整合性を評価する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-wcu">WCU</a></td><td>特化</td><td>DynamoDBの書込みサイズ・トランザクションを評価する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2-hibernation">EC2休止</a></td><td>特化</td><td>休止対応条件を満たし、RAM状態を保持して再開したい。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-instance-store">インスタンスストア</a></td><td>特化</td><td>消えてよい一時データに使い、永続データの代替を用意する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-savings-plans">Savings Plans</a></td><td>特定条件で使える</td><td>継続利用の予測と利用額コミットが可能。容量予約ではない。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-reserved-instances">Reserved Instances（RI）</a></td><td>特定条件で使える</td><td>期間・属性等の契約条件が合う。スコープで容量予約の扱いが異なる。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-intelligent-tiering">S3 Intelligent-Tiering</a></td><td>特定条件で使える</td><td>S3のアクセス変動に適し、監視費・対象条件を許容する。</td></tr>
+<h3>コネクション（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-savings-plans">Savings Plans</a></td><td>特化</td><td>継続利用の予測と利用額コミットが可能。容量予約ではない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-reserved-instances">Reserved Instances（RI）</a></td><td>特化</td><td>期間・属性等の契約条件が合う。スコープで容量予約の扱いが異なる。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-intelligent-tiering">S3 Intelligent-Tiering</a></td><td>特化</td><td>S3のアクセス変動に適し、監視費・対象条件を許容する。</td></tr>
 </table></div>
 </section>
 <section id="b-cdn"><h2>加速者：配信ビルド</h2><p>繰り返し配信を効率化する。Global Acceleratorは経路改善でありキャッシュではない。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-cloudfront">CloudFront</a></td><td>特定条件で使える</td><td>HTTP/HTTPS配信が対象。キャッシュ可能性・更新条件を設計する。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-cloudfront">CloudFront</a></td><td>特化</td><td>HTTP/HTTPS配信が対象。キャッシュ可能性・更新条件を設計する。</td></tr>
 </table></div>
-<h3>強化・安定化（9種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3">Amazon S3</a></td><td>特定条件で使える</td><td>オブジェクト保存を採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cache-key">キャッシュキー</a></td><td>特定条件で使える</td><td>複数要求が同じ結果を共有できる範囲を識別する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-dns-ttl">TTL</a></td><td>特定条件で使える</td><td>DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cloudfront-oac">OAC</a></td><td>特定条件で使える</td><td>対応するCloudFrontオリジンへのアクセスを制限する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-signed-url">署名付き URL</a></td><td>特定条件で使える</td><td>期限などを限定した配信アクセスが必要。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-route53">Route 53</a></td><td>特定条件で使える</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-tls">TLS</a></td><td>特定条件で使える</td><td>通信の暗号化と相手認証が必要。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-waf">WAF</a></td><td>特定条件で使える</td><td>HTTPリクエストの検査・制御が必要。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-shield">Shield</a></td><td>特定条件で使える</td><td>DDoSへの保護が必要。</td></tr>
+<h3>オプション（9種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3">Amazon S3</a></td><td>特化</td><td>オブジェクト保存を採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cache-key">キャッシュキー</a></td><td>特化</td><td>複数要求が同じ結果を共有できる範囲を識別する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-dns-ttl">TTL</a></td><td>特化</td><td>DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cloudfront-oac">OAC</a></td><td>特化</td><td>対応するCloudFrontオリジンへのアクセスを制限する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-signed-url">署名付き URL</a></td><td>特化</td><td>期限などを限定した配信アクセスが必要。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-route53">Route 53</a></td><td>特化</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-tls">TLS</a></td><td>特化</td><td>通信の暗号化と相手認証が必要。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-waf">WAF</a></td><td>特化</td><td>HTTPリクエストの検査・制御が必要。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-shield">Shield</a></td><td>特化</td><td>DDoSへの保護が必要。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-transfer-acceleration">S3 Transfer Acceleration</a></td><td>特定条件で使える</td><td>遠隔からS3へのアップロード改善が実測で有効。CDNの結果キャッシュとは別。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-global-accelerator">Global Accelerator</a></td><td>特定条件で使える</td><td>TCP/UDPの通信経路改善や静的IPが必要。キャッシュではない。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-transfer-acceleration">S3 Transfer Acceleration</a></td><td>特化</td><td>遠隔からS3へのアップロード改善が実測で有効。CDNの結果キャッシュとは別。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-global-accelerator">Global Accelerator</a></td><td>特化</td><td>TCP/UDPの通信経路改善や静的IPが必要。キャッシュではない。</td></tr>
 </table></div>
 </section>
 <section id="b-cache"><h2>加速者：記憶ビルド</h2><p>同じ要求の結果を再利用する。TTLだけで最新性は保証できず、DynamoDB TTLはキャッシュ失効と別。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-cache">キャッシュ</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-dax">DAX</a></td><td>特定条件で使える</td><td>DynamoDBの結果整合性の繰り返し読取りに適する。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-cache">キャッシュ</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-dax">DAX</a></td><td>特化</td><td>DynamoDBの結果整合性の繰り返し読取りに適する。</td></tr>
 </table></div>
-<h3>強化・安定化（6種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cache-key">キャッシュキー</a></td><td>特定条件で使える</td><td>複数要求が同じ結果を共有できる範囲を識別する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-dns-ttl">TTL</a></td><td>特定条件で使える</td><td>DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-consistency">読取り整合性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3-consistency">S3の強い整合性</a></td><td>特定条件で使える</td><td>S3の成功した更新後の読取りを扱う。CDNや複製の鮮度は別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-dynamodb">Amazon DynamoDB</a></td><td>特定条件で使える</td><td>DynamoDBのキーアクセスが要件に合う。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-performance">ボトルネック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>オプション（6種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cache-key">キャッシュキー</a></td><td>特化</td><td>複数要求が同じ結果を共有できる範囲を識別する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-dns-ttl">TTL</a></td><td>特化</td><td>DNSまたはキャッシュの再利用期間を設計する。最新性保証とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-consistency">読取り整合性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3-consistency">S3の強い整合性</a></td><td>特化</td><td>S3の成功した更新後の読取りを扱う。CDNや複製の鮮度は別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-dynamodb">Amazon DynamoDB</a></td><td>特化</td><td>DynamoDBのキーアクセスが要件に合う。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-performance">ボトルネック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-dynamodb-ttl">DynamoDB TTL</a></td><td>特定条件で使える</td><td>DynamoDB項目の期限後削除が必要。指定秒の削除やキャッシュ失効は保証しない。</td></tr>
+<h3>コネクション（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-dynamodb-ttl">DynamoDB TTL</a></td><td>特化</td><td>DynamoDB項目の期限後削除が必要。指定秒の削除やキャッシュ失効は保証しない。</td></tr>
 </table></div>
 </section>
 <section id="b-read-replica"><h2>加速者：読取分散ビルド</h2><p>参照処理を分担する。GSIは別キー索引の代替案で、RDSのレプリカではない。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-read-replica">リードレプリカ</a></td><td>特定条件で使える</td><td>対応DBの読取り分散が必要で、複製遅延を許容する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-aurora-replica">Aurora Replica</a></td><td>特定条件で使える</td><td>Auroraを採用し、読取り分散または昇格先を必要とする。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-read-replica">リードレプリカ</a></td><td>特化</td><td>対応DBの読取り分散が必要で、複製遅延を許容する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-aurora-replica">Aurora Replica</a></td><td>特化</td><td>Auroraを採用し、読取り分散または昇格先を必要とする。</td></tr>
 </table></div>
-<h3>強化・安定化（5種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-rds">Amazon RDS</a></td><td>特定条件で使える</td><td>リレーショナルDBを採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-replication">レプリケーション</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-consistency">読取り整合性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-performance">ボトルネック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-database-cost">DBの総費用</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>オプション（5種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-rds">Amazon RDS</a></td><td>特化</td><td>リレーショナルDBを採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-replication">レプリケーション</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-consistency">読取り整合性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-performance">ボトルネック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-database-cost">DBの総費用</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-gsi">グローバルセカンダリインデックス（GSI）</a></td><td>特定条件で使える</td><td>DynamoDBで別キーの問い合わせが必要。結果整合性の索引でありRDSレプリカではない。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-partition-key">パーティションキー</a></td><td>特定条件で使える</td><td>DynamoDBのキー分散を設計する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-rcu">RCU</a></td><td>特定条件で使える</td><td>DynamoDBの読取りサイズ・整合性を評価する。</td></tr>
+<h3>コネクション（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-gsi">グローバルセカンダリインデックス（GSI）</a></td><td>特化</td><td>DynamoDBで別キーの問い合わせが必要。結果整合性の索引でありRDSレプリカではない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-partition-key">パーティションキー</a></td><td>特化</td><td>DynamoDBのキー分散を設計する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-rcu">RCU</a></td><td>特化</td><td>DynamoDBの読取りサイズ・整合性を評価する。</td></tr>
 </table></div>
 </section>
 <section id="b-queue"><h2>指揮者：蓄積ビルド</h2><p>仕事を蓄えて順次処理する。受理と完了を区別し、期限と滞留に注意。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-sqs">SQS</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-sqs">SQS</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>強化・安定化（9種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特定条件で使える</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-fifo">FIFO</a></td><td>特定条件で使える</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-queue-scaling">キューに基づくスケーリング</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-dlq">デッドレターキュー</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-claim-check">Claim Check</a></td><td>特定条件で使える</td><td>メッセージに収まらない等の大きなデータを外部保存して参照を渡す。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3">Amazon S3</a></td><td>特定条件で使える</td><td>オブジェクト保存を採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2">Amazon EC2</a></td><td>特定条件で使える</td><td>EC2を処理基盤に採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-lambda">Lambda</a></td><td>特定条件で使える</td><td>関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ecs">ECS</a></td><td>特定条件で使える</td><td>コンテナタスクを採用する。</td></tr>
+<h3>オプション（9種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特化</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-fifo">FIFO</a></td><td>特化</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-queue-scaling">キューに基づくスケーリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-dlq">デッドレターキュー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-claim-check">Claim Check</a></td><td>特化</td><td>メッセージに収まらない等の大きなデータを外部保存して参照を渡す。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3">Amazon S3</a></td><td>特化</td><td>オブジェクト保存を採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-lambda">Lambda</a></td><td>特化</td><td>関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ecs">ECS</a></td><td>特化</td><td>コンテナタスクを採用する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（5種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-sns">SNS</a></td><td>特定条件で使える</td><td>購読先への通知配信を必要とする。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-fanout">ファンアウト</a></td><td>特定条件で使える</td><td>一つの通知を複数の独立した処理先へ配る。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-eventbridge">EventBridge</a></td><td>特定条件で使える</td><td>イベントの振り分けが必要。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-kinesis">Kinesis Data Streams</a></td><td>特定条件で使える</td><td>保持・再読込み等を伴うストリーム処理が必要。SQSと同一ではない。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-firehose">Data Firehose</a></td><td>特定条件で使える</td><td>ストリームを対応先へ配送する。任意の仕事キューではない。</td></tr>
+<h3>コネクション（5種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-sns">SNS</a></td><td>特化</td><td>購読先への通知配信を必要とする。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-fanout">ファンアウト</a></td><td>特化</td><td>一つの通知を複数の独立した処理先へ配る。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-eventbridge">EventBridge</a></td><td>特化</td><td>イベントの振り分けが必要。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-kinesis">Kinesis Data Streams</a></td><td>特化</td><td>保持・再読込み等を伴うストリーム処理が必要。SQSと同一ではない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-firehose">Data Firehose</a></td><td>特化</td><td>ストリームを対応先へ配送する。任意の仕事キューではない。</td></tr>
 </table></div>
 </section>
 <section id="b-safe-retry"><h2>指揮者：再挑戦ビルド</h2><p>失敗した作業を制限付きで再試行する。トランザクションやFIFOだけで業務全体の冪等性は保証しない。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-idempotency">冪等性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-idempotency">冪等性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>強化・安定化（5種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-step-functions">Step Functions</a></td><td>特定条件で使える</td><td>複数ステップの順序・再試行を制御する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特定条件で使える</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-dlq">デッドレターキュー</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-throttling">スロットリング</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-fifo">FIFO</a></td><td>特定条件で使える</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
+<h3>オプション（5種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-step-functions">Step Functions</a></td><td>特化</td><td>複数ステップの順序・再試行を制御する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特化</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-dlq">デッドレターキュー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-throttling">スロットリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-fifo">FIFO</a></td><td>特化</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-dynamodb-transactions">DynamoDBトランザクション</a></td><td>特定条件で使える</td><td>DynamoDB複数項目の全成功・全失敗が必要。外部処理までの冪等性は別。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-multipart-upload">マルチパートアップロード</a></td><td>特定条件で使える</td><td>大きなS3アップロードで失敗部分を再送する。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-dynamodb-transactions">DynamoDBトランザクション</a></td><td>特化</td><td>DynamoDB複数項目の全成功・全失敗が必要。外部処理までの冪等性は別。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-multipart-upload">マルチパートアップロード</a></td><td>特化</td><td>大きなS3アップロードで失敗部分を再送する。</td></tr>
 </table></div>
 </section>
 <section id="b-spot"><h2>指揮者：機会活用ビルド</h2><p>安い臨時戦力を使い、中断後は保存済みの進捗から再開する。スナップショットだけでアプリの進捗保存は完成しない。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-spot">Spotインスタンス</a></td><td>特定条件で使える</td><td>中断可能・再開可能な仕事で、代替戦力と期限を用意する。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-spot">Spotインスタンス</a></td><td>特化</td><td>中断可能・再開可能な仕事で、代替戦力と期限を用意する。</td></tr>
 </table></div>
-<h3>強化・安定化（7種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ec2">Amazon EC2</a></td><td>特定条件で使える</td><td>EC2を処理基盤に採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ebs">Amazon EBS</a></td><td>特定条件で使える</td><td>EC2で永続ブロック保存を使う。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3">Amazon S3</a></td><td>特定条件で使える</td><td>オブジェクト保存を採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特定条件で使える</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ami">AMI</a></td><td>特定条件で使える</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特定条件で使える</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-instance-store">インスタンスストア</a></td><td>特定条件で使える</td><td>消えてよい一時データに使い、永続データの代替を用意する。</td></tr>
+<h3>オプション（7種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ebs">Amazon EBS</a></td><td>特化</td><td>EC2で永続ブロック保存を使う。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3">Amazon S3</a></td><td>特化</td><td>オブジェクト保存を採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-auto-scaling">EC2 Auto Scaling</a></td><td>特化</td><td>EC2の台数調整・健全性維持を使う。起動待ちと下流容量を考慮する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ami">AMI</a></td><td>特化</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特化</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-instance-store">インスタンスストア</a></td><td>特化</td><td>消えてよい一時データに使い、永続データの代替を用意する。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特定条件で使える</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
+<h3>コネクション（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特化</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
 </table></div>
 </section>
 <section id="b-least-privilege"><h2>構築士：権限設計ビルド</h2><p>必要な行動を許可し、不要な操作を防ぐ。上限やDenyは操作権限を付与しない。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-least-privilege">最小権限</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-iam-role">IAMロール</a></td><td>特定条件で使える</td><td>人やサービスへロールで権限を委任する。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-least-privilege">最小権限</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-iam-role">IAMロール</a></td><td>特化</td><td>人やサービスへロールで権限を委任する。</td></tr>
 </table></div>
-<h3>強化・安定化（12種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-temporary-credentials">一時認証情報</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-resource-policy">リソースベースポリシー</a></td><td>特定条件で使える</td><td>リソース側のPrincipal・許可・拒否を設計する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-explicit-deny">明示的Deny</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-implicit-deny">暗黙的Deny</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-permissions-boundary">アクセス許可の境界</a></td><td>特定条件で使える</td><td>IAM主体への権限上限を設定する。単独で許可は付与しない。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-abac">ABAC</a></td><td>特定条件で使える</td><td>属性ベースの認可が適し、タグ変更権限も管理できる。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-task-role">タスクロール</a></td><td>特定条件で使える</td><td>ECSアプリからAWS APIへアクセスする。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-scp">サービスコントロールポリシー（SCP）</a></td><td>特定条件で使える</td><td>Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cross-account">クロスアカウントアクセス</a></td><td>特定条件で使える</td><td>別アカウントのリソースへアクセスする。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-external-id">External ID</a></td><td>特定条件で使える</td><td>外部事業者が複数顧客のロールを扱う。秘密のパスワードではない。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-block-public-access">S3 Block Public Access</a></td><td>特定条件で使える</td><td>S3のパブリックアクセス設定を防御する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-access-analyzer">IAM Access Analyzer</a></td><td>特定条件で使える</td><td>対応するアクセス設定の分析を行う。是正は別の行動。</td></tr>
+<h3>オプション（12種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-temporary-credentials">一時認証情報</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-resource-policy">リソースベースポリシー</a></td><td>特化</td><td>リソース側のPrincipal・許可・拒否を設計する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-explicit-deny">明示的Deny</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-implicit-deny">暗黙的Deny</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-permissions-boundary">アクセス許可の境界</a></td><td>特化</td><td>IAM主体への権限上限を設定する。単独で許可は付与しない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-abac">ABAC</a></td><td>特化</td><td>属性ベースの認可が適し、タグ変更権限も管理できる。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-task-role">タスクロール</a></td><td>特化</td><td>ECSアプリからAWS APIへアクセスする。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-scp">サービスコントロールポリシー（SCP）</a></td><td>特化</td><td>Organizationsのメンバーアカウントを統制する。単独で許可は付与しない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cross-account">クロスアカウントアクセス</a></td><td>特化</td><td>別アカウントのリソースへアクセスする。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-external-id">External ID</a></td><td>特化</td><td>外部事業者が複数顧客のロールを扱う。秘密のパスワードではない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-block-public-access">S3 Block Public Access</a></td><td>特化</td><td>S3のパブリックアクセス設定を防御する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-access-analyzer">IAM Access Analyzer</a></td><td>特化</td><td>対応するアクセス設定の分析を行う。是正は別の行動。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-kms">KMS</a></td><td>特定条件で使える</td><td>KMSの暗号鍵と操作権限を必要とする。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-secrets-manager">Secrets Manager</a></td><td>特定条件で使える</td><td>認証情報の保管・更新を必要とする。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-lake-formation">Lake Formation</a></td><td>特定条件で使える</td><td>データレイクの権限管理を必要とする。</td></tr>
+<h3>コネクション（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-kms">KMS</a></td><td>特化</td><td>KMSの暗号鍵と操作権限を必要とする。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-secrets-manager">Secrets Manager</a></td><td>特化</td><td>認証情報の保管・更新を必要とする。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-lake-formation">Lake Formation</a></td><td>特化</td><td>データレイクの権限管理を必要とする。</td></tr>
 </table></div>
 </section>
 <section id="b-private-access"><h2>構築士：閉域接続ビルド</h2><p>経路と通信許可を整える。接続方式ごとの範囲を区別し、IAM認可も必要。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-vpc-endpoint">VPCエンドポイント</a></td><td>特定条件で使える</td><td>対応AWSサービスへのエンドポイント経路を必要とする。IAM認可は別。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-private-link">AWS PrivateLink</a></td><td>特定条件で使える</td><td>対応サービスへのプライベートIP接続を使う。Gateway endpointとは別。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-vpc-endpoint">VPCエンドポイント</a></td><td>特化</td><td>対応AWSサービスへのエンドポイント経路を必要とする。IAM認可は別。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-private-link">AWS PrivateLink</a></td><td>特化</td><td>対応サービスへのプライベートIP接続を使う。Gateway endpointとは別。</td></tr>
 </table></div>
-<h3>強化・安定化（9種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-vpc">Amazon VPC</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-subnet">サブネット</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-route">ルートテーブル</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-security-group">セキュリティグループ</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-network-acl">ネットワークACL</a></td><td>特定条件で使える</td><td>サブネット境界でステートレスな許可・拒否を必要とする。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-session-manager">Session Manager</a></td><td>特定条件で使える</td><td>Agent・IAM・到達性を整えて管理接続する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-longest-prefix">最長プレフィックス一致</a></td><td>特定条件で使える</td><td>重なる宛先範囲の経路選択を設計する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-tls">TLS</a></td><td>特定条件で使える</td><td>通信の暗号化と相手認証が必要。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-vpc-flow-logs">VPC Flow Logs</a></td><td>特定条件で使える</td><td>IP通信メタデータを調査する。パケット本文は記録しない。</td></tr>
+<h3>オプション（9種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-vpc">Amazon VPC</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-subnet">サブネット</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-route">ルートテーブル</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-security-group">セキュリティグループ</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-network-acl">ネットワークACL</a></td><td>特化</td><td>サブネット境界でステートレスな許可・拒否を必要とする。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-session-manager">Session Manager</a></td><td>特化</td><td>Agent・IAM・到達性を整えて管理接続する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-longest-prefix">最長プレフィックス一致</a></td><td>特化</td><td>重なる宛先範囲の経路選択を設計する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-tls">TLS</a></td><td>特化</td><td>通信の暗号化と相手認証が必要。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-vpc-flow-logs">VPC Flow Logs</a></td><td>特化</td><td>IP通信メタデータを調査する。パケット本文は記録しない。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（6種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-peering">VPCピアリング</a></td><td>特定条件で使える</td><td>2つのVPCを直接接続する。重複CIDR・推移接続に制約。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-transit-gateway">AWS Transit Gateway</a></td><td>特定条件で使える</td><td>複数VPCや拠点の接続を集約する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-site-to-site-vpn">Site-to-Site VPN</a></td><td>特定条件で使える</td><td>拠点とAWSをIPsecで接続する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-direct-connect">AWS Direct Connect</a></td><td>特定条件で使える</td><td>専用接続が必要。既定では暗号化されない。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-nat-gateway">NAT Gateway</a></td><td>特定条件で使える</td><td>プライベート側からの外向き通信を必要とする。閉域接続そのものではない。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-ipv6-egress">Egress-only Internet Gateway</a></td><td>特定条件で使える</td><td>IPv6の外向き通信を必要とする。</td></tr>
+<h3>コネクション（6種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-peering">VPCピアリング</a></td><td>特化</td><td>2つのVPCを直接接続する。重複CIDR・推移接続に制約。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-transit-gateway">AWS Transit Gateway</a></td><td>特化</td><td>複数VPCや拠点の接続を集約する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-site-to-site-vpn">Site-to-Site VPN</a></td><td>特化</td><td>拠点とAWSをIPsecで接続する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-direct-connect">AWS Direct Connect</a></td><td>特化</td><td>専用接続が必要。既定では暗号化されない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-nat-gateway">NAT Gateway</a></td><td>特化</td><td>プライベート側からの外向き通信を必要とする。閉域接続そのものではない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-ipv6-egress">Egress-only Internet Gateway</a></td><td>特化</td><td>IPv6の外向き通信を必要とする。</td></tr>
 </table></div>
 </section>
 <section id="b-iac"><h2>構築士：再現構築ビルド</h2><p>設計図で再構築する方向。AMIはマシンイメージ、ECRは保管、Configは設定評価でありIaCの代用品ではない。</p>
-<p class="warn">不足：IaCの中核となる教材候補名がない。候補追加またはビルド再検討が必要。</p>
-<h3>中核（0種類）</h3>
+<p class="warn">不足：IaCのキーとなる教材候補名がない。候補追加またはビルド再検討が必要。</p>
+<h3>キー（0種類）</h3>
 <p>該当候補なし</p>
-<h3>強化・安定化（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ami">AMI</a></td><td>特定条件で使える</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ecr">ECR</a></td><td>特定条件で使える</td><td>コンテナイメージを保管・取得する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-aws-config">AWS Config</a></td><td>特定条件で使える</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
+<h3>オプション（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ami">AMI</a></td><td>特化</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ecr">ECR</a></td><td>特化</td><td>コンテナイメージを保管・取得する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-aws-config">AWS Config</a></td><td>特化</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-control-tower">AWS Control Tower</a></td><td>特定条件で使える</td><td>複数アカウントのランディングゾーンを整える。任意のIaC定義の代替ではない。</td></tr>
+<h3>コネクション（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-control-tower">AWS Control Tower</a></td><td>特化</td><td>複数アカウントのランディングゾーンを整える。任意のIaC定義の代替ではない。</td></tr>
 </table></div>
 </section>
 <section id="b-backup"><h2>復旧者：保存ビルド</h2><p>保存した正常状態から復旧する。保存以降の進捗損失と復元待ち時間がある。</p>
-<h3>中核（3種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-backup">バックアップ</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特定条件で使える</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-point-in-time-recovery">ポイントインタイムリカバリ（PITR）</a></td><td>特定条件で使える</td><td>対応DBの保持期間内の時点へ復元したい。</td></tr>
+<h3>キー（3種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-backup">バックアップ</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特化</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-point-in-time-recovery">ポイントインタイムリカバリ（PITR）</a></td><td>特化</td><td>対応DBの保持期間内の時点へ復元したい。</td></tr>
 </table></div>
-<h3>強化・安定化（9種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-versioning">S3バージョニング</a></td><td>特定条件で使える</td><td>S3オブジェクトの版を保持する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-noncurrent-version">S3旧バージョン</a></td><td>特定条件で使える</td><td>S3旧版の保持・削除・費用を管理する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-object-lock">S3 Object Lock</a></td><td>特定条件で使える</td><td>S3の版を一定期間保護し、適切なモードを選ぶ。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-restore-test">復元テスト</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-rpo">RPO</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3">Amazon S3</a></td><td>特定条件で使える</td><td>オブジェクト保存を採用する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-durability">耐久性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-kms">KMS</a></td><td>特定条件で使える</td><td>KMSの暗号鍵と操作権限を必要とする。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3-encryption">S3の保存時暗号化</a></td><td>特定条件で使える</td><td>S3の保存時暗号化を設計する。認可とは別。</td></tr>
+<h3>オプション（9種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-versioning">S3バージョニング</a></td><td>特化</td><td>S3オブジェクトの版を保持する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-noncurrent-version">S3旧バージョン</a></td><td>特化</td><td>S3旧版の保持・削除・費用を管理する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-object-lock">S3 Object Lock</a></td><td>特化</td><td>S3の版を一定期間保護し、適切なモードを選ぶ。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-restore-test">復元テスト</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-rpo">RPO</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3">Amazon S3</a></td><td>特化</td><td>オブジェクト保存を採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-durability">耐久性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-kms">KMS</a></td><td>特化</td><td>KMSの暗号鍵と操作権限を必要とする。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3-encryption">S3の保存時暗号化</a></td><td>特化</td><td>S3の保存時暗号化を設計する。認可とは別。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-archive">アーカイブ保存</a></td><td>特定条件で使える</td><td>低頻度の長期保存で復元待ち時間と取得費を許容する。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-standard-ia">S3 Standard-IA</a></td><td>特定条件で使える</td><td>低頻度だが即時取得が必要で、取得費等を許容する。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-archive">アーカイブ保存</a></td><td>特化</td><td>低頻度の長期保存で復元待ち時間と取得費を許容する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-standard-ia">S3 Standard-IA</a></td><td>特化</td><td>低頻度だが即時取得が必要で、取得費等を許容する。</td></tr>
 </table></div>
 </section>
 <section id="b-disaster-recovery"><h2>復旧者：待機ビルド</h2><p>別拠点の準備量で復旧時間と維持費を調整する。複製は誤更新へのバックアップとは別。</p>
-<h3>中核（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-pilot-light">パイロットライト</a></td><td>特定条件で使える</td><td>復旧先は中核だけ維持し、残りの起動時間を許容する。</td></tr>
-<tr class="membership" data-role="中核" data-usage="特定条件で使える"><td><a href="#c-warm-standby">ウォームスタンバイ</a></td><td>特定条件で使える</td><td>縮小した全体構成の維持費を払って復旧を速める。</td></tr>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-pilot-light">パイロットライト</a></td><td>特化</td><td>復旧先はキーだけ維持し、残りの起動時間を許容する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-warm-standby">ウォームスタンバイ</a></td><td>特化</td><td>縮小した全体構成の維持費を払って復旧を速める。</td></tr>
 </table></div>
-<h3>強化・安定化（10種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-rto">RTO</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-rpo">RPO</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-replication">レプリケーション</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-s3-replication">S3レプリケーション</a></td><td>特定条件で使える</td><td>S3オブジェクトの別拠点への複製が必要。過去分・削除条件を確認。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-region">リージョン</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-route53">Route 53</a></td><td>特定条件で使える</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-restore-test">復元テスト</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-ami">AMI</a></td><td>特定条件で使える</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-availability">可用性</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特定条件で使える</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
+<h3>オプション（10種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-rto">RTO</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-rpo">RPO</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-replication">レプリケーション</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3-replication">S3レプリケーション</a></td><td>特化</td><td>S3オブジェクトの別拠点への複製が必要。過去分・削除条件を確認。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-region">リージョン</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-route53">Route 53</a></td><td>特化</td><td>DNSによる宛先案内や切替を使う。TTL・検出遅延がある。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-restore-test">復元テスト</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ami">AMI</a></td><td>特化</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-availability">可用性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特化</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-global-tables">DynamoDBグローバルテーブル</a></td><td>特定条件で使える</td><td>DynamoDBの複数リージョン読み書きが必要。整合性方式の条件を確認。</td></tr>
+<h3>コネクション（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-global-tables">DynamoDBグローバルテーブル</a></td><td>特化</td><td>DynamoDBの複数リージョン読み書きが必要。整合性方式の条件を確認。</td></tr>
 </table></div>
 </section>
 <section id="b-observability"><h2>復旧者：観測ビルド</h2><p>異常を発見して対処を選ぶ。監視・監査・脅威検出は対象が異なり、発見だけでは回復しない。</p>
-<h3>中核（1種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="中核" data-usage="幅広く使える"><td><a href="#c-cloudwatch">CloudWatch</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<h3>キー（1種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-cloudwatch">CloudWatch</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>強化・安定化（9種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-cloudtrail">CloudTrail</a></td><td>特定条件で使える</td><td>AWS API操作の履歴を調べる。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-aws-config">AWS Config</a></td><td>特定条件で使える</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-vpc-flow-logs">VPC Flow Logs</a></td><td>特定条件で使える</td><td>IP通信メタデータを調査する。パケット本文は記録しない。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-health-check">ヘルスチェック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="幅広く使える"><td><a href="#c-performance">ボトルネック</a></td><td>幅広く使える</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-guardduty">GuardDuty</a></td><td>特定条件で使える</td><td>対応範囲の不審な活動・脅威兆候を検出する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-inspector">Inspector</a></td><td>特定条件で使える</td><td>対応ワークロードの脆弱性を調べる。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-macie">Macie</a></td><td>特定条件で使える</td><td>S3の機密データを検出する。</td></tr>
-<tr class="membership" data-role="強化・安定化" data-usage="特定条件で使える"><td><a href="#c-access-analyzer">IAM Access Analyzer</a></td><td>特定条件で使える</td><td>対応するアクセス設定の分析を行う。是正は別の行動。</td></tr>
+<h3>オプション（9種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cloudtrail">CloudTrail</a></td><td>特化</td><td>AWS API操作の履歴を調べる。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-aws-config">AWS Config</a></td><td>特化</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-vpc-flow-logs">VPC Flow Logs</a></td><td>特化</td><td>IP通信メタデータを調査する。パケット本文は記録しない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-performance">ボトルネック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-guardduty">GuardDuty</a></td><td>特化</td><td>対応範囲の不審な活動・脅威兆候を検出する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-inspector">Inspector</a></td><td>特化</td><td>対応ワークロードの脆弱性を調べる。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-macie">Macie</a></td><td>特化</td><td>S3の機密データを検出する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-access-analyzer">IAM Access Analyzer</a></td><td>特化</td><td>対応するアクセス設定の分析を行う。是正は別の行動。</td></tr>
 </table></div>
-<h3>別構成への橋渡し（2種類）</h3>
-<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-cost-explorer">AWS Cost Explorer</a></td><td>特定条件で使える</td><td>費用・使用量を分析する。障害修復とは別。</td></tr>
-<tr class="membership" data-role="別構成への橋渡し" data-usage="特定条件で使える"><td><a href="#c-opensearch">OpenSearch</a></td><td>特定条件で使える</td><td>全文検索やログ分析基盤を必要とする。</td></tr>
+<h3>コネクション（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-cost-explorer">AWS Cost Explorer</a></td><td>特化</td><td>費用・使用量を分析する。障害修復とは別。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-opensearch">OpenSearch</a></td><td>特化</td><td>全文検索やログ分析基盤を必要とする。</td></tr>
 </table></div>
 </section>
 <section id="remaining"><h2>未所属候補：後続整理用ID</h2><p>削除・不採用を意味しません。共通枠、新しい組み合わせ、状況対策などを後で設計します。</p><div class="scroll"><table><tr><th>追跡ID／候補名</th><th>保留理由</th></tr>
@@ -436,172 +436,172 @@
 <tr><td><code>remainder-gwlb</code><br><a href="#c-gwlb">Gateway Load Balancer（GWLB）</a></td><td>セキュリティアプライアンス経由の通信。閉域接続とは異なる検査・防御の用途を検討。</td></tr>
 <tr><td><code>remainder-requester-pays</code><br><a href="#c-requester-pays">Requester Pays</a></td><td>費用負担者を変更する候補。資源効率を上げる効果とは分けて設計。</td></tr>
 </table></div></section><h2 id="all">全候補の逆引き</h2>
-<article class="candidate" id="c-region"><h3>リージョン</h3><code>candidate-region</code><p>AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。</p><p>所属：復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #region</small></article>
-<article class="candidate" id="c-az"><h3>アベイラビリティーゾーン（AZ）</h3><code>candidate-az</code><p>リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。</p><p>所属：守護者・分散要塞［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #az</small></article>
+<article class="candidate" id="c-region"><h3>リージョン</h3><code>candidate-region</code><p>AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。</p><p>所属：復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #region</small></article>
+<article class="candidate" id="c-az"><h3>アベイラビリティーゾーン（AZ）</h3><code>candidate-az</code><p>リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。</p><p>所属：守護者・分散要塞［キー／汎用］</p><small>教材参照：src/content/index.ts #az</small></article>
 <article class="candidate" id="c-shared-responsibility"><h3>責任共有モデル</h3><code>candidate-shared-responsibility</code><p>AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。</p><p>所属：未所属：remainder-shared-responsibility</p><small>教材参照：src/content/index.ts #shared-responsibility</small></article>
-<article class="candidate" id="c-availability"><h3>可用性</h3><code>candidate-availability</code><p>必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。</p><p>所属：守護者・分散要塞［中核／幅広く使える］／守護者・継承［強化・安定化／幅広く使える］／復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #availability</small></article>
-<article class="candidate" id="c-durability"><h3>耐久性</h3><code>candidate-durability</code><p>保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。</p><p>所属：復旧者・保存［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #durability</small></article>
-<article class="candidate" id="c-scaling"><h3>スケーリング</h3><code>candidate-scaling</code><p>負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。</p><p>所属：調律師・増援［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #scaling</small></article>
-<article class="candidate" id="c-spot"><h3>Spotインスタンス</h3><code>candidate-spot</code><p>中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。</p><p>所属：指揮者・機会活用［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #spot</small></article>
-<article class="candidate" id="c-instance-store"><h3>インスタンスストア</h3><code>candidate-instance-store</code><p>EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］／指揮者・機会活用［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #instance-store</small></article>
-<article class="candidate" id="c-s3"><h3>Amazon S3</h3><code>candidate-s3</code><p>データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］／指揮者・蓄積［強化・安定化／特定条件で使える］／指揮者・機会活用［強化・安定化／特定条件で使える］／復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #s3</small></article>
-<article class="candidate" id="c-rds"><h3>Amazon RDS</h3><code>candidate-rds</code><p>リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。</p><p>所属：守護者・継承［強化・安定化／特定条件で使える］／加速者・読取分散［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #rds</small></article>
-<article class="candidate" id="c-iam-role"><h3>IAMロール</h3><code>candidate-iam-role</code><p>人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。</p><p>所属：構築士・権限設計［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #iam-role</small></article>
-<article class="candidate" id="c-temporary-credentials"><h3>一時認証情報</h3><code>candidate-temporary-credentials</code><p>有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。</p><p>所属：構築士・権限設計［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #temporary-credentials</small></article>
-<article class="candidate" id="c-least-privilege"><h3>最小権限</h3><code>candidate-least-privilege</code><p>必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。</p><p>所属：構築士・権限設計［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #least-privilege</small></article>
-<article class="candidate" id="c-explicit-deny"><h3>明示的Deny</h3><code>candidate-explicit-deny</code><p>ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。</p><p>所属：構築士・権限設計［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #explicit-deny</small></article>
-<article class="candidate" id="c-scp"><h3>サービスコントロールポリシー（SCP）</h3><code>candidate-scp</code><p>Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。</p><p>所属：守護者・隔離［別構成への橋渡し／特定条件で使える］／構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #scp</small></article>
-<article class="candidate" id="c-cross-account"><h3>クロスアカウントアクセス</h3><code>candidate-cross-account</code><p>別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #cross-account</small></article>
-<article class="candidate" id="c-external-id"><h3>External ID</h3><code>candidate-external-id</code><p>外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #external-id</small></article>
+<article class="candidate" id="c-availability"><h3>可用性</h3><code>candidate-availability</code><p>必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。</p><p>所属：守護者・分散要塞［キー／汎用］／守護者・継承［オプション／汎用］／復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #availability</small></article>
+<article class="candidate" id="c-durability"><h3>耐久性</h3><code>candidate-durability</code><p>保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。</p><p>所属：復旧者・保存［オプション／汎用］</p><small>教材参照：src/content/index.ts #durability</small></article>
+<article class="candidate" id="c-scaling"><h3>スケーリング</h3><code>candidate-scaling</code><p>負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。</p><p>所属：調律師・増援［オプション／汎用］</p><small>教材参照：src/content/index.ts #scaling</small></article>
+<article class="candidate" id="c-spot"><h3>Spotインスタンス</h3><code>candidate-spot</code><p>中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。</p><p>所属：指揮者・機会活用［キー／特化］</p><small>教材参照：src/content/index.ts #spot</small></article>
+<article class="candidate" id="c-instance-store"><h3>インスタンスストア</h3><code>candidate-instance-store</code><p>EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。</p><p>所属：調律師・精鋭［オプション／特化］／指揮者・機会活用［オプション／特化］</p><small>教材参照：src/content/index.ts #instance-store</small></article>
+<article class="candidate" id="c-s3"><h3>Amazon S3</h3><code>candidate-s3</code><p>データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。</p><p>所属：加速者・配信［オプション／特化］／指揮者・蓄積［オプション／特化］／指揮者・機会活用［オプション／特化］／復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #s3</small></article>
+<article class="candidate" id="c-rds"><h3>Amazon RDS</h3><code>candidate-rds</code><p>リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。</p><p>所属：守護者・継承［オプション／特化］／加速者・読取分散［オプション／特化］</p><small>教材参照：src/content/index.ts #rds</small></article>
+<article class="candidate" id="c-iam-role"><h3>IAMロール</h3><code>candidate-iam-role</code><p>人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。</p><p>所属：構築士・権限設計［キー／特化］</p><small>教材参照：src/content/index.ts #iam-role</small></article>
+<article class="candidate" id="c-temporary-credentials"><h3>一時認証情報</h3><code>candidate-temporary-credentials</code><p>有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。</p><p>所属：構築士・権限設計［オプション／汎用］</p><small>教材参照：src/content/index.ts #temporary-credentials</small></article>
+<article class="candidate" id="c-least-privilege"><h3>最小権限</h3><code>candidate-least-privilege</code><p>必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。</p><p>所属：構築士・権限設計［キー／汎用］</p><small>教材参照：src/content/index.ts #least-privilege</small></article>
+<article class="candidate" id="c-explicit-deny"><h3>明示的Deny</h3><code>candidate-explicit-deny</code><p>ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。</p><p>所属：構築士・権限設計［オプション／汎用］</p><small>教材参照：src/content/index.ts #explicit-deny</small></article>
+<article class="candidate" id="c-scp"><h3>サービスコントロールポリシー（SCP）</h3><code>candidate-scp</code><p>Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。</p><p>所属：守護者・隔離［コネクション／特化］／構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #scp</small></article>
+<article class="candidate" id="c-cross-account"><h3>クロスアカウントアクセス</h3><code>candidate-cross-account</code><p>別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #cross-account</small></article>
+<article class="candidate" id="c-external-id"><h3>External ID</h3><code>candidate-external-id</code><p>外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #external-id</small></article>
 <article class="candidate" id="c-identity-center"><h3>IAM Identity Center</h3><code>candidate-identity-center</code><p>従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。</p><p>所属：未所属：remainder-identity-center</p><small>教材参照：src/content/index.ts #identity-center</small></article>
 <article class="candidate" id="c-cognito"><h3>Amazon Cognito</h3><code>candidate-cognito</code><p>一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。</p><p>所属：未所属：remainder-cognito</p><small>教材参照：src/content/index.ts #cognito</small></article>
 <article class="candidate" id="c-root"><h3>ルートユーザー</h3><code>candidate-root</code><p>AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。</p><p>所属：未所属：remainder-root</p><small>教材参照：src/content/index.ts #root</small></article>
 <article class="candidate" id="c-mfa"><h3>多要素認証（MFA）</h3><code>candidate-mfa</code><p>パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。</p><p>所属：未所属：remainder-mfa</p><small>教材参照：src/content/index.ts #mfa</small></article>
-<article class="candidate" id="c-organizations"><h3>AWS Organizations</h3><code>candidate-organizations</code><p>AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。</p><p>所属：守護者・隔離［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #organizations</small></article>
-<article class="candidate" id="c-control-tower"><h3>AWS Control Tower</h3><code>candidate-control-tower</code><p>ランディングゾーンと複数アカウントの統制・払い出しを支援する。</p><p>所属：構築士・再現構築［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #control-tower</small></article>
-<article class="candidate" id="c-permissions-boundary"><h3>アクセス許可の境界</h3><code>candidate-permissions-boundary</code><p>IAM主体へ付与できる権限の上限。単独で権限を付与しない。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #permissions-boundary</small></article>
-<article class="candidate" id="c-abac"><h3>ABAC</h3><code>candidate-abac</code><p>タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #abac</small></article>
-<article class="candidate" id="c-resource-policy"><h3>リソースベースポリシー</h3><code>candidate-resource-policy</code><p>S3バケット等のリソース側でPrincipalと許可・拒否を定める。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #resource-policy</small></article>
-<article class="candidate" id="c-implicit-deny"><h3>暗黙的Deny</h3><code>candidate-implicit-deny</code><p>適用される許可がない要求を既定で拒否すること。</p><p>所属：構築士・権限設計［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #implicit-deny</small></article>
-<article class="candidate" id="c-access-analyzer"><h3>IAM Access Analyzer</h3><code>candidate-access-analyzer</code><p>外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］／復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #access-analyzer</small></article>
+<article class="candidate" id="c-organizations"><h3>AWS Organizations</h3><code>candidate-organizations</code><p>AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。</p><p>所属：守護者・隔離［コネクション／特化］</p><small>教材参照：src/content/index.ts #organizations</small></article>
+<article class="candidate" id="c-control-tower"><h3>AWS Control Tower</h3><code>candidate-control-tower</code><p>ランディングゾーンと複数アカウントの統制・払い出しを支援する。</p><p>所属：構築士・再現構築［コネクション／特化］</p><small>教材参照：src/content/index.ts #control-tower</small></article>
+<article class="candidate" id="c-permissions-boundary"><h3>アクセス許可の境界</h3><code>candidate-permissions-boundary</code><p>IAM主体へ付与できる権限の上限。単独で権限を付与しない。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #permissions-boundary</small></article>
+<article class="candidate" id="c-abac"><h3>ABAC</h3><code>candidate-abac</code><p>タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #abac</small></article>
+<article class="candidate" id="c-resource-policy"><h3>リソースベースポリシー</h3><code>candidate-resource-policy</code><p>S3バケット等のリソース側でPrincipalと許可・拒否を定める。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #resource-policy</small></article>
+<article class="candidate" id="c-implicit-deny"><h3>暗黙的Deny</h3><code>candidate-implicit-deny</code><p>適用される許可がない要求を既定で拒否すること。</p><p>所属：構築士・権限設計［オプション／汎用］</p><small>教材参照：src/content/index.ts #implicit-deny</small></article>
+<article class="candidate" id="c-access-analyzer"><h3>IAM Access Analyzer</h3><code>candidate-access-analyzer</code><p>外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。</p><p>所属：構築士・権限設計［オプション／特化］／復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #access-analyzer</small></article>
 <article class="candidate" id="c-cognito-identity"><h3>Cognito IDプール</h3><code>candidate-cognito-identity</code><p>認証済みID等に応じた限定的なAWS一時認証情報を提供する。</p><p>所属：未所属：remainder-cognito-identity</p><small>教材参照：src/content/index.ts #cognito-identity</small></article>
-<article class="candidate" id="c-block-public-access"><h3>S3 Block Public Access</h3><code>candidate-block-public-access</code><p>S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。</p><p>所属：構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #block-public-access</small></article>
-<article class="candidate" id="c-vpc"><h3>Amazon VPC</h3><code>candidate-vpc</code><p>リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。</p><p>所属：構築士・閉域接続［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #vpc</small></article>
-<article class="candidate" id="c-subnet"><h3>サブネット</h3><code>candidate-subnet</code><p>1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。</p><p>所属：守護者・分散要塞［強化・安定化／幅広く使える］／守護者・隔離［強化・安定化／幅広く使える］／構築士・閉域接続［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #subnet</small></article>
-<article class="candidate" id="c-route"><h3>ルートテーブル</h3><code>candidate-route</code><p>宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。</p><p>所属：構築士・閉域接続［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #route</small></article>
+<article class="candidate" id="c-block-public-access"><h3>S3 Block Public Access</h3><code>candidate-block-public-access</code><p>S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。</p><p>所属：構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #block-public-access</small></article>
+<article class="candidate" id="c-vpc"><h3>Amazon VPC</h3><code>candidate-vpc</code><p>リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。</p><p>所属：構築士・閉域接続［オプション／汎用］</p><small>教材参照：src/content/index.ts #vpc</small></article>
+<article class="candidate" id="c-subnet"><h3>サブネット</h3><code>candidate-subnet</code><p>1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。</p><p>所属：守護者・分散要塞［オプション／汎用］／守護者・隔離［オプション／汎用］／構築士・閉域接続［オプション／汎用］</p><small>教材参照：src/content/index.ts #subnet</small></article>
+<article class="candidate" id="c-route"><h3>ルートテーブル</h3><code>candidate-route</code><p>宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。</p><p>所属：構築士・閉域接続［オプション／汎用］</p><small>教材参照：src/content/index.ts #route</small></article>
 <article class="candidate" id="c-public-subnet"><h3>パブリックサブネット</h3><code>candidate-public-subnet</code><p>IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。</p><p>所属：未所属：remainder-public-subnet</p><small>教材参照：src/content/index.ts #public-subnet</small></article>
-<article class="candidate" id="c-longest-prefix"><h3>最長プレフィックス一致</h3><code>candidate-longest-prefix</code><p>宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。</p><p>所属：構築士・閉域接続［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #longest-prefix</small></article>
-<article class="candidate" id="c-security-group"><h3>セキュリティグループ</h3><code>candidate-security-group</code><p>許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。</p><p>所属：構築士・閉域接続［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #security-group</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
-<article class="candidate" id="c-network-acl"><h3>ネットワークACL</h3><code>candidate-network-acl</code><p>サブネット境界で許可・拒否を設定するステートレスな通信制御。</p><p>所属：構築士・閉域接続［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #network-acl</small></article>
-<article class="candidate" id="c-nat-gateway"><h3>NAT Gateway</h3><code>candidate-nat-gateway</code><p>外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #nat-gateway</small></article>
-<article class="candidate" id="c-vpc-endpoint"><h3>VPCエンドポイント</h3><code>candidate-vpc-endpoint</code><p>対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。</p><p>所属：構築士・閉域接続［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #vpc-endpoint</small></article>
-<article class="candidate" id="c-private-link"><h3>AWS PrivateLink</h3><code>candidate-private-link</code><p>対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。</p><p>所属：構築士・閉域接続［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #private-link</small></article>
-<article class="candidate" id="c-peering"><h3>VPCピアリング</h3><code>candidate-peering</code><p>2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #peering</small></article>
-<article class="candidate" id="c-transit-gateway"><h3>AWS Transit Gateway</h3><code>candidate-transit-gateway</code><p>複数VPCや拠点接続を集約するネットワークハブ。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #transit-gateway</small></article>
-<article class="candidate" id="c-site-to-site-vpn"><h3>Site-to-Site VPN</h3><code>candidate-site-to-site-vpn</code><p>拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #site-to-site-vpn</small></article>
-<article class="candidate" id="c-direct-connect"><h3>AWS Direct Connect</h3><code>candidate-direct-connect</code><p>AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #direct-connect</small></article>
-<article class="candidate" id="c-ipv6-egress"><h3>Egress-only Internet Gateway</h3><code>candidate-ipv6-egress</code><p>IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。</p><p>所属：構築士・閉域接続［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #ipv6-egress</small></article>
-<article class="candidate" id="c-vpc-flow-logs"><h3>VPC Flow Logs</h3><code>candidate-vpc-flow-logs</code><p>IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。</p><p>所属：構築士・閉域接続［強化・安定化／特定条件で使える］／復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #vpc-flow-logs</small></article>
-<article class="candidate" id="c-session-manager"><h3>Session Manager</h3><code>candidate-session-manager</code><p>Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。</p><p>所属：構築士・閉域接続［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #session-manager</small></article>
-<article class="candidate" id="c-ec2"><h3>Amazon EC2</h3><code>candidate-ec2</code><p>要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。</p><p>所属：守護者・分散要塞［強化・安定化／特定条件で使える］／調律師・増援［強化・安定化／特定条件で使える］／指揮者・蓄積［強化・安定化／特定条件で使える］／指揮者・機会活用［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ec2</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
-<article class="candidate" id="c-nlb"><h3>Network Load Balancer</h3><code>candidate-nlb</code><p>TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。</p><p>所属：守護者・分散要塞［強化・安定化／特定条件で使える］／調律師・増援［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #nlb</small></article>
-<article class="candidate" id="c-auto-scaling"><h3>EC2 Auto Scaling</h3><code>candidate-auto-scaling</code><p>需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。</p><p>所属：守護者・分散要塞［別構成への橋渡し／特定条件で使える］／調律師・増援［中核／特定条件で使える］／指揮者・機会活用［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #auto-scaling</small></article>
-<article class="candidate" id="c-target-tracking"><h3>ターゲット追跡スケーリング</h3><code>candidate-target-tracking</code><p>1台当たりの負荷等が目標に近づくよう容量を調整する方式。</p><p>所属：調律師・増援［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #target-tracking</small></article>
-<article class="candidate" id="c-scheduled-scaling"><h3>予定スケーリング</h3><code>candidate-scheduled-scaling</code><p>既知の時刻の需要に合わせて事前に容量を変更する方式。</p><p>所属：調律師・増援［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #scheduled-scaling</small></article>
-<article class="candidate" id="c-warm-pool"><h3>Warm Pool</h3><code>candidate-warm-pool</code><p>初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。</p><p>所属：調律師・増援［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #warm-pool</small></article>
-<article class="candidate" id="c-ami"><h3>AMI</h3><code>candidate-ami</code><p>EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。</p><p>所属：指揮者・機会活用［強化・安定化／特定条件で使える］／構築士・再現構築［強化・安定化／特定条件で使える］／復旧者・待機［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ami</small></article>
-<article class="candidate" id="c-capacity-reservation"><h3>Capacity Reservation</h3><code>candidate-capacity-reservation</code><p>指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。</p><p>所属：調律師・増援［強化・安定化／特定条件で使える］／指揮者・機会活用［別構成への橋渡し／特定条件で使える］／復旧者・待機［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #capacity-reservation</small></article>
-<article class="candidate" id="c-placement-group"><h3>プレイスメントグループ</h3><code>candidate-placement-group</code><p>低遅延や障害分離等の要件に合わせEC2の配置を制御する。</p><p>所属：守護者・分散要塞［強化・安定化／特定条件で使える］／守護者・隔離［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #placement-group</small></article>
-<article class="candidate" id="c-instance-family"><h3>インスタンスファミリー</h3><code>candidate-instance-family</code><p>CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。</p><p>所属：調律師・精鋭［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #instance-family</small></article>
-<article class="candidate" id="c-ebs"><h3>Amazon EBS</h3><code>candidate-ebs</code><p>EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。</p><p>所属：指揮者・機会活用［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ebs</small></article>
-<article class="candidate" id="c-efs"><h3>Amazon EFS</h3><code>candidate-efs</code><p>Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。</p><p>所属：守護者・分散要塞［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #efs</small></article>
-<article class="candidate" id="c-gp3"><h3>gp3</h3><code>candidate-gp3</code><p>容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #gp3</small></article>
-<article class="candidate" id="c-provisioned-iops"><h3>Provisioned IOPS SSD</h3><code>candidate-provisioned-iops</code><p>厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #provisioned-iops</small></article>
-<article class="candidate" id="c-storage-performance"><h3>IOPSとスループット</h3><code>candidate-storage-performance</code><p>秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #storage-performance</small></article>
-<article class="candidate" id="c-standard-ia"><h3>S3 Standard-IA</h3><code>candidate-standard-ia</code><p>低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。</p><p>所属：復旧者・保存［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #standard-ia</small></article>
-<article class="candidate" id="c-intelligent-tiering"><h3>S3 Intelligent-Tiering</h3><code>candidate-intelligent-tiering</code><p>アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。</p><p>所属：調律師・精鋭［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #intelligent-tiering</small></article>
-<article class="candidate" id="c-archive"><h3>アーカイブ保存</h3><code>candidate-archive</code><p>長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。</p><p>所属：復旧者・保存［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #archive</small></article>
-<article class="candidate" id="c-versioning"><h3>S3バージョニング</h3><code>candidate-versioning</code><p>オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。</p><p>所属：復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #versioning</small></article>
-<article class="candidate" id="c-noncurrent-version"><h3>S3旧バージョン</h3><code>candidate-noncurrent-version</code><p>現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。</p><p>所属：復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #noncurrent-version</small></article>
-<article class="candidate" id="c-object-lock"><h3>S3 Object Lock</h3><code>candidate-object-lock</code><p>一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。</p><p>所属：復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #object-lock</small></article>
+<article class="candidate" id="c-longest-prefix"><h3>最長プレフィックス一致</h3><code>candidate-longest-prefix</code><p>宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。</p><p>所属：構築士・閉域接続［オプション／特化］</p><small>教材参照：src/content/index.ts #longest-prefix</small></article>
+<article class="candidate" id="c-security-group"><h3>セキュリティグループ</h3><code>candidate-security-group</code><p>許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。</p><p>所属：構築士・閉域接続［オプション／汎用］</p><small>教材参照：src/content/index.ts #security-group</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-network-acl"><h3>ネットワークACL</h3><code>candidate-network-acl</code><p>サブネット境界で許可・拒否を設定するステートレスな通信制御。</p><p>所属：構築士・閉域接続［オプション／特化］</p><small>教材参照：src/content/index.ts #network-acl</small></article>
+<article class="candidate" id="c-nat-gateway"><h3>NAT Gateway</h3><code>candidate-nat-gateway</code><p>外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #nat-gateway</small></article>
+<article class="candidate" id="c-vpc-endpoint"><h3>VPCエンドポイント</h3><code>candidate-vpc-endpoint</code><p>対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。</p><p>所属：構築士・閉域接続［キー／特化］</p><small>教材参照：src/content/index.ts #vpc-endpoint</small></article>
+<article class="candidate" id="c-private-link"><h3>AWS PrivateLink</h3><code>candidate-private-link</code><p>対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。</p><p>所属：構築士・閉域接続［キー／特化］</p><small>教材参照：src/content/index.ts #private-link</small></article>
+<article class="candidate" id="c-peering"><h3>VPCピアリング</h3><code>candidate-peering</code><p>2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #peering</small></article>
+<article class="candidate" id="c-transit-gateway"><h3>AWS Transit Gateway</h3><code>candidate-transit-gateway</code><p>複数VPCや拠点接続を集約するネットワークハブ。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #transit-gateway</small></article>
+<article class="candidate" id="c-site-to-site-vpn"><h3>Site-to-Site VPN</h3><code>candidate-site-to-site-vpn</code><p>拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #site-to-site-vpn</small></article>
+<article class="candidate" id="c-direct-connect"><h3>AWS Direct Connect</h3><code>candidate-direct-connect</code><p>AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #direct-connect</small></article>
+<article class="candidate" id="c-ipv6-egress"><h3>Egress-only Internet Gateway</h3><code>candidate-ipv6-egress</code><p>IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。</p><p>所属：構築士・閉域接続［コネクション／特化］</p><small>教材参照：src/content/index.ts #ipv6-egress</small></article>
+<article class="candidate" id="c-vpc-flow-logs"><h3>VPC Flow Logs</h3><code>candidate-vpc-flow-logs</code><p>IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。</p><p>所属：構築士・閉域接続［オプション／特化］／復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #vpc-flow-logs</small></article>
+<article class="candidate" id="c-session-manager"><h3>Session Manager</h3><code>candidate-session-manager</code><p>Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。</p><p>所属：構築士・閉域接続［オプション／特化］</p><small>教材参照：src/content/index.ts #session-manager</small></article>
+<article class="candidate" id="c-ec2"><h3>Amazon EC2</h3><code>candidate-ec2</code><p>要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。</p><p>所属：守護者・分散要塞［オプション／特化］／調律師・増援［オプション／特化］／指揮者・蓄積［オプション／特化］／指揮者・機会活用［オプション／特化］</p><small>教材参照：src/content/index.ts #ec2</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-nlb"><h3>Network Load Balancer</h3><code>candidate-nlb</code><p>TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。</p><p>所属：守護者・分散要塞［オプション／特化］／調律師・増援［オプション／特化］</p><small>教材参照：src/content/index.ts #nlb</small></article>
+<article class="candidate" id="c-auto-scaling"><h3>EC2 Auto Scaling</h3><code>candidate-auto-scaling</code><p>需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。</p><p>所属：守護者・分散要塞［コネクション／特化］／調律師・増援［キー／特化］／指揮者・機会活用［オプション／特化］</p><small>教材参照：src/content/index.ts #auto-scaling</small></article>
+<article class="candidate" id="c-target-tracking"><h3>ターゲット追跡スケーリング</h3><code>candidate-target-tracking</code><p>1台当たりの負荷等が目標に近づくよう容量を調整する方式。</p><p>所属：調律師・増援［キー／特化］</p><small>教材参照：src/content/index.ts #target-tracking</small></article>
+<article class="candidate" id="c-scheduled-scaling"><h3>予定スケーリング</h3><code>candidate-scheduled-scaling</code><p>既知の時刻の需要に合わせて事前に容量を変更する方式。</p><p>所属：調律師・増援［キー／特化］</p><small>教材参照：src/content/index.ts #scheduled-scaling</small></article>
+<article class="candidate" id="c-warm-pool"><h3>Warm Pool</h3><code>candidate-warm-pool</code><p>初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。</p><p>所属：調律師・増援［オプション／特化］</p><small>教材参照：src/content/index.ts #warm-pool</small></article>
+<article class="candidate" id="c-ami"><h3>AMI</h3><code>candidate-ami</code><p>EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。</p><p>所属：指揮者・機会活用［オプション／特化］／構築士・再現構築［オプション／特化］／復旧者・待機［オプション／特化］</p><small>教材参照：src/content/index.ts #ami</small></article>
+<article class="candidate" id="c-capacity-reservation"><h3>Capacity Reservation</h3><code>candidate-capacity-reservation</code><p>指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。</p><p>所属：調律師・増援［オプション／特化］／指揮者・機会活用［コネクション／特化］／復旧者・待機［オプション／特化］</p><small>教材参照：src/content/index.ts #capacity-reservation</small></article>
+<article class="candidate" id="c-placement-group"><h3>プレイスメントグループ</h3><code>candidate-placement-group</code><p>低遅延や障害分離等の要件に合わせEC2の配置を制御する。</p><p>所属：守護者・分散要塞［オプション／特化］／守護者・隔離［キー／特化］</p><small>教材参照：src/content/index.ts #placement-group</small></article>
+<article class="candidate" id="c-instance-family"><h3>インスタンスファミリー</h3><code>candidate-instance-family</code><p>CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。</p><p>所属：調律師・精鋭［キー／汎用］</p><small>教材参照：src/content/index.ts #instance-family</small></article>
+<article class="candidate" id="c-ebs"><h3>Amazon EBS</h3><code>candidate-ebs</code><p>EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。</p><p>所属：指揮者・機会活用［オプション／特化］</p><small>教材参照：src/content/index.ts #ebs</small></article>
+<article class="candidate" id="c-efs"><h3>Amazon EFS</h3><code>candidate-efs</code><p>Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。</p><p>所属：守護者・分散要塞［オプション／特化］</p><small>教材参照：src/content/index.ts #efs</small></article>
+<article class="candidate" id="c-gp3"><h3>gp3</h3><code>candidate-gp3</code><p>容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。</p><p>所属：調律師・精鋭［オプション／特化］</p><small>教材参照：src/content/index.ts #gp3</small></article>
+<article class="candidate" id="c-provisioned-iops"><h3>Provisioned IOPS SSD</h3><code>candidate-provisioned-iops</code><p>厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。</p><p>所属：調律師・精鋭［オプション／特化］</p><small>教材参照：src/content/index.ts #provisioned-iops</small></article>
+<article class="candidate" id="c-storage-performance"><h3>IOPSとスループット</h3><code>candidate-storage-performance</code><p>秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #storage-performance</small></article>
+<article class="candidate" id="c-standard-ia"><h3>S3 Standard-IA</h3><code>candidate-standard-ia</code><p>低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。</p><p>所属：復旧者・保存［コネクション／特化］</p><small>教材参照：src/content/index.ts #standard-ia</small></article>
+<article class="candidate" id="c-intelligent-tiering"><h3>S3 Intelligent-Tiering</h3><code>candidate-intelligent-tiering</code><p>アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。</p><p>所属：調律師・精鋭［コネクション／特化］</p><small>教材参照：src/content/index.ts #intelligent-tiering</small></article>
+<article class="candidate" id="c-archive"><h3>アーカイブ保存</h3><code>candidate-archive</code><p>長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。</p><p>所属：復旧者・保存［コネクション／特化］</p><small>教材参照：src/content/index.ts #archive</small></article>
+<article class="candidate" id="c-versioning"><h3>S3バージョニング</h3><code>candidate-versioning</code><p>オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。</p><p>所属：復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #versioning</small></article>
+<article class="candidate" id="c-noncurrent-version"><h3>S3旧バージョン</h3><code>candidate-noncurrent-version</code><p>現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。</p><p>所属：復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #noncurrent-version</small></article>
+<article class="candidate" id="c-object-lock"><h3>S3 Object Lock</h3><code>candidate-object-lock</code><p>一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。</p><p>所属：復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #object-lock</small></article>
 <article class="candidate" id="c-fsx-windows"><h3>FSx for Windows File Server</h3><code>candidate-fsx-windows</code><p>SMB共有やActive Directory連携を要件とするWindowsファイルサービス。</p><p>所属：未所属：remainder-fsx-windows</p><small>教材参照：src/content/index.ts #fsx-windows</small></article>
-<article class="candidate" id="c-ebs-snapshot"><h3>EBSスナップショット</h3><code>candidate-ebs-snapshot</code><p>EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。</p><p>所属：指揮者・機会活用［強化・安定化／特定条件で使える］／復旧者・保存［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #ebs-snapshot</small></article>
-<article class="candidate" id="c-multipart-upload"><h3>マルチパートアップロード</h3><code>candidate-multipart-upload</code><p>大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。</p><p>所属：指揮者・再挑戦［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #multipart-upload</small></article>
-<article class="candidate" id="c-transfer-acceleration"><h3>S3 Transfer Acceleration</h3><code>candidate-transfer-acceleration</code><p>遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。</p><p>所属：加速者・配信［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #transfer-acceleration</small></article>
-<article class="candidate" id="c-s3-consistency"><h3>S3の強い整合性</h3><code>candidate-s3-consistency</code><p>成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。</p><p>所属：加速者・記憶［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #s3-consistency</small></article>
-<article class="candidate" id="c-s3-encryption"><h3>S3の保存時暗号化</h3><code>candidate-s3-encryption</code><p>SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。</p><p>所属：復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #s3-encryption</small></article>
-<article class="candidate" id="c-s3-replication"><h3>S3レプリケーション</h3><code>candidate-s3-replication</code><p>ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。</p><p>所属：復旧者・待機［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #s3-replication</small></article>
-<article class="candidate" id="c-rds-multi-az"><h3>RDS Multi-AZ</h3><code>candidate-rds-multi-az</code><p>複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。</p><p>所属：守護者・継承［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #rds-multi-az</small></article>
-<article class="candidate" id="c-read-replica"><h3>リードレプリカ</h3><code>candidate-read-replica</code><p>読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。</p><p>所属：加速者・読取分散［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #read-replica</small></article>
-<article class="candidate" id="c-rds-standby"><h3>RDSの単一スタンバイ</h3><code>candidate-rds-standby</code><p>Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。</p><p>所属：守護者・継承［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #rds-standby</small></article>
-<article class="candidate" id="c-dynamodb"><h3>Amazon DynamoDB</h3><code>candidate-dynamodb</code><p>キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。</p><p>所属：加速者・記憶［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #dynamodb</small></article>
-<article class="candidate" id="c-partition-key"><h3>パーティションキー</h3><code>candidate-partition-key</code><p>DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。</p><p>所属：加速者・読取分散［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #partition-key</small></article>
-<article class="candidate" id="c-gsi"><h3>グローバルセカンダリインデックス（GSI）</h3><code>candidate-gsi</code><p>別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。</p><p>所属：加速者・読取分散［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #gsi</small></article>
-<article class="candidate" id="c-consistency"><h3>読取り整合性</h3><code>candidate-consistency</code><p>更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。</p><p>所属：加速者・記憶［強化・安定化／幅広く使える］／加速者・読取分散［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #consistency</small></article>
-<article class="candidate" id="c-dynamodb-on-demand"><h3>DynamoDBオンデマンド容量</h3><code>candidate-dynamodb-on-demand</code><p>読書き要求ベースの容量課金。事前の固定容量計画を減らす。</p><p>所属：調律師・即応［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #dynamodb-on-demand</small></article>
-<article class="candidate" id="c-dynamodb-ttl"><h3>DynamoDB TTL</h3><code>candidate-dynamodb-ttl</code><p>項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。</p><p>所属：加速者・記憶［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #dynamodb-ttl</small></article>
-<article class="candidate" id="c-dynamodb-transactions"><h3>DynamoDBトランザクション</h3><code>candidate-dynamodb-transactions</code><p>複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。</p><p>所属：指揮者・再挑戦［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #dynamodb-transactions</small></article>
-<article class="candidate" id="c-dax"><h3>DAX</h3><code>candidate-dax</code><p>DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。</p><p>所属：加速者・記憶［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #dax</small></article>
-<article class="candidate" id="c-rds-proxy"><h3>RDS Proxy</h3><code>candidate-rds-proxy</code><p>DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。</p><p>所属：守護者・継承［強化・安定化／特定条件で使える］／調律師・即応［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #rds-proxy</small></article>
-<article class="candidate" id="c-point-in-time-recovery"><h3>ポイントインタイムリカバリ（PITR）</h3><code>candidate-point-in-time-recovery</code><p>保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。</p><p>所属：復旧者・保存［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #point-in-time-recovery</small></article>
-<article class="candidate" id="c-aurora-replica"><h3>Aurora Replica</h3><code>candidate-aurora-replica</code><p>Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。</p><p>所属：守護者・継承［別構成への橋渡し／特定条件で使える］／加速者・読取分散［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #aurora-replica</small></article>
-<article class="candidate" id="c-global-tables"><h3>DynamoDBグローバルテーブル</h3><code>candidate-global-tables</code><p>複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。</p><p>所属：復旧者・待機［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #global-tables</small></article>
-<article class="candidate" id="c-database-selection"><h3>データモデルによるDB選定</h3><code>candidate-database-selection</code><p>SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #database-selection</small></article>
-<article class="candidate" id="c-database-cost"><h3>DBの総費用</h3><code>candidate-database-cost</code><p>実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］／加速者・読取分散［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #database-cost</small></article>
-<article class="candidate" id="c-network-cost"><h3>ネットワークの総費用</h3><code>candidate-network-cost</code><p>出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #network-cost</small></article>
-<article class="candidate" id="c-storage-cost"><h3>ストレージの総費用</h3><code>candidate-storage-cost</code><p>保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #storage-cost</small></article>
-<article class="candidate" id="c-route53"><h3>Route 53</h3><code>candidate-route53</code><p>名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。</p><p>所属：守護者・分散要塞［別構成への橋渡し／特定条件で使える］／加速者・配信［強化・安定化／特定条件で使える］／復旧者・待機［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #route53</small></article>
-<article class="candidate" id="c-dns-ttl"><h3>TTL</h3><code>candidate-dns-ttl</code><p>DNS やキャッシュの情報を再利用する有効期間。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］／加速者・記憶［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #dns-ttl</small></article>
-<article class="candidate" id="c-cloudfront"><h3>CloudFront</h3><code>candidate-cloudfront</code><p>エッジで HTTP/HTTPS コンテンツを配信する CDN。</p><p>所属：加速者・配信［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #cloudfront</small></article>
-<article class="candidate" id="c-cache-key"><h3>キャッシュキー</h3><code>candidate-cache-key</code><p>どの要求で同じキャッシュを共有するかを決める識別情報。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］／加速者・記憶［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #cache-key</small></article>
-<article class="candidate" id="c-global-accelerator"><h3>Global Accelerator</h3><code>candidate-global-accelerator</code><p>静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。</p><p>所属：加速者・配信［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #global-accelerator</small></article>
-<article class="candidate" id="c-cloudfront-oac"><h3>OAC</h3><code>candidate-cloudfront-oac</code><p>CloudFront からオリジンへのアクセスを制限する仕組み。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #cloudfront-oac</small></article>
-<article class="candidate" id="c-signed-url"><h3>署名付き URL</h3><code>candidate-signed-url</code><p>有効期限等を含む署名で視聴者のアクセスを制限する URL。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #signed-url</small></article>
-<article class="candidate" id="c-lambda"><h3>Lambda</h3><code>candidate-lambda</code><p>イベントに応じてコードを動かすサーバーレスサービス。</p><p>所属：調律師・即応［中核／特定条件で使える］／指揮者・蓄積［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #lambda</small></article>
-<article class="candidate" id="c-lambda-concurrency"><h3>同時実行</h3><code>candidate-lambda-concurrency</code><p>同じ時点で処理されている関数呼出し数。</p><p>所属：調律師・即応［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #lambda-concurrency</small></article>
-<article class="candidate" id="c-ecs"><h3>ECS</h3><code>candidate-ecs</code><p>コンテナタスクの実行・配置・維持を管理するサービス。</p><p>所属：調律師・増援［別構成への橋渡し／特定条件で使える］／調律師・即応［別構成への橋渡し／特定条件で使える］／指揮者・蓄積［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ecs</small></article>
-<article class="candidate" id="c-fargate"><h3>Fargate</h3><code>candidate-fargate</code><p>ホストを直接管理せずコンテナを動かす計算基盤。</p><p>所属：調律師・即応［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #fargate</small></article>
-<article class="candidate" id="c-eks"><h3>EKS</h3><code>candidate-eks</code><p>Kubernetes のマネージドサービス。</p><p>所属：調律師・増援［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #eks</small></article>
-<article class="candidate" id="c-ecr"><h3>ECR</h3><code>candidate-ecr</code><p>コンテナイメージを保管するレジストリ。</p><p>所属：構築士・再現構築［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ecr</small></article>
-<article class="candidate" id="c-task-role"><h3>タスクロール</h3><code>candidate-task-role</code><p>ECS タスク内のアプリが AWS API を使うための IAM ロール。</p><p>所属：調律師・即応［強化・安定化／特定条件で使える］／構築士・権限設計［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #task-role</small></article>
-<article class="candidate" id="c-api-gateway"><h3>API Gateway</h3><code>candidate-api-gateway</code><p>API の公開・認証連携・流量管理を担う入口。</p><p>所属：調律師・即応［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #api-gateway</small></article>
-<article class="candidate" id="c-step-functions"><h3>Step Functions</h3><code>candidate-step-functions</code><p>複数ステップの順序や再試行を状態機械で管理するサービス。</p><p>所属：調律師・即応［別構成への橋渡し／特定条件で使える］／指揮者・再挑戦［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #step-functions</small></article>
-<article class="candidate" id="c-sqs"><h3>SQS</h3><code>candidate-sqs</code><p>非同期処理の作業待ちメッセージを保持するキュー。</p><p>所属：調律師・即応［別構成への橋渡し／幅広く使える］／指揮者・蓄積［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #sqs</small></article>
-<article class="candidate" id="c-visibility-timeout"><h3>可視性タイムアウト</h3><code>candidate-visibility-timeout</code><p>受信済みメッセージをほかの受信者から一時的に隠す期間。</p><p>所属：指揮者・蓄積［強化・安定化／特定条件で使える］／指揮者・再挑戦［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #visibility-timeout</small></article>
-<article class="candidate" id="c-fifo"><h3>FIFO</h3><code>candidate-fifo</code><p>先入れ先出し。SQS ではメッセージグループ内の順序を維持する。</p><p>所属：指揮者・蓄積［強化・安定化／特定条件で使える］／指揮者・再挑戦［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #fifo</small></article>
-<article class="candidate" id="c-idempotency"><h3>冪等性</h3><code>candidate-idempotency</code><p>同じ要求を繰り返しても業務上の結果が重複しない性質。</p><p>所属：指揮者・再挑戦［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #idempotency</small></article>
-<article class="candidate" id="c-sns"><h3>SNS</h3><code>candidate-sns</code><p>トピックの購読者へメッセージを配信するサービス。</p><p>所属：調律師・即応［別構成への橋渡し／特定条件で使える］／指揮者・蓄積［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #sns</small></article>
-<article class="candidate" id="c-fanout"><h3>ファンアウト</h3><code>candidate-fanout</code><p>一つのメッセージを複数の独立した受信先へ配る構成。</p><p>所属：指揮者・蓄積［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #fanout</small></article>
-<article class="candidate" id="c-eventbridge"><h3>EventBridge</h3><code>candidate-eventbridge</code><p>イベントをパターンに応じて対象へ振り分けるサービス。</p><p>所属：調律師・即応［強化・安定化／特定条件で使える］／指揮者・蓄積［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #eventbridge</small></article>
-<article class="candidate" id="c-dlq"><h3>デッドレターキュー</h3><code>candidate-dlq</code><p>処理に繰り返し失敗したメッセージの隔離先。</p><p>所属：守護者・隔離［強化・安定化／幅広く使える］／指揮者・蓄積［強化・安定化／幅広く使える］／指揮者・再挑戦［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #dlq</small></article>
-<article class="candidate" id="c-queue-scaling"><h3>キューに基づくスケーリング</h3><code>candidate-queue-scaling</code><p>滞留件数や待ち時間に応じて処理能力を調整すること。</p><p>所属：調律師・増援［別構成への橋渡し／幅広く使える］／指揮者・蓄積［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #queue-scaling</small></article>
-<article class="candidate" id="c-claim-check"><h3>Claim Check</h3><code>candidate-claim-check</code><p>大きなデータを外部保存し、メッセージには参照を渡す方式。</p><p>所属：指揮者・蓄積［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #claim-check</small></article>
-<article class="candidate" id="c-kms"><h3>KMS</h3><code>candidate-kms</code><p>暗号鍵と暗号操作の権限を管理するサービス。</p><p>所属：構築士・権限設計［別構成への橋渡し／特定条件で使える］／復旧者・保存［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #kms</small></article>
-<article class="candidate" id="c-secrets-manager"><h3>Secrets Manager</h3><code>candidate-secrets-manager</code><p>認証情報等を保管し、更新を管理するサービス。</p><p>所属：構築士・権限設計［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #secrets-manager</small></article>
-<article class="candidate" id="c-tls"><h3>TLS</h3><code>candidate-tls</code><p>通信経路の暗号化と相手認証のプロトコル。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］／構築士・閉域接続［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #tls</small></article>
-<article class="candidate" id="c-waf"><h3>WAF</h3><code>candidate-waf</code><p>HTTP リクエストを条件に基づいて検査・制御する仕組み。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #waf</small></article>
-<article class="candidate" id="c-guardduty"><h3>GuardDuty</h3><code>candidate-guardduty</code><p>不審な活動や脅威の兆候を検出するサービス。</p><p>所属：復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #guardduty</small></article>
-<article class="candidate" id="c-inspector"><h3>Inspector</h3><code>candidate-inspector</code><p>対応ワークロードのソフトウェア脆弱性等を調べるサービス。</p><p>所属：復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #inspector</small></article>
-<article class="candidate" id="c-macie"><h3>Macie</h3><code>candidate-macie</code><p>S3 データの機密情報を検出するサービス。</p><p>所属：復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #macie</small></article>
-<article class="candidate" id="c-shield"><h3>Shield</h3><code>candidate-shield</code><p>DDoS 攻撃からの保護を提供するサービス。</p><p>所属：加速者・配信［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #shield</small></article>
-<article class="candidate" id="c-cloudwatch"><h3>CloudWatch</h3><code>candidate-cloudwatch</code><p>メトリクス、ログ、アラーム等の可観測性サービス。</p><p>所属：調律師・増援［強化・安定化／幅広く使える］／復旧者・観測［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #cloudwatch</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
-<article class="candidate" id="c-cloudtrail"><h3>CloudTrail</h3><code>candidate-cloudtrail</code><p>AWS API 操作の履歴を追跡する監査サービス。</p><p>所属：復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #cloudtrail</small></article>
-<article class="candidate" id="c-aws-config"><h3>AWS Config</h3><code>candidate-aws-config</code><p>リソース設定の履歴とルール準拠を評価するサービス。</p><p>所属：構築士・再現構築［強化・安定化／特定条件で使える］／復旧者・観測［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #aws-config</small></article>
-<article class="candidate" id="c-rto"><h3>RTO</h3><code>candidate-rto</code><p>障害後にサービスを復旧させるまでの目標時間。</p><p>所属：復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #rto</small></article>
-<article class="candidate" id="c-rpo"><h3>RPO</h3><code>candidate-rpo</code><p>どれだけ過去までのデータ損失を許容するかという時間の目標。</p><p>所属：復旧者・保存［強化・安定化／幅広く使える］／復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #rpo</small></article>
-<article class="candidate" id="c-pilot-light"><h3>パイロットライト</h3><code>candidate-pilot-light</code><p>復旧先で中核だけを維持し、障害時に残りを起動する戦略。</p><p>所属：復旧者・待機［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #pilot-light</small></article>
-<article class="candidate" id="c-warm-standby"><h3>ウォームスタンバイ</h3><code>candidate-warm-standby</code><p>縮小した全体構成を復旧先で稼働させておく戦略。</p><p>所属：復旧者・待機［中核／特定条件で使える］</p><small>教材参照：src/content/index.ts #warm-standby</small></article>
-<article class="candidate" id="c-backup"><h3>バックアップ</h3><code>candidate-backup</code><p>誤更新や障害から戻すための復元可能なデータの複製。</p><p>所属：復旧者・保存［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #backup</small></article>
-<article class="candidate" id="c-restore-test"><h3>復元テスト</h3><code>candidate-restore-test</code><p>バックアップから起動・整合性・所要時間を検証する試験。</p><p>所属：復旧者・保存［強化・安定化／幅広く使える］／復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #restore-test</small></article>
-<article class="candidate" id="c-replication"><h3>レプリケーション</h3><code>candidate-replication</code><p>別の保存先へデータの更新を複製する仕組み。</p><p>所属：加速者・読取分散［強化・安定化／幅広く使える］／復旧者・待機［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #replication</small></article>
+<article class="candidate" id="c-ebs-snapshot"><h3>EBSスナップショット</h3><code>candidate-ebs-snapshot</code><p>EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。</p><p>所属：指揮者・機会活用［オプション／特化］／復旧者・保存［キー／特化］</p><small>教材参照：src/content/index.ts #ebs-snapshot</small></article>
+<article class="candidate" id="c-multipart-upload"><h3>マルチパートアップロード</h3><code>candidate-multipart-upload</code><p>大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。</p><p>所属：指揮者・再挑戦［コネクション／特化］</p><small>教材参照：src/content/index.ts #multipart-upload</small></article>
+<article class="candidate" id="c-transfer-acceleration"><h3>S3 Transfer Acceleration</h3><code>candidate-transfer-acceleration</code><p>遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。</p><p>所属：加速者・配信［コネクション／特化］</p><small>教材参照：src/content/index.ts #transfer-acceleration</small></article>
+<article class="candidate" id="c-s3-consistency"><h3>S3の強い整合性</h3><code>candidate-s3-consistency</code><p>成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。</p><p>所属：加速者・記憶［オプション／特化］</p><small>教材参照：src/content/index.ts #s3-consistency</small></article>
+<article class="candidate" id="c-s3-encryption"><h3>S3の保存時暗号化</h3><code>candidate-s3-encryption</code><p>SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。</p><p>所属：復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #s3-encryption</small></article>
+<article class="candidate" id="c-s3-replication"><h3>S3レプリケーション</h3><code>candidate-s3-replication</code><p>ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。</p><p>所属：復旧者・待機［オプション／特化］</p><small>教材参照：src/content/index.ts #s3-replication</small></article>
+<article class="candidate" id="c-rds-multi-az"><h3>RDS Multi-AZ</h3><code>candidate-rds-multi-az</code><p>複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。</p><p>所属：守護者・継承［キー／特化］</p><small>教材参照：src/content/index.ts #rds-multi-az</small></article>
+<article class="candidate" id="c-read-replica"><h3>リードレプリカ</h3><code>candidate-read-replica</code><p>読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。</p><p>所属：加速者・読取分散［キー／特化］</p><small>教材参照：src/content/index.ts #read-replica</small></article>
+<article class="candidate" id="c-rds-standby"><h3>RDSの単一スタンバイ</h3><code>candidate-rds-standby</code><p>Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。</p><p>所属：守護者・継承［キー／特化］</p><small>教材参照：src/content/index.ts #rds-standby</small></article>
+<article class="candidate" id="c-dynamodb"><h3>Amazon DynamoDB</h3><code>candidate-dynamodb</code><p>キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。</p><p>所属：加速者・記憶［オプション／特化］</p><small>教材参照：src/content/index.ts #dynamodb</small></article>
+<article class="candidate" id="c-partition-key"><h3>パーティションキー</h3><code>candidate-partition-key</code><p>DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。</p><p>所属：加速者・読取分散［コネクション／特化］</p><small>教材参照：src/content/index.ts #partition-key</small></article>
+<article class="candidate" id="c-gsi"><h3>グローバルセカンダリインデックス（GSI）</h3><code>candidate-gsi</code><p>別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。</p><p>所属：加速者・読取分散［コネクション／特化］</p><small>教材参照：src/content/index.ts #gsi</small></article>
+<article class="candidate" id="c-consistency"><h3>読取り整合性</h3><code>candidate-consistency</code><p>更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。</p><p>所属：加速者・記憶［オプション／汎用］／加速者・読取分散［オプション／汎用］</p><small>教材参照：src/content/index.ts #consistency</small></article>
+<article class="candidate" id="c-dynamodb-on-demand"><h3>DynamoDBオンデマンド容量</h3><code>candidate-dynamodb-on-demand</code><p>読書き要求ベースの容量課金。事前の固定容量計画を減らす。</p><p>所属：調律師・即応［オプション／特化］</p><small>教材参照：src/content/index.ts #dynamodb-on-demand</small></article>
+<article class="candidate" id="c-dynamodb-ttl"><h3>DynamoDB TTL</h3><code>candidate-dynamodb-ttl</code><p>項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。</p><p>所属：加速者・記憶［コネクション／特化］</p><small>教材参照：src/content/index.ts #dynamodb-ttl</small></article>
+<article class="candidate" id="c-dynamodb-transactions"><h3>DynamoDBトランザクション</h3><code>candidate-dynamodb-transactions</code><p>複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。</p><p>所属：指揮者・再挑戦［コネクション／特化］</p><small>教材参照：src/content/index.ts #dynamodb-transactions</small></article>
+<article class="candidate" id="c-dax"><h3>DAX</h3><code>candidate-dax</code><p>DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。</p><p>所属：加速者・記憶［キー／特化］</p><small>教材参照：src/content/index.ts #dax</small></article>
+<article class="candidate" id="c-rds-proxy"><h3>RDS Proxy</h3><code>candidate-rds-proxy</code><p>DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。</p><p>所属：守護者・継承［オプション／特化］／調律師・即応［オプション／特化］</p><small>教材参照：src/content/index.ts #rds-proxy</small></article>
+<article class="candidate" id="c-point-in-time-recovery"><h3>ポイントインタイムリカバリ（PITR）</h3><code>candidate-point-in-time-recovery</code><p>保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。</p><p>所属：復旧者・保存［キー／特化］</p><small>教材参照：src/content/index.ts #point-in-time-recovery</small></article>
+<article class="candidate" id="c-aurora-replica"><h3>Aurora Replica</h3><code>candidate-aurora-replica</code><p>Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。</p><p>所属：守護者・継承［コネクション／特化］／加速者・読取分散［キー／特化］</p><small>教材参照：src/content/index.ts #aurora-replica</small></article>
+<article class="candidate" id="c-global-tables"><h3>DynamoDBグローバルテーブル</h3><code>candidate-global-tables</code><p>複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。</p><p>所属：復旧者・待機［コネクション／特化］</p><small>教材参照：src/content/index.ts #global-tables</small></article>
+<article class="candidate" id="c-database-selection"><h3>データモデルによるDB選定</h3><code>candidate-database-selection</code><p>SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #database-selection</small></article>
+<article class="candidate" id="c-database-cost"><h3>DBの総費用</h3><code>candidate-database-cost</code><p>実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。</p><p>所属：調律師・精鋭［オプション／汎用］／加速者・読取分散［オプション／汎用］</p><small>教材参照：src/content/index.ts #database-cost</small></article>
+<article class="candidate" id="c-network-cost"><h3>ネットワークの総費用</h3><code>candidate-network-cost</code><p>出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #network-cost</small></article>
+<article class="candidate" id="c-storage-cost"><h3>ストレージの総費用</h3><code>candidate-storage-cost</code><p>保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #storage-cost</small></article>
+<article class="candidate" id="c-route53"><h3>Route 53</h3><code>candidate-route53</code><p>名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。</p><p>所属：守護者・分散要塞［コネクション／特化］／加速者・配信［オプション／特化］／復旧者・待機［オプション／特化］</p><small>教材参照：src/content/index.ts #route53</small></article>
+<article class="candidate" id="c-dns-ttl"><h3>TTL</h3><code>candidate-dns-ttl</code><p>DNS やキャッシュの情報を再利用する有効期間。</p><p>所属：加速者・配信［オプション／特化］／加速者・記憶［オプション／特化］</p><small>教材参照：src/content/index.ts #dns-ttl</small></article>
+<article class="candidate" id="c-cloudfront"><h3>CloudFront</h3><code>candidate-cloudfront</code><p>エッジで HTTP/HTTPS コンテンツを配信する CDN。</p><p>所属：加速者・配信［キー／特化］</p><small>教材参照：src/content/index.ts #cloudfront</small></article>
+<article class="candidate" id="c-cache-key"><h3>キャッシュキー</h3><code>candidate-cache-key</code><p>どの要求で同じキャッシュを共有するかを決める識別情報。</p><p>所属：加速者・配信［オプション／特化］／加速者・記憶［オプション／特化］</p><small>教材参照：src/content/index.ts #cache-key</small></article>
+<article class="candidate" id="c-global-accelerator"><h3>Global Accelerator</h3><code>candidate-global-accelerator</code><p>静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。</p><p>所属：加速者・配信［コネクション／特化］</p><small>教材参照：src/content/index.ts #global-accelerator</small></article>
+<article class="candidate" id="c-cloudfront-oac"><h3>OAC</h3><code>candidate-cloudfront-oac</code><p>CloudFront からオリジンへのアクセスを制限する仕組み。</p><p>所属：加速者・配信［オプション／特化］</p><small>教材参照：src/content/index.ts #cloudfront-oac</small></article>
+<article class="candidate" id="c-signed-url"><h3>署名付き URL</h3><code>candidate-signed-url</code><p>有効期限等を含む署名で視聴者のアクセスを制限する URL。</p><p>所属：加速者・配信［オプション／特化］</p><small>教材参照：src/content/index.ts #signed-url</small></article>
+<article class="candidate" id="c-lambda"><h3>Lambda</h3><code>candidate-lambda</code><p>イベントに応じてコードを動かすサーバーレスサービス。</p><p>所属：調律師・即応［キー／特化］／指揮者・蓄積［オプション／特化］</p><small>教材参照：src/content/index.ts #lambda</small></article>
+<article class="candidate" id="c-lambda-concurrency"><h3>同時実行</h3><code>candidate-lambda-concurrency</code><p>同じ時点で処理されている関数呼出し数。</p><p>所属：調律師・即応［オプション／特化］</p><small>教材参照：src/content/index.ts #lambda-concurrency</small></article>
+<article class="candidate" id="c-ecs"><h3>ECS</h3><code>candidate-ecs</code><p>コンテナタスクの実行・配置・維持を管理するサービス。</p><p>所属：調律師・増援［コネクション／特化］／調律師・即応［コネクション／特化］／指揮者・蓄積［オプション／特化］</p><small>教材参照：src/content/index.ts #ecs</small></article>
+<article class="candidate" id="c-fargate"><h3>Fargate</h3><code>candidate-fargate</code><p>ホストを直接管理せずコンテナを動かす計算基盤。</p><p>所属：調律師・即応［キー／特化］</p><small>教材参照：src/content/index.ts #fargate</small></article>
+<article class="candidate" id="c-eks"><h3>EKS</h3><code>candidate-eks</code><p>Kubernetes のマネージドサービス。</p><p>所属：調律師・増援［コネクション／特化］</p><small>教材参照：src/content/index.ts #eks</small></article>
+<article class="candidate" id="c-ecr"><h3>ECR</h3><code>candidate-ecr</code><p>コンテナイメージを保管するレジストリ。</p><p>所属：構築士・再現構築［オプション／特化］</p><small>教材参照：src/content/index.ts #ecr</small></article>
+<article class="candidate" id="c-task-role"><h3>タスクロール</h3><code>candidate-task-role</code><p>ECS タスク内のアプリが AWS API を使うための IAM ロール。</p><p>所属：調律師・即応［オプション／特化］／構築士・権限設計［オプション／特化］</p><small>教材参照：src/content/index.ts #task-role</small></article>
+<article class="candidate" id="c-api-gateway"><h3>API Gateway</h3><code>candidate-api-gateway</code><p>API の公開・認証連携・流量管理を担う入口。</p><p>所属：調律師・即応［オプション／特化］</p><small>教材参照：src/content/index.ts #api-gateway</small></article>
+<article class="candidate" id="c-step-functions"><h3>Step Functions</h3><code>candidate-step-functions</code><p>複数ステップの順序や再試行を状態機械で管理するサービス。</p><p>所属：調律師・即応［コネクション／特化］／指揮者・再挑戦［オプション／特化］</p><small>教材参照：src/content/index.ts #step-functions</small></article>
+<article class="candidate" id="c-sqs"><h3>SQS</h3><code>candidate-sqs</code><p>非同期処理の作業待ちメッセージを保持するキュー。</p><p>所属：調律師・即応［コネクション／汎用］／指揮者・蓄積［キー／汎用］</p><small>教材参照：src/content/index.ts #sqs</small></article>
+<article class="candidate" id="c-visibility-timeout"><h3>可視性タイムアウト</h3><code>candidate-visibility-timeout</code><p>受信済みメッセージをほかの受信者から一時的に隠す期間。</p><p>所属：指揮者・蓄積［オプション／特化］／指揮者・再挑戦［オプション／特化］</p><small>教材参照：src/content/index.ts #visibility-timeout</small></article>
+<article class="candidate" id="c-fifo"><h3>FIFO</h3><code>candidate-fifo</code><p>先入れ先出し。SQS ではメッセージグループ内の順序を維持する。</p><p>所属：指揮者・蓄積［オプション／特化］／指揮者・再挑戦［オプション／特化］</p><small>教材参照：src/content/index.ts #fifo</small></article>
+<article class="candidate" id="c-idempotency"><h3>冪等性</h3><code>candidate-idempotency</code><p>同じ要求を繰り返しても業務上の結果が重複しない性質。</p><p>所属：指揮者・再挑戦［キー／汎用］</p><small>教材参照：src/content/index.ts #idempotency</small></article>
+<article class="candidate" id="c-sns"><h3>SNS</h3><code>candidate-sns</code><p>トピックの購読者へメッセージを配信するサービス。</p><p>所属：調律師・即応［コネクション／特化］／指揮者・蓄積［コネクション／特化］</p><small>教材参照：src/content/index.ts #sns</small></article>
+<article class="candidate" id="c-fanout"><h3>ファンアウト</h3><code>candidate-fanout</code><p>一つのメッセージを複数の独立した受信先へ配る構成。</p><p>所属：指揮者・蓄積［コネクション／特化］</p><small>教材参照：src/content/index.ts #fanout</small></article>
+<article class="candidate" id="c-eventbridge"><h3>EventBridge</h3><code>candidate-eventbridge</code><p>イベントをパターンに応じて対象へ振り分けるサービス。</p><p>所属：調律師・即応［オプション／特化］／指揮者・蓄積［コネクション／特化］</p><small>教材参照：src/content/index.ts #eventbridge</small></article>
+<article class="candidate" id="c-dlq"><h3>デッドレターキュー</h3><code>candidate-dlq</code><p>処理に繰り返し失敗したメッセージの隔離先。</p><p>所属：守護者・隔離［オプション／汎用］／指揮者・蓄積［オプション／汎用］／指揮者・再挑戦［オプション／汎用］</p><small>教材参照：src/content/index.ts #dlq</small></article>
+<article class="candidate" id="c-queue-scaling"><h3>キューに基づくスケーリング</h3><code>candidate-queue-scaling</code><p>滞留件数や待ち時間に応じて処理能力を調整すること。</p><p>所属：調律師・増援［コネクション／汎用］／指揮者・蓄積［オプション／汎用］</p><small>教材参照：src/content/index.ts #queue-scaling</small></article>
+<article class="candidate" id="c-claim-check"><h3>Claim Check</h3><code>candidate-claim-check</code><p>大きなデータを外部保存し、メッセージには参照を渡す方式。</p><p>所属：指揮者・蓄積［オプション／特化］</p><small>教材参照：src/content/index.ts #claim-check</small></article>
+<article class="candidate" id="c-kms"><h3>KMS</h3><code>candidate-kms</code><p>暗号鍵と暗号操作の権限を管理するサービス。</p><p>所属：構築士・権限設計［コネクション／特化］／復旧者・保存［オプション／特化］</p><small>教材参照：src/content/index.ts #kms</small></article>
+<article class="candidate" id="c-secrets-manager"><h3>Secrets Manager</h3><code>candidate-secrets-manager</code><p>認証情報等を保管し、更新を管理するサービス。</p><p>所属：構築士・権限設計［コネクション／特化］</p><small>教材参照：src/content/index.ts #secrets-manager</small></article>
+<article class="candidate" id="c-tls"><h3>TLS</h3><code>candidate-tls</code><p>通信経路の暗号化と相手認証のプロトコル。</p><p>所属：加速者・配信［オプション／特化］／構築士・閉域接続［オプション／特化］</p><small>教材参照：src/content/index.ts #tls</small></article>
+<article class="candidate" id="c-waf"><h3>WAF</h3><code>candidate-waf</code><p>HTTP リクエストを条件に基づいて検査・制御する仕組み。</p><p>所属：加速者・配信［オプション／特化］</p><small>教材参照：src/content/index.ts #waf</small></article>
+<article class="candidate" id="c-guardduty"><h3>GuardDuty</h3><code>candidate-guardduty</code><p>不審な活動や脅威の兆候を検出するサービス。</p><p>所属：復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #guardduty</small></article>
+<article class="candidate" id="c-inspector"><h3>Inspector</h3><code>candidate-inspector</code><p>対応ワークロードのソフトウェア脆弱性等を調べるサービス。</p><p>所属：復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #inspector</small></article>
+<article class="candidate" id="c-macie"><h3>Macie</h3><code>candidate-macie</code><p>S3 データの機密情報を検出するサービス。</p><p>所属：復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #macie</small></article>
+<article class="candidate" id="c-shield"><h3>Shield</h3><code>candidate-shield</code><p>DDoS 攻撃からの保護を提供するサービス。</p><p>所属：加速者・配信［オプション／特化］</p><small>教材参照：src/content/index.ts #shield</small></article>
+<article class="candidate" id="c-cloudwatch"><h3>CloudWatch</h3><code>candidate-cloudwatch</code><p>メトリクス、ログ、アラーム等の可観測性サービス。</p><p>所属：調律師・増援［オプション／汎用］／復旧者・観測［キー／汎用］</p><small>教材参照：src/content/index.ts #cloudwatch</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-cloudtrail"><h3>CloudTrail</h3><code>candidate-cloudtrail</code><p>AWS API 操作の履歴を追跡する監査サービス。</p><p>所属：復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #cloudtrail</small></article>
+<article class="candidate" id="c-aws-config"><h3>AWS Config</h3><code>candidate-aws-config</code><p>リソース設定の履歴とルール準拠を評価するサービス。</p><p>所属：構築士・再現構築［オプション／特化］／復旧者・観測［オプション／特化］</p><small>教材参照：src/content/index.ts #aws-config</small></article>
+<article class="candidate" id="c-rto"><h3>RTO</h3><code>candidate-rto</code><p>障害後にサービスを復旧させるまでの目標時間。</p><p>所属：復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #rto</small></article>
+<article class="candidate" id="c-rpo"><h3>RPO</h3><code>candidate-rpo</code><p>どれだけ過去までのデータ損失を許容するかという時間の目標。</p><p>所属：復旧者・保存［オプション／汎用］／復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #rpo</small></article>
+<article class="candidate" id="c-pilot-light"><h3>パイロットライト</h3><code>candidate-pilot-light</code><p>復旧先でキーだけを維持し、障害時に残りを起動する戦略。</p><p>所属：復旧者・待機［キー／特化］</p><small>教材参照：src/content/index.ts #pilot-light</small></article>
+<article class="candidate" id="c-warm-standby"><h3>ウォームスタンバイ</h3><code>candidate-warm-standby</code><p>縮小した全体構成を復旧先で稼働させておく戦略。</p><p>所属：復旧者・待機［キー／特化］</p><small>教材参照：src/content/index.ts #warm-standby</small></article>
+<article class="candidate" id="c-backup"><h3>バックアップ</h3><code>candidate-backup</code><p>誤更新や障害から戻すための復元可能なデータの複製。</p><p>所属：復旧者・保存［キー／汎用］</p><small>教材参照：src/content/index.ts #backup</small></article>
+<article class="candidate" id="c-restore-test"><h3>復元テスト</h3><code>candidate-restore-test</code><p>バックアップから起動・整合性・所要時間を検証する試験。</p><p>所属：復旧者・保存［オプション／汎用］／復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #restore-test</small></article>
+<article class="candidate" id="c-replication"><h3>レプリケーション</h3><code>candidate-replication</code><p>別の保存先へデータの更新を複製する仕組み。</p><p>所属：加速者・読取分散［オプション／汎用］／復旧者・待機［オプション／汎用］</p><small>教材参照：src/content/index.ts #replication</small></article>
 <article class="candidate" id="c-dms"><h3>DMS</h3><code>candidate-dms</code><p>DB の初期移行と継続的な変更同期を行うサービス。</p><p>所属：未所属：remainder-dms</p><small>教材参照：src/content/index.ts #dms</small></article>
 <article class="candidate" id="c-cdc"><h3>CDC</h3><code>candidate-cdc</code><p>データベースに生じた変更を取得して反映する方式。</p><p>所属：未所属：remainder-cdc</p><small>教材参照：src/content/index.ts #cdc</small></article>
 <article class="candidate" id="c-datasync"><h3>DataSync</h3><code>candidate-datasync</code><p>対応するストレージ間でファイル・オブジェクトを転送するサービス。</p><p>所属：未所属：remainder-datasync</p><small>教材参照：src/content/index.ts #datasync</small></article>
 <article class="candidate" id="c-migration"><h3>リホスト</h3><code>candidate-migration</code><p>アプリを大きく変更せず実行環境を移す移行方式。</p><p>所属：未所属：remainder-migration</p><small>教材参照：src/content/index.ts #migration</small></article>
-<article class="candidate" id="c-performance"><h3>ボトルネック</h3><code>candidate-performance</code><p>処理全体の速度や容量を制限している部分。</p><p>所属：調律師・精鋭［中核／幅広く使える］／加速者・記憶［強化・安定化／幅広く使える］／加速者・読取分散［強化・安定化／幅広く使える］／復旧者・観測［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #performance</small></article>
-<article class="candidate" id="c-cache"><h3>キャッシュ</h3><code>candidate-cache</code><p>再利用可能なデータを速く取得できる場所へ一時保存する仕組み。</p><p>所属：加速者・記憶［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #cache</small></article>
-<article class="candidate" id="c-savings-plans"><h3>Savings Plans</h3><code>candidate-savings-plans</code><p>一定の利用額をコミットして対象使用料の割引を受ける購入方式。</p><p>所属：調律師・精鋭［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #savings-plans</small></article>
-<article class="candidate" id="c-cost-optimization"><h3>コスト最適化</h3><code>candidate-cost-optimization</code><p>要件を満たしながら使用量と価格条件を改善すること。</p><p>所属：調律師・精鋭［中核／幅広く使える］</p><small>教材参照：src/content/index.ts #cost-optimization</small></article>
+<article class="candidate" id="c-performance"><h3>ボトルネック</h3><code>candidate-performance</code><p>処理全体の速度や容量を制限している部分。</p><p>所属：調律師・精鋭［キー／汎用］／加速者・記憶［オプション／汎用］／加速者・読取分散［オプション／汎用］／復旧者・観測［オプション／汎用］</p><small>教材参照：src/content/index.ts #performance</small></article>
+<article class="candidate" id="c-cache"><h3>キャッシュ</h3><code>candidate-cache</code><p>再利用可能なデータを速く取得できる場所へ一時保存する仕組み。</p><p>所属：加速者・記憶［キー／汎用］</p><small>教材参照：src/content/index.ts #cache</small></article>
+<article class="candidate" id="c-savings-plans"><h3>Savings Plans</h3><code>candidate-savings-plans</code><p>一定の利用額をコミットして対象使用料の割引を受ける購入方式。</p><p>所属：調律師・精鋭［コネクション／特化］</p><small>教材参照：src/content/index.ts #savings-plans</small></article>
+<article class="candidate" id="c-cost-optimization"><h3>コスト最適化</h3><code>candidate-cost-optimization</code><p>要件を満たしながら使用量と価格条件を改善すること。</p><p>所属：調律師・精鋭［キー／汎用］</p><small>教材参照：src/content/index.ts #cost-optimization</small></article>
 <article class="candidate" id="c-athena"><h3>Athena</h3><code>candidate-athena</code><p>S3 などのデータを SQL で分析するサービス。</p><p>所属：未所属：remainder-athena</p><small>教材参照：src/content/index.ts #athena</small></article>
 <article class="candidate" id="c-glue"><h3>Glue</h3><code>candidate-glue</code><p>データカタログとデータ統合・ETL を提供するサービス。</p><p>所属：未所属：remainder-glue</p><small>教材参照：src/content/index.ts #glue</small></article>
 <article class="candidate" id="c-redshift"><h3>Redshift</h3><code>candidate-redshift</code><p>大規模な分析用データウェアハウス。</p><p>所属：未所属：remainder-redshift</p><small>教材参照：src/content/index.ts #redshift</small></article>
-<article class="candidate" id="c-kinesis"><h3>Kinesis Data Streams</h3><code>candidate-kinesis</code><p>データストリームを収集し処理・再読込するサービス。</p><p>所属：指揮者・蓄積［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #kinesis</small></article>
-<article class="candidate" id="c-firehose"><h3>Data Firehose</h3><code>candidate-firehose</code><p>ストリーミングデータを対応先へ配信するサービス。</p><p>所属：指揮者・蓄積［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #firehose</small></article>
-<article class="candidate" id="c-opensearch"><h3>OpenSearch</h3><code>candidate-opensearch</code><p>全文検索やログ分析に使う検索・分析エンジン。</p><p>所属：復旧者・観測［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #opensearch</small></article>
-<article class="candidate" id="c-lake-formation"><h3>Lake Formation</h3><code>candidate-lake-formation</code><p>データレイクの権限管理を支援するサービス。</p><p>所属：構築士・権限設計［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #lake-formation</small></article>
-<article class="candidate" id="c-reserved-instances"><h3>Reserved Instances（RI）</h3><code>candidate-reserved-instances</code><p>適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。</p><p>所属：調律師・精鋭［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #reserved-instances</small></article>
-<article class="candidate" id="c-ec2-hibernation"><h3>EC2休止</h3><code>candidate-ec2-hibernation</code><p>対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ec2-hibernation</small></article>
-<article class="candidate" id="c-ec2-stop"><h3>EC2停止</h3><code>candidate-ec2-stop</code><p>EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #ec2-stop</small></article>
-<article class="candidate" id="c-rcu"><h3>RCU</h3><code>candidate-rcu</code><p>DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］／加速者・読取分散［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #rcu</small></article>
-<article class="candidate" id="c-wcu"><h3>WCU</h3><code>candidate-wcu</code><p>DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］</p><small>教材参照：src/content/index.ts #wcu</small></article>
-<article class="candidate" id="c-cost-explorer"><h3>AWS Cost Explorer</h3><code>candidate-cost-explorer</code><p>費用・使用量の傾向と内訳を可視化して分析するサービス。</p><p>所属：調律師・精鋭［強化・安定化／特定条件で使える］／復旧者・観測［別構成への橋渡し／特定条件で使える］</p><small>教材参照：src/content/index.ts #cost-explorer</small></article>
-<article class="candidate" id="c-budgets"><h3>AWS Budgets</h3><code>candidate-budgets</code><p>実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #budgets</small></article>
-<article class="candidate" id="c-cur"><h3>Cost and Usage Report（CUR）</h3><code>candidate-cur</code><p>詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #cur</small></article>
-<article class="candidate" id="c-cost-allocation"><h3>コスト配分タグ</h3><code>candidate-cost-allocation</code><p>費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。</p><p>所属：調律師・精鋭［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #cost-allocation</small></article>
+<article class="candidate" id="c-kinesis"><h3>Kinesis Data Streams</h3><code>candidate-kinesis</code><p>データストリームを収集し処理・再読込するサービス。</p><p>所属：指揮者・蓄積［コネクション／特化］</p><small>教材参照：src/content/index.ts #kinesis</small></article>
+<article class="candidate" id="c-firehose"><h3>Data Firehose</h3><code>candidate-firehose</code><p>ストリーミングデータを対応先へ配信するサービス。</p><p>所属：指揮者・蓄積［コネクション／特化］</p><small>教材参照：src/content/index.ts #firehose</small></article>
+<article class="candidate" id="c-opensearch"><h3>OpenSearch</h3><code>candidate-opensearch</code><p>全文検索やログ分析に使う検索・分析エンジン。</p><p>所属：復旧者・観測［コネクション／特化］</p><small>教材参照：src/content/index.ts #opensearch</small></article>
+<article class="candidate" id="c-lake-formation"><h3>Lake Formation</h3><code>candidate-lake-formation</code><p>データレイクの権限管理を支援するサービス。</p><p>所属：構築士・権限設計［コネクション／特化］</p><small>教材参照：src/content/index.ts #lake-formation</small></article>
+<article class="candidate" id="c-reserved-instances"><h3>Reserved Instances（RI）</h3><code>candidate-reserved-instances</code><p>適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。</p><p>所属：調律師・精鋭［コネクション／特化］</p><small>教材参照：src/content/index.ts #reserved-instances</small></article>
+<article class="candidate" id="c-ec2-hibernation"><h3>EC2休止</h3><code>candidate-ec2-hibernation</code><p>対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。</p><p>所属：調律師・精鋭［オプション／特化］</p><small>教材参照：src/content/index.ts #ec2-hibernation</small></article>
+<article class="candidate" id="c-ec2-stop"><h3>EC2停止</h3><code>candidate-ec2-stop</code><p>EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。</p><p>所属：調律師・精鋭［オプション／特化］</p><small>教材参照：src/content/index.ts #ec2-stop</small></article>
+<article class="candidate" id="c-rcu"><h3>RCU</h3><code>candidate-rcu</code><p>DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。</p><p>所属：調律師・精鋭［オプション／特化］／加速者・読取分散［コネクション／特化］</p><small>教材参照：src/content/index.ts #rcu</small></article>
+<article class="candidate" id="c-wcu"><h3>WCU</h3><code>candidate-wcu</code><p>DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。</p><p>所属：調律師・精鋭［オプション／特化］</p><small>教材参照：src/content/index.ts #wcu</small></article>
+<article class="candidate" id="c-cost-explorer"><h3>AWS Cost Explorer</h3><code>candidate-cost-explorer</code><p>費用・使用量の傾向と内訳を可視化して分析するサービス。</p><p>所属：調律師・精鋭［オプション／特化］／復旧者・観測［コネクション／特化］</p><small>教材参照：src/content/index.ts #cost-explorer</small></article>
+<article class="candidate" id="c-budgets"><h3>AWS Budgets</h3><code>candidate-budgets</code><p>実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #budgets</small></article>
+<article class="candidate" id="c-cur"><h3>Cost and Usage Report（CUR）</h3><code>candidate-cur</code><p>詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #cur</small></article>
+<article class="candidate" id="c-cost-allocation"><h3>コスト配分タグ</h3><code>candidate-cost-allocation</code><p>費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。</p><p>所属：調律師・精鋭［オプション／汎用］</p><small>教材参照：src/content/index.ts #cost-allocation</small></article>
 <article class="candidate" id="c-gwlb"><h3>Gateway Load Balancer（GWLB）</h3><code>candidate-gwlb</code><p>仮想ファイアウォール等のアプライアンスへ通信を透過的に分配する負荷分散。</p><p>所属：未所属：remainder-gwlb</p><small>教材参照：src/content/index.ts #gwlb</small></article>
 <article class="candidate" id="c-requester-pays"><h3>Requester Pays</h3><code>candidate-requester-pays</code><p>対応するS3要求・ダウンロード費を要求者が負担する設定。所有者の保存費は残る。</p><p>所属：未所属：remainder-requester-pays</p><small>教材参照：src/content/index.ts #requester-pays</small></article>
-<article class="candidate" id="c-throttling"><h3>スロットリング</h3><code>candidate-throttling</code><p>レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。</p><p>所属：守護者・隔離［強化・安定化／幅広く使える］／指揮者・再挑戦［強化・安定化／幅広く使える］</p><small>教材参照：src/content/index.ts #throttling</small></article>
-<article class="candidate" id="c-health-check"><h3>ヘルスチェック</h3><code>candidate-health-check</code><p>ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。</p><p>所属：守護者・分散要塞［強化・安定化／幅広く使える］／守護者・継承［強化・安定化／幅広く使える］／守護者・隔離［強化・安定化／幅広く使える］／調律師・増援［強化・安定化／幅広く使える］／復旧者・観測［強化・安定化／幅広く使える］</p><small>教材参照：knowledge/game-supplement.json #health-check</small></article>
-<article class="candidate" id="c-alb"><h3>Application Load Balancer</h3><code>candidate-alb</code><p>ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。</p><p>所属：守護者・分散要塞［強化・安定化／特定条件で使える］／守護者・隔離［強化・安定化／特定条件で使える］／調律師・増援［強化・安定化／特定条件で使える］</p><small>教材参照：knowledge/game-supplement.json #alb</small></article>
-<article class="candidate" id="c-remaining-capacity"><h3>残存容量</h3><code>candidate-remaining-capacity</code><p>各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。</p><p>所属：守護者・分散要塞［中核／幅広く使える］</p><small>教材参照：knowledge/game-supplement.json #remaining-capacity</small></article>
+<article class="candidate" id="c-throttling"><h3>スロットリング</h3><code>candidate-throttling</code><p>レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。</p><p>所属：守護者・隔離［オプション／汎用］／指揮者・再挑戦［オプション／汎用］</p><small>教材参照：src/content/index.ts #throttling</small></article>
+<article class="candidate" id="c-health-check"><h3>ヘルスチェック</h3><code>candidate-health-check</code><p>ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。</p><p>所属：守護者・分散要塞［オプション／汎用］／守護者・継承［オプション／汎用］／守護者・隔離［オプション／汎用］／調律師・増援［オプション／汎用］／復旧者・観測［オプション／汎用］</p><small>教材参照：knowledge/game-supplement.json #health-check</small></article>
+<article class="candidate" id="c-alb"><h3>Application Load Balancer</h3><code>candidate-alb</code><p>ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。</p><p>所属：守護者・分散要塞［オプション／特化］／守護者・隔離［オプション／特化］／調律師・増援［オプション／特化］</p><small>教材参照：knowledge/game-supplement.json #alb</small></article>
+<article class="candidate" id="c-remaining-capacity"><h3>残存容量</h3><code>candidate-remaining-capacity</code><p>各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。</p><p>所属：守護者・分散要塞［キー／汎用］</p><small>教材参照：knowledge/game-supplement.json #remaining-capacity</small></article>
 <script>const q=document.getElementById("search"),cards=[...document.querySelectorAll(".candidate")];q.addEventListener("input",()=>{let n=0;for(const c of cards){c.hidden=!c.textContent.toLowerCase().includes(q.value.toLowerCase());if(!c.hidden)n++;}document.getElementById("result").textContent=n+"件表示（ビルド一覧・未所属一覧は常に表示）"});document.addEventListener("click",e=>{if(e.target.closest("a[href^=\"#c-\"]")){q.value="";q.dispatchEvent(new Event("input"));}});</script></main></html>

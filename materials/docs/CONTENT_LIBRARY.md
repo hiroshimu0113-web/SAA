@@ -75,3 +75,5 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - 同じHTML/JSONを更新。役割＝中核／強化・安定化／別構成への橋渡し、用途＝幅広く使える／特定条件で使える。215所属ごとに適用条件を表示し、旧条件付きは役割へ個別再分類。
 - 全168候補・151所属候補・未所属17件・candidate/remainder-IDとビルド所属は維持。中核でも条件向けになり得ること、条件向け＝不要ではないことを説明。
 - 分類concept-character-card-build-allocationはdraft/candidateのまま。ゲーム効果・排出率・保存は変更なし。検証・公開結果は後記。
+
+- カード仕分け表記変更（2026-10-09）：役割＝キー／オプション／コネクション、分類＝汎用／特化。分類の意味・215所属・168候補・追跡IDを維持。既存分類concept-character-card-build-allocationはdraft/candidate。公開確認は後記。

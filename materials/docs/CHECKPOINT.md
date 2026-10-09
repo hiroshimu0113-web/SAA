@@ -861,3 +861,5 @@
 - 分類concept-character-card-build-allocationはdraft/candidateのまま。ゲーム効果・排出率・保存は変更なし。検証・公開結果は後記。
 - ローカル検証：215所属の双方向一致・全件の2軸固定語彙/条件、候補全件照合、検索/リンク解除/JS無効/320・390・1024px、進捗照合、build成功。現行ゲームカタログ版02bc4cca60ddf580不変。
 - 公開完了：219e8bc / Actions 37919758684 build・deploy成功。2軸資料のWebKit検証、公開HTML/JSONのHTTP200・SHA256照合成功。同じ公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html を更新。GitHub main同期、分類draft/candidate、実装未変更。
+
+- カード仕分け表記変更（2026-10-09）：役割＝キー／オプション／コネクション、分類＝汎用／特化。分類の意味・215所属・168候補・追跡IDを維持。既存分類concept-character-card-build-allocationはdraft/candidate。公開確認は後記。

@@ -6,19 +6,19 @@ candidates=data['candidates']; builds=data['builds']; by={c['termId']:c for c in
 e=lambda v:html.escape(str(v))
 parts=['<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>6キャラ・18ビルドと教材カード候補</title><style>body{font:16px/1.75 -apple-system,BlinkMacSystemFont,sans-serif;background:#f4f6fa;color:#17233b;margin:0;padding:24px}main{max-width:1100px;margin:auto}section,article{background:white;padding:20px;margin:18px 0;border-radius:12px}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #dce2ec;text-align:left;padding:10px;vertical-align:top}code{overflow-wrap:anywhere;font-size:12px}input{font:inherit;padding:10px;width:90%}.scroll{overflow-x:auto}a{color:#205db5}.warn{color:#a33}small{display:block;color:#54617a}@media(max-width:600px){body{padding:12px}section,article{padding:12px}td,th{padding:6px}}@media print{input{display:none}article{break-inside:avoid}}</style><main><h1>6キャラ・18ビルドと教材カード候補</h1><p>設計案／ゲーム未実装。教材の名称・意味を保持し、ビルドへの接続を整理。</p>']
 left=[c for c in candidates if not c['memberships']]
-parts.append(f'<p>候補 <b>{len(candidates)}</b>件／ビルド所属 <b>{len(candidates)-len(left)}</b>件／未所属 <b>{len(left)}</b>件／重複を含む所属 <b>{sum(len(c["memberships"]) for c in candidates)}</b>件。</p><ul>'+''.join('<li>'+e(x)+'</li>' for x in data['rules'])+'</ul><p>役割と用途は別の軸です。中核でも特定条件向けの場合があり、橋渡しでも幅広く使える場合があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav>'+''.join(f'<a href="#b-{b["id"]}">{e(b["characterName"])}／{e(b["name"])}</a>　' for b in builds)+'<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>')
-parts.append('<section id="axes"><h2>分類基準：役割 × 用途</h2>')
+parts.append(f'<p>候補 <b>{len(candidates)}</b>件／ビルド所属 <b>{len(candidates)-len(left)}</b>件／未所属 <b>{len(left)}</b>件／重複を含む所属 <b>{sum(len(c["memberships"]) for c in candidates)}</b>件。</p><ul>'+''.join('<li>'+e(x)+'</li>' for x in data['rules'])+'</ul><p>役割と分類は別の軸です。キーでも特定条件向けの場合があり、コネクションでも汎用場合があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav>'+''.join(f'<a href="#b-{b["id"]}">{e(b["characterName"])}／{e(b["name"])}</a>　' for b in builds)+'<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>')
+parts.append('<section id="axes"><h2>分類基準：役割 × 分類</h2>')
 for axis in data['axes'].values():
  parts.append('<p>'+e(axis['description'])+'</p><ul>'+''.join('<li><b>'+e(k)+'</b>：'+e(v)+'</li>' for k,v in axis['values'].items())+'</ul>')
-parts.append('<p>「特定条件で使える」は不要という意味ではありません。条件が合えば中核にもなります。この分類だけでデッキの成立や強さは判定できず、カード効果を決めてから再確認します。未所属候補の2軸は所属先が決まってから設定します。</p></section>')
+parts.append('<p>「特化」は不要という意味ではありません。条件が合えばキーにもなります。この分類だけでデッキの成立や強さは判定できず、カード効果を決めてから再確認します。未所属候補の2軸は所属先が決まってから設定します。</p></section>')
 for b in builds:
  parts.append(f'<section id="b-{b["id"]}"><h2>{e(b["characterName"])}：{e(b["name"])}ビルド</h2><p>{e(b["gameplay"])}</p>')
  if b['gap']:parts.append('<p class="warn">不足：'+e(b['gap'])+'</p>')
- for role in ['中核','強化・安定化','別構成への橋渡し']:
+ for role in ['キー','オプション','コネクション']:
   selected=[x for x in b['cards'] if x['role']==role]
   parts.append('<h3>'+role+f'（{len(selected)}種類）</h3>')
   if not selected:parts.append('<p>該当候補なし</p>');continue
-  parts.append('<div class="scroll"><table><tr><th>カード候補</th><th>用途</th><th>適用条件・判断理由</th></tr>')
+  parts.append('<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>')
   for c in selected:
    parts.append(f'<tr class="membership" data-role="{e(c["role"])}" data-usage="{e(c["usage"])}"><td><a href="#c-{c["termId"]}">{e(by[c["termId"]]["name"])}</a></td><td>{e(c["usage"])}</td><td>{e(c["usageCondition"])}</td></tr>')
   parts.append('</table></div>')
