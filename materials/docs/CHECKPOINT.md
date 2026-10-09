@@ -863,3 +863,4 @@
 - 公開完了：219e8bc / Actions 37919758684 build・deploy成功。2軸資料のWebKit検証、公開HTML/JSONのHTTP200・SHA256照合成功。同じ公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html を更新。GitHub main同期、分類draft/candidate、実装未変更。
 
 - カード仕分け表記変更（2026-10-09）：役割＝キー／オプション／コネクション、分類＝汎用／特化。分類の意味・215所属・168候補・追跡IDを維持。既存分類concept-character-card-build-allocationはdraft/candidate。公開確認は後記。
+- 表記変更公開完了：6fd109c / Actions 37921181973 build・deploy・新資料WebKit検証・HTML/JSON HTTP200/SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 。分類concept-character-card-build-allocationはdraft/candidate、ゲーム未変更。
