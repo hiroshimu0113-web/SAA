@@ -13,7 +13,9 @@ export function recordRoomAnswers(run,quizItems){
   const id=run.quiz.ids[i],item=quizItems[id],current=pack.practice.find(q=>q.id===id);
   const same=current&&current.prompt===item.prompt&&JSON.stringify(current.options)===JSON.stringify(item.options)&&JSON.stringify(current.answers)===JSON.stringify([item.answer])&&JSON.stringify(current.reasons)===JSON.stringify(item.reasons);
   const q=same?current:{id,prompt:item.prompt,options:item.options,reasons:item.reasons,answers:[item.answer],source:item.source,domain:item.domain||current?.domain||2,skills:item.skills||current?.skills||[],level:item.level||current?.level||'basic',revision:item.revision||'room-'+(run.learningCatalog?.version||'legacy')};
-  p=recordAnswer(p,{key:'room:'+run.seed+':'+run.floor+':'+id+':'+q.revision,question:q,selected:[run.quiz.answers[i]],mode:'room',at:run.quiz.answerTimes?.[i]||Date.now()});
+  const legacyKey='room:'+run.seed+':'+run.floor+':'+id+':'+q.revision;
+  const key=run.quiz.cycleVersion===2&&!(i===0&&p.records.some(r=>r.key===legacyKey))?legacyKey+':'+i:legacyKey;
+  p=recordAnswer(p,{key,question:q,selected:[run.quiz.answers[i]],mode:'room',at:run.quiz.answerTimes?.[i]||Date.now()});
  }
  persistStudy(localStorage,p);
 }

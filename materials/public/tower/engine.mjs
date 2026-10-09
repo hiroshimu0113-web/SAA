@@ -1,4 +1,4 @@
-import {validQuizCycle,normalizeCycle,markQuestion,pickQuestion,cycleForRun} from './quiz-cycle.mjs';
+import {validQuizCycle,normalizeCycle,readyCycle,markQuestion,pickQuestion,cycleForRun} from './quiz-cycle.mjs';
 import {DEBUFFS,delayPaused,delayRemaining,advanceDelay,emptyDebuffs,applyDebuff,attackAmount,blockAmount,decayDebuffs} from './debuffs.mjs';
 import {COMBOS} from './combos.mjs';
 import {QUIZZES,QUIZ_RULES,LEGACY_QUIZ_RULES,quizScore} from './quiz.mjs';
@@ -99,17 +99,17 @@ function win(s){
  s.phase='reward';log(s,'勝利。カードを'+s.rewardPicks+'枚まで選ぶか、見送れます。');
 }
 function startQuiz(s){
- const ids=Object.keys(QUIZZES),cycle=cycleForRun(s,ids),first=pickQuestion(cycle,ids,()=>rnd(s));
- s.quizCycle=markQuestion(cycle,first,ids);
+ const ids=Object.keys(QUIZZES),cycle=readyCycle(cycleForRun(s,ids,QUIZZES),ids),first=pickQuestion(cycle,ids,()=>rnd(s));
+ s.quizCycle=cycle;
  const second=pickQuestion(s.quizCycle,ids,()=>rnd(s),[first]);
- s.quiz={ids:[first,second],answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};
+ s.quiz={cycleVersion:2,ids:[first,second],answers:[],step:0,result:null,rulesVersion:2,startHp:s.hp,penalty:Math.ceil(s.maxHp*QUIZ_RULES.wrongRate),damageTaken:0};
  const orderRng={rng:(s.rng^0x9e3779b9)>>>0};s.quiz.orders=s.quiz.ids.map(id=>shuffle(orderRng,QUIZZES[id].options.map((_,i)=>i)));
 }
 function complete(s){s.quiz=null;s.phase='map';s.battle=null;s.reward=[];s.stock=[];s.rewardPicks=0;s.shopRelic=null;}
 export function act(state,action){
  if(activeVersion()!==(state.learningCatalog?.version||null))activateCatalog(state.learningCatalog||null);
  const s=clone(state),a=action,b=s.battle;
- if(s.quizCycle===undefined)s.quizCycle=cycleForRun(s,Object.keys(QUIZZES));
+ if(s.quizCycle?.mode!=='correct')s.quizCycle=cycleForRun(s,Object.keys(QUIZZES),QUIZZES);
  if(a.type==='node'&&s.phase==='map'&&Number.isInteger(a.lane)&&routesFor(s)[s.floor]?.[a.lane]){
   const type=routesFor(s)[s.floor][a.lane];s.history.push({floor:s.floor,lane:a.lane,type});s.floor++;log(s,s.floor+'階：'+NODE_NAMES[type]);
   if(['battle','elite','boss'].includes(type)){const pool=ENEMY_POOLS[type],id=pool[Math.floor(rnd(s)*pool.length)];startBattle(s,id);}
@@ -191,11 +191,18 @@ export function act(state,action){
  if(s.phase==='event'){
   const q=s.quiz;
   if(!q)return state;
-  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){if(q.answerTimes!==undefined||Number.isFinite(a.answeredAt))q.answerTimes=[...(q.answerTimes||q.answers.map(()=>0)),Number.isFinite(a.answeredAt)&&a.answeredAt>=0?a.answeredAt:0];q.answers.push(a.choice);if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
+  if(a.type==='quiz-answer'&&q.step<2&&q.answers.length===q.step&&a.questionId===q.ids[q.step]&&Number.isInteger(a.choice)&&a.choice>=0&&a.choice<QUIZZES[q.ids[q.step]].options.length){if(q.answerTimes!==undefined||Number.isFinite(a.answeredAt))q.answerTimes=[...(q.answerTimes||q.answers.map(()=>0)),Number.isFinite(a.answeredAt)&&a.answeredAt>=0?a.answeredAt:0];q.answers.push(a.choice);if(a.choice===QUIZZES[a.questionId].answer)s.quizCycle=markQuestion(s.quizCycle,a.questionId,Object.keys(QUIZZES));if(q.rulesVersion===2&&a.choice!==QUIZZES[a.questionId].answer){const loss=Math.min(s.hp,q.penalty);s.hp-=loss;q.damageTaken+=loss;log(s,'誤答：HP −'+loss+'（最大HPの10％）。');if(s.hp===0){q.step=q.answers.length;q.result={correct:quizScore(q),relic:null,gold:0,damage:q.damageTaken,interrupted:true};s.phase='lost';log(s,'クイズのダメージで力尽きた。');}}return s;}
   if(a.type==='quiz-next'&&q.step<2&&q.answers.length===q.step+1&&a.questionId===q.ids[q.step]){
-   const cycle=cycleForRun(s,Object.keys(QUIZZES));
+   const cycle=cycleForRun(s,Object.keys(QUIZZES),QUIZZES);
    q.step++;
-   if(q.step===1)s.quizCycle=markQuestion(cycle,q.ids[1],Object.keys(QUIZZES));
+   if(q.step===1){
+    const ids=Object.keys(QUIZZES);s.quizCycle=readyCycle(cycle,ids);
+    if(s.quizCycle.seen.includes(q.ids[1])||q.ids[1]===q.ids[0]&&!s.quizCycle.seen.includes(q.ids[0])&&ids.some(id=>id!==q.ids[0]&&!s.quizCycle.seen.includes(id))){
+     q.ids[1]=pickQuestion(s.quizCycle,ids,()=>rnd(s),[q.ids[0]]);
+     const orderRng={rng:(s.rng^0x9e3779b9)>>>0};q.orders=q.orders||q.ids.map(id=>QUIZZES[id].options.map((_,i)=>i));q.orders[1]=shuffle(orderRng,QUIZZES[q.ids[1]].options.map((_,i)=>i));
+    }
+    q.cycleVersion=2;
+   }
    if(q.step===2){
     const correct=quizScore(q);q.result={correct,relic:null,gold:0,damage:q.rulesVersion===2?q.damageTaken:0};
     if(correct===2){const relic=shuffle(s,REWARD_RELICS.filter(r=>!s.relics.includes(r)))[0];if(relic){q.result.relic=relic;s.relics.push(relic);}else if(q.rulesVersion!==2){q.result.gold=LEGACY_QUIZ_RULES.allRelicsCoins;s.gold+=q.result.gold;}}
@@ -242,7 +249,8 @@ function validateRun(raw){
  if(s.quiz===undefined){if(s.version!==1)throw Error('クイズ保存形式が不正です。');s.quiz=null;if(s.phase==='event')startQuiz(s);}
  const q=s.quiz;
  if(q!==null){
-  if(!['event','lost'].includes(s.phase)||s.history[s.history.length-1]?.type!=='event'||!Array.isArray(q.ids)||q.ids.length!==2||new Set(q.ids).size!==2||!q.ids.every(id=>owns(QUIZZES,id))||!Array.isArray(q.answers)||!num(q.step,2)||q.answers.length<q.step||q.answers.length>Math.min(2,q.step+1)||!q.answers.every((v,i)=>num(v,QUIZZES[q.ids[i]].options.length-1)))throw Error('クイズの記録が不正です。');
+  if(q.cycleVersion!==undefined&&q.cycleVersion!==2)throw Error('クイズ出題方式が不正です。');
+  if(!['event','lost'].includes(s.phase)||s.history[s.history.length-1]?.type!=='event'||!Array.isArray(q.ids)||q.ids.length!==2||new Set(q.ids).size!==2&&!(q.cycleVersion===2&&s.quizCycle?.mode==='correct'&&Object.keys(QUIZZES).every(id=>id===q.ids[0]||s.quizCycle.seen.includes(id)))||!q.ids.every(id=>owns(QUIZZES,id))||!Array.isArray(q.answers)||!num(q.step,2)||q.answers.length<q.step||q.answers.length>Math.min(2,q.step+1)||!q.answers.every((v,i)=>num(v,QUIZZES[q.ids[i]].options.length-1)))throw Error('クイズの記録が不正です。');
   if(q.answerTimes!==undefined&&(!Array.isArray(q.answerTimes)||q.answerTimes.length!==q.answers.length||!q.answerTimes.every(t=>Number.isFinite(t)&&t>=0)))throw Error('回答日時が不正です。');
   if(q.orders!==undefined&&(!Array.isArray(q.orders)||q.orders.length!==2||!q.orders.every((order,i)=>Array.isArray(order)&&order.length===QUIZZES[q.ids[i]].options.length&&new Set(order).size===order.length&&order.every(n=>Number.isInteger(n)&&n>=0&&n<order.length))))throw Error('選択肢の表示順が不正です。');
   if(q.rulesVersion===2){

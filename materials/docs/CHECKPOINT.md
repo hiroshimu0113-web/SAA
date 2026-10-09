@@ -840,3 +840,9 @@
 - Verify the published learning releaseがsuccess。新HTMLを含めHTTP200・配布成果物とのSHA256一致確認。HTML SHA256：86533228f5e10fba15b38c196df95e437d1da912d7be4b8a7555c02ffb514361。
 - 公式URL：https://hiroshimu0113-web.github.io/SAA/design/aws-builds.html 。資料作成・GitHub同期・公式配信は完了。本人のSafari実機評価は未実施。
 - 27分類はdraft/candidate、AWS公式資料自己照合済み、独立した内容監査・ゲーム実装・本人理解認定は未実施。次は6核ビルドの採用、ステージ要件・維持費・配置/行動のルールをユーザーと具体化。
+
+
+## クイズの正解済みフラグ（2026-10-09）
+- 誤答・未回答は同じ巡の候補に残し、正解時だけフラグを付ける。全問正解後に次の巡へ移る。最後の1問の部屋内再出題と誤答→正解の別履歴にも対応。
+- 旧表示フラグは正解と見なさず、保存中の正解回答だけ回収して移行。変更記録：GAME_QUIZ_CORRECT_CYCLE_CHANGE.md。教材・分類の変更なし。
+- 全128テスト・build・Chromiumの学習室/正解フラグ回帰・knowledge/game/progress check成功。次：GitHub同期・CI・公開確認。

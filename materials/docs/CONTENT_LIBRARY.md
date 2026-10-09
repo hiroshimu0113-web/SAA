@@ -62,3 +62,5 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 役のジャンル/別軸の組み合わせ相談： [HTML](../public/design/role-combinations.html) / [JSON](../public/design/role-combinations.json)。重複のない2〜4枚パターンとレア度等12軸を比較。ゲーム未実装の設計資料。
 
 AWS構築手法からビルドへの調査設計：[単一HTML](../public/design/aws-builds.html)。正本はknowledge/game-supplement.jsonのarchitectureBuildResearch、生成はscripts/export-aws-build-design.py。18構築ビルド・8ケース16問・29公式出典・評価原理とキャラ設計。27分類はdraft/candidate、ゲーム未取り込み。
+
+- [クイズの正解済みフラグ](GAME_QUIZ_CORRECT_CYCLE_CHANGE.md)：誤答を正解まで再出題し、全問正解で一巡する仕様と移行記録（2026-10-09）。
