@@ -63,6 +63,10 @@ jobs:
           node scripts/aws-builds-browser-check.mjs
         env:
           BROWSER: webkit
+      - name: Verify card build allocation in Safari
+        run: pnpm exec tsx scripts/card-build-allocation-browser-check.mjs
+        env:
+          BROWSER: webkit
       - name: Verify character build design document in Safari
         run: node scripts/character-builds-browser-check.mjs
         env:
