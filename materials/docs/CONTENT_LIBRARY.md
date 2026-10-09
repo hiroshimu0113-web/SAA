@@ -69,3 +69,9 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - public/design/card-build-allocation.html / JSON。公開教材165用語＋補足3用語の全168候補。所属151候補・重複込み215接続、未所属17候補へremainder-ID。中核・補助・条件付きで分類。
 - 正本game-supplement.json characterCardAllocation、生成scripts/export-card-build-allocation.py。分類concept-character-card-build-allocationはdraft/candidate。IaCの中核候補不足を明記。ゲームカード30種類・性能・キャラ・保存は変更なし。
 - 次：未所属の用途、各専用スターター、実効果・最終プール・排出率を検討。ローカル検証とGitHub同期・公開確認は後記。
+
+
+## カード仕分けを役割×用途の2軸へ更新（2026-10-09）
+- 同じHTML/JSONを更新。役割＝中核／強化・安定化／別構成への橋渡し、用途＝幅広く使える／特定条件で使える。215所属ごとに適用条件を表示し、旧条件付きは役割へ個別再分類。
+- 全168候補・151所属候補・未所属17件・candidate/remainder-IDとビルド所属は維持。中核でも条件向けになり得ること、条件向け＝不要ではないことを説明。
+- 分類concept-character-card-build-allocationはdraft/candidateのまま。ゲーム効果・排出率・保存は変更なし。検証・公開結果は後記。

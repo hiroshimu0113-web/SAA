@@ -54711,7 +54711,7 @@
       "aliases": [],
       "kind": "concept",
       "classification_reason": "教材名と戦闘ビルドの関連性・重複・未所属の扱いを設計する概念。",
-      "objective": "候補をビルドの中核・補助・条件付きに分け、未所属と不足を説明する。",
+      "objective": "候補の役割と用途の2軸を区別し、条件向けと不要カードを混同しない。",
       "unit_ids": [],
       "material_refs": [
         {
@@ -54750,7 +54750,7 @@
         "中核一覧をAWS構成の十分条件や全カード必須と扱わない。"
       ],
       "content": {
-        "principle": "全168候補を追跡し、所属151件と未所属17件を分ける。",
+        "principle": "全168候補と215所属を維持し、役割（中核・強化/安定化・橋渡し）と用途（幅広い・特定条件）を独立に整理する。",
         "applicable_when": [
           "キャラ別カードプールを設計するとき。"
         ],
@@ -54767,7 +54767,7 @@
       "content_status": "draft",
       "review_notes": [],
       "game_design": {
-        "proposal": "全候補へcandidate-ID、未所属へremainder-IDを付与。",
+        "proposal": "所属ごとに役割・用途・利用条件を表示。未所属17件の追跡IDを維持。",
         "mechanism_note": "教材定義は全候補逆引きに表示。",
         "metaphor_limit": "ゲーム効果は未定で、AWS性能を表さない。",
         "simplifications": [],
@@ -54778,7 +54778,8 @@
       },
       "import_status": "candidate",
       "open_questions": [
-        "未所属17件の用途、IaC不足、スターター18枚、効果・レア度・排出率を後続設計。"
+        "未所属17件の用途、IaC不足、スターター18枚、効果・レア度・排出率を後続設計。",
+        "2軸は教材からの暫定設計。ゲーム効果を設計後に適用範囲を再確認する。"
       ]
     }
   ]

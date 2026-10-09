@@ -1241,3 +1241,10 @@
 - 検証：168候補の一意性・所属双方向参照、6キャラ18ビルド、Chromium検索/リンク時解除・JS無効・320/390/1024px、progress:update/check、build成功。現行カタログの版02bc4cca60ddf580不変。
 
 - 公開確認完了：1dd84cf / Actions 37883091078 build・deploy成功。新資料のWebKit検証、HTML/JSONのHTTP200・SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 。HTML SHA256 ed37efc16c96f6099b6c20e560c7b600da2774459cbe8f2b5d0f26b56f765cc9。GitHub main同期済み、分類draft/candidate、ゲーム未実装。
+
+
+## カード仕分けを役割×用途の2軸へ更新（2026-10-09）
+- 同じHTML/JSONを更新。役割＝中核／強化・安定化／別構成への橋渡し、用途＝幅広く使える／特定条件で使える。215所属ごとに適用条件を表示し、旧条件付きは役割へ個別再分類。
+- 全168候補・151所属候補・未所属17件・candidate/remainder-IDとビルド所属は維持。中核でも条件向けになり得ること、条件向け＝不要ではないことを説明。
+- 分類concept-character-card-build-allocationはdraft/candidateのまま。ゲーム効果・排出率・保存は変更なし。検証・公開結果は後記。
+- ローカル検証：215所属の双方向一致・全件の2軸固定語彙/条件、候補全件照合、検索/リンク解除/JS無効/320・390・1024px、進捗照合、build成功。現行ゲームカタログ版02bc4cca60ddf580不変。
