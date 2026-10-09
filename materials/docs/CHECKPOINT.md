@@ -851,3 +851,5 @@
 - 正本game-supplement.json characterCardAllocation、生成scripts/export-card-build-allocation.py。分類concept-character-card-build-allocationはdraft/candidate。IaCの中核候補不足を明記。ゲームカード30種類・性能・キャラ・保存は変更なし。
 - 次：未所属の用途、各専用スターター、実効果・最終プール・排出率を検討。ローカル検証とGitHub同期・公開確認は後記。
 - 検証：168候補の一意性・所属双方向参照、6キャラ18ビルド、Chromium検索/リンク時解除・JS無効・320/390/1024px、progress:update/check、build成功。現行カタログの版02bc4cca60ddf580不変。
+
+- 公開確認完了：1dd84cf / Actions 37883091078 build・deploy成功。新資料のWebKit検証、HTML/JSONのHTTP200・SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 。HTML SHA256 ed37efc16c96f6099b6c20e560c7b600da2774459cbe8f2b5d0f26b56f765cc9。GitHub main同期済み、分類draft/candidate、ゲーム未実装。
