@@ -28,5 +28,41 @@
     "to": "least-privilege",
     "type": "used_with",
     "reason": "認証の強化とアクセス許可の制限を組み合わせる。"
+  },
+  {
+    "from": "iac",
+    "to": "cloudformation",
+    "type": "used_with",
+    "reason": "構成定義をCloudFormationで展開する。"
+  },
+  {
+    "from": "cloudformation",
+    "to": "change-set",
+    "type": "used_with",
+    "reason": "更新前に影響を確認する。"
+  },
+  {
+    "from": "cloudformation",
+    "to": "drift-detection",
+    "type": "used_with",
+    "reason": "定義と実際の差を対象範囲で検出する。"
+  },
+  {
+    "from": "exponential-backoff",
+    "to": "jitter",
+    "type": "used_with",
+    "reason": "待ち時間増加と時刻分散を組み合わせる。"
+  },
+  {
+    "from": "circuit-breaker",
+    "to": "exponential-backoff",
+    "type": "contrast_with",
+    "reason": "持続障害への遮断と一時障害への再試行を区別する。"
+  },
+  {
+    "from": "checkpoint",
+    "to": "s3",
+    "type": "used_with",
+    "reason": "保持できる場所へ進捗を保存する例。"
   }
 ]

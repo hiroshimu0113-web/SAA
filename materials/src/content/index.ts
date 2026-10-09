@@ -1,3 +1,4 @@
+import {buildGapTerms,enrichBuildGapLessons} from './build-gap-expansion';
 import { chapters1, questions1, terms1 } from './part1';
 import { chapters2, questions2, terms2 } from './part2';
 import { starterTerms } from './starter';
@@ -15,6 +16,7 @@ chapters[1].lessons[0] = {
   conceptIds: [...chapters[1].lessons[0].conceptIds, 'root', 'mfa'],
 };
 chapters[1].lessons[2] = { ...chapters[1].lessons[2], conceptIds: [...chapters[1].lessons[2].conceptIds, 'cognito'] };
-export const terms = [...starterTerms, ...terms1, ...terms2].filter((t,i,all) => all.findIndex(x => x.id === t.id || x.name === t.name) === i);
+enrichBuildGapLessons(chapters);
+export const terms = [...starterTerms, ...terms1, ...terms2, ...buildGapTerms].filter((t,i,all) => all.findIndex(x => x.id === t.id || x.name === t.name) === i);
 export const questions = [...questions1, ...questions2];
 export const release = { label: '12章学習版', chapters: chapters.length, questions: questions.filter(q=>!q.exam).length, mocksReady: true };

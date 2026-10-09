@@ -30,5 +30,9 @@ bmap={b['id']:b for b in builds}
 for c in candidates:
  links='／'.join(e(bmap[x['buildId']]['characterName']+'・'+bmap[x['buildId']]['name']+'［'+x['role']+'／'+x['usage']+'］') for x in c['memberships']) or '未所属：'+e(c['remainderId'])
  parts.append(f'<article class="candidate" id="c-{c["termId"]}"><h3>{e(c["name"])}</h3><code>{e(c["id"])}</code><p>{e(c["meaning"])}</p><p>所属：{links}</p><small>教材参照：{e(c["sourceRef"]["path"])} #{e(c["termId"])}</small>'+('<p>共通スターター候補。5枚の内訳は未決定。</p>' if c['commonStarterCandidate'] else '')+'</article>')
+ if c.get('lessonDetails'):
+  parts[-1]=parts[-1].removesuffix('</article>')
+  t=c['lessonDetails'];parts.append('<section class="expansion"><h4>'+e(t['name'])+'：追加教材</h4><p>'+e(t['caution'])+'</p><p>適用の確認：'+e(t['scenario'])+'</p><details><summary>判断の例を表示</summary><p>'+e(t['answer'])+'</p></details><p><a href="'+e(t['source'])+'">AWS公式出典</a>／確認日 '+e(t['checkedOn'])+'／自己照合・独立監査前</p></section></article>')
+
 parts.append('<script>const q=document.getElementById("search"),cards=[...document.querySelectorAll(".candidate")];q.addEventListener("input",()=>{let n=0;for(const c of cards){c.hidden=!c.textContent.toLowerCase().includes(q.value.toLowerCase());if(!c.hidden)n++;}document.getElementById("result").textContent=n+"件表示（ビルド一覧・未所属一覧は常に表示）"});document.addEventListener("click",e=>{if(e.target.closest("a[href^=\\"#c-\\"]")){q.value="";q.dispatchEvent(new Event("input"));}});</script></main></html>')
 (r/'public/design/card-build-allocation.html').write_text('\n'.join(parts))

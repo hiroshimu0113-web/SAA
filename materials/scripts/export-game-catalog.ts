@@ -14,7 +14,7 @@ const designs=JSON.parse(await readFile(new URL('knowledge/game-design-questions
 const revision=q=>createHash('sha256').update(JSON.stringify(q)).digest('hex').slice(0,16);
 const cards=Object.fromEntries(Object.entries(BASE_CARDS).filter(([id])=>!STARTERS.includes(id)));
 const notes={};
-const sourceFor=(term)=>questions.find(q=>q.conceptIds.includes(term.id))?.sources[0]?.url || chapters.find(c=>c.id===term.chapterId)?.lessons.find(l=>l.conceptIds.includes(term.id))?.sources[0]?.url;
+const sourceFor=(term)=>supplement.buildGapExpansion?.items.find(t=>t.id===term.id)?.source || questions.find(q=>q.conceptIds.includes(term.id))?.sources[0]?.url || chapters.find(c=>c.id===term.chapterId)?.lessons.find(l=>l.conceptIds.includes(term.id))?.sources[0]?.url;
 const starterNames={};
 const publishedTerms=[...terms.map(t=>({...t,source:sourceFor(t)})),...supplement.terms];
 const termById=new Map(publishedTerms.map(t=>[t.id,t]));

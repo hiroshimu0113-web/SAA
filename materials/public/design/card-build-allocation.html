@@ -1,5 +1,5 @@
 <!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>6キャラ・18ビルドと教材カード候補</title><style>body{font:16px/1.75 -apple-system,BlinkMacSystemFont,sans-serif;background:#f4f6fa;color:#17233b;margin:0;padding:24px}main{max-width:1100px;margin:auto}section,article{background:white;padding:20px;margin:18px 0;border-radius:12px}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #dce2ec;text-align:left;padding:10px;vertical-align:top}code{overflow-wrap:anywhere;font-size:12px}input{font:inherit;padding:10px;width:90%}.scroll{overflow-x:auto}a{color:#205db5}.warn{color:#a33}small{display:block;color:#54617a}@media(max-width:600px){body{padding:12px}section,article{padding:12px}td,th{padding:6px}}@media print{input{display:none}article{break-inside:avoid}}</style><main><h1>6キャラ・18ビルドと教材カード候補</h1><p>設計案／ゲーム未実装。教材の名称・意味を保持し、ビルドへの接続を整理。</p>
-<p>候補 <b>168</b>件／ビルド所属 <b>151</b>件／未所属 <b>17</b>件／重複を含む所属 <b>215</b>件。</p><ul><li>6キャラ各3ビルド。所属は重複可。</li><li>共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。</li><li>HPを0にしてタスク完了。追加勝利パラメータは採用しない。</li><li>分類はカード効果・排出率・最終プールの実装ではない。</li><li>未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。</li><li>役割と分類を独立に整理する。キーにも特化の候補があり、コネクションにも汎用の候補がある。</li></ul><p>役割と分類は別の軸です。キーにも特化の候補があり、コネクションにも汎用の候補があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav><a href="#b-multi-az">守護者／分散要塞</a>　<a href="#b-rds-ha">守護者／継承</a>　<a href="#b-isolation">守護者／隔離</a>　<a href="#b-autoscaling">調律師／増援</a>　<a href="#b-serverless">調律師／即応</a>　<a href="#b-rightsizing">調律師／精鋭</a>　<a href="#b-cdn">加速者／配信</a>　<a href="#b-cache">加速者／記憶</a>　<a href="#b-read-replica">加速者／読取分散</a>　<a href="#b-queue">指揮者／蓄積</a>　<a href="#b-safe-retry">指揮者／再挑戦</a>　<a href="#b-spot">指揮者／機会活用</a>　<a href="#b-least-privilege">構築士／権限設計</a>　<a href="#b-private-access">構築士／閉域接続</a>　<a href="#b-iac">構築士／再現構築</a>　<a href="#b-backup">復旧者／保存</a>　<a href="#b-disaster-recovery">復旧者／待機</a>　<a href="#b-observability">復旧者／観測</a>　<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>
+<p>候補 <b>180</b>件／ビルド所属 <b>163</b>件／未所属 <b>17</b>件／重複を含む所属 <b>235</b>件。</p><ul><li>6キャラ各3ビルド。所属は重複可。</li><li>共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。</li><li>HPを0にしてタスク完了。追加勝利パラメータは採用しない。</li><li>分類はカード効果・排出率・最終プールの実装ではない。</li><li>未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。</li><li>役割と分類を独立に整理する。キーにも特化の候補があり、コネクションにも汎用の候補がある。</li><li>2026-10-09：AWS公式調査により12用語を補足。元の168候補・17追跡IDは維持。追加候補も設計段階でゲーム未実装。</li></ul><p>役割と分類は別の軸です。キーにも特化の候補があり、コネクションにも汎用の候補があります。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav><a href="#b-multi-az">守護者／分散要塞</a>　<a href="#b-rds-ha">守護者／継承</a>　<a href="#b-isolation">守護者／隔離</a>　<a href="#b-autoscaling">調律師／増援</a>　<a href="#b-serverless">調律師／即応</a>　<a href="#b-rightsizing">調律師／精鋭</a>　<a href="#b-cdn">加速者／配信</a>　<a href="#b-cache">加速者／記憶</a>　<a href="#b-read-replica">加速者／読取分散</a>　<a href="#b-queue">指揮者／蓄積</a>　<a href="#b-safe-retry">指揮者／再挑戦</a>　<a href="#b-spot">指揮者／機会活用</a>　<a href="#b-least-privilege">構築士／権限設計</a>　<a href="#b-private-access">構築士／閉域接続</a>　<a href="#b-iac">構築士／再現構築</a>　<a href="#b-backup">復旧者／保存</a>　<a href="#b-disaster-recovery">復旧者／待機</a>　<a href="#b-observability">復旧者／観測</a>　<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>
 <section id="axes"><h2>分類基準：役割 × 分類</h2>
 <p>このビルドに対して何を担うか。強さ・レア度・単独成立を表さない。</p><ul><li><b>キー</b>：ビルド固有の仕組みや判断軸を作る。</li><li><b>オプション</b>：処理を伸ばす、基盤を用意する、弱点を補う。</li><li><b>コネクション</b>：別の仕組みや他ビルドへの移行・混成に接続する。</li></ul>
 <p>このビルド内での適用範囲。幅広い場合も前提や制約はある。</p><ul><li><b>汎用</b>：このビルドの多くの構成で検討できる。</li><li><b>特化</b>：対象サービス、仕事の性質、接続方式などの追加条件が必要。</li></ul>
@@ -46,17 +46,19 @@
 </table></div>
 </section>
 <section id="b-isolation"><h2>守護者：隔離ビルド</h2><p>妨害の波及を抑える。配置・流量制御・失敗隔離は別の仕組みであり万能な遮断ではない。</p>
-<h3>キー（1種類）</h3>
+<h3>キー（2種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-placement-group">プレイスメントグループ</a></td><td>特化</td><td>EC2配置の要件があり、障害分離などに適した配置方式を選ぶ。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-circuit-breaker">サーキットブレーカー</a></td><td>特化</td><td>依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。</td></tr>
 </table></div>
-<h3>オプション（5種類）</h3>
+<h3>オプション（6種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-subnet">サブネット</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-throttling">スロットリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-dlq">デッドレターキュー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-health-check">ヘルスチェック</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-alb">Application Load Balancer</a></td><td>特化</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-request-timeout">リクエストタイムアウト</a></td><td>特化</td><td>待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。</td></tr>
 </table></div>
 <h3>コネクション（2種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -71,7 +73,7 @@
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-target-tracking">ターゲット追跡スケーリング</a></td><td>特化</td><td>追跡に適した負荷指標と目標値がある。</td></tr>
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-scheduled-scaling">予定スケーリング</a></td><td>特化</td><td>需要が増える時刻を予測できる。</td></tr>
 </table></div>
-<h3>オプション（8種類）</h3>
+<h3>オプション（9種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-scaling">スケーリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
@@ -81,6 +83,7 @@
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-nlb">Network Load Balancer</a></td><td>特化</td><td>TCP/UDP/TLSや固定IP等の要件がある。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-alb">Application Load Balancer</a></td><td>特化</td><td>HTTP/HTTPSの振り分けが必要。正常先の残存容量と全異常時の例外を確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特化</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cloudwatch-alarm">CloudWatchアラーム</a></td><td>特化</td><td>通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。</td></tr>
 </table></div>
 <h3>コネクション（3種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -169,10 +172,11 @@
 </table></div>
 </section>
 <section id="b-cache"><h2>加速者：記憶ビルド</h2><p>同じ要求の結果を再利用する。TTLだけで最新性は保証できず、DynamoDB TTLはキャッシュ失効と別。</p>
-<h3>キー（2種類）</h3>
+<h3>キー（3種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-cache">キャッシュ</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-dax">DAX</a></td><td>特化</td><td>DynamoDBの結果整合性の繰り返し読取りに適する。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-elasticache">Amazon ElastiCache</a></td><td>特化</td><td>結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。</td></tr>
 </table></div>
 <h3>オプション（6種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -214,7 +218,7 @@
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-sqs">SQS</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>オプション（9種類）</h3>
+<h3>オプション（10種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特化</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-fifo">FIFO</a></td><td>特化</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
@@ -225,6 +229,7 @@
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-lambda">Lambda</a></td><td>特化</td><td>関数によるイベント処理が適する。起動・同時実行・実行時間などの制約がある。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ecs">ECS</a></td><td>特化</td><td>コンテナタスクを採用する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-exponential-backoff">指数バックオフ</a></td><td>特化</td><td>回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。</td></tr>
 </table></div>
 <h3>コネクション（5種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -240,18 +245,23 @@
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-idempotency">冪等性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>オプション（5種類）</h3>
+<h3>オプション（8種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-step-functions">Step Functions</a></td><td>特化</td><td>複数ステップの順序・再試行を制御する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-visibility-timeout">可視性タイムアウト</a></td><td>特化</td><td>SQS受信済み仕事の再配信時期を調整する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-dlq">デッドレターキュー</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-throttling">スロットリング</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-fifo">FIFO</a></td><td>特化</td><td>SQSでメッセージグループ内の順序を必要とする。業務全体の重複防止とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-exponential-backoff">指数バックオフ</a></td><td>特化</td><td>回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-jitter">ジッター</a></td><td>特化</td><td>成功率を保証せず、冪等性や回数制限の代わりにはならない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-request-timeout">リクエストタイムアウト</a></td><td>汎用</td><td>待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。</td></tr>
 </table></div>
-<h3>コネクション（2種類）</h3>
+<h3>コネクション（4種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-dynamodb-transactions">DynamoDBトランザクション</a></td><td>特化</td><td>DynamoDB複数項目の全成功・全失敗が必要。外部処理までの冪等性は別。</td></tr>
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-multipart-upload">マルチパートアップロード</a></td><td>特化</td><td>大きなS3アップロードで失敗部分を再送する。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-circuit-breaker">サーキットブレーカー</a></td><td>特化</td><td>依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-checkpoint">チェックポイント</a></td><td>特化</td><td>保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。</td></tr>
 </table></div>
 </section>
 <section id="b-spot"><h2>指揮者：機会活用ビルド</h2><p>安い臨時戦力を使い、中断後は保存済みの進捗から再開する。スナップショットだけでアプリの進捗保存は完成しない。</p>
@@ -259,7 +269,7 @@
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-spot">Spotインスタンス</a></td><td>特化</td><td>中断可能・再開可能な仕事で、代替戦力と期限を用意する。</td></tr>
 </table></div>
-<h3>オプション（7種類）</h3>
+<h3>オプション（8種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ec2">Amazon EC2</a></td><td>特化</td><td>EC2を処理基盤に採用する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ebs">Amazon EBS</a></td><td>特化</td><td>EC2で永続ブロック保存を使う。</td></tr>
@@ -268,6 +278,7 @@
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ami">AMI</a></td><td>特化</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特化</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-instance-store">インスタンスストア</a></td><td>特化</td><td>消えてよい一時データに使い、永続データの代替を用意する。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-checkpoint">チェックポイント</a></td><td>特化</td><td>保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。</td></tr>
 </table></div>
 <h3>コネクション（1種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -330,15 +341,19 @@
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-ipv6-egress">Egress-only Internet Gateway</a></td><td>特化</td><td>IPv6の外向き通信を必要とする。</td></tr>
 </table></div>
 </section>
-<section id="b-iac"><h2>構築士：再現構築ビルド</h2><p>設計図で再構築する方向。AMIはマシンイメージ、ECRは保管、Configは設定評価でありIaCの代用品ではない。</p>
-<p class="warn">不足：IaCのキーとなる教材候補名がない。候補追加またはビルド再検討が必要。</p>
-<h3>キー（0種類）</h3>
-<p>該当候補なし</p>
-<h3>オプション（3種類）</h3>
+<section id="b-iac"><h2>構築士：再現構築ビルド</h2><p>構成を設計図として保存し、検証して展開・再構築する。IaCとCloudFormationをキー候補に追加。AMIは起動イメージ、Configは設定評価であり別の役割。定義の誤りも再現するため、変更影響とデータ保護を確認する。</p>
+<h3>キー（2種類）</h3>
+<div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
+<tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-iac">Infrastructure as Code（IaC）</a></td><td>汎用</td><td>AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。</td></tr>
+<tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-cloudformation">AWS CloudFormation</a></td><td>特化</td><td>定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。</td></tr>
+</table></div>
+<h3>オプション（5種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ami">AMI</a></td><td>特化</td><td>EC2の起動イメージが必要。業務データの継続バックアップとは別。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-ecr">ECR</a></td><td>特化</td><td>コンテナイメージを保管・取得する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-aws-config">AWS Config</a></td><td>特化</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-change-set">CloudFormation変更セット</a></td><td>特化</td><td>作成しただけでは更新されず、実行成功の保証でもない。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-drift-detection">CloudFormationドリフト検出</a></td><td>特化</td><td>対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。</td></tr>
 </table></div>
 <h3>コネクション（1種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -352,7 +367,7 @@
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-ebs-snapshot">EBSスナップショット</a></td><td>特化</td><td>EBSの時点復元が必要。アプリ整合性や再開位置を別途確認する。</td></tr>
 <tr class="membership" data-role="キー" data-usage="特化"><td><a href="#c-point-in-time-recovery">ポイントインタイムリカバリ（PITR）</a></td><td>特化</td><td>対応DBの保持期間内の時点へ復元したい。</td></tr>
 </table></div>
-<h3>オプション（9種類）</h3>
+<h3>オプション（10種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-versioning">S3バージョニング</a></td><td>特化</td><td>S3オブジェクトの版を保持する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-noncurrent-version">S3旧バージョン</a></td><td>特化</td><td>S3旧版の保持・削除・費用を管理する。</td></tr>
@@ -363,6 +378,7 @@
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-durability">耐久性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-kms">KMS</a></td><td>特化</td><td>KMSの暗号鍵と操作権限を必要とする。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-s3-encryption">S3の保存時暗号化</a></td><td>特化</td><td>S3の保存時暗号化を設計する。認可とは別。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-aws-backup">AWS Backup</a></td><td>特化</td><td>リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。</td></tr>
 </table></div>
 <h3>コネクション（2種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
@@ -389,9 +405,11 @@
 <tr class="membership" data-role="オプション" data-usage="汎用"><td><a href="#c-availability">可用性</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-capacity-reservation">Capacity Reservation</a></td><td>特化</td><td>特定AZ・属性のEC2容量確保が必要。割引やSpot継続の保証ではない。</td></tr>
 </table></div>
-<h3>コネクション（1種類）</h3>
+<h3>コネクション（3種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-global-tables">DynamoDBグローバルテーブル</a></td><td>特化</td><td>DynamoDBの複数リージョン読み書きが必要。整合性方式の条件を確認。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="汎用"><td><a href="#c-iac">Infrastructure as Code（IaC）</a></td><td>汎用</td><td>AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-cloudformation">AWS CloudFormation</a></td><td>特化</td><td>定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。</td></tr>
 </table></div>
 </section>
 <section id="b-observability"><h2>復旧者：観測ビルド</h2><p>異常を発見して対処を選ぶ。監視・監査・脅威検出は対象が異なり、発見だけでは回復しない。</p>
@@ -399,7 +417,7 @@
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="キー" data-usage="汎用"><td><a href="#c-cloudwatch">CloudWatch</a></td><td>汎用</td><td>このビルドの仕組み・基盤・判断を幅広く支える。具体的な適用範囲と制約は教材の定義およびビルド説明で確認する。</td></tr>
 </table></div>
-<h3>オプション（9種類）</h3>
+<h3>オプション（10種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cloudtrail">CloudTrail</a></td><td>特化</td><td>AWS API操作の履歴を調べる。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-aws-config">AWS Config</a></td><td>特化</td><td>リソース設定履歴・準拠を調べる。修復やIaC定義とは別。</td></tr>
@@ -410,11 +428,13 @@
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-inspector">Inspector</a></td><td>特化</td><td>対応ワークロードの脆弱性を調べる。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-macie">Macie</a></td><td>特化</td><td>S3の機密データを検出する。</td></tr>
 <tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-access-analyzer">IAM Access Analyzer</a></td><td>特化</td><td>対応するアクセス設定の分析を行う。是正は別の行動。</td></tr>
+<tr class="membership" data-role="オプション" data-usage="特化"><td><a href="#c-cloudwatch-alarm">CloudWatchアラーム</a></td><td>特化</td><td>通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。</td></tr>
 </table></div>
-<h3>コネクション（2種類）</h3>
+<h3>コネクション（3種類）</h3>
 <div class="scroll"><table><tr><th>カード候補</th><th>分類</th><th>適用条件・判断理由</th></tr>
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-cost-explorer">AWS Cost Explorer</a></td><td>特化</td><td>費用・使用量を分析する。障害修復とは別。</td></tr>
 <tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-opensearch">OpenSearch</a></td><td>特化</td><td>全文検索やログ分析基盤を必要とする。</td></tr>
+<tr class="membership" data-role="コネクション" data-usage="特化"><td><a href="#c-drift-detection">CloudFormationドリフト検出</a></td><td>特化</td><td>対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。</td></tr>
 </table></div>
 </section>
 <section id="remaining"><h2>未所属候補：後続整理用ID</h2><p>削除・不採用を意味しません。共通枠、新しい組み合わせ、状況対策などを後で設計します。</p><div class="scroll"><table><tr><th>追跡ID／候補名</th><th>保留理由</th></tr>
@@ -604,4 +624,28 @@
 <article class="candidate" id="c-health-check"><h3>ヘルスチェック</h3><code>candidate-health-check</code><p>ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。</p><p>所属：守護者・分散要塞［オプション／汎用］／守護者・継承［オプション／汎用］／守護者・隔離［オプション／汎用］／調律師・増援［オプション／汎用］／復旧者・観測［オプション／汎用］</p><small>教材参照：knowledge/game-supplement.json #health-check</small></article>
 <article class="candidate" id="c-alb"><h3>Application Load Balancer</h3><code>candidate-alb</code><p>ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。</p><p>所属：守護者・分散要塞［オプション／特化］／守護者・隔離［オプション／特化］／調律師・増援［オプション／特化］</p><small>教材参照：knowledge/game-supplement.json #alb</small></article>
 <article class="candidate" id="c-remaining-capacity"><h3>残存容量</h3><code>candidate-remaining-capacity</code><p>各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。</p><p>所属：守護者・分散要塞［キー／汎用］</p><small>教材参照：knowledge/game-supplement.json #remaining-capacity</small></article>
+<article class="candidate" id="c-iac"><h3>Infrastructure as Code（IaC）</h3><code>candidate-iac</code><p>インフラ構成をコードとして定義・版管理し、検証して再現する考え方。</p><p>所属：構築士・再現構築［キー／汎用］／復旧者・待機［コネクション／汎用］</p><small>教材参照：src/content/build-gap-expansion.ts #iac</small>
+<section class="expansion"><h4>Infrastructure as Code（IaC）：追加教材</h4><p>AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。</p><p>適用の確認：復旧先のネットワークや権限を毎回手作業で作り、設定が一致しない。何を用意する？</p><details><summary>判断の例を表示</summary><p>構成定義を版管理し、復旧先で再現を検証する。データ・秘密情報・利用権限は別途復旧する。</p></details><p><a href="https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-cloudformation"><h3>AWS CloudFormation</h3><code>candidate-cloudformation</code><p>テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。</p><p>所属：構築士・再現構築［キー／特化］／復旧者・待機［コネクション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #cloudformation</small>
+<section class="expansion"><h4>AWS CloudFormation：追加教材</h4><p>定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。</p><p>適用の確認：同じWeb構成を複数環境へ展開したい。AMIだけでネットワークやIAMも再現できる？</p><details><summary>判断の例を表示</summary><p>CloudFormationで関連リソースを定義し、権限や環境差を確認する。AMIは起動イメージを担当する。</p></details><p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-change-set"><h3>CloudFormation変更セット</h3><code>candidate-change-set</code><p>スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。</p><p>所属：構築士・再現構築［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #change-set</small>
+<section class="expansion"><h4>CloudFormation変更セット：追加教材</h4><p>作成しただけでは更新されず、実行成功の保証でもない。</p><p>適用の確認：DBの置換を伴う更新を本番へ出す前に何を確認する？</p><details><summary>判断の例を表示</summary><p>変更セットで置換や削除を確認し、データ保護と戻し方を用意する。確認後も実行時の失敗に備える。</p></details><p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-drift-detection"><h3>CloudFormationドリフト検出</h3><code>candidate-drift-detection</code><p>管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。</p><p>所属：構築士・再現構築［オプション／特化］／復旧者・観測［コネクション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #drift-detection</small>
+<section class="expansion"><h4>CloudFormationドリフト検出：追加教材</h4><p>対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。</p><p>適用の確認：コンソールで変更した設定があり、検出結果はIN_SYNCだった。全設定が一致している？</p><details><summary>判断の例を表示</summary><p>検出対象外や定義していない値があるため、全設定の一致は保証できない。対象範囲を確認して是正する。</p></details><p><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-circuit-breaker"><h3>サーキットブレーカー</h3><code>candidate-circuit-breaker</code><p>失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。</p><p>所属：守護者・隔離［キー／特化］／指揮者・再挑戦［コネクション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #circuit-breaker</small>
+<section class="expansion"><h4>サーキットブレーカー：追加教材</h4><p>依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。</p><p>適用の確認：決済先が停止しているのに呼出しを繰り返し、接続資源が尽きる。どう抑える？</p><details><summary>判断の例を表示</summary><p>失敗閾値で遮断し、回復確認後に再開する。決済未完了を成功扱いせず、保留や再処理を設計する。</p></details><p><a href="https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-exponential-backoff"><h3>指数バックオフ</h3><code>candidate-exponential-backoff</code><p>再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。</p><p>所属：指揮者・再挑戦［オプション／特化］／指揮者・蓄積［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #exponential-backoff</small>
+<section class="expansion"><h4>指数バックオフ：追加教材</h4><p>回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。</p><p>適用の確認：429が出るたび即時再試行し、さらに混雑している。どう変える？</p><details><summary>判断の例を表示</summary><p>再試行間隔を伸ばし、回数と総期限を制限する。業務の重複防止も別途必要。</p></details><p><a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-jitter"><h3>ジッター</h3><code>candidate-jitter</code><p>再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。</p><p>所属：指揮者・再挑戦［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #jitter</small>
+<section class="expansion"><h4>ジッター：追加教材</h4><p>成功率を保証せず、冪等性や回数制限の代わりにはならない。</p><p>適用の確認：多数のクライアントが同じ待ち時間の後に再試行し、また過負荷になる。どう分散する？</p><details><summary>判断の例を表示</summary><p>バックオフへジッターを加えて時刻を分散する。再試行の回数と期限も制限する。</p></details><p><a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-request-timeout"><h3>リクエストタイムアウト</h3><code>candidate-request-timeout</code><p>呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。</p><p>所属：指揮者・再挑戦［オプション／汎用］／守護者・隔離［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #request-timeout</small>
+<section class="expansion"><h4>リクエストタイムアウト：追加教材</h4><p>待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。</p><p>適用の確認：決済要求がタイムアウトした。新しい注文IDで送れば安全？</p><details><summary>判断の例を表示</summary><p>完了状況を確認し、同じ業務IDの冪等性を使う。タイムアウトだけでは失敗確定と判断できない。</p></details><p><a href="https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-checkpoint"><h3>チェックポイント</h3><code>candidate-checkpoint</code><p>処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。</p><p>所属：指揮者・機会活用［オプション／特化］／指揮者・再挑戦［コネクション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #checkpoint</small>
+<section class="expansion"><h4>チェックポイント：追加教材</h4><p>保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。</p><p>適用の確認：Spot終了時に進捗をインスタンスストアだけへ保存した。再開できる？</p><details><summary>判断の例を表示</summary><p>失われる可能性があるため、S3等の保持できる保存先と再開手順を用意する。重複処理と保存費も確認する。</p></details><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-elasticache"><h3>Amazon ElastiCache</h3><code>candidate-elasticache</code><p>Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。</p><p>所属：加速者・記憶［キー／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #elasticache</small>
+<section class="expansion"><h4>Amazon ElastiCache：追加教材</h4><p>結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。</p><p>適用の確認：繰り返し読む商品説明は数分の古さを許容するが、在庫の確定は最新値が必要。どう分ける？</p><details><summary>判断の例を表示</summary><p>商品説明はキャッシュを検討し、在庫確定は最新性を満たす元データの処理を使う。更新・ミス時も設計する。</p></details><p><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-aws-backup"><h3>AWS Backup</h3><code>candidate-aws-backup</code><p>対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。</p><p>所属：復旧者・保存［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #aws-backup</small>
+<section class="expansion"><h4>AWS Backup：追加教材</h4><p>リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。</p><p>適用の確認：バックアップジョブが成功したので、復旧時間目標を満たしたといえる？</p><details><summary>判断の例を表示</summary><p>復元テストで起動・整合性・所要時間を確認する。復号権限と接続先の切替も検証する。</p></details><p><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
+<article class="candidate" id="c-cloudwatch-alarm"><h3>CloudWatchアラーム</h3><code>candidate-cloudwatch-alarm</code><p>メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。</p><p>所属：復旧者・観測［オプション／特化］／調律師・増援［オプション／特化］</p><small>教材参照：src/content/build-gap-expansion.ts #cloudwatch-alarm</small>
+<section class="expansion"><h4>CloudWatchアラーム：追加教材</h4><p>通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。</p><p>適用の確認：CPU異常の通知だけ設定したら、処理能力は自動で増える？</p><details><summary>判断の例を表示</summary><p>通知先と増強アクションは別。対応するアクションと権限・動作を設定して確認する。</p></details><p><a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html">AWS公式出典</a>／確認日 2026-10-09／自己照合・独立監査前</p></section></article>
 <script>const q=document.getElementById("search"),cards=[...document.querySelectorAll(".candidate")];q.addEventListener("input",()=>{let n=0;for(const c of cards){c.hidden=!c.textContent.toLowerCase().includes(q.value.toLowerCase());if(!c.hidden)n++;}document.getElementById("result").textContent=n+"件表示（ビルド一覧・未所属一覧は常に表示）"});document.addEventListener("click",e=>{if(e.target.closest("a[href^=\"#c-\"]")){q.value="";q.dispatchEvent(new Event("input"));}});</script></main></html>

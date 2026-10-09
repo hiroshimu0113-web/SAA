@@ -77,3 +77,9 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - 分類concept-character-card-build-allocationはdraft/candidateのまま。ゲーム効果・排出率・保存は変更なし。検証・公開結果は後記。
 
 - カード仕分け表記変更（2026-10-09）：役割＝キー／オプション／コネクション、分類＝汎用／特化。分類の意味・215所属・168候補・追跡IDを維持。既存分類concept-character-card-build-allocationはdraft/candidate。公開確認は後記。
+
+
+## ビルド不足教材のAWS公式調査と拡充（2026-10-09）
+- 12用語：IaC、CloudFormation、変更セット、ドリフト検出、サーキットブレーカー、指数バックオフ、ジッター、リクエストタイムアウト、チェックポイント、ElastiCache、AWS Backup、CloudWatchアラーム。既存本文の言及と用語未登録を区別。
+- 正本knowledge/build-gap-expansion.jsonとunits/relations、src/content/build-gap-expansion.tsで既存6レッスンへ適用例・境界・公式出典を追加。知識単位12件（計26）、説明/適用確認24件。元168候補・未所属17IDを維持し、180候補・235所属へ拡充。IaCキー不足解消。
+- 分類term-build-gap-* 12件はdraft/candidate、公式自己照合、独立監査・本人理解・ゲーム効果実装は未実施。教材語彙追加はゲーム通常カードの自動追加を意味しない。検証/公開は後記。

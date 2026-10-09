@@ -1073,7 +1073,7 @@
 
 
 ### 手順書対応SVGアイコン：公式公開完了（2026-10-08 UTC）
-- 公開版6d952fa（実装03f574e、判定修正42b534e、詳細スクロール9fbe863）/Actions 37723712347のbuild/deployともsuccess。
+- 公開版6d952fa（実装03f574e、判定修正42b534e、詳細スクロール9fbe863）/Actions 37723712357のbuild/deployともsuccess。
 - 111テスト、WebKitの全件アイコン対応/一意性/所持獲得と敵詳細/15ノード横並び、33画面/93カード詳細、全操作回帰、教材更新、章/模試検証を通過。Safariでは別々の座標取得と詳細スクロールの差を確認し、同時取得/レイアウト待ちとHPバー下への先頭スクロールで修正。検査条件を外して通過扱いにはしていない。
 - deployログのHTTPS取得でHTTP200/SHA256一致。対象はtower/icons.html、tower/icons-v2.html、tower/icons.mjs、tower/card-icons.mjs、既存入口/アプリ/教材/Service Worker。公式入口 https://hiroshimu0113-web.github.io/SAA/tower/icons-v2.html 。旧クエストは https://hiroshimu0113-web.github.io/SAA/ 。
 - 最終キットをoutput/icon-reproductionへ保存・GitHub同期。基準42b534e7d5320c5e4ad8706668e5cdf9629e5f8a、ZIP SHA256 42bb1ba57057d1a6b007ea5de1213880d00ed033732741dfc48192cf78caf781。最終版でも新規clone→全SHA256/CRC→依存導入→111テスト→ビルド→アイコン試験を確認。新入口/SVG2ファイル/sw.jsは検証済み作業環境と一致。
@@ -1252,3 +1252,10 @@
 
 - カード仕分け表記変更（2026-10-09）：役割＝キー／オプション／コネクション、分類＝汎用／特化。分類の意味・215所属・168候補・追跡IDを維持。既存分類concept-character-card-build-allocationはdraft/candidate。公開確認は後記。
 - 表記変更公開完了：6fd109c / Actions 37921181973 build・deploy・新資料WebKit検証・HTML/JSON HTTP200/SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 。分類concept-character-card-build-allocationはdraft/candidate、ゲーム未変更。
+
+
+## ビルド不足教材のAWS公式調査と拡充（2026-10-09）
+- 12用語：IaC、CloudFormation、変更セット、ドリフト検出、サーキットブレーカー、指数バックオフ、ジッター、リクエストタイムアウト、チェックポイント、ElastiCache、AWS Backup、CloudWatchアラーム。既存本文の言及と用語未登録を区別。
+- 正本knowledge/build-gap-expansion.jsonとunits/relations、src/content/build-gap-expansion.tsで既存6レッスンへ適用例・境界・公式出典を追加。知識単位12件（計26）、説明/適用確認24件。元168候補・未所属17IDを維持し、180候補・235所属へ拡充。IaCキー不足解消。
+- 分類term-build-gap-* 12件はdraft/candidate、公式自己照合、独立監査・本人理解・ゲーム効果実装は未実施。教材語彙追加はゲーム通常カードの自動追加を意味しない。検証/公開は後記。
+- ローカル：全128既存テスト・build、180候補235所属・双方向/2軸・検索/JS無効/各幅、26単位の知識グラフ操作、knowledge/game/progress照合成功。カタログの変更は用語数と版のみ（カード30種類・効果・問題は不変）。追加教材接続の検査と公開を続行。

@@ -5955,7 +5955,7 @@
     }
   },
   "counts": {
-    "publishedTerms": 165,
+    "publishedTerms": 177,
     "additionalTerms": 3,
     "publishedQuestions": 430,
     "skippedQuestions": 209
@@ -5965,5 +5965,5 @@
     "src/content/starter.ts",
     "knowledge/game-supplement.json"
   ],
-  "version": "02bc4cca60ddf580"
+  "version": "70de9f34ebd70b3a"
 }

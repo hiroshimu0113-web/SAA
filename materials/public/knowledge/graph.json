@@ -12,9 +12,9 @@
     "questions": 430,
     "published_lessons": 58,
     "published_questions": 430,
-    "concepts": 195,
-    "detailed_units": 14,
-    "rubric_checks": 28
+    "concepts": 206,
+    "detailed_units": 26,
+    "rubric_checks": 52
   },
   "nodes": [
     {
@@ -300,6 +300,64 @@
       }
     },
     {
+      "id": "concept:aws-backup",
+      "kind": "concept",
+      "title": "AWS Backup",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "aws-backup",
+        "title": "AWS Backup",
+        "group": "architecture-operations",
+        "objective": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+        ],
+        "checks": [
+          {
+            "id": "aws-backup-explain",
+            "level": "explain",
+            "prompt": "AWS Backupの役割と限界を説明してください。",
+            "expected_points": [
+              "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+              "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+            ]
+          },
+          {
+            "id": "aws-backup-apply",
+            "level": "apply",
+            "prompt": "バックアップジョブが成功したので、復旧時間目標を満たしたといえる？",
+            "expected_points": [
+              "復元テストで起動・整合性・所要時間を確認する。復号権限と接続先の切替も検証する。",
+              "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch11-l02"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html",
+              "checked_on": "2026-10-09",
+              "claim": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
+    },
+    {
       "id": "concept:aws-config",
       "kind": "concept",
       "title": "AWS Config",
@@ -423,6 +481,122 @@
       "unit": null
     },
     {
+      "id": "concept:change-set",
+      "kind": "concept",
+      "title": "CloudFormation変更セット",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "change-set",
+        "title": "CloudFormation変更セット",
+        "group": "architecture-operations",
+        "objective": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "作成しただけでは更新されず、実行成功の保証でもない。"
+        ],
+        "checks": [
+          {
+            "id": "change-set-explain",
+            "level": "explain",
+            "prompt": "CloudFormation変更セットの役割と限界を説明してください。",
+            "expected_points": [
+              "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+              "作成しただけでは更新されず、実行成功の保証でもない。"
+            ]
+          },
+          {
+            "id": "change-set-apply",
+            "level": "apply",
+            "prompt": "DBの置換を伴う更新を本番へ出す前に何を確認する？",
+            "expected_points": [
+              "変更セットで置換や削除を確認し、データ保護と戻し方を用意する。確認後も実行時の失敗に備える。",
+              "作成しただけでは更新されず、実行成功の保証でもない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch11-l04"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+              "checked_on": "2026-10-09",
+              "claim": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
+    },
+    {
+      "id": "concept:checkpoint",
+      "kind": "concept",
+      "title": "チェックポイント",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "checkpoint",
+        "title": "チェックポイント",
+        "group": "architecture-operations",
+        "objective": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+        ],
+        "checks": [
+          {
+            "id": "checkpoint-explain",
+            "level": "explain",
+            "prompt": "チェックポイントの役割と限界を説明してください。",
+            "expected_points": [
+              "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+              "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+            ]
+          },
+          {
+            "id": "checkpoint-apply",
+            "level": "apply",
+            "prompt": "Spot終了時に進捗をインスタンスストアだけへ保存した。再開できる？",
+            "expected_points": [
+              "失われる可能性があるため、S3等の保持できる保存先と再開手順を用意する。重複処理と保存費も確認する。",
+              "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch04-l01"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html",
+              "checked_on": "2026-10-09",
+              "claim": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
+    },
+    {
       "id": "concept:cidr",
       "kind": "concept",
       "title": "cidr",
@@ -430,11 +604,127 @@
       "unit": null
     },
     {
+      "id": "concept:circuit-breaker",
+      "kind": "concept",
+      "title": "サーキットブレーカー",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "circuit-breaker",
+        "title": "サーキットブレーカー",
+        "group": "architecture-operations",
+        "objective": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+        ],
+        "checks": [
+          {
+            "id": "circuit-breaker-explain",
+            "level": "explain",
+            "prompt": "サーキットブレーカーの役割と限界を説明してください。",
+            "expected_points": [
+              "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+              "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+            ]
+          },
+          {
+            "id": "circuit-breaker-apply",
+            "level": "apply",
+            "prompt": "決済先が停止しているのに呼出しを繰り返し、接続資源が尽きる。どう抑える？",
+            "expected_points": [
+              "失敗閾値で遮断し、回復確認後に再開する。決済未完了を成功扱いせず、保留や再処理を設計する。",
+              "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch09-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+              "checked_on": "2026-10-09",
+              "claim": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
+    },
+    {
       "id": "concept:claim-check",
       "kind": "concept",
       "title": "Claim Check",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:cloudformation",
+      "kind": "concept",
+      "title": "AWS CloudFormation",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "cloudformation",
+        "title": "AWS CloudFormation",
+        "group": "architecture-operations",
+        "objective": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+        ],
+        "checks": [
+          {
+            "id": "cloudformation-explain",
+            "level": "explain",
+            "prompt": "AWS CloudFormationの役割と限界を説明してください。",
+            "expected_points": [
+              "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+              "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+            ]
+          },
+          {
+            "id": "cloudformation-apply",
+            "level": "apply",
+            "prompt": "同じWeb構成を複数環境へ展開したい。AMIだけでネットワークやIAMも再現できる？",
+            "expected_points": [
+              "CloudFormationで関連リソースを定義し、権限や環境差を確認する。AMIは起動イメージを担当する。",
+              "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch11-l04"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+              "checked_on": "2026-10-09",
+              "claim": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:cloudfront",
@@ -463,6 +753,64 @@
       "title": "CloudWatch",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:cloudwatch-alarm",
+      "kind": "concept",
+      "title": "CloudWatchアラーム",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "cloudwatch-alarm",
+        "title": "CloudWatchアラーム",
+        "group": "architecture-operations",
+        "objective": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+        ],
+        "checks": [
+          {
+            "id": "cloudwatch-alarm-explain",
+            "level": "explain",
+            "prompt": "CloudWatchアラームの役割と限界を説明してください。",
+            "expected_points": [
+              "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+              "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+            ]
+          },
+          {
+            "id": "cloudwatch-alarm-apply",
+            "level": "apply",
+            "prompt": "CPU異常の通知だけ設定したら、処理能力は自動で増える？",
+            "expected_points": [
+              "通知先と増強アクションは別。対応するアクションと権限・動作を設定して確認する。",
+              "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch10-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+              "checked_on": "2026-10-09",
+              "claim": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:cognito",
@@ -589,6 +937,64 @@
       "title": "TTL",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:drift-detection",
+      "kind": "concept",
+      "title": "CloudFormationドリフト検出",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "drift-detection",
+        "title": "CloudFormationドリフト検出",
+        "group": "architecture-operations",
+        "objective": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+        ],
+        "checks": [
+          {
+            "id": "drift-detection-explain",
+            "level": "explain",
+            "prompt": "CloudFormationドリフト検出の役割と限界を説明してください。",
+            "expected_points": [
+              "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+              "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+            ]
+          },
+          {
+            "id": "drift-detection-apply",
+            "level": "apply",
+            "prompt": "コンソールで変更した設定があり、検出結果はIN_SYNCだった。全設定が一致している？",
+            "expected_points": [
+              "検出対象外や定義していない値があるため、全設定の一致は保証できない。対象範囲を確認して是正する。",
+              "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch11-l04"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+              "checked_on": "2026-10-09",
+              "claim": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:durability",
@@ -784,6 +1190,64 @@
       "unit": null
     },
     {
+      "id": "concept:elasticache",
+      "kind": "concept",
+      "title": "Amazon ElastiCache",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "elasticache",
+        "title": "Amazon ElastiCache",
+        "group": "architecture-operations",
+        "objective": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+        ],
+        "checks": [
+          {
+            "id": "elasticache-explain",
+            "level": "explain",
+            "prompt": "Amazon ElastiCacheの役割と限界を説明してください。",
+            "expected_points": [
+              "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+              "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+            ]
+          },
+          {
+            "id": "elasticache-apply",
+            "level": "apply",
+            "prompt": "繰り返し読む商品説明は数分の古さを許容するが、在庫の確定は最新値が必要。どう分ける？",
+            "expected_points": [
+              "商品説明はキャッシュを検討し、在庫確定は最新性を満たす元データの処理を使う。更新・ミス時も設計する。",
+              "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch06-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+              "checked_on": "2026-10-09",
+              "claim": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
+    },
+    {
       "id": "concept:endpoint-policy",
       "kind": "concept",
       "title": "endpoint-policy",
@@ -803,6 +1267,64 @@
       "title": "明示的Deny",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:exponential-backoff",
+      "kind": "concept",
+      "title": "指数バックオフ",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "exponential-backoff",
+        "title": "指数バックオフ",
+        "group": "architecture-operations",
+        "objective": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+        ],
+        "checks": [
+          {
+            "id": "exponential-backoff-explain",
+            "level": "explain",
+            "prompt": "指数バックオフの役割と限界を説明してください。",
+            "expected_points": [
+              "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+              "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+            ]
+          },
+          {
+            "id": "exponential-backoff-apply",
+            "level": "apply",
+            "prompt": "429が出るたび即時再試行し、さらに混雑している。どう変える？",
+            "expected_points": [
+              "再試行間隔を伸ばし、回数と総期限を制限する。業務の重複防止も別途必要。",
+              "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch09-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+              "checked_on": "2026-10-09",
+              "claim": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:external-id",
@@ -912,9 +1434,60 @@
     {
       "id": "concept:iac",
       "kind": "concept",
-      "title": "iac",
-      "detail_status": "inventory_only",
-      "unit": null
+      "title": "Infrastructure as Code（IaC）",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "iac",
+        "title": "Infrastructure as Code（IaC）",
+        "group": "architecture-operations",
+        "objective": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+        ],
+        "checks": [
+          {
+            "id": "iac-explain",
+            "level": "explain",
+            "prompt": "Infrastructure as Code（IaC）の役割と限界を説明してください。",
+            "expected_points": [
+              "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+              "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+            ]
+          },
+          {
+            "id": "iac-apply",
+            "level": "apply",
+            "prompt": "復旧先のネットワークや権限を毎回手作業で作り、設定が一致しない。何を用意する？",
+            "expected_points": [
+              "構成定義を版管理し、復旧先で再現を検証する。データ・秘密情報・利用権限は別途復旧する。",
+              "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch11-l04"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html",
+              "checked_on": "2026-10-09",
+              "claim": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:iam-role",
@@ -1071,6 +1644,64 @@
       "title": "Egress-only Internet Gateway",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:jitter",
+      "kind": "concept",
+      "title": "ジッター",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "jitter",
+        "title": "ジッター",
+        "group": "architecture-operations",
+        "objective": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+        ],
+        "checks": [
+          {
+            "id": "jitter-explain",
+            "level": "explain",
+            "prompt": "ジッターの役割と限界を説明してください。",
+            "expected_points": [
+              "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+              "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+            ]
+          },
+          {
+            "id": "jitter-apply",
+            "level": "apply",
+            "prompt": "多数のクライアントが同じ待ち時間の後に再試行し、また過負荷になる。どう分散する？",
+            "expected_points": [
+              "バックオフへジッターを加えて時刻を分散する。再試行の回数と期限も制限する。",
+              "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch09-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+              "checked_on": "2026-10-09",
+              "claim": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:kinesis",
@@ -1530,6 +2161,64 @@
       "title": "レプリケーション",
       "detail_status": "inventory_only",
       "unit": null
+    },
+    {
+      "id": "concept:request-timeout",
+      "kind": "concept",
+      "title": "リクエストタイムアウト",
+      "detail_status": "draft_unit",
+      "unit": {
+        "id": "request-timeout",
+        "title": "リクエストタイムアウト",
+        "group": "architecture-operations",
+        "objective": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+        "estimated_minutes": 5,
+        "scope": "ビルド設計の補足。概要と適用条件を扱い、AWS実装手順・性能保証を扱わない。",
+        "prerequisites": [],
+        "misconceptions": [
+          "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+        ],
+        "checks": [
+          {
+            "id": "request-timeout-explain",
+            "level": "explain",
+            "prompt": "リクエストタイムアウトの役割と限界を説明してください。",
+            "expected_points": [
+              "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+              "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+            ]
+          },
+          {
+            "id": "request-timeout-apply",
+            "level": "apply",
+            "prompt": "決済要求がタイムアウトした。新しい注文IDで送れば安全？",
+            "expected_points": [
+              "完了状況を確認し、同じ業務IDの冪等性を使う。タイムアウトだけでは失敗確定と判断できない。",
+              "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+            ]
+          }
+        ],
+        "lesson_ids": [
+          "ch09-l03"
+        ],
+        "review": {
+          "status": "draft",
+          "basis": "AWS公式の対象主張を自己照合。独立した問題・内容監査は未実施。",
+          "source_document": "knowledge/build-gap-expansion.json",
+          "evidence": [
+            {
+              "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+              "checked_on": "2026-10-09",
+              "claim": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+              "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+            }
+          ]
+        },
+        "learner_state": "unassessed",
+        "next_enrichment": [
+          "カード効果と適用条件の設計、独立した内容監査。"
+        ]
+      }
     },
     {
       "id": "concept:requester-pays",
@@ -2393,6 +3082,11 @@
           "title": "AWS公式: capacity",
           "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "チェックポイントの機能と限界",
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -2815,6 +3509,11 @@
           "title": "AWS公式: dax",
           "url": "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "Amazon ElastiCacheの機能と限界",
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -3153,6 +3852,26 @@
           "title": "CloudWatch",
           "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "サーキットブレーカーの機能と限界",
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "指数バックオフの機能と限界",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "ジッターの機能と限界",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "リクエストタイムアウトの機能と限界",
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -3254,6 +3973,11 @@
           "title": "AWS Config",
           "url": "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "CloudWatchアラームの機能と限界",
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -3325,6 +4049,11 @@
           "title": "災害復旧戦略",
           "url": "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html",
           "checked": "2026-10-05"
+        },
+        {
+          "title": "AWS Backupの機能と限界",
+          "url": "https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -3385,6 +4114,26 @@
           "title": "Transfer Familyのファイル転送プロトコル",
           "url": "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html",
           "checked": "2026-10-08"
+        },
+        {
+          "title": "Infrastructure as Code（IaC）の機能と限界",
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "AWS CloudFormationの機能と限界",
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "CloudFormation変更セットの機能と限界",
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+          "checked": "2026-10-09"
+        },
+        {
+          "title": "CloudFormationドリフト検出の機能と限界",
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+          "checked": "2026-10-09"
         }
       ]
     },
@@ -12236,6 +12985,11 @@
       "type": "covered_by"
     },
     {
+      "from": "concept:checkpoint",
+      "to": "lesson:ch04-l01",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch04",
       "to": "lesson:ch04-l02",
       "type": "contains"
@@ -12636,6 +13390,11 @@
       "type": "covered_by"
     },
     {
+      "from": "concept:elasticache",
+      "to": "lesson:ch06-l03",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch06",
       "to": "lesson:ch06-l04",
       "type": "contains"
@@ -12981,6 +13740,26 @@
       "type": "covered_by"
     },
     {
+      "from": "concept:circuit-breaker",
+      "to": "lesson:ch09-l03",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:exponential-backoff",
+      "to": "lesson:ch09-l03",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:jitter",
+      "to": "lesson:ch09-l03",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:request-timeout",
+      "to": "lesson:ch09-l03",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch09",
       "to": "lesson:ch09-l04",
       "type": "contains"
@@ -13081,6 +13860,11 @@
       "type": "covered_by"
     },
     {
+      "from": "concept:cloudwatch-alarm",
+      "to": "lesson:ch10-l03",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch10",
       "to": "lesson:ch10-l04",
       "type": "contains"
@@ -13156,6 +13940,11 @@
       "type": "covered_by"
     },
     {
+      "from": "concept:aws-backup",
+      "to": "lesson:ch11-l02",
+      "type": "covered_by"
+    },
+    {
       "from": "chapter:ch11",
       "to": "lesson:ch11-l03",
       "type": "contains"
@@ -13222,6 +14011,21 @@
     },
     {
       "from": "concept:storage-gateway",
+      "to": "lesson:ch11-l04",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:cloudformation",
+      "to": "lesson:ch11-l04",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:change-set",
+      "to": "lesson:ch11-l04",
+      "type": "covered_by"
+    },
+    {
+      "from": "concept:drift-detection",
       "to": "lesson:ch11-l04",
       "type": "covered_by"
     },
@@ -18136,6 +18940,66 @@
       "type": "unit_reference"
     },
     {
+      "from": "concept:iac",
+      "to": "lesson:ch11-l04",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:cloudformation",
+      "to": "lesson:ch11-l04",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:change-set",
+      "to": "lesson:ch11-l04",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:drift-detection",
+      "to": "lesson:ch11-l04",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:circuit-breaker",
+      "to": "lesson:ch09-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:exponential-backoff",
+      "to": "lesson:ch09-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:jitter",
+      "to": "lesson:ch09-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:request-timeout",
+      "to": "lesson:ch09-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:checkpoint",
+      "to": "lesson:ch04-l01",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:elasticache",
+      "to": "lesson:ch06-l03",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:aws-backup",
+      "to": "lesson:ch11-l02",
+      "type": "unit_reference"
+    },
+    {
+      "from": "concept:cloudwatch-alarm",
+      "to": "lesson:ch10-l03",
+      "type": "unit_reference"
+    },
+    {
       "from": "concept:availability",
       "to": "concept:durability",
       "type": "contrast_with"
@@ -18158,6 +19022,36 @@
     {
       "from": "concept:mfa",
       "to": "concept:least-privilege",
+      "type": "used_with"
+    },
+    {
+      "from": "concept:iac",
+      "to": "concept:cloudformation",
+      "type": "used_with"
+    },
+    {
+      "from": "concept:cloudformation",
+      "to": "concept:change-set",
+      "type": "used_with"
+    },
+    {
+      "from": "concept:cloudformation",
+      "to": "concept:drift-detection",
+      "type": "used_with"
+    },
+    {
+      "from": "concept:exponential-backoff",
+      "to": "concept:jitter",
+      "type": "used_with"
+    },
+    {
+      "from": "concept:circuit-breaker",
+      "to": "concept:exponential-backoff",
+      "type": "contrast_with"
+    },
+    {
+      "from": "concept:checkpoint",
+      "to": "concept:s3",
       "type": "used_with"
     },
     {

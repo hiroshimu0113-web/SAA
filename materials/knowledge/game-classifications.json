@@ -54750,7 +54750,7 @@
         "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
       ],
       "content": {
-        "principle": "全168候補と215所属を維持し、役割（キー・強化/安定化・橋渡し）と分類（幅広い・特定条件）を独立に整理する。",
+        "principle": "元168候補を保持し、公式調査に基づく12候補を追加。180候補と235所属を役割×分類で整理する。",
         "applicable_when": [
           "キャラ別カードプールを設計するとき。"
         ],
@@ -54778,8 +54778,1039 @@
       },
       "import_status": "candidate",
       "open_questions": [
-        "未所属17件の用途、IaC不足、スターター18枚、効果・レア度・排出率を後続設計。",
-        "2軸は教材からの暫定設計。ゲーム効果を設計後に適用範囲を再確認する。"
+        "未所属17件の用途、スターター、ゲーム効果・排出率の設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-iac",
+      "title": "Infrastructure as Code（IaC）",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+      "unit_ids": [
+        "iac"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "iac"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "iac"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。"
+      ],
+      "limitations": [
+        "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+      ],
+      "misconceptions": [
+        "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+      ],
+      "content": {
+        "definition": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+        "distinguish_from": [
+          "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html",
+          "claim": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。 AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+        "metaphor_limit": "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-cloudformation",
+      "title": "AWS CloudFormation",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+      "unit_ids": [
+        "cloudformation"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "cloudformation"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "cloudformation"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。"
+      ],
+      "limitations": [
+        "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+      ],
+      "misconceptions": [
+        "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+      ],
+      "content": {
+        "definition": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+        "distinguish_from": [
+          "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+          "claim": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。 定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+        "metaphor_limit": "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-change-set",
+      "title": "CloudFormation変更セット",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+      "unit_ids": [
+        "change-set"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "change-set"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "change-set"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。"
+      ],
+      "limitations": [
+        "作成しただけでは更新されず、実行成功の保証でもない。"
+      ],
+      "misconceptions": [
+        "作成しただけでは更新されず、実行成功の保証でもない。"
+      ],
+      "content": {
+        "definition": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+        "distinguish_from": [
+          "作成しただけでは更新されず、実行成功の保証でもない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+          "claim": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。 作成しただけでは更新されず、実行成功の保証でもない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+        "metaphor_limit": "作成しただけでは更新されず、実行成功の保証でもない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "作成しただけでは更新されず、実行成功の保証でもない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-drift-detection",
+      "title": "CloudFormationドリフト検出",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+      "unit_ids": [
+        "drift-detection"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "drift-detection"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "drift-detection"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。"
+      ],
+      "limitations": [
+        "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+      ],
+      "misconceptions": [
+        "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+      ],
+      "content": {
+        "definition": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+        "distinguish_from": [
+          "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+          "claim": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。 対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+        "metaphor_limit": "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-circuit-breaker",
+      "title": "サーキットブレーカー",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+      "unit_ids": [
+        "circuit-breaker"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "circuit-breaker"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "circuit-breaker"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。"
+      ],
+      "limitations": [
+        "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+      ],
+      "misconceptions": [
+        "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+      ],
+      "content": {
+        "definition": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+        "distinguish_from": [
+          "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+          "claim": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。 依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+        "metaphor_limit": "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-exponential-backoff",
+      "title": "指数バックオフ",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+      "unit_ids": [
+        "exponential-backoff"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "exponential-backoff"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "exponential-backoff"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。"
+      ],
+      "limitations": [
+        "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+      ],
+      "misconceptions": [
+        "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+      ],
+      "content": {
+        "definition": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+        "distinguish_from": [
+          "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "claim": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。 回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+        "metaphor_limit": "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-jitter",
+      "title": "ジッター",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+      "unit_ids": [
+        "jitter"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "jitter"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "jitter"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。"
+      ],
+      "limitations": [
+        "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+      ],
+      "misconceptions": [
+        "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+      ],
+      "content": {
+        "definition": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+        "distinguish_from": [
+          "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "claim": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。 成功率を保証せず、冪等性や回数制限の代わりにはならない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+        "metaphor_limit": "成功率を保証せず、冪等性や回数制限の代わりにはならない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "成功率を保証せず、冪等性や回数制限の代わりにはならない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-request-timeout",
+      "title": "リクエストタイムアウト",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+      "unit_ids": [
+        "request-timeout"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "request-timeout"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "request-timeout"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。"
+      ],
+      "limitations": [
+        "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+      ],
+      "misconceptions": [
+        "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+      ],
+      "content": {
+        "definition": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+        "distinguish_from": [
+          "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+          "claim": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。 待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+        "metaphor_limit": "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-checkpoint",
+      "title": "チェックポイント",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+      "unit_ids": [
+        "checkpoint"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "checkpoint"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "checkpoint"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。"
+      ],
+      "limitations": [
+        "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+      ],
+      "misconceptions": [
+        "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+      ],
+      "content": {
+        "definition": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+        "distinguish_from": [
+          "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html",
+          "claim": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。 保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+        "metaphor_limit": "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-elasticache",
+      "title": "Amazon ElastiCache",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+      "unit_ids": [
+        "elasticache"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "elasticache"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "elasticache"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。"
+      ],
+      "limitations": [
+        "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+      ],
+      "misconceptions": [
+        "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+      ],
+      "content": {
+        "definition": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+        "distinguish_from": [
+          "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+          "claim": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。 結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+        "metaphor_limit": "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-aws-backup",
+      "title": "AWS Backup",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+      "unit_ids": [
+        "aws-backup"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "aws-backup"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "aws-backup"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。"
+      ],
+      "limitations": [
+        "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+      ],
+      "misconceptions": [
+        "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+      ],
+      "content": {
+        "definition": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+        "distinguish_from": [
+          "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html",
+          "claim": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。 リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+        "metaphor_limit": "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
+      ]
+    },
+    {
+      "id": "term-build-gap-cloudwatch-alarm",
+      "title": "CloudWatchアラーム",
+      "aliases": [],
+      "kind": "term",
+      "classification_reason": "名称と定義を対応させ、関連する機能と限界を区別するための補足用語。",
+      "objective": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+      "unit_ids": [
+        "cloudwatch-alarm"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/build-gap-expansion.json",
+          "locator": "cloudwatch-alarm"
+        },
+        {
+          "path": "src/content/build-gap-expansion.ts",
+          "locator": "cloudwatch-alarm"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "glossary",
+        "card",
+        "build"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。"
+      ],
+      "limitations": [
+        "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+      ],
+      "misconceptions": [
+        "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+      ],
+      "content": {
+        "definition": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+        "distinguish_from": [
+          "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+          "claim": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。 通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [
+        {
+          "scope": "content",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+          "checked_on": "2026-10-09",
+          "summary": "公式資料の機能・適用範囲・限界を自己照合。独立内容監査ではない。"
+        }
+      ],
+      "game_design": {
+        "proposal": "対応ビルドのキー/オプション/コネクション候補。数値効果は未設計。",
+        "mechanism_note": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+        "metaphor_limit": "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。",
+        "simplifications": [
+          "攻撃・防御等の戦闘効果と実際のAWS動作を分ける。"
+        ],
+        "mislearning_risks": [
+          "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立した内容監査とゲーム効果・バランス設計。"
       ]
     }
   ]

@@ -1,0 +1,287 @@
+{
+  "schema": 1,
+  "status": "draft",
+  "purpose": "18ビルドに必要な構成・制御の用語不足を補い、既存の本文出現語を用語として登録する。",
+  "items": [
+    {
+      "id": "iac",
+      "name": "Infrastructure as Code（IaC）",
+      "lessonId": "ch11-l04",
+      "chapterId": "ch11",
+      "meaning": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+      "caution": "AMIはマシンイメージ、Configは設定評価であり、構成全体の定義の代替ではない。",
+      "scenario": "復旧先のネットワークや権限を毎回手作業で作り、設定が一致しない。何を用意する？",
+      "answer": "構成定義を版管理し、復旧先で再現を検証する。データ・秘密情報・利用権限は別途復旧する。",
+      "source": "https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/infrastructure-as-code.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "キー",
+          "usage": "汎用"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "コネクション",
+          "usage": "汎用"
+        }
+      ]
+    },
+    {
+      "id": "cloudformation",
+      "name": "AWS CloudFormation",
+      "lessonId": "ch11-l04",
+      "chapterId": "ch11",
+      "meaning": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+      "caution": "定義の誤りも再現する。構成の再作成だけで業務データが復元されるわけではない。",
+      "scenario": "同じWeb構成を複数環境へ展開したい。AMIだけでネットワークやIAMも再現できる？",
+      "answer": "CloudFormationで関連リソースを定義し、権限や環境差を確認する。AMIは起動イメージを担当する。",
+      "source": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "キー",
+          "usage": "特化"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "コネクション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "change-set",
+      "name": "CloudFormation変更セット",
+      "lessonId": "ch11-l04",
+      "chapterId": "ch11",
+      "meaning": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+      "caution": "作成しただけでは更新されず、実行成功の保証でもない。",
+      "scenario": "DBの置換を伴う更新を本番へ出す前に何を確認する？",
+      "answer": "変更セットで置換や削除を確認し、データ保護と戻し方を用意する。確認後も実行時の失敗に備える。",
+      "source": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "drift-detection",
+      "name": "CloudFormationドリフト検出",
+      "lessonId": "ch11-l04",
+      "chapterId": "ch11",
+      "meaning": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+      "caution": "対応リソース・明示したプロパティが対象。検出だけで自動修復するものではない。",
+      "scenario": "コンソールで変更した設定があり、検出結果はIN_SYNCだった。全設定が一致している？",
+      "answer": "検出対象外や定義していない値があるため、全設定の一致は保証できない。対象範囲を確認して是正する。",
+      "source": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "オプション",
+          "usage": "特化"
+        },
+        {
+          "buildId": "observability",
+          "role": "コネクション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "circuit-breaker",
+      "name": "サーキットブレーカー",
+      "lessonId": "ch09-l03",
+      "chapterId": "ch09",
+      "meaning": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+      "caution": "依存先そのものを修復しない。必須処理は完了できず、復帰判定や状態遷移の試験も必要。",
+      "scenario": "決済先が停止しているのに呼出しを繰り返し、接続資源が尽きる。どう抑える？",
+      "answer": "失敗閾値で遮断し、回復確認後に再開する。決済未完了を成功扱いせず、保留や再処理を設計する。",
+      "source": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/circuit-breaker.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "isolation",
+          "role": "キー",
+          "usage": "特化"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "コネクション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "exponential-backoff",
+      "name": "指数バックオフ",
+      "lessonId": "ch09-l03",
+      "chapterId": "ch09",
+      "meaning": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+      "caution": "回数・待ち時間・総期限を制限する。許可不足など待っても直らない失敗を無限再試行しない。",
+      "scenario": "429が出るたび即時再試行し、さらに混雑している。どう変える？",
+      "answer": "再試行間隔を伸ばし、回数と総期限を制限する。業務の重複防止も別途必要。",
+      "source": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "オプション",
+          "usage": "特化"
+        },
+        {
+          "buildId": "queue",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "jitter",
+      "name": "ジッター",
+      "lessonId": "ch09-l03",
+      "chapterId": "ch09",
+      "meaning": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+      "caution": "成功率を保証せず、冪等性や回数制限の代わりにはならない。",
+      "scenario": "多数のクライアントが同じ待ち時間の後に再試行し、また過負荷になる。どう分散する？",
+      "answer": "バックオフへジッターを加えて時刻を分散する。再試行の回数と期限も制限する。",
+      "source": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "request-timeout",
+      "name": "リクエストタイムアウト",
+      "lessonId": "ch09-l03",
+      "chapterId": "ch09",
+      "meaning": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+      "caution": "待ち時間超過でも処理未実行とは限らない。短すぎる設定は不要な再試行を増やす。",
+      "scenario": "決済要求がタイムアウトした。新しい注文IDで送れば安全？",
+      "answer": "完了状況を確認し、同じ業務IDの冪等性を使う。タイムアウトだけでは失敗確定と判断できない。",
+      "source": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "オプション",
+          "usage": "汎用"
+        },
+        {
+          "buildId": "isolation",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "name": "チェックポイント",
+      "lessonId": "ch04-l01",
+      "chapterId": "ch04",
+      "meaning": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+      "caution": "保存先と再開手順をアプリが設計する。AMIやスナップショットだけで再開位置が確定するわけではない。",
+      "scenario": "Spot終了時に進捗をインスタンスストアだけへ保存した。再開できる？",
+      "answer": "失われる可能性があるため、S3等の保持できる保存先と再開手順を用意する。重複処理と保存費も確認する。",
+      "source": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "spot",
+          "role": "オプション",
+          "usage": "特化"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "コネクション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "elasticache",
+      "name": "Amazon ElastiCache",
+      "lessonId": "ch06-l03",
+      "chapterId": "ch06",
+      "meaning": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+      "caution": "結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。",
+      "scenario": "繰り返し読む商品説明は数分の古さを許容するが、在庫の確定は最新値が必要。どう分ける？",
+      "answer": "商品説明はキャッシュを検討し、在庫確定は最新性を満たす元データの処理を使う。更新・ミス時も設計する。",
+      "source": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "キー",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "aws-backup",
+      "name": "AWS Backup",
+      "lessonId": "ch11-l02",
+      "chapterId": "ch11",
+      "meaning": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+      "caution": "リソースやリージョンごとに対応が異なる。取得成功だけで復旧時間や業務再開は保証されない。",
+      "scenario": "バックアップジョブが成功したので、復旧時間目標を満たしたといえる？",
+      "answer": "復元テストで起動・整合性・所要時間を確認する。復号権限と接続先の切替も検証する。",
+      "source": "https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    },
+    {
+      "id": "cloudwatch-alarm",
+      "name": "CloudWatchアラーム",
+      "lessonId": "ch10-l03",
+      "chapterId": "ch10",
+      "meaning": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+      "caution": "通知だけでは修復しない。複合アラームはEC2・Auto Scalingの直接アクションに対応しない。",
+      "scenario": "CPU異常の通知だけ設定したら、処理能力は自動で増える？",
+      "answer": "通知先と増強アクションは別。対応するアクションと権限・動作を設定して確認する。",
+      "source": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html",
+      "checkedOn": "2026-10-09",
+      "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。",
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "オプション",
+          "usage": "特化"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "オプション",
+          "usage": "特化"
+        }
+      ]
+    }
+  ]
+}
