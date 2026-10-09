@@ -55609,7 +55609,13 @@
       "sources": [
         {
           "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html",
-          "claim": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。 結果の再利用にはキー・更新・期限を設計する。TTLだけでは常に最新とはいえず、ミス時の取得先も必要。",
+          "claim": "ElastiCacheのインメモリ保存・対応エンジン・管理方式。",
+          "checked_on": "2026-10-09",
+          "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html",
+          "claim": "キャッシュミス時の元データ取得・更新と、TTLだけでは古い値を防げないこと。",
           "checked_on": "2026-10-09",
           "reviewer": "Codex：AWS公式資料との自己照合。独立監査未実施。"
         }
