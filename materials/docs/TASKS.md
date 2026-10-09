@@ -1259,3 +1259,4 @@
 - 正本knowledge/build-gap-expansion.jsonとunits/relations、src/content/build-gap-expansion.tsで既存6レッスンへ適用例・境界・公式出典を追加。知識単位12件（計26）、説明/適用確認24件。元168候補・未所属17IDを維持し、180候補・235所属へ拡充。IaCキー不足解消。
 - 分類term-build-gap-* 12件はdraft/candidate、公式自己照合、独立監査・本人理解・ゲーム効果実装は未実施。教材語彙追加はゲーム通常カードの自動追加を意味しない。検証/公開は後記。
 - ローカル：全128既存テスト・build、180候補235所属・双方向/2軸・検索/JS無効/各幅、26単位の知識グラフ操作、knowledge/game/progress照合成功。カタログの変更は用語数と版のみ（カード30種類・効果・問題は不変）。追加教材接続の検査と公開を続行。
+- 教材拡充公開完了：870f3dd / Actions 37922788940 build・deploy・129テスト・新資料WebKit検証・実配信HTTP200/SHA256照合成功。公式資料 https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 、教材本文・用語集・知識グラフも配信。12補足分類term-build-gap-*はdraft/candidate、独立監査・本人理解・カード効果実装は未実施。
