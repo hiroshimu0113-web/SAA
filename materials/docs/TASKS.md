@@ -1233,4 +1233,4 @@
 ## クイズの正解済みフラグ（2026-10-09）
 - 誤答・未回答は同じ巡の候補に残し、正解時だけフラグを付ける。全問正解後に次の巡へ移る。最後の1問の部屋内再出題と誤答→正解の別履歴にも対応。
 - 旧表示フラグは正解と見なさず、保存中の正解回答だけ回収して移行。変更記録：GAME_QUIZ_CORRECT_CYCLE_CHANGE.md。教材・分類の変更なし。
-- 全128テスト・build・Chromiumの学習室/正解フラグ回帰・knowledge/game/progress check成功。次：GitHub同期・CI・公開確認。
+- 全128テスト・build・Chromiumの学習室/正解フラグ回帰・knowledge/game/progress check成功。公開版 `6b72f77` / Actions `37877210145` のWebKit全8工程・deploy・HTTP 200/SHA256一致確認成功。GitHub mainへ同期済み。公開：https://hiroshimu0113-web.github.io/SAA/tower/fan.html 。次：本人の実機確認。

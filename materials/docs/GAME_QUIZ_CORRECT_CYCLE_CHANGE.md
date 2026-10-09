@@ -24,6 +24,7 @@
 - `app.mjs`：正解済み数とルールを表示。`study-ui.mjs`：部屋内の回答位置を履歴キーに含め、誤答→正解を別記録にする。
 - 全128テスト・型検査・build成功。250問×2巡の正解、誤答/未回答/致死回答、最後の1問の繰返しと巡の境界、保存/旧方式移行を検証。
 - Chromium：誤答後のフラグ不変、残り1問の再出題、誤答→正解の2履歴と再読込時の重複防止、全問正解後のリセット、再開・やり直し・バックアップを確認。knowledge/game/progress check成功。
-- CI WebKit・公開配信の確認結果は完了後に記載。
+- CI WebKitの全8検証工程、build/deploy成功。公開版 `6b72f7730b7edfd6f3b9ab99a6a5e283fe82ffa9` / [Actions 37877210145](https://github.com/hiroshimu0113-web/SAA/actions/runs/37877210145)。
+- CIの実配信検証でHTTP 200・公開成果物とのSHA256一致を確認。[公開ゲーム](https://hiroshimu0113-web.github.io/SAA/tower/fan.html)へ反映済み。GitHub mainへ同期済み。本人のiPhone実機確認は未実施。
 
 教材本文・問題数・正答・分類台帳の変更なし。
