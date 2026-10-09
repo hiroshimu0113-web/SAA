@@ -1,0 +1,4634 @@
+{
+  "schema": 1,
+  "status": "draft",
+  "scope": "公開教材termsとgame-supplement.termsを全件カード候補として棚卸し。現在実装された通常30種に限定しない。",
+  "rules": [
+    "6キャラ各3ビルド。所属は重複可。",
+    "共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。",
+    "HPを0にしてタスク完了。追加勝利パラメータは採用しない。",
+    "分類はカード効果・排出率・最終プールの実装ではない。",
+    "未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。"
+  ],
+  "builds": [
+    {
+      "id": "multi-az",
+      "characterId": "guardian",
+      "characterName": "守護者",
+      "name": "分散要塞",
+      "gameplay": "分散した戦力を残して攻撃を継続する。残存容量とデータ到達性が必要。",
+      "cards": [
+        {
+          "candidateId": "candidate-az",
+          "termId": "az",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-availability",
+          "termId": "availability",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-remaining-capacity",
+          "termId": "remaining-capacity",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-alb",
+          "termId": "alb",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-health-check",
+          "termId": "health-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-subnet",
+          "termId": "subnet",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ec2",
+          "termId": "ec2",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-auto-scaling",
+          "termId": "auto-scaling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-placement-group",
+          "termId": "placement-group",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-nlb",
+          "termId": "nlb",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-route53",
+          "termId": "route53",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-efs",
+          "termId": "efs",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "rds-ha",
+      "characterId": "guardian",
+      "characterName": "守護者",
+      "name": "継承",
+      "gameplay": "主力停止後に待機系へ交代する。単一スタンバイは平時の読取り攻撃に使わない。",
+      "cards": [
+        {
+          "candidateId": "candidate-rds-multi-az",
+          "termId": "rds-multi-az",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-rds-standby",
+          "termId": "rds-standby",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-rds",
+          "termId": "rds",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-health-check",
+          "termId": "health-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-availability",
+          "termId": "availability",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-rds-proxy",
+          "termId": "rds-proxy",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-aurora-replica",
+          "termId": "aurora-replica",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "isolation",
+      "characterId": "guardian",
+      "characterName": "守護者",
+      "name": "隔離",
+      "gameplay": "妨害の波及を抑える。配置・流量制御・失敗隔離は別の仕組みであり万能な遮断ではない。",
+      "cards": [
+        {
+          "candidateId": "candidate-placement-group",
+          "termId": "placement-group",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-subnet",
+          "termId": "subnet",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-throttling",
+          "termId": "throttling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dlq",
+          "termId": "dlq",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-health-check",
+          "termId": "health-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-organizations",
+          "termId": "organizations",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-scp",
+          "termId": "scp",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-alb",
+          "termId": "alb",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "autoscaling",
+      "characterId": "tuner",
+      "characterName": "調律師",
+      "name": "増援",
+      "gameplay": "負荷に応じ戦力を追加する。起動待ちと下流の容量が弱点。",
+      "cards": [
+        {
+          "candidateId": "candidate-auto-scaling",
+          "termId": "auto-scaling",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-target-tracking",
+          "termId": "target-tracking",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-scheduled-scaling",
+          "termId": "scheduled-scaling",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-scaling",
+          "termId": "scaling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ec2",
+          "termId": "ec2",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cloudwatch",
+          "termId": "cloudwatch",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-health-check",
+          "termId": "health-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-queue-scaling",
+          "termId": "queue-scaling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-warm-pool",
+          "termId": "warm-pool",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ecs",
+          "termId": "ecs",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-eks",
+          "termId": "eks",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-nlb",
+          "termId": "nlb",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-alb",
+          "termId": "alb",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-capacity-reservation",
+          "termId": "capacity-reservation",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "serverless",
+      "characterId": "tuner",
+      "characterName": "調律師",
+      "name": "即応",
+      "gameplay": "必要時に処理を起動する。同時実行上限や接続先の限界を消せない。",
+      "cards": [
+        {
+          "candidateId": "candidate-lambda",
+          "termId": "lambda",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-fargate",
+          "termId": "fargate",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-lambda-concurrency",
+          "termId": "lambda-concurrency",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-api-gateway",
+          "termId": "api-gateway",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-eventbridge",
+          "termId": "eventbridge",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dynamodb-on-demand",
+          "termId": "dynamodb-on-demand",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-sqs",
+          "termId": "sqs",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-sns",
+          "termId": "sns",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-step-functions",
+          "termId": "step-functions",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-rds-proxy",
+          "termId": "rds-proxy",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ecs",
+          "termId": "ecs",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-task-role",
+          "termId": "task-role",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "rightsizing",
+      "characterId": "tuner",
+      "characterName": "調律師",
+      "name": "精鋭",
+      "gameplay": "能力と維持費を調整する。契約割引は性能強化や容量確保とは別。",
+      "cards": [
+        {
+          "candidateId": "candidate-instance-family",
+          "termId": "instance-family",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-cost-optimization",
+          "termId": "cost-optimization",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-performance",
+          "termId": "performance",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-storage-performance",
+          "termId": "storage-performance",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-gp3",
+          "termId": "gp3",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-provisioned-iops",
+          "termId": "provisioned-iops",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-database-selection",
+          "termId": "database-selection",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-database-cost",
+          "termId": "database-cost",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-network-cost",
+          "termId": "network-cost",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-storage-cost",
+          "termId": "storage-cost",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cost-explorer",
+          "termId": "cost-explorer",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-budgets",
+          "termId": "budgets",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cur",
+          "termId": "cur",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cost-allocation",
+          "termId": "cost-allocation",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ec2-stop",
+          "termId": "ec2-stop",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-savings-plans",
+          "termId": "savings-plans",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-reserved-instances",
+          "termId": "reserved-instances",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-intelligent-tiering",
+          "termId": "intelligent-tiering",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-rcu",
+          "termId": "rcu",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-wcu",
+          "termId": "wcu",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ec2-hibernation",
+          "termId": "ec2-hibernation",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-instance-store",
+          "termId": "instance-store",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "cdn",
+      "characterId": "accelerator",
+      "characterName": "加速者",
+      "name": "配信",
+      "gameplay": "繰り返し配信を効率化する。Global Acceleratorは経路改善でありキャッシュではない。",
+      "cards": [
+        {
+          "candidateId": "candidate-cloudfront",
+          "termId": "cloudfront",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-s3",
+          "termId": "s3",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cache-key",
+          "termId": "cache-key",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dns-ttl",
+          "termId": "dns-ttl",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-cloudfront-oac",
+          "termId": "cloudfront-oac",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-signed-url",
+          "termId": "signed-url",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-route53",
+          "termId": "route53",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-tls",
+          "termId": "tls",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-waf",
+          "termId": "waf",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-shield",
+          "termId": "shield",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-transfer-acceleration",
+          "termId": "transfer-acceleration",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-global-accelerator",
+          "termId": "global-accelerator",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "cache",
+      "characterId": "accelerator",
+      "characterName": "加速者",
+      "name": "記憶",
+      "gameplay": "同じ要求の結果を再利用する。TTLだけで最新性は保証できず、DynamoDB TTLはキャッシュ失効と別。",
+      "cards": [
+        {
+          "candidateId": "candidate-cache",
+          "termId": "cache",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-dax",
+          "termId": "dax",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-cache-key",
+          "termId": "cache-key",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dns-ttl",
+          "termId": "dns-ttl",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-consistency",
+          "termId": "consistency",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-s3-consistency",
+          "termId": "s3-consistency",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dynamodb",
+          "termId": "dynamodb",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-dynamodb-ttl",
+          "termId": "dynamodb-ttl",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-performance",
+          "termId": "performance",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "read-replica",
+      "characterId": "accelerator",
+      "characterName": "加速者",
+      "name": "読取分散",
+      "gameplay": "参照処理を分担する。GSIは別キー索引の代替案で、RDSのレプリカではない。",
+      "cards": [
+        {
+          "candidateId": "candidate-read-replica",
+          "termId": "read-replica",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-aurora-replica",
+          "termId": "aurora-replica",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-rds",
+          "termId": "rds",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-replication",
+          "termId": "replication",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-consistency",
+          "termId": "consistency",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-performance",
+          "termId": "performance",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-gsi",
+          "termId": "gsi",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-partition-key",
+          "termId": "partition-key",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-rcu",
+          "termId": "rcu",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-database-cost",
+          "termId": "database-cost",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "queue",
+      "characterId": "commander",
+      "characterName": "指揮者",
+      "name": "蓄積",
+      "gameplay": "仕事を蓄えて順次処理する。受理と完了を区別し、期限と滞留に注意。",
+      "cards": [
+        {
+          "candidateId": "candidate-sqs",
+          "termId": "sqs",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-visibility-timeout",
+          "termId": "visibility-timeout",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-fifo",
+          "termId": "fifo",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-queue-scaling",
+          "termId": "queue-scaling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dlq",
+          "termId": "dlq",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-claim-check",
+          "termId": "claim-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-sns",
+          "termId": "sns",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-fanout",
+          "termId": "fanout",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-eventbridge",
+          "termId": "eventbridge",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-s3",
+          "termId": "s3",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ec2",
+          "termId": "ec2",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-lambda",
+          "termId": "lambda",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ecs",
+          "termId": "ecs",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-kinesis",
+          "termId": "kinesis",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-firehose",
+          "termId": "firehose",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "safe-retry",
+      "characterId": "commander",
+      "characterName": "指揮者",
+      "name": "再挑戦",
+      "gameplay": "失敗した作業を制限付きで再試行する。トランザクションやFIFOだけで業務全体の冪等性は保証しない。",
+      "cards": [
+        {
+          "candidateId": "candidate-idempotency",
+          "termId": "idempotency",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-step-functions",
+          "termId": "step-functions",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-visibility-timeout",
+          "termId": "visibility-timeout",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dlq",
+          "termId": "dlq",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-throttling",
+          "termId": "throttling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-dynamodb-transactions",
+          "termId": "dynamodb-transactions",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-multipart-upload",
+          "termId": "multipart-upload",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-fifo",
+          "termId": "fifo",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "spot",
+      "characterId": "commander",
+      "characterName": "指揮者",
+      "name": "機会活用",
+      "gameplay": "安い臨時戦力を使い、中断後は保存済みの進捗から再開する。スナップショットだけでアプリの進捗保存は完成しない。",
+      "cards": [
+        {
+          "candidateId": "candidate-spot",
+          "termId": "spot",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-ec2",
+          "termId": "ec2",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ebs",
+          "termId": "ebs",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-s3",
+          "termId": "s3",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-auto-scaling",
+          "termId": "auto-scaling",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ami",
+          "termId": "ami",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ebs-snapshot",
+          "termId": "ebs-snapshot",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-instance-store",
+          "termId": "instance-store",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-capacity-reservation",
+          "termId": "capacity-reservation",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "least-privilege",
+      "characterId": "builder",
+      "characterName": "構築士",
+      "name": "権限設計",
+      "gameplay": "必要な行動を許可し、不要な操作を防ぐ。上限やDenyは操作権限を付与しない。",
+      "cards": [
+        {
+          "candidateId": "candidate-least-privilege",
+          "termId": "least-privilege",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-iam-role",
+          "termId": "iam-role",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-temporary-credentials",
+          "termId": "temporary-credentials",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-resource-policy",
+          "termId": "resource-policy",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-explicit-deny",
+          "termId": "explicit-deny",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-implicit-deny",
+          "termId": "implicit-deny",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-permissions-boundary",
+          "termId": "permissions-boundary",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-abac",
+          "termId": "abac",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-task-role",
+          "termId": "task-role",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-scp",
+          "termId": "scp",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-cross-account",
+          "termId": "cross-account",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-external-id",
+          "termId": "external-id",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-kms",
+          "termId": "kms",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-secrets-manager",
+          "termId": "secrets-manager",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-block-public-access",
+          "termId": "block-public-access",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-access-analyzer",
+          "termId": "access-analyzer",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-lake-formation",
+          "termId": "lake-formation",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "private-access",
+      "characterId": "builder",
+      "characterName": "構築士",
+      "name": "閉域接続",
+      "gameplay": "経路と通信許可を整える。接続方式ごとの範囲を区別し、IAM認可も必要。",
+      "cards": [
+        {
+          "candidateId": "candidate-vpc-endpoint",
+          "termId": "vpc-endpoint",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-private-link",
+          "termId": "private-link",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-vpc",
+          "termId": "vpc",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-subnet",
+          "termId": "subnet",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-route",
+          "termId": "route",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-security-group",
+          "termId": "security-group",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-network-acl",
+          "termId": "network-acl",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-session-manager",
+          "termId": "session-manager",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-peering",
+          "termId": "peering",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-transit-gateway",
+          "termId": "transit-gateway",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-site-to-site-vpn",
+          "termId": "site-to-site-vpn",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-direct-connect",
+          "termId": "direct-connect",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-nat-gateway",
+          "termId": "nat-gateway",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ipv6-egress",
+          "termId": "ipv6-egress",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-longest-prefix",
+          "termId": "longest-prefix",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-tls",
+          "termId": "tls",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-vpc-flow-logs",
+          "termId": "vpc-flow-logs",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "iac",
+      "characterId": "builder",
+      "characterName": "構築士",
+      "name": "再現構築",
+      "gameplay": "設計図で再構築する方向。AMIはマシンイメージ、ECRは保管、Configは設定評価でありIaCの代用品ではない。",
+      "cards": [
+        {
+          "candidateId": "candidate-ami",
+          "termId": "ami",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-ecr",
+          "termId": "ecr",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-aws-config",
+          "termId": "aws-config",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-control-tower",
+          "termId": "control-tower",
+          "role": "条件付き"
+        }
+      ],
+      "gap": "IaCの中核となる教材候補名がない。候補追加またはビルド再検討が必要。"
+    },
+    {
+      "id": "backup",
+      "characterId": "restorer",
+      "characterName": "復旧者",
+      "name": "保存",
+      "gameplay": "保存した正常状態から復旧する。保存以降の進捗損失と復元待ち時間がある。",
+      "cards": [
+        {
+          "candidateId": "candidate-backup",
+          "termId": "backup",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-ebs-snapshot",
+          "termId": "ebs-snapshot",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-point-in-time-recovery",
+          "termId": "point-in-time-recovery",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-versioning",
+          "termId": "versioning",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-noncurrent-version",
+          "termId": "noncurrent-version",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-object-lock",
+          "termId": "object-lock",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-restore-test",
+          "termId": "restore-test",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-rpo",
+          "termId": "rpo",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-s3",
+          "termId": "s3",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-durability",
+          "termId": "durability",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-archive",
+          "termId": "archive",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-standard-ia",
+          "termId": "standard-ia",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-kms",
+          "termId": "kms",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-s3-encryption",
+          "termId": "s3-encryption",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "disaster-recovery",
+      "characterId": "restorer",
+      "characterName": "復旧者",
+      "name": "待機",
+      "gameplay": "別拠点の準備量で復旧時間と維持費を調整する。複製は誤更新へのバックアップとは別。",
+      "cards": [
+        {
+          "candidateId": "candidate-pilot-light",
+          "termId": "pilot-light",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-warm-standby",
+          "termId": "warm-standby",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-rto",
+          "termId": "rto",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-rpo",
+          "termId": "rpo",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-replication",
+          "termId": "replication",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-s3-replication",
+          "termId": "s3-replication",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-region",
+          "termId": "region",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-route53",
+          "termId": "route53",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-restore-test",
+          "termId": "restore-test",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-global-tables",
+          "termId": "global-tables",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-ami",
+          "termId": "ami",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-availability",
+          "termId": "availability",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-capacity-reservation",
+          "termId": "capacity-reservation",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    },
+    {
+      "id": "observability",
+      "characterId": "restorer",
+      "characterName": "復旧者",
+      "name": "観測",
+      "gameplay": "異常を発見して対処を選ぶ。監視・監査・脅威検出は対象が異なり、発見だけでは回復しない。",
+      "cards": [
+        {
+          "candidateId": "candidate-cloudwatch",
+          "termId": "cloudwatch",
+          "role": "中核"
+        },
+        {
+          "candidateId": "candidate-cloudtrail",
+          "termId": "cloudtrail",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-aws-config",
+          "termId": "aws-config",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-vpc-flow-logs",
+          "termId": "vpc-flow-logs",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-health-check",
+          "termId": "health-check",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-performance",
+          "termId": "performance",
+          "role": "補助"
+        },
+        {
+          "candidateId": "candidate-guardduty",
+          "termId": "guardduty",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-inspector",
+          "termId": "inspector",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-macie",
+          "termId": "macie",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-access-analyzer",
+          "termId": "access-analyzer",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-cost-explorer",
+          "termId": "cost-explorer",
+          "role": "条件付き"
+        },
+        {
+          "candidateId": "candidate-opensearch",
+          "termId": "opensearch",
+          "role": "条件付き"
+        }
+      ],
+      "gap": null
+    }
+  ],
+  "candidates": [
+    {
+      "id": "candidate-region",
+      "termId": "region",
+      "name": "リージョン",
+      "meaning": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "region"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-az",
+      "termId": "az",
+      "name": "アベイラビリティーゾーン（AZ）",
+      "meaning": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "az"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-shared-responsibility",
+      "termId": "shared-responsibility",
+      "name": "責任共有モデル",
+      "meaning": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "shared-responsibility"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-shared-responsibility",
+      "remainderReason": "全キャラ共通の責任分担を扱う候補。戦闘効果と初期レリックとの役割分担を未決定。"
+    },
+    {
+      "id": "candidate-availability",
+      "termId": "availability",
+      "name": "可用性",
+      "meaning": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "availability"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "中核"
+        },
+        {
+          "buildId": "rds-ha",
+          "role": "補助"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-durability",
+      "termId": "durability",
+      "name": "耐久性",
+      "meaning": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "durability"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-scaling",
+      "termId": "scaling",
+      "name": "スケーリング",
+      "meaning": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "scaling"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-spot",
+      "termId": "spot",
+      "name": "Spotインスタンス",
+      "meaning": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "spot"
+      },
+      "memberships": [
+        {
+          "buildId": "spot",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-instance-store",
+      "termId": "instance-store",
+      "name": "インスタンスストア",
+      "meaning": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "instance-store"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "spot",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-s3",
+      "termId": "s3",
+      "name": "Amazon S3",
+      "meaning": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "s3"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "補助"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "spot",
+          "role": "補助"
+        },
+        {
+          "buildId": "backup",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rds",
+      "termId": "rds",
+      "name": "Amazon RDS",
+      "meaning": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rds"
+      },
+      "memberships": [
+        {
+          "buildId": "rds-ha",
+          "role": "補助"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-iam-role",
+      "termId": "iam-role",
+      "name": "IAMロール",
+      "meaning": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "iam-role"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-temporary-credentials",
+      "termId": "temporary-credentials",
+      "name": "一時認証情報",
+      "meaning": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "temporary-credentials"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-least-privilege",
+      "termId": "least-privilege",
+      "name": "最小権限",
+      "meaning": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "least-privilege"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-explicit-deny",
+      "termId": "explicit-deny",
+      "name": "明示的Deny",
+      "meaning": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "explicit-deny"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-scp",
+      "termId": "scp",
+      "name": "サービスコントロールポリシー（SCP）",
+      "meaning": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "scp"
+      },
+      "memberships": [
+        {
+          "buildId": "isolation",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cross-account",
+      "termId": "cross-account",
+      "name": "クロスアカウントアクセス",
+      "meaning": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cross-account"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-external-id",
+      "termId": "external-id",
+      "name": "External ID",
+      "meaning": "外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "external-id"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-identity-center",
+      "termId": "identity-center",
+      "name": "IAM Identity Center",
+      "meaning": "従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "identity-center"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-identity-center",
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+    },
+    {
+      "id": "candidate-cognito",
+      "termId": "cognito",
+      "name": "Amazon Cognito",
+      "meaning": "一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cognito"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-cognito",
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+    },
+    {
+      "id": "candidate-root",
+      "termId": "root",
+      "name": "ルートユーザー",
+      "meaning": "AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "root"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-root",
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+    },
+    {
+      "id": "candidate-mfa",
+      "termId": "mfa",
+      "name": "多要素認証（MFA）",
+      "meaning": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "mfa"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-mfa",
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+    },
+    {
+      "id": "candidate-organizations",
+      "termId": "organizations",
+      "name": "AWS Organizations",
+      "meaning": "AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "organizations"
+      },
+      "memberships": [
+        {
+          "buildId": "isolation",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-control-tower",
+      "termId": "control-tower",
+      "name": "AWS Control Tower",
+      "meaning": "ランディングゾーンと複数アカウントの統制・払い出しを支援する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "control-tower"
+      },
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-permissions-boundary",
+      "termId": "permissions-boundary",
+      "name": "アクセス許可の境界",
+      "meaning": "IAM主体へ付与できる権限の上限。単独で権限を付与しない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "permissions-boundary"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-abac",
+      "termId": "abac",
+      "name": "ABAC",
+      "meaning": "タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "abac"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-resource-policy",
+      "termId": "resource-policy",
+      "name": "リソースベースポリシー",
+      "meaning": "S3バケット等のリソース側でPrincipalと許可・拒否を定める。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "resource-policy"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-implicit-deny",
+      "termId": "implicit-deny",
+      "name": "暗黙的Deny",
+      "meaning": "適用される許可がない要求を既定で拒否すること。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "implicit-deny"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-access-analyzer",
+      "termId": "access-analyzer",
+      "name": "IAM Access Analyzer",
+      "meaning": "外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "access-analyzer"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cognito-identity",
+      "termId": "cognito-identity",
+      "name": "Cognito IDプール",
+      "meaning": "認証済みID等に応じた限定的なAWS一時認証情報を提供する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cognito-identity"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-cognito-identity",
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+    },
+    {
+      "id": "candidate-block-public-access",
+      "termId": "block-public-access",
+      "name": "S3 Block Public Access",
+      "meaning": "S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "block-public-access"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-vpc",
+      "termId": "vpc",
+      "name": "Amazon VPC",
+      "meaning": "リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "vpc"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-subnet",
+      "termId": "subnet",
+      "name": "サブネット",
+      "meaning": "1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "subnet"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "isolation",
+          "role": "補助"
+        },
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-route",
+      "termId": "route",
+      "name": "ルートテーブル",
+      "meaning": "宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "route"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-public-subnet",
+      "termId": "public-subnet",
+      "name": "パブリックサブネット",
+      "meaning": "IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "public-subnet"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-public-subnet",
+      "remainderReason": "公開経路の候補。閉域接続とは用途が異なり、公開入口の共通枠を検討。"
+    },
+    {
+      "id": "candidate-longest-prefix",
+      "termId": "longest-prefix",
+      "name": "最長プレフィックス一致",
+      "meaning": "宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "longest-prefix"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-security-group",
+      "termId": "security-group",
+      "name": "セキュリティグループ",
+      "meaning": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "security-group"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": true,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-network-acl",
+      "termId": "network-acl",
+      "name": "ネットワークACL",
+      "meaning": "サブネット境界で許可・拒否を設定するステートレスな通信制御。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "network-acl"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-nat-gateway",
+      "termId": "nat-gateway",
+      "name": "NAT Gateway",
+      "meaning": "外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "nat-gateway"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-vpc-endpoint",
+      "termId": "vpc-endpoint",
+      "name": "VPCエンドポイント",
+      "meaning": "対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "vpc-endpoint"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-private-link",
+      "termId": "private-link",
+      "name": "AWS PrivateLink",
+      "meaning": "対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "private-link"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-peering",
+      "termId": "peering",
+      "name": "VPCピアリング",
+      "meaning": "2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "peering"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-transit-gateway",
+      "termId": "transit-gateway",
+      "name": "AWS Transit Gateway",
+      "meaning": "複数VPCや拠点接続を集約するネットワークハブ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "transit-gateway"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-site-to-site-vpn",
+      "termId": "site-to-site-vpn",
+      "name": "Site-to-Site VPN",
+      "meaning": "拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "site-to-site-vpn"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-direct-connect",
+      "termId": "direct-connect",
+      "name": "AWS Direct Connect",
+      "meaning": "AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "direct-connect"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ipv6-egress",
+      "termId": "ipv6-egress",
+      "name": "Egress-only Internet Gateway",
+      "meaning": "IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ipv6-egress"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-vpc-flow-logs",
+      "termId": "vpc-flow-logs",
+      "name": "VPC Flow Logs",
+      "meaning": "IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "vpc-flow-logs"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "observability",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-session-manager",
+      "termId": "session-manager",
+      "name": "Session Manager",
+      "meaning": "Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "session-manager"
+      },
+      "memberships": [
+        {
+          "buildId": "private-access",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ec2",
+      "termId": "ec2",
+      "name": "Amazon EC2",
+      "meaning": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ec2"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "spot",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": true,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-nlb",
+      "termId": "nlb",
+      "name": "Network Load Balancer",
+      "meaning": "TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "nlb"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-auto-scaling",
+      "termId": "auto-scaling",
+      "name": "EC2 Auto Scaling",
+      "meaning": "需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "auto-scaling"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "中核"
+        },
+        {
+          "buildId": "spot",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-target-tracking",
+      "termId": "target-tracking",
+      "name": "ターゲット追跡スケーリング",
+      "meaning": "1台当たりの負荷等が目標に近づくよう容量を調整する方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "target-tracking"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-scheduled-scaling",
+      "termId": "scheduled-scaling",
+      "name": "予定スケーリング",
+      "meaning": "既知の時刻の需要に合わせて事前に容量を変更する方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "scheduled-scaling"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-warm-pool",
+      "termId": "warm-pool",
+      "name": "Warm Pool",
+      "meaning": "初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "warm-pool"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ami",
+      "termId": "ami",
+      "name": "AMI",
+      "meaning": "EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ami"
+      },
+      "memberships": [
+        {
+          "buildId": "spot",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "iac",
+          "role": "補助"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-capacity-reservation",
+      "termId": "capacity-reservation",
+      "name": "Capacity Reservation",
+      "meaning": "指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "capacity-reservation"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "spot",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-placement-group",
+      "termId": "placement-group",
+      "name": "プレイスメントグループ",
+      "meaning": "低遅延や障害分離等の要件に合わせEC2の配置を制御する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "placement-group"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "isolation",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-instance-family",
+      "termId": "instance-family",
+      "name": "インスタンスファミリー",
+      "meaning": "CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "instance-family"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ebs",
+      "termId": "ebs",
+      "name": "Amazon EBS",
+      "meaning": "EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ebs"
+      },
+      "memberships": [
+        {
+          "buildId": "spot",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-efs",
+      "termId": "efs",
+      "name": "Amazon EFS",
+      "meaning": "Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "efs"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-gp3",
+      "termId": "gp3",
+      "name": "gp3",
+      "meaning": "容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "gp3"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-provisioned-iops",
+      "termId": "provisioned-iops",
+      "name": "Provisioned IOPS SSD",
+      "meaning": "厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "provisioned-iops"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-storage-performance",
+      "termId": "storage-performance",
+      "name": "IOPSとスループット",
+      "meaning": "秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "storage-performance"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-standard-ia",
+      "termId": "standard-ia",
+      "name": "S3 Standard-IA",
+      "meaning": "低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "standard-ia"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-intelligent-tiering",
+      "termId": "intelligent-tiering",
+      "name": "S3 Intelligent-Tiering",
+      "meaning": "アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "intelligent-tiering"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-archive",
+      "termId": "archive",
+      "name": "アーカイブ保存",
+      "meaning": "長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "archive"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-versioning",
+      "termId": "versioning",
+      "name": "S3バージョニング",
+      "meaning": "オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "versioning"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-noncurrent-version",
+      "termId": "noncurrent-version",
+      "name": "S3旧バージョン",
+      "meaning": "現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "noncurrent-version"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-object-lock",
+      "termId": "object-lock",
+      "name": "S3 Object Lock",
+      "meaning": "一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "object-lock"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-fsx-windows",
+      "termId": "fsx-windows",
+      "name": "FSx for Windows File Server",
+      "meaning": "SMB共有やActive Directory連携を要件とするWindowsファイルサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "fsx-windows"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-fsx-windows",
+      "remainderReason": "共有ファイルの要件を扱う候補。共通ストレージ枠または新しい構築ルートを検討。"
+    },
+    {
+      "id": "candidate-ebs-snapshot",
+      "termId": "ebs-snapshot",
+      "name": "EBSスナップショット",
+      "meaning": "EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ebs-snapshot"
+      },
+      "memberships": [
+        {
+          "buildId": "spot",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "backup",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-multipart-upload",
+      "termId": "multipart-upload",
+      "name": "マルチパートアップロード",
+      "meaning": "大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "multipart-upload"
+      },
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-transfer-acceleration",
+      "termId": "transfer-acceleration",
+      "name": "S3 Transfer Acceleration",
+      "meaning": "遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "transfer-acceleration"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-s3-consistency",
+      "termId": "s3-consistency",
+      "name": "S3の強い整合性",
+      "meaning": "成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "s3-consistency"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-s3-encryption",
+      "termId": "s3-encryption",
+      "name": "S3の保存時暗号化",
+      "meaning": "SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "s3-encryption"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-s3-replication",
+      "termId": "s3-replication",
+      "name": "S3レプリケーション",
+      "meaning": "ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "s3-replication"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rds-multi-az",
+      "termId": "rds-multi-az",
+      "name": "RDS Multi-AZ",
+      "meaning": "複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rds-multi-az"
+      },
+      "memberships": [
+        {
+          "buildId": "rds-ha",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-read-replica",
+      "termId": "read-replica",
+      "name": "リードレプリカ",
+      "meaning": "読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "read-replica"
+      },
+      "memberships": [
+        {
+          "buildId": "read-replica",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rds-standby",
+      "termId": "rds-standby",
+      "name": "RDSの単一スタンバイ",
+      "meaning": "Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rds-standby"
+      },
+      "memberships": [
+        {
+          "buildId": "rds-ha",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dynamodb",
+      "termId": "dynamodb",
+      "name": "Amazon DynamoDB",
+      "meaning": "キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dynamodb"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-partition-key",
+      "termId": "partition-key",
+      "name": "パーティションキー",
+      "meaning": "DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "partition-key"
+      },
+      "memberships": [
+        {
+          "buildId": "read-replica",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-gsi",
+      "termId": "gsi",
+      "name": "グローバルセカンダリインデックス（GSI）",
+      "meaning": "別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "gsi"
+      },
+      "memberships": [
+        {
+          "buildId": "read-replica",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-consistency",
+      "termId": "consistency",
+      "name": "読取り整合性",
+      "meaning": "更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "consistency"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "補助"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dynamodb-on-demand",
+      "termId": "dynamodb-on-demand",
+      "name": "DynamoDBオンデマンド容量",
+      "meaning": "読書き要求ベースの容量課金。事前の固定容量計画を減らす。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dynamodb-on-demand"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dynamodb-ttl",
+      "termId": "dynamodb-ttl",
+      "name": "DynamoDB TTL",
+      "meaning": "項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dynamodb-ttl"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dynamodb-transactions",
+      "termId": "dynamodb-transactions",
+      "name": "DynamoDBトランザクション",
+      "meaning": "複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dynamodb-transactions"
+      },
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dax",
+      "termId": "dax",
+      "name": "DAX",
+      "meaning": "DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dax"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rds-proxy",
+      "termId": "rds-proxy",
+      "name": "RDS Proxy",
+      "meaning": "DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rds-proxy"
+      },
+      "memberships": [
+        {
+          "buildId": "rds-ha",
+          "role": "補助"
+        },
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-point-in-time-recovery",
+      "termId": "point-in-time-recovery",
+      "name": "ポイントインタイムリカバリ（PITR）",
+      "meaning": "保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "point-in-time-recovery"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-aurora-replica",
+      "termId": "aurora-replica",
+      "name": "Aurora Replica",
+      "meaning": "Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "aurora-replica"
+      },
+      "memberships": [
+        {
+          "buildId": "rds-ha",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-global-tables",
+      "termId": "global-tables",
+      "name": "DynamoDBグローバルテーブル",
+      "meaning": "複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "global-tables"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-database-selection",
+      "termId": "database-selection",
+      "name": "データモデルによるDB選定",
+      "meaning": "SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "database-selection"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-database-cost",
+      "termId": "database-cost",
+      "name": "DBの総費用",
+      "meaning": "実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "database-cost"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-network-cost",
+      "termId": "network-cost",
+      "name": "ネットワークの総費用",
+      "meaning": "出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "network-cost"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-storage-cost",
+      "termId": "storage-cost",
+      "name": "ストレージの総費用",
+      "meaning": "保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "storage-cost"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-route53",
+      "termId": "route53",
+      "name": "Route 53",
+      "meaning": "名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "route53"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dns-ttl",
+      "termId": "dns-ttl",
+      "name": "TTL",
+      "meaning": "DNS やキャッシュの情報を再利用する有効期間。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dns-ttl"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "補助"
+        },
+        {
+          "buildId": "cache",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cloudfront",
+      "termId": "cloudfront",
+      "name": "CloudFront",
+      "meaning": "エッジで HTTP/HTTPS コンテンツを配信する CDN。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cloudfront"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cache-key",
+      "termId": "cache-key",
+      "name": "キャッシュキー",
+      "meaning": "どの要求で同じキャッシュを共有するかを決める識別情報。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cache-key"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "補助"
+        },
+        {
+          "buildId": "cache",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-global-accelerator",
+      "termId": "global-accelerator",
+      "name": "Global Accelerator",
+      "meaning": "静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "global-accelerator"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cloudfront-oac",
+      "termId": "cloudfront-oac",
+      "name": "OAC",
+      "meaning": "CloudFront からオリジンへのアクセスを制限する仕組み。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cloudfront-oac"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-signed-url",
+      "termId": "signed-url",
+      "name": "署名付き URL",
+      "meaning": "有効期限等を含む署名で視聴者のアクセスを制限する URL。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "signed-url"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-lambda",
+      "termId": "lambda",
+      "name": "Lambda",
+      "meaning": "イベントに応じてコードを動かすサーバーレスサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "lambda"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "中核"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-lambda-concurrency",
+      "termId": "lambda-concurrency",
+      "name": "同時実行",
+      "meaning": "同じ時点で処理されている関数呼出し数。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "lambda-concurrency"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ecs",
+      "termId": "ecs",
+      "name": "ECS",
+      "meaning": "コンテナタスクの実行・配置・維持を管理するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ecs"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-fargate",
+      "termId": "fargate",
+      "name": "Fargate",
+      "meaning": "ホストを直接管理せずコンテナを動かす計算基盤。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "fargate"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-eks",
+      "termId": "eks",
+      "name": "EKS",
+      "meaning": "Kubernetes のマネージドサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "eks"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ecr",
+      "termId": "ecr",
+      "name": "ECR",
+      "meaning": "コンテナイメージを保管するレジストリ。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ecr"
+      },
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-task-role",
+      "termId": "task-role",
+      "name": "タスクロール",
+      "meaning": "ECS タスク内のアプリが AWS API を使うための IAM ロール。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "task-role"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "least-privilege",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-api-gateway",
+      "termId": "api-gateway",
+      "name": "API Gateway",
+      "meaning": "API の公開・認証連携・流量管理を担う入口。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "api-gateway"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-step-functions",
+      "termId": "step-functions",
+      "name": "Step Functions",
+      "meaning": "複数ステップの順序や再試行を状態機械で管理するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "step-functions"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-sqs",
+      "termId": "sqs",
+      "name": "SQS",
+      "meaning": "非同期処理の作業待ちメッセージを保持するキュー。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "sqs"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "queue",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-visibility-timeout",
+      "termId": "visibility-timeout",
+      "name": "可視性タイムアウト",
+      "meaning": "受信済みメッセージをほかの受信者から一時的に隠す期間。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "visibility-timeout"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "補助"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-fifo",
+      "termId": "fifo",
+      "name": "FIFO",
+      "meaning": "先入れ先出し。SQS ではメッセージグループ内の順序を維持する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "fifo"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "補助"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-idempotency",
+      "termId": "idempotency",
+      "name": "冪等性",
+      "meaning": "同じ要求を繰り返しても業務上の結果が重複しない性質。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "idempotency"
+      },
+      "memberships": [
+        {
+          "buildId": "safe-retry",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-sns",
+      "termId": "sns",
+      "name": "SNS",
+      "meaning": "トピックの購読者へメッセージを配信するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "sns"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-fanout",
+      "termId": "fanout",
+      "name": "ファンアウト",
+      "meaning": "一つのメッセージを複数の独立した受信先へ配る構成。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "fanout"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-eventbridge",
+      "termId": "eventbridge",
+      "name": "EventBridge",
+      "meaning": "イベントをパターンに応じて対象へ振り分けるサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "eventbridge"
+      },
+      "memberships": [
+        {
+          "buildId": "serverless",
+          "role": "補助"
+        },
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dlq",
+      "termId": "dlq",
+      "name": "デッドレターキュー",
+      "meaning": "処理に繰り返し失敗したメッセージの隔離先。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dlq"
+      },
+      "memberships": [
+        {
+          "buildId": "isolation",
+          "role": "補助"
+        },
+        {
+          "buildId": "queue",
+          "role": "補助"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-queue-scaling",
+      "termId": "queue-scaling",
+      "name": "キューに基づくスケーリング",
+      "meaning": "滞留件数や待ち時間に応じて処理能力を調整すること。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "queue-scaling"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        },
+        {
+          "buildId": "queue",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-claim-check",
+      "termId": "claim-check",
+      "name": "Claim Check",
+      "meaning": "大きなデータを外部保存し、メッセージには参照を渡す方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "claim-check"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-kms",
+      "termId": "kms",
+      "name": "KMS",
+      "meaning": "暗号鍵と暗号操作の権限を管理するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "kms"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "backup",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-secrets-manager",
+      "termId": "secrets-manager",
+      "name": "Secrets Manager",
+      "meaning": "認証情報等を保管し、更新を管理するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "secrets-manager"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-tls",
+      "termId": "tls",
+      "name": "TLS",
+      "meaning": "通信経路の暗号化と相手認証のプロトコル。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "tls"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "private-access",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-waf",
+      "termId": "waf",
+      "name": "WAF",
+      "meaning": "HTTP リクエストを条件に基づいて検査・制御する仕組み。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "waf"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-guardduty",
+      "termId": "guardduty",
+      "name": "GuardDuty",
+      "meaning": "不審な活動や脅威の兆候を検出するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "guardduty"
+      },
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-inspector",
+      "termId": "inspector",
+      "name": "Inspector",
+      "meaning": "対応ワークロードのソフトウェア脆弱性等を調べるサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "inspector"
+      },
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-macie",
+      "termId": "macie",
+      "name": "Macie",
+      "meaning": "S3 データの機密情報を検出するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "macie"
+      },
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-shield",
+      "termId": "shield",
+      "name": "Shield",
+      "meaning": "DDoS 攻撃からの保護を提供するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "shield"
+      },
+      "memberships": [
+        {
+          "buildId": "cdn",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cloudwatch",
+      "termId": "cloudwatch",
+      "name": "CloudWatch",
+      "meaning": "メトリクス、ログ、アラーム等の可観測性サービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cloudwatch"
+      },
+      "memberships": [
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        },
+        {
+          "buildId": "observability",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": true,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cloudtrail",
+      "termId": "cloudtrail",
+      "name": "CloudTrail",
+      "meaning": "AWS API 操作の履歴を追跡する監査サービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cloudtrail"
+      },
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-aws-config",
+      "termId": "aws-config",
+      "name": "AWS Config",
+      "meaning": "リソース設定の履歴とルール準拠を評価するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "aws-config"
+      },
+      "memberships": [
+        {
+          "buildId": "iac",
+          "role": "補助"
+        },
+        {
+          "buildId": "observability",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rto",
+      "termId": "rto",
+      "name": "RTO",
+      "meaning": "障害後にサービスを復旧させるまでの目標時間。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rto"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rpo",
+      "termId": "rpo",
+      "name": "RPO",
+      "meaning": "どれだけ過去までのデータ損失を許容するかという時間の目標。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rpo"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-pilot-light",
+      "termId": "pilot-light",
+      "name": "パイロットライト",
+      "meaning": "復旧先で中核だけを維持し、障害時に残りを起動する戦略。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "pilot-light"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-warm-standby",
+      "termId": "warm-standby",
+      "name": "ウォームスタンバイ",
+      "meaning": "縮小した全体構成を復旧先で稼働させておく戦略。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "warm-standby"
+      },
+      "memberships": [
+        {
+          "buildId": "disaster-recovery",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-backup",
+      "termId": "backup",
+      "name": "バックアップ",
+      "meaning": "誤更新や障害から戻すための復元可能なデータの複製。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "backup"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-restore-test",
+      "termId": "restore-test",
+      "name": "復元テスト",
+      "meaning": "バックアップから起動・整合性・所要時間を検証する試験。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "restore-test"
+      },
+      "memberships": [
+        {
+          "buildId": "backup",
+          "role": "補助"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-replication",
+      "termId": "replication",
+      "name": "レプリケーション",
+      "meaning": "別の保存先へデータの更新を複製する仕組み。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "replication"
+      },
+      "memberships": [
+        {
+          "buildId": "read-replica",
+          "role": "補助"
+        },
+        {
+          "buildId": "disaster-recovery",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-dms",
+      "termId": "dms",
+      "name": "DMS",
+      "meaning": "DB の初期移行と継続的な変更同期を行うサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "dms"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-dms",
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+    },
+    {
+      "id": "candidate-cdc",
+      "termId": "cdc",
+      "name": "CDC",
+      "meaning": "データベースに生じた変更を取得して反映する方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cdc"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-cdc",
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+    },
+    {
+      "id": "candidate-datasync",
+      "termId": "datasync",
+      "name": "DataSync",
+      "meaning": "対応するストレージ間でファイル・オブジェクトを転送するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "datasync"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-datasync",
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+    },
+    {
+      "id": "candidate-migration",
+      "termId": "migration",
+      "name": "リホスト",
+      "meaning": "アプリを大きく変更せず実行環境を移す移行方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "migration"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-migration",
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+    },
+    {
+      "id": "candidate-performance",
+      "termId": "performance",
+      "name": "ボトルネック",
+      "meaning": "処理全体の速度や容量を制限している部分。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "performance"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "中核"
+        },
+        {
+          "buildId": "cache",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "補助"
+        },
+        {
+          "buildId": "observability",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cache",
+      "termId": "cache",
+      "name": "キャッシュ",
+      "meaning": "再利用可能なデータを速く取得できる場所へ一時保存する仕組み。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cache"
+      },
+      "memberships": [
+        {
+          "buildId": "cache",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-savings-plans",
+      "termId": "savings-plans",
+      "name": "Savings Plans",
+      "meaning": "一定の利用額をコミットして対象使用料の割引を受ける購入方式。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "savings-plans"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cost-optimization",
+      "termId": "cost-optimization",
+      "name": "コスト最適化",
+      "meaning": "要件を満たしながら使用量と価格条件を改善すること。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cost-optimization"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-athena",
+      "termId": "athena",
+      "name": "Athena",
+      "meaning": "S3 などのデータを SQL で分析するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "athena"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-athena",
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+    },
+    {
+      "id": "candidate-glue",
+      "termId": "glue",
+      "name": "Glue",
+      "meaning": "データカタログとデータ統合・ETL を提供するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "glue"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-glue",
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+    },
+    {
+      "id": "candidate-redshift",
+      "termId": "redshift",
+      "name": "Redshift",
+      "meaning": "大規模な分析用データウェアハウス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "redshift"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-redshift",
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+    },
+    {
+      "id": "candidate-kinesis",
+      "termId": "kinesis",
+      "name": "Kinesis Data Streams",
+      "meaning": "データストリームを収集し処理・再読込するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "kinesis"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-firehose",
+      "termId": "firehose",
+      "name": "Data Firehose",
+      "meaning": "ストリーミングデータを対応先へ配信するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "firehose"
+      },
+      "memberships": [
+        {
+          "buildId": "queue",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-opensearch",
+      "termId": "opensearch",
+      "name": "OpenSearch",
+      "meaning": "全文検索やログ分析に使う検索・分析エンジン。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "opensearch"
+      },
+      "memberships": [
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-lake-formation",
+      "termId": "lake-formation",
+      "name": "Lake Formation",
+      "meaning": "データレイクの権限管理を支援するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "lake-formation"
+      },
+      "memberships": [
+        {
+          "buildId": "least-privilege",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-reserved-instances",
+      "termId": "reserved-instances",
+      "name": "Reserved Instances（RI）",
+      "meaning": "適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "reserved-instances"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ec2-hibernation",
+      "termId": "ec2-hibernation",
+      "name": "EC2休止",
+      "meaning": "対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ec2-hibernation"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-ec2-stop",
+      "termId": "ec2-stop",
+      "name": "EC2停止",
+      "meaning": "EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "ec2-stop"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-rcu",
+      "termId": "rcu",
+      "name": "RCU",
+      "meaning": "DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "rcu"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "read-replica",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-wcu",
+      "termId": "wcu",
+      "name": "WCU",
+      "meaning": "DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "wcu"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cost-explorer",
+      "termId": "cost-explorer",
+      "name": "AWS Cost Explorer",
+      "meaning": "費用・使用量の傾向と内訳を可視化して分析するサービス。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cost-explorer"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        },
+        {
+          "buildId": "observability",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-budgets",
+      "termId": "budgets",
+      "name": "AWS Budgets",
+      "meaning": "実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "budgets"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cur",
+      "termId": "cur",
+      "name": "Cost and Usage Report（CUR）",
+      "meaning": "詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cur"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-cost-allocation",
+      "termId": "cost-allocation",
+      "name": "コスト配分タグ",
+      "meaning": "費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "cost-allocation"
+      },
+      "memberships": [
+        {
+          "buildId": "rightsizing",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-gwlb",
+      "termId": "gwlb",
+      "name": "Gateway Load Balancer（GWLB）",
+      "meaning": "仮想ファイアウォール等のアプライアンスへ通信を透過的に分配する負荷分散。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "gwlb"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-gwlb",
+      "remainderReason": "セキュリティアプライアンス経由の通信。閉域接続とは異なる検査・防御の用途を検討。"
+    },
+    {
+      "id": "candidate-requester-pays",
+      "termId": "requester-pays",
+      "name": "Requester Pays",
+      "meaning": "対応するS3要求・ダウンロード費を要求者が負担する設定。所有者の保存費は残る。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "requester-pays"
+      },
+      "memberships": [],
+      "commonStarterCandidate": false,
+      "remainderId": "remainder-requester-pays",
+      "remainderReason": "費用負担者を変更する候補。資源効率を上げる効果とは分けて設計。"
+    },
+    {
+      "id": "candidate-throttling",
+      "termId": "throttling",
+      "name": "スロットリング",
+      "meaning": "レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。",
+      "sourceRef": {
+        "path": "src/content/index.ts",
+        "locator": "throttling"
+      },
+      "memberships": [
+        {
+          "buildId": "isolation",
+          "role": "補助"
+        },
+        {
+          "buildId": "safe-retry",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-health-check",
+      "termId": "health-check",
+      "name": "ヘルスチェック",
+      "meaning": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+      "sourceRef": {
+        "path": "knowledge/game-supplement.json",
+        "locator": "health-check"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "rds-ha",
+          "role": "補助"
+        },
+        {
+          "buildId": "isolation",
+          "role": "補助"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "補助"
+        },
+        {
+          "buildId": "observability",
+          "role": "補助"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-alb",
+      "termId": "alb",
+      "name": "Application Load Balancer",
+      "meaning": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
+      "sourceRef": {
+        "path": "knowledge/game-supplement.json",
+        "locator": "alb"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "補助"
+        },
+        {
+          "buildId": "isolation",
+          "role": "条件付き"
+        },
+        {
+          "buildId": "autoscaling",
+          "role": "条件付き"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    },
+    {
+      "id": "candidate-remaining-capacity",
+      "termId": "remaining-capacity",
+      "name": "残存容量",
+      "meaning": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+      "sourceRef": {
+        "path": "knowledge/game-supplement.json",
+        "locator": "remaining-capacity"
+      },
+      "memberships": [
+        {
+          "buildId": "multi-az",
+          "role": "中核"
+        }
+      ],
+      "commonStarterCandidate": false,
+      "remainderId": null,
+      "remainderReason": null
+    }
+  ]
+}

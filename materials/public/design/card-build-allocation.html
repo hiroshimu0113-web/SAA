@@ -1,0 +1,281 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>6キャラ・18ビルドと教材カード候補</title><style>body{font:16px/1.75 -apple-system,BlinkMacSystemFont,sans-serif;background:#f4f6fa;color:#17233b;margin:0;padding:24px}main{max-width:1100px;margin:auto}section,article{background:white;padding:20px;margin:18px 0;border-radius:12px}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #dce2ec;text-align:left;padding:10px;vertical-align:top}code{overflow-wrap:anywhere;font-size:12px}input{font:inherit;padding:10px;width:90%}.scroll{overflow-x:auto}a{color:#205db5}.warn{color:#a33}small{display:block;color:#54617a}@media(max-width:600px){body{padding:12px}section,article{padding:12px}td,th{padding:6px}}@media print{input{display:none}article{break-inside:avoid}}</style><main><h1>6キャラ・18ビルドと教材カード候補</h1><p>設計案／ゲーム未実装。教材の名称・意味を保持し、ビルドへの接続を整理。</p>
+<p>候補 <b>168</b>件／ビルド所属 <b>151</b>件／未所属 <b>17</b>件／重複を含む所属 <b>215</b>件。</p><ul><li>6キャラ各3ビルド。所属は重複可。</li><li>共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。</li><li>HPを0にしてタスク完了。追加勝利パラメータは採用しない。</li><li>分類はカード効果・排出率・最終プールの実装ではない。</li><li>未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。</li></ul><p>中核＝その方向の入口、補助＝基盤や弱点対策、条件付き＝特定要件・代替構成で使う候補。列挙カードすべての取得が完成条件ではありません。枚数・数値効果は未決定です。</p><p><a href="card-build-allocation.json">構造化JSON</a></p><input id="search" placeholder="カード名・ID・意味で全候補を検索" aria-label="カード候補検索"><p id="result"></p><nav><a href="#b-multi-az">守護者／分散要塞</a>　<a href="#b-rds-ha">守護者／継承</a>　<a href="#b-isolation">守護者／隔離</a>　<a href="#b-autoscaling">調律師／増援</a>　<a href="#b-serverless">調律師／即応</a>　<a href="#b-rightsizing">調律師／精鋭</a>　<a href="#b-cdn">加速者／配信</a>　<a href="#b-cache">加速者／記憶</a>　<a href="#b-read-replica">加速者／読取分散</a>　<a href="#b-queue">指揮者／蓄積</a>　<a href="#b-safe-retry">指揮者／再挑戦</a>　<a href="#b-spot">指揮者／機会活用</a>　<a href="#b-least-privilege">構築士／権限設計</a>　<a href="#b-private-access">構築士／閉域接続</a>　<a href="#b-iac">構築士／再現構築</a>　<a href="#b-backup">復旧者／保存</a>　<a href="#b-disaster-recovery">復旧者／待機</a>　<a href="#b-observability">復旧者／観測</a>　<a href="#remaining">未所属候補</a>　<a href="#all">全件逆引き</a></nav>
+<section id="b-multi-az"><h2>守護者：分散要塞ビルド</h2><p>分散した戦力を残して攻撃を継続する。残存容量とデータ到達性が必要。</p>
+<h3>中核（3種類）</h3><p><a href="#c-az">アベイラビリティーゾーン（AZ）</a>／<a href="#c-availability">可用性</a>／<a href="#c-remaining-capacity">残存容量</a></p>
+<h3>補助（6種類）</h3><p><a href="#c-alb">Application Load Balancer</a>／<a href="#c-health-check">ヘルスチェック</a>／<a href="#c-subnet">サブネット</a>／<a href="#c-ec2">Amazon EC2</a>／<a href="#c-auto-scaling">EC2 Auto Scaling</a>／<a href="#c-placement-group">プレイスメントグループ</a></p>
+<h3>条件付き（3種類）</h3><p><a href="#c-nlb">Network Load Balancer</a>／<a href="#c-route53">Route 53</a>／<a href="#c-efs">Amazon EFS</a></p>
+</section>
+<section id="b-rds-ha"><h2>守護者：継承ビルド</h2><p>主力停止後に待機系へ交代する。単一スタンバイは平時の読取り攻撃に使わない。</p>
+<h3>中核（2種類）</h3><p><a href="#c-rds-multi-az">RDS Multi-AZ</a>／<a href="#c-rds-standby">RDSの単一スタンバイ</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-rds">Amazon RDS</a>／<a href="#c-health-check">ヘルスチェック</a>／<a href="#c-availability">可用性</a>／<a href="#c-rds-proxy">RDS Proxy</a></p>
+<h3>条件付き（1種類）</h3><p><a href="#c-aurora-replica">Aurora Replica</a></p>
+</section>
+<section id="b-isolation"><h2>守護者：隔離ビルド</h2><p>妨害の波及を抑える。配置・流量制御・失敗隔離は別の仕組みであり万能な遮断ではない。</p>
+<h3>中核（1種類）</h3><p><a href="#c-placement-group">プレイスメントグループ</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-subnet">サブネット</a>／<a href="#c-throttling">スロットリング</a>／<a href="#c-dlq">デッドレターキュー</a>／<a href="#c-health-check">ヘルスチェック</a></p>
+<h3>条件付き（3種類）</h3><p><a href="#c-organizations">AWS Organizations</a>／<a href="#c-scp">サービスコントロールポリシー（SCP）</a>／<a href="#c-alb">Application Load Balancer</a></p>
+</section>
+<section id="b-autoscaling"><h2>調律師：増援ビルド</h2><p>負荷に応じ戦力を追加する。起動待ちと下流の容量が弱点。</p>
+<h3>中核（3種類）</h3><p><a href="#c-auto-scaling">EC2 Auto Scaling</a>／<a href="#c-target-tracking">ターゲット追跡スケーリング</a>／<a href="#c-scheduled-scaling">予定スケーリング</a></p>
+<h3>補助（6種類）</h3><p><a href="#c-scaling">スケーリング</a>／<a href="#c-ec2">Amazon EC2</a>／<a href="#c-cloudwatch">CloudWatch</a>／<a href="#c-health-check">ヘルスチェック</a>／<a href="#c-queue-scaling">キューに基づくスケーリング</a>／<a href="#c-warm-pool">Warm Pool</a></p>
+<h3>条件付き（5種類）</h3><p><a href="#c-ecs">ECS</a>／<a href="#c-eks">EKS</a>／<a href="#c-nlb">Network Load Balancer</a>／<a href="#c-alb">Application Load Balancer</a>／<a href="#c-capacity-reservation">Capacity Reservation</a></p>
+</section>
+<section id="b-serverless"><h2>調律師：即応ビルド</h2><p>必要時に処理を起動する。同時実行上限や接続先の限界を消せない。</p>
+<h3>中核（2種類）</h3><p><a href="#c-lambda">Lambda</a>／<a href="#c-fargate">Fargate</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-lambda-concurrency">同時実行</a>／<a href="#c-api-gateway">API Gateway</a>／<a href="#c-eventbridge">EventBridge</a>／<a href="#c-dynamodb-on-demand">DynamoDBオンデマンド容量</a></p>
+<h3>条件付き（6種類）</h3><p><a href="#c-sqs">SQS</a>／<a href="#c-sns">SNS</a>／<a href="#c-step-functions">Step Functions</a>／<a href="#c-rds-proxy">RDS Proxy</a>／<a href="#c-ecs">ECS</a>／<a href="#c-task-role">タスクロール</a></p>
+</section>
+<section id="b-rightsizing"><h2>調律師：精鋭ビルド</h2><p>能力と維持費を調整する。契約割引は性能強化や容量確保とは別。</p>
+<h3>中核（3種類）</h3><p><a href="#c-instance-family">インスタンスファミリー</a>／<a href="#c-cost-optimization">コスト最適化</a>／<a href="#c-performance">ボトルネック</a></p>
+<h3>補助（12種類）</h3><p><a href="#c-storage-performance">IOPSとスループット</a>／<a href="#c-gp3">gp3</a>／<a href="#c-provisioned-iops">Provisioned IOPS SSD</a>／<a href="#c-database-selection">データモデルによるDB選定</a>／<a href="#c-database-cost">DBの総費用</a>／<a href="#c-network-cost">ネットワークの総費用</a>／<a href="#c-storage-cost">ストレージの総費用</a>／<a href="#c-cost-explorer">AWS Cost Explorer</a>／<a href="#c-budgets">AWS Budgets</a>／<a href="#c-cur">Cost and Usage Report（CUR）</a>／<a href="#c-cost-allocation">コスト配分タグ</a>／<a href="#c-ec2-stop">EC2停止</a></p>
+<h3>条件付き（7種類）</h3><p><a href="#c-savings-plans">Savings Plans</a>／<a href="#c-reserved-instances">Reserved Instances（RI）</a>／<a href="#c-intelligent-tiering">S3 Intelligent-Tiering</a>／<a href="#c-rcu">RCU</a>／<a href="#c-wcu">WCU</a>／<a href="#c-ec2-hibernation">EC2休止</a>／<a href="#c-instance-store">インスタンスストア</a></p>
+</section>
+<section id="b-cdn"><h2>加速者：配信ビルド</h2><p>繰り返し配信を効率化する。Global Acceleratorは経路改善でありキャッシュではない。</p>
+<h3>中核（1種類）</h3><p><a href="#c-cloudfront">CloudFront</a></p>
+<h3>補助（5種類）</h3><p><a href="#c-s3">Amazon S3</a>／<a href="#c-cache-key">キャッシュキー</a>／<a href="#c-dns-ttl">TTL</a>／<a href="#c-cloudfront-oac">OAC</a>／<a href="#c-signed-url">署名付き URL</a></p>
+<h3>条件付き（6種類）</h3><p><a href="#c-route53">Route 53</a>／<a href="#c-tls">TLS</a>／<a href="#c-waf">WAF</a>／<a href="#c-shield">Shield</a>／<a href="#c-transfer-acceleration">S3 Transfer Acceleration</a>／<a href="#c-global-accelerator">Global Accelerator</a></p>
+</section>
+<section id="b-cache"><h2>加速者：記憶ビルド</h2><p>同じ要求の結果を再利用する。TTLだけで最新性は保証できず、DynamoDB TTLはキャッシュ失効と別。</p>
+<h3>中核（2種類）</h3><p><a href="#c-cache">キャッシュ</a>／<a href="#c-dax">DAX</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-cache-key">キャッシュキー</a>／<a href="#c-dns-ttl">TTL</a>／<a href="#c-consistency">読取り整合性</a>／<a href="#c-s3-consistency">S3の強い整合性</a></p>
+<h3>条件付き（3種類）</h3><p><a href="#c-dynamodb">Amazon DynamoDB</a>／<a href="#c-dynamodb-ttl">DynamoDB TTL</a>／<a href="#c-performance">ボトルネック</a></p>
+</section>
+<section id="b-read-replica"><h2>加速者：読取分散ビルド</h2><p>参照処理を分担する。GSIは別キー索引の代替案で、RDSのレプリカではない。</p>
+<h3>中核（2種類）</h3><p><a href="#c-read-replica">リードレプリカ</a>／<a href="#c-aurora-replica">Aurora Replica</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-rds">Amazon RDS</a>／<a href="#c-replication">レプリケーション</a>／<a href="#c-consistency">読取り整合性</a>／<a href="#c-performance">ボトルネック</a></p>
+<h3>条件付き（4種類）</h3><p><a href="#c-gsi">グローバルセカンダリインデックス（GSI）</a>／<a href="#c-partition-key">パーティションキー</a>／<a href="#c-rcu">RCU</a>／<a href="#c-database-cost">DBの総費用</a></p>
+</section>
+<section id="b-queue"><h2>指揮者：蓄積ビルド</h2><p>仕事を蓄えて順次処理する。受理と完了を区別し、期限と滞留に注意。</p>
+<h3>中核（1種類）</h3><p><a href="#c-sqs">SQS</a></p>
+<h3>補助（5種類）</h3><p><a href="#c-visibility-timeout">可視性タイムアウト</a>／<a href="#c-fifo">FIFO</a>／<a href="#c-queue-scaling">キューに基づくスケーリング</a>／<a href="#c-dlq">デッドレターキュー</a>／<a href="#c-claim-check">Claim Check</a></p>
+<h3>条件付き（9種類）</h3><p><a href="#c-sns">SNS</a>／<a href="#c-fanout">ファンアウト</a>／<a href="#c-eventbridge">EventBridge</a>／<a href="#c-s3">Amazon S3</a>／<a href="#c-ec2">Amazon EC2</a>／<a href="#c-lambda">Lambda</a>／<a href="#c-ecs">ECS</a>／<a href="#c-kinesis">Kinesis Data Streams</a>／<a href="#c-firehose">Data Firehose</a></p>
+</section>
+<section id="b-safe-retry"><h2>指揮者：再挑戦ビルド</h2><p>失敗した作業を制限付きで再試行する。トランザクションやFIFOだけで業務全体の冪等性は保証しない。</p>
+<h3>中核（1種類）</h3><p><a href="#c-idempotency">冪等性</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-step-functions">Step Functions</a>／<a href="#c-visibility-timeout">可視性タイムアウト</a>／<a href="#c-dlq">デッドレターキュー</a>／<a href="#c-throttling">スロットリング</a></p>
+<h3>条件付き（3種類）</h3><p><a href="#c-dynamodb-transactions">DynamoDBトランザクション</a>／<a href="#c-multipart-upload">マルチパートアップロード</a>／<a href="#c-fifo">FIFO</a></p>
+</section>
+<section id="b-spot"><h2>指揮者：機会活用ビルド</h2><p>安い臨時戦力を使い、中断後は保存済みの進捗から再開する。スナップショットだけでアプリの進捗保存は完成しない。</p>
+<h3>中核（1種類）</h3><p><a href="#c-spot">Spotインスタンス</a></p>
+<h3>補助（4種類）</h3><p><a href="#c-ec2">Amazon EC2</a>／<a href="#c-ebs">Amazon EBS</a>／<a href="#c-s3">Amazon S3</a>／<a href="#c-auto-scaling">EC2 Auto Scaling</a></p>
+<h3>条件付き（4種類）</h3><p><a href="#c-ami">AMI</a>／<a href="#c-ebs-snapshot">EBSスナップショット</a>／<a href="#c-instance-store">インスタンスストア</a>／<a href="#c-capacity-reservation">Capacity Reservation</a></p>
+</section>
+<section id="b-least-privilege"><h2>構築士：権限設計ビルド</h2><p>必要な行動を許可し、不要な操作を防ぐ。上限やDenyは操作権限を付与しない。</p>
+<h3>中核（2種類）</h3><p><a href="#c-least-privilege">最小権限</a>／<a href="#c-iam-role">IAMロール</a></p>
+<h3>補助（7種類）</h3><p><a href="#c-temporary-credentials">一時認証情報</a>／<a href="#c-resource-policy">リソースベースポリシー</a>／<a href="#c-explicit-deny">明示的Deny</a>／<a href="#c-implicit-deny">暗黙的Deny</a>／<a href="#c-permissions-boundary">アクセス許可の境界</a>／<a href="#c-abac">ABAC</a>／<a href="#c-task-role">タスクロール</a></p>
+<h3>条件付き（8種類）</h3><p><a href="#c-scp">サービスコントロールポリシー（SCP）</a>／<a href="#c-cross-account">クロスアカウントアクセス</a>／<a href="#c-external-id">External ID</a>／<a href="#c-kms">KMS</a>／<a href="#c-secrets-manager">Secrets Manager</a>／<a href="#c-block-public-access">S3 Block Public Access</a>／<a href="#c-access-analyzer">IAM Access Analyzer</a>／<a href="#c-lake-formation">Lake Formation</a></p>
+</section>
+<section id="b-private-access"><h2>構築士：閉域接続ビルド</h2><p>経路と通信許可を整える。接続方式ごとの範囲を区別し、IAM認可も必要。</p>
+<h3>中核（2種類）</h3><p><a href="#c-vpc-endpoint">VPCエンドポイント</a>／<a href="#c-private-link">AWS PrivateLink</a></p>
+<h3>補助（6種類）</h3><p><a href="#c-vpc">Amazon VPC</a>／<a href="#c-subnet">サブネット</a>／<a href="#c-route">ルートテーブル</a>／<a href="#c-security-group">セキュリティグループ</a>／<a href="#c-network-acl">ネットワークACL</a>／<a href="#c-session-manager">Session Manager</a></p>
+<h3>条件付き（9種類）</h3><p><a href="#c-peering">VPCピアリング</a>／<a href="#c-transit-gateway">AWS Transit Gateway</a>／<a href="#c-site-to-site-vpn">Site-to-Site VPN</a>／<a href="#c-direct-connect">AWS Direct Connect</a>／<a href="#c-nat-gateway">NAT Gateway</a>／<a href="#c-ipv6-egress">Egress-only Internet Gateway</a>／<a href="#c-longest-prefix">最長プレフィックス一致</a>／<a href="#c-tls">TLS</a>／<a href="#c-vpc-flow-logs">VPC Flow Logs</a></p>
+</section>
+<section id="b-iac"><h2>構築士：再現構築ビルド</h2><p>設計図で再構築する方向。AMIはマシンイメージ、ECRは保管、Configは設定評価でありIaCの代用品ではない。</p>
+<p class="warn">不足：IaCの中核となる教材候補名がない。候補追加またはビルド再検討が必要。</p>
+<h3>中核（0種類）</h3><p>該当候補なし</p>
+<h3>補助（3種類）</h3><p><a href="#c-ami">AMI</a>／<a href="#c-ecr">ECR</a>／<a href="#c-aws-config">AWS Config</a></p>
+<h3>条件付き（1種類）</h3><p><a href="#c-control-tower">AWS Control Tower</a></p>
+</section>
+<section id="b-backup"><h2>復旧者：保存ビルド</h2><p>保存した正常状態から復旧する。保存以降の進捗損失と復元待ち時間がある。</p>
+<h3>中核（3種類）</h3><p><a href="#c-backup">バックアップ</a>／<a href="#c-ebs-snapshot">EBSスナップショット</a>／<a href="#c-point-in-time-recovery">ポイントインタイムリカバリ（PITR）</a></p>
+<h3>補助（7種類）</h3><p><a href="#c-versioning">S3バージョニング</a>／<a href="#c-noncurrent-version">S3旧バージョン</a>／<a href="#c-object-lock">S3 Object Lock</a>／<a href="#c-restore-test">復元テスト</a>／<a href="#c-rpo">RPO</a>／<a href="#c-s3">Amazon S3</a>／<a href="#c-durability">耐久性</a></p>
+<h3>条件付き（4種類）</h3><p><a href="#c-archive">アーカイブ保存</a>／<a href="#c-standard-ia">S3 Standard-IA</a>／<a href="#c-kms">KMS</a>／<a href="#c-s3-encryption">S3の保存時暗号化</a></p>
+</section>
+<section id="b-disaster-recovery"><h2>復旧者：待機ビルド</h2><p>別拠点の準備量で復旧時間と維持費を調整する。複製は誤更新へのバックアップとは別。</p>
+<h3>中核（2種類）</h3><p><a href="#c-pilot-light">パイロットライト</a>／<a href="#c-warm-standby">ウォームスタンバイ</a></p>
+<h3>補助（7種類）</h3><p><a href="#c-rto">RTO</a>／<a href="#c-rpo">RPO</a>／<a href="#c-replication">レプリケーション</a>／<a href="#c-s3-replication">S3レプリケーション</a>／<a href="#c-region">リージョン</a>／<a href="#c-route53">Route 53</a>／<a href="#c-restore-test">復元テスト</a></p>
+<h3>条件付き（4種類）</h3><p><a href="#c-global-tables">DynamoDBグローバルテーブル</a>／<a href="#c-ami">AMI</a>／<a href="#c-availability">可用性</a>／<a href="#c-capacity-reservation">Capacity Reservation</a></p>
+</section>
+<section id="b-observability"><h2>復旧者：観測ビルド</h2><p>異常を発見して対処を選ぶ。監視・監査・脅威検出は対象が異なり、発見だけでは回復しない。</p>
+<h3>中核（1種類）</h3><p><a href="#c-cloudwatch">CloudWatch</a></p>
+<h3>補助（5種類）</h3><p><a href="#c-cloudtrail">CloudTrail</a>／<a href="#c-aws-config">AWS Config</a>／<a href="#c-vpc-flow-logs">VPC Flow Logs</a>／<a href="#c-health-check">ヘルスチェック</a>／<a href="#c-performance">ボトルネック</a></p>
+<h3>条件付き（6種類）</h3><p><a href="#c-guardduty">GuardDuty</a>／<a href="#c-inspector">Inspector</a>／<a href="#c-macie">Macie</a>／<a href="#c-access-analyzer">IAM Access Analyzer</a>／<a href="#c-cost-explorer">AWS Cost Explorer</a>／<a href="#c-opensearch">OpenSearch</a></p>
+</section>
+<section id="remaining"><h2>未所属候補：後続整理用ID</h2><p>削除・不採用を意味しません。共通枠、新しい組み合わせ、状況対策などを後で設計します。</p><div class="scroll"><table><tr><th>追跡ID／候補名</th><th>保留理由</th></tr>
+<tr><td><code>remainder-shared-responsibility</code><br><a href="#c-shared-responsibility">責任共有モデル</a></td><td>全キャラ共通の責任分担を扱う候補。戦闘効果と初期レリックとの役割分担を未決定。</td></tr>
+<tr><td><code>remainder-identity-center</code><br><a href="#c-identity-center">IAM Identity Center</a></td><td>利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。</td></tr>
+<tr><td><code>remainder-cognito</code><br><a href="#c-cognito">Amazon Cognito</a></td><td>利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。</td></tr>
+<tr><td><code>remainder-root</code><br><a href="#c-root">ルートユーザー</a></td><td>利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。</td></tr>
+<tr><td><code>remainder-mfa</code><br><a href="#c-mfa">多要素認証（MFA）</a></td><td>利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。</td></tr>
+<tr><td><code>remainder-cognito-identity</code><br><a href="#c-cognito-identity">Cognito IDプール</a></td><td>利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。</td></tr>
+<tr><td><code>remainder-public-subnet</code><br><a href="#c-public-subnet">パブリックサブネット</a></td><td>公開経路の候補。閉域接続とは用途が異なり、公開入口の共通枠を検討。</td></tr>
+<tr><td><code>remainder-fsx-windows</code><br><a href="#c-fsx-windows">FSx for Windows File Server</a></td><td>共有ファイルの要件を扱う候補。共通ストレージ枠または新しい構築ルートを検討。</td></tr>
+<tr><td><code>remainder-dms</code><br><a href="#c-dms">DMS</a></td><td>移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。</td></tr>
+<tr><td><code>remainder-cdc</code><br><a href="#c-cdc">CDC</a></td><td>移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。</td></tr>
+<tr><td><code>remainder-datasync</code><br><a href="#c-datasync">DataSync</a></td><td>移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。</td></tr>
+<tr><td><code>remainder-migration</code><br><a href="#c-migration">リホスト</a></td><td>移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。</td></tr>
+<tr><td><code>remainder-athena</code><br><a href="#c-athena">Athena</a></td><td>分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。</td></tr>
+<tr><td><code>remainder-glue</code><br><a href="#c-glue">Glue</a></td><td>分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。</td></tr>
+<tr><td><code>remainder-redshift</code><br><a href="#c-redshift">Redshift</a></td><td>分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。</td></tr>
+<tr><td><code>remainder-gwlb</code><br><a href="#c-gwlb">Gateway Load Balancer（GWLB）</a></td><td>セキュリティアプライアンス経由の通信。閉域接続とは異なる検査・防御の用途を検討。</td></tr>
+<tr><td><code>remainder-requester-pays</code><br><a href="#c-requester-pays">Requester Pays</a></td><td>費用負担者を変更する候補。資源効率を上げる効果とは分けて設計。</td></tr>
+</table></div></section><h2 id="all">全候補の逆引き</h2>
+<article class="candidate" id="c-region"><h3>リージョン</h3><code>candidate-region</code><p>AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。</p><p>所属：復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #region</small></article>
+<article class="candidate" id="c-az"><h3>アベイラビリティーゾーン（AZ）</h3><code>candidate-az</code><p>リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。</p><p>所属：守護者・分散要塞［中核］</p><small>教材参照：src/content/index.ts #az</small></article>
+<article class="candidate" id="c-shared-responsibility"><h3>責任共有モデル</h3><code>candidate-shared-responsibility</code><p>AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。</p><p>所属：未所属：remainder-shared-responsibility</p><small>教材参照：src/content/index.ts #shared-responsibility</small></article>
+<article class="candidate" id="c-availability"><h3>可用性</h3><code>candidate-availability</code><p>必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。</p><p>所属：守護者・分散要塞［中核］／守護者・継承［補助］／復旧者・待機［条件付き］</p><small>教材参照：src/content/index.ts #availability</small></article>
+<article class="candidate" id="c-durability"><h3>耐久性</h3><code>candidate-durability</code><p>保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。</p><p>所属：復旧者・保存［補助］</p><small>教材参照：src/content/index.ts #durability</small></article>
+<article class="candidate" id="c-scaling"><h3>スケーリング</h3><code>candidate-scaling</code><p>負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。</p><p>所属：調律師・増援［補助］</p><small>教材参照：src/content/index.ts #scaling</small></article>
+<article class="candidate" id="c-spot"><h3>Spotインスタンス</h3><code>candidate-spot</code><p>中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。</p><p>所属：指揮者・機会活用［中核］</p><small>教材参照：src/content/index.ts #spot</small></article>
+<article class="candidate" id="c-instance-store"><h3>インスタンスストア</h3><code>candidate-instance-store</code><p>EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。</p><p>所属：調律師・精鋭［条件付き］／指揮者・機会活用［条件付き］</p><small>教材参照：src/content/index.ts #instance-store</small></article>
+<article class="candidate" id="c-s3"><h3>Amazon S3</h3><code>candidate-s3</code><p>データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。</p><p>所属：加速者・配信［補助］／指揮者・蓄積［条件付き］／指揮者・機会活用［補助］／復旧者・保存［補助］</p><small>教材参照：src/content/index.ts #s3</small></article>
+<article class="candidate" id="c-rds"><h3>Amazon RDS</h3><code>candidate-rds</code><p>リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。</p><p>所属：守護者・継承［補助］／加速者・読取分散［補助］</p><small>教材参照：src/content/index.ts #rds</small></article>
+<article class="candidate" id="c-iam-role"><h3>IAMロール</h3><code>candidate-iam-role</code><p>人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。</p><p>所属：構築士・権限設計［中核］</p><small>教材参照：src/content/index.ts #iam-role</small></article>
+<article class="candidate" id="c-temporary-credentials"><h3>一時認証情報</h3><code>candidate-temporary-credentials</code><p>有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #temporary-credentials</small></article>
+<article class="candidate" id="c-least-privilege"><h3>最小権限</h3><code>candidate-least-privilege</code><p>必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。</p><p>所属：構築士・権限設計［中核］</p><small>教材参照：src/content/index.ts #least-privilege</small></article>
+<article class="candidate" id="c-explicit-deny"><h3>明示的Deny</h3><code>candidate-explicit-deny</code><p>ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #explicit-deny</small></article>
+<article class="candidate" id="c-scp"><h3>サービスコントロールポリシー（SCP）</h3><code>candidate-scp</code><p>Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。</p><p>所属：守護者・隔離［条件付き］／構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #scp</small></article>
+<article class="candidate" id="c-cross-account"><h3>クロスアカウントアクセス</h3><code>candidate-cross-account</code><p>別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。</p><p>所属：構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #cross-account</small></article>
+<article class="candidate" id="c-external-id"><h3>External ID</h3><code>candidate-external-id</code><p>外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。</p><p>所属：構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #external-id</small></article>
+<article class="candidate" id="c-identity-center"><h3>IAM Identity Center</h3><code>candidate-identity-center</code><p>従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。</p><p>所属：未所属：remainder-identity-center</p><small>教材参照：src/content/index.ts #identity-center</small></article>
+<article class="candidate" id="c-cognito"><h3>Amazon Cognito</h3><code>candidate-cognito</code><p>一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。</p><p>所属：未所属：remainder-cognito</p><small>教材参照：src/content/index.ts #cognito</small></article>
+<article class="candidate" id="c-root"><h3>ルートユーザー</h3><code>candidate-root</code><p>AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。</p><p>所属：未所属：remainder-root</p><small>教材参照：src/content/index.ts #root</small></article>
+<article class="candidate" id="c-mfa"><h3>多要素認証（MFA）</h3><code>candidate-mfa</code><p>パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。</p><p>所属：未所属：remainder-mfa</p><small>教材参照：src/content/index.ts #mfa</small></article>
+<article class="candidate" id="c-organizations"><h3>AWS Organizations</h3><code>candidate-organizations</code><p>AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。</p><p>所属：守護者・隔離［条件付き］</p><small>教材参照：src/content/index.ts #organizations</small></article>
+<article class="candidate" id="c-control-tower"><h3>AWS Control Tower</h3><code>candidate-control-tower</code><p>ランディングゾーンと複数アカウントの統制・払い出しを支援する。</p><p>所属：構築士・再現構築［条件付き］</p><small>教材参照：src/content/index.ts #control-tower</small></article>
+<article class="candidate" id="c-permissions-boundary"><h3>アクセス許可の境界</h3><code>candidate-permissions-boundary</code><p>IAM主体へ付与できる権限の上限。単独で権限を付与しない。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #permissions-boundary</small></article>
+<article class="candidate" id="c-abac"><h3>ABAC</h3><code>candidate-abac</code><p>タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #abac</small></article>
+<article class="candidate" id="c-resource-policy"><h3>リソースベースポリシー</h3><code>candidate-resource-policy</code><p>S3バケット等のリソース側でPrincipalと許可・拒否を定める。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #resource-policy</small></article>
+<article class="candidate" id="c-implicit-deny"><h3>暗黙的Deny</h3><code>candidate-implicit-deny</code><p>適用される許可がない要求を既定で拒否すること。</p><p>所属：構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #implicit-deny</small></article>
+<article class="candidate" id="c-access-analyzer"><h3>IAM Access Analyzer</h3><code>candidate-access-analyzer</code><p>外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。</p><p>所属：構築士・権限設計［条件付き］／復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #access-analyzer</small></article>
+<article class="candidate" id="c-cognito-identity"><h3>Cognito IDプール</h3><code>candidate-cognito-identity</code><p>認証済みID等に応じた限定的なAWS一時認証情報を提供する。</p><p>所属：未所属：remainder-cognito-identity</p><small>教材参照：src/content/index.ts #cognito-identity</small></article>
+<article class="candidate" id="c-block-public-access"><h3>S3 Block Public Access</h3><code>candidate-block-public-access</code><p>S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。</p><p>所属：構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #block-public-access</small></article>
+<article class="candidate" id="c-vpc"><h3>Amazon VPC</h3><code>candidate-vpc</code><p>リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。</p><p>所属：構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #vpc</small></article>
+<article class="candidate" id="c-subnet"><h3>サブネット</h3><code>candidate-subnet</code><p>1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。</p><p>所属：守護者・分散要塞［補助］／守護者・隔離［補助］／構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #subnet</small></article>
+<article class="candidate" id="c-route"><h3>ルートテーブル</h3><code>candidate-route</code><p>宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。</p><p>所属：構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #route</small></article>
+<article class="candidate" id="c-public-subnet"><h3>パブリックサブネット</h3><code>candidate-public-subnet</code><p>IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。</p><p>所属：未所属：remainder-public-subnet</p><small>教材参照：src/content/index.ts #public-subnet</small></article>
+<article class="candidate" id="c-longest-prefix"><h3>最長プレフィックス一致</h3><code>candidate-longest-prefix</code><p>宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #longest-prefix</small></article>
+<article class="candidate" id="c-security-group"><h3>セキュリティグループ</h3><code>candidate-security-group</code><p>許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。</p><p>所属：構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #security-group</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-network-acl"><h3>ネットワークACL</h3><code>candidate-network-acl</code><p>サブネット境界で許可・拒否を設定するステートレスな通信制御。</p><p>所属：構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #network-acl</small></article>
+<article class="candidate" id="c-nat-gateway"><h3>NAT Gateway</h3><code>candidate-nat-gateway</code><p>外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #nat-gateway</small></article>
+<article class="candidate" id="c-vpc-endpoint"><h3>VPCエンドポイント</h3><code>candidate-vpc-endpoint</code><p>対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。</p><p>所属：構築士・閉域接続［中核］</p><small>教材参照：src/content/index.ts #vpc-endpoint</small></article>
+<article class="candidate" id="c-private-link"><h3>AWS PrivateLink</h3><code>candidate-private-link</code><p>対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。</p><p>所属：構築士・閉域接続［中核］</p><small>教材参照：src/content/index.ts #private-link</small></article>
+<article class="candidate" id="c-peering"><h3>VPCピアリング</h3><code>candidate-peering</code><p>2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #peering</small></article>
+<article class="candidate" id="c-transit-gateway"><h3>AWS Transit Gateway</h3><code>candidate-transit-gateway</code><p>複数VPCや拠点接続を集約するネットワークハブ。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #transit-gateway</small></article>
+<article class="candidate" id="c-site-to-site-vpn"><h3>Site-to-Site VPN</h3><code>candidate-site-to-site-vpn</code><p>拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #site-to-site-vpn</small></article>
+<article class="candidate" id="c-direct-connect"><h3>AWS Direct Connect</h3><code>candidate-direct-connect</code><p>AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #direct-connect</small></article>
+<article class="candidate" id="c-ipv6-egress"><h3>Egress-only Internet Gateway</h3><code>candidate-ipv6-egress</code><p>IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。</p><p>所属：構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #ipv6-egress</small></article>
+<article class="candidate" id="c-vpc-flow-logs"><h3>VPC Flow Logs</h3><code>candidate-vpc-flow-logs</code><p>IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。</p><p>所属：構築士・閉域接続［条件付き］／復旧者・観測［補助］</p><small>教材参照：src/content/index.ts #vpc-flow-logs</small></article>
+<article class="candidate" id="c-session-manager"><h3>Session Manager</h3><code>candidate-session-manager</code><p>Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。</p><p>所属：構築士・閉域接続［補助］</p><small>教材参照：src/content/index.ts #session-manager</small></article>
+<article class="candidate" id="c-ec2"><h3>Amazon EC2</h3><code>candidate-ec2</code><p>要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。</p><p>所属：守護者・分散要塞［補助］／調律師・増援［補助］／指揮者・蓄積［条件付き］／指揮者・機会活用［補助］</p><small>教材参照：src/content/index.ts #ec2</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-nlb"><h3>Network Load Balancer</h3><code>candidate-nlb</code><p>TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。</p><p>所属：守護者・分散要塞［条件付き］／調律師・増援［条件付き］</p><small>教材参照：src/content/index.ts #nlb</small></article>
+<article class="candidate" id="c-auto-scaling"><h3>EC2 Auto Scaling</h3><code>candidate-auto-scaling</code><p>需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。</p><p>所属：守護者・分散要塞［補助］／調律師・増援［中核］／指揮者・機会活用［補助］</p><small>教材参照：src/content/index.ts #auto-scaling</small></article>
+<article class="candidate" id="c-target-tracking"><h3>ターゲット追跡スケーリング</h3><code>candidate-target-tracking</code><p>1台当たりの負荷等が目標に近づくよう容量を調整する方式。</p><p>所属：調律師・増援［中核］</p><small>教材参照：src/content/index.ts #target-tracking</small></article>
+<article class="candidate" id="c-scheduled-scaling"><h3>予定スケーリング</h3><code>candidate-scheduled-scaling</code><p>既知の時刻の需要に合わせて事前に容量を変更する方式。</p><p>所属：調律師・増援［中核］</p><small>教材参照：src/content/index.ts #scheduled-scaling</small></article>
+<article class="candidate" id="c-warm-pool"><h3>Warm Pool</h3><code>candidate-warm-pool</code><p>初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。</p><p>所属：調律師・増援［補助］</p><small>教材参照：src/content/index.ts #warm-pool</small></article>
+<article class="candidate" id="c-ami"><h3>AMI</h3><code>candidate-ami</code><p>EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。</p><p>所属：指揮者・機会活用［条件付き］／構築士・再現構築［補助］／復旧者・待機［条件付き］</p><small>教材参照：src/content/index.ts #ami</small></article>
+<article class="candidate" id="c-capacity-reservation"><h3>Capacity Reservation</h3><code>candidate-capacity-reservation</code><p>指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。</p><p>所属：調律師・増援［条件付き］／指揮者・機会活用［条件付き］／復旧者・待機［条件付き］</p><small>教材参照：src/content/index.ts #capacity-reservation</small></article>
+<article class="candidate" id="c-placement-group"><h3>プレイスメントグループ</h3><code>candidate-placement-group</code><p>低遅延や障害分離等の要件に合わせEC2の配置を制御する。</p><p>所属：守護者・分散要塞［補助］／守護者・隔離［中核］</p><small>教材参照：src/content/index.ts #placement-group</small></article>
+<article class="candidate" id="c-instance-family"><h3>インスタンスファミリー</h3><code>candidate-instance-family</code><p>CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。</p><p>所属：調律師・精鋭［中核］</p><small>教材参照：src/content/index.ts #instance-family</small></article>
+<article class="candidate" id="c-ebs"><h3>Amazon EBS</h3><code>candidate-ebs</code><p>EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。</p><p>所属：指揮者・機会活用［補助］</p><small>教材参照：src/content/index.ts #ebs</small></article>
+<article class="candidate" id="c-efs"><h3>Amazon EFS</h3><code>candidate-efs</code><p>Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。</p><p>所属：守護者・分散要塞［条件付き］</p><small>教材参照：src/content/index.ts #efs</small></article>
+<article class="candidate" id="c-gp3"><h3>gp3</h3><code>candidate-gp3</code><p>容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #gp3</small></article>
+<article class="candidate" id="c-provisioned-iops"><h3>Provisioned IOPS SSD</h3><code>candidate-provisioned-iops</code><p>厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #provisioned-iops</small></article>
+<article class="candidate" id="c-storage-performance"><h3>IOPSとスループット</h3><code>candidate-storage-performance</code><p>秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #storage-performance</small></article>
+<article class="candidate" id="c-standard-ia"><h3>S3 Standard-IA</h3><code>candidate-standard-ia</code><p>低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。</p><p>所属：復旧者・保存［条件付き］</p><small>教材参照：src/content/index.ts #standard-ia</small></article>
+<article class="candidate" id="c-intelligent-tiering"><h3>S3 Intelligent-Tiering</h3><code>candidate-intelligent-tiering</code><p>アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。</p><p>所属：調律師・精鋭［条件付き］</p><small>教材参照：src/content/index.ts #intelligent-tiering</small></article>
+<article class="candidate" id="c-archive"><h3>アーカイブ保存</h3><code>candidate-archive</code><p>長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。</p><p>所属：復旧者・保存［条件付き］</p><small>教材参照：src/content/index.ts #archive</small></article>
+<article class="candidate" id="c-versioning"><h3>S3バージョニング</h3><code>candidate-versioning</code><p>オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。</p><p>所属：復旧者・保存［補助］</p><small>教材参照：src/content/index.ts #versioning</small></article>
+<article class="candidate" id="c-noncurrent-version"><h3>S3旧バージョン</h3><code>candidate-noncurrent-version</code><p>現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。</p><p>所属：復旧者・保存［補助］</p><small>教材参照：src/content/index.ts #noncurrent-version</small></article>
+<article class="candidate" id="c-object-lock"><h3>S3 Object Lock</h3><code>candidate-object-lock</code><p>一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。</p><p>所属：復旧者・保存［補助］</p><small>教材参照：src/content/index.ts #object-lock</small></article>
+<article class="candidate" id="c-fsx-windows"><h3>FSx for Windows File Server</h3><code>candidate-fsx-windows</code><p>SMB共有やActive Directory連携を要件とするWindowsファイルサービス。</p><p>所属：未所属：remainder-fsx-windows</p><small>教材参照：src/content/index.ts #fsx-windows</small></article>
+<article class="candidate" id="c-ebs-snapshot"><h3>EBSスナップショット</h3><code>candidate-ebs-snapshot</code><p>EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。</p><p>所属：指揮者・機会活用［条件付き］／復旧者・保存［中核］</p><small>教材参照：src/content/index.ts #ebs-snapshot</small></article>
+<article class="candidate" id="c-multipart-upload"><h3>マルチパートアップロード</h3><code>candidate-multipart-upload</code><p>大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。</p><p>所属：指揮者・再挑戦［条件付き］</p><small>教材参照：src/content/index.ts #multipart-upload</small></article>
+<article class="candidate" id="c-transfer-acceleration"><h3>S3 Transfer Acceleration</h3><code>candidate-transfer-acceleration</code><p>遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。</p><p>所属：加速者・配信［条件付き］</p><small>教材参照：src/content/index.ts #transfer-acceleration</small></article>
+<article class="candidate" id="c-s3-consistency"><h3>S3の強い整合性</h3><code>candidate-s3-consistency</code><p>成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。</p><p>所属：加速者・記憶［補助］</p><small>教材参照：src/content/index.ts #s3-consistency</small></article>
+<article class="candidate" id="c-s3-encryption"><h3>S3の保存時暗号化</h3><code>candidate-s3-encryption</code><p>SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。</p><p>所属：復旧者・保存［条件付き］</p><small>教材参照：src/content/index.ts #s3-encryption</small></article>
+<article class="candidate" id="c-s3-replication"><h3>S3レプリケーション</h3><code>candidate-s3-replication</code><p>ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。</p><p>所属：復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #s3-replication</small></article>
+<article class="candidate" id="c-rds-multi-az"><h3>RDS Multi-AZ</h3><code>candidate-rds-multi-az</code><p>複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。</p><p>所属：守護者・継承［中核］</p><small>教材参照：src/content/index.ts #rds-multi-az</small></article>
+<article class="candidate" id="c-read-replica"><h3>リードレプリカ</h3><code>candidate-read-replica</code><p>読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。</p><p>所属：加速者・読取分散［中核］</p><small>教材参照：src/content/index.ts #read-replica</small></article>
+<article class="candidate" id="c-rds-standby"><h3>RDSの単一スタンバイ</h3><code>candidate-rds-standby</code><p>Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。</p><p>所属：守護者・継承［中核］</p><small>教材参照：src/content/index.ts #rds-standby</small></article>
+<article class="candidate" id="c-dynamodb"><h3>Amazon DynamoDB</h3><code>candidate-dynamodb</code><p>キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。</p><p>所属：加速者・記憶［条件付き］</p><small>教材参照：src/content/index.ts #dynamodb</small></article>
+<article class="candidate" id="c-partition-key"><h3>パーティションキー</h3><code>candidate-partition-key</code><p>DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。</p><p>所属：加速者・読取分散［条件付き］</p><small>教材参照：src/content/index.ts #partition-key</small></article>
+<article class="candidate" id="c-gsi"><h3>グローバルセカンダリインデックス（GSI）</h3><code>candidate-gsi</code><p>別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。</p><p>所属：加速者・読取分散［条件付き］</p><small>教材参照：src/content/index.ts #gsi</small></article>
+<article class="candidate" id="c-consistency"><h3>読取り整合性</h3><code>candidate-consistency</code><p>更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。</p><p>所属：加速者・記憶［補助］／加速者・読取分散［補助］</p><small>教材参照：src/content/index.ts #consistency</small></article>
+<article class="candidate" id="c-dynamodb-on-demand"><h3>DynamoDBオンデマンド容量</h3><code>candidate-dynamodb-on-demand</code><p>読書き要求ベースの容量課金。事前の固定容量計画を減らす。</p><p>所属：調律師・即応［補助］</p><small>教材参照：src/content/index.ts #dynamodb-on-demand</small></article>
+<article class="candidate" id="c-dynamodb-ttl"><h3>DynamoDB TTL</h3><code>candidate-dynamodb-ttl</code><p>項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。</p><p>所属：加速者・記憶［条件付き］</p><small>教材参照：src/content/index.ts #dynamodb-ttl</small></article>
+<article class="candidate" id="c-dynamodb-transactions"><h3>DynamoDBトランザクション</h3><code>candidate-dynamodb-transactions</code><p>複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。</p><p>所属：指揮者・再挑戦［条件付き］</p><small>教材参照：src/content/index.ts #dynamodb-transactions</small></article>
+<article class="candidate" id="c-dax"><h3>DAX</h3><code>candidate-dax</code><p>DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。</p><p>所属：加速者・記憶［中核］</p><small>教材参照：src/content/index.ts #dax</small></article>
+<article class="candidate" id="c-rds-proxy"><h3>RDS Proxy</h3><code>candidate-rds-proxy</code><p>DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。</p><p>所属：守護者・継承［補助］／調律師・即応［条件付き］</p><small>教材参照：src/content/index.ts #rds-proxy</small></article>
+<article class="candidate" id="c-point-in-time-recovery"><h3>ポイントインタイムリカバリ（PITR）</h3><code>candidate-point-in-time-recovery</code><p>保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。</p><p>所属：復旧者・保存［中核］</p><small>教材参照：src/content/index.ts #point-in-time-recovery</small></article>
+<article class="candidate" id="c-aurora-replica"><h3>Aurora Replica</h3><code>candidate-aurora-replica</code><p>Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。</p><p>所属：守護者・継承［条件付き］／加速者・読取分散［中核］</p><small>教材参照：src/content/index.ts #aurora-replica</small></article>
+<article class="candidate" id="c-global-tables"><h3>DynamoDBグローバルテーブル</h3><code>candidate-global-tables</code><p>複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。</p><p>所属：復旧者・待機［条件付き］</p><small>教材参照：src/content/index.ts #global-tables</small></article>
+<article class="candidate" id="c-database-selection"><h3>データモデルによるDB選定</h3><code>candidate-database-selection</code><p>SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #database-selection</small></article>
+<article class="candidate" id="c-database-cost"><h3>DBの総費用</h3><code>candidate-database-cost</code><p>実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。</p><p>所属：調律師・精鋭［補助］／加速者・読取分散［条件付き］</p><small>教材参照：src/content/index.ts #database-cost</small></article>
+<article class="candidate" id="c-network-cost"><h3>ネットワークの総費用</h3><code>candidate-network-cost</code><p>出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #network-cost</small></article>
+<article class="candidate" id="c-storage-cost"><h3>ストレージの総費用</h3><code>candidate-storage-cost</code><p>保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #storage-cost</small></article>
+<article class="candidate" id="c-route53"><h3>Route 53</h3><code>candidate-route53</code><p>名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。</p><p>所属：守護者・分散要塞［条件付き］／加速者・配信［条件付き］／復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #route53</small></article>
+<article class="candidate" id="c-dns-ttl"><h3>TTL</h3><code>candidate-dns-ttl</code><p>DNS やキャッシュの情報を再利用する有効期間。</p><p>所属：加速者・配信［補助］／加速者・記憶［補助］</p><small>教材参照：src/content/index.ts #dns-ttl</small></article>
+<article class="candidate" id="c-cloudfront"><h3>CloudFront</h3><code>candidate-cloudfront</code><p>エッジで HTTP/HTTPS コンテンツを配信する CDN。</p><p>所属：加速者・配信［中核］</p><small>教材参照：src/content/index.ts #cloudfront</small></article>
+<article class="candidate" id="c-cache-key"><h3>キャッシュキー</h3><code>candidate-cache-key</code><p>どの要求で同じキャッシュを共有するかを決める識別情報。</p><p>所属：加速者・配信［補助］／加速者・記憶［補助］</p><small>教材参照：src/content/index.ts #cache-key</small></article>
+<article class="candidate" id="c-global-accelerator"><h3>Global Accelerator</h3><code>candidate-global-accelerator</code><p>静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。</p><p>所属：加速者・配信［条件付き］</p><small>教材参照：src/content/index.ts #global-accelerator</small></article>
+<article class="candidate" id="c-cloudfront-oac"><h3>OAC</h3><code>candidate-cloudfront-oac</code><p>CloudFront からオリジンへのアクセスを制限する仕組み。</p><p>所属：加速者・配信［補助］</p><small>教材参照：src/content/index.ts #cloudfront-oac</small></article>
+<article class="candidate" id="c-signed-url"><h3>署名付き URL</h3><code>candidate-signed-url</code><p>有効期限等を含む署名で視聴者のアクセスを制限する URL。</p><p>所属：加速者・配信［補助］</p><small>教材参照：src/content/index.ts #signed-url</small></article>
+<article class="candidate" id="c-lambda"><h3>Lambda</h3><code>candidate-lambda</code><p>イベントに応じてコードを動かすサーバーレスサービス。</p><p>所属：調律師・即応［中核］／指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #lambda</small></article>
+<article class="candidate" id="c-lambda-concurrency"><h3>同時実行</h3><code>candidate-lambda-concurrency</code><p>同じ時点で処理されている関数呼出し数。</p><p>所属：調律師・即応［補助］</p><small>教材参照：src/content/index.ts #lambda-concurrency</small></article>
+<article class="candidate" id="c-ecs"><h3>ECS</h3><code>candidate-ecs</code><p>コンテナタスクの実行・配置・維持を管理するサービス。</p><p>所属：調律師・増援［条件付き］／調律師・即応［条件付き］／指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #ecs</small></article>
+<article class="candidate" id="c-fargate"><h3>Fargate</h3><code>candidate-fargate</code><p>ホストを直接管理せずコンテナを動かす計算基盤。</p><p>所属：調律師・即応［中核］</p><small>教材参照：src/content/index.ts #fargate</small></article>
+<article class="candidate" id="c-eks"><h3>EKS</h3><code>candidate-eks</code><p>Kubernetes のマネージドサービス。</p><p>所属：調律師・増援［条件付き］</p><small>教材参照：src/content/index.ts #eks</small></article>
+<article class="candidate" id="c-ecr"><h3>ECR</h3><code>candidate-ecr</code><p>コンテナイメージを保管するレジストリ。</p><p>所属：構築士・再現構築［補助］</p><small>教材参照：src/content/index.ts #ecr</small></article>
+<article class="candidate" id="c-task-role"><h3>タスクロール</h3><code>candidate-task-role</code><p>ECS タスク内のアプリが AWS API を使うための IAM ロール。</p><p>所属：調律師・即応［条件付き］／構築士・権限設計［補助］</p><small>教材参照：src/content/index.ts #task-role</small></article>
+<article class="candidate" id="c-api-gateway"><h3>API Gateway</h3><code>candidate-api-gateway</code><p>API の公開・認証連携・流量管理を担う入口。</p><p>所属：調律師・即応［補助］</p><small>教材参照：src/content/index.ts #api-gateway</small></article>
+<article class="candidate" id="c-step-functions"><h3>Step Functions</h3><code>candidate-step-functions</code><p>複数ステップの順序や再試行を状態機械で管理するサービス。</p><p>所属：調律師・即応［条件付き］／指揮者・再挑戦［補助］</p><small>教材参照：src/content/index.ts #step-functions</small></article>
+<article class="candidate" id="c-sqs"><h3>SQS</h3><code>candidate-sqs</code><p>非同期処理の作業待ちメッセージを保持するキュー。</p><p>所属：調律師・即応［条件付き］／指揮者・蓄積［中核］</p><small>教材参照：src/content/index.ts #sqs</small></article>
+<article class="candidate" id="c-visibility-timeout"><h3>可視性タイムアウト</h3><code>candidate-visibility-timeout</code><p>受信済みメッセージをほかの受信者から一時的に隠す期間。</p><p>所属：指揮者・蓄積［補助］／指揮者・再挑戦［補助］</p><small>教材参照：src/content/index.ts #visibility-timeout</small></article>
+<article class="candidate" id="c-fifo"><h3>FIFO</h3><code>candidate-fifo</code><p>先入れ先出し。SQS ではメッセージグループ内の順序を維持する。</p><p>所属：指揮者・蓄積［補助］／指揮者・再挑戦［条件付き］</p><small>教材参照：src/content/index.ts #fifo</small></article>
+<article class="candidate" id="c-idempotency"><h3>冪等性</h3><code>candidate-idempotency</code><p>同じ要求を繰り返しても業務上の結果が重複しない性質。</p><p>所属：指揮者・再挑戦［中核］</p><small>教材参照：src/content/index.ts #idempotency</small></article>
+<article class="candidate" id="c-sns"><h3>SNS</h3><code>candidate-sns</code><p>トピックの購読者へメッセージを配信するサービス。</p><p>所属：調律師・即応［条件付き］／指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #sns</small></article>
+<article class="candidate" id="c-fanout"><h3>ファンアウト</h3><code>candidate-fanout</code><p>一つのメッセージを複数の独立した受信先へ配る構成。</p><p>所属：指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #fanout</small></article>
+<article class="candidate" id="c-eventbridge"><h3>EventBridge</h3><code>candidate-eventbridge</code><p>イベントをパターンに応じて対象へ振り分けるサービス。</p><p>所属：調律師・即応［補助］／指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #eventbridge</small></article>
+<article class="candidate" id="c-dlq"><h3>デッドレターキュー</h3><code>candidate-dlq</code><p>処理に繰り返し失敗したメッセージの隔離先。</p><p>所属：守護者・隔離［補助］／指揮者・蓄積［補助］／指揮者・再挑戦［補助］</p><small>教材参照：src/content/index.ts #dlq</small></article>
+<article class="candidate" id="c-queue-scaling"><h3>キューに基づくスケーリング</h3><code>candidate-queue-scaling</code><p>滞留件数や待ち時間に応じて処理能力を調整すること。</p><p>所属：調律師・増援［補助］／指揮者・蓄積［補助］</p><small>教材参照：src/content/index.ts #queue-scaling</small></article>
+<article class="candidate" id="c-claim-check"><h3>Claim Check</h3><code>candidate-claim-check</code><p>大きなデータを外部保存し、メッセージには参照を渡す方式。</p><p>所属：指揮者・蓄積［補助］</p><small>教材参照：src/content/index.ts #claim-check</small></article>
+<article class="candidate" id="c-kms"><h3>KMS</h3><code>candidate-kms</code><p>暗号鍵と暗号操作の権限を管理するサービス。</p><p>所属：構築士・権限設計［条件付き］／復旧者・保存［条件付き］</p><small>教材参照：src/content/index.ts #kms</small></article>
+<article class="candidate" id="c-secrets-manager"><h3>Secrets Manager</h3><code>candidate-secrets-manager</code><p>認証情報等を保管し、更新を管理するサービス。</p><p>所属：構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #secrets-manager</small></article>
+<article class="candidate" id="c-tls"><h3>TLS</h3><code>candidate-tls</code><p>通信経路の暗号化と相手認証のプロトコル。</p><p>所属：加速者・配信［条件付き］／構築士・閉域接続［条件付き］</p><small>教材参照：src/content/index.ts #tls</small></article>
+<article class="candidate" id="c-waf"><h3>WAF</h3><code>candidate-waf</code><p>HTTP リクエストを条件に基づいて検査・制御する仕組み。</p><p>所属：加速者・配信［条件付き］</p><small>教材参照：src/content/index.ts #waf</small></article>
+<article class="candidate" id="c-guardduty"><h3>GuardDuty</h3><code>candidate-guardduty</code><p>不審な活動や脅威の兆候を検出するサービス。</p><p>所属：復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #guardduty</small></article>
+<article class="candidate" id="c-inspector"><h3>Inspector</h3><code>candidate-inspector</code><p>対応ワークロードのソフトウェア脆弱性等を調べるサービス。</p><p>所属：復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #inspector</small></article>
+<article class="candidate" id="c-macie"><h3>Macie</h3><code>candidate-macie</code><p>S3 データの機密情報を検出するサービス。</p><p>所属：復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #macie</small></article>
+<article class="candidate" id="c-shield"><h3>Shield</h3><code>candidate-shield</code><p>DDoS 攻撃からの保護を提供するサービス。</p><p>所属：加速者・配信［条件付き］</p><small>教材参照：src/content/index.ts #shield</small></article>
+<article class="candidate" id="c-cloudwatch"><h3>CloudWatch</h3><code>candidate-cloudwatch</code><p>メトリクス、ログ、アラーム等の可観測性サービス。</p><p>所属：調律師・増援［補助］／復旧者・観測［中核］</p><small>教材参照：src/content/index.ts #cloudwatch</small><p>共通スターター候補。5枚の内訳は未決定。</p></article>
+<article class="candidate" id="c-cloudtrail"><h3>CloudTrail</h3><code>candidate-cloudtrail</code><p>AWS API 操作の履歴を追跡する監査サービス。</p><p>所属：復旧者・観測［補助］</p><small>教材参照：src/content/index.ts #cloudtrail</small></article>
+<article class="candidate" id="c-aws-config"><h3>AWS Config</h3><code>candidate-aws-config</code><p>リソース設定の履歴とルール準拠を評価するサービス。</p><p>所属：構築士・再現構築［補助］／復旧者・観測［補助］</p><small>教材参照：src/content/index.ts #aws-config</small></article>
+<article class="candidate" id="c-rto"><h3>RTO</h3><code>candidate-rto</code><p>障害後にサービスを復旧させるまでの目標時間。</p><p>所属：復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #rto</small></article>
+<article class="candidate" id="c-rpo"><h3>RPO</h3><code>candidate-rpo</code><p>どれだけ過去までのデータ損失を許容するかという時間の目標。</p><p>所属：復旧者・保存［補助］／復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #rpo</small></article>
+<article class="candidate" id="c-pilot-light"><h3>パイロットライト</h3><code>candidate-pilot-light</code><p>復旧先で中核だけを維持し、障害時に残りを起動する戦略。</p><p>所属：復旧者・待機［中核］</p><small>教材参照：src/content/index.ts #pilot-light</small></article>
+<article class="candidate" id="c-warm-standby"><h3>ウォームスタンバイ</h3><code>candidate-warm-standby</code><p>縮小した全体構成を復旧先で稼働させておく戦略。</p><p>所属：復旧者・待機［中核］</p><small>教材参照：src/content/index.ts #warm-standby</small></article>
+<article class="candidate" id="c-backup"><h3>バックアップ</h3><code>candidate-backup</code><p>誤更新や障害から戻すための復元可能なデータの複製。</p><p>所属：復旧者・保存［中核］</p><small>教材参照：src/content/index.ts #backup</small></article>
+<article class="candidate" id="c-restore-test"><h3>復元テスト</h3><code>candidate-restore-test</code><p>バックアップから起動・整合性・所要時間を検証する試験。</p><p>所属：復旧者・保存［補助］／復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #restore-test</small></article>
+<article class="candidate" id="c-replication"><h3>レプリケーション</h3><code>candidate-replication</code><p>別の保存先へデータの更新を複製する仕組み。</p><p>所属：加速者・読取分散［補助］／復旧者・待機［補助］</p><small>教材参照：src/content/index.ts #replication</small></article>
+<article class="candidate" id="c-dms"><h3>DMS</h3><code>candidate-dms</code><p>DB の初期移行と継続的な変更同期を行うサービス。</p><p>所属：未所属：remainder-dms</p><small>教材参照：src/content/index.ts #dms</small></article>
+<article class="candidate" id="c-cdc"><h3>CDC</h3><code>candidate-cdc</code><p>データベースに生じた変更を取得して反映する方式。</p><p>所属：未所属：remainder-cdc</p><small>教材参照：src/content/index.ts #cdc</small></article>
+<article class="candidate" id="c-datasync"><h3>DataSync</h3><code>candidate-datasync</code><p>対応するストレージ間でファイル・オブジェクトを転送するサービス。</p><p>所属：未所属：remainder-datasync</p><small>教材参照：src/content/index.ts #datasync</small></article>
+<article class="candidate" id="c-migration"><h3>リホスト</h3><code>candidate-migration</code><p>アプリを大きく変更せず実行環境を移す移行方式。</p><p>所属：未所属：remainder-migration</p><small>教材参照：src/content/index.ts #migration</small></article>
+<article class="candidate" id="c-performance"><h3>ボトルネック</h3><code>candidate-performance</code><p>処理全体の速度や容量を制限している部分。</p><p>所属：調律師・精鋭［中核］／加速者・記憶［条件付き］／加速者・読取分散［補助］／復旧者・観測［補助］</p><small>教材参照：src/content/index.ts #performance</small></article>
+<article class="candidate" id="c-cache"><h3>キャッシュ</h3><code>candidate-cache</code><p>再利用可能なデータを速く取得できる場所へ一時保存する仕組み。</p><p>所属：加速者・記憶［中核］</p><small>教材参照：src/content/index.ts #cache</small></article>
+<article class="candidate" id="c-savings-plans"><h3>Savings Plans</h3><code>candidate-savings-plans</code><p>一定の利用額をコミットして対象使用料の割引を受ける購入方式。</p><p>所属：調律師・精鋭［条件付き］</p><small>教材参照：src/content/index.ts #savings-plans</small></article>
+<article class="candidate" id="c-cost-optimization"><h3>コスト最適化</h3><code>candidate-cost-optimization</code><p>要件を満たしながら使用量と価格条件を改善すること。</p><p>所属：調律師・精鋭［中核］</p><small>教材参照：src/content/index.ts #cost-optimization</small></article>
+<article class="candidate" id="c-athena"><h3>Athena</h3><code>candidate-athena</code><p>S3 などのデータを SQL で分析するサービス。</p><p>所属：未所属：remainder-athena</p><small>教材参照：src/content/index.ts #athena</small></article>
+<article class="candidate" id="c-glue"><h3>Glue</h3><code>candidate-glue</code><p>データカタログとデータ統合・ETL を提供するサービス。</p><p>所属：未所属：remainder-glue</p><small>教材参照：src/content/index.ts #glue</small></article>
+<article class="candidate" id="c-redshift"><h3>Redshift</h3><code>candidate-redshift</code><p>大規模な分析用データウェアハウス。</p><p>所属：未所属：remainder-redshift</p><small>教材参照：src/content/index.ts #redshift</small></article>
+<article class="candidate" id="c-kinesis"><h3>Kinesis Data Streams</h3><code>candidate-kinesis</code><p>データストリームを収集し処理・再読込するサービス。</p><p>所属：指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #kinesis</small></article>
+<article class="candidate" id="c-firehose"><h3>Data Firehose</h3><code>candidate-firehose</code><p>ストリーミングデータを対応先へ配信するサービス。</p><p>所属：指揮者・蓄積［条件付き］</p><small>教材参照：src/content/index.ts #firehose</small></article>
+<article class="candidate" id="c-opensearch"><h3>OpenSearch</h3><code>candidate-opensearch</code><p>全文検索やログ分析に使う検索・分析エンジン。</p><p>所属：復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #opensearch</small></article>
+<article class="candidate" id="c-lake-formation"><h3>Lake Formation</h3><code>candidate-lake-formation</code><p>データレイクの権限管理を支援するサービス。</p><p>所属：構築士・権限設計［条件付き］</p><small>教材参照：src/content/index.ts #lake-formation</small></article>
+<article class="candidate" id="c-reserved-instances"><h3>Reserved Instances（RI）</h3><code>candidate-reserved-instances</code><p>適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。</p><p>所属：調律師・精鋭［条件付き］</p><small>教材参照：src/content/index.ts #reserved-instances</small></article>
+<article class="candidate" id="c-ec2-hibernation"><h3>EC2休止</h3><code>candidate-ec2-hibernation</code><p>対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。</p><p>所属：調律師・精鋭［条件付き］</p><small>教材参照：src/content/index.ts #ec2-hibernation</small></article>
+<article class="candidate" id="c-ec2-stop"><h3>EC2停止</h3><code>candidate-ec2-stop</code><p>EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #ec2-stop</small></article>
+<article class="candidate" id="c-rcu"><h3>RCU</h3><code>candidate-rcu</code><p>DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。</p><p>所属：調律師・精鋭［条件付き］／加速者・読取分散［条件付き］</p><small>教材参照：src/content/index.ts #rcu</small></article>
+<article class="candidate" id="c-wcu"><h3>WCU</h3><code>candidate-wcu</code><p>DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。</p><p>所属：調律師・精鋭［条件付き］</p><small>教材参照：src/content/index.ts #wcu</small></article>
+<article class="candidate" id="c-cost-explorer"><h3>AWS Cost Explorer</h3><code>candidate-cost-explorer</code><p>費用・使用量の傾向と内訳を可視化して分析するサービス。</p><p>所属：調律師・精鋭［補助］／復旧者・観測［条件付き］</p><small>教材参照：src/content/index.ts #cost-explorer</small></article>
+<article class="candidate" id="c-budgets"><h3>AWS Budgets</h3><code>candidate-budgets</code><p>実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #budgets</small></article>
+<article class="candidate" id="c-cur"><h3>Cost and Usage Report（CUR）</h3><code>candidate-cur</code><p>詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #cur</small></article>
+<article class="candidate" id="c-cost-allocation"><h3>コスト配分タグ</h3><code>candidate-cost-allocation</code><p>費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。</p><p>所属：調律師・精鋭［補助］</p><small>教材参照：src/content/index.ts #cost-allocation</small></article>
+<article class="candidate" id="c-gwlb"><h3>Gateway Load Balancer（GWLB）</h3><code>candidate-gwlb</code><p>仮想ファイアウォール等のアプライアンスへ通信を透過的に分配する負荷分散。</p><p>所属：未所属：remainder-gwlb</p><small>教材参照：src/content/index.ts #gwlb</small></article>
+<article class="candidate" id="c-requester-pays"><h3>Requester Pays</h3><code>candidate-requester-pays</code><p>対応するS3要求・ダウンロード費を要求者が負担する設定。所有者の保存費は残る。</p><p>所属：未所属：remainder-requester-pays</p><small>教材参照：src/content/index.ts #requester-pays</small></article>
+<article class="candidate" id="c-throttling"><h3>スロットリング</h3><code>candidate-throttling</code><p>レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。</p><p>所属：守護者・隔離［補助］／指揮者・再挑戦［補助］</p><small>教材参照：src/content/index.ts #throttling</small></article>
+<article class="candidate" id="c-health-check"><h3>ヘルスチェック</h3><code>candidate-health-check</code><p>ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。</p><p>所属：守護者・分散要塞［補助］／守護者・継承［補助］／守護者・隔離［補助］／調律師・増援［補助］／復旧者・観測［補助］</p><small>教材参照：knowledge/game-supplement.json #health-check</small></article>
+<article class="candidate" id="c-alb"><h3>Application Load Balancer</h3><code>candidate-alb</code><p>ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。</p><p>所属：守護者・分散要塞［補助］／守護者・隔離［条件付き］／調律師・増援［条件付き］</p><small>教材参照：knowledge/game-supplement.json #alb</small></article>
+<article class="candidate" id="c-remaining-capacity"><h3>残存容量</h3><code>candidate-remaining-capacity</code><p>各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。</p><p>所属：守護者・分散要塞［中核］</p><small>教材参照：knowledge/game-supplement.json #remaining-capacity</small></article>
+<script>const q=document.getElementById("search"),cards=[...document.querySelectorAll(".candidate")];q.addEventListener("input",()=>{let n=0;for(const c of cards){c.hidden=!c.textContent.toLowerCase().includes(q.value.toLowerCase());if(!c.hidden)n++;}document.getElementById("result").textContent=n+"件表示（ビルド一覧・未所属一覧は常に表示）"});document.addEventListener("click",e=>{if(e.target.closest("a[href^=\"#c-\"]")){q.value="";q.dispatchEvent(new Event("input"));}});</script></main></html>

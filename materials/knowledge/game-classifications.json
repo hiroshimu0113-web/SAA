@@ -54704,6 +54704,82 @@
         "独立した技術レビューとゲームバランス検証。",
         "ゲームへの実装と採用はユーザーと別途設計する。"
       ]
+    },
+    {
+      "id": "concept-character-card-build-allocation",
+      "title": "6キャラ・18ビルドへの教材カード候補の所属設計",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "教材名と戦闘ビルドの関連性・重複・未所属の扱いを設計する概念。",
+      "objective": "候補をビルドの中核・補助・条件付きに分け、未所属と不足を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation"
+        },
+        {
+          "path": "public/design/card-build-allocation.html",
+          "locator": "全候補の逆引き"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card",
+        "build",
+        "character"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "6キャラ各3方向、所属の重複を許す。"
+      ],
+      "limitations": [
+        "名前と教材定義に基づく設計案。効果と排出率のバランスは未検証。"
+      ],
+      "misconceptions": [
+        "中核一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "principle": "全168候補を追跡し、所属151件と未所属17件を分ける。",
+        "applicable_when": [
+          "キャラ別カードプールを設計するとき。"
+        ],
+        "counterexample": [
+          "IaCの中核候補が存在しない場合にConfigで置換しない。"
+        ],
+        "comparison": [
+          "カード種類数とデッキ枚数を区別する。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "全候補へcandidate-ID、未所属へremainder-IDを付与。",
+        "mechanism_note": "教材定義は全候補逆引きに表示。",
+        "metaphor_limit": "ゲーム効果は未定で、AWS性能を表さない。",
+        "simplifications": [],
+        "mislearning_risks": [
+          "名称の関連だけで構築成立と扱うこと。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "未所属17件の用途、IaC不足、スターター18枚、効果・レア度・排出率を後続設計。"
+      ]
     }
   ]
 }

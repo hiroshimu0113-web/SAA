@@ -64,3 +64,8 @@ public/knowledge/graph.jsonやknowledge/INVENTORY.mdは生成物です。正本�
 AWS構築手法からビルドへの調査設計：[単一HTML](../public/design/aws-builds.html)。正本はknowledge/game-supplement.jsonのarchitectureBuildResearch、生成はscripts/export-aws-build-design.py。18構築ビルド・8ケース16問・29公式出典・評価原理とキャラ設計。27分類はdraft/candidate、ゲーム未取り込み。
 
 - [クイズの正解済みフラグ](GAME_QUIZ_CORRECT_CYCLE_CHANGE.md)：誤答を正解まで再出題し、全問正解で一巡する仕様と移行記録（2026-10-09）。
+
+## 6キャラ・18ビルドとカード候補の仕分け（2026-10-09）
+- public/design/card-build-allocation.html / JSON。公開教材165用語＋補足3用語の全168候補。所属151候補・重複込み215接続、未所属17候補へremainder-ID。中核・補助・条件付きで分類。
+- 正本game-supplement.json characterCardAllocation、生成scripts/export-card-build-allocation.py。分類concept-character-card-build-allocationはdraft/candidate。IaCの中核候補不足を明記。ゲームカード30種類・性能・キャラ・保存は変更なし。
+- 次：未所属の用途、各専用スターター、実効果・最終プール・排出率を検討。ローカル検証とGitHub同期・公開確認は後記。

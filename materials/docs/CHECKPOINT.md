@@ -846,3 +846,8 @@
 - 誤答・未回答は同じ巡の候補に残し、正解時だけフラグを付ける。全問正解後に次の巡へ移る。最後の1問の部屋内再出題と誤答→正解の別履歴にも対応。
 - 旧表示フラグは正解と見なさず、保存中の正解回答だけ回収して移行。変更記録：GAME_QUIZ_CORRECT_CYCLE_CHANGE.md。教材・分類の変更なし。
 - 全128テスト・build・Chromiumの学習室/正解フラグ回帰・knowledge/game/progress check成功。公開版 `6b72f77` / Actions `37877210145` のWebKit全8工程・deploy・HTTP 200/SHA256一致確認成功。GitHub mainへ同期済み。公開：https://hiroshimu0113-web.github.io/SAA/tower/fan.html 。次：本人の実機確認。
+## 6キャラ・18ビルドとカード候補の仕分け（2026-10-09）
+- public/design/card-build-allocation.html / JSON。公開教材165用語＋補足3用語の全168候補。所属151候補・重複込み215接続、未所属17候補へremainder-ID。中核・補助・条件付きで分類。
+- 正本game-supplement.json characterCardAllocation、生成scripts/export-card-build-allocation.py。分類concept-character-card-build-allocationはdraft/candidate。IaCの中核候補不足を明記。ゲームカード30種類・性能・キャラ・保存は変更なし。
+- 次：未所属の用途、各専用スターター、実効果・最終プール・排出率を検討。ローカル検証とGitHub同期・公開確認は後記。
+- 検証：168候補の一意性・所属双方向参照、6キャラ18ビルド、Chromium検索/リンク時解除・JS無効・320/390/1024px、progress:update/check、build成功。現行カタログの版02bc4cca60ddf580不変。
