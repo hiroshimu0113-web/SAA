@@ -1267,3 +1267,4 @@
 - 共通5枚＋専用3枚のスターター案、コモン70/アンコモン25/レア5の共通抽選案。費用・契約は交換所、未所属の限定用途は専用イベントへ。数値は仮、追加勝利ゲージなし。
 - 分類concept-card-mechanics-acquisition-fitはdraft/candidate。現行ゲーム30カード・キャラ・保存を変更しない。前提タグ・設置状態・利用費イベント・強化値・8階層の試遊は未実装/未検証。検証と公開は後記。
 - ローカル：180件の全設定・教材定義一致・8枚スターターと3ビルド対応、2軸/所属/追跡ID、レア度/入手先フィルター・検索/JS無効/320・390・1024px、progress照合・build成功。現行カタログと補足の他キーは変更前と一致。公開検証は続行。
+- 仮設定公開完了：32793fb / Actions 38041828183 build・deploy・129テスト・WebKit設定/フィルター検証・HTTP200/SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-build-allocation.html 。全180設定、スターター案、入手先・レア度を公開。分類concept-card-mechanics-acquisition-fitはdraft/candidate。ゲーム本体適用と試遊・AWS解釈の独立監査は未実施。
