@@ -4,7 +4,7 @@
   "scope": "公開教材termsとgame-supplement.termsを全件カード候補として棚卸し。現在実装された通常30種に限定しない。",
   "rules": [
     "6キャラ各3ビルド。所属は重複可。",
-    "共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数は未確定。",
+    "共通5枚＋専用3枚のスターター方針は維持。具体的なカードと重複枚数はcardSettingsに仮設定。採用は未確定。",
     "HPを0にしてタスク完了。追加勝利パラメータは採用しない。",
     "分類はカード効果・排出率・最終プールの実装ではない。",
     "未所属にもcandidate-IDとremainder-IDを付け、所属後も追跡用remainder-IDは履歴として維持する。",
@@ -1858,7 +1858,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "次の配置カード1枚の地域を選び、地域条件に合えばコストを1下げる。",
+        "trigger": "配置カードが手札にある。",
+        "tradeoff": "条件外では割引なし。",
+        "metaphorLimit": "地域選択だけで可用性やデータ規制を満たさない。",
+        "status": "draft",
+        "realFunction": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-az",
@@ -1879,7 +1899,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "処理カードを別AZへ配置する。片方のAZを対象にした妨害でも、他方の処理は継続する。",
+        "trigger": "配置先と対象AZを持つカードに使う。",
+        "tradeoff": "処理能力そのものは増やさない。",
+        "metaphorLimit": "AZ分離だけでデータ到達性や残存容量を保証しない。",
+        "status": "draft",
+        "realFunction": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "guardian"
+        ],
+        "links": [
+          "multi-az"
+        ]
+      }
     },
     {
       "id": "candidate-shared-responsibility",
@@ -1893,7 +1935,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-shared-responsibility",
-      "remainderReason": "全キャラ共通の責任分担を扱う候補。戦闘効果と初期レリックとの役割分担を未決定。"
+      "remainderReason": "全キャラ共通の責任分担を扱う候補。戦闘効果と初期レリックとの役割分担を未決定。",
+      "cardDesign": {
+        "energy": 0,
+        "effect": "手札1枚の担当範囲を確認する。利用者側の設定不備に対応できるカード1枚を山札から手札へ。",
+        "trigger": "対応札が山札にある。",
+        "tradeoff": "使用後は除外。対応札がなければ取得なし。",
+        "metaphorLimit": "責任を確認するだけで設定は修復されない。",
+        "status": "draft",
+        "realFunction": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-availability",
@@ -1926,7 +1986,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "正常な処理先が残る場合、その処理先に次の停止妨害1回を回避させる。",
+        "trigger": "切替先に必要な容量・到達性がある。",
+        "tradeoff": "切替先がなければ効果なし。",
+        "metaphorLimit": "可用性はデータの履歴保護ではない。",
+        "status": "draft",
+        "realFunction": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "rds-ha",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-durability",
@@ -1947,7 +2029,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "保存済みの成果物1つに、次の消失妨害を1回防ぐ保護を付ける。",
+        "trigger": "保存カードの成果物がある。",
+        "tradeoff": "停止妨害や誤更新には効かない。",
+        "metaphorLimit": "保存の耐久性を即時の稼働保証と混同しない。",
+        "status": "draft",
+        "realFunction": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-scaling",
@@ -1968,7 +2070,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "稼働中の処理カード1枚の攻撃を次ターンから3増やす。",
+        "trigger": "拡張可能な処理先がある。",
+        "tradeoff": "今ターンの攻撃は増えない。",
+        "metaphorLimit": "下流のボトルネックは解消しない。",
+        "status": "draft",
+        "realFunction": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-spot",
@@ -1989,7 +2111,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "中断可能な処理として、各ターン6ダメージ。中断予告を受けたら停止する。",
+        "trigger": "戦闘終了まで設置。進捗保存札で再開できる。",
+        "tradeoff": "中断時は保存していない進捗を失う。",
+        "metaphorLimit": "確率の瞬殺ではなく安価な中断可能戦力の比喩。",
+        "status": "draft",
+        "realFunction": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "commander"
+        ],
+        "links": [
+          "spot"
+        ]
+      }
     },
     {
       "id": "candidate-instance-store",
@@ -2016,7 +2160,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "このターンの一時処理カード1枚をコスト0で使う。",
+        "trigger": "再生成できる一時データを使う処理。",
+        "tradeoff": "その処理先の停止で一時データを失う。",
+        "metaphorLimit": "唯一の永続データや再開地点の保存先にしない。",
+        "status": "draft",
+        "realFunction": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing",
+          "spot"
+        ]
+      }
     },
     {
       "id": "candidate-s3",
@@ -2055,7 +2220,30 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "処理結果またはチェックポイント1つをオブジェクトとして保存する。",
+        "trigger": "保存できる結果を選ぶ。",
+        "tradeoff": "保存だけでは攻撃・復旧しない。",
+        "metaphorLimit": "オブジェクト保存をDBやRAM保持と同一視しない。",
+        "status": "draft",
+        "realFunction": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "cdn",
+          "queue",
+          "spot",
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-rds",
@@ -2082,7 +2270,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DB処理先を設置し、毎ターン3ダメージ。",
+        "trigger": "SQL処理に対応。",
+        "tradeoff": "停止すると攻撃も停止。",
+        "metaphorLimit": "管理サービスでも業務データや権限の設計は残る。",
+        "status": "draft",
+        "realFunction": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "rds-ha",
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-iam-role",
@@ -2103,7 +2312,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "このターン、指定した主体へ許可済みのAWS操作を実行させる。",
+        "trigger": "対象操作の許可と引受条件がある。",
+        "tradeoff": "許可外の操作には使えない。",
+        "metaphorLimit": "ロールだけで経路や万能権限を得ない。",
+        "status": "draft",
+        "realFunction": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "builder"
+        ],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-temporary-credentials",
@@ -2124,7 +2355,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "既存のロールの許可を2ターン利用できる認証情報へ交換する。",
+        "trigger": "引受可能なロールがある。",
+        "tradeoff": "期限後は再取得が必要。",
+        "metaphorLimit": "短命な認証情報でも権限範囲は広がらない。",
+        "status": "draft",
+        "realFunction": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-least-privilege",
@@ -2145,7 +2396,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "許可対象を絞り、対象外操作による設定不備付与を1回防ぐ。",
+        "trigger": "必要な操作は許可済み。",
+        "tradeoff": "絞りすぎると対応する自分の操作も失敗する。",
+        "metaphorLimit": "最小権限は必要操作を拒否することではない。",
+        "status": "draft",
+        "realFunction": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-explicit-deny",
@@ -2166,7 +2437,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "指定操作を禁止し、その操作による妨害を1回防ぐ。",
+        "trigger": "対応するポリシーの適用範囲内。",
+        "tradeoff": "自分の同じ操作も禁止。",
+        "metaphorLimit": "DenyはAllowに優先するが、あらゆる脅威を防がない。",
+        "status": "draft",
+        "realFunction": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-scp",
@@ -2193,7 +2484,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "所属アカウントの操作上限を設定し、上限外操作の妨害を防ぐ。",
+        "trigger": "Organizationsの対象メンバーアカウント。",
+        "tradeoff": "この札だけでは操作許可を得ない。",
+        "metaphorLimit": "管理アカウントや適用主体等の例外を省略している。",
+        "status": "draft",
+        "realFunction": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "isolation",
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-cross-account",
@@ -2214,7 +2526,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "別アカウントの許可済みリソースを、処理先として利用する。",
+        "trigger": "両側の信頼と許可が成立。",
+        "tradeoff": "条件が欠ければ利用不可。",
+        "metaphorLimit": "アカウントを分けるだけでアクセスできない。",
+        "status": "draft",
+        "realFunction": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-external-id",
@@ -2235,7 +2567,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "外部委任ロールに顧客識別条件を加え、取り違えの妨害を1回防ぐ。",
+        "trigger": "外部事業者が委任ロールを使う。",
+        "tradeoff": "一般の通信妨害には無効。",
+        "metaphorLimit": "External IDを秘密パスワードとして扱わない。",
+        "status": "draft",
+        "realFunction": "外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-identity-center",
@@ -2249,7 +2601,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-identity-center",
-      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "従業員主体を登録し、許可済みのアカウントへログインできるようにする。",
+        "trigger": "従業員アクセスを扱うイベント。",
+        "tradeoff": "一般利用者のアプリ認証には代用不可。",
+        "metaphorLimit": "認証成功とサービス操作の認可は別。",
+        "status": "draft",
+        "realFunction": "従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-cognito",
@@ -2263,7 +2633,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-cognito",
-      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "一般利用者の認証を成立させ、ログイン必須の処理を通す。",
+        "trigger": "アプリ利用者の認証が必要。",
+        "tradeoff": "AWS API権限は付かない。",
+        "metaphorLimit": "ユーザープールとIDプールを区別する。",
+        "status": "draft",
+        "realFunction": "一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-root",
@@ -2277,7 +2665,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-root",
-      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。",
+      "cardDesign": {
+        "energy": 2,
+        "effect": "ルートが必要と明示されたアカウント管理処理を1回行う。",
+        "trigger": "専用イベントのみ。日常の攻撃・防御には使わない。",
+        "tradeoff": "使用後除外。日常利用を推奨しない。",
+        "metaphorLimit": "強権限を理由に万能攻撃カードにしない。",
+        "status": "draft",
+        "realFunction": "AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-mfa",
@@ -2291,7 +2697,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-mfa",
-      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "認証への追加確認を設定し、パスワード漏えいによる妨害を1回防ぐ。",
+        "trigger": "対応する認証主体を保護。",
+        "tradeoff": "設定ミスや通信攻撃には無効。",
+        "metaphorLimit": "MFAだけで認可や全脅威への安全性を保証しない。",
+        "status": "draft",
+        "realFunction": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-organizations",
@@ -2312,7 +2736,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "別アカウントの区画を作り、アカウント範囲の妨害を分離する。",
+        "trigger": "複数アカウント構成。",
+        "tradeoff": "区画間アクセスは別途必要。",
+        "metaphorLimit": "統制や請求集約が全操作を自動許可するわけではない。",
+        "status": "draft",
+        "realFunction": "AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "isolation"
+        ]
+      }
     },
     {
       "id": "candidate-control-tower",
@@ -2333,7 +2777,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "複数アカウントの初期統制を展開し、設定済みの基本ルールを適用する。",
+        "trigger": "ランディングゾーンを作る構成。",
+        "tradeoff": "任意のアプリ構成は展開しない。",
+        "metaphorLimit": "IaC全般や任意設定の代替ではない。",
+        "status": "draft",
+        "realFunction": "ランディングゾーンと複数アカウントの統制・払い出しを支援する。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "iac"
+        ]
+      }
     },
     {
       "id": "candidate-permissions-boundary",
@@ -2354,7 +2818,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "主体の権限上限を固定し、上限外への拡大を防ぐ。",
+        "trigger": "対象IAM主体がある。",
+        "tradeoff": "Allowは別途必要。",
+        "metaphorLimit": "境界だけでは権限を付与しない。",
+        "status": "draft",
+        "realFunction": "IAM主体へ付与できる権限の上限。単独で権限を付与しない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-abac",
@@ -2375,7 +2859,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "属性が一致する主体と対象の間で、許可された操作を通す。",
+        "trigger": "認可用タグが管理されている。",
+        "tradeoff": "属性不一致では通らない。",
+        "metaphorLimit": "タグ変更権限まで管理しなければ安全ではない。",
+        "status": "draft",
+        "realFunction": "タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-resource-policy",
@@ -2396,7 +2900,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対象リソースに主体と操作の許可・拒否を設定する。",
+        "trigger": "対応するリソースがある。",
+        "tradeoff": "他の適用ポリシーのDenyは覆せない。",
+        "metaphorLimit": "リソース側設定だけで全認可が決まるとは限らない。",
+        "status": "draft",
+        "realFunction": "S3バケット等のリソース側でPrincipalと許可・拒否を定める。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-implicit-deny",
@@ -2417,7 +2941,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "許可がない操作を止め、手札の不足する許可を確認する。",
+        "trigger": "認可の失敗を調べる。",
+        "tradeoff": "止めるだけで修復しない。",
+        "metaphorLimit": "暗黙的拒否と明示的拒否の原因を区別する。",
+        "status": "draft",
+        "realFunction": "適用される許可がない要求を既定で拒否すること。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-access-analyzer",
@@ -2444,7 +2988,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対象の外部共有設定を確認し、不備があれば設定不備対策札を1枚引く。",
+        "trigger": "分析対象のアクセス設定がある。",
+        "tradeoff": "修正は引いた札で別途実行。",
+        "metaphorLimit": "検出が修正や全アクセスの安全保証ではない。",
+        "status": "draft",
+        "realFunction": "外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-cognito-identity",
@@ -2458,7 +3023,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-cognito-identity",
-      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。"
+      "remainderReason": "利用者・従業員の認証やアカウント保護。現行の権限設計ビルドとは別の認証カード群として検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "認証済みのアプリ利用者へ、限定された一時AWS認証情報を渡す。",
+        "trigger": "IDプールと対応ロールがある。",
+        "tradeoff": "期限・許可範囲に従う。",
+        "metaphorLimit": "ユーザープールのログイン機能とは別。",
+        "status": "draft",
+        "realFunction": "認証済みID等に応じた限定的なAWS一時認証情報を提供する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-block-public-access",
@@ -2479,7 +3062,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3対象への公開設定の妨害を防ぐ。",
+        "trigger": "S3の公開制御を設定。",
+        "tradeoff": "意図した公開構成にも影響する。",
+        "metaphorLimit": "VPC経路やIAM全般の代替ではない。",
+        "status": "draft",
+        "realFunction": "S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-vpc",
@@ -2500,7 +3103,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "処理先を配置するネットワーク区画を設置する。",
+        "trigger": "アドレス範囲を選ぶ。",
+        "tradeoff": "経路と通信許可は別。",
+        "metaphorLimit": "VPCだけで全通信が成立・遮断するわけではない。",
+        "status": "draft",
+        "realFunction": "リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-subnet",
@@ -2533,7 +3156,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "1つのAZに属する配置区画を作る。",
+        "trigger": "VPCと対象AZがある。",
+        "tradeoff": "複数AZを1区画にまとめられない。",
+        "metaphorLimit": "区画の作成だけで経路や認可は成立しない。",
+        "status": "draft",
+        "realFunction": "1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "isolation",
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-route",
@@ -2554,7 +3199,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "指定宛先への経路を設定し、対応する通信を通す。",
+        "trigger": "経路先が存在。",
+        "tradeoff": "通信許可とIAMは別途必要。",
+        "metaphorLimit": "ルートテーブルは操作権限を与えない。",
+        "status": "draft",
+        "realFunction": "宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-public-subnet",
@@ -2568,7 +3233,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-public-subnet",
-      "remainderReason": "公開経路の候補。閉域接続とは用途が異なり、公開入口の共通枠を検討。"
+      "remainderReason": "公開経路の候補。閉域接続とは用途が異なり、公開入口の共通枠を検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "IGWへ直接向かう経路を区画に設定する。",
+        "trigger": "IGWを利用する公開入口の場面。",
+        "tradeoff": "各処理先の公開IPや通信許可は別。",
+        "metaphorLimit": "配置したEC2が自動公開されるわけではない。",
+        "status": "draft",
+        "realFunction": "IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-longest-prefix",
@@ -2589,7 +3272,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "重なる経路の中から、指定宛先に最も具体的な経路を選ぶ。",
+        "trigger": "宛先に複数経路が一致。",
+        "tradeoff": "経路がなければ無効。",
+        "metaphorLimit": "細かい経路を選ぶルールであり通信許可ではない。",
+        "status": "draft",
+        "realFunction": "宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-security-group",
@@ -2610,7 +3313,27 @@
       ],
       "commonStarterCandidate": true,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "5ブロック。許可した通信の戻りも通す。",
+        "trigger": "関連付けた処理先の通信を保護。",
+        "tradeoff": "許可外の必要通信も通らない。",
+        "metaphorLimit": "ブロック値は比喩。明示的Denyを設定する機能ではない。",
+        "status": "draft",
+        "realFunction": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-network-acl",
@@ -2631,7 +3354,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "区画境界に許可・拒否を設定し、対象通信の妨害を防ぐ。",
+        "trigger": "往路と復路を両方設定。",
+        "tradeoff": "復路を忘れると自分の処理も失敗。",
+        "metaphorLimit": "ステートフルなSGと同じルールにしない。",
+        "status": "draft",
+        "realFunction": "サブネット境界で許可・拒否を設定するステートレスな通信制御。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-nat-gateway",
@@ -2652,7 +3395,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "プライベート側のIPv4処理先から外部への通信を通す。",
+        "trigger": "NAT配置・経路が成立。",
+        "tradeoff": "外からの新規接続は通さない。",
+        "metaphorLimit": "専用のサービス閉域経路や暗号化ではない。",
+        "status": "draft",
+        "realFunction": "外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-vpc-endpoint",
@@ -2673,7 +3436,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応AWSサービスへの経路を作り、外部出口を使わずに接続する。",
+        "trigger": "対応サービス・経路方式を選ぶ。",
+        "tradeoff": "IAMの許可がなければ操作失敗。",
+        "metaphorLimit": "接続と認可は別。全サービスへ万能ではない。",
+        "status": "draft",
+        "realFunction": "対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "builder"
+        ],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-private-link",
@@ -2694,7 +3479,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応サービスへプライベートIP接続を作る。",
+        "trigger": "提供側・利用側の設定がある。",
+        "tradeoff": "通常のVPC全体接続には使えない。",
+        "metaphorLimit": "Gateway endpointやVPCピアリングとは異なる。",
+        "status": "draft",
+        "realFunction": "対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-peering",
@@ -2715,7 +3520,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "2つのVPCを直接つなぎ、両区画の処理を連携させる。",
+        "trigger": "CIDRが重複せず経路がある。",
+        "tradeoff": "第三のVPCへ推移接続しない。",
+        "metaphorLimit": "接続だけで通信許可は付かない。",
+        "status": "draft",
+        "realFunction": "2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-transit-gateway",
@@ -2736,7 +3561,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "複数区画の接続先を集約し、設定した経路間で仕事を渡す。",
+        "trigger": "ハブの接続・経路表を設計。",
+        "tradeoff": "未設定の宛先へは通らない。",
+        "metaphorLimit": "接続集約を万能認可・暗号化と混同しない。",
+        "status": "draft",
+        "realFunction": "複数VPCや拠点接続を集約するネットワークハブ。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-site-to-site-vpn",
@@ -2757,7 +3602,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "拠点とAWSを暗号化トンネルでつなぐ。",
+        "trigger": "トンネル・経路・必要帯域がある。",
+        "tradeoff": "回線障害や帯域不足は別に残る。",
+        "metaphorLimit": "トンネル数をそのまま総処理能力に掛けない。",
+        "status": "draft",
+        "realFunction": "拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-direct-connect",
@@ -2778,7 +3643,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "専用回線経路を作り、該当の拠点転送を支える。",
+        "trigger": "接続の準備を済ませた場面。",
+        "tradeoff": "配置後1ターン待って利用。",
+        "metaphorLimit": "専用接続は既定で暗号化されない。",
+        "status": "draft",
+        "realFunction": "AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-ipv6-egress",
@@ -2799,7 +3684,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "IPv6の外向き通信と応答を通す。",
+        "trigger": "対象処理先がIPv6を使う。",
+        "tradeoff": "外からの新規接続は通さない。",
+        "metaphorLimit": "IPv4 NATの代用品ではない。",
+        "status": "draft",
+        "realFunction": "IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-vpc-flow-logs",
@@ -2826,7 +3731,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "通信メタデータを確認し、経路・許可の調査札を1枚引く。",
+        "trigger": "対象通信の記録を調べる。",
+        "tradeoff": "本文やアプリの正誤は分からない。",
+        "metaphorLimit": "パケット本文を取得する機能ではない。",
+        "status": "draft",
+        "realFunction": "IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-session-manager",
@@ -2847,7 +3773,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "受信SSHを開けず、処理先の管理作業を1回行う。",
+        "trigger": "Agent・IAM・到達性がある。",
+        "tradeoff": "欠ければ管理できない。",
+        "metaphorLimit": "権限や接続設定を省略できない。",
+        "status": "draft",
+        "realFunction": "Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-ec2",
@@ -2886,7 +3832,30 @@
       ],
       "commonStarterCandidate": true,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "6ダメージ。仮想サーバーによる基本処理として扱う。",
+        "trigger": "単体で使用可能。",
+        "tradeoff": "エナジー1消費。",
+        "metaphorLimit": "EC2性能を6という数値で保証しない。",
+        "status": "draft",
+        "realFunction": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "autoscaling",
+          "queue",
+          "spot"
+        ]
+      }
     },
     {
       "id": "candidate-nlb",
@@ -2913,7 +3882,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "TCP/UDP/TLSの仕事を、正常な対応処理先へ分配する。",
+        "trigger": "対応プロトコルと正常先がある。",
+        "tradeoff": "処理先の能力自体は増えない。",
+        "metaphorLimit": "ALBのHTTP機能と一律に置換しない。",
+        "status": "draft",
+        "realFunction": "TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-auto-scaling",
@@ -2946,7 +3936,31 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "次ターンから毎ターン3ダメージ。追加のEC2札を使うと次ターンの攻撃が3増える。",
+        "trigger": "基本の処理先1つを含む設置札として使える。",
+        "tradeoff": "増強は即時反映しない。",
+        "metaphorLimit": "台数調整の比喩であり下流上限を消さない。",
+        "status": "draft",
+        "realFunction": "需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "tuner"
+        ],
+        "links": [
+          "multi-az",
+          "autoscaling",
+          "spot"
+        ]
+      }
     },
     {
       "id": "candidate-target-tracking",
@@ -2967,7 +3981,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "目標を超えた負荷が予告された場合、次ターンの拡張コストを1下げる。",
+        "trigger": "適した負荷指標を観測。",
+        "tradeoff": "低負荷・不適切な指標では割引なし。",
+        "metaphorLimit": "CPUだけで全ボトルネックを測れない。",
+        "status": "draft",
+        "realFunction": "1台当たりの負荷等が目標に近づくよう容量を調整する方式。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-scheduled-scaling",
@@ -2988,7 +4022,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "指定した次ターンに増援を準備し、拡張を1ターン早く利用する。",
+        "trigger": "既知の需要の時刻に合わせる。",
+        "tradeoff": "予測が外れても準備コストは戻らない。",
+        "metaphorLimit": "突発負荷を予知する能力ではない。",
+        "status": "draft",
+        "realFunction": "既知の時刻の需要に合わせて事前に容量を変更する方式。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-warm-pool",
@@ -3009,7 +4063,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EC2増援1回の起動待ちを短縮する。",
+        "trigger": "待機するEC2構成を用意する。",
+        "tradeoff": "待機分の準備コストが必要。",
+        "metaphorLimit": "何も準備せず即時増援できるわけではない。",
+        "status": "draft",
+        "realFunction": "初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-ami",
@@ -3042,7 +4116,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EC2の起動設定1つを保存し、次の同設定の起動コストを1下げる。",
+        "trigger": "対象イメージを作れるEC2構成。",
+        "tradeoff": "業務データは保存しない。",
+        "metaphorLimit": "継続バックアップや構成全体のIaCではない。",
+        "status": "draft",
+        "realFunction": "EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "spot",
+          "iac",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-capacity-reservation",
@@ -3075,7 +4171,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "指定AZ・属性に合うEC2増援1回の容量不足を防ぐ。",
+        "trigger": "予約条件に合う増援。",
+        "tradeoff": "別AZ・別属性には無効。",
+        "metaphorLimit": "料金割引やSpot中断の抑止ではない。",
+        "status": "draft",
+        "realFunction": "指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling",
+          "spot",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-placement-group",
@@ -3102,7 +4220,30 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EC2戦力の配置方式を選ぶ。障害分離方式なら一部への停止の波及を抑える。",
+        "trigger": "配置制約を満たすEC2を使う。",
+        "tradeoff": "低遅延配置と障害分離は同時に万能化しない。",
+        "metaphorLimit": "全プレイスメント方式を同じ防御として扱わない。",
+        "status": "draft",
+        "realFunction": "低遅延や障害分離等の要件に合わせEC2の配置を制御する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "guardian"
+        ],
+        "links": [
+          "multi-az",
+          "isolation"
+        ]
+      }
     },
     {
       "id": "candidate-instance-family",
@@ -3123,7 +4264,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "処理カードのCPU・メモリ・I/O型を選び、合うタスクへの次の攻撃を3増やす。",
+        "trigger": "処理の要求特性と型が合う。",
+        "tradeoff": "合わない場合は増加なし。",
+        "metaphorLimit": "サイズや名前だけで最適性能が決まらない。",
+        "status": "draft",
+        "realFunction": "CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "tuner"
+        ],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-ebs",
@@ -3144,7 +4307,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EC2の処理結果を保持するブロック保存先を設置する。",
+        "trigger": "EC2と適した接続がある。",
+        "tradeoff": "バックアップ取得は別。",
+        "metaphorLimit": "永続保存と時点復元を同一視しない。",
+        "status": "draft",
+        "realFunction": "EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "spot"
+        ]
+      }
     },
     {
       "id": "candidate-efs",
@@ -3165,7 +4348,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "複数の対応処理先へ同じ共有ファイルを利用可能にする。",
+        "trigger": "NFS・経路・許可が成立。",
+        "tradeoff": "対応外のアクセスには使えない。",
+        "metaphorLimit": "共有できることだけで性能や整合性を保証しない。",
+        "status": "draft",
+        "realFunction": "Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "multi-az"
+        ]
+      }
     },
     {
       "id": "candidate-gp3",
@@ -3186,7 +4389,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EBS処理のIOPSまたは帯域を調整し、適合する次のI/O攻撃を3増やす。",
+        "trigger": "EBS gp3を使う処理。",
+        "tradeoff": "EC2側上限を超えられない。",
+        "metaphorLimit": "容量追加だけで全性能が増すわけではない。",
+        "status": "draft",
+        "realFunction": "容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-provisioned-iops",
@@ -3207,7 +4430,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "厳しいI/O要件の次の処理を強化し、攻撃を5増やす。",
+        "trigger": "対応SSD・I/O型の処理。",
+        "tradeoff": "エナジー2消費。",
+        "metaphorLimit": "実際の遅延・IOPS保証をゲーム値へ読み替えない。",
+        "status": "draft",
+        "realFunction": "厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-storage-performance",
@@ -3228,7 +4471,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "I/O要求と上限を確認し、対応する性能調整札を1枚引く。",
+        "trigger": "I/Oを含む処理を調べる。",
+        "tradeoff": "調査だけでは攻撃は増えない。",
+        "metaphorLimit": "IOPSと帯域を同じ指標にしない。",
+        "status": "draft",
+        "realFunction": "秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-standard-ia",
@@ -3249,7 +4512,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "低頻度で即時取得が必要な保存データを、低頻度保存枠へ移す。",
+        "trigger": "対象データが低頻度。",
+        "tradeoff": "取得時に追加のエナジー1を要する。",
+        "metaphorLimit": "実際の最低保存期間や料金を簡略化している。",
+        "status": "draft",
+        "realFunction": "低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-intelligent-tiering",
@@ -3270,7 +4552,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "アクセス履歴に応じて保存枠を調整し、不要な保存コストを抑える。",
+        "trigger": "S3の適したデータを保存。",
+        "tradeoff": "監視・対象条件があり無条件無料ではない。",
+        "metaphorLimit": "全データの最安値を保証しない。",
+        "status": "draft",
+        "realFunction": "アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-archive",
@@ -3291,7 +4592,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "低頻度の保存データを長期枠へ移す。復元時は1ターン待つ。",
+        "trigger": "待ち時間を許容する保存。",
+        "tradeoff": "即時復旧には向かない。",
+        "metaphorLimit": "階層ごとの実際の復元時間はゲームの1ターンとは別。",
+        "status": "draft",
+        "realFunction": "長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-versioning",
@@ -3312,7 +4632,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3の更新前の版を1つ保持する。誤更新時は旧版を選べる。",
+        "trigger": "S3を保存先に使う。",
+        "tradeoff": "旧版の保持コストは残る。",
+        "metaphorLimit": "版を持つだけで接続切替・業務復旧まで終わらない。",
+        "status": "draft",
+        "realFunction": "オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-noncurrent-version",
@@ -3333,7 +4673,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "保持条件を満たしたS3旧版1つを整理し、保存枠を空ける。",
+        "trigger": "旧版を削除できる保持条件。",
+        "tradeoff": "必要な旧版を消すと戻せなくなる。",
+        "metaphorLimit": "保持義務やObject Lockを無視しない。",
+        "status": "draft",
+        "realFunction": "現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-object-lock",
@@ -3354,7 +4714,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3の指定版に削除・上書き保護を付ける。",
+        "trigger": "版・保持モード・期間を設定。",
+        "tradeoff": "期間中は自分の整理も制限される。",
+        "metaphorLimit": "モードの差や期限を省略した永久無敵ではない。",
+        "status": "draft",
+        "realFunction": "一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-fsx-windows",
@@ -3368,7 +4748,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-fsx-windows",
-      "remainderReason": "共有ファイルの要件を扱う候補。共通ストレージ枠または新しい構築ルートを検討。"
+      "remainderReason": "共有ファイルの要件を扱う候補。共通ストレージ枠または新しい構築ルートを検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "SMB/ADを必要とするファイル処理先を設置する。",
+        "trigger": "Windows共有の要件。",
+        "tradeoff": "他の共有形式には代用しない。",
+        "metaphorLimit": "EFSと同一の接続条件にはしない。",
+        "status": "draft",
+        "realFunction": "SMB共有やActive Directory連携を要件とするWindowsファイルサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-ebs-snapshot",
@@ -3395,7 +4793,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "EBSの時点を保存する。復元札でその地点を再作成できる。",
+        "trigger": "EBSを保存している。",
+        "tradeoff": "取得以降の更新は戻らない。",
+        "metaphorLimit": "単独でアプリ整合性や業務再開を保証しない。",
+        "status": "draft",
+        "realFunction": "EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "spot",
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-multipart-upload",
@@ -3416,7 +4835,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3転送を部分に分け、失敗時は失敗部分だけ再送する。",
+        "trigger": "大きなアップロードが対象。",
+        "tradeoff": "部分の管理が必要。",
+        "metaphorLimit": "任意の業務操作へ適用できる再試行ではない。",
+        "status": "draft",
+        "realFunction": "大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-transfer-acceleration",
@@ -3437,7 +4876,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "遠隔S3アップロードの次の転送処理を3強化する。",
+        "trigger": "遠隔転送で有効と確認された場面。",
+        "tradeoff": "追加コストがあり、近距離等は効果なし。",
+        "metaphorLimit": "CDNの結果キャッシュではない。",
+        "status": "draft",
+        "realFunction": "遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-s3-consistency",
@@ -3458,7 +4917,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "成功済みのS3更新に対する次の直接読取りを、更新後の値で行う。",
+        "trigger": "S3への直接アクセス。",
+        "tradeoff": "CDNや複製先の古さは残る。",
+        "metaphorLimit": "全キャッシュへ強い整合性が伝わるわけではない。",
+        "status": "draft",
+        "realFunction": "成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-s3-encryption",
@@ -3479,7 +4958,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3保存データを暗号化し、対応する漏えい妨害を防ぐ。",
+        "trigger": "適切な鍵方式と復号権限を用意。",
+        "tradeoff": "許可した操作の誤更新は防がない。",
+        "metaphorLimit": "暗号化とアクセス権を混同しない。",
+        "status": "draft",
+        "realFunction": "SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-s3-replication",
@@ -3500,7 +4999,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応ルールでS3データを別保存先へ複製する。",
+        "trigger": "複製条件と宛先権限がある。",
+        "tradeoff": "反映待ちがあり誤更新も伝わり得る。",
+        "metaphorLimit": "過去版・削除の扱いはルール依存。",
+        "status": "draft",
+        "realFunction": "ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-rds-multi-az",
@@ -3521,7 +5040,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "DB主力と待機先を設置し、毎ターン3ダメージ。主力停止時は次ターンに切替。",
+        "trigger": "単一スタンバイ方式をこの札で表す。",
+        "tradeoff": "平時の待機先は攻撃しない。",
+        "metaphorLimit": "クラスター方式との違いをカード詳細に残す。",
+        "status": "draft",
+        "realFunction": "複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "guardian"
+        ],
+        "links": [
+          "rds-ha"
+        ]
+      }
     },
     {
       "id": "candidate-read-replica",
@@ -3542,7 +5083,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "初回はDB参照処理で4ダメージ。以後、既存DBの読取り攻撃を3増やす。",
+        "trigger": "入口札はDB参照先とレプリカを含む複合構成。書込みには適用しない。",
+        "tradeoff": "初回取得・複製遅延があり、最新値必須の処理へは適用しない。",
+        "metaphorLimit": "最新値が必要な読取りには別判断が必要。",
+        "status": "draft",
+        "realFunction": "読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "accelerator"
+        ],
+        "links": [
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-rds-standby",
@@ -3563,7 +5126,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "RDS主力の停止時に、待機先へ交代する。",
+        "trigger": "単一スタンバイ配置のRDSがある。",
+        "tradeoff": "切替の1ターン中は処理が停止。",
+        "metaphorLimit": "SELECT用の平時戦力として使わない。",
+        "status": "draft",
+        "realFunction": "Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rds-ha"
+        ]
+      }
     },
     {
       "id": "candidate-dynamodb",
@@ -3584,7 +5167,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "キーアクセスの処理先を設置し、対応タスクへ毎ターン3ダメージ。",
+        "trigger": "キーを決められる処理。",
+        "tradeoff": "キー偏りで処理が制限される。",
+        "metaphorLimit": "SQL全般の代用ではない。",
+        "status": "draft",
+        "realFunction": "キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-partition-key",
@@ -3605,7 +5208,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DynamoDBの仕事を分散できるキーへ調整し、偏りによる減衰を取り除く。",
+        "trigger": "適切なキー設計が可能。",
+        "tradeoff": "単一ホットキーの万能解決ではない。",
+        "metaphorLimit": "無条件の筋力増加にしない。",
+        "status": "draft",
+        "realFunction": "DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-gsi",
@@ -3626,7 +5249,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DynamoDBに別キーの参照経路を追加し、対応する読取りを通す。",
+        "trigger": "別キーの問合せ。",
+        "tradeoff": "結果整合性・索引コストがある。",
+        "metaphorLimit": "RDS読み取りレプリカではない。",
+        "status": "draft",
+        "realFunction": "別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-consistency",
@@ -3653,7 +5296,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "次の読取りで必要な鮮度を指定し、条件を満たす参照先を選ぶ。",
+        "trigger": "対応する読取り先がある。",
+        "tradeoff": "非対応の強い整合性は選べない。",
+        "metaphorLimit": "指定だけで複製遅延を消さない。",
+        "status": "draft",
+        "realFunction": "更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "cache",
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-dynamodb-on-demand",
@@ -3674,7 +5338,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DynamoDB処理の固定容量設定を減らし、要求に合わせて処理する。",
+        "trigger": "対応DynamoDB処理。",
+        "tradeoff": "負荷による費用と制限は残る。",
+        "metaphorLimit": "即時無限容量ではない。",
+        "status": "draft",
+        "realFunction": "読書き要求ベースの容量課金。事前の固定容量計画を減らす。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless"
+        ]
+      }
     },
     {
       "id": "candidate-dynamodb-ttl",
@@ -3695,7 +5379,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "期限を過ぎたDynamoDB項目を削除待ちにする。",
+        "trigger": "期限属性を設定した項目。",
+        "tradeoff": "削除までの待ち時間が残る。",
+        "metaphorLimit": "期限の瞬間に消去するカードではない。",
+        "status": "draft",
+        "realFunction": "項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-dynamodb-transactions",
@@ -3716,7 +5420,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "DynamoDBの指定した複数変更を、全部成功か全部取消しで実行する。",
+        "trigger": "対象項目・操作が制約内。",
+        "tradeoff": "エナジー2消費。",
+        "metaphorLimit": "外部サービスの副作用や業務冪等性は別。",
+        "status": "draft",
+        "realFunction": "複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-dax",
@@ -3737,7 +5461,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DynamoDBの繰返し読取りを記憶し、同じ参照1回のコストを1下げる。",
+        "trigger": "結果整合性の読取りが適する。",
+        "tradeoff": "書込み・強い整合性の読取りには割引なし。",
+        "metaphorLimit": "DynamoDB固有キャッシュであり全DBに使えない。",
+        "status": "draft",
+        "realFunction": "DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-rds-proxy",
@@ -3764,7 +5508,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DB接続を再利用し、次の対応DB接続コストを1下げる。",
+        "trigger": "対応RDS系の接続。",
+        "tradeoff": "SQL実行結果は記憶しない。",
+        "metaphorLimit": "結果キャッシュと接続プールを区別する。",
+        "status": "draft",
+        "realFunction": "DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rds-ha",
+          "serverless"
+        ]
+      }
     },
     {
       "id": "candidate-point-in-time-recovery",
@@ -3785,7 +5550,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "対応DBを保持期間内の指定時点へ戻す。",
+        "trigger": "復元可能な時点がある。",
+        "tradeoff": "別復元先の確認・接続切替を要する。",
+        "metaphorLimit": "任意時点・即時全快を保証しない。",
+        "status": "draft",
+        "realFunction": "保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-aurora-replica",
@@ -3812,7 +5597,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "Auroraの読取りを3強化。主力停止時は昇格先候補にもなる。",
+        "trigger": "Auroraを使う。",
+        "tradeoff": "読取り鮮度・昇格待ちがある。",
+        "metaphorLimit": "単一スタンバイと同じ平時制約にしない。",
+        "status": "draft",
+        "realFunction": "Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "rds-ha",
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-global-tables",
@@ -3833,7 +5639,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "DynamoDBの別リージョン処理先を作り、地域停止後もそちらで処理する。",
+        "trigger": "整合性方式と要件が合う。",
+        "tradeoff": "複製・競合・追加コストを考慮する。",
+        "metaphorLimit": "全リージョンで常に同じ最新値とは限らない。",
+        "status": "draft",
+        "realFunction": "複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-database-selection",
@@ -3854,7 +5680,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "タスクのデータ要件を確認し、対応するDB札を1枚山札から手札へ。",
+        "trigger": "山札に適合DB札がある。",
+        "tradeoff": "使用後除外。未所持のDBは生成しない。",
+        "metaphorLimit": "最適DBを自動決定する機能ではない。",
+        "status": "draft",
+        "realFunction": "SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-database-cost",
@@ -3881,7 +5727,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "既存DBの稼働・保存・I/O・複製費を確認し、次のDB調整札のコストを1下げる。",
+        "trigger": "調整札を使う。",
+        "tradeoff": "調査だけでは戦力増加なし。",
+        "metaphorLimit": "保存単価だけで総費用を評価しない。",
+        "status": "draft",
+        "realFunction": "実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing",
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-network-cost",
@@ -3902,7 +5768,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "経路の維持・転送負担を確認し、次の経路調整札のコストを1下げる。",
+        "trigger": "同じ可用性条件で比較。",
+        "tradeoff": "新しい経路は別に作る。",
+        "metaphorLimit": "一番安い経路が必ず要件を満たすわけではない。",
+        "status": "draft",
+        "realFunction": "出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-storage-cost",
@@ -3923,7 +5808,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "保持・取得・移行費を確認し、次の保存調整札のコストを1下げる。",
+        "trigger": "保存要件を維持した調整。",
+        "tradeoff": "取得や保持条件を無視できない。",
+        "metaphorLimit": "単価だけの比較を総費用としない。",
+        "status": "draft",
+        "realFunction": "保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-route53",
@@ -3956,7 +5860,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DNSの案内先を正常な対応先へ切り替える。",
+        "trigger": "名前解決で切替できる構成。",
+        "tradeoff": "TTLによる待ちが残る。",
+        "metaphorLimit": "接続中の全通信が瞬時に切り替わるわけではない。",
+        "status": "draft",
+        "realFunction": "名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "cdn",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-dns-ttl",
@@ -3983,7 +5909,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DNSまたはキャッシュ1つの再利用期間を短くし、次回の取得を更新する。",
+        "trigger": "期限による更新が適する。",
+        "tradeoff": "再取得の処理コストが増える。",
+        "metaphorLimit": "TTLで常に最新が保証されるわけではない。",
+        "status": "draft",
+        "realFunction": "DNS やキャッシュの情報を再利用する有効期間。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "cdn",
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-cloudfront",
@@ -4004,7 +5951,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "配信処理で6ダメージ。同じ内容を次に配信するコストを1下げる。",
+        "trigger": "単体で初回配信可能。再利用は同じキー。",
+        "tradeoff": "更新時は記憶を更新する必要。",
+        "metaphorLimit": "キャッシュ不能処理や書込みの高速化ではない。",
+        "status": "draft",
+        "realFunction": "エッジで HTTP/HTTPS コンテンツを配信する CDN。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "accelerator"
+        ],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-cache-key",
@@ -4031,7 +6000,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "共有してよい要求のキーを指定し、次のキャッシュ再利用条件を整える。",
+        "trigger": "結果を共有可能な範囲。",
+        "tradeoff": "異なる利用者・要求を誤共有しない。",
+        "metaphorLimit": "キー指定でデータ自体は保存されない。",
+        "status": "draft",
+        "realFunction": "どの要求で同じキャッシュを共有するかを決める識別情報。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "cdn",
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-global-accelerator",
@@ -4052,7 +6042,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応するTCP/UDP経路を調整し、次の通信処理の遅延を軽減する。",
+        "trigger": "対応入口と経路がある。",
+        "tradeoff": "結果の再利用はしない。",
+        "metaphorLimit": "CDNキャッシュと異なる。",
+        "status": "draft",
+        "realFunction": "静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-cloudfront-oac",
@@ -4073,7 +6083,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "CloudFrontから対応オリジンへのアクセスを限定する。",
+        "trigger": "対応オリジンと許可設定。",
+        "tradeoff": "視聴者認証は別途必要。",
+        "metaphorLimit": "署名付きURLと同じ対象を保護するわけではない。",
+        "status": "draft",
+        "realFunction": "CloudFront からオリジンへのアクセスを制限する仕組み。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-signed-url",
@@ -4094,7 +6124,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "期限・条件付きの視聴者アクセスを許可する。",
+        "trigger": "署名と対象コンテンツが有効。",
+        "tradeoff": "期限切れで無効。",
+        "metaphorLimit": "全AWS API操作への権限を与えない。",
+        "status": "draft",
+        "realFunction": "有効期限等を含む署名で視聴者のアクセスを制限する URL。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-lambda",
@@ -4121,7 +6171,30 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "イベント処理で6ダメージ。処理終了後は戦場に常駐しない。",
+        "trigger": "単体のイベントを含む入口札。",
+        "tradeoff": "同時実行上限と起動条件がある。",
+        "metaphorLimit": "無制限の即時実行とは表現しない。",
+        "status": "draft",
+        "realFunction": "イベントに応じてコードを動かすサーバーレスサービス。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "tuner"
+        ],
+        "links": [
+          "serverless",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-lambda-concurrency",
@@ -4142,7 +6215,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "Lambdaの同時処理枠を調整し、次のイベント攻撃を3増やす。",
+        "trigger": "許容クォータと下流容量の範囲。",
+        "tradeoff": "予約と事前初期化の効果は別。",
+        "metaphorLimit": "同時実行数だけで低遅延を保証しない。",
+        "status": "draft",
+        "realFunction": "同じ時点で処理されている関数呼出し数。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless"
+        ]
+      }
     },
     {
       "id": "candidate-ecs",
@@ -4175,7 +6268,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応コンテナ処理を設置し、毎ターン3ダメージ。",
+        "trigger": "イメージと実行基盤がある。",
+        "tradeoff": "停止や配置待ちで攻撃できない。",
+        "metaphorLimit": "ECSそのものをホスト基盤と同一視しない。",
+        "status": "draft",
+        "realFunction": "コンテナタスクの実行・配置・維持を管理するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "autoscaling",
+          "serverless",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-fargate",
@@ -4196,7 +6311,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "ホスト管理なしのコンテナ処理を起動し、次ターン6ダメージ。",
+        "trigger": "コンテナタスクを実行する。",
+        "tradeoff": "起動待ちがある。",
+        "metaphorLimit": "Lambdaと同じイベント瞬時起動ではない。",
+        "status": "draft",
+        "realFunction": "ホストを直接管理せずコンテナを動かす計算基盤。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless"
+        ]
+      }
     },
     {
       "id": "candidate-eks",
@@ -4217,7 +6352,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "Kubernetesの配置・管理を用意し、対応コンテナ処理を維持する。",
+        "trigger": "Kubernetesが必要な構成。",
+        "tradeoff": "管理の準備コストが大きい。",
+        "metaphorLimit": "すべてのコンテナで必須としない。",
+        "status": "draft",
+        "realFunction": "Kubernetes のマネージドサービス。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-ecr",
@@ -4238,7 +6393,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "コンテナイメージを登録し、対応する起動札へ供給する。",
+        "trigger": "イメージを使う処理。",
+        "tradeoff": "保管だけでは実行しない。",
+        "metaphorLimit": "レジストリはコンテナ実行基盤ではない。",
+        "status": "draft",
+        "realFunction": "コンテナイメージを保管するレジストリ。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "iac"
+        ]
+      }
     },
     {
       "id": "candidate-task-role",
@@ -4265,7 +6440,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "ECSタスクに必要なAWS操作の許可を渡す。",
+        "trigger": "対象タスクと対応ロール。",
+        "tradeoff": "許可外操作は失敗。",
+        "metaphorLimit": "実行基盤やネットワーク経路は作らない。",
+        "status": "draft",
+        "realFunction": "ECS タスク内のアプリが AWS API を使うための IAM ロール。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless",
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-api-gateway",
@@ -4286,7 +6482,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "API仕事の入口を設置し、認証連携・流量設定に従って処理先へ渡す。",
+        "trigger": "対応するAPIバックエンド。",
+        "tradeoff": "上限超過は保留または拒否。",
+        "metaphorLimit": "スロットリングを絶対的な費用上限にしない。",
+        "status": "draft",
+        "realFunction": "API の公開・認証連携・流量管理を担う入口。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless"
+        ]
+      }
     },
     {
       "id": "candidate-step-functions",
@@ -4313,7 +6529,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "手札の処理2枚の順序と失敗時の行動を設定する。",
+        "trigger": "連携する処理がある。",
+        "tradeoff": "各処理のコストは別に払う。",
+        "metaphorLimit": "設定だけで失敗が成功へ変わらない。",
+        "status": "draft",
+        "realFunction": "複数ステップの順序や再試行を状態機械で管理するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless",
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-sqs",
@@ -4340,7 +6577,30 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "未処理の仕事をキューへ蓄える。処理札を使ったとき蓄積分から3ダメージを追加。",
+        "trigger": "単体で保留できる。追加攻撃は処理札が必要。",
+        "tradeoff": "ためただけではHPを減らさない。",
+        "metaphorLimit": "メッセージ受理を業務完了として扱わない。",
+        "status": "draft",
+        "realFunction": "非同期処理の作業待ちメッセージを保持するキュー。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "commander"
+        ],
+        "links": [
+          "serverless",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-visibility-timeout",
@@ -4367,7 +6627,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "受信済みの仕事を1ターン他の受信者から隠す。",
+        "trigger": "SQSの仕事を処理中。",
+        "tradeoff": "期限後は再び受信され得る。",
+        "metaphorLimit": "削除や業務全体の重複防止ではない。",
+        "status": "draft",
+        "realFunction": "受信済みメッセージをほかの受信者から一時的に隠す期間。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "queue",
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-fifo",
@@ -4394,7 +6675,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "同じグループの仕事を順番に処理する。",
+        "trigger": "順序を必要とするSQS仕事。",
+        "tradeoff": "グループ内の並列性が制限される。",
+        "metaphorLimit": "一切の重複がなくなる万能保証にしない。",
+        "status": "draft",
+        "realFunction": "先入れ先出し。SQS ではメッセージグループ内の順序を維持する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "queue",
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-idempotency",
@@ -4415,7 +6717,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "このターン4ダメージ。同じ業務IDの再実行による成果重複・手戻りを防ぐ。",
+        "trigger": "初回の業務処理と、その業務IDの重複防止を含む入口札。",
+        "tradeoff": "同じ完了仕事を再攻撃して報酬を増やせない。",
+        "metaphorLimit": "4ダメージは初回の業務処理分。冪等性そのものが仕事を実行するわけではない。記録・保持条件は別途必要。",
+        "status": "draft",
+        "realFunction": "同じ要求を繰り返しても業務上の結果が重複しない性質。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "commander"
+        ],
+        "links": [
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-sns",
@@ -4442,7 +6766,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "同じ通知を購読先へ配り、対応する処理をそれぞれ起動できるようにする。",
+        "trigger": "購読先がある。",
+        "tradeoff": "通知を送るだけで処理完了しない。",
+        "metaphorLimit": "キューそのものと同じ保持・消化にしない。",
+        "status": "draft",
+        "realFunction": "トピックの購読者へメッセージを配信するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-fanout",
@@ -4463,7 +6808,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "独立する処理先へ同じ仕事の通知を分ける。",
+        "trigger": "受信先と役割が独立。",
+        "tradeoff": "同一成果を重複加算しない。",
+        "metaphorLimit": "配信数をそのまま業務処理成功数としない。",
+        "status": "draft",
+        "realFunction": "一つのメッセージを複数の独立した受信先へ配る構成。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-eventbridge",
@@ -4490,7 +6855,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "イベント条件に合う処理札1枚を起動先として選ぶ。",
+        "trigger": "対応イベントとルールがある。",
+        "tradeoff": "不一致の処理は起動しない。",
+        "metaphorLimit": "万能な全サービス連携ではない。",
+        "status": "draft",
+        "realFunction": "イベントをパターンに応じて対象へ振り分けるサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "serverless",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-dlq",
@@ -4523,7 +6909,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "繰り返し失敗した仕事を隔離し、正常な仕事の処理を継続する。",
+        "trigger": "失敗したキュー仕事がある。",
+        "tradeoff": "隔離した仕事は未完了のまま。",
+        "metaphorLimit": "隔離だけで復旧や成功にはならない。",
+        "status": "draft",
+        "realFunction": "処理に繰り返し失敗したメッセージの隔離先。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "isolation",
+          "queue",
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-queue-scaling",
@@ -4550,7 +6958,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "キュー滞留がある場合、次ターンの処理攻撃を3増やす。",
+        "trigger": "滞留を観測できる処理先。",
+        "tradeoff": "下流の上限は超えられない。",
+        "metaphorLimit": "キュー追加だけで処理能力は増えない。",
+        "status": "draft",
+        "realFunction": "滞留件数や待ち時間に応じて処理能力を調整すること。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling",
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-claim-check",
@@ -4571,7 +7000,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "大きなキュー仕事の本文をS3等へ保存し、参照をキューに渡す。",
+        "trigger": "外部保存先と取得許可がある。",
+        "tradeoff": "本文取得の処理が別途必要。",
+        "metaphorLimit": "保存先への認可や取得失敗を無視しない。",
+        "status": "draft",
+        "realFunction": "大きなデータを外部保存し、メッセージには参照を渡す方式。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-kms",
@@ -4598,7 +7047,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "鍵を使う保存・復元処理を許可範囲内で保護する。",
+        "trigger": "鍵ポリシーと操作許可がある。",
+        "tradeoff": "鍵を使えなければ復元も失敗。",
+        "metaphorLimit": "鍵管理はIAMやアプリの全権限の代替ではない。",
+        "status": "draft",
+        "realFunction": "暗号鍵と暗号操作の権限を管理するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege",
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-secrets-manager",
@@ -4619,7 +7089,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "秘密情報を取得・更新し、対応する接続の認証を成立させる。",
+        "trigger": "接続先と取得許可がある。",
+        "tradeoff": "更新後の利用側反映も必要。",
+        "metaphorLimit": "秘密を保管するだけで接続は通らない。",
+        "status": "draft",
+        "realFunction": "認証情報等を保管し、更新を管理するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-tls",
@@ -4646,7 +7136,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対象通信を暗号化し、通信の盗聴妨害を防ぐ。",
+        "trigger": "証明書・相手確認が成立。",
+        "tradeoff": "端点の設定ミスは防がない。",
+        "metaphorLimit": "暗号化だけで操作権限は得られない。",
+        "status": "draft",
+        "realFunction": "通信経路の暗号化と相手認証のプロトコル。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn",
+          "private-access"
+        ]
+      }
     },
     {
       "id": "candidate-waf",
@@ -4667,7 +7178,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "条件に合うHTTP妨害を防ぎ、4ブロック。",
+        "trigger": "HTTP対象の検査が可能。",
+        "tradeoff": "対象外の攻撃は軽減しない。",
+        "metaphorLimit": "全プロトコルを守る万能防壁ではない。",
+        "status": "draft",
+        "realFunction": "HTTP リクエストを条件に基づいて検査・制御する仕組み。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-guardduty",
@@ -4688,7 +7219,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "不審な活動の兆候を確認し、対応する対処札を1枚引く。",
+        "trigger": "対応する検出対象。",
+        "tradeoff": "対処は別カード。",
+        "metaphorLimit": "検出だけで攻撃を遮断しない。",
+        "status": "draft",
+        "realFunction": "不審な活動や脅威の兆候を検出するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-inspector",
@@ -4709,7 +7260,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応ワークロードの脆弱性を確認し、修正・更新札を1枚引く。",
+        "trigger": "対応対象を評価。",
+        "tradeoff": "評価だけでは修正しない。",
+        "metaphorLimit": "すべての脆弱性を検出・解消する保証ではない。",
+        "status": "draft",
+        "realFunction": "対応ワークロードのソフトウェア脆弱性等を調べるサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-macie",
@@ -4730,7 +7301,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3の機密データを確認し、対応する保護札を1枚引く。",
+        "trigger": "S3対象の分析。",
+        "tradeoff": "分析だけで権限を修正しない。",
+        "metaphorLimit": "全保存先の機密情報検出ではない。",
+        "status": "draft",
+        "realFunction": "S3 データの機密情報を検出するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-shield",
@@ -4751,7 +7342,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DDoS型の妨害を軽減し、5ブロック。",
+        "trigger": "DDoS保護の対象。",
+        "tradeoff": "設定不備や業務不正には無効。",
+        "metaphorLimit": "すべての障害を防ぐ効果にしない。",
+        "status": "draft",
+        "realFunction": "DDoS 攻撃からの保護を提供するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cdn"
+        ]
+      }
     },
     {
       "id": "candidate-cloudwatch",
@@ -4778,7 +7389,28 @@
       ],
       "commonStarterCandidate": true,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "1枚引く。観測した予告に対応する札を選びやすくする。",
+        "trigger": "単体で使用可能。",
+        "tradeoff": "観測だけでは回復・増強しない。",
+        "metaphorLimit": "ドローは情報取得の比喩でAWSの性能増強ではない。",
+        "status": "draft",
+        "realFunction": "メトリクス、ログ、アラーム等の可観測性サービス。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "autoscaling",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-cloudtrail",
@@ -4799,7 +7431,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "API操作履歴を確認し、設定変更の原因に対応する札を1枚引く。",
+        "trigger": "API操作に起因する不備。",
+        "tradeoff": "ログだけでは変更を戻せない。",
+        "metaphorLimit": "通信本文や全アプリログの記録ではない。",
+        "status": "draft",
+        "realFunction": "AWS API 操作の履歴を追跡する監査サービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-aws-config",
@@ -4826,7 +7478,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "設定履歴・ルールとの差を確認し、是正札を1枚引く。",
+        "trigger": "対応リソース設定。",
+        "tradeoff": "修正は別行動。",
+        "metaphorLimit": "任意のインフラを展開するIaCの代替ではない。",
+        "status": "draft",
+        "realFunction": "リソース設定の履歴とルール準拠を評価するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "iac",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-rto",
@@ -4847,7 +7520,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "復旧目標に合う、手札の復旧札1枚を選んでコストを1下げる。",
+        "trigger": "目標時間を満たせる復旧手段がある。",
+        "tradeoff": "使用後除外。目標を宣言するだけでは復旧しない。",
+        "metaphorLimit": "RTOは実復旧時間の保証ではない。",
+        "status": "draft",
+        "realFunction": "障害後にサービスを復旧させるまでの目標時間。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-rpo",
@@ -4874,7 +7567,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "損失許容幅に合う保存・複製札1枚のコストを1下げる。",
+        "trigger": "許容幅を満たせる方式。",
+        "tradeoff": "使用後除外。保存自体は別札。",
+        "metaphorLimit": "RPOと復旧所要時間は異なる。",
+        "status": "draft",
+        "realFunction": "どれだけ過去までのデータ損失を許容するかという時間の目標。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-pilot-light",
@@ -4895,7 +7609,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "復旧先の中核を準備する。停止後、起動札を使うと別拠点で処理を再開する。",
+        "trigger": "単体で準備開始できる。",
+        "tradeoff": "全体起動と容量拡張に待ちがある。",
+        "metaphorLimit": "用意しただけで全構成が常時稼働するわけではない。",
+        "status": "draft",
+        "realFunction": "復旧先でキーだけを維持し、障害時に残りを起動する戦略。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "restorer"
+        ],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-warm-standby",
@@ -4916,7 +7652,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "縮小した復旧先を設置し、切替後は毎ターン3ダメージ。",
+        "trigger": "対応する別拠点構成。",
+        "tradeoff": "本来の能力へ戻すには拡張が必要。",
+        "metaphorLimit": "平時費用なしの即時全回復にしない。",
+        "status": "draft",
+        "realFunction": "縮小した全体構成を復旧先で稼働させておく戦略。",
+        "rarity": "レア",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-backup",
@@ -4937,7 +7693,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "このターンの正常状態を保存。以後の損傷に対し、この状態へ戻す復旧を準備する。",
+        "trigger": "単体で保存開始可能。",
+        "tradeoff": "保存後の進捗は対象外。復元行動が必要。",
+        "metaphorLimit": "保存だけでHPが回復するカードにしない。",
+        "status": "draft",
+        "realFunction": "誤更新や障害から戻すための復元可能なデータの複製。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "restorer"
+        ],
+        "links": [
+          "backup"
+        ]
+      }
     },
     {
       "id": "candidate-restore-test",
@@ -4964,7 +7742,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "保存した復旧手段を試し、復元に対応する札を1枚引く。",
+        "trigger": "復元対象と権限がある。",
+        "tradeoff": "試験コストを払う。復旧時間は測定が必要。",
+        "metaphorLimit": "テスト1回で将来の復旧を保証しない。",
+        "status": "draft",
+        "realFunction": "バックアップから起動・整合性・所要時間を検証する試験。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-replication",
@@ -4991,7 +7790,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "更新を別の対応保存先へ複製する。",
+        "trigger": "元データと宛先がある。",
+        "tradeoff": "誤更新も伝わり得る。",
+        "metaphorLimit": "履歴バックアップとは異なる。",
+        "status": "draft",
+        "realFunction": "別の保存先へデータの更新を複製する仕組み。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "read-replica",
+          "disaster-recovery"
+        ]
+      }
     },
     {
       "id": "candidate-dms",
@@ -5005,7 +7825,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-dms",
-      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DB初回移行を進め、変更追随の接続先を用意する。",
+        "trigger": "対応する移行元・先。",
+        "tradeoff": "移行後の整合性確認が必要。",
+        "metaphorLimit": "全ファイル転送に万能ではない。",
+        "status": "draft",
+        "realFunction": "DB の初期移行と継続的な変更同期を行うサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-cdc",
@@ -5019,7 +7857,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-cdc",
-      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "DBの変更分を移行先へ追随させる。",
+        "trigger": "初期状態・ログ取得・対応経路。",
+        "tradeoff": "遅延と切替時の確認が残る。",
+        "metaphorLimit": "同期しているだけで切替完了とはしない。",
+        "status": "draft",
+        "realFunction": "データベースに生じた変更を取得して反映する方式。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-datasync",
@@ -5033,7 +7889,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-datasync",
-      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応ファイル・オブジェクトの初回または差分転送で6ダメージ。",
+        "trigger": "転送タスクを扱うイベント。",
+        "tradeoff": "最終整合性・切替は別。",
+        "metaphorLimit": "DBトランザクションCDCとは異なる。",
+        "status": "draft",
+        "realFunction": "対応するストレージ間でファイル・オブジェクトを転送するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-migration",
@@ -5047,7 +7921,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-migration",
-      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。"
+      "remainderReason": "移行・転送のタスク対策候補。現在の18ビルドには独立した移行ルートがない。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "既存の実行環境を大きく変えず移し、対応移行タスクへ6ダメージ。",
+        "trigger": "リホストが要件に合う。",
+        "tradeoff": "既存の非効率も持ち越す。",
+        "metaphorLimit": "移行だけで最適化されるわけではない。",
+        "status": "draft",
+        "realFunction": "アプリを大きく変更せず実行環境を移す移行方式。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-performance",
@@ -5086,7 +7978,30 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "ボトルネックの種類を確認し、適合する調整札を1枚引く。",
+        "trigger": "観測情報がある。",
+        "tradeoff": "調整をしなければ処理は速くならない。",
+        "metaphorLimit": "調査だけの万能筋力増加にしない。",
+        "status": "draft",
+        "realFunction": "処理全体の速度や容量を制限している部分。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "rightsizing",
+          "cache",
+          "read-replica",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-cache",
@@ -5107,7 +8022,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "4ダメージを与え、その結果を記憶。同じ仕事1回のコストを1下げる。",
+        "trigger": "初回取得を含む入口札。更新後は再取得。",
+        "tradeoff": "異なる仕事・最新性が必要な処理には割引なし。",
+        "metaphorLimit": "キャッシュの初回取得と更新を含めた複合札。",
+        "status": "draft",
+        "realFunction": "再利用可能なデータを速く取得できる場所へ一時保存する仕組み。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "accelerator"
+        ],
+        "links": [
+          "cache"
+        ]
+      }
     },
     {
       "id": "candidate-savings-plans",
@@ -5128,7 +8065,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "安定した対象利用に契約を置き、以後の対応処理の利用費を下げる。",
+        "trigger": "利用額コミットを満たす。",
+        "tradeoff": "使わなくても契約負担が残る。",
+        "metaphorLimit": "エナジー・容量が無料で増える効果ではない。",
+        "status": "draft",
+        "realFunction": "一定の利用額をコミットして対象使用料の割引を受ける購入方式。",
+        "rarity": "レア",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-cost-optimization",
@@ -5149,7 +8105,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "要件を満たす未使用設備1つを整理し、次の調整札のコストを1下げる。",
+        "trigger": "処理・復旧の必要量を残す。",
+        "tradeoff": "削りすぎると障害時に不足する。",
+        "metaphorLimit": "安さだけで成功と扱わない。",
+        "status": "draft",
+        "realFunction": "要件を満たしながら使用量と価格条件を改善すること。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-athena",
@@ -5163,7 +8139,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-athena",
-      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "S3上の対応データをSQLで分析し、原因調査札を1枚引く。",
+        "trigger": "対象データと参照許可がある。",
+        "tradeoff": "走査量に応じた負担がある。",
+        "metaphorLimit": "分析を汎用DBの更新処理として使わない。",
+        "status": "draft",
+        "realFunction": "S3 などのデータを SQL で分析するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-glue",
@@ -5177,7 +8171,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-glue",
-      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "データの構造を登録または変換し、後続の分析処理を利用可能にする。",
+        "trigger": "ETL・カタログが必要。",
+        "tradeoff": "単独では分析結果を得ない。",
+        "metaphorLimit": "カタログ登録だけで全データが変換されない。",
+        "status": "draft",
+        "realFunction": "データカタログとデータ統合・ETL を提供するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-redshift",
@@ -5191,7 +8203,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-redshift",
-      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。"
+      "remainderReason": "分析・ETLの候補。蓄積だけでは固有の役割を表せず、分析ルートか状況対策を検討。",
+      "cardDesign": {
+        "energy": 2,
+        "effect": "分析処理先を設置し、大規模集計タスクへ毎ターン4ダメージ。",
+        "trigger": "分析用のデータが準備済み。",
+        "tradeoff": "通常の取引処理の代用にはしない。",
+        "metaphorLimit": "データ投入や管理を不要としない。",
+        "status": "draft",
+        "realFunction": "大規模な分析用データウェアハウス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-kinesis",
@@ -5212,7 +8242,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "ストリームを保持し、対応期間内で再読込みできるようにする。",
+        "trigger": "ストリーム処理。",
+        "tradeoff": "保持期間外の再読込みは不可。",
+        "metaphorLimit": "SQSの単純な仕事キューと同一視しない。",
+        "status": "draft",
+        "realFunction": "データストリームを収集し処理・再読込するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-firehose",
@@ -5233,7 +8283,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "ストリームを対応保存先へ配送する。",
+        "trigger": "対応宛先がある。",
+        "tradeoff": "宛先側処理の完了は別。",
+        "metaphorLimit": "任意の再試行業務を管理するサービスではない。",
+        "status": "draft",
+        "realFunction": "ストリーミングデータを対応先へ配信するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "queue"
+        ]
+      }
     },
     {
       "id": "candidate-opensearch",
@@ -5254,7 +8324,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "投入したデータを検索し、対応する調査札を1枚引く。",
+        "trigger": "索引へデータが投入済み。",
+        "tradeoff": "索引管理・投入コストがある。",
+        "metaphorLimit": "置いただけで全ログが集まるわけではない。",
+        "status": "draft",
+        "realFunction": "全文検索やログ分析に使う検索・分析エンジン。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-lake-formation",
@@ -5275,7 +8365,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "データレイクの対象へ細分化した参照許可を設定する。",
+        "trigger": "対応レイクの管理。",
+        "tradeoff": "ネットワーク経路は別。",
+        "metaphorLimit": "全AWS操作の権限管理に拡張しない。",
+        "status": "draft",
+        "realFunction": "データレイクの権限管理を支援するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "least-privilege"
+        ]
+      }
     },
     {
       "id": "candidate-reserved-instances",
@@ -5296,7 +8406,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 2,
+        "effect": "条件に合う継続EC2利用へ契約割引を置く。",
+        "trigger": "期間・属性・スコープが合う。",
+        "tradeoff": "未使用の契約負担が残る。",
+        "metaphorLimit": "リージョンRIとAZスコープの容量予約を区別する。",
+        "status": "draft",
+        "realFunction": "適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。",
+        "rarity": "レア",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "影響が大きい構成変更・契約や準備の重い候補。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-ec2-hibernation",
@@ -5317,7 +8446,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応EC2のRAM状態を保存して休止し、再開時に引き継ぐ。",
+        "trigger": "休止対応条件と暗号化EBS。",
+        "tradeoff": "保存費と再開待ちがある。",
+        "metaphorLimit": "通常停止や全業務バックアップと異なる。",
+        "status": "draft",
+        "realFunction": "対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-ec2-stop",
@@ -5338,7 +8486,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "不要なEC2の稼働を止める。再開札までその攻撃も止まる。",
+        "trigger": "停止可能なEC2。",
+        "tradeoff": "RAMを保持せず、保存費は残る。",
+        "metaphorLimit": "停止だけで費用が完全にゼロにはならない。",
+        "status": "draft",
+        "realFunction": "EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-rcu",
@@ -5365,7 +8532,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "DynamoDB読取りのサイズ・整合性を確認し、必要容量に合わせる。",
+        "trigger": "DynamoDBの読取り。",
+        "tradeoff": "容量不足なら強化札が別に必要。",
+        "metaphorLimit": "読取りと書込みの単位を同じにしない。",
+        "status": "draft",
+        "realFunction": "DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing",
+          "read-replica"
+        ]
+      }
     },
     {
       "id": "candidate-wcu",
@@ -5386,7 +8574,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "DynamoDB書込みのサイズ・方式を確認し、必要容量に合わせる。",
+        "trigger": "DynamoDBの書込み。",
+        "tradeoff": "トランザクション費用も考慮。",
+        "metaphorLimit": "読取り能力を増やすカードではない。",
+        "status": "draft",
+        "realFunction": "DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-cost-explorer",
@@ -5413,7 +8621,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "費用内訳を確認し、費用調整札を1枚引く。",
+        "trigger": "利用履歴がある。",
+        "tradeoff": "観測だけでは費用が減らない。",
+        "metaphorLimit": "リアルタイムの支出強制上限ではない。",
+        "status": "draft",
+        "realFunction": "費用・使用量の傾向と内訳を可視化して分析するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-budgets",
@@ -5434,7 +8662,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "予算条件に達した通知を出し、次の費用調整を選べる。",
+        "trigger": "通知条件と利用情報。",
+        "tradeoff": "支出を自動的に絶対停止しない。",
+        "metaphorLimit": "予算通知とハード上限は別。",
+        "status": "draft",
+        "realFunction": "実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-cur",
@@ -5455,7 +8702,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "費用・利用量の詳細記録を用意し、分析処理へ渡す。",
+        "trigger": "記録を出力する保存先がある。",
+        "tradeoff": "分析は別カード。",
+        "metaphorLimit": "出力だけで最適化を行わない。",
+        "status": "draft",
+        "realFunction": "詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-cost-allocation",
@@ -5476,7 +8742,26 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "対象費用に分類タグを付け、次の費用分析を対象別に絞る。",
+        "trigger": "有効化したタグ。",
+        "tradeoff": "共有費や未設定分の配賦は別。",
+        "metaphorLimit": "認可タグのABACと同じ役割ではない。",
+        "status": "draft",
+        "realFunction": "費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "rightsizing"
+        ]
+      }
     },
     {
       "id": "candidate-gwlb",
@@ -5490,7 +8775,25 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-gwlb",
-      "remainderReason": "セキュリティアプライアンス経由の通信。閉域接続とは異なる検査・防御の用途を検討。"
+      "remainderReason": "セキュリティアプライアンス経由の通信。閉域接続とは異なる検査・防御の用途を検討。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "通信を対応検査アプライアンスへ渡す経路を作る。",
+        "trigger": "検査先が配置されている。",
+        "tradeoff": "GWLB単体では検査・遮断しない。",
+        "metaphorLimit": "普通のアプリ負荷分散と同じ効果にしない。",
+        "status": "draft",
+        "realFunction": "仮想ファイアウォール等のアプライアンスへ通信を透過的に分配する負荷分散。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "専用イベント",
+          "交換所"
+        ],
+        "acquisitionReason": "用途が限定される未所属候補。対応するイベントで選べる。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-requester-pays",
@@ -5504,7 +8807,24 @@
       "memberships": [],
       "commonStarterCandidate": false,
       "remainderId": "remainder-requester-pays",
-      "remainderReason": "費用負担者を変更する候補。資源効率を上げる効果とは分けて設計。"
+      "remainderReason": "費用負担者を変更する候補。資源効率を上げる効果とは分けて設計。",
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応S3転送の要求・取得費の負担先を要求者へ設定する。",
+        "trigger": "相手が費用負担を承諾するイベント。",
+        "tradeoff": "所有者の保存費は残る。",
+        "metaphorLimit": "総コストを消すカードや無制限な金策にしない。",
+        "status": "draft",
+        "realFunction": "対応するS3要求・ダウンロード費を要求者が負担する設定。所有者の保存費は残る。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "交換所"
+        ],
+        "acquisitionReason": "費用・契約・保存条件を比較する交換枠。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": []
+      }
     },
     {
       "id": "candidate-throttling",
@@ -5531,7 +8851,28 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "下流へ送る仕事の量を制限し、過負荷付与を1回抑える。",
+        "trigger": "下流容量に合わせた設定。",
+        "tradeoff": "残りの仕事は未処理。",
+        "metaphorLimit": "全レート制御を絶対的な上限として保証しない。",
+        "status": "draft",
+        "realFunction": "レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "isolation",
+          "safe-retry"
+        ]
+      }
     },
     {
       "id": "candidate-health-check",
@@ -5576,7 +8917,31 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "応答できる処理先を確認し、次の振分け・切替の対象を選ぶ。",
+        "trigger": "対象をチェックできる。",
+        "tradeoff": "検出待ちがあり修復はしない。",
+        "metaphorLimit": "全ターゲット異常時のALB例外を残す。",
+        "status": "draft",
+        "realFunction": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "rds-ha",
+          "isolation",
+          "autoscaling",
+          "observability"
+        ]
+      }
     },
     {
       "id": "candidate-alb",
@@ -5609,7 +8974,29 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 1,
+        "effect": "正常なHTTP処理先へ次の仕事を振り分ける。",
+        "trigger": "正常先・データ・残存容量がある。",
+        "tradeoff": "正常先がなくても万能遮断しない。",
+        "metaphorLimit": "ALB全異常時のフェイルオープンを省略しない。",
+        "status": "draft",
+        "realFunction": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "multi-az",
+          "isolation",
+          "autoscaling"
+        ]
+      }
     },
     {
       "id": "candidate-remaining-capacity",
@@ -5630,7 +9017,27 @@
       ],
       "commonStarterCandidate": false,
       "remainderId": null,
-      "remainderReason": null
+      "remainderReason": null,
+      "cardDesign": {
+        "energy": 0,
+        "effect": "停止後に残る処理能力を確認し、対応する増強札を1枚引く。",
+        "trigger": "障害予告と容量が分かる。",
+        "tradeoff": "確認だけでは容量が増えない。",
+        "metaphorLimit": "稼働台数だけで必要量を満たすとはしない。",
+        "status": "draft",
+        "realFunction": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "multi-az"
+        ]
+      }
     },
     {
       "id": "candidate-iac",
@@ -5681,6 +9088,27 @@
             "role": "コネクション",
             "usage": "汎用"
           }
+        ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "構成定義1つを記録し、再展開時の設定手順を再利用する。",
+        "trigger": "対象構成がコード化できる。",
+        "tradeoff": "データ復元・秘密・接続確認は別。",
+        "metaphorLimit": "設計図を記録するだけで正しい構成になるとは限らない。",
+        "status": "draft",
+        "realFunction": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "iac",
+          "disaster-recovery"
         ]
       }
     },
@@ -5734,6 +9162,29 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "基本構成を展開して4ブロック。定義済み構成の再展開コストを1下げる。",
+        "trigger": "入口札はVPC・サブネット・セキュリティグループの基本テンプレートを含む。",
+        "tradeoff": "実際の配置札と起動待ちは別。",
+        "metaphorLimit": "4ブロックは同梱した通信制御を表す。CloudFormation自体が防壁になるわけではなく、業務データも復元しない。",
+        "status": "draft",
+        "realFunction": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "builder"
+        ],
+        "links": [
+          "iac",
+          "disaster-recovery"
+        ]
       }
     },
     {
@@ -5774,6 +9225,26 @@
             "role": "オプション",
             "usage": "特化"
           }
+        ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "次のCloudFormation更新の置換・削除を確認し、更新のやり直しを1回避ける。",
+        "trigger": "更新前に確認できる。",
+        "tradeoff": "更新札は別に使う。",
+        "metaphorLimit": "確認しても実行成功を保証しない。",
+        "status": "draft",
+        "realFunction": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "iac"
         ]
       }
     },
@@ -5827,6 +9298,27 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "定義と実際の設定差を確認し、是正札を1枚引く。",
+        "trigger": "対応リソース・明示設定が対象。",
+        "tradeoff": "対象外の差は分からない。",
+        "metaphorLimit": "IN_SYNCで全設定一致を保証しない。",
+        "status": "draft",
+        "realFunction": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "iac",
+          "observability"
+        ]
       }
     },
     {
@@ -5878,6 +9370,27 @@
             "role": "コネクション",
             "usage": "特化"
           }
+        ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "失敗が続く依存先への呼出しを1ターン止め、失敗波及を抑える。",
+        "trigger": "依存先の失敗閾値を満たす。",
+        "tradeoff": "必要な仕事も保留。復帰確認が必要。",
+        "metaphorLimit": "依存先を修復したり未完了を成功にしない。",
+        "status": "draft",
+        "realFunction": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "isolation",
+          "safe-retry"
         ]
       }
     },
@@ -5931,6 +9444,27 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "失敗した処理1枚の再試行を次ターンへ送り、その集中負荷を抑える。",
+        "trigger": "再試行可能な一時失敗。",
+        "tradeoff": "回数・総期限を制限し、カード代も再度払う。",
+        "metaphorLimit": "待っても直らない許可不足に万能ではない。",
+        "status": "draft",
+        "realFunction": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "safe-retry",
+          "queue"
+        ]
       }
     },
     {
@@ -5971,6 +9505,26 @@
             "role": "オプション",
             "usage": "特化"
           }
+        ]
+      },
+      "cardDesign": {
+        "energy": 0,
+        "effect": "複数の再試行時刻を分散し、同時再試行の過負荷を抑える。",
+        "trigger": "再試行が集中する場面。",
+        "tradeoff": "回数や完了時間を保証しない。",
+        "metaphorLimit": "成功確率のギャンブル強化として扱わない。",
+        "status": "draft",
+        "realFunction": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "safe-retry"
         ]
       }
     },
@@ -6024,6 +9578,27 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "応答待ちの呼出しを打ち切り、資源占有の遅延を1回抑える。",
+        "trigger": "待ち時間の上限を超える。",
+        "tradeoff": "相手側で処理済みの可能性は残る。",
+        "metaphorLimit": "タイムアウトを未実行確定・安全な新規再送としない。",
+        "status": "draft",
+        "realFunction": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "safe-retry",
+          "isolation"
+        ]
       }
     },
     {
@@ -6076,6 +9651,27 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "中断可能処理の進捗を保存し、再開時に保存部分のやり直しを免れる。",
+        "trigger": "保持できる保存先と再開手順がある。",
+        "tradeoff": "保存費・保存以後の進捗損失がある。",
+        "metaphorLimit": "AMIや単なるスナップショットとは別。",
+        "status": "draft",
+        "realFunction": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [],
+        "links": [
+          "spot",
+          "safe-retry"
+        ]
       }
     },
     {
@@ -6117,6 +9713,26 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応する繰返し読取りの結果を保存し、次の同キー読取りのコストを1下げる。",
+        "trigger": "元データ取得・更新方針がある。",
+        "tradeoff": "キャッシュミス時は再取得。",
+        "metaphorLimit": "TTLだけで最新性は保証しない。",
+        "status": "draft",
+        "realFunction": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "cache"
+        ]
       }
     },
     {
@@ -6157,6 +9773,26 @@
             "role": "オプション",
             "usage": "特化"
           }
+        ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "対応保存先の取得・保持計画をまとめ、次のバックアップ札のコストを1下げる。",
+        "trigger": "対応リソースを計画へ含める。",
+        "tradeoff": "復元や試験は別札。",
+        "metaphorLimit": "ジョブ成功だけでRTO達成を保証しない。",
+        "status": "draft",
+        "realFunction": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+        "rarity": "アンコモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
+        "starterFor": [],
+        "links": [
+          "backup"
         ]
       }
     },
@@ -6210,6 +9846,29 @@
             "usage": "特化"
           }
         ]
+      },
+      "cardDesign": {
+        "energy": 1,
+        "effect": "予告条件を評価し、対応する増強・復旧札1枚を手札から選びコストを1下げる。",
+        "trigger": "対象アクションと権限を設定。",
+        "tradeoff": "対応札がなければ通知だけ。",
+        "metaphorLimit": "全アラームでEC2・Auto Scaling操作が可能とはしない。",
+        "status": "draft",
+        "realFunction": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+        "rarity": "コモン",
+        "acquisition": [
+          "戦闘報酬",
+          "交換所"
+        ],
+        "acquisitionReason": "所属キャラの報酬候補。レア度を先に抽選し、対象から選ぶ。",
+        "rarityReason": "序盤から使う入口・基盤・成長の候補。",
+        "starterFor": [
+          "restorer"
+        ],
+        "links": [
+          "observability",
+          "autoscaling"
+        ]
       }
     }
   ],
@@ -6229,5 +9888,83 @@
         "特化": "対象サービス、仕事の性質、接続方式などの追加条件が必要。"
       }
     }
+  },
+  "cardSettings": {
+    "status": "draft",
+    "rules": [
+      "勝利は敵HPを0にする既存方針。工程の完了に別ゲージを追加しない。",
+      "全キャラ8階層、報酬回数・提示枚数・レア度抽選は共通。",
+      "スターターは共通5枚（EC2×2、セキュリティグループ×2、CloudWatch×1）＋専用3枚。",
+      "通常報酬は所属カードのうち戦闘報酬対象から抽選。共通スターターは所属外でも初期所持のみ可能。",
+      "レア度の仮比率はコモン70%／アンコモン25%／レア5%。各候補枠を同じ手順で抽選し、提示内の重複を避ける。",
+      "対象レア度が空なら残るレア度へ比率を再配分。特定ビルドの成立や必要札の取得は保証しない。",
+      "カード種別と読取り/書込み/配信/転送/再試行等の対象タグは効果判定用。敵HP以外の勝利条件ではない。",
+      "設置効果は戦闘内のみ。単発札は使用済みへ、設置札はその戦闘中に再設置不可。除外と明記した札は戦闘終了まで除外。",
+      "ターン攻撃は正常な処理先だけが敵HPへ与える。停止・経路・許可不足で利用できない先は攻撃しない。",
+      "軽減・許可・保存・観測は対象の機能に限定し、無関係な攻撃や回復を付けない。",
+      "山札から取得する効果は所持カードだけ。検索対象がなければ効果なし。ドロー1枚は通常の山札から引く。",
+      "エナジー値・ダメージ・待ちターン・設置は全てゲーム上の仮値。AWS性能・時間・価格の保証ではない。",
+      "契約・保存階層の費用効果は、イベントで提示する利用費に適用。戦闘エナジーやショップ価格を自動割引しない。イベントの費用数値は未設計。",
+      "未所属17候補も効果・入手先を設定するが、キャラ所属と追跡IDは維持。レア度の違いだけで汎用化しない。",
+      "初期に必要な前提は複合カードの内訳を詳細に明記。入手後の個別札では前提と制約を満たす必要がある。",
+      "8階層での構築確率・効果の強さは未検証。初期キャラ・通常30枚の現行実装は変更しない。",
+      "0エナジーの検索・ドロー・割引効果は、同じ札名につき各ターン1回まで。割引後もコストは0未満にならず、無限循環を防ぐ。"
+    ],
+    "starterCommon": [
+      {
+        "termId": "ec2",
+        "copies": 2
+      },
+      {
+        "termId": "security-group",
+        "copies": 2
+      },
+      {
+        "termId": "cloudwatch",
+        "copies": 1
+      }
+    ],
+    "starterDedicated": {
+      "guardian": [
+        "az",
+        "rds-multi-az",
+        "placement-group"
+      ],
+      "tuner": [
+        "auto-scaling",
+        "lambda",
+        "instance-family"
+      ],
+      "accelerator": [
+        "cloudfront",
+        "cache",
+        "read-replica"
+      ],
+      "commander": [
+        "sqs",
+        "idempotency",
+        "spot"
+      ],
+      "builder": [
+        "iam-role",
+        "vpc-endpoint",
+        "cloudformation"
+      ],
+      "restorer": [
+        "backup",
+        "pilot-light",
+        "cloudwatch-alarm"
+      ]
+    },
+    "rarityWeights": {
+      "コモン": 70,
+      "アンコモン": 25,
+      "レア": 5
+    },
+    "openQuestions": [
+      "通信・認可・保存の前提タグと設置状態をどこまで戦闘へ導入するか。",
+      "利用費イベントの費用・契約負担の数値。",
+      "レリックとの連携、強化後効果、8階層の試遊と数値調整。"
+    ]
   }
 }

@@ -55818,6 +55818,90 @@
       "open_questions": [
         "独立した内容監査とゲーム効果・バランス設計。"
       ]
+    },
+    {
+      "id": "concept-card-mechanics-acquisition-fit",
+      "title": "機能に沿うカード効果と入手先・レア度の設計",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "教材名と戦闘ビルドの関連性・重複・未所属の扱いを設計する概念。",
+      "objective": "実機能の条件と代償を保持して、効果・入手先・レア度を対応付ける。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.cardSettings"
+        },
+        {
+          "path": "public/design/card-build-allocation.html",
+          "locator": "カード効果・入手先・レア度の仮設定"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card",
+        "build",
+        "character"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "6キャラ各3方向、所属の重複を許す。"
+      ],
+      "limitations": [
+        "名前と教材定義に基づく設計案。効果と排出率のバランスは未検証。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "principle": "180候補すべてに機能・効果・条件・代償・比喩の限界を付ける。",
+        "applicable_when": [
+          "8階層・共通報酬ルールでキャラ別プールを設計するとき。"
+        ],
+        "counterexample": [
+          "監視だけで修復、レプリカで書込み強化、確率でSpot瞬殺としない。"
+        ],
+        "comparison": [
+          "AWS上の重要度とゲームのレア度を分ける。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "180候補のcardDesignとcardSettingsを正本に、現行ゲームとは分離して相談する。",
+        "mechanism_note": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.candidates[*].cardDesign.realFunction"
+        },
+        "metaphor_limit": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.candidates[*].cardDesign.metaphorLimit"
+        },
+        "simplifications": [
+          "エナジー・攻撃値・待ち時間は架空。前提タグ・設置状態は設計段階。"
+        ],
+        "mislearning_risks": [
+          "条件を無視した万能効果と誤解する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "前提タグの実装範囲、利用費イベント、強化値、8階層での試遊。"
+      ]
     }
   ]
 }
