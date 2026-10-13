@@ -105,3 +105,13 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 ## カード効果案の検証レポート
 - 正本：docs/CARD_EFFECTS_REVISION2_REVIEW.md。技術的実装可否とゲームバランスの検証記録。学習教材やゲーム効果の追加ではない。
 - 公開版：public/design/card-effects-review.html。scripts/export-card-review.pyで正本から生成。全文Markdownも同じ場所に配置。
+
+
+## カード改訂3・独立30形態試作（2026-10-13）
+- ユーザーの公開レビュー#balanceとdocs/CARD_EFFECTS_REVISION2_REVIEW.mdに基づき、180名称/181形態案を改訂。一律コスト減を撤廃。基本設備/正常データ/初期記録を全キャラ共通にし、Spotは2コスト4攻撃、処理3/支援2枠、制御は枠外、指定データ復元と仕事重複防止を分離。
+- 30形態・6キャラ・8階層の独立試作 public/tower/build-lab.html を実装。正式冒険の旧30カード/3主人公/保存は維持。役は専用3種と状態成立、1戦闘1回。複数対象は先頭自動選択。レリック/交換所/全脅威/正式レア度は未接続。
+- 比較は固定方策・初期レリックなし100シード×6キャラ×3条件＋初戦1,800件。全キャラ初戦成功100%、停止0。完走は通常62–94%、設備47–93%、データ55–94%。加速者優位と復旧者の停止への弱さが残る。勝率の正式評価ではない。JSONにエンジンSHAと条件を記録。
+- 分類concept-card-sts-semantic-effectsとcombo-build-lab-{guardian,tuner,accelerator,commander,builder,restorer}はdraft/candidate。30形態の実装参照あり、独立内容監査/全181形態導入/正式レリックあり/人手試遊は保留。
+- ローカル検証・GitHub同期・公開確認を続行。対応表docs/CARD_EFFECTS_REVISION3_RESPONSE.md、再現 node scripts/build-lab-balance.mjs。
+
+- ローカル146テスト成功。180カード資料/30形態試作のChromium画面検査、320/390/1024px、保存再開、役、割引0コスト、データのみ復元、設備再開、報酬/強化、旧保存不変に成功。knowledge/game/progress照合とSafari14向けbuild成功。現行カタログのGit差分なし。新資料と試作のWebKitは公開CIで確認する。

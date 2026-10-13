@@ -55950,13 +55950,13 @@
         "6キャラ各3方向、所属の重複を許す。"
       ],
       "limitations": [
-        "名前と教材定義に基づく設計案。効果と排出率のバランスは未検証。"
+        "全181形態の導入、独立内容監査、正式レリックあり・人手バランス評価は未実施。"
       ],
       "misconceptions": [
         "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
       ],
       "content": {
-        "principle": "改訂2：使用可能判定・設備ID・脅威タグ・仕事/データ記録・個別強化と入手先を契約として定義する。180名称/EC2分離で181形態案。",
+        "principle": "改訂3：初期前提・個別強化・設備枠・合法操作・割引履歴・役を再設計。180名称/181形態案のうち30形態は独立試作で動作。",
         "applicable_when": [
           "個別効果の設計とSTS機能移植を検討するとき。"
         ],
@@ -55990,16 +55990,594 @@
           "locator": "characterCardAllocation.candidates[*].stsEffectProposal.limits"
         },
         "simplifications": [
-          "時間・コスト・効果値は架空。設置・タグ・予約・記録は未実装案。"
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
         ],
         "mislearning_risks": [
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
-        "implementation_refs": []
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs（30形態のみ）"
+        ]
       },
       "import_status": "candidate",
       "open_questions": [
         "共通機能の本体導入、保存移行、独立意味監査、8階層試遊と強化バランス。"
+      ]
+    },
+    {
+      "id": "combo-build-lab-guardian",
+      "title": "守護者の連携役「可用性」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "az",
+        "rds-multi-az",
+        "placement-group"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.guardian"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "guardian"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "分散・主力/待機・ホスト配置を整える。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "az",
+          "rds-multi-az",
+          "placement-group"
+        ],
+        "linkage_reason": "分散・主力/待機・ホスト配置を整える。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "分散・主力/待機・ホスト配置を整える。"
+        ],
+        "additional_effect": {
+          "damage": 3,
+          "communication_block": 8
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
+      ]
+    },
+    {
+      "id": "combo-build-lab-tuner",
+      "title": "調律師の連携役「スケーリング」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "auto-scaling",
+        "lambda",
+        "instance-family"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.tuner"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "tuner"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "増援設定・イベント処理・資源選定を行う。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "auto-scaling",
+          "lambda",
+          "instance-family"
+        ],
+        "linkage_reason": "増援設定・イベント処理・資源選定を行う。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "増援設定・イベント処理・資源選定を行う。"
+        ],
+        "additional_effect": {
+          "damage": 5,
+          "communication_block": 4
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
+      ]
+    },
+    {
+      "id": "combo-build-lab-accelerator",
+      "title": "加速者の連携役「読取り整合性」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "cloudfront",
+        "cache",
+        "read-replica"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.accelerator"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "accelerator"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "配信・キャッシュ・参照分散を整え、データが正常。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "cloudfront",
+          "cache",
+          "read-replica"
+        ],
+        "linkage_reason": "配信・キャッシュ・参照分散を整え、データが正常。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "配信・キャッシュ・参照分散を整え、データが正常。"
+        ],
+        "additional_effect": {
+          "damage": 3,
+          "communication_block": 4
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
+      ]
+    },
+    {
+      "id": "combo-build-lab-commander",
+      "title": "指揮者の連携役「冪等性」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "sqs",
+        "idempotency",
+        "spot"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.commander"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "commander"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "キュー・重複防止・中断可能戦力をそろえる。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "sqs",
+          "idempotency",
+          "spot"
+        ],
+        "linkage_reason": "キュー・重複防止・中断可能戦力をそろえる。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "キュー・重複防止・中断可能戦力をそろえる。"
+        ],
+        "additional_effect": {
+          "damage": 4,
+          "communication_block": 5
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
+      ]
+    },
+    {
+      "id": "combo-build-lab-builder",
+      "title": "構築士の連携役「最小権限」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "iam-role",
+        "vpc-endpoint",
+        "cloudformation"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.builder"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "builder"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "追加認可・専用経路・基本テンプレートが成立。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "iam-role",
+          "vpc-endpoint",
+          "cloudformation"
+        ],
+        "linkage_reason": "追加認可・専用経路・基本テンプレートが成立。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "追加認可・専用経路・基本テンプレートが成立。"
+        ],
+        "additional_effect": {
+          "damage": 8,
+          "communication_block": 6
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
+      ]
+    },
+    {
+      "id": "combo-build-lab-restorer",
+      "title": "復旧者の連携役「バックアップ」",
+      "aliases": [],
+      "kind": "combo",
+      "classification_reason": "カード3種の準備と状態条件を満たす局所連携・1戦闘1回の追加効果を記述するため。",
+      "objective": "単体カードの機能と構成連携の報酬を区別する。",
+      "unit_ids": [
+        "backup",
+        "pilot-light",
+        "cloudwatch-alarm"
+      ],
+      "material_refs": [
+        {
+          "path": "knowledge/card-balance-pilot.json",
+          "locator": "roles.restorer"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "combo",
+        "card",
+        "build"
+      ],
+      "character_families": [
+        "restorer"
+      ],
+      "prerequisites": [],
+      "conditions": [
+        "正常データの保存・復旧中核・監視アクションを整える。",
+        "同じ戦闘内で関連3種類を使用する。"
+      ],
+      "limitations": [
+        "役の成立はAWS本番構成の十分条件ではない。攻撃/防御値は架空の連携報酬。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "components": [
+          "backup",
+          "pilot-light",
+          "cloudwatch-alarm"
+        ],
+        "linkage_reason": "正常データの保存・復旧中核・監視アクションを整える。",
+        "activation_conditions": [
+          "同じ戦闘で3種類使用",
+          "正常データの保存・復旧中核・監視アクションを整える。"
+        ],
+        "additional_effect": {
+          "damage": 6,
+          "communication_block": 6
+        },
+        "activation_limit": "1戦闘1回",
+        "simplifications": [
+          "役の条件は現実のAWS構成要件の一部を省略したゲームルール。"
+        ],
+        "mislearning_risks": [
+          "役の成立だけで本番設計や理解度を判定しない。"
+        ]
+      },
+      "relations": [],
+      "sources": [],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "独立試作で使用、正式冒険の既存役へは未接続。",
+        "mechanism_note": "knowledge/card-balance-pilot.jsonの関連カード条件",
+        "metaphor_limit": "攻撃と通信防御は連携を促すゲーム報酬。",
+        "simplifications": [
+          "独立試作は対象候補を先頭から自動選択、基本VPC/権限と所有データを全キャラ共通で用意。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": [
+          "public/tower/build-lab-engine.mjs:role"
+        ]
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "独立意味監査",
+        "正式レリックとの相互作用",
+        "人手試遊"
       ]
     }
   ]

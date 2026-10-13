@@ -1,0 +1,377 @@
+{
+  "version": 3,
+  "status": "independent-prototype",
+  "engine": "public/tower/build-lab-engine.mjs",
+  "profiles": {
+    "ec2-burst": {
+      "term": "ec2",
+      "name": "Amazon EC2〈処理〉",
+      "cost": 1,
+      "text": "6ダメージ。設備は残らない。",
+      "up": "8ダメージ。",
+      "damage": 6,
+      "rarity": "コモン"
+    },
+    "ec2-deploy": {
+      "term": "ec2",
+      "name": "Amazon EC2〈配置〉",
+      "cost": 2,
+      "text": "EC2設備を配置。終了時3ダメージ。",
+      "up": "終了時4ダメージ。",
+      "power": 3,
+      "rarity": "コモン"
+    },
+    "security-group": {
+      "term": "security-group",
+      "name": "セキュリティグループ",
+      "cost": 1,
+      "text": "通信型の攻撃に5ブロック。",
+      "up": "通信型に7ブロック。",
+      "rarity": "コモン"
+    },
+    "cloudwatch": {
+      "term": "cloudwatch",
+      "name": "CloudWatch",
+      "cost": 1,
+      "text": "2枚引く。修復はしない。",
+      "up": "3枚引く。",
+      "rarity": "コモン"
+    },
+    "az": {
+      "name": "アベイラビリティーゾーン（AZ）",
+      "cost": 1,
+      "text": "正常な処理設備を別AZへ分散。次のAZ停止の処理損失を抑える。",
+      "up": "2設備まで分散。停止自体は防がない。",
+      "term": "az",
+      "rarity": "コモン"
+    },
+    "rds-multi-az": {
+      "name": "RDS Multi-AZ",
+      "cost": 2,
+      "text": "主力3攻撃＋待機を1処理枠に配置。主力停止後、1ターンで切替。",
+      "up": "主力4攻撃。待機は平時攻撃しない。",
+      "term": "rds-multi-az",
+      "rarity": "コモン"
+    },
+    "placement-group": {
+      "name": "プレイスメントグループ",
+      "cost": 1,
+      "text": "EC2を別ホストへ分散。ホスト故障の波及を抑える。",
+      "up": "次のEC2処理を+2。",
+      "term": "placement-group",
+      "rarity": "コモン"
+    },
+    "auto-scaling": {
+      "name": "EC2 Auto Scaling",
+      "cost": 1,
+      "text": "枠外の制御設定。次ターンにEC2配置札1枚を生成。1戦闘1回。",
+      "up": "生成札を保留。",
+      "term": "auto-scaling",
+      "rarity": "コモン"
+    },
+    "lambda": {
+      "name": "Lambda",
+      "cost": 1,
+      "text": "イベント処理で6ダメージ。常駐しない。",
+      "up": "8ダメージ。",
+      "damage": 6,
+      "term": "lambda",
+      "rarity": "コモン"
+    },
+    "instance-family": {
+      "name": "インスタンスファミリー",
+      "cost": 1,
+      "text": "適合する次の計算処理を+3。",
+      "up": "+4。",
+      "term": "instance-family",
+      "rarity": "コモン"
+    },
+    "cloudfront": {
+      "name": "CloudFront",
+      "cost": 1,
+      "text": "配信6ダメージ。同じ内容/版の次回配信を1軽減。",
+      "up": "8ダメージ。",
+      "damage": 6,
+      "term": "cloudfront",
+      "rarity": "コモン"
+    },
+    "cache": {
+      "name": "キャッシュ",
+      "cost": 1,
+      "text": "初回取得4ダメージ。同じキー/版の次回読取りを1軽減。",
+      "up": "5ダメージ。",
+      "damage": 4,
+      "term": "cache",
+      "rarity": "コモン"
+    },
+    "read-replica": {
+      "name": "リードレプリカ",
+      "cost": 2,
+      "text": "元DBとレプリカを1枠に配置。終了時読取り3ダメージ。書込みには無効。",
+      "up": "読取り4ダメージ。",
+      "term": "read-replica",
+      "rarity": "コモン"
+    },
+    "sqs": {
+      "name": "SQS",
+      "cost": 1,
+      "text": "支援枠にキューを配置。未完了の処理札を最大2枚保留。",
+      "up": "最大3枚保留。",
+      "term": "sqs",
+      "rarity": "コモン"
+    },
+    "idempotency": {
+      "name": "冪等性",
+      "cost": 1,
+      "text": "初回業務処理4ダメージ。同じ仕事の完了を重複加算しない。",
+      "up": "5ダメージ。",
+      "damage": 4,
+      "term": "idempotency",
+      "rarity": "コモン"
+    },
+    "spot": {
+      "name": "Spotインスタンス",
+      "cost": 2,
+      "text": "Spot設備を配置。終了時4ダメージ。中断リスクがある。",
+      "up": "終了時5ダメージ。",
+      "term": "spot",
+      "rarity": "コモン"
+    },
+    "iam-role": {
+      "name": "IAMロール",
+      "cost": 1,
+      "text": "必要な追加操作を委任。対応する配置札1枚を保留。",
+      "up": "配置札2枚まで保留。",
+      "term": "iam-role",
+      "rarity": "コモン"
+    },
+    "vpc-endpoint": {
+      "name": "VPCエンドポイント",
+      "cost": 1,
+      "text": "S3への専用経路を設定。認可は別。対応札1枚を保留。",
+      "up": "経路設定後、対応札の次回コストを1軽減。",
+      "term": "vpc-endpoint",
+      "rarity": "コモン"
+    },
+    "cloudformation": {
+      "name": "AWS CloudFormation",
+      "cost": 1,
+      "text": "基本テンプレートを展開。SGの分として通信4ブロック。",
+      "up": "通信6ブロック。",
+      "term": "cloudformation",
+      "rarity": "コモン"
+    },
+    "backup": {
+      "name": "バックアップ",
+      "cost": 1,
+      "text": "正常な所有データを保存。破損時は保存した版の復元を次ターンへ予約。",
+      "up": "復元予約はこのターン終了前に適用。",
+      "term": "backup",
+      "rarity": "コモン"
+    },
+    "pilot-light": {
+      "name": "パイロットライト",
+      "cost": 1,
+      "text": "支援枠に復旧中核を準備。停止後の復旧先起動を支える。",
+      "up": "復旧先起動の次回コストを1軽減。",
+      "term": "pilot-light",
+      "rarity": "コモン"
+    },
+    "cloudwatch-alarm": {
+      "name": "CloudWatchアラーム",
+      "cost": 1,
+      "text": "予告を評価し、対応する手札の対処札1枚を1軽減。通知だけでは修復しない。",
+      "up": "軽減する対応札1枚を保留。",
+      "term": "cloudwatch-alarm",
+      "rarity": "コモン"
+    },
+    "checkpoint": {
+      "name": "チェックポイント",
+      "cost": 1,
+      "text": "未完了仕事の進捗を永続保存。中断後は残りだけ再開。",
+      "up": "保留する処理札を1枚追加。",
+      "term": "checkpoint",
+      "rarity": "アンコモン"
+    },
+    "health-check": {
+      "name": "ヘルスチェック",
+      "cost": 0,
+      "text": "設備1つの応答を確認。正常先があれば情報を1枚引く。",
+      "up": "全設備を確認。ドローは1枚のみ。",
+      "term": "health-check",
+      "rarity": "アンコモン"
+    },
+    "restore-test": {
+      "name": "復元テスト",
+      "cost": 1,
+      "text": "初期記録/保存版を隔離先で検証。対応復元札1枚を引く。",
+      "up": "検証後、対象札を保留。",
+      "term": "restore-test",
+      "rarity": "アンコモン"
+    },
+    "target-tracking": {
+      "name": "ターゲット追跡スケーリング",
+      "cost": 1,
+      "text": "高負荷予告に合わせ、次ターンEC2配置札1枚。1戦闘1回。",
+      "up": "生成札を保留。",
+      "term": "target-tracking",
+      "rarity": "アンコモン"
+    },
+    "rds-proxy": {
+      "name": "RDS Proxy",
+      "cost": 1,
+      "text": "DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。",
+      "up": "対応DB札を保留。",
+      "term": "rds-proxy",
+      "rarity": "アンコモン"
+    },
+    "visibility-timeout": {
+      "name": "可視性タイムアウト",
+      "cost": 1,
+      "text": "未完了キュー仕事を次ターンまで他受信者から隠す。",
+      "up": "他受信者から隠す期間を2ターンに延長。",
+      "term": "visibility-timeout",
+      "rarity": "アンコモン"
+    },
+    "remaining-capacity": {
+      "name": "残存容量",
+      "cost": 0,
+      "text": "停止後の処理能力を調べ、所持する増強札1枚を引く。",
+      "up": "引いた増強札を保留。",
+      "term": "remaining-capacity",
+      "rarity": "アンコモン"
+    },
+    "change-set": {
+      "name": "CloudFormation変更セット",
+      "cost": 1,
+      "text": "次の更新を確認。適合する構成札1枚を保留する。成功保証ではない。",
+      "up": "構成札2枚まで保留。",
+      "term": "change-set",
+      "rarity": "アンコモン"
+    }
+  },
+  "heroes": {
+    "guardian": {
+      "name": "守護者",
+      "dedicated": [
+        "az",
+        "rds-multi-az",
+        "placement-group"
+      ],
+      "support": [
+        "health-check",
+        "remaining-capacity",
+        "rds-proxy"
+      ]
+    },
+    "tuner": {
+      "name": "調律師",
+      "dedicated": [
+        "auto-scaling",
+        "lambda",
+        "instance-family"
+      ],
+      "support": [
+        "target-tracking",
+        "remaining-capacity",
+        "checkpoint"
+      ]
+    },
+    "accelerator": {
+      "name": "加速者",
+      "dedicated": [
+        "cloudfront",
+        "cache",
+        "read-replica"
+      ],
+      "support": [
+        "rds-proxy",
+        "health-check",
+        "change-set"
+      ]
+    },
+    "commander": {
+      "name": "指揮者",
+      "dedicated": [
+        "sqs",
+        "idempotency",
+        "spot"
+      ],
+      "support": [
+        "checkpoint",
+        "visibility-timeout",
+        "remaining-capacity"
+      ]
+    },
+    "builder": {
+      "name": "構築士",
+      "dedicated": [
+        "iam-role",
+        "vpc-endpoint",
+        "cloudformation"
+      ],
+      "support": [
+        "change-set",
+        "health-check",
+        "rds-proxy"
+      ]
+    },
+    "restorer": {
+      "name": "復旧者",
+      "dedicated": [
+        "backup",
+        "pilot-light",
+        "cloudwatch-alarm"
+      ],
+      "support": [
+        "restore-test",
+        "checkpoint",
+        "health-check"
+      ]
+    }
+  },
+  "roles": {
+    "guardian": {
+      "name": "可用性",
+      "damage": 3,
+      "block": 8,
+      "condition": "分散・主力/待機・ホスト配置を整える。"
+    },
+    "tuner": {
+      "name": "スケーリング",
+      "damage": 5,
+      "block": 4,
+      "condition": "増援設定・イベント処理・資源選定を行う。"
+    },
+    "accelerator": {
+      "name": "読取り整合性",
+      "damage": 3,
+      "block": 4,
+      "condition": "配信・キャッシュ・参照分散を整え、データが正常。"
+    },
+    "commander": {
+      "name": "冪等性",
+      "damage": 4,
+      "block": 5,
+      "condition": "キュー・重複防止・中断可能戦力をそろえる。"
+    },
+    "builder": {
+      "name": "最小権限",
+      "damage": 8,
+      "block": 6,
+      "condition": "追加認可・専用経路・基本テンプレートが成立。"
+    },
+    "restorer": {
+      "name": "バックアップ",
+      "damage": 6,
+      "block": 6,
+      "condition": "正常データの保存・復旧中核・監視アクションを整える。"
+    }
+  },
+  "scope": "30形態のみ動作する独立試作。全180名称/181形態案と正式冒険の採用判定は別。",
+  "limits": [
+    "複数対象は適合する先頭を自動選択。",
+    "レリック・コスト支出・交換所・全25脅威・全181形態は未接続。",
+    "役は戦闘をまたがない3種使用＋状態成立の報酬。現行版の同一ターン役とは独立。"
+  ]
+}

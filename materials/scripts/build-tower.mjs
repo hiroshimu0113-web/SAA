@@ -91,3 +91,6 @@ await writeFile('dist/tower/fan.html',html);
 await writeFile('dist/tower/hand-icons.html',html);
 
 await writeFile('dist/tower/role-seams.html',html);
+const labResult=await build({configFile:false,publicDir:false,logLevel:'error',build:{write:false,target:'safari14',minify:'esbuild',lib:{entry:'public/tower/build-lab-app.mjs',formats:['iife'],name:'BuildLab'},rollupOptions:{output:{inlineDynamicImports:true}}}});
+const labOutput=(Array.isArray(labResult)?labResult[0].output:labResult.output).find(x=>x.type==='chunk').code.replace(/<\/script/gi,'<\\/script');
+let labHTML=await readFile('public/tower/build-lab.html','utf8');labHTML=labHTML.replace('<script type="module" src="./build-lab-app.mjs"></script>','<script>'+labOutput+'</script>');await writeFile('dist/tower/build-lab.html',labHTML);

@@ -67,6 +67,10 @@ jobs:
         run: node scripts/card-effects-proposal-browser-check.mjs
         env:
           BROWSER: webkit
+      - name: Verify independent card balance pilot in Safari
+        run: node scripts/build-lab-browser-check.mjs
+        env:
+          BROWSER: webkit
       - name: Verify card build allocation in Safari
         run: pnpm exec tsx scripts/card-build-allocation-browser-check.mjs
         env:

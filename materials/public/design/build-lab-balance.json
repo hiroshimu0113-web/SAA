@@ -1,0 +1,349 @@
+{
+  "status": "diagnostic-only",
+  "engineSHA256": "36fa3d49ce648de1078b742bc5086d53ba5996961543694e14779440ac81bf0d",
+  "configuration": {
+    "floors": 8,
+    "hp": 72,
+    "healBetweenFloors": 14,
+    "bossHP": 72,
+    "initialRelics": 0,
+    "processSlots": 3,
+    "supportSlots": 2,
+    "rewardChoices": 3,
+    "upgradePerFloor": 1,
+    "scenarioSeeds": "1–100（同じシードを全キャラへ）"
+  },
+  "seeds": 100,
+  "policy": "固定の設備/ドロー/火力/防御優先。未最適化。報酬は不足する専用札→共通札、強化は初期札優先。",
+  "limits": [
+    "初期レリックなしの試作だけ。正式版の勝率ではない。",
+    "自動方策の得手不得手を含むためキャラ優劣を断定しない。",
+    "人手試遊と報酬方策/強化方策を変えた比較が必要。"
+  ],
+  "rows": [
+    {
+      "hero": "guardian",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 71,
+      "confidence95": [
+        0.6146092505999207,
+        0.7898529302601586
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.51,
+      "firstTurns": 3.65,
+      "meanActions": 75.76,
+      "meanRoleTriggers": 0.63,
+      "unusableRate": 0.1269340069466372
+    },
+    {
+      "hero": "tuner",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 67,
+      "confidence95": [
+        0.5730516033971139,
+        0.7543701620610456
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.15,
+      "firstTurns": 3.13,
+      "meanActions": 68.96,
+      "meanRoleTriggers": 0.13,
+      "unusableRate": 0.05617592656025211
+    },
+    {
+      "hero": "accelerator",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 94,
+      "confidence95": [
+        0.8752303146877748,
+        0.9722142547333433
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 10.2,
+      "firstTurns": 2.71,
+      "meanActions": 67.19,
+      "meanRoleTriggers": 6.86,
+      "unusableRate": 0.14558058925476602
+    },
+    {
+      "hero": "commander",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 76,
+      "confidence95": [
+        0.6676748127670786,
+        0.8330878873454004
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.94,
+      "firstTurns": 3.03,
+      "meanActions": 68.11,
+      "meanRoleTriggers": 0.77,
+      "unusableRate": 0.1113491844069671
+    },
+    {
+      "hero": "builder",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 84,
+      "confidence95": [
+        0.7557955544110557,
+        0.8990479765052628
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.2,
+      "firstTurns": 3.89,
+      "meanActions": 83.37,
+      "meanRoleTriggers": 0.3,
+      "unusableRate": 0.08174626428362144
+    },
+    {
+      "hero": "restorer",
+      "scenario": "attack",
+      "n": 100,
+      "wins": 62,
+      "confidence95": [
+        0.5220957382071033,
+        0.7090255079986562
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.4,
+      "firstTurns": 3.79,
+      "meanActions": 77.2,
+      "meanRoleTriggers": 0.03,
+      "unusableRate": 0.07664370695053224
+    },
+    {
+      "hero": "guardian",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 68,
+      "confidence95": [
+        0.5833719774632081,
+        0.7633098918454312
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.51,
+      "firstTurns": 3.65,
+      "meanActions": 75.87,
+      "meanRoleTriggers": 0.63,
+      "unusableRate": 0.1270031545741325
+    },
+    {
+      "hero": "tuner",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 64,
+      "confidence95": [
+        0.542352199811621,
+        0.7272892540950986
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.15,
+      "firstTurns": 3.13,
+      "meanActions": 69.37,
+      "meanRoleTriggers": 0.15,
+      "unusableRate": 0.05445713894780051
+    },
+    {
+      "hero": "accelerator",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 93,
+      "confidence95": [
+        0.8625032899347025,
+        0.965681175635936
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 10.2,
+      "firstTurns": 2.71,
+      "meanActions": 67.38,
+      "meanRoleTriggers": 6.86,
+      "unusableRate": 0.14558670820353065
+    },
+    {
+      "hero": "commander",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 76,
+      "confidence95": [
+        0.6676748127670786,
+        0.8330878873454004
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.94,
+      "firstTurns": 3.03,
+      "meanActions": 68.14,
+      "meanRoleTriggers": 0.77,
+      "unusableRate": 0.11144890485732052
+    },
+    {
+      "hero": "builder",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 57,
+      "confidence95": [
+        0.4721521169586435,
+        0.6626686099947162
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.2,
+      "firstTurns": 3.89,
+      "meanActions": 84.57,
+      "meanRoleTriggers": 0.3,
+      "unusableRate": 0.0824634655532359
+    },
+    {
+      "hero": "restorer",
+      "scenario": "equipment",
+      "n": 100,
+      "wins": 47,
+      "confidence95": [
+        0.3751065198210374,
+        0.5671131686275227
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.4,
+      "firstTurns": 3.79,
+      "meanActions": 77.91,
+      "meanRoleTriggers": 0.03,
+      "unusableRate": 0.07741330834114339
+    },
+    {
+      "hero": "guardian",
+      "scenario": "data",
+      "n": 100,
+      "wins": 70,
+      "confidence95": [
+        0.6041496156718804,
+        0.7810524613377188
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.51,
+      "firstTurns": 3.65,
+      "meanActions": 75.67,
+      "meanRoleTriggers": 0.63,
+      "unusableRate": 0.12702020202020203
+    },
+    {
+      "hero": "tuner",
+      "scenario": "data",
+      "n": 100,
+      "wins": 65,
+      "confidence95": [
+        0.5525426042919797,
+        0.7363589534652197
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.15,
+      "firstTurns": 3.13,
+      "meanActions": 69.23,
+      "meanRoleTriggers": 0.15,
+      "unusableRate": 0.054192929569745134
+    },
+    {
+      "hero": "accelerator",
+      "scenario": "data",
+      "n": 100,
+      "wins": 94,
+      "confidence95": [
+        0.8752303146877748,
+        0.9722142547333433
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 10.2,
+      "firstTurns": 2.71,
+      "meanActions": 67.22,
+      "meanRoleTriggers": 6.86,
+      "unusableRate": 0.14558058925476602
+    },
+    {
+      "hero": "commander",
+      "scenario": "data",
+      "n": 100,
+      "wins": 76,
+      "confidence95": [
+        0.6676748127670786,
+        0.8330878873454004
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.94,
+      "firstTurns": 3.03,
+      "meanActions": 68.1,
+      "meanRoleTriggers": 0.77,
+      "unusableRate": 0.1114183024606027
+    },
+    {
+      "hero": "builder",
+      "scenario": "data",
+      "n": 100,
+      "wins": 76,
+      "confidence95": [
+        0.6676748127670786,
+        0.8330878873454004
+      ],
+      "stalled": 0,
+      "meanFloor": 8,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.2,
+      "firstTurns": 3.89,
+      "meanActions": 83.28,
+      "meanRoleTriggers": 0.28,
+      "unusableRate": 0.08181021897810219
+    },
+    {
+      "hero": "restorer",
+      "scenario": "data",
+      "n": 100,
+      "wins": 55,
+      "confidence95": [
+        0.45244427031643447,
+        0.6438562489359654
+      ],
+      "stalled": 0,
+      "meanFloor": 7.99,
+      "firstWinRate": 1,
+      "firstHPLoss": 13.4,
+      "firstTurns": 3.79,
+      "meanActions": 77.25,
+      "meanRoleTriggers": 0.08,
+      "unusableRate": 0.07738504848295277
+    }
+  ]
+}
