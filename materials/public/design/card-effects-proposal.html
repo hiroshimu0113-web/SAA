@@ -1329,8 +1329,8 @@
 </ul><p>入手先〈改訂3・導入予定〉：戦闘報酬・交換所。イベント専用は専用イベントのみ。全案の導入ゲートは未許可です。</p><small>教材参照：src/content/index.ts #dax</small><a href="card-build-allocation.html#c-dax">旧設定と所属を確認</a></article>
 <article class="effect-card" id="c-rds-proxy" data-character="guardian tuner" data-readiness="共通機能待ち" data-type="パワー"><h2>RDS Proxy</h2><code>candidate-rds-proxy</code><p>守護者・継承／調律師・即応</p><span class="badge">パワー</span><span class="badge">エナジー 1</span><span class="badge">アンコモン〈仮〉</span><dl>
 <dt>実際の機能</dt><dd>DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。</dd>
-<dt>通常効果案</dt><dd>DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。</dd>
-<dt>強化後案</dt><dd>コスト 1→1。対応DB札を保留。</dd>
+<dt>通常効果案</dt><dd>DB接続再利用を設定。高負荷ターンに最初のDB設備の処理を+1。SQL結果は記憶しない。</dd>
+<dt>強化後案</dt><dd>コスト 1→1。高負荷時のDB処理を+2。配置札のコストは下げない。</dd>
 <dt>AWSとの対応理由</dt><dd>接続プールでありSQL結果をコピーしない。</dd>
 <dt>使用可能条件〈改訂3〉</dt><dd>対応RDS系の接続。</dd>
 <dt>代償・弱点</dt><dd>SQL実行結果は記憶しない。</dd>
@@ -1338,7 +1338,7 @@
 <dt>必要な対象</dt><dd>equipment ／範囲 rds</dd><dt>導入判定</dt><dd>共通機能待ち：対象・状態・強化・場面判定の共通機能を実装してから導入する。</dd><dt>必要な共通機能</dt><dd>playability-v2／upgrade-overrides／equipment-state／persistent-effects／effective-cost／semantic-tags</dd><dt>対応敵行動</dt><dd>特定の防止対象なし</dd><dt>設備との関係</dt><dd>refer〈create＝配置、refer＝参照、none＝設備なし、profile-dependent＝形態ごと〉</dd>
 <dt>個別強化の定義</dt><dd>通常コスト 1 → 強化コスト 1。強化後効果と条件を独立した定義として参照。</dd>
 <dt>独立試作で動作する効果</dt><dd>
-<p><b>RDS Proxy</b>／コスト 1：DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。<br>強化後：対応DB札を保留。<small>profileId rds-proxy。複数対象は先頭の適合候補を自動選択。全案導入とは別。</small></p>
+<p><b>RDS Proxy</b>／コスト 1：DB接続再利用を設定。高負荷ターンに最初のDB設備の処理を+1。SQL結果は記憶しない。<br>強化後：高負荷時のDB処理を+2。配置札のコストは下げない。<small>profileId rds-proxy。複数対象は先頭の適合候補を自動選択。全案導入とは別。</small></p>
 </dd>
 </dl><h3>参照したSTSの効果</h3><ul>
 <li>M070 · コスト・実行 コスト変更・無料化・次の札無料／代表：バレットタイム／堕落／冷酷／王様キック／時の砂<small>参照資料でのSAA状態：未対応。このカード案の実装済み判定ではありません。</small></li>

@@ -23298,8 +23298,8 @@
         "stsEffectProposal": {
           "type": "パワー",
           "energy": 1,
-          "effect": "DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。",
-          "upgrade": "コスト 1→1。対応DB札を保留。",
+          "effect": "DB接続再利用を設定。高負荷ターンに最初のDB設備の処理を+1。SQL結果は記憶しない。",
+          "upgrade": "コスト 1→1。高負荷時のDB処理を+2。配置札のコストは下げない。",
           "stsMechanicIds": [
             "M070",
             "M101"
@@ -23341,14 +23341,14 @@
           "revision": 3,
           "upgradeOverride": {
             "energy": 1,
-            "effect": "対応DB札を保留。",
+            "effect": "高負荷時のDB処理を+2。配置札のコストは下げない。",
             "trigger": "対応RDS系の接続。",
             "targetScope": "rds",
             "type": "パワー"
           },
           "baseProfile": {
             "energy": 1,
-            "effect": "DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。",
+            "effect": "DB接続再利用を設定。高負荷ターンに最初のDB設備の処理を+1。SQL結果は記憶しない。",
             "trigger": "対応RDS系の接続。",
             "targetScope": "rds",
             "type": "パワー"
@@ -23481,8 +23481,8 @@
               "id": "rds-proxy",
               "name": "RDS Proxy",
               "cost": 1,
-              "text": "DB接続再利用を設定。各ターン最初の対応DB札を1軽減。SQL結果は記憶しない。",
-              "up": "対応DB札を保留。",
+              "text": "DB接続再利用を設定。高負荷ターンに最初のDB設備の処理を+1。SQL結果は記憶しない。",
+              "up": "高負荷時のDB処理を+2。配置札のコストは下げない。",
               "term": "rds-proxy",
               "rarity": "アンコモン"
             }

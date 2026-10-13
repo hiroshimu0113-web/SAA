@@ -935,3 +935,5 @@
 - ローカル検証・GitHub同期・公開確認を続行。対応表docs/CARD_EFFECTS_REVISION3_RESPONSE.md、再現 node scripts/build-lab-balance.mjs。
 
 - ローカル146テスト成功。180カード資料/30形態試作のChromium画面検査、320/390/1024px、保存再開、役、割引0コスト、データのみ復元、設備再開、報酬/強化、旧保存不変に成功。knowledge/game/progress照合とSafari14向けbuild成功。現行カタログのGit差分なし。新資料と試作のWebKitは公開CIで確認する。
+
+- 初回公開CI 23ddaa1 / 38347532304は新資料・独立試作のWebKit成功後、既存仕分けJSONの再生成漏れで停止、deploy未実施。JSONを改訂3正本と同期して修正。RDS Proxyを配置割引から高負荷時のDB処理補助へ改訂、実挙動検査2件を追加し148テスト成功。固定方策の完走数は変化なし。公開を再試行する。
