@@ -117,3 +117,6 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - ローカル146テスト成功。180カード資料/30形態試作のChromium画面検査、320/390/1024px、保存再開、役、割引0コスト、データのみ復元、設備再開、報酬/強化、旧保存不変に成功。knowledge/game/progress照合とSafari14向けbuild成功。現行カタログのGit差分なし。新資料と試作のWebKitは公開CIで確認する。
 
 - 初回公開CI 23ddaa1 / 38347532304は新資料・独立試作のWebKit成功後、既存仕分けJSONの再生成漏れで停止、deploy未実施。JSONを改訂3正本と同期して修正。RDS Proxyを配置割引から高負荷時のDB処理補助へ改訂、実挙動検査2件を追加し148テスト成功。固定方策の完走数は変化なし。公開を再試行する。
+
+- 改訂3公開完了：98305dc / Actions 38348036813。148テスト・新資料/独立試作/既存仕分けを含む全WebKit回帰・build/deploy成功。公開HTML/JSONは未認証HTTP200・生成物SHA256一致をCIで確認。https://hiroshimu0113-web.github.io/SAA/design/card-effects-proposal.html#balance3 ／ https://hiroshimu0113-web.github.io/SAA/tower/build-lab.html 。GitHub同期済み。
+- この依頼の180名称の改訂・30形態の独立試作・公開は完了。全181形態の正式導入、独立意味監査、レリックあり、人手試遊は保留。次の着手点：加速者優位と復旧者の停止時の弱さを人手/複数方策で比較し、役・報酬・初動の調整へつなぐ。
