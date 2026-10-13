@@ -3747,6 +3747,28 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "手札の配置札1枚を選ぶ。指定された地域条件に合うなら、このターンのコストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "地域と配置条件を選ぶ支援。地域を選ぶだけで攻撃は増えない。",
+          "status": "proposal-only",
+          "realFunction": "AWSの地理的な提供地域。遅延、データの所在、サービスの提供状況を考えて選ぶ。",
+          "limits": "地域選択だけで可用性やデータ規制を満たさない。",
+          "trigger": "配置カードが手札にある。",
+          "tradeoff": "条件外では割引なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -3790,6 +3812,30 @@
           "links": [
             "multi-az"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "配置札1枚を別AZへ分散する。その配置先への単一AZ停止を、この戦闘で1回回避する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M101"
+          ],
+          "correspondence": "独立した配置を一回の停止回避で表す。単なる火力の分身ではない。",
+          "status": "proposal-only",
+          "realFunction": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+          "limits": "AZ分離だけでデータ到達性や残存容量を保証しない。",
+          "trigger": "配置先と対象AZを持つカードに使う。",
+          "tradeoff": "処理能力そのものは増やさない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "guardian"
+          ]
         }
       },
       {
@@ -3822,6 +3868,27 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "山札から利用者側の設定札1枚を選び、手札に加える。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "責任範囲を確認して必要な設定を選ぶ。設定は別カードで行う。",
+          "status": "proposal-only",
+          "realFunction": "AWSと利用者で安全性や運用の責任を分担する考え方。利用するサービスで境界が変わる。",
+          "limits": "責任を確認するだけで設定は修復されない。",
+          "trigger": "対応札が山札にある。",
+          "tradeoff": "使用後は除外。対応札がなければ取得なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -3877,6 +3944,28 @@
             "rds-ha",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "正常な切替先があるとき、次の停止妨害1回を回避する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M036"
+          ],
+          "correspondence": "利用継続を回避効果にする。切替先の条件は残す。",
+          "status": "proposal-only",
+          "realFunction": "必要なときにサービスを利用できる性質。冗長化と切り替えを組み合わせて高める。",
+          "limits": "可用性はデータの履歴保護ではない。",
+          "trigger": "切替先に必要な容量・到達性がある。",
+          "tradeoff": "切替先がなければ効果なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -3918,6 +4007,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "保存済みデータ1つを、次の消失妨害1回から保護する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M101"
+          ],
+          "correspondence": "データ保持の保護。稼働停止や誤更新には適用しない。",
+          "status": "proposal-only",
+          "realFunction": "保存したデータを失いにくい性質。サービスが今応答できるかを表す可用性とは異なる。",
+          "limits": "保存の耐久性を即時の稼働保証と混同しない。",
+          "trigger": "保存カードの成果物がある。",
+          "tradeoff": "停止妨害や誤更新には効かない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -3959,6 +4070,28 @@
           "links": [
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "稼働中の処理札1枚を選ぶ。次ターン、その札の攻撃を3増やす。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M096"
+          ],
+          "correspondence": "能力増加と立上がりの待ちを対象限定・予約で表す。",
+          "status": "proposal-only",
+          "realFunction": "負荷に合わせて処理能力を変えること。1台を大きくするスケールアップ、台数を増やすスケールアウトがある。",
+          "limits": "下流のボトルネックは解消しない。",
+          "trigger": "拡張可能な処理先がある。",
+          "tradeoff": "今ターンの攻撃は増えない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4001,6 +4134,30 @@
           ],
           "links": [
             "spot"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "ターン終了時、6ダメージ。中断予告を受けたら停止する。保存済みのチェックポイントから再開できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M082"
+          ],
+          "correspondence": "中断可能な戦力として召喚型の持続攻撃を使う。瞬殺や毒ではない。",
+          "status": "proposal-only",
+          "realFunction": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+          "limits": "確率の瞬殺ではなく安価な中断可能戦力の比喩。",
+          "trigger": "戦闘終了まで設置。進捗保存札で再開できる。",
+          "tradeoff": "中断時は保存していない進捗を失う。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "commander"
           ]
         }
       },
@@ -4050,6 +4207,28 @@
             "rightsizing",
             "spot"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "再生成可能な一時処理札1枚を、このターンのみコスト0にする。処理先が停止すると一時データは消える。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "一時データの高速利用と消失リスクを限定的な無料化で表す。",
+          "status": "proposal-only",
+          "realFunction": "EC2ホストに直接接続された一時的なストレージ。停止・終了などによる消失に備え、唯一の永続データを置かない。",
+          "limits": "唯一の永続データや再開地点の保存先にしない。",
+          "trigger": "再生成できる一時データを使う処理。",
+          "tradeoff": "その処理先の停止で一時データを失う。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4112,6 +4291,28 @@
             "spot",
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する保存済み成果1つを記録する。対応する復元札を使うとき、その記録から戻せる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "保存先の準備として記録する。S3はオブジェクト、EBSはEC2ブロックの対象限定。",
+          "status": "proposal-only",
+          "realFunction": "データをオブジェクトとして保存するサービス。アクセス権とデータ管理は利用者が設計する。",
+          "limits": "オブジェクト保存をDBやRAM保持と同一視しない。",
+          "trigger": "保存できる結果を選ぶ。",
+          "tradeoff": "保存だけでは攻撃・復旧しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4160,6 +4361,28 @@
             "rds-ha",
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "ターン終了時、読取りまたは書込みタスクへ3ダメージ。DB停止中は発動しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M101"
+          ],
+          "correspondence": "DB処理を対象限定の持続攻撃として表す。",
+          "status": "proposal-only",
+          "realFunction": "リレーショナルデータベースの管理サービス。基盤保守の一部をAWSに任せられるがデータ・権限の管理は残る。",
+          "limits": "管理サービスでも業務データや権限の設計は残る。",
+          "trigger": "SQL処理に対応。",
+          "tradeoff": "停止すると攻撃も停止。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4203,6 +4426,30 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "主体1つへ許可済みの操作を設定する。このターン最初の対応操作札のコストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "権限設定を利用可能な行動への支援にする。操作自体の処理能力は増やさない。",
+          "status": "proposal-only",
+          "realFunction": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+          "limits": "ロールだけで経路や万能権限を得ない。",
+          "trigger": "対象操作の許可と引受条件がある。",
+          "tradeoff": "許可外の操作には使えない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "builder"
+          ]
         }
       },
       {
@@ -4244,6 +4491,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "既存ロールの許可を、このターンと次ターンの対応操作へ引き継ぐ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M067"
+          ],
+          "correspondence": "短い有効期間を期限付きの許可状態で表す。",
+          "status": "proposal-only",
+          "realFunction": "有効期限を持つAWS操作用の認証情報。長期アクセスキーの配布を減らせる。",
+          "limits": "短命な認証情報でも権限範囲は広がらない。",
+          "trigger": "引受可能なロールがある。",
+          "tradeoff": "期限後は再取得が必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4285,6 +4554,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "必要操作を残して許可範囲を絞る。対象外操作による設定不備を次の1回だけ防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M101"
+          ],
+          "correspondence": "必要操作と不要操作の区別を、限定したデバフ拒否へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "必要な対象に必要な操作だけを許可する原則。Action、Resource、Conditionなどを絞る。",
+          "limits": "最小権限は必要操作を拒否することではない。",
+          "trigger": "必要な操作は許可済み。",
+          "tradeoff": "絞りすぎると対応する自分の操作も失敗する。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4326,6 +4617,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "指定操作を禁止する。その操作による次の妨害1回を防ぐ。自分の同操作も使えない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "強い拒否と自分への制約を同時に表す。",
+          "status": "proposal-only",
+          "realFunction": "ポリシーで明示的に禁止する指定。対象操作に適用されればAllowより優先される。",
+          "limits": "DenyはAllowに優先するが、あらゆる脅威を防がない。",
+          "trigger": "対応するポリシーの適用範囲内。",
+          "tradeoff": "自分の同じ操作も禁止。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4374,6 +4687,28 @@
             "isolation",
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する主体の操作上限を設定する。上限外の操作による妨害を1回防ぐ。操作許可は別に必要。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "SCPは対象メンバーアカウント、境界はIAM主体に限定。上限は許可ではない。",
+          "status": "proposal-only",
+          "realFunction": "Organizationsのメンバーアカウントで利用できる権限の上限を定める。SCP単体では操作権限を付与しない。",
+          "limits": "管理アカウントや適用主体等の例外を省略している。",
+          "trigger": "Organizationsの対象メンバーアカウント。",
+          "tradeoff": "この札だけでは操作許可を得ない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4415,6 +4750,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "両側の許可を満たす別アカウントの札1枚を手札から選び、利用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "信頼・認可の成立を条件付き使用へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "別のAWSアカウントのリソースへアクセスすること。ロールによる委任などで信頼関係と権限を設定する。",
+          "limits": "アカウントを分けるだけでアクセスできない。",
+          "trigger": "両側の信頼と許可が成立。",
+          "tradeoff": "条件が欠ければ利用不可。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4456,6 +4813,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "外部委任ロールに顧客条件を付け、顧客取り違えの設定不備を1回防ぐ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M067"
+          ],
+          "correspondence": "委任先の識別を限定保護へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "外部事業者が複数顧客のロールを使うとき、顧客の取り違えを防ぐ信頼ポリシー条件。秘密のパスワードではない。",
+          "limits": "External IDを秘密パスワードとして扱わない。",
+          "trigger": "外部事業者が委任ロールを使う。",
+          "tradeoff": "一般の通信妨害には無効。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4488,6 +4867,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "従業員アクセスが必要な場面で、許可済みアカウントの操作札1枚を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "従業員向けログインの用途に限定。一般利用者の認証に代用しない。",
+          "status": "proposal-only",
+          "realFunction": "従業員の複数AWSアカウントや業務アプリへのアクセスをまとめて管理するサービス。",
+          "limits": "認証成功とサービス操作の認可は別。",
+          "trigger": "従業員アクセスを扱うイベント。",
+          "tradeoff": "一般利用者のアプリ認証には代用不可。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4520,6 +4921,27 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "アプリ利用者を認証し、ログインが必要な操作札1枚を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056"
+          ],
+          "correspondence": "認証による入口の成立を表す。AWS操作権限は付けない。",
+          "status": "proposal-only",
+          "realFunction": "一般利用者向けアプリの認証などを扱うサービス。ユーザープールでサインアップとログインを提供できる。",
+          "limits": "ユーザープールとIDプールを区別する。",
+          "trigger": "アプリ利用者の認証が必要。",
+          "tradeoff": "AWS API権限は付かない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4552,6 +4974,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 2,
+          "effect": "ルートユーザーが必要と明示されたアカウント管理処理を1回行う。除外。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M008",
+            "M056"
+          ],
+          "correspondence": "日常の戦闘で万能攻撃にせず、特定管理作業に限定する。",
+          "status": "proposal-only",
+          "realFunction": "AWSアカウントの強い権限を持つ主体。MFAで保護し、日常作業は別の適切なIDで行う。",
+          "limits": "強権限を理由に万能攻撃カードにしない。",
+          "trigger": "専用イベントのみ。日常の攻撃・防御には使わない。",
+          "tradeoff": "使用後除外。日常利用を推奨しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4584,6 +5028,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "認証主体1つを保護し、パスワード漏えいによる設定不備を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M101"
+          ],
+          "correspondence": "認証の追加確認を対象限定の保護にする。",
+          "status": "proposal-only",
+          "realFunction": "パスワードに加えて別の認証要素を求める仕組み。パスワードだけの漏えいに対する防御を加える。",
+          "limits": "MFAだけで認可や全脅威への安全性を保証しない。",
+          "trigger": "対応する認証主体を保護。",
+          "tradeoff": "設定ミスや通信攻撃には無効。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4625,6 +5091,28 @@
           "links": [
             "isolation"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "別アカウント区画を1つ作る。アカウント限定の妨害は他区画へ波及しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M082"
+          ],
+          "correspondence": "管理・隔離の区画を表す。自動許可や自動暗号化はしない。",
+          "status": "proposal-only",
+          "realFunction": "AWSアカウントを組織とOUにまとめ、統制や請求管理を行う。",
+          "limits": "統制や請求集約が全操作を自動許可するわけではない。",
+          "trigger": "複数アカウント構成。",
+          "tradeoff": "区画間アクセスは別途必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4666,6 +5154,28 @@
           "links": [
             "iac"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 2,
+          "effect": "複数アカウントの初期統制を1回展開し、定義済みの基本設定札を2枚手札へ加える。除外。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M059",
+            "M101"
+          ],
+          "correspondence": "初期統制のセットだけを生成する。任意アプリの複製には使わない。",
+          "status": "proposal-only",
+          "realFunction": "ランディングゾーンと複数アカウントの統制・払い出しを支援する。",
+          "limits": "IaC全般や任意設定の代替ではない。",
+          "trigger": "ランディングゾーンを作る構成。",
+          "tradeoff": "任意のアプリ構成は展開しない。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4707,6 +5217,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する主体の操作上限を設定する。上限外の操作による妨害を1回防ぐ。操作許可は別に必要。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "SCPは対象メンバーアカウント、境界はIAM主体に限定。上限は許可ではない。",
+          "status": "proposal-only",
+          "realFunction": "IAM主体へ付与できる権限の上限。単独で権限を付与しない。",
+          "limits": "境界だけでは権限を付与しない。",
+          "trigger": "対象IAM主体がある。",
+          "tradeoff": "Allowは別途必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4748,6 +5280,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "属性が一致する主体と対象の操作札を、このターン使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "属性条件で行動を絞る。認可タグの変更管理も必要。",
+          "status": "proposal-only",
+          "realFunction": "タグ等の属性を条件にするアクセス制御。認可用タグの変更権限も管理する。",
+          "limits": "タグ変更権限まで管理しなければ安全ではない。",
+          "trigger": "認可用タグが管理されている。",
+          "tradeoff": "属性不一致では通らない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4789,6 +5343,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対象リソースの主体・操作許可を設定する。許可された次の対応操作札のコストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "リソース側の設定支援。適用Denyを覆さない。",
+          "status": "proposal-only",
+          "realFunction": "S3バケット等のリソース側でPrincipalと許可・拒否を定める。",
+          "limits": "リソース側設定だけで全認可が決まるとは限らない。",
+          "trigger": "対応するリソースがある。",
+          "tradeoff": "他の適用ポリシーのDenyは覆せない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4830,6 +5406,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "許可がない操作1つを止める。山札から対応する許可設定札1枚を手札へ加える。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M056"
+          ],
+          "correspondence": "原因を調べて設定を選ぶ。選ぶだけで許可は付かない。",
+          "status": "proposal-only",
+          "realFunction": "適用される許可がない要求を既定で拒否すること。",
+          "limits": "暗黙的拒否と明示的拒否の原因を区別する。",
+          "trigger": "認可の失敗を調べる。",
+          "tradeoff": "止めるだけで修復しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4878,6 +5476,28 @@
             "least-privilege",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応アクセス設定を確認する。不備があれば山札から是正札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "検出と是正を別にする。",
+          "status": "proposal-only",
+          "realFunction": "外部共有等のアクセス設定を分析する機能。検出後の是正は別途行う。",
+          "limits": "検出が修正や全アクセスの安全保証ではない。",
+          "trigger": "分析対象のアクセス設定がある。",
+          "tradeoff": "修正は引いた札で別途実行。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4910,6 +5530,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "認証済みのアプリ利用者へ、次ターンまで限定的なAWS操作許可を渡す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M067"
+          ],
+          "correspondence": "短期認証情報の提供を期限付き状態へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "認証済みID等に応じた限定的なAWS一時認証情報を提供する。",
+          "limits": "ユーザープールのログイン機能とは別。",
+          "trigger": "IDプールと対応ロールがある。",
+          "tradeoff": "期限・許可範囲に従う。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4951,6 +5593,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "S3への公開設定による妨害を1回防ぐ。意図した公開操作も設定範囲で制限する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "公開制御の対象をS3に限る。",
+          "status": "proposal-only",
+          "realFunction": "S3のパブリックアクセス設定に対する防御。ネットワーク経路とは別。",
+          "limits": "VPC経路やIAM全般の代替ではない。",
+          "trigger": "S3の公開制御を設定。",
+          "tradeoff": "意図した公開構成にも影響する。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -4992,6 +5656,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "ネットワーク区画を1つ作る。対応する配置札を置けるようにする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M082",
+            "M101"
+          ],
+          "correspondence": "ネットワークの土台。区画だけでは通信許可を得ない。",
+          "status": "proposal-only",
+          "realFunction": "リージョン内に作る論理的なネットワーク。アドレスと経路・通信許可を設計する。",
+          "limits": "VPCだけで全通信が成立・遮断するわけではない。",
+          "trigger": "アドレス範囲を選ぶ。",
+          "tradeoff": "経路と通信許可は別。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5047,6 +5733,28 @@
             "isolation",
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "VPC内の1AZに配置区画を作る。対応配置札1枚を保留する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M082"
+          ],
+          "correspondence": "配置を準備し、次の札まで保持する。複数AZにはまたがらない。",
+          "status": "proposal-only",
+          "realFunction": "1つのAZに属するVPC内のアドレス区画。複数AZへまたがらない。",
+          "limits": "区画の作成だけで経路や認可は成立しない。",
+          "trigger": "VPCと対象AZがある。",
+          "tradeoff": "複数AZを1区画にまとめられない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5088,6 +5796,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "宛先への経路を1つ設定する。対応する次の通信札1枚を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "経路があることと認可を別に扱う。",
+          "status": "proposal-only",
+          "realFunction": "宛先範囲に応じ通信を送る経路の一覧。IAM認可を付与するものではない。",
+          "limits": "ルートテーブルは操作権限を与えない。",
+          "trigger": "経路先が存在。",
+          "tradeoff": "通信許可とIAMは別途必要。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5120,6 +5850,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "IGWへ直接向かう区画経路を設定する。条件を満たす公開入口札を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "経路だけでEC2を自動公開しない。",
+          "status": "proposal-only",
+          "realFunction": "IGWへの直接経路を持つサブネット。各EC2が自動公開される意味ではない。",
+          "limits": "配置したEC2が自動公開されるわけではない。",
+          "trigger": "IGWを利用する公開入口の場面。",
+          "tradeoff": "各処理先の公開IPや通信許可は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5161,6 +5913,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "複数経路から指定宛先に最も具体的な経路を選ぶ。対応通信札1枚を保留。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M101"
+          ],
+          "correspondence": "経路選択ルールを選択・保留で表す。",
+          "status": "proposal-only",
+          "realFunction": "宛先に一致するルートのうち、最も具体的なアドレス範囲を優先する。",
+          "limits": "細かい経路を選ぶルールであり通信許可ではない。",
+          "trigger": "宛先に複数経路が一致。",
+          "tradeoff": "経路がなければ無効。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5202,6 +5976,27 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "5ブロック。",
+          "upgrade": "5→8ブロック。コスト1。",
+          "stsMechanicIds": [
+            "M003"
+          ],
+          "correspondence": "通信の許可境界を基本防御に置き換える。",
+          "status": "proposal-only",
+          "realFunction": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+          "limits": "ブロック値は比喩。明示的Denyを設定する機能ではない。",
+          "trigger": "関連付けた処理先の通信を保護。",
+          "tradeoff": "許可外の必要通信も通らない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5243,6 +6038,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "区画境界の往路・復路を指定する。合う通信妨害1回を防ぐ。復路未設定なら自分の通信も失敗。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "ステートレスな両方向設定を条件に残す。",
+          "status": "proposal-only",
+          "realFunction": "サブネット境界で許可・拒否を設定するステートレスな通信制御。",
+          "limits": "ステートフルなSGと同じルールにしない。",
+          "trigger": "往路と復路を両方設定。",
+          "tradeoff": "復路を忘れると自分の処理も失敗。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5284,6 +6101,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "プライベート側のIPv4外向き通信札を、このターン使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "外向き経路に限定。新規の内向き接続は通さない。",
+          "status": "proposal-only",
+          "realFunction": "外向き通信のアドレス変換を行うマネージド機能。配置・経路・料金を確認する。",
+          "limits": "専用のサービス閉域経路や暗号化ではない。",
+          "trigger": "NAT配置・経路が成立。",
+          "tradeoff": "外からの新規接続は通さない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5327,6 +6166,30 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応サービスへの経路を作る。手札のそのサービス操作札1枚を保留する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M056"
+          ],
+          "correspondence": "専用経路の準備。IAM許可は別。",
+          "status": "proposal-only",
+          "realFunction": "対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。",
+          "limits": "接続と認可は別。全サービスへ万能ではない。",
+          "trigger": "対応サービス・経路方式を選ぶ。",
+          "tradeoff": "IAMの許可がなければ操作失敗。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "builder"
+          ]
         }
       },
       {
@@ -5368,6 +6231,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応サービスへプライベートIPで接続する。対応操作札1枚を保留。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M056"
+          ],
+          "correspondence": "サービス単位の接続。VPC全体への推移接続ではない。",
+          "status": "proposal-only",
+          "realFunction": "対応サービスへプライベートIPで接続する仕組み。Gateway endpointとは異なる。",
+          "limits": "Gateway endpointやVPCピアリングとは異なる。",
+          "trigger": "提供側・利用側の設定がある。",
+          "tradeoff": "通常のVPC全体接続には使えない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5409,6 +6294,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "CIDRが重複しない2つのVPCの対応通信を通す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "直接接続に限定し、第三VPCへ推移させない。",
+          "status": "proposal-only",
+          "realFunction": "2つのVPCの直接接続。重複CIDRや推移的ルーティングに制約がある。",
+          "limits": "接続だけで通信許可は付かない。",
+          "trigger": "CIDRが重複せず経路がある。",
+          "tradeoff": "第三のVPCへ推移接続しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5450,6 +6357,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "複数区画のハブを設置する。設定した経路間の対応通信札を使用可能にする。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M082",
+            "M101"
+          ],
+          "correspondence": "接続集約を表す。許可・暗号化は別。",
+          "status": "proposal-only",
+          "realFunction": "複数VPCや拠点接続を集約するネットワークハブ。",
+          "limits": "接続集約を万能認可・暗号化と混同しない。",
+          "trigger": "ハブの接続・経路表を設計。",
+          "tradeoff": "未設定の宛先へは通らない。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5491,6 +6420,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "拠点通信を暗号化トンネルで通す。該当通信の盗聴妨害を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "対応経路の保護。帯域・回線障害は残る。",
+          "status": "proposal-only",
+          "realFunction": "拠点とAWSをIPsecトンネルで接続する。帯域と冗長性も別に確認する。",
+          "limits": "トンネル数をそのまま総処理能力に掛けない。",
+          "trigger": "トンネル・経路・必要帯域がある。",
+          "tradeoff": "回線障害や帯域不足は別に残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5532,6 +6483,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 2,
+          "effect": "次ターン、対応する拠点転送札のコストを1下げる。専用回線の準備として扱う。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M070"
+          ],
+          "correspondence": "準備時間を予約で表す。暗号化を自動付与しない。",
+          "status": "proposal-only",
+          "realFunction": "AWSへの専用ネットワーク接続。既定では通信暗号化を行わない。",
+          "limits": "専用接続は既定で暗号化されない。",
+          "trigger": "接続の準備を済ませた場面。",
+          "tradeoff": "配置後1ターン待って利用。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5573,6 +6546,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "IPv6の外向き通信と応答を通す。外からの新規接続は通さない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "IPv6専用の方向制御。",
+          "status": "proposal-only",
+          "realFunction": "IPv6の外向き通信と応答を許し、外からの新規接続を防ぐ経路。",
+          "limits": "IPv4 NATの代用品ではない。",
+          "trigger": "対象処理先がIPv6を使う。",
+          "tradeoff": "外からの新規接続は通さない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5621,6 +6616,27 @@
             "private-access",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "通信のメタデータを確認し、山札から経路・通信許可調査札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "通信調査だけを支援する。本文や業務正誤は分からない。",
+          "status": "proposal-only",
+          "realFunction": "IP通信の送受信先や許可・拒否などのメタデータ記録。パケット本文ではない。",
+          "limits": "パケット本文を取得する機能ではない。",
+          "trigger": "対象通信の記録を調べる。",
+          "tradeoff": "本文やアプリの正誤は分からない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5662,6 +6678,28 @@
           "links": [
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "Agent・IAM・到達性を満たす処理先に管理作業を1回行う。対応する設定札1枚を保留。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M056"
+          ],
+          "correspondence": "受信SSHを開けない管理接続。条件は省略しない。",
+          "status": "proposal-only",
+          "realFunction": "Agent・IAM・到達性を整え、受信SSHを開けず管理セッションを提供する。",
+          "limits": "権限や接続設定を省略できない。",
+          "trigger": "Agent・IAM・到達性がある。",
+          "tradeoff": "欠ければ管理できない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5724,6 +6762,27 @@
             "queue",
             "spot"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "アタック",
+          "energy": 1,
+          "effect": "6ダメージ。",
+          "upgrade": "6→9ダメージ。コスト1。",
+          "stsMechanicIds": [
+            "M001"
+          ],
+          "correspondence": "基本処理を単発攻撃に置き換える。",
+          "status": "proposal-only",
+          "realFunction": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+          "limits": "EC2性能を6という数値で保証しない。",
+          "trigger": "単体で使用可能。",
+          "tradeoff": "エナジー1消費。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5772,6 +6831,28 @@
             "multi-az",
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "正常なTCP/UDP/TLS処理先を選び、次の対応処理札を1回実行する。コストは通常どおり払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M073",
+            "M101"
+          ],
+          "correspondence": "振分けを対象限定の実行先選択にする。",
+          "status": "proposal-only",
+          "realFunction": "TCP/UDP/TLSの負荷分散や固定IP要件で比較するロードバランサー。",
+          "limits": "ALBのHTTP機能と一律に置換しない。",
+          "trigger": "対応プロトコルと正常先がある。",
+          "tradeoff": "処理先の能力自体は増えない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5829,6 +6910,30 @@
             "autoscaling",
             "spot"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "次ターン開始時、戦闘限定のAmazon EC2を1枚手札へ。この戦闘の増援札として扱う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M059"
+          ],
+          "correspondence": "台数増加を処理カード生成で表す。生成札の使用コストは払う。",
+          "status": "proposal-only",
+          "realFunction": "需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。",
+          "limits": "台数調整の比喩であり下流上限を消さない。",
+          "trigger": "基本の処理先1つを含む設置札として使える。",
+          "tradeoff": "増強は即時反映しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "tuner"
+          ]
         }
       },
       {
@@ -5870,6 +6975,29 @@
           "links": [
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "観測した負荷が目標を超えた次ターン、EC2増援札を1枚手札へ。1ターン1回。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M036",
+            "M044",
+            "M059"
+          ],
+          "correspondence": "指標を使った需要追随。指標と下流限界は残る。",
+          "status": "proposal-only",
+          "realFunction": "1台当たりの負荷等が目標に近づくよう容量を調整する方式。",
+          "limits": "CPUだけで全ボトルネックを測れない。",
+          "trigger": "適した負荷指標を観測。",
+          "tradeoff": "低負荷・不適切な指標では割引なし。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5911,6 +7039,28 @@
           "links": [
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "指定した次ターン開始時、戦闘限定のAmazon EC2を2枚手札へ。除外。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M059"
+          ],
+          "correspondence": "既知の需要へ事前準備する。",
+          "status": "proposal-only",
+          "realFunction": "既知の時刻の需要に合わせて事前に容量を変更する方式。",
+          "limits": "突発負荷を予知する能力ではない。",
+          "trigger": "既知の需要の時刻に合わせる。",
+          "tradeoff": "予測が外れても準備コストは戻らない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -5952,6 +7102,28 @@
           "links": [
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "手札のEC2増援札1枚を保留する。その札の次の使用コストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M070"
+          ],
+          "correspondence": "初期化済み待機を利用しやすい増援へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "初期化を済ませた待機インスタンスを用意しスケール時の準備時間を減らす。",
+          "limits": "何も準備せず即時増援できるわけではない。",
+          "trigger": "待機するEC2構成を用意する。",
+          "tradeoff": "待機分の準備コストが必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6007,6 +7179,29 @@
             "iac",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "所持するEC2起動設定札1枚のコピーを、次ターン山札上へ置く。業務データは複製しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M049",
+            "M061"
+          ],
+          "correspondence": "マシンイメージによる同設定の起動をコピーで表す。",
+          "status": "proposal-only",
+          "realFunction": "EC2の起動に使うマシンイメージ。全業務データの継続バックアップとは別。",
+          "limits": "継続バックアップや構成全体のIaCではない。",
+          "trigger": "対象イメージを作れるEC2構成。",
+          "tradeoff": "業務データは保存しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6062,6 +7257,28 @@
             "spot",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 2,
+          "effect": "指定AZ・属性のEC2増援に限り、次の容量不足による使用失敗を1回防ぐ。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M101"
+          ],
+          "correspondence": "特定の容量確保。料金割引やSpot中断防止ではない。",
+          "status": "proposal-only",
+          "realFunction": "指定AZと属性のEC2容量を確保する。料金割引とは役割が異なる。",
+          "limits": "料金割引やSpot中断の抑止ではない。",
+          "trigger": "予約条件に合う増援。",
+          "tradeoff": "別AZ・別属性には無効。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6112,6 +7329,31 @@
             "multi-az",
             "isolation"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "EC2配置を低遅延か障害分離から選ぶ。前者は次の対応処理のコスト-1、後者は局所停止の波及を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M070",
+            "M100"
+          ],
+          "correspondence": "配置方式ごとの異なる目的を選択式で表す。",
+          "status": "proposal-only",
+          "realFunction": "低遅延や障害分離等の要件に合わせEC2の配置を制御する。",
+          "limits": "全プレイスメント方式を同じ防御として扱わない。",
+          "trigger": "配置制約を満たすEC2を使う。",
+          "tradeoff": "低遅延配置と障害分離は同時に万能化しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "guardian"
+          ]
         }
       },
       {
@@ -6155,6 +7397,30 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "CPU・メモリ・I/O型を選ぶ。適合する次の処理札1枚の攻撃+3。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M020",
+            "M101"
+          ],
+          "correspondence": "実測で合う特性への限定強化。全攻撃筋力ではない。",
+          "status": "proposal-only",
+          "realFunction": "CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。",
+          "limits": "サイズや名前だけで最適性能が決まらない。",
+          "trigger": "処理の要求特性と型が合う。",
+          "tradeoff": "合わない場合は増加なし。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "tuner"
+          ]
         }
       },
       {
@@ -6196,6 +7462,28 @@
           "links": [
             "spot"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する保存済み成果1つを記録する。対応する復元札を使うとき、その記録から戻せる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "保存先の準備として記録する。S3はオブジェクト、EBSはEC2ブロックの対象限定。",
+          "status": "proposal-only",
+          "realFunction": "EC2で使う永続ブロックストレージ。性能設定とEC2側上限を確認する。",
+          "limits": "永続保存と時点復元を同一視しない。",
+          "trigger": "EC2と適した接続がある。",
+          "tradeoff": "バックアップ取得は別。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6237,6 +7525,28 @@
           "links": [
             "multi-az"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応NFS処理先で共有ファイルを使用できる。同じ共有データを使う次の処理札の取得コストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "共有ファイルによる再取得の支援。性能保証とは別。",
+          "status": "proposal-only",
+          "realFunction": "Linux等から共有するマネージドNFSファイルストレージ。モードと到達性を設計する。",
+          "limits": "共有できることだけで性能や整合性を保証しない。",
+          "trigger": "NFS・経路・許可が成立。",
+          "tradeoff": "対応外のアクセスには使えない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6278,6 +7588,28 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応EBSの次のI/O処理札1枚の攻撃+3。EC2側上限は超えない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M020",
+            "M101"
+          ],
+          "correspondence": "容量とは別の性能調整を限定強化にする。",
+          "status": "proposal-only",
+          "realFunction": "容量とは独立してIOPS・スループットを設定できる汎用SSDのEBSタイプ。",
+          "limits": "容量追加だけで全性能が増すわけではない。",
+          "trigger": "EBS gp3を使う処理。",
+          "tradeoff": "EC2側上限を超えられない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6319,6 +7651,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "対応SSDを使うI/O処理札の攻撃+3。対象外には加算しない。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M096"
+          ],
+          "correspondence": "厳しいI/O用途への持続的な能力投資。",
+          "status": "proposal-only",
+          "realFunction": "厳しいIOPS・遅延要件で比較するEBS SSD。io2等がある。",
+          "limits": "実際の遅延・IOPS保証をゲーム値へ読み替えない。",
+          "trigger": "対応SSD・I/O型の処理。",
+          "tradeoff": "エナジー2消費。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6360,6 +7713,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "山札からIOPS・帯域の調整札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "測定を必要な調整手段へのアクセスで表す。",
+          "status": "proposal-only",
+          "realFunction": "秒当たりの操作回数と転送量。I/Oサイズを掛けて帯域要求を計算する。",
+          "limits": "IOPSと帯域を同じ指標にしない。",
+          "trigger": "I/Oを含む処理を調べる。",
+          "tradeoff": "調査だけでは攻撃は増えない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6400,6 +7774,27 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "低頻度・即時取得データを低頻度階層へ移す。保存費-1、次の取得費+1。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "費用のトレードオフをイベントの仮費用へ反映する。",
+          "status": "proposal-only",
+          "realFunction": "低頻度でも即時取得を求める保存階層。取得費と最低保存条件を含めて比較する。",
+          "limits": "実際の最低保存期間や料金を簡略化している。",
+          "trigger": "対象データが低頻度。",
+          "tradeoff": "取得時に追加のエナジー1を要する。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6440,6 +7835,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "対象データのアクセス履歴で保存階層を調整する。監視費1を払い、適合する保存費を1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "監視の負担と適正化を分ける。実料金とは別。",
+          "status": "proposal-only",
+          "realFunction": "アクセス状況に応じ保存階層を自動調整する。監視費や対象条件を確認する。",
+          "limits": "全データの最安値を保証しない。",
+          "trigger": "S3の適したデータを保存。",
+          "tradeoff": "監視・対象条件があり無条件無料ではない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6480,6 +7896,27 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "長期低頻度データの保存費を1下げる。復元には追加1ターン待つ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M088"
+          ],
+          "correspondence": "低費用と待ち時間の交換。",
+          "status": "proposal-only",
+          "realFunction": "長期低頻度の保存。選んだ階層の復元待ち時間・取得費が要件に合うか確認する。",
+          "limits": "階層ごとの実際の復元時間はゲームの1ターンとは別。",
+          "trigger": "待ち時間を許容する保存。",
+          "tradeoff": "即時復旧には向かない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6521,6 +7958,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "S3の更新前の版を1つ記録する。対応する復元札で旧版を選べる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "旧版の保持を記録として表す。廃棄札回収と同じではない。",
+          "status": "proposal-only",
+          "realFunction": "オブジェクトの複数バージョンを保持する。削除後の旧版にも保存費が生じ得る。",
+          "limits": "版を持つだけで接続切替・業務復旧まで終わらない。",
+          "trigger": "S3を保存先に使う。",
+          "tradeoff": "旧版の保持コストは残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6562,6 +8021,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 0,
+          "effect": "保持条件を満たすS3旧版1つを整理し、その保存費を1下げる。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "不要な保存の整理。必要版の復旧能力は失う。",
+          "status": "proposal-only",
+          "realFunction": "現在版でなくなったオブジェクト版。保持義務とLifecycleで管理する。",
+          "limits": "保持義務やObject Lockを無視しない。",
+          "trigger": "旧版を削除できる保持条件。",
+          "tradeoff": "必要な旧版を消すと戻せなくなる。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6603,6 +8084,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "選んだS3版の削除・上書き妨害を、指定保持期間中防ぐ。自分の整理も制限する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M056"
+          ],
+          "correspondence": "モードと期間を伴う保持保護。永久無敵ではない。",
+          "status": "proposal-only",
+          "realFunction": "一定期間のオブジェクト版の上書き・削除からの保護を設計する機能。",
+          "limits": "モードの差や期限を省略した永久無敵ではない。",
+          "trigger": "版・保持モード・期間を設定。",
+          "tradeoff": "期間中は自分の整理も制限される。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6635,6 +8138,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "SMB/ADを必要とする処理を成立させる。対応転送タスクへ6ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M056"
+          ],
+          "correspondence": "Windows共有の用途へ限定した処理。",
+          "status": "proposal-only",
+          "realFunction": "SMB共有やActive Directory連携を要件とするWindowsファイルサービス。",
+          "limits": "EFSと同一の接続条件にはしない。",
+          "trigger": "Windows共有の要件。",
+          "tradeoff": "他の共有形式には代用しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6683,6 +8208,28 @@
             "spot",
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "EBSの時点を記録する。対応する復元札を使用したとき、その時点へ戻す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "保存時点の保持。実行・整合性確認は別。",
+          "status": "proposal-only",
+          "realFunction": "EBSの時点バックアップ。復元後のアプリ整合性と起動確認も必要。",
+          "limits": "単独でアプリ整合性や業務再開を保証しない。",
+          "trigger": "EBSを保存している。",
+          "tradeoff": "取得以降の更新は戻らない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6724,6 +8271,28 @@
           "links": [
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "大きなS3転送を3部分へ分ける。2ダメージを3回。失敗部分のみ再試行できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M002",
+            "M072"
+          ],
+          "correspondence": "分割転送と部分再送を多段・部分リプレイへ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "大きいS3オブジェクトを部分に分けて送信し失敗部分を再送する方式。",
+          "limits": "任意の業務操作へ適用できる再試行ではない。",
+          "trigger": "大きなアップロードが対象。",
+          "tradeoff": "部分の管理が必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6765,6 +8334,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "遠隔S3アップロードの次の転送攻撃+3。効果が有効な経路だけに適用。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M020",
+            "M101"
+          ],
+          "correspondence": "転送経路改善を対象限定強化で表す。",
+          "status": "proposal-only",
+          "realFunction": "遠隔からS3への転送改善の候補。実測効果と追加費用を比較する。",
+          "limits": "CDNの結果キャッシュではない。",
+          "trigger": "遠隔転送で有効と確認された場面。",
+          "tradeoff": "追加コストがあり、近距離等は効果なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6806,6 +8397,28 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "成功済みS3更新の次の直接読取りを更新後の値で行う。対応札1枚を保留。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M101"
+          ],
+          "correspondence": "整合性の範囲をS3直接アクセスに限定する。",
+          "status": "proposal-only",
+          "realFunction": "成功したPUT/DELETE後の読取りとLISTに変更を反映する性質。CDNや非同期複製は別。",
+          "limits": "全キャッシュへ強い整合性が伝わるわけではない。",
+          "trigger": "S3への直接アクセス。",
+          "tradeoff": "CDNや複製先の古さは残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6847,6 +8460,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "S3保存データの盗み見妨害を1回防ぐ。復元には適した復号権限を要する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "暗号化の保護と復元の鍵条件を残す。",
+          "status": "proposal-only",
+          "realFunction": "SSE-S3やSSE-KMS等による保存データ保護。アクセス権限は別途制御する。",
+          "limits": "暗号化とアクセス権を混同しない。",
+          "trigger": "適切な鍵方式と復号権限を用意。",
+          "tradeoff": "許可した操作の誤更新は防がない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6888,6 +8523,28 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "S3データの複製を予約する。次ターン対応する別保存先に記録を作る。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M061"
+          ],
+          "correspondence": "非同期複製を予約コピーにする。誤更新も伝わる。",
+          "status": "proposal-only",
+          "realFunction": "ルールに応じたオブジェクト複製。過去分の複製や削除動作も確認する。",
+          "limits": "過去版・削除の扱いはルール依存。",
+          "trigger": "複製条件と宛先権限がある。",
+          "tradeoff": "反映待ちがあり誤更新も伝わり得る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -6930,6 +8587,31 @@
           ],
           "links": [
             "rds-ha"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "DB主力を設置し、ターン終了時3ダメージ。主力停止時、1ターン後に待機先へ切り替えて再開。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M044",
+            "M082"
+          ],
+          "correspondence": "継戦を主力と待機の交代にする。平時の火力を倍増しない。",
+          "status": "proposal-only",
+          "realFunction": "複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。",
+          "limits": "クラスター方式との違いをカード詳細に残す。",
+          "trigger": "単一スタンバイ方式をこの札で表す。",
+          "tradeoff": "平時の待機先は攻撃しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "guardian"
           ]
         }
       },
@@ -6974,6 +8656,30 @@
           "links": [
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "初回参照で4ダメージ。以後、この戦闘の読取り札の攻撃+3。書込みには加算しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M096"
+          ],
+          "correspondence": "読取り分散だけを強化。入口札は元DB参照とレプリカを含む。",
+          "status": "proposal-only",
+          "realFunction": "読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。",
+          "limits": "最新値が必要な読取りには別判断が必要。",
+          "trigger": "入口札はDB参照先とレプリカを含む複合構成。書込みには適用しない。",
+          "tradeoff": "初回取得・複製遅延があり、最新値必須の処理へは適用しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "accelerator"
+          ]
         }
       },
       {
@@ -7015,6 +8721,28 @@
           "links": [
             "rds-ha"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "RDS主力が停止したら、次ターンに主力処理を再開する。平時の攻撃は増えない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M042",
+            "M044"
+          ],
+          "correspondence": "待機からの切替を停止時の予約にする。",
+          "status": "proposal-only",
+          "realFunction": "Multi-AZ DBインスタンスの同期待機先。通常のSELECTには使わない。",
+          "limits": "SELECT用の平時戦力として使わない。",
+          "trigger": "単一スタンバイ配置のRDSがある。",
+          "tradeoff": "切替の1ターン中は処理が停止。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7056,6 +8784,28 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "ターン終了時、キーアクセスのタスクへ3ダメージ。ホットキー集中中は発動しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M101"
+          ],
+          "correspondence": "キーアクセス型の処理に限定する。",
+          "status": "proposal-only",
+          "realFunction": "キーに基づくアクセスを中心とするマネージドNoSQL DB。キー分散と容量を設計する。",
+          "limits": "SQL全般の代用ではない。",
+          "trigger": "キーを決められる処理。",
+          "tradeoff": "キー偏りで処理が制限される。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7097,6 +8847,28 @@
           "links": [
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "適合するDynamoDBのキー分散を整える。偏りで止まった処理を再開できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M067",
+            "M101"
+          ],
+          "correspondence": "キー設計の調整。万能な火力上昇ではない。",
+          "status": "proposal-only",
+          "realFunction": "DynamoDBのデータ配置とアクセス分散を左右するキー。偏りによる集中に注意する。",
+          "limits": "無条件の筋力増加にしない。",
+          "trigger": "適切なキー設計が可能。",
+          "tradeoff": "単一ホットキーの万能解決ではない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7138,6 +8910,28 @@
           "links": [
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "DynamoDBの別キー問合せを使用可能にする。山札から対応読取り札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M056"
+          ],
+          "correspondence": "別の検索経路を使えるようにする。最新性は保証しない。",
+          "status": "proposal-only",
+          "realFunction": "別のキーで問い合わせるDynamoDB索引。読取りは結果整合性。",
+          "limits": "RDS読み取りレプリカではない。",
+          "trigger": "別キーの問合せ。",
+          "tradeoff": "結果整合性・索引コストがある。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7186,6 +8980,28 @@
             "cache",
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "次の読取りの鮮度条件を選ぶ。手札から条件に合う読取り札1枚を保留。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M100"
+          ],
+          "correspondence": "強い整合性が必要なら対応先だけを選ぶ。",
+          "status": "proposal-only",
+          "realFunction": "更新直後の値の反映条件。アクセス先ごとに強い整合性の対応を確認する。",
+          "limits": "指定だけで複製遅延を消さない。",
+          "trigger": "対応する読取り先がある。",
+          "tradeoff": "非対応の強い整合性は選べない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7227,6 +9043,28 @@
           "links": [
             "serverless"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "DynamoDBの対応処理を要求量に合わせる。固定容量不足の妨害を1回軽減する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M101"
+          ],
+          "correspondence": "容量方式の違いを限定保護で表す。無限容量ではない。",
+          "status": "proposal-only",
+          "realFunction": "読書き要求ベースの容量課金。事前の固定容量計画を減らす。",
+          "limits": "即時無限容量ではない。",
+          "trigger": "対応DynamoDB処理。",
+          "tradeoff": "負荷による費用と制限は残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7268,6 +9106,27 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "DynamoDB項目1つを期限後の削除待ちにする。次ターン以降の対応削除処理を予約。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044"
+          ],
+          "correspondence": "非同期削除を即時消去やキャッシュ失効にしない。",
+          "status": "proposal-only",
+          "realFunction": "項目の期限後に非同期で削除する機能。指定秒での削除を保証しない。",
+          "limits": "期限の瞬間に消去するカードではない。",
+          "trigger": "期限属性を設定した項目。",
+          "tradeoff": "削除までの待ち時間が残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7309,6 +9168,28 @@
           "links": [
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 2,
+          "effect": "対応するDynamoDB変更札2枚を選ぶ。全成功なら両方適用、どちらか失敗なら両方の変更を取消す。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M100",
+            "M101"
+          ],
+          "correspondence": "全成功/全失敗を分岐として表す。外部副作用は含めない。",
+          "status": "proposal-only",
+          "realFunction": "複数項目の変更を全成功または全失敗として扱う。制約と容量費用も考慮する。",
+          "limits": "外部サービスの副作用や業務冪等性は別。",
+          "trigger": "対象項目・操作が制約内。",
+          "tradeoff": "エナジー2消費。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7350,6 +9231,29 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "同じキーのDynamoDB結果整合性読取りを再使用するとき、コストを1下げる。各ターン1回。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M037",
+            "M070",
+            "M101"
+          ],
+          "correspondence": "DynamoDB固有の繰返し参照を割引する。",
+          "status": "proposal-only",
+          "realFunction": "DynamoDB用インメモリキャッシュ。結果整合性の繰返し読取りで比較する。",
+          "limits": "DynamoDB固有キャッシュであり全DBに使えない。",
+          "trigger": "結果整合性の読取りが適する。",
+          "tradeoff": "書込み・強い整合性の読取りには割引なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7398,6 +9302,28 @@
             "rds-ha",
             "serverless"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応DB接続を再利用する次の札のコストを1下げる。各ターン1回。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "接続プールでありSQL結果をコピーしない。",
+          "status": "proposal-only",
+          "realFunction": "DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。",
+          "limits": "結果キャッシュと接続プールを区別する。",
+          "trigger": "対応RDS系の接続。",
+          "tradeoff": "SQL実行結果は記憶しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7439,6 +9365,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 2,
+          "effect": "保持期間内の対応DB記録を選び、1ターン後に復元する。取得以降の更新は失う。除外。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M100"
+          ],
+          "correspondence": "時点選択と復元の待ち。接続切替は別に必要。",
+          "status": "proposal-only",
+          "realFunction": "保持期間内の指定時点へ復元する。復元先の検証と接続切替も必要。",
+          "limits": "任意時点・即時全快を保証しない。",
+          "trigger": "復元可能な時点がある。",
+          "tradeoff": "別復元先の確認・接続切替を要する。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7487,6 +9435,28 @@
             "rds-ha",
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "Aurora読取り札の攻撃+3。主力停止時は次ターンの昇格先候補にもなる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M096"
+          ],
+          "correspondence": "読取りと昇格という2用途を、対象限定で併せ持つ。",
+          "status": "proposal-only",
+          "realFunction": "Auroraの読取り分散やフェイルオーバーの昇格先として使うレプリカ。",
+          "limits": "単一スタンバイと同じ平時制約にしない。",
+          "trigger": "Auroraを使う。",
+          "tradeoff": "読取り鮮度・昇格待ちがある。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7528,6 +9498,29 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "DynamoDBを別地域へ複製する。整合性方式の条件を満たせば、地域停止後も対応処理を継続する。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M061",
+            "M082"
+          ],
+          "correspondence": "複数地域の稼働を表す。常に全地域最新値にはしない。",
+          "status": "proposal-only",
+          "realFunction": "複数リージョンのレプリカで読み書きする構成。MREC/MRSC等の条件を確認する。",
+          "limits": "全リージョンで常に同じ最新値とは限らない。",
+          "trigger": "整合性方式と要件が合う。",
+          "tradeoff": "複製・競合・追加コストを考慮する。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7569,6 +9562,28 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "山札からタスクの条件に合うDB札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "要件に応じた選定を検索にする。未所持のDBは生成しない。",
+          "status": "proposal-only",
+          "realFunction": "SQL・キーアクセス・整合性・負荷等の必須条件からDBを比較する。",
+          "limits": "最適DBを自動決定する機能ではない。",
+          "trigger": "山札に適合DB札がある。",
+          "tradeoff": "使用後除外。未所持のDBは生成しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7616,6 +9631,27 @@
             "rightsizing",
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "対応する費用内訳を確認し、次の同分野の調整札のコストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "調査で調整をしやすくする。実利用費の節約は実際の構成変更後。",
+          "status": "proposal-only",
+          "realFunction": "実行・保存・I/O・レプリカ・バックアップ・転送等を合わせた費用。",
+          "limits": "保存単価だけで総費用を評価しない。",
+          "trigger": "調整札を使う。",
+          "tradeoff": "調査だけでは戦力増加なし。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7656,6 +9692,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "対応する費用内訳を確認し、次の同分野の調整札のコストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "調査で調整をしやすくする。実利用費の節約は実際の構成変更後。",
+          "status": "proposal-only",
+          "realFunction": "出口の稼働時間・処理量・転送経路等を同じ可用性条件で比較する費用。",
+          "limits": "一番安い経路が必ず要件を満たすわけではない。",
+          "trigger": "同じ可用性条件で比較。",
+          "tradeoff": "新しい経路は別に作る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7696,6 +9753,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "対応する費用内訳を確認し、次の同分野の調整札のコストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "調査で調整をしやすくする。実利用費の節約は実際の構成変更後。",
+          "status": "proposal-only",
+          "realFunction": "保存単価だけでなく取得・要求・移行・最低期間・旧版等を含む費用。",
+          "limits": "単価だけの比較を総費用としない。",
+          "trigger": "保存要件を維持した調整。",
+          "tradeoff": "取得や保持条件を無視できない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7751,6 +9829,28 @@
             "cdn",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "正常な案内先を指定する。TTL待ちの後に次の対応処理先を切り替える。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "DNSの更新と利用側の待ちを残す。",
+          "status": "proposal-only",
+          "realFunction": "名前から宛先を返す権威 DNS。ルーティングポリシーで案内先を選ぶ。",
+          "limits": "接続中の全通信が瞬時に切り替わるわけではない。",
+          "trigger": "名前解決で切替できる構成。",
+          "tradeoff": "TTLによる待ちが残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7799,6 +9899,28 @@
             "cdn",
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "次のDNSまたはキャッシュ再取得を予約し、保存情報を更新する。対応札1枚を次ターンに引く。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M101"
+          ],
+          "correspondence": "期限更新と再取得のコストを持つ。常に最新とは限らない。",
+          "status": "proposal-only",
+          "realFunction": "DNS やキャッシュの情報を再利用する有効期間。",
+          "limits": "TTLで常に最新が保証されるわけではない。",
+          "trigger": "期限による更新が適する。",
+          "tradeoff": "再取得の処理コストが増える。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7841,6 +9963,31 @@
           ],
           "links": [
             "cdn"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "アタック",
+          "energy": 1,
+          "effect": "配信タスクへ6ダメージ。同じ内容の次の配信札のコストを1下げる。更新後は再取得が必要。",
+          "upgrade": "6→9ダメージ。コスト1。その他の条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M037",
+            "M070"
+          ],
+          "correspondence": "配信と内容の再利用を同じカードに含める。",
+          "status": "proposal-only",
+          "realFunction": "エッジで HTTP/HTTPS コンテンツを配信する CDN。",
+          "limits": "キャッシュ不能処理や書込みの高速化ではない。",
+          "trigger": "単体で初回配信可能。再利用は同じキー。",
+          "tradeoff": "更新時は記憶を更新する必要。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "accelerator"
           ]
         }
       },
@@ -7890,6 +10037,28 @@
             "cdn",
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "共有できる要求のキーを指定する。次の対応キャッシュ札1枚を保留。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M101"
+          ],
+          "correspondence": "再利用の範囲を整える。キーだけで結果は保存しない。",
+          "status": "proposal-only",
+          "realFunction": "どの要求で同じキャッシュを共有するかを決める識別情報。",
+          "limits": "キー指定でデータ自体は保存されない。",
+          "trigger": "結果を共有可能な範囲。",
+          "tradeoff": "異なる利用者・要求を誤共有しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7931,6 +10100,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応するTCP/UDP経路の次の通信札のコストを1下げる。結果の再利用はしない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "経路改善を表し、CloudFrontのキャッシュと区別する。",
+          "status": "proposal-only",
+          "realFunction": "静的 IP と AWS ネットワークを使う TCP/UDP アプリの通信経路。",
+          "limits": "CDNキャッシュと異なる。",
+          "trigger": "対応入口と経路がある。",
+          "tradeoff": "結果の再利用はしない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -7972,6 +10163,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "CloudFrontから対応オリジンへのアクセスを限定する。該当する不正アクセス妨害を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M101"
+          ],
+          "correspondence": "オリジン側の保護。視聴者認証は別。",
+          "status": "proposal-only",
+          "realFunction": "CloudFront からオリジンへのアクセスを制限する仕組み。",
+          "limits": "署名付きURLと同じ対象を保護するわけではない。",
+          "trigger": "対応オリジンと許可設定。",
+          "tradeoff": "視聴者認証は別途必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8013,6 +10226,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "期限内の対応視聴者にだけ配信札を使用可能にする。次ターン終了時に失効。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M056"
+          ],
+          "correspondence": "視聴者の条件付きアクセスを短期許可で表す。",
+          "status": "proposal-only",
+          "realFunction": "有効期限等を含む署名で視聴者のアクセスを制限する URL。",
+          "limits": "全AWS API操作への権限を与えない。",
+          "trigger": "署名と対象コンテンツが有効。",
+          "tradeoff": "期限切れで無効。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8063,6 +10298,30 @@
             "serverless",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "アタック",
+          "energy": 1,
+          "effect": "イベントタスクへ6ダメージ。常駐戦力は作らない。",
+          "upgrade": "6→9ダメージ。コスト1。その他の条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M101"
+          ],
+          "correspondence": "必要時の単発処理。起動や同時実行の制約は残る。",
+          "status": "proposal-only",
+          "realFunction": "イベントに応じてコードを動かすサーバーレスサービス。",
+          "limits": "無制限の即時実行とは表現しない。",
+          "trigger": "単体のイベントを含む入口札。",
+          "tradeoff": "同時実行上限と起動条件がある。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "tuner"
+          ]
         }
       },
       {
@@ -8104,6 +10363,28 @@
           "links": [
             "serverless"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "条件を満たす次のLambdaイベント札1枚の攻撃+3。許容する同時実行枠内でのみ有効。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M020",
+            "M101"
+          ],
+          "correspondence": "処理枠の調整。予約と事前初期化を同一の効果にしない。",
+          "status": "proposal-only",
+          "realFunction": "同じ時点で処理されている関数呼出し数。",
+          "limits": "同時実行数だけで低遅延を保証しない。",
+          "trigger": "許容クォータと下流容量の範囲。",
+          "tradeoff": "予約と事前初期化の効果は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8159,6 +10440,28 @@
             "serverless",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応コンテナを配置する。ターン終了時、正常稼働なら3ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M082"
+          ],
+          "correspondence": "実行管理と配置を持続する処理へ対応させる。",
+          "status": "proposal-only",
+          "realFunction": "コンテナタスクの実行・配置・維持を管理するサービス。",
+          "limits": "ECSそのものをホスト基盤と同一視しない。",
+          "trigger": "イメージと実行基盤がある。",
+          "tradeoff": "停止や配置待ちで攻撃できない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8200,6 +10503,27 @@
           "links": [
             "serverless"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "コンテナを起動する。次ターンに6ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044"
+          ],
+          "correspondence": "起動待ちを含む処理。Lambdaと同じ瞬時イベント処理にしない。",
+          "status": "proposal-only",
+          "realFunction": "ホストを直接管理せずコンテナを動かす計算基盤。",
+          "limits": "Lambdaと同じイベント瞬時起動ではない。",
+          "trigger": "コンテナタスクを実行する。",
+          "tradeoff": "起動待ちがある。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8241,6 +10565,29 @@
           "links": [
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "Kubernetesの対応コンテナ配置を維持する。正常な対象は次ターンから終了時3ダメージ。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M044",
+            "M082"
+          ],
+          "correspondence": "Kubernetesの管理が必要な構成に限定する。",
+          "status": "proposal-only",
+          "realFunction": "Kubernetes のマネージドサービス。",
+          "limits": "すべてのコンテナで必須としない。",
+          "trigger": "Kubernetesが必要な構成。",
+          "tradeoff": "管理の準備コストが大きい。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8282,6 +10629,28 @@
           "links": [
             "iac"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "登録した対応コンテナイメージの起動札1枚を山札から手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "イメージ保管を起動に必要な札へのアクセスにする。",
+          "status": "proposal-only",
+          "realFunction": "コンテナイメージを保管するレジストリ。",
+          "limits": "レジストリはコンテナ実行基盤ではない。",
+          "trigger": "イメージを使う処理。",
+          "tradeoff": "保管だけでは実行しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8330,6 +10699,28 @@
             "serverless",
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "ECSタスクの許可範囲に合う次のAWS操作札を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "タスクのアプリ権限のみ。実行基盤は別。",
+          "status": "proposal-only",
+          "realFunction": "ECS タスク内のアプリが AWS API を使うための IAM ロール。",
+          "limits": "実行基盤やネットワーク経路は作らない。",
+          "trigger": "対象タスクと対応ロール。",
+          "tradeoff": "許可外操作は失敗。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8371,6 +10762,28 @@
           "links": [
             "serverless"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応APIの入口を設置する。許可・流量条件に合うイベント札を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M082"
+          ],
+          "correspondence": "入口と流量管理。バックエンドの処理は別に行う。",
+          "status": "proposal-only",
+          "realFunction": "API の公開・認証連携・流量管理を担う入口。",
+          "limits": "スロットリングを絶対的な費用上限にしない。",
+          "trigger": "対応するAPIバックエンド。",
+          "tradeoff": "上限超過は保留または拒否。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8419,6 +10832,29 @@
             "serverless",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "処理札2枚を順に予約する。失敗時の再試行か停止を選ぶ。各処理のコストは払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M072",
+            "M100"
+          ],
+          "correspondence": "処理順と分岐の制御を効果リストとして表す。",
+          "status": "proposal-only",
+          "realFunction": "複数ステップの順序や再試行を状態機械で管理するサービス。",
+          "limits": "設定だけで失敗が成功へ変わらない。",
+          "trigger": "連携する処理がある。",
+          "tradeoff": "各処理のコストは別に払う。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8469,6 +10905,29 @@
             "serverless",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応処理札を最大2枚保留できる。保留した仕事は、後のターンで使うまで未完了。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053"
+          ],
+          "correspondence": "仕事の蓄積を手札保留へ置換する。保留だけではダメージなし。",
+          "status": "proposal-only",
+          "realFunction": "非同期処理の作業待ちメッセージを保持するキュー。",
+          "limits": "メッセージ受理を業務完了として扱わない。",
+          "trigger": "単体で保留できる。追加攻撃は処理札が必要。",
+          "tradeoff": "ためただけではHPを減らさない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "commander"
+          ]
         }
       },
       {
@@ -8517,6 +10976,28 @@
             "queue",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "処理中のSQS仕事1枚を次ターンまで他の受信者から隠す。未完了なら再受信可能に戻す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M056"
+          ],
+          "correspondence": "一時的不可視と再配信。削除・完全な重複防止ではない。",
+          "status": "proposal-only",
+          "realFunction": "受信済みメッセージをほかの受信者から一時的に隠す期間。",
+          "limits": "削除や業務全体の重複防止ではない。",
+          "trigger": "SQSの仕事を処理中。",
+          "tradeoff": "期限後は再び受信され得る。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8565,6 +11046,28 @@
             "queue",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "同じメッセージグループの保留仕事を、受信順にだけ使用できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M056"
+          ],
+          "correspondence": "順序制約を残す。全仕事の順序や業務重複ゼロを保証しない。",
+          "status": "proposal-only",
+          "realFunction": "先入れ先出し。SQS ではメッセージグループ内の順序を維持する。",
+          "limits": "一切の重複がなくなる万能保証にしない。",
+          "trigger": "順序を必要とするSQS仕事。",
+          "tradeoff": "グループ内の並列性が制限される。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8607,6 +11110,31 @@
           ],
           "links": [
             "safe-retry"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "アタック",
+          "energy": 1,
+          "effect": "初回の業務処理で4ダメージ。同じ完了業務IDの再プレイでは成果を重複加算しない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M037",
+            "M072"
+          ],
+          "correspondence": "初回処理を含む複合札。冪等性だけが攻撃するわけではない。",
+          "status": "proposal-only",
+          "realFunction": "同じ要求を繰り返しても業務上の結果が重複しない性質。",
+          "limits": "4ダメージは初回の業務処理分。冪等性そのものが仕事を実行するわけではない。記録・保持条件は別途必要。",
+          "trigger": "初回の業務処理と、その業務IDの重複防止を含む入口札。",
+          "tradeoff": "同じ完了仕事を再攻撃して報酬を増やせない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "commander"
           ]
         }
       },
@@ -8656,6 +11184,28 @@
             "serverless",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "通知を対応する購読先へ渡す。対応する通知受信札を2枚まで手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M059",
+            "M101"
+          ],
+          "correspondence": "通知生成のみ。各購読先の処理成功は別。",
+          "status": "proposal-only",
+          "realFunction": "トピックの購読者へメッセージを配信するサービス。",
+          "limits": "キューそのものと同じ保持・消化にしない。",
+          "trigger": "購読先がある。",
+          "tradeoff": "通知を送るだけで処理完了しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8697,6 +11247,28 @@
           "links": [
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "同じ通知を独立した対応先2つへコピーする。各先の処理コストは別に払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M061",
+            "M101"
+          ],
+          "correspondence": "配信先の分岐。コピー数を業務成果の重複加算にしない。",
+          "status": "proposal-only",
+          "realFunction": "一つのメッセージを複数の独立した受信先へ配る構成。",
+          "limits": "配信数をそのまま業務処理成功数としない。",
+          "trigger": "受信先と役割が独立。",
+          "tradeoff": "同一成果を重複加算しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8745,6 +11317,28 @@
             "serverless",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "イベント条件に合う手札の対象札1枚を選んで実行する。コストは別に払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M073",
+            "M101"
+          ],
+          "correspondence": "ルールによる実行先選択。",
+          "status": "proposal-only",
+          "realFunction": "イベントをパターンに応じて対象へ振り分けるサービス。",
+          "limits": "万能な全サービス連携ではない。",
+          "trigger": "対応イベントとルールがある。",
+          "tradeoff": "不一致の処理は起動しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8800,6 +11394,28 @@
             "queue",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "失敗を繰り返したキュー仕事1枚を手札から隔離する。再処理札を使うまで通常の山札に戻さない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M046",
+            "M047"
+          ],
+          "correspondence": "隔離を廃棄札に近い別置き場にする。成功扱いではない。",
+          "status": "proposal-only",
+          "realFunction": "処理に繰り返し失敗したメッセージの隔離先。",
+          "limits": "隔離だけで復旧や成功にはならない。",
+          "trigger": "失敗したキュー仕事がある。",
+          "tradeoff": "隔離した仕事は未完了のまま。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8848,6 +11464,29 @@
             "autoscaling",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "キューで保留中の仕事があれば、次ターンに戦闘限定のEC2増援札を1枚手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M031",
+            "M044",
+            "M059"
+          ],
+          "correspondence": "滞留への増援。下流容量を超えない。",
+          "status": "proposal-only",
+          "realFunction": "滞留件数や待ち時間に応じて処理能力を調整すること。",
+          "limits": "キュー追加だけで処理能力は増えない。",
+          "trigger": "滞留を観測できる処理先。",
+          "tradeoff": "下流の上限は超えられない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8889,6 +11528,28 @@
           "links": [
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "大きい仕事の本文を外部保存し、参照付きの保留札1枚に置換する。本文取得の権限・コストは別。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M062"
+          ],
+          "correspondence": "メッセージを参照へ変換し、保存先へのアクセス条件を残す。",
+          "status": "proposal-only",
+          "realFunction": "大きなデータを外部保存し、メッセージには参照を渡す方式。",
+          "limits": "保存先への認可や取得失敗を無視しない。",
+          "trigger": "外部保存先と取得許可がある。",
+          "tradeoff": "本文取得の処理が別途必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8937,6 +11598,28 @@
             "least-privilege",
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "鍵の許可条件を満たす保存・復元札1枚を使用可能にする。対応する盗み見妨害を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M056"
+          ],
+          "correspondence": "暗号操作の認可に限定。全操作の認可ではない。",
+          "status": "proposal-only",
+          "realFunction": "暗号鍵と暗号操作の権限を管理するサービス。",
+          "limits": "鍵管理はIAMやアプリの全権限の代替ではない。",
+          "trigger": "鍵ポリシーと操作許可がある。",
+          "tradeoff": "鍵を使えなければ復元も失敗。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -8978,6 +11661,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応接続の秘密情報を取得・更新する。その接続札1枚を保留。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M056"
+          ],
+          "correspondence": "接続認証の準備。経路や許可は別。",
+          "status": "proposal-only",
+          "realFunction": "認証情報等を保管し、更新を管理するサービス。",
+          "limits": "秘密を保管するだけで接続は通らない。",
+          "trigger": "接続先と取得許可がある。",
+          "tradeoff": "更新後の利用側反映も必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9026,6 +11731,27 @@
             "cdn",
             "private-access"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "証明書・相手確認を満たす通信への盗聴妨害を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026"
+          ],
+          "correspondence": "通信保護。端点の不備や操作権限は別。",
+          "status": "proposal-only",
+          "realFunction": "通信経路の暗号化と相手認証のプロトコル。",
+          "limits": "暗号化だけで操作権限は得られない。",
+          "trigger": "証明書・相手確認が成立。",
+          "tradeoff": "端点の設定ミスは防がない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9067,6 +11793,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "HTTP型の妨害に対して8ブロック。それ以外にはブロックを得ない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M003",
+            "M036"
+          ],
+          "correspondence": "HTTP検査を条件付き防御にする。",
+          "status": "proposal-only",
+          "realFunction": "HTTP リクエストを条件に基づいて検査・制御する仕組み。",
+          "limits": "全プロトコルを守る万能防壁ではない。",
+          "trigger": "HTTP対象の検査が可能。",
+          "tradeoff": "対象外の攻撃は軽減しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9108,6 +11856,28 @@
           "links": [
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応対象を調べ、山札から該当する対処札1枚を手札へ。対処は別カードで行う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "GuardDutyは脅威兆候、Inspectorは対応ワークロード脆弱性、MacieはS3機密データに限定。",
+          "status": "proposal-only",
+          "realFunction": "不審な活動や脅威の兆候を検出するサービス。",
+          "limits": "検出だけで攻撃を遮断しない。",
+          "trigger": "対応する検出対象。",
+          "tradeoff": "対処は別カード。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9149,6 +11919,28 @@
           "links": [
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応対象を調べ、山札から該当する対処札1枚を手札へ。対処は別カードで行う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "GuardDutyは脅威兆候、Inspectorは対応ワークロード脆弱性、MacieはS3機密データに限定。",
+          "status": "proposal-only",
+          "realFunction": "対応ワークロードのソフトウェア脆弱性等を調べるサービス。",
+          "limits": "すべての脆弱性を検出・解消する保証ではない。",
+          "trigger": "対応対象を評価。",
+          "tradeoff": "評価だけでは修正しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9190,6 +11982,28 @@
           "links": [
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応対象を調べ、山札から該当する対処札1枚を手札へ。対処は別カードで行う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "GuardDutyは脅威兆候、Inspectorは対応ワークロード脆弱性、MacieはS3機密データに限定。",
+          "status": "proposal-only",
+          "realFunction": "S3 データの機密情報を検出するサービス。",
+          "limits": "全保存先の機密情報検出ではない。",
+          "trigger": "S3対象の分析。",
+          "tradeoff": "分析だけで権限を修正しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9231,6 +12045,28 @@
           "links": [
             "cdn"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "DDoS型の妨害に対して8ブロック。それ以外にはブロックを得ない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M003",
+            "M036"
+          ],
+          "correspondence": "DDoS保護を対象限定防御にする。",
+          "status": "proposal-only",
+          "realFunction": "DDoS 攻撃からの保護を提供するサービス。",
+          "limits": "すべての障害を防ぐ効果にしない。",
+          "trigger": "DDoS保護の対象。",
+          "tradeoff": "設定不備や業務不正には無効。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9279,6 +12115,27 @@
             "autoscaling",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "2枚引く。",
+          "upgrade": "2→3枚ドロー。コスト1。",
+          "stsMechanicIds": [
+            "M004"
+          ],
+          "correspondence": "観測により判断材料が増えることをドローで表す。自動修復はしない。",
+          "status": "proposal-only",
+          "realFunction": "メトリクス、ログ、アラーム等の可観測性サービス。",
+          "limits": "ドローは情報取得の比喩でAWSの性能増強ではない。",
+          "trigger": "単体で使用可能。",
+          "tradeoff": "観測だけでは回復・増強しない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9320,6 +12177,27 @@
           "links": [
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "API操作履歴を確認し、山札から変更原因に対応する札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "履歴の調査。修復は別行動。",
+          "status": "proposal-only",
+          "realFunction": "AWS API 操作の履歴を追跡する監査サービス。",
+          "limits": "通信本文や全アプリログの記録ではない。",
+          "trigger": "API操作に起因する不備。",
+          "tradeoff": "ログだけでは変更を戻せない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9368,6 +12246,27 @@
             "iac",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応設定の履歴と準拠を確認し、山札から是正札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "検出・評価を選択にする。IaC展開はしない。",
+          "status": "proposal-only",
+          "realFunction": "リソース設定の履歴とルール準拠を評価するサービス。",
+          "limits": "任意のインフラを展開するIaCの代替ではない。",
+          "trigger": "対応リソース設定。",
+          "tradeoff": "修正は別行動。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9409,6 +12308,28 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "手札から目標条件を満たす対応札1枚を選び、コストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "RTOは復旧時間、RPOはデータ損失幅で選ぶ。目標だけで復旧・保存しない。",
+          "status": "proposal-only",
+          "realFunction": "障害後にサービスを復旧させるまでの目標時間。",
+          "limits": "RTOは実復旧時間の保証ではない。",
+          "trigger": "目標時間を満たせる復旧手段がある。",
+          "tradeoff": "使用後除外。目標を宣言するだけでは復旧しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9457,6 +12378,28 @@
             "backup",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "手札から目標条件を満たす対応札1枚を選び、コストを1下げる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "RTOは復旧時間、RPOはデータ損失幅で選ぶ。目標だけで復旧・保存しない。",
+          "status": "proposal-only",
+          "realFunction": "どれだけ過去までのデータ損失を許容するかという時間の目標。",
+          "limits": "RPOと復旧所要時間は異なる。",
+          "trigger": "許容幅を満たせる方式。",
+          "tradeoff": "使用後除外。保存自体は別札。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9500,6 +12443,30 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "復旧先の中核を準備する。停止後に起動札を使うと、次ターン対応処理を再開できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M082"
+          ],
+          "correspondence": "低い準備量と立上げの待ちを持つ復旧。",
+          "status": "proposal-only",
+          "realFunction": "復旧先でキーだけを維持し、障害時に残りを起動する戦略。",
+          "limits": "用意しただけで全構成が常時稼働するわけではない。",
+          "trigger": "単体で準備開始できる。",
+          "tradeoff": "全体起動と容量拡張に待ちがある。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "restorer"
+          ]
         }
       },
       {
@@ -9541,6 +12508,28 @@
           "links": [
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 2,
+          "effect": "縮小復旧先を設置する。切替後、ターン終了時3ダメージ。能力を戻すには増強札が必要。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M082"
+          ],
+          "correspondence": "平時の準備負担と小さい稼働を表す。",
+          "status": "proposal-only",
+          "realFunction": "縮小した全体構成を復旧先で稼働させておく戦略。",
+          "limits": "平時費用なしの即時全回復にしない。",
+          "trigger": "対応する別拠点構成。",
+          "tradeoff": "本来の能力へ戻すには拡張が必要。",
+          "rarity": "レア",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9583,6 +12572,30 @@
           ],
           "links": [
             "backup"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する正常データ状態を記録する。次の使用で復元を予約し、1ターン後に記録へ戻す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M100"
+          ],
+          "correspondence": "保存と復元を段階化する。任意のHP全快にはしない。",
+          "status": "proposal-only",
+          "realFunction": "誤更新や障害から戻すための復元可能なデータの複製。",
+          "limits": "保存だけでHPが回復するカードにしない。",
+          "trigger": "単体で保存開始可能。",
+          "tradeoff": "保存後の進捗は対象外。復元行動が必要。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "restorer"
           ]
         }
       },
@@ -9632,6 +12645,28 @@
             "backup",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "記録の復元条件を試す。成功したら対応復元札1枚を山札から手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M056"
+          ],
+          "correspondence": "試験の結果を必要札へのアクセスにする。将来成功の保証ではない。",
+          "status": "proposal-only",
+          "realFunction": "バックアップから起動・整合性・所要時間を検証する試験。",
+          "limits": "テスト1回で将来の復旧を保証しない。",
+          "trigger": "復元対象と権限がある。",
+          "tradeoff": "試験コストを払う。復旧時間は測定が必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9680,6 +12715,28 @@
             "read-replica",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応データ記録を別保存先へコピーする。履歴は作らず、以後の誤更新も伝わる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M061",
+            "M101"
+          ],
+          "correspondence": "現在状態の複製と履歴保護を区別する。",
+          "status": "proposal-only",
+          "realFunction": "別の保存先へデータの更新を複製する仕組み。",
+          "limits": "履歴バックアップとは異なる。",
+          "trigger": "元データと宛先がある。",
+          "tradeoff": "誤更新も伝わり得る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9712,6 +12769,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "対応DB移行タスクへ6ダメージ。変更追随が必要ならCDC札を利用できるようにする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M056"
+          ],
+          "correspondence": "初回移行と継続変更同期の用途。",
+          "status": "proposal-only",
+          "realFunction": "DB の初期移行と継続的な変更同期を行うサービス。",
+          "limits": "全ファイル転送に万能ではない。",
+          "trigger": "対応する移行元・先。",
+          "tradeoff": "移行後の整合性確認が必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9744,6 +12823,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "移行元のDB変更分を対象へ送る。対応する残差分タスクへ4ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M101"
+          ],
+          "correspondence": "初回移行や切替完了と区別する。",
+          "status": "proposal-only",
+          "realFunction": "データベースに生じた変更を取得して反映する方式。",
+          "limits": "同期しているだけで切替完了とはしない。",
+          "trigger": "初期状態・ログ取得・対応経路。",
+          "tradeoff": "遅延と切替時の確認が残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9776,6 +12877,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "対応ファイル・オブジェクト転送タスクへ6ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M101"
+          ],
+          "correspondence": "DBトランザクションのCDCには代用しない。",
+          "status": "proposal-only",
+          "realFunction": "対応するストレージ間でファイル・オブジェクトを転送するサービス。",
+          "limits": "DBトランザクションCDCとは異なる。",
+          "trigger": "転送タスクを扱うイベント。",
+          "tradeoff": "最終整合性・切替は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9808,6 +12931,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "リホストが適する移行タスクへ6ダメージ。構成の非効率も引き継ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M101"
+          ],
+          "correspondence": "大きく変更しない移行。移すだけで最適化しない。",
+          "status": "proposal-only",
+          "realFunction": "アプリを大きく変更せず実行環境を移す移行方式。",
+          "limits": "移行だけで最適化されるわけではない。",
+          "trigger": "リホストが要件に合う。",
+          "tradeoff": "既存の非効率も持ち越す。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9870,6 +13015,28 @@
             "read-replica",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "ボトルネックを確認し、山札から合う性能調整札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "情報を必要な調整に結びつける。調査だけで筋力は得ない。",
+          "status": "proposal-only",
+          "realFunction": "処理全体の速度や容量を制限している部分。",
+          "limits": "調査だけの万能筋力増加にしない。",
+          "trigger": "観測情報がある。",
+          "tradeoff": "調整をしなければ処理は速くならない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9913,6 +13080,31 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "アタック",
+          "energy": 1,
+          "effect": "初回取得で4ダメージ。同じ仕事の次の対応札のコストを1下げる。更新時は記憶を無効化する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M037",
+            "M070"
+          ],
+          "correspondence": "初回取得込みの複合札。異なる要求や最新値必須には割引しない。",
+          "status": "proposal-only",
+          "realFunction": "再利用可能なデータを速く取得できる場所へ一時保存する仕組み。",
+          "limits": "キャッシュの初回取得と更新を含めた複合札。",
+          "trigger": "初回取得を含む入口札。更新後は再取得。",
+          "tradeoff": "異なる仕事・最新性が必要な処理には割引なし。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "accelerator"
+          ]
         }
       },
       {
@@ -9953,6 +13145,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 2,
+          "effect": "契約負担を払い、条件に合う継続利用の費用を1下げる。利用しなくても契約負担は残る。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "料金方式をイベント費用へ限定する。容量・エナジーの無条件増加にしない。",
+          "status": "proposal-only",
+          "realFunction": "一定の利用額をコミットして対象使用料の割引を受ける購入方式。",
+          "limits": "エナジー・容量が無料で増える効果ではない。",
+          "trigger": "利用額コミットを満たす。",
+          "tradeoff": "使わなくても契約負担が残る。",
+          "rarity": "レア",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -9994,6 +13207,28 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "要件を残せる調整札1枚のコストを1下げる。除外。未使用設備を整理する場合はその効果も止める。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M070"
+          ],
+          "correspondence": "節約と必要能力の維持をセットで考える。",
+          "status": "proposal-only",
+          "realFunction": "要件を満たしながら使用量と価格条件を改善すること。",
+          "limits": "安さだけで成功と扱わない。",
+          "trigger": "処理・復旧の必要量を残す。",
+          "tradeoff": "削りすぎると障害時に不足する。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10026,6 +13261,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "S3等の対応データを分析し、山札から原因調査札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "分析を意思決定に結びつける。走査の負担は残す。",
+          "status": "proposal-only",
+          "realFunction": "S3 などのデータを SQL で分析するサービス。",
+          "limits": "分析を汎用DBの更新処理として使わない。",
+          "trigger": "対象データと参照許可がある。",
+          "tradeoff": "走査量に応じた負担がある。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10058,6 +13315,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "対応する構造登録・ETLを行う。後続分析札1枚を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "カタログと変換を明示して扱う。",
+          "status": "proposal-only",
+          "realFunction": "データカタログとデータ統合・ETL を提供するサービス。",
+          "limits": "カタログ登録だけで全データが変換されない。",
+          "trigger": "ETL・カタログが必要。",
+          "tradeoff": "単独では分析結果を得ない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10090,6 +13369,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 2,
+          "effect": "分析先を設置する。集計タスクへターン終了時4ダメージ。通常の取引タスクには発動しない。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M043",
+            "M101"
+          ],
+          "correspondence": "分析用DWHの用途に限定。",
+          "status": "proposal-only",
+          "realFunction": "大規模な分析用データウェアハウス。",
+          "limits": "データ投入や管理を不要としない。",
+          "trigger": "分析用のデータが準備済み。",
+          "tradeoff": "通常の取引処理の代用にはしない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10131,6 +13432,28 @@
           "links": [
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応ストリーム札を保持期間内に限り、捨て札から1枚回収できる。各ターン1回。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M047",
+            "M101"
+          ],
+          "correspondence": "ストリームの保持・再読込みを回収で表す。SQSと同じ保証にはしない。",
+          "status": "proposal-only",
+          "realFunction": "データストリームを収集し処理・再読込するサービス。",
+          "limits": "SQSの単純な仕事キューと同一視しない。",
+          "trigger": "ストリーム処理。",
+          "tradeoff": "保持期間外の再読込みは不可。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10172,6 +13495,28 @@
           "links": [
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応するストリーム配送札を指定宛先へ渡す。配送タスクへ4ダメージ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M001",
+            "M101"
+          ],
+          "correspondence": "宛先への配送。宛先の業務完了は別。",
+          "status": "proposal-only",
+          "realFunction": "ストリーミングデータを対応先へ配信するサービス。",
+          "limits": "任意の再試行業務を管理するサービスではない。",
+          "trigger": "対応宛先がある。",
+          "tradeoff": "宛先側処理の完了は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10213,6 +13558,28 @@
           "links": [
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "投入済み索引を検索し、山札から合う調査札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "索引への投入と検索の前提を残す。",
+          "status": "proposal-only",
+          "realFunction": "全文検索やログ分析に使う検索・分析エンジン。",
+          "limits": "置いただけで全ログが集まるわけではない。",
+          "trigger": "索引へデータが投入済み。",
+          "tradeoff": "索引管理・投入コストがある。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10254,6 +13621,28 @@
           "links": [
             "least-privilege"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "対応データレイクの参照条件を設定し、合う分析札1枚を使用可能にする。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M056",
+            "M101"
+          ],
+          "correspondence": "データレイクの権限に限定する。",
+          "status": "proposal-only",
+          "realFunction": "データレイクの権限管理を支援するサービス。",
+          "limits": "全AWS操作の権限管理に拡張しない。",
+          "trigger": "対応レイクの管理。",
+          "tradeoff": "ネットワーク経路は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10294,6 +13683,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 2,
+          "effect": "契約負担を払い、条件に合う継続利用の費用を1下げる。利用しなくても契約負担は残る。",
+          "upgrade": "エナジーコストを2から1へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "料金方式をイベント費用へ限定する。容量・エナジーの無条件増加にしない。",
+          "status": "proposal-only",
+          "realFunction": "適合するEC2使用量への期間契約の割引。リージョンとAZのスコープで容量予約の有無等が異なる。",
+          "limits": "リージョンRIとAZスコープの容量予約を区別する。",
+          "trigger": "期間・属性・スコープが合う。",
+          "tradeoff": "未使用の契約負担が残る。",
+          "rarity": "レア",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10334,6 +13744,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応EC2処理札1枚のRAM状態を記録し、保留する。再開時に引き継ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M101"
+          ],
+          "correspondence": "RAM保持と保存負担。通常停止と区別する。",
+          "status": "proposal-only",
+          "realFunction": "対応条件下でRAMを暗号化EBSへ保存し、再開時に状態を戻す。停止中も保存費等は残る。",
+          "limits": "通常停止や全業務バックアップと異なる。",
+          "trigger": "休止対応条件と暗号化EBS。",
+          "tradeoff": "保存費と再開待ちがある。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10374,6 +13805,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "停止可能なEC2札1枚の持続効果を止める。再開するまで発動しない。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M071",
+            "M101"
+          ],
+          "correspondence": "稼働停止を表す。保持費までゼロにはしない。",
+          "status": "proposal-only",
+          "realFunction": "EBS-backedの実行を止める操作。通常停止はRAMを保持せず、EBS等の保持費は別。",
+          "limits": "停止だけで費用が完全にゼロにはならない。",
+          "trigger": "停止可能なEC2。",
+          "tradeoff": "RAMを保持せず、保存費は残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10422,6 +13874,28 @@
             "rightsizing",
             "read-replica"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "対応するDynamoDB処理の必要容量を確認する。山札から合う容量調整札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "RCUは読取り、WCUは書込みに限定。サイズ・整合性・取引方式を考慮。",
+          "status": "proposal-only",
+          "realFunction": "DynamoDBの読取り容量単位。単一項目は4KB単位のサイズと整合性等から計算する。",
+          "limits": "読取りと書込みの単位を同じにしない。",
+          "trigger": "DynamoDBの読取り。",
+          "tradeoff": "容量不足なら強化札が別に必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10463,6 +13937,28 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "対応するDynamoDB処理の必要容量を確認する。山札から合う容量調整札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "RCUは読取り、WCUは書込みに限定。サイズ・整合性・取引方式を考慮。",
+          "status": "proposal-only",
+          "realFunction": "DynamoDBの書込み容量単位。通常書込みは1KB単位へ切り上げ、トランザクションは2倍。",
+          "limits": "読取り能力を増やすカードではない。",
+          "trigger": "DynamoDBの書込み。",
+          "tradeoff": "トランザクション費用も考慮。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10510,6 +14006,26 @@
             "rightsizing",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "費用を観測し、山札から費用調整札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048"
+          ],
+          "correspondence": "分析のみ。修正・支出強制停止は別。",
+          "status": "proposal-only",
+          "realFunction": "費用・使用量の傾向と内訳を可視化して分析するサービス。",
+          "limits": "リアルタイムの支出強制上限ではない。",
+          "trigger": "利用履歴がある。",
+          "tradeoff": "観測だけでは費用が減らない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10550,6 +14066,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "予算条件に達したら費用調整札1枚を選んで手札へ。通知だけでは支出は止まらない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M036",
+            "M048"
+          ],
+          "correspondence": "しきい値通知の役割に限定。",
+          "status": "proposal-only",
+          "realFunction": "実績や予測が予算条件へ達したことを通知する。支出の即時・絶対上限ではない。",
+          "limits": "予算通知とハード上限は別。",
+          "trigger": "通知条件と利用情報。",
+          "tradeoff": "支出を自動的に絶対停止しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10590,6 +14127,27 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "費用の詳細記録を作る。対応する分析札1枚を保留する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M053",
+            "M101"
+          ],
+          "correspondence": "記録出力と分析を分ける。",
+          "status": "proposal-only",
+          "realFunction": "詳細な費用・使用量データをS3へ出力し、独自分析に使う。新規はData ExportsのCUR 2.0も比較。",
+          "limits": "出力だけで最適化を行わない。",
+          "trigger": "記録を出力する保存先がある。",
+          "tradeoff": "分析は別カード。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10630,6 +14188,26 @@
           "links": [
             "rightsizing"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 0,
+          "effect": "費用対象へタグを付ける。次の分析で対象を絞れる。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M101"
+          ],
+          "correspondence": "費用分類のタグであり認可タグではない。",
+          "status": "proposal-only",
+          "realFunction": "費用を部門等へ分けるために有効化するタグ。未設定・共有費の配賦規則も必要。",
+          "limits": "認可タグのABACと同じ役割ではない。",
+          "trigger": "有効化したタグ。",
+          "tradeoff": "共有費や未設定分の配賦は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10662,6 +14240,28 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "配置済み検査先へ通信を渡す。対応する検査札1枚を実行する。コストは別に払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M073",
+            "M101"
+          ],
+          "correspondence": "転送先の検査を使う。GWLB自体が検査・遮断するわけではない。",
+          "status": "proposal-only",
+          "realFunction": "仮想ファイアウォール等のアプライアンスへ通信を透過的に分配する負荷分散。",
+          "limits": "普通のアプリ負荷分散と同じ効果にしない。",
+          "trigger": "検査先が配置されている。",
+          "tradeoff": "GWLB単体では検査・遮断しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "専用イベント",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10693,6 +14293,27 @@
           "rarityReason": "条件を理解して組み合わせる補助・専門手段。",
           "starterFor": [],
           "links": []
+        },
+        "stsEffectProposal": {
+          "type": "イベント専用",
+          "energy": 1,
+          "effect": "承諾した相手へ対象S3取得費を移す。所有者の保存費は残る。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M088",
+            "M101"
+          ],
+          "correspondence": "費用の負担者変更であり総費用の消滅ではない。",
+          "status": "proposal-only",
+          "realFunction": "対応するS3要求・ダウンロード費を要求者が負担する設定。所有者の保存費は残る。",
+          "limits": "総コストを消すカードや無制限な金策にしない。",
+          "trigger": "相手が費用負担を承諾するイベント。",
+          "tradeoff": "所有者の保存費は残る。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10741,6 +14362,28 @@
             "isolation",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "下流容量に合わせて流量を制限し、過負荷の付与を次の1回防ぐ。残る仕事1枚を保留。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M053"
+          ],
+          "correspondence": "処理量の制限と待ちを両方表す。",
+          "status": "proposal-only",
+          "realFunction": "レートやバーストに基づく流量制御。再試行と下流能力も合わせて設計する。",
+          "limits": "全レート制御を絶対的な上限として保証しない。",
+          "trigger": "下流容量に合わせた設定。",
+          "tradeoff": "残りの仕事は未処理。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10810,6 +14453,27 @@
             "autoscaling",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "山札上3枚を確認し、正常な処理先に対応する札を1枚選び山札上へ戻す。残りは元の順へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M050"
+          ],
+          "correspondence": "正常先を調べることを確認・選別へ対応させる。修復はしない。",
+          "status": "proposal-only",
+          "realFunction": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+          "limits": "全ターゲット異常時のALB例外を残す。",
+          "trigger": "対象をチェックできる。",
+          "tradeoff": "検出待ちがあり修復はしない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10865,6 +14529,28 @@
             "isolation",
             "autoscaling"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "正常なHTTP処理先を選び、次の対応処理札を実行する。コストは別に払う。全対象異常時の例外は残る。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M073",
+            "M101"
+          ],
+          "correspondence": "正常先への振分け。容量・データ条件は必要。",
+          "status": "proposal-only",
+          "realFunction": "ALBは正常な処理先へHTTP要求を振り分けます。正常先が残り、その側で必要なデータと容量が使えることが必要です。全ターゲットが異常なら全体に送る例外もあります。",
+          "limits": "ALB全異常時のフェイルオープンを省略しない。",
+          "trigger": "正常先・データ・残存容量がある。",
+          "tradeoff": "正常先がなくても万能遮断しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10906,6 +14592,28 @@
           "links": [
             "multi-az"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "障害後の容量を確認し、山札から合う増強札1枚を手札へ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "残存能力の評価。確認だけで能力は増えない。",
+          "status": "proposal-only",
+          "realFunction": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+          "limits": "稼働台数だけで必要量を満たすとはしない。",
+          "trigger": "障害予告と容量が分かる。",
+          "tradeoff": "確認だけでは容量が増えない。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -10979,6 +14687,28 @@
             "iac",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "所持する定義済み構成札1枚のコピーを次ターン手札へ。業務データはコピーしない。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M061"
+          ],
+          "correspondence": "構成再現をコピーで表す。定義の誤りも複製される。",
+          "status": "proposal-only",
+          "realFunction": "インフラ構成をコードとして定義・版管理し、検証して再現する考え方。",
+          "limits": "設計図を記録するだけで正しい構成になるとは限らない。",
+          "trigger": "対象構成がコード化できる。",
+          "tradeoff": "データ復元・秘密・接続確認は別。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11054,6 +14784,30 @@
             "iac",
             "disaster-recovery"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "基本テンプレートを展開して4ブロック。記録済みテンプレートの次の再展開コストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M003",
+            "M070"
+          ],
+          "correspondence": "基本VPC・サブネット・SGの複合札。防御はSG分、展開機能自体の防壁ではない。",
+          "status": "proposal-only",
+          "realFunction": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+          "limits": "4ブロックは同梱した通信制御を表す。CloudFormation自体が防壁になるわけではなく、業務データも復元しない。",
+          "trigger": "入口札はVPC・サブネット・セキュリティグループの基本テンプレートを含む。",
+          "tradeoff": "実際の配置札と起動待ちは別。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "builder"
+          ]
         }
       },
       {
@@ -11115,6 +14869,29 @@
           "links": [
             "iac"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "次のCloudFormation更新の変更・置換・削除を確認し、実行か中止を選ぶ。中止時は更新札を保留。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M050",
+            "M053",
+            "M100"
+          ],
+          "correspondence": "更新前の選択。確認で成功保証や無料復旧は得ない。",
+          "status": "proposal-only",
+          "realFunction": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+          "limits": "確認しても実行成功を保証しない。",
+          "trigger": "更新前に確認できる。",
+          "tradeoff": "更新札は別に使う。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11188,6 +14965,28 @@
             "iac",
             "observability"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "対応する明示設定との差を確認し、山札から是正札1枚を手札へ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M048",
+            "M101"
+          ],
+          "correspondence": "検出対象外の差は分からず、自動修復しない。",
+          "status": "proposal-only",
+          "realFunction": "管理対象の実際の設定と、テンプレート等で期待する設定との差を検出する機能。",
+          "limits": "IN_SYNCで全設定一致を保証しない。",
+          "trigger": "対応リソース・明示設定が対象。",
+          "tradeoff": "対象外の差は分からない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11261,6 +15060,29 @@
             "isolation",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "失敗が続く依存先への呼出しを1ターン止める。そこからの失敗波及を1回防ぐ。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M025",
+            "M044",
+            "M056"
+          ],
+          "correspondence": "遮断と復帰確認。必要仕事も未完了のまま。",
+          "status": "proposal-only",
+          "realFunction": "失敗が続く依存先への呼出しを一時的に遮断し、回復を確認して再開する設計。",
+          "limits": "依存先を修復したり未完了を成功にしない。",
+          "trigger": "依存先の失敗閾値を満たす。",
+          "tradeoff": "必要な仕事も保留。復帰確認が必要。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11334,6 +15156,29 @@
             "safe-retry",
             "queue"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "一時失敗した未完了処理札1枚を、次ターン手札へ戻す。再使用時も通常コストを払う。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M044",
+            "M047",
+            "M072"
+          ],
+          "correspondence": "待って再試行する。無制限の無料リプレイではない。",
+          "status": "proposal-only",
+          "realFunction": "再試行の待ち時間を段階的に伸ばし、依存先への集中を抑える方式。",
+          "limits": "待っても直らない許可不足に万能ではない。",
+          "trigger": "再試行可能な一時失敗。",
+          "tradeoff": "回数・総期限を制限し、カード代も再度払う。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11395,6 +15240,28 @@
           "links": [
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 0,
+          "effect": "同時に予約された再試行を分散し、その集中による過負荷を1回防ぐ。除外。",
+          "upgrade": "追加で1枚引く。除外は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M044"
+          ],
+          "correspondence": "時刻のばらつき。成功率の賭けにはしない。",
+          "status": "proposal-only",
+          "realFunction": "再試行などの待ち時間にばらつきを付け、同時刻の要求集中を抑える工夫。",
+          "limits": "成功確率のギャンブル強化として扱わない。",
+          "trigger": "再試行が集中する場面。",
+          "tradeoff": "回数や完了時間を保証しない。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11468,6 +15335,28 @@
             "safe-retry",
             "isolation"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "応答待ちの呼出し1つを打ち切り、それによる遅延付与を1回防ぐ。相手側で完了した可能性は残す。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M026",
+            "M101"
+          ],
+          "correspondence": "資源占有の抑制。未実行確定や成功判定とは別。",
+          "status": "proposal-only",
+          "realFunction": "呼出しの待ち時間を制限し、応答のない依存先に資源を占有され続けることを抑える。",
+          "limits": "タイムアウトを未実行確定・安全な新規再送としない。",
+          "trigger": "待ち時間の上限を超える。",
+          "tradeoff": "相手側で処理済みの可能性は残る。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11541,6 +15430,28 @@
             "spot",
             "safe-retry"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "中断可能な未完了処理札の進捗を記録する。中断後、その札を記録地点から捨て札から回収できる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M047",
+            "M101"
+          ],
+          "correspondence": "処理再開の回収。保存以後の進捗は失う。",
+          "status": "proposal-only",
+          "realFunction": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+          "limits": "AMIや単なるスナップショットとは別。",
+          "trigger": "保持できる保存先と再開手順がある。",
+          "tradeoff": "保存費・保存以後の進捗損失がある。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11602,6 +15513,29 @@
           "links": [
             "cache"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "同じキーの対応読取り札を再使用するときコストを1下げる。各ターン1回。ミス・更新時は再取得する。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M037",
+            "M070",
+            "M101"
+          ],
+          "correspondence": "インメモリ再利用を割引する。無条件のエナジー生成ではない。",
+          "status": "proposal-only",
+          "realFunction": "Valkey・Redis OSS・Memcached等に対応する、マネージドなインメモリデータストア／キャッシュ。",
+          "limits": "TTLだけで最新性は保証しない。",
+          "trigger": "元データ取得・更新方針がある。",
+          "tradeoff": "キャッシュミス時は再取得。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11663,6 +15597,28 @@
           "links": [
             "backup"
           ]
+        },
+        "stsEffectProposal": {
+          "type": "パワー",
+          "energy": 1,
+          "effect": "対応リソースの保存計画を置く。各ターン最初の対応バックアップ札のコストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M070",
+            "M101"
+          ],
+          "correspondence": "取得計画の集約。復元・試験は別。",
+          "status": "proposal-only",
+          "realFunction": "対応リソースのバックアップ計画・保持・取得活動を集約し、自動化するサービス。",
+          "limits": "ジョブ成功だけでRTO達成を保証しない。",
+          "trigger": "対応リソースを計画へ含める。",
+          "tradeoff": "復元や試験は別札。",
+          "rarity": "アンコモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": []
         }
       },
       {
@@ -11737,6 +15693,31 @@
           "links": [
             "observability",
             "autoscaling"
+          ]
+        },
+        "stsEffectProposal": {
+          "type": "スキル",
+          "energy": 1,
+          "effect": "観測条件を満たす場合、手札から設定済みの対応アクション札1枚を選びコストを1下げる。",
+          "upgrade": "エナジーコストを1から0へ下げる。効果と条件は維持。",
+          "stsMechanicIds": [
+            "M036",
+            "M070",
+            "M101"
+          ],
+          "correspondence": "通知から対応に接続する。対処札なしでは通知のみ。",
+          "status": "proposal-only",
+          "realFunction": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+          "limits": "全アラームでEC2・Auto Scaling操作が可能とはしない。",
+          "trigger": "対象アクションと権限を設定。",
+          "tradeoff": "対応札がなければ通知だけ。",
+          "rarity": "コモン",
+          "acquisition": [
+            "戦闘報酬",
+            "交換所"
+          ],
+          "starterFor": [
+            "restorer"
           ]
         }
       }
@@ -11834,6 +15815,747 @@
         "通信・認可・保存の前提タグと設置状態をどこまで戦闘へ導入するか。",
         "利用費イベントの費用・契約負担の数値。",
         "レリックとの連携、強化後効果、8階層の試遊と数値調整。"
+      ]
+    },
+    "stsEffectResearch": {
+      "status": "draft",
+      "referenceUrl": "https://hiroshimu0113-web.github.io/SAA/sts-migration.html",
+      "referenceLocalPath": "public/sts-migration.html",
+      "referenceSha256": "870ecb3d567736b15f22051c5b24e0a5e1049ab0a4ae0acdff06fd63845d2671",
+      "referenceReadOn": "2026-10-13",
+      "accessNote": "指定URLはWeb閲覧ツールで取得不可。同じパスの既存ローカル資料を読み取り、SHA256を保存。ライブURLとの一致は未検証。",
+      "mechanics": {
+        "M001": {
+          "id": "M001",
+          "title": "M001 · 基礎 単体への固定ダメージ",
+          "exampleNames": "ストライク",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "単体攻撃の基本形を設定できる。複合効果の処理順は別途確認。"
+        },
+        "M002": {
+          "id": "M002",
+          "title": "M002 · 基礎 固定回数の多段攻撃",
+          "exampleNames": "ツインストライク",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "同じ敵への固定回数攻撃に対応。ランダム対象・全体攻撃は別項目。"
+        },
+        "M003": {
+          "id": "M003",
+          "title": "M003 · 基礎 固定ブロック獲得",
+          "exampleNames": "防御",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "正の固定ブロックを付与できる。脆弱との倍率差はデバフ項目参照。"
+        },
+        "M004": {
+          "id": "M004",
+          "title": "M004 · 基礎 固定枚数ドロー",
+          "exampleNames": "スキム",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "山札切れで捨て札を再シャッフル。手札上限10枚。選択ドローは未対応。"
+        },
+        "M005": {
+          "id": "M005",
+          "title": "M005 · 基礎 即時エナジー獲得",
+          "exampleNames": "アドレナリン",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "正の固定量をその場で得られる。Xコストや消費履歴は別項目。"
+        },
+        "M006": {
+          "id": "M006",
+          "title": "M006 · 基礎 固定HP回復",
+          "exampleNames": "未だ倒れず",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "最大HPまで回復。吸収・与ダメージ連動・最大HP変更は別項目。"
+        },
+        "M007": {
+          "id": "M007",
+          "title": "M007 · 基礎 自分のHPを固定量失う",
+          "exampleNames": "ヘモキネシス／供物",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "ブロックを無視する自傷に対応。現在は攻撃より前に適用。回復と併用時の順序は固定。"
+        },
+        "M008": {
+          "id": "M008",
+          "title": "M008 · 基礎 使用した自分自身の廃棄",
+          "exampleNames": "不動",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "戦闘中の除外札置き場あり。他カードの選択廃棄・廃棄時の誘発は別項目。"
+        },
+        "M009": {
+          "id": "M009",
+          "title": "M009 · 能力・デバフ 戦闘中持続する筋力上昇",
+          "exampleNames": "発火",
+          "auditStatusInReference": "対応可能",
+          "referenceNote": "攻撃の各ヒットに加算。筋力だけを上げる基本効果は既存構造で対応。"
+        },
+        "M010": {
+          "id": "M010",
+          "title": "M010 · 能力・デバフ 毒（減衰するHP継続損失）",
+          "exampleNames": "致死毒／毒の一刺し",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "炎上もブロック無視・数値分HP損失・発動後1減少。STSの毒は敵ターン開始時、SAAの炎上は敵行動後。毒で行動前に倒す挙動にはタイミング追加が必要。"
+        },
+        "M011": {
+          "id": "M011",
+          "title": "M011 · 能力・デバフ 脱力（攻撃25%減）",
+          "exampleNames": "無力化／不意打ち",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "攻撃25%減は一致。持続減算・付与ターンの扱いを合わせる必要がある。名称の読み替えで基本用途を充足。"
+        },
+        "M012": {
+          "id": "M012",
+          "title": "M012 · 能力・デバフ 弱体・弱体化（被攻撃ダメージ増）",
+          "exampleNames": "強打／ビームセル",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "SAAは25%増、STS標準は50%増。倍率と攻撃前後の付与順、持続減算を調整。"
+        },
+        "M013": {
+          "id": "M013",
+          "title": "M013 · 能力・デバフ 脆弱・虚弱（ブロック獲得減）",
+          "exampleNames": "羞恥",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "SAAは50%減、STS標準のFrailは25%減。CSVの日本語表記には揺れがあるため、カードIDと文脈で区別。"
+        },
+        "M014": {
+          "id": "M014",
+          "title": "M014 · 能力・デバフ スタン・追加ターン",
+          "exampleNames": "ホイッスル／飛躍",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "敵の休止はあるが、復帰後に敵が2回行動し再付与制限もある。STS2スタンやSTS1飛躍の純粋な追加ターンと同一ではない。"
+        },
+        "M015": {
+          "id": "M015",
+          "title": "M015 · 防御・能力 毎ターン固定ブロック",
+          "exampleNames": "金属化",
+          "auditStatusInReference": "近似対応",
+          "referenceNote": "開始時に固定防御を得る構造がある。STS1金属化など終了時付与とはタイミングが違う。"
+        },
+        "M016": {
+          "id": "M016",
+          "title": "M016 · 防御・能力 敏捷・敏捷性（獲得ブロック加算）",
+          "exampleNames": "フットワーク／武勇",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "正のブロック獲得に+1する計算あり。カードから増減する敏捷の状態値・持続・保存を追加。"
+        },
+        "M017": {
+          "id": "M017",
+          "title": "M017 · 防御・能力 プレート・プレートアーマー",
+          "exampleNames": "ストーンアーマー／願いごと",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "継続防御で代替候補。被攻撃での減少、適用時点などプレート固有ルールはない。"
+        },
+        "M018": {
+          "id": "M018",
+          "title": "M018 · 防御・能力 筋力の低下・敵筋力操作",
+          "exampleNames": "運命共同体／共鳴",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "敵の自己強化やレリックでの増加はある。カードの敵筋力操作、負値、戦闘保存検証を拡張する。"
+        },
+        "M019": {
+          "id": "M019",
+          "title": "M019 · 防御・能力 ターン限定の能力増減",
+          "exampleNames": "セットアップストライク／機先／闇の足枷",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "筋力・敏捷・集中力などの期限付き変化と期限後の復元が必要。"
+        },
+        "M020": {
+          "id": "M020",
+          "title": "M020 · 防御・能力 次の攻撃だけ強化・倍化",
+          "exampleNames": "テラフォーミング／炎の輪冠／シャドウステップ",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "活力・炎の輪冠等の一回分バフ、対象条件、使用後の消費が必要。"
+        },
+        "M021": {
+          "id": "M021",
+          "title": "M021 · 防御・能力 ブロックを次ターンに保持",
+          "exampleNames": "バリケード／ブラー",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "バリケード／ブラーの保持フラグ・期限。固定防御の再獲得では残ブロックを保持できない。"
+        },
+        "M022": {
+          "id": "M022",
+          "title": "M022 · 防御・能力 ブロック・エナジー・筋力の倍化",
+          "exampleNames": "塹壕／ダブルエナジー／リミットブレイク",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "現在値を読み取り、倍率を適用する効果オペレーターが必要。"
+        },
+        "M023": {
+          "id": "M023",
+          "title": "M023 · 防御・能力 反撃・トゲ・ブロック反射",
+          "exampleNames": "炎の障壁／まきびし／反射",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "攻撃を受けた時の誘発、攻撃者の参照、反射量とブロック扱いを追加。"
+        },
+        "M024": {
+          "id": "M024",
+          "title": "M024 · 防御・能力 霊体・ダメージ上限",
+          "exampleNames": "幻姿／死霊化",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "受けるダメージを1にする等の別ルールと持続数が必要。ブロック量の増加では代替しきれない。"
+        },
+        "M025": {
+          "id": "M025",
+          "title": "M025 · 防御・能力 バッファー・一回無効化",
+          "exampleNames": "バッファー",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "次のHP損失を無効化する回数制バフと、何をHP損失として消費するかを定義。"
+        },
+        "M026": {
+          "id": "M026",
+          "title": "M026 · 防御・能力 アーティファクト・デバフ拒否",
+          "exampleNames": "コアサージ／万能薬／暴露",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "デバフ付与を打ち消す回数と、免疫・除去の判定を追加。"
+        },
+        "M027": {
+          "id": "M027",
+          "title": "M027 · 防御・能力 ブロック・アーティファクトの除去",
+          "exampleNames": "暴露",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "敵のブロックとアーティファクトを即時除去する専用効果が必要。自然減衰とは別。"
+        },
+        "M028": {
+          "id": "M028",
+          "title": "M028 · 防御・能力 毒・弱体の倍化／即時発動／拡散",
+          "exampleNames": "触媒／促進剤／ミザリー／溶岩の拳",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "基本デバフの数値はある。触媒、促進剤、ミザリー等の倍率・追加発動・他敵への複製は未対応。"
+        },
+        "M029": {
+          "id": "M029",
+          "title": "M029 · 攻撃・計算 現在ブロックを攻撃値に使用",
+          "exampleNames": "ボディスラム",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "現在は固定ダメージ＋現在ブロック＋筋力。ボディスラムの純粋なブロック値にはdamage=0の攻撃処理など調整が必要。"
+        },
+        "M030": {
+          "id": "M030",
+          "title": "M030 · 攻撃・計算 筋力の特殊倍率・デバフ倍率補正",
+          "exampleNames": "ヘビーブレード／無慈悲／衰弱",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ヘビーブレードの筋力3倍／5倍、無慈悲や衰弱の状態別倍率をパラメーター化。"
+        },
+        "M031": {
+          "id": "M031",
+          "title": "M031 · 攻撃・計算 手札・山札・捨て札・廃棄札数の参照",
+          "exampleNames": "スタック／マインドブラスト／パーフェクトストライク／ソウルストーム",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "枚数や種類別枚数を参照する動的計算式を追加。山札の数、ストライクの数、廃棄枚数など。"
+        },
+        "M032": {
+          "id": "M032",
+          "title": "M032 · 攻撃・計算 HP・失ったHP・状態量の参照",
+          "exampleNames": "解き放つ／蜃気楼／裂傷／刻限",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "HP割合、毒／破滅量、デバフ種類数などを計算に用いる仕組みが必要。"
+        },
+        "M033": {
+          "id": "M033",
+          "title": "M033 · 攻撃・計算 実際に与えたダメージに連動",
+          "exampleNames": "死神／殴打／拳闘／枯毒のストライク",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ブロック軽減後のダメージ結果を返し、HP回復・ブロック・破滅へ変換する。"
+        },
+        "M034": {
+          "id": "M034",
+          "title": "M034 · 攻撃・計算 全体攻撃・全体デバフ",
+          "exampleNames": "サンダークラップ／五月雨ダガー／衝撃波",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "敵の配列、個別HP／ブロック／デバフ、対象全体ループと複数撃破処理が必要。単体へ縮約はSAA用アレンジ。"
+        },
+        "M035": {
+          "id": "M035",
+          "title": "M035 · 攻撃・計算 ランダムな敵への攻撃・付与",
+          "exampleNames": "ソードブーメラン／バウンドフラスコ／ラグナロク",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "複数敵と対象抽選、各ヒットで再抽選するかのルールが必要。"
+        },
+        "M036": {
+          "id": "M036",
+          "title": "M036 · 攻撃・計算 敵の意図に応じた効果",
+          "exampleNames": "目潰し／悪を恐れず",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "敵予告はある。カードの発動条件として攻撃予定などを評価する分岐を追加。"
+        },
+        "M037": {
+          "id": "M037",
+          "title": "M037 · 履歴・誘発 プレイ枚数・種類数・直前カード参照",
+          "exampleNames": "FTL／フィニッシャー／追撃／尊厳",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "既存はそのターンのカードID集合と指定組合せ。同じIDの反復回数、順序、アタック／スキル回数は保存しない。"
+        },
+        "M038": {
+          "id": "M038",
+          "title": "M038 · 履歴・誘発 ドロー・廃棄・HP損失・生成等の履歴",
+          "exampleNames": "八つ裂き／殺害／超大質量／電圧上昇",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ターン内／戦闘内のイベント種別ごとの回数・量を記録。終了時リセット範囲も分ける。"
+        },
+        "M039": {
+          "id": "M039",
+          "title": "M039 · 履歴・誘発 カード使用時の汎用誘発",
+          "exampleNames": "残像／大蛇化／死の舞踏／威風堂々",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カード使用・種類・コスト・N枚目等を購読するパワーが必要。コンボは固定組合せで毎回誘発しない。"
+        },
+        "M040": {
+          "id": "M040",
+          "title": "M040 · 履歴・誘発 ドロー時・捨てた時・廃棄時の誘発",
+          "exampleNames": "闇の抱擁／反射神経／虚無／紙の嵐",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "移動理由ごとのイベント通知と、連鎖・手札上限・再帰制限を追加。"
+        },
+        "M041": {
+          "id": "M041",
+          "title": "M041 · 履歴・誘発 攻撃命中・ブロック・デバフ付与時の誘発",
+          "exampleNames": "ジャガーノート／毒の仕込み／残忍／呪肉の奇術",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ジャガーノート、毒の仕込み、残忍等の誘発。HPに通ったダメージと攻撃しただけの場合を区別。"
+        },
+        "M042": {
+          "id": "M042",
+          "title": "M042 · 履歴・誘発 HP損失・敵死亡時の誘発",
+          "exampleNames": "血の沸騰／インフェルノ／反響する斬撃",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "自傷や継続損失、攻撃ダメージを区別した通知、誰が倒したか、死亡連鎖の解決が必要。"
+        },
+        "M043": {
+          "id": "M043",
+          "title": "M043 · 履歴・誘発 ターン開始／終了時のパワー誘発",
+          "exampleNames": "悪魔化／機械学習／かがり火／有毒ガス",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "固定レリック処理はある。カード由来の可変量・回数・複数パワーの順序を管理する汎用状態が必要。"
+        },
+        "M044": {
+          "id": "M044",
+          "title": "M044 · 履歴・誘発 次のターン／数ターン後の予約効果",
+          "exampleNames": "バッテリー充電／略奪／円環の障壁／爆弾",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "次ターンのドロー・エナジー・防御、爆弾の遅延ダメージ等を保存する予約キューを追加。"
+        },
+        "M045": {
+          "id": "M045",
+          "title": "M045 · 札操作 任意の手札を捨てる／全捨て",
+          "exampleNames": "ダガースロー／アクロバット／イカサマ／鋼の嵐",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カード効果で枚数／種類／選択／ランダム／全捨てを行う操作と選択画面はない。"
+        },
+        "M046": {
+          "id": "M046",
+          "title": "M046 · 札操作 他カードを選択／ランダム／一括廃棄",
+          "exampleNames": "焦熱の契約／鬼火／セカンドウィンド／リサイクル",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "別カードを対象にする廃棄処理、選択画面、廃棄した枚数／コスト／ダメージの戻り値を追加。"
+        },
+        "M047": {
+          "id": "M047",
+          "title": "M047 · 札操作 捨て札・廃棄札から回収",
+          "exampleNames": "ホログラム／オール・フォー・ワン／採取／ナイフの罠",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "対象選択・条件抽出・手札移動・上限処理。廃棄札からの回収も個別仕様を確認。"
+        },
+        "M048": {
+          "id": "M048",
+          "title": "M048 · 札操作 山札から選択・種類指定ドロー",
+          "exampleNames": "願い／シークレットウェポン／聖なる選別／シーカーストライク",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "山札検索、候補提示、選択・複数取得、レア度／カード種類条件が必要。"
+        },
+        "M049": {
+          "id": "M049",
+          "title": "M049 · 札操作 山札上へ戻す・任意の順序へ配置",
+          "exampleNames": "ヘッドバット／リバウンド／微光／郷愁",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "手札／捨て札から先頭へ置く操作と、次のカードに適用する予約が必要。"
+        },
+        "M050": {
+          "id": "M050",
+          "title": "M050 · 札操作 占術・山札上の確認と選別",
+          "exampleNames": "第三の目／ただの幸運／未来予見",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "上N枚の表示、捨てる札の選択、残りの順序維持、占術イベントの通知を追加。"
+        },
+        "M051": {
+          "id": "M051",
+          "title": "M051 · 札操作 全札を山札へ混ぜて再構築",
+          "exampleNames": "再起動",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "再起動の手札等を含む即時再構築、現在プレイ中のカードや廃棄札の扱いを定義。"
+        },
+        "M052": {
+          "id": "M052",
+          "title": "M052 · 札操作 条件が満たされるまでドロー",
+          "exampleNames": "職人技／ぶんどる／走り書き／苛立ち",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "指定手札枚数まで、特定種類を引くまで、空手札時だけ等のループ／分岐が必要。"
+        },
+        "M053": {
+          "id": "M053",
+          "title": "M053 · 札操作 手札の保留・全手札保持",
+          "exampleNames": "用意周到／均衡／蛇の噛みつき／忍耐",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "カード固有／一時付与／任意選択の保留状態、ターン終了の選択画面、保留時誘発を追加。"
+        },
+        "M054": {
+          "id": "M054",
+          "title": "M054 · 札操作 天賦（初期手札保証）",
+          "exampleNames": "起動シーケンス／騙し討ち／神格化",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "天賦札の初期手札優先と枚数上限時の扱いを追加。初回ドロー枚数増では保証にならない。"
+        },
+        "M055": {
+          "id": "M055",
+          "title": "M055 · 札操作 エセリアル／エーテリアル",
+          "exampleNames": "幻姿／解析／めまい",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "未使用でターン終了した時の廃棄フラグを追加。使用した時だけ廃棄とは別ルール。"
+        },
+        "M056": {
+          "id": "M056",
+          "title": "M056 · 札操作 プレイ不可・条件付き使用・先に使用",
+          "exampleNames": "クラッシュ／グランドフィナーレ／心酔／怪我",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "使用禁止、手札種類・山札0枚・他カードより先などの条件。障害ログは使用可能なので不可札の代替には不足。"
+        },
+        "M057": {
+          "id": "M057",
+          "title": "M057 · 札操作 手札にある間のペナルティ",
+          "exampleNames": "後悔／火傷／負債／疑念",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "後悔・火傷・負債等の終了時処理、手札枚数によるHP損失／コイン損失を追加。火傷カードと炎上デバフは異なる。"
+        },
+        "M058": {
+          "id": "M058",
+          "title": "M058 · 札操作 プレイ枚数制限・ドロー禁止・防御禁止",
+          "exampleNames": "凡庸／バトルトランス／非常ボタン",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ターン内の制限状態と合法手チェック。カード以外から得る防御を含むか等を区別する。"
+        },
+        "M059": {
+          "id": "M059",
+          "title": "M059 · 札生成・変化 戦闘限定カード生成・置き場指定",
+          "exampleNames": "剣の舞／外套と短剣／分霊／オーバークロック",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "UID・保存・戦闘後削除は既存。プレイヤーカードから任意IDを手札／捨て札へ生成する汎用効果はない。"
+        },
+        "M060": {
+          "id": "M060",
+          "title": "M060 · 札生成・変化 ランダムカード／候補から選び生成",
+          "exampleNames": "発見／クエーサー／ホワイトノイズ／スプラッシュ",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "戦闘中の候補提示、種類／色／レア度条件、コスト変更付き生成を追加。レア度はSAAに未設定。"
+        },
+        "M061": {
+          "id": "M061",
+          "title": "M061 · 札生成・変化 カードのコピー",
+          "exampleNames": "怒り／二刀流／悪夢／アウトレイジ",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "元カードの強化・個別数値・コスト・キーワードを複製し、戦闘限定か永続かを区別する。"
+        },
+        "M062": {
+          "id": "M062",
+          "title": "M062 · 札生成・変化 カード変化・トークン置換",
+          "exampleNames": "原始の力／圧縮／失せよ！／降霊術",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "対象カードを別IDへ変化、強化と付与効果の継承規則、戦闘後の復元を追加。"
+        },
+        "M063": {
+          "id": "M063",
+          "title": "M063 · 札生成・変化 戦闘中のアップグレード",
+          "exampleNames": "武装／神格化／力の吸収／現実掌握",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "戦闘中選択・全札対象と一時強化の復元を追加。現在は攻撃1.5倍、パワーはコスト減のみでSTS固有強化は表現できない。"
+        },
+        "M064": {
+          "id": "M064",
+          "title": "M064 · 札生成・変化 カード固有の強化・無限強化",
+          "exampleNames": "灼熱の一撃／ホログラム／ザップ",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "カード別効果／コスト／廃棄フラグ変更、灼熱の一撃の多段階強化、強化回数を保存する。"
+        },
+        "M065": {
+          "id": "M065",
+          "title": "M065 · 札生成・変化 カード自身／同名札の戦闘内成長",
+          "exampleNames": "ランページ／爪／引き裂き／王様パンチ／忍耐",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ランページ、爪、引き裂き等の個体／同名全札の数値変更。引く・保留する等の誘発成長も必要。"
+        },
+        "M066": {
+          "id": "M066",
+          "title": "M066 · 札生成・変化 戦闘を越える永続的数値成長",
+          "exampleNames": "遺伝的アルゴリズム／大鎌／儀式用ダガー",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "遺伝的アルゴリズム、大鎌、儀式用ダガーの個別値をデッキ・保存・コピーへ反映。"
+        },
+        "M067": {
+          "id": "M067",
+          "title": "M067 · 札生成・変化 カードへのキーワード・追加効果付与",
+          "exampleNames": "手品／変貌／隠された宝石／パリィ",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "保留・エセリアル・スライ・リプレイ、特定カードの追加ブロック等を個体へ付与して保存する。"
+        },
+        "M068": {
+          "id": "M068",
+          "title": "M068 · コスト・実行 0コスト札を使い続ける進行",
+          "exampleNames": "スライス／アドレナリン",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "0コスト自体はあるが、エナジー0になると自動ターン終了。残りの0コスト札を手動で使うSTS型進行には終了条件の改修が必要。"
+        },
+        "M069": {
+          "id": "M069",
+          "title": "M069 · コスト・実行 Xコストと消費量参照",
+          "exampleNames": "旋風刃／串刺し／マルチキャスト／採集",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "残りエナジーを全部支払い、そのXを攻撃回数／生成数／予約ターン数へ渡す。0で使用する挙動も定義。"
+        },
+        "M070": {
+          "id": "M070",
+          "title": "M070 · コスト・実行 コスト変更・無料化・次の札無料",
+          "exampleNames": "バレットタイム／堕落／冷酷／王様キック／時の砂",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "個体コスト、対象種類、期限、次の1枚への予約、引く／使う等の条件付き変更を追加。"
+        },
+        "M071": {
+          "id": "M071",
+          "title": "M071 · コスト・実行 エナジー消費・減少・ターン供給変更",
+          "exampleNames": "虚無／断食／フレンドシップ／オービット",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カードからの消費／減少、使用コストの差引と別の消費、次ターン基本供給の増減を追加。"
+        },
+        "M072": {
+          "id": "M072",
+          "title": "M072 · コスト・実行 カードを再プレイ・リプレイ",
+          "exampleNames": "バースト／反響化／ワン・ツーパンチ／剣聖",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "費用なし実行、2回目の対象／誘発／廃棄順、次のカードへの予約、連鎖防止を追加。"
+        },
+        "M073": {
+          "id": "M073",
+          "title": "M073 · コスト・実行 手札以外から自動プレイ",
+          "exampleNames": "荒廃／騒乱／ビートダウン／彼方からの遠吠え／爆撃",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "山札上・捨て札・廃棄札からの実行と各置き場への復帰／廃棄、自動対象選択が必要。"
+        },
+        "M074": {
+          "id": "M074",
+          "title": "M074 · コスト・実行 捨てることでプレイするスライ",
+          "exampleNames": "フリック・フラック／策士／不可侵",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "捨てた時に無料プレイするSTS2のキーワード。捨てる操作・誘発・自動プレイの共通基盤に依存。"
+        },
+        "M075": {
+          "id": "M075",
+          "title": "M075 · コスト・実行 カード効果によるターン終了",
+          "exampleNames": "終幕／瞑想／虚無化",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "効果途中から正式なターン終了を要求する実行結果と、追加ターン／保留等との順序が必要。"
+        },
+        "M076": {
+          "id": "M076",
+          "title": "M076 · 専用システム オーブ生成・スロット・解放・自動効果",
+          "exampleNames": "ザップ／デュアルキャスト／コンデンサ／屈折／ループ",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ライトニング／フロスト／ダーク／プラズマ／STS2グラス、配置順、押し出し解放、自動効果と個別蓄積を追加。"
+        },
+        "M077": {
+          "id": "M077",
+          "title": "M077 · 専用システム 集中力・オーブ効果補正",
+          "exampleNames": "デフラグ／認知偏向／ホットフィックス／ハイパービーム",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "オーブ専用の集中力状態、増減、負値、期限、種類別適用を追加。筋力では代替しない。"
+        },
+        "M078": {
+          "id": "M078",
+          "title": "M078 · 専用システム スタンス・憤怒・平静・神聖",
+          "exampleNames": "噴火／警戒／空虚なる拳／冒涜",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "攻撃倍率／被ダメージ倍率、平静解除時エナジー、神聖終了とスタンス変更誘発を追加。"
+        },
+        "M079": {
+          "id": "M079",
+          "title": "M079 · 専用システム マントラ蓄積と神聖移行",
+          "exampleNames": "崇拝／拝跪／献身／神光",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "閾値で神聖へ移行する蓄積状態、消費、獲得履歴を追加。"
+        },
+        "M080": {
+          "id": "M080",
+          "title": "M080 · 専用システム 急所（マーク）と全対象HP損失",
+          "exampleNames": "経穴殺法",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "各敵の急所蓄積と、カード使用時に急所量だけ即時HP損失を適用。炎上の周期ダメージでは一致しない。"
+        },
+        "M081": {
+          "id": "M081",
+          "title": "M081 · 専用システム 破滅蓄積・HP閾値で即死",
+          "exampleNames": "天罰／終末の日／刻限",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "破滅をHPと比較して即死判定する専用状態・判定タイミングが必要。毒／炎上とは別効果。"
+        },
+        "M082": {
+          "id": "M082",
+          "title": "M082 · 専用システム 召喚・オスティのHP／攻撃／死亡",
+          "exampleNames": "ボディガード／つっつき／激励／生贄／骨の軍団",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "味方召喚ユニット、最大／現在HP、被攻撃の肩代わり、召喚増量・回復・死亡・専用攻撃。"
+        },
+        "M083": {
+          "id": "M083",
+          "title": "M083 · 専用システム 星の獲得・消費・カード費用",
+          "exampleNames": "畏敬／星の外套／ブラックホール／隠し財産",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "星の別資源、星コスト、ターンをまたぐ保持、獲得／使用時誘発を追加。星をエナジー扱いにする案はルール変更。"
+        },
+        "M084": {
+          "id": "M084",
+          "title": "M084 · 専用システム 鍛造・ソヴリン・ブレード",
+          "exampleNames": "刃の戦錬／鍛冶師／顕現／追尾の刃",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "鍛造量で成長する専用カード、所在を問わない回収、全体化・リプレイ・追加ブロック等の付与を追加。"
+        },
+        "M085": {
+          "id": "M085",
+          "title": "M085 · 専用システム 即死・死亡予約・特殊敗北条件",
+          "exampleNames": "審判／冒涜／背水の陣",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "審判のHP閾値、冒涜の次ターン死亡、背水の陣の貫通ダメージで死亡などの判定を追加。"
+        },
+        "M086": {
+          "id": "M086",
+          "title": "M086 · 戦闘外・協力 とどめを刺した時の追加効果",
+          "exampleNames": "捕食／強欲の手／狩猟／教訓／切断",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カードによるリーサル識別、ミニオン除外、最大HP／コイン／カード報酬／強化の分岐を追加。"
+        },
+        "M087": {
+          "id": "M087",
+          "title": "M087 · 戦闘外・協力 最大HPの増減",
+          "exampleNames": "捕食／極光の炎",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "戦闘勝利で最大HP+5あり。カード起点の増減、現在HPの増減／上限への丸めと保存を追加。"
+        },
+        "M088": {
+          "id": "M088",
+          "title": "M088 · 戦闘外・協力 コイン獲得・損失・勝利時予約",
+          "exampleNames": "願いごと／負債／ロイヤリティ",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "勝利時+30のレリックあり。願いごとの即時獲得、負債の手札ペナルティ、ロイヤリティのカード起点予約を追加。"
+        },
+        "M089": {
+          "id": "M089",
+          "title": "M089 · 戦闘外・協力 永続カード削除・削除禁止（永劫）",
+          "exampleNames": "禁断の魔導書／鐘の呪い／アセンダーの災厄",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カード効果からの削除、削除可能条件、永劫等の保護属性はない。戦闘廃棄とデッキ削除を区別。"
+        },
+        "M090": {
+          "id": "M090",
+          "title": "M090 · 戦闘外・協力 ポーション獲得",
+          "exampleNames": "錬金術",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ポーションの所持枠、抽選、使用、保存と錬金術の生成効果を追加。"
+        },
+        "M091": {
+          "id": "M091",
+          "title": "M091 · 戦闘外・協力 クエスト・部屋／戦闘回数でカード変化",
+          "exampleNames": "ビャードニスの卵／ランタンの鍵／戦利品の地図／罪悪感／ダウジング",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "カード個体の進行カウンター、休憩所ふ化、次層イベント／宝物、回数後の削除／変化を追加。"
+        },
+        "M092": {
+          "id": "M092",
+          "title": "M092 · 戦闘外・協力 イベントでカード効果を組み立てる",
+          "exampleNames": "マッド・サイエンス",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "イベントで選んだ種類・追加効果を個体に保存。教材差し替えの全体定義とは別。"
+        },
+        "M093": {
+          "id": "M093",
+          "title": "M093 · 戦闘外・協力 他プレイヤー支援・共有・肩代わり",
+          "exampleNames": "手助け／インターセプト／タッグチーム／ボール／ソウルバウンド",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "複数プレイヤーの戦闘状態、味方対象、カード移譲、共有履歴、肩代わりを追加。主人公3種だけでは協力プレイにならない。"
+        },
+        "M094": {
+          "id": "M094",
+          "title": "M094 · 能力・デバフ 自分へのデバフ付与・能力代償",
+          "exampleNames": "狂戦士／ニューロサージ／断食",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "カードのdebuffは敵だけに付与。狂戦士の自分への弱体、パワーの自傷等に対象指定が必要。"
+        },
+        "M095": {
+          "id": "M095",
+          "title": "M095 · 攻撃・計算 敵への即時HP損失・ブロック無視",
+          "exampleNames": "窒息／霊魂抽出／憑依",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "直接HPを失わせる非アタック効果と、攻撃倍率を適用しない解決が必要。炎上は同時に発動しない。"
+        },
+        "M096": {
+          "id": "M096",
+          "title": "M096 · 攻撃・計算 特定種類・名前のカードを継続強化",
+          "exampleNames": "精度上昇／締め直し／骨強化",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "ナイフだけの追加ダメージ、防御札だけ追加ブロック、同名札への補正を管理。筋力・敏捷の全体補正と区別。"
+        },
+        "M097": {
+          "id": "M097",
+          "title": "M097 · 履歴・誘発 シャッフル・保留・資源操作時の誘発",
+          "exampleNames": "計略／制定／オービット／ブラックホール",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "山札再構築、保留、星／エナジー消費、スタンス／オーブなど固有イベントも通知。"
+        },
+        "M098": {
+          "id": "M098",
+          "title": "M098 · 戦闘外・協力 戦闘終了時の回復・強化",
+          "exampleNames": "自己修復／マッド・サイエンス",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "自己修復などカードから登録する終了時の回復、マッド・サイエンスの強化予約を追加。"
+        },
+        "M099": {
+          "id": "M099",
+          "title": "M099 · 専用システム 特殊遭遇の逃亡カウンター",
+          "exampleNames": "決死の逃亡",
+          "auditStatusInReference": "未対応",
+          "referenceNote": "決死の逃亡の進行値・蟻地獄と使用ごとのコスト増加、逃亡による遭遇終了を追加。"
+        },
+        "M100": {
+          "id": "M100",
+          "title": "M100 · 横断 複合効果の処理順・分岐・選択",
+          "exampleNames": "アッパーカット／供物／願いごと／マッド・サイエンス",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "ブロック→能力→デバフ→回復／自傷→攻撃→コンボ→ドローの順。STSの文章順実行、複数デバフ、選択肢、途中撃破後処理には効果リスト化が必要。"
+        },
+        "M101": {
+          "id": "M101",
+          "title": "M101 · 横断 レア度・所属・カード名等の条件参照",
+          "exampleNames": "聖なる選別／パーフェクトストライク／三日月の槍／スプラッシュ",
+          "auditStatusInReference": "一部あり",
+          "referenceNote": "kindは存在。レア度未設定、主人公別カードプールなし、名前や星コストで抽出するカード効果も未実装。"
+        }
+      },
+      "rules": [
+        "全180候補の比較用改訂案。前のcardDesignは履歴として保持し、この案は別項目へ保存。",
+        "勝利は敵HPを0にする。AWSの構成条件は効果対象・利用条件として扱い、別の勝利ゲージは追加しない。",
+        "処理・配置・通信・読取り・書込み・転送・イベント・復元等は選択用タグ案。タグと実サービス対応を定義しないまま万能効果にしない。",
+        "保留＝ターン終了時に捨てず保持。パワー＝戦闘中の持続効果。召喚・区画・記録はこの案の追加状態であり現行実装には未対応。",
+        "コピー・生成札は戦闘限定。元の設定不備・権限・地域等の条件も引き継ぐ。生成しただけで稼働や成功とはしない。",
+        "再試行・回収は未完了処理に限る。完了済みの同じ業務IDからダメージ・コイン・報酬を再取得しない。",
+        "山札検索・回収・保留は所持札のみ。未所持カードを出す場合は生成と明記し、生成対象・枚数・行先を指定する。",
+        "0コスト札のドロー・検索・割引、同名再プレイ連携は同名につき各ターン1回。コストは0未満にならない。コピー後も同名の回数上限を共有。",
+        "通常/予約攻撃はタスクHPへの処理進行。停止・権限不足・経路不成立で対応処理ができない場合は発動しない。",
+        "保存・復元はデータ状態の回復。任意のプレイヤーHP全快、自由な状態異常解除、完了成果の二重加算にはしない。",
+        "イベント専用は対応する専用イベント・交換所でのみ効果を使う案。元のキャラ所属と入手先設定は履歴として保持し、採用時はイベント扱いに整合させる。",
+        "イベント費用の±1や1ターン待ちは架空の尺度。実際の料金や年単位の契約・復元時間の換算ではない。",
+        "基盤設定札は直接火力を持たなくてもよい。意味を壊す万能攻撃や自動修復を加えず、対応札の検索・保留・限定許可に接続する。",
+        "強化のコスト軽減やドロー増加も仮案。0コスト化・持続効果の強さ、8階層での構築率は未検証。",
+        "資料のSAA対応状態は参照資料に記された基準版の評価であり、新しいカード案全体の実装済み判定ではない。",
+        "現行ゲームへの導入・初期キャラ/デッキ・排出率・レリック変更は行わない。"
+      ],
+      "scope": "STS1/STS2・参照資料の分類を効果の文法として使う。AWSの機能との対応は既存教材を起点にした設計案。",
+      "openQuestions": [
+        "配置・経路・認可タグをどこまでゲームへ持ち込むか。",
+        "イベント専用へ変更した候補の入手先・所属との整合。",
+        "個別強化・レリック・複数敵・予約時の撃破と処理順・8階層試遊。"
       ]
     }
   },

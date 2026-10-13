@@ -89,3 +89,9 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - 機能・ゲーム効果・利用条件・代償・比喩の限界・エナジー・入手先・レア度を全180候補へ設定。既存HTML/JSON更新、検索とレア度/入手先絞り込み。元235所属と未所属17IDは維持。
 - 共通5枚＋専用3枚のスターター案、コモン70/アンコモン25/レア5の共通抽選案。費用・契約は交換所、未所属の限定用途は専用イベントへ。数値は仮、追加勝利ゲージなし。
 - 分類concept-card-mechanics-acquisition-fitはdraft/candidate。現行ゲーム30カード・キャラ・保存を変更しない。前提タグ・設置状態・利用費イベント・強化値・8階層の試遊は未実装/未検証。検証と公開は後記。
+
+
+## STS型の180カード効果改訂案（2026-10-13 JST）
+- public/design/card-effects-proposal.html。全180候補へ種類・コスト・通常/強化・条件・代償・意味の対応・STS機能IDを設定。旧cardDesignは保持、stsEffectProposalに別案保存。元235所属と追跡IDは維持。
+- 指定sts-migration.htmlはWebツールで取得不可。同パスのローカル資料M001〜M101を読み、SHA256をstsEffectResearchへ記録。ライブ版との一致は未確認。34効果分類を参照。
+- 分類concept-card-sts-semantic-effectsはdraft/candidate。配置・タグ・記録・予約等は未実装。イベント専用の入手先整合、独立意味監査、8階層の試遊は未実施。現行ゲームの性能や保存は変更しない。検証と公開は後記。

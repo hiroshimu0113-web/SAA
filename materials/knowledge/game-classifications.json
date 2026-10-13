@@ -55902,6 +55902,101 @@
       "open_questions": [
         "前提タグの実装範囲、利用費イベント、強化値、8階層での試遊。"
       ]
+    },
+    {
+      "id": "concept-card-sts-semantic-effects",
+      "title": "教材の機能をSTS型の戦闘効果へ対応付ける設計",
+      "aliases": [],
+      "kind": "concept",
+      "classification_reason": "教材名と戦闘ビルドの関連性・重複・未所属の扱いを設計する概念。",
+      "objective": "180候補の効果・条件・代償をSTSの文法で具体化し、比喩の限界を説明する。",
+      "unit_ids": [],
+      "material_refs": [
+        {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.stsEffectResearch"
+        },
+        {
+          "path": "public/sts-migration.html",
+          "locator": "M001〜M101"
+        },
+        {
+          "path": "public/design/card-effects-proposal.html",
+          "locator": "180カードのSTS型戦闘効果案"
+        }
+      ],
+      "domains": [
+        "operations"
+      ],
+      "capabilities": [
+        "coordinate"
+      ],
+      "concerns": [
+        "operability"
+      ],
+      "service_names": [],
+      "game_targets": [
+        "card",
+        "build",
+        "character"
+      ],
+      "character_families": [],
+      "prerequisites": [],
+      "conditions": [
+        "6キャラ各3方向、所属の重複を許す。"
+      ],
+      "limitations": [
+        "名前と教材定義に基づく設計案。効果と排出率のバランスは未検証。"
+      ],
+      "misconceptions": [
+        "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
+      ],
+      "content": {
+        "principle": "処理進行を攻撃、観測を選択・ドロー、蓄積を保留、再試行を未完了札の予約回収、構成再現を条件付きコピーにする。",
+        "applicable_when": [
+          "個別効果の設計とSTS機能移植を検討するとき。"
+        ],
+        "counterexample": [
+          "監視だけの自動修復、レプリカによる書込み強化、無制限の完了成果リプレイは採らない。"
+        ],
+        "comparison": [
+          "旧説明案と新しい戦闘効果案を併記し、参照資料の対応状態と新案の実装を分ける。"
+        ]
+      },
+      "relations": [],
+      "sources": [
+        {
+          "url": "https://hiroshimu0113-web.github.io/SAA/sts-migration.html",
+          "claim": "M001〜M101の効果分類と代表名をローカル同名資料から参照。ライブ公開版との一致は未確認。",
+          "checked_on": null,
+          "reviewer": null
+        }
+      ],
+      "classification_status": "draft",
+      "content_status": "draft",
+      "review_notes": [],
+      "game_design": {
+        "proposal": "全候補のstsEffectProposalを独立した設計案にする。",
+        "mechanism_note": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.candidates[*].stsEffectProposal.correspondence"
+        },
+        "metaphor_limit": {
+          "path": "knowledge/game-supplement.json",
+          "locator": "characterCardAllocation.candidates[*].stsEffectProposal.limits"
+        },
+        "simplifications": [
+          "時間・コスト・効果値は架空。設置・タグ・予約・記録は未実装案。"
+        ],
+        "mislearning_risks": [
+          "参照資料の対応可能表示を、新カード実装済みと誤解する。"
+        ],
+        "implementation_refs": []
+      },
+      "import_status": "candidate",
+      "open_questions": [
+        "ライブ参照資料との同一性、独立内容監査、効果処理順、入手先整合、8階層の試遊。"
+      ]
     }
   ]
 }
