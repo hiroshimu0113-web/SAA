@@ -15,10 +15,10 @@ for axis in data['axes'].values():
 parts.append('<p>「特化」は不要という意味ではありません。条件が合えばキーにもなります。この分類だけでデッキの成立や強さは判定できず、カード効果を決めてから再確認します。未所属候補の2軸は所属先が決まってから設定します。</p></section>')
 if data.get('cardSettings'):
  settings=data['cardSettings']
- parts.append('<section id="settings"><h2>カード効果・入手先・レア度の仮設定</h2><p>全180候補の設計案。現行ゲームには未適用。階層・報酬回数・提示数・レア度抽選は全キャラ共通です。</p><ul>'+''.join('<li>'+e(x)+'</li>' for x in settings['rules'])+'</ul><h3>キャラ別の入手先内訳</h3><p>元の所属種類数を維持。共通スターターは初期所持で補い、所属外カードを通常報酬へ自動追加しません。レア度はAWS上の重要度ではありません。</p><div class="scroll"><table><tr><th>キャラ</th><th>所属種類数</th><th>戦闘報酬対象</th><th>交換所のみ</th><th>専用スターター3枚</th></tr>')
+ parts.append('<section id="settings"><h2>カード効果・入手先・レア度の仮設定</h2><p>全180候補の設計案。現行ゲームには未適用。階層・報酬回数・提示数・レア度抽選は全キャラ共通です。</p><ul>'+''.join('<li>'+e(x)+'</li>' for x in settings['rules'])+'</ul><h3>キャラ別の入手先内訳</h3><p>元の所属種類数を維持。共通スターターは初期所持で補い、所属外カードを通常報酬へ自動追加しません。レア度はAWS上の重要度ではありません。</p><div class="scroll"><table><tr><th>キャラ</th><th>所属種類数</th><th>戦闘報酬対象</th><th>交換所のみ</th><th>イベント専用</th><th>専用スターター3枚</th></tr>')
  for cid,ids in settings['starterDedicated'].items():
-  bs=[b for b in builds if b['characterId']==cid];owned={c['termId'] for b in bs for c in b['cards']};regular=sum('戦闘報酬' in by[tid]['cardDesign']['acquisition'] for tid in owned)
-  parts.append('<tr><td>'+e(bs[0]['characterName'])+'</td><td>'+str(len(owned))+'</td><td>'+str(regular)+'</td><td>'+str(len(owned)-regular)+'</td><td>'+e('／'.join(by[tid]['name'] for tid in ids))+'</td></tr>')
+  bs=[b for b in builds if b['characterId']==cid];owned={c['termId'] for b in bs for c in b['cards']};regular=sum('戦闘報酬' in by[tid]['cardDesign']['acquisition'] for tid in owned);event_only=sum(by[tid].get('stsEffectProposal',{}).get('type')=='イベント専用' for tid in owned)
+  parts.append('<tr><td>'+e(bs[0]['characterName'])+'</td><td>'+str(len(owned))+'</td><td>'+str(regular)+'</td><td>'+str(len(owned)-regular-event_only)+'</td><td>'+str(event_only)+'</td><td>'+e('／'.join(by[tid]['name'] for tid in ids))+'</td></tr>')
  parts.append('</table></div><p>未所属17件は対応する専用イベント・交換所で全キャラが検討できる枠。ただしキャラへの本所属はまだ未決定です。</p><details><summary>残る設計事項</summary><ul>'+''.join('<li>'+e(x)+'</li>' for x in settings['openQuestions'])+'</ul></details></section>')
  parts.append('<p><label>レア度 <select id="rarity"><option value="">すべて</option><option>コモン</option><option>アンコモン</option><option>レア</option></select></label>　<label>入手先 <select id="acquisition"><option value="">すべて</option><option>戦闘報酬</option><option>交換所</option><option>専用イベント</option></select></label></p>')
 for b in builds:
