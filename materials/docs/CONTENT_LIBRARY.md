@@ -101,3 +101,7 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - 同じcard-effects-proposal.htmlを更新。180名称を維持、EC2処理/配置で181形態案。新共通スターター5枚は処理1・配置1・SG2・CloudWatch1。全キャラ専用3枚と合わせて8枚。
 - 使用可能判定による自動終了、設備の配置/表示/状態、25敵行動案との対応、仕事/試行/部分成果の重複防止、指定データだけの復元、個別base/upgradeOverride、イベント専用21案の排出整理。
 - 全案のliveEligible=false。共通機能待ち177・意味再検討3。6つの設計契約テストは模型のみで現行エンジン未接続。分類concept-card-sts-semantic-effectsはdraft/candidate。実装・独立監査・8階層試遊は未実施。検証と公開は後記。
+
+## カード効果案の検証レポート
+- 正本：docs/CARD_EFFECTS_REVISION2_REVIEW.md。技術的実装可否とゲームバランスの検証記録。学習教材やゲーム効果の追加ではない。
+- 公開版：public/design/card-effects-review.html。scripts/export-card-review.pyで正本から生成。全文Markdownも同じ場所に配置。
