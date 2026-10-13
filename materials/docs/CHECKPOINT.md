@@ -897,3 +897,4 @@
 - 使用可能判定による自動終了、設備の配置/表示/状態、25敵行動案との対応、仕事/試行/部分成果の重複防止、指定データだけの復元、個別base/upgradeOverride、イベント専用21案の排出整理。
 - 全案のliveEligible=false。共通機能待ち177・意味再検討3。6つの設計契約テストは模型のみで現行エンジン未接続。分類concept-card-sts-semantic-effectsはdraft/candidate。実装・独立監査・8階層試遊は未実施。検証と公開は後記。
 - ローカル：135テスト成功（設計模型6件を含む）、180改訂案・導入判定フィルター/25敵行動表示・全検索/JS無効/320・390・1024px・保存不変、旧資料回帰、progress照合・build成功。現行ゲームカタログは変更前と一致。公開検証は続行。
+- 改訂2公開完了：4a5877c / Actions 38339178969 build・deploy・135テスト・新資料WebKit検証・HTML/JSON HTTP200/SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-effects-proposal.html#revision 。180名称/181形態案、25敵行動案、イベント専用21、共通機能待ち177/意味再検討3。分類concept-card-sts-semantic-effectsはdraft/candidate、ゲーム本体未適用・独立監査/8階層試遊未実施。
