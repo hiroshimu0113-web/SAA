@@ -1,6 +1,6 @@
 {
   "status": "diagnostic-only",
-  "engineSHA256": "ee450cfb4b9bab32e41dd788e15c345b313d276f4f1f641fa144c08174f8a615",
+  "engineSHA256": "ecd9c815875ffe9f95f690a04754f7e4ecdad2b5901677ee2afb3f7581059758",
   "configuration": {
     "floors": 8,
     "hp": 72,
