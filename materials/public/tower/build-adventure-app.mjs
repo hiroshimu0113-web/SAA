@@ -63,7 +63,7 @@ function render(){const previous=root.querySelector('.hand'),key=state?state.com
  for(const b of root.querySelectorAll('[data-action]'))b.dataset.revision=state.revision;
 }
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
-async function banner(text){const el=document.createElement('aside');el.className='turn-banner';el.textContent=text;el.setAttribute('role','status');document.body.append(el);await pause(500);el.remove();}
+async function banner(text){const el=document.createElement('aside');el.className='turn-banner build-turn-banner';el.textContent=text;el.setAttribute('role','status');document.body.append(el);await pause(500);el.remove();}
 async function dispatch(a){
  if(busy)return;const before=state;let equipment=null;
  state=transition(state,a,catalog.quizzes,event=>{if(event.kind==='equipment')equipment=event;});

@@ -16,3 +16,5 @@ body{overflow-wrap:anywhere}#game{max-width:960px}select{font:inherit;max-width:
 .build-portrait.painted-portrait{display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .portrait-window{display:block;position:relative;width:100%;aspect-ratio:var(--portrait-ratio);overflow:hidden}
 .portrait-window>img{position:absolute;display:block;width:300%;max-width:none;height:auto;pointer-events:none}
+
+.build-turn-banner{position:fixed;z-index:110;font-size:24px;line-height:1.5;pointer-events:none}
