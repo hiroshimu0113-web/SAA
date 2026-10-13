@@ -993,3 +993,5 @@
 - 確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html 。シリンダーはモチーフ、上部/戦闘は立ち絵、マップ現在地は選択キャラのモチーフ。次はユーザーの操作・見た目のフィードバックへ対応。
 
 - 立ち絵非表示の報告へ対応：配信PNGはHTTP200で取得可能。端末での原因は未確定のため表示方式をSVG image/clipPathから通常のHTML img/CSS切り抜きに変更。6人の選択/戦闘画像のdecode検査を追加。Chromium選択回帰・画面確認成功、公開Safari検査へ進む。
+
+- 立ち絵表示方式の修正版を公開：3aa210d / Actions 38380446300成功。旧SVGを前提にした単体検査も更新し163件成功、ChromiumとSafariで6人の選択/戦闘imgの実読み込み検査成功。motifs.html/index.html?v=3aa210dをHTTP取得しdistとのSHA256一致確認。端末での元の非表示原因は未確定、表示方式変更後のユーザー確認待ち。確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html?v=3aa210d 。
