@@ -7,7 +7,7 @@ export async function checkCompact(browser,base){
  async function load(phase,gold=200){let s=newRun(2);s.routes[1]=[phase,'battle'];s.floor=1;s.history=[{floor:0,lane:0,type:'battle'}];s.gold=gold;s=act(s,{type:'node',lane:0});if(phase==='shop')s.shopRelic='discount';await page.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await page.reload();}
  async function hold(locator){const box=await locator.boundingBox();await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.waitForTimeout(550);await page.mouse.up();await page.locator('.options-card-detail .effect').waitFor();await page.waitForTimeout(510);}
  try{
-  await page.goto(base+'tower/compact.html');
+  await page.goto(base+'tower/legacy.html');
   for(const width of [320,390,1024]){
    await page.setViewportSize({width,height:844});await load('shop');
    const boxes=await page.locator('.shop-shelf>.shop-slot').evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,width:r.width};}));

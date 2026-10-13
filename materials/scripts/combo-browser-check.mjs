@@ -5,7 +5,7 @@ import {COMBOS} from '../public/tower/combos.mjs';
 export async function checkCombos(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
-  await p.goto(base+'tower/combo.html');
+  await p.goto(base+'tower/legacy.html');
   for(const [id,r] of Object.entries(COMBOS)){
    const s=act(newRun(1),{type:'node',lane:0});s.battle.energy=4;s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.deck=s.deck.map((card,i)=>({...card,id:r.cards[i]||'guard'}));s.battle.hand=s.deck.slice(0,6).map(c=>c.uid);s.battle.draw=s.deck.slice(6).map(c=>c.uid);s.battle.discard=[];s.battle.exhaust=[];
    await p.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),s);await p.reload();

@@ -31,7 +31,7 @@ try{
  // Do not rely on Safari 15.4+ APIs or external modules to start the shipped game.
  await c.addInitScript(()=>{window.structuredClone=undefined;Object.hasOwn=undefined;});
  await c.route('**/tower/*.mjs',route=>route.abort());
- await p.goto(base+'tower/index.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).tap();
+ await p.goto(base+'tower/legacy.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).tap();
  await p.locator('.current [data-action=node]').first().tap();
  // Use a non-draw card so the touch assertion is independent of the random opening hand.
  await p.evaluate(k=>{const s=JSON.parse(localStorage.getItem(k));s.deck.find(c=>c.uid===s.battle.hand[0]).id='strike';localStorage.setItem(k,JSON.stringify(s));},key);await p.reload();await p.locator('.hand').waitFor();const before=await p.evaluate(k=>localStorage.getItem(k),key);
@@ -64,7 +64,7 @@ try{
  await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
  if(kind==='webkit'&&server){await new Promise(r=>server.httpServer.close(r));server=null;}else await c.setOffline(true);
  await p.reload();await p.locator('.hand').waitFor();
- await p.goto(base+'tower/index.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
+ await p.goto(base+'tower/legacy.html?from=home');await p.locator('.hand').waitFor(); // query must not return study shell.
  await quizOfflineRoundtrip(p);
  await checkComboOffline(p);
  await checkDebuffOffline(p);
@@ -84,7 +84,7 @@ try{
  await checkFlavor(browser,base);
  await checkDebuffs(browser,base);
  // Deliberately stop the inline application: loader must offer recovery, not hang.
- const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/index.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
- await q.goto(base+'tower/index.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();
+ const fail=await browser.newContext(),q=await fail.newPage();await q.route('**/tower/legacy.html',async route=>{const r=await route.fetch();const html=await r.text();const blocks=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.ok(blocks.length>=2);await route.fulfill({response:r,body:html.replace(blocks.at(-1)[0],'<script>throw new Error("simulated startup failure")</script>')});});
+ await q.goto(base+'tower/legacy.html');await q.locator('#startup-error:not([hidden])').waitFor();await q.getByRole('button',{name:'再読み込み',exact:true}).waitFor();await fail.close();
  console.log('PASS '+kind+': Safari-compatible bundled startup, module requests blocked, single-tap play, long-press read-only details, cancellation, swipe guard, hand navigation, 320px targets, persistence, offline query navigation, visible boot recovery.');
 }finally{await browser.close();if(server)await server.httpServer.close();}

@@ -7,7 +7,7 @@ export async function checkRules(browser,base){
  const read=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
  function quiz(hp=72,maxHp=72){const s=newRun(2);s.hp=hp;s.maxHp=maxHp;s.floor=1;s.history=[{floor:0,lane:0,type:'battle'}];return act(s,{type:'node',lane:0});}
  try{
- await p.goto(base+'tower/rules.html');let s=act(newRun(2),{type:'node',lane:0});await load(s);assert.equal(await p.locator('.status-badge').count(),0);
+ await p.goto(base+'tower/legacy.html');let s=act(newRun(2),{type:'node',lane:0});await load(s);assert.equal(await p.locator('.status-badge').count(),0);
  s.battle.playerDebuffs.burn=1;s.battle.playerDebuffs.overload=2;s.battle.enemyDebuffs.misconfig=1;s.battle.enemyDebuffs.delay=3;await load(s);
  assert.equal(await p.locator('.player-column .status-badge').count(),2);assert.equal(await p.locator('.enemy-column .status-badge').count(),2);assert.equal(await p.locator('.player-column [data-debuff="burn"]').getAttribute('aria-label'),'炎上 1');assert.match(await p.locator('.enemy-column [data-debuff="delay"]').getAttribute('aria-label'),/あと2ターン/);
  for(const side of ['player','enemy']){const model=await p.locator('[data-status="'+side+'"]').boundingBox(),icons=await p.locator('.'+side+'-column .status-badges').boundingBox();assert.ok(icons.y>=model.y+model.height);}

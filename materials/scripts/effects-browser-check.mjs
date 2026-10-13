@@ -4,7 +4,7 @@ import {act} from '../public/tower/engine.mjs';
 export async function checkCombatEffects(browser,base){
  const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
- await p.goto(base+'tower/play.html');
+ await p.goto(base+'tower/legacy.html');
  await p.getByText('演出 v2',{exact:true}).waitFor();
  const original=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));await p.getByRole('button',{name:'演出を試す',exact:true}).tap();await p.locator('.combat-toast').waitFor();assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),original);
  await p.locator('.combat-toast').waitFor({state:'detached',timeout:5000});
@@ -24,8 +24,8 @@ export async function checkCombatEffects(browser,base){
  // Reproduce a previous offline package keeping index.html but lacking the new entry.
  await p.evaluate(async()=>{await navigator.serviceWorker.register('../sw.js');await navigator.serviceWorker.ready;});await p.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));
  const saved=await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));
- await p.evaluate(async()=>{for(const name of await caches.keys()){if(!name.startsWith('saa-v1-'))continue;const cache=await caches.open(name);await cache.put(new URL('./index.html',location.href).href,new Response('<meta charset="utf-8"><h1>古いゲーム</h1>',{headers:{'Content-Type':'text/html; charset=utf-8'}}));await cache.delete(new URL('./play.html',location.href).href);}});
- await p.goto(base+'tower/index.html');await p.getByRole('heading',{name:'古いゲーム'}).waitFor();await p.goto(base+'tower/play.html');await p.getByText('演出 v2',{exact:true}).waitFor();assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),saved);
+ await p.evaluate(async()=>{for(const name of await caches.keys()){if(!name.startsWith('saa-v1-'))continue;const cache=await caches.open(name);await cache.put(new URL('./index.html',location.href).href,new Response('<meta charset="utf-8"><h1>古いゲーム</h1>',{headers:{'Content-Type':'text/html; charset=utf-8'}}));await cache.delete(new URL('./legacy.html',location.href).href);}});
+ await p.goto(base+'tower/index.html');await p.getByRole('heading',{name:'古いゲーム'}).waitFor();await p.goto(base+'tower/legacy.html');await p.getByText('演出 v2',{exact:true}).waitFor();assert.equal(await p.evaluate(()=>localStorage.getItem('saa-tower-run-v1')),saved);
  console.log('PASS cached old index: fresh entry loads visible effects version and preserves saved run.');
  console.log('PASS combat effects: hit, shield, full/partial guard, healing, rapid taps, no effect for invalid play, reduced motion and cleanup.');
  }finally{await c.close();}

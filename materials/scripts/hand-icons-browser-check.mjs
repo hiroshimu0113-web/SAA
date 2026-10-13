@@ -6,7 +6,7 @@ export async function checkHandIcons(browser,base){
  const read=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
  async function centered(){await p.waitForTimeout(250);const ids=await p.locator('.hand .card').evaluateAll(es=>es.map(e=>e.dataset.uid));assert.equal(await p.locator('.fan-active').getAttribute('data-uid'),ids[Math.floor((ids.length-1)/2)]);const offset=await p.locator('.hand').evaluate(e=>{const c=e.querySelector('.fan-active');return(c.offsetLeft+c.offsetWidth/2-e.scrollLeft)/e.clientWidth;});assert.ok(Math.abs(offset-.38)<.015,'left aligned focus '+offset);}
  try{
- await p.goto(base+'tower/hand-icons.html');
+ await p.goto(base+'tower/legacy.html');
  let s=act(newRun(2),{type:'node',lane:0});s.deck[0].id='strike';s.battle.hand=s.deck.map(c=>c.uid);s.battle.draw=[];s.battle.energy=1;
  for(const double of [false,true]){
   const test=JSON.parse(JSON.stringify(s));if(double){test.battle.playerDebuffs.delay=2;test.battle.playerActions=2;}

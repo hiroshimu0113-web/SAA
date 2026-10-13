@@ -3,7 +3,7 @@ import {HEROES,act,newRun} from '../public/tower/engine.mjs';
 export async function checkHeroes(browser,base){
  const context=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true});
  try{
- const page=await context.newPage();await page.goto(base+'tower/models.html');
+ const page=await context.newPage();await page.goto(base+'tower/legacy.html');
  const dialogs=[];page.on('dialog',d=>{dialogs.push(d.message());d.dismiss();});
  for(const [seed,id] of Object.keys(HEROES).entries()){
   await page.evaluate(seed=>{crypto.getRandomValues=a=>{a[0]=seed;return a;};},seed);

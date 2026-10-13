@@ -4,7 +4,7 @@ import {act,RELICS} from '../public/tower/engine.mjs';
 export async function checkStrategy(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
- await p.goto(base+'tower/strategy.html');const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerStrength=2;s.battle.enemyDebuffs.overload=2;s.battle.armor=3;s.battle.block=3;s.deck.find(c=>c.uid===s.battle.hand[0]).id='parallel';s.deck.find(c=>c.uid===s.battle.hand[1]).id='optimize';
+ await p.goto(base+'tower/legacy.html');const s=act(newRun(1),{type:'node',lane:0});s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerStrength=2;s.battle.enemyDebuffs.overload=2;s.battle.armor=3;s.battle.block=3;s.deck.find(c=>c.uid===s.battle.hand[0]).id='parallel';s.deck.find(c=>c.uid===s.battle.hand[1]).id='optimize';
  const raw=JSON.stringify(s);await p.evaluate(raw=>localStorage.setItem('saa-tower-run-v1',raw),raw);await p.reload();await p.evaluate(()=>window.scrollTo(0,0));
  assert.equal(await p.locator('.strategy-panel,.battle-bar,.turn-forecast,.playable-count').count(),0);
  const hand=await p.locator('.hand').boundingBox();assert.ok(hand.y>0&&hand.y<400,'hand should be visible without scrolling');

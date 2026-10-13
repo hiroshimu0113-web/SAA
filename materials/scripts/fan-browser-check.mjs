@@ -4,7 +4,7 @@ export async function checkFan(browser,base){
  for(const mobile of [true,false]){
  const ctx=await browser.newContext({viewport:{width:mobile?390:1000,height:844},isMobile:mobile,hasTouch:mobile}),page=await ctx.newPage();
  try{
- await page.goto(base+'tower/fan.html');let state=newRun(2);state=act(state,{type:'node',lane:0});state.battle.hand=state.deck.map(c=>c.uid);state.battle.draw=[];
+ await page.goto(base+'tower/legacy.html');let state=newRun(2);state=act(state,{type:'node',lane:0});state.battle.hand=state.deck.map(c=>c.uid);state.battle.draw=[];
  await page.evaluate(s=>localStorage.setItem('saa-tower-run-v1',JSON.stringify(s)),state);await page.reload();await page.locator('.fan-hand').waitFor();const before=await page.evaluate(()=>localStorage.getItem('saa-tower-run-v1'));
  const hand=page.locator('.hand');await hand.scrollIntoViewIfNeeded();await page.waitForTimeout(250);
  async function active(){return page.locator('.hand .fan-active').getAttribute('data-uid');}

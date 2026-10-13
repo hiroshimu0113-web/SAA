@@ -11,7 +11,7 @@ export async function checkTurnBanners(browser,base){
  });};
  const idle=()=>p.locator('#game[aria-busy="false"]').waitFor();
  try{
- await p.goto(base+'tower/turns.html');await load(make());await p.locator('.end-turn').tap();await p.locator('.enemy-turn').waitFor();
+ await p.goto(base+'tower/legacy.html');await load(make());await p.locator('.end-turn').tap();await p.locator('.enemy-turn').waitFor();
  assert.equal(await p.locator('.end-turn').isDisabled(),true);const committed=await read();assert.equal(JSON.parse(committed).battle.turn,2);
  await p.evaluate(()=>document.querySelector('.end-turn').dispatchEvent(new MouseEvent('click',{bubbles:true})));await p.keyboard.press('Enter');assert.equal(await read(),committed);
  await p.screenshot({path:'artifacts/enemy-turn.png'});await p.locator('.your-turn').waitFor();assert.equal(await p.locator('.end-turn').isDisabled(),true);await p.screenshot({path:'artifacts/your-turn.png'});await idle();assert.equal(await p.locator('.end-turn').isDisabled(),false);

@@ -15,7 +15,7 @@ try{
  await page.getByRole('link',{name:'問題集',exact:true}).click();assert.equal(await page.locator('details').count(),7);await page.locator('summary').first().click();assert.equal(await page.locator('details').first().getAttribute('open'),'');
  await page.setViewportSize({width:320,height:740});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:'artifacts/next-questions-mobile.png',fullPage:true});
- await page.goto(base+'tower/index.html');await page.getByRole('button',{name:'冒険を始める',exact:true}).click();
+ await page.goto(base+'tower/legacy.html');await page.getByRole('button',{name:'冒険を始める',exact:true}).click();
  await page.screenshot({path:'artifacts/tower-map-mobile.png',fullPage:true});
  await page.locator('.current [data-action=node]').first().click();
  await page.locator('.hand .card:not(:disabled)').first().click();
@@ -26,7 +26,7 @@ try{
  await context.setOffline(true);await page.reload();await page.locator('.hand').waitFor();
  await page.goto(base+'study/2026-10-07/questions.html');assert.equal(await page.locator('details').count(),7);await page.locator('summary').last().click();
  await page.goto(base+'study/2026-10-07/text.html');await page.getByRole('heading',{level:1}).waitFor();
- await context.setOffline(false);await page.goto(base+'tower/index.html');await page.locator('.hand').waitFor();
+ await context.setOffline(false);await page.goto(base+'tower/legacy.html');await page.locator('.hand').waitFor();
 
  // Drive a complete run via the same touch buttons, never editing HP or battle outcomes.
  for(let seed=1;seed<=4;seed++){

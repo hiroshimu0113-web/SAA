@@ -10,7 +10,7 @@ export async function checkImpact(browser,base){
  const idle=()=>p.locator('#game[aria-busy="false"]').waitFor();
  const read=()=>p.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
  try{
- await p.goto(base+'tower/impact.html');await load({block:3});await p.locator('.end-turn').tap();await idle();let hits=await p.evaluate(()=>window.impacts);
+ await p.goto(base+'tower/legacy.html');await load({block:3});await p.locator('.end-turn').tap();await idle();let hits=await p.evaluate(()=>window.impacts);
  assert.equal(hits.filter(x=>x.name==='screen-impact').length,1);assert.ok(hits.some(x=>x.target.includes('battle-hud')));assert.ok(hits.some(x=>x.target.includes('combat-toast')));assert.equal((await read()).hp,46);assert.equal(await p.locator('.screen-shake,html.screen-shaking').count(),0);
  await load({block:20});await p.locator('.end-turn').tap();await idle();assert.deepEqual(await p.evaluate(()=>window.impacts),[]);assert.equal((await read()).hp,50);
  await load();await p.locator('.hand .card').first().tap();await p.waitForTimeout(400);assert.deepEqual(await p.evaluate(()=>window.impacts),[]);assert.equal((await read()).battle.hp,26);

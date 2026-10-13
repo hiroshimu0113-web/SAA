@@ -7,7 +7,7 @@ function battle(enemy){const s=act(newRun(1),{type:'node',lane:0});s.battle.enem
 export async function checkDebuffs(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
-  await p.goto(base+'tower/debuff.html');
+  await p.goto(base+'tower/legacy.html');
   const read=()=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);
   const setup=async s=>{await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();};
   await setup(battle('boss'));assert.match(await p.locator('.intent').innerText(),/攻撃 10.*遅延/);

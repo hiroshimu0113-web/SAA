@@ -55998,12 +55998,13 @@
         "implementation_refs": [
           "public/tower/build-lab-engine.mjs（30形態のみ）",
           "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
-          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）",
+          "public/tower/index.html（改訂3の30形態を通常入口へ採用。6系統の配色と構成優先の強敵報酬）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
-        "共通機能の本体導入、保存移行、独立意味監査、8階層試遊と強化バランス。",
+        "旧保存はlegacy.htmlで保持。全181形態の導入、独立意味監査、8階層試遊と強化バランスは未完了。",
         "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },

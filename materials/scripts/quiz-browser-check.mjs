@@ -9,7 +9,7 @@ export async function quizOfflineRoundtrip(p){
 export async function checkQuizAndHud(browser,base){
  const c=await browser.newContext({viewport:{width:320,height:740},isMobile:true,hasTouch:true}),p=await c.newPage();p.setDefaultTimeout(10000);
  try{
- await p.goto(base+'tower/quiz.html');
+ await p.goto(base+'tower/legacy.html');
  for(const correct of [2,1,0]){
   const s=enter();await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();await p.getByRole('heading',{name:'知識の間：1 / 2問'}).waitFor();
   assert.equal(await p.locator('.quiz-rules').getAttribute('open'),null);

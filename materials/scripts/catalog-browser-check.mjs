@@ -9,7 +9,7 @@ const base='http://127.0.0.1:4192/SAA/',key='saa-tower-run-v1';
 const pack=JSON.parse(await readFile('public/tower/learning-catalog.json','utf8'));
 try{
  const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const p=await c.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
- await p.goto(base+'tower/learning.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).click();
+ await p.goto(base+'tower/legacy.html');await p.getByRole('button',{name:'冒険を始める',exact:true}).click();
  let saved=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),key));assert.equal(saved.learningCatalog.version,pack.version);assert.equal(saved.deck.length,7);
  await p.locator('.learning-cards > summary').click();await p.getByRole('heading',{name:pack.starterNames.strike+'（スターター）',exact:true}).waitFor();await p.getByRole('heading',{name:'IAMロール',exact:true}).first().waitFor();
  await p.setViewportSize({width:320,height:740});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.locator('.learning-cards > summary').click();
