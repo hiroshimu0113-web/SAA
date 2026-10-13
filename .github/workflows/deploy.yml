@@ -74,8 +74,7 @@ jobs:
       - name: Verify revision 3 adventure in Safari
         run: |
           node scripts/export-build-adventure.mjs --check
-          node scripts/build-adventure-browser-check.mjs
-          node scripts/cylinder-browser-check.mjs
+          node --input-type=module -e "try { await import('./scripts/build-adventure-browser-check.mjs'); await import('./scripts/cylinder-browser-check.mjs'); } catch (error) { console.log('::error::' + String(error.stack).replaceAll('%', '%25').replaceAll('\\n', '%0A').replaceAll('\\r', '%0D')); process.exitCode = 1; }"
         env:
           BROWSER: webkit
       - name: Verify card build allocation in Safari
