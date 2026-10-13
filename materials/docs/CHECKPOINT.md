@@ -889,3 +889,4 @@
 - ローカル：180提案の全項目/STS参照SHA・ID/意味境界、キャラ・種類・効果ID検索/強化表示は検証。新資料の320px横幅は初回失敗、修正と再検証を実施。旧資料回帰、進捗照合・build成功。現行カタログは変更前と一致。公開/CI WebKitは続行。
 - 新資料のスマホ幅：検索欄の修正に加え、参照SHA256の長い文字列にも折返し対応が必要。最終検証結果は後記。
 - 最終ローカル検証成功：検索欄とSHA256の折返しを修正し、180件/参照ID/意味境界、全フィルター・強化表示・JS無効・320/390/1024px・保存不変の検証が全件成功。
+- STS効果案公開完了：ba310f3 / Actions 38329648550 build・deploy・全129テスト・新資料WebKit検証・実配信HTTP200/SHA256照合成功。公式URL https://hiroshimu0113-web.github.io/SAA/design/card-effects-proposal.html 。180案/34参照分類、旧設定維持。分類concept-card-sts-semantic-effectsはdraft/candidate、ゲーム実装・独立意味監査・8階層試遊は未実施。指定参照URLのライブ版一致は未確認。
