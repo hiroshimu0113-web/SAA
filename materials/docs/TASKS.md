@@ -1379,3 +1379,5 @@
 
 - 公開完了：c5d5ec3 / Actions 38378647757が成功。前回失敗したSafariタッチ検査を含む全build/deploy/公開照合が成功。ローカルChromiumタッチ回帰も成功。motifs.htmlとindex.htmlを未認証HTTPで取得し、HTTP200・ローカルdistとのSHA256一致を確認。GitHub認証障害・公開待ちは解消。
 - 確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html 。シリンダーはモチーフ、上部/戦闘は立ち絵、マップ現在地は選択キャラのモチーフ。次はユーザーの操作・見た目のフィードバックへ対応。
+
+- 立ち絵非表示の報告へ対応：配信PNGはHTTP200で取得可能。端末での原因は未確定のため表示方式をSVG image/clipPathから通常のHTML img/CSS切り抜きに変更。6人の選択/戦闘画像のdecode検査を追加。Chromium選択回帰・画面確認成功、公開Safari検査へ進む。
