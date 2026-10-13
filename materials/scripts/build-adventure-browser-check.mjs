@@ -6,7 +6,7 @@ import {newJourney,transition,SAVE_KEY,validateJourney,HEROES} from '../public/t
 import {policy} from './build-lab-balance.mjs';
 const atlas=await readFile('dist/tower/portraits/serious-atlas-v1.png');
 const html=await readFile('dist/tower/index.html'),legacy=await readFile('dist/tower/legacy.html');assert.ok(!html.toString().includes('type="module"'));
-for(const entry of ['portraits','cylinder','build-colours','builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
+for(const entry of ['motifs','portraits','cylinder','build-colours','builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
 const server=createServer((req,res)=>{if(req.url?.endsWith('/portraits/serious-atlas-v1.png')){res.setHeader('Content-Type','image/png');res.end(atlas);return;}res.setHeader('Content-Type','text/html;charset=utf-8');res.end(req.url?.includes('legacy.html')?legacy:html);});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
 try{

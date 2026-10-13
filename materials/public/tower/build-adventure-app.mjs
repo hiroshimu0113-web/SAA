@@ -2,6 +2,7 @@ import {CARDS,HEROES,ROLES,RELICS,SAVE_KEY,newJourney,transition,validateJourney
 import {act as previewPlay} from './build-lab-engine.mjs';
 import {mountFanHand} from './fan-hand.mjs';
 import {openOptions} from './options-ui.mjs';
+import {heroMotif} from './hero-motifs.mjs';
 import {buildPortrait} from './build-portraits.mjs';
 import {cylinderHTML,mountCylinder} from './hero-cylinder.mjs';
 import {icon} from './icons.mjs';
@@ -29,7 +30,7 @@ function detail(c){const d=CARDS[c.id];return cardHTML(c).replace('<button ','<d
 function collection(cards){return '<p class="muted">長押しで詳細（キーボードはEnter）</p><div class="options-cards">'+cards.map(c=>'<article>'+cardHTML(c).replace('data-action="inspect"','data-inspect="'+esc(c.uid)+'"')+'<template>'+detail(c)+'</template></article>').join('')+'</div>';}
 function allCards(){return Object.keys(CARDS).map(id=>({id,uid:id,up:false}));}
 function inspect(c){if(!c)return;openOptions(root,{'カード詳細':()=>'<div class="options-card-detail">'+detail(c)+'</div>'},{},'カード詳細','カード詳細');}
-function mapHTML(interactive=true){const c=state.combat;return '<p class="eyebrow">CLOUD SPIRE / REVISION 3</p><h2>クラウドの尖塔</h2><p class="muted">上へ進み、8階のボスを目指そう。各戦闘後にカード・強化を選び、寄り道できます。強敵はHPが35%多く、構成に合うカードを優先して落とします。</p><div class="build-map">'+state.routes.map((routes,i)=>{const floor=i+1,current=floor===c.floor;return `<section class="build-floor ${current?'current':''}"><b>${floor} F</b><div>${routes.map(s=>btn(icon(s==='boss'?'boss':s==='elite'?'elite':s==='attack'?'battle':s==='equipment'?'power':'skill')+scenarios[s],'enter',`data-scenario="${s}"`,!interactive||!current)).join('')}</div><small>${floor<c.floor?'踏破済み':current?'現在地':''}</small></section>`;}).reverse().join('')+'</div>';}
+function mapHTML(interactive=true){const c=state.combat;return '<p class="eyebrow">CLOUD SPIRE / REVISION 3</p><h2>クラウドの尖塔</h2><p class="muted">上へ進み、8階のボスを目指そう。各戦闘後にカード・強化を選び、寄り道できます。強敵はHPが35%多く、構成に合うカードを優先して落とします。</p><div class="build-map">'+state.routes.map((routes,i)=>{const floor=i+1,current=floor===c.floor;return `<section class="build-floor ${current?'current':''}"><b>${floor} F</b><div>${routes.map(s=>btn(icon(s==='boss'?'boss':s==='elite'?'elite':s==='attack'?'battle':s==='equipment'?'power':'skill')+scenarios[s],'enter',`data-scenario="${s}"`,!interactive||!current)).join('')}</div><small>${floor<c.floor?'踏破済み':current?'<span class="map-hero-marker">'+heroMotif(c.hero)+'<span>現在地<br>'+HEROES[c.hero].name+'</span></span>':''}</small></section>`;}).reverse().join('')+'</div>';}
 function options(){const c=state.combat;openOptions(root,{
  'デッキ':()=>collection(c.deck),'所持レリック':()=>state.relics.length?state.relics.map(id=>`<p><b>${icon(id)}${esc(relicName(id))}</b><br>${RELICS[id].text}</p>`).join(''):'<p>まだ所持していません。交換所や？マスで獲得できます。</p>',
  'マップ':()=>mapHTML(false),'役一覧':()=>Object.entries(ROLES).map(([h,r])=>`<h3>${r.name}（${HEROES[h].name}）</h3><p>${r.condition} 同じ戦闘で3種類を使用し、状態成立で1回発動。${r.damage}攻撃・${r.block}防御。</p>`+collection(HEROES[h].dedicated.map(id=>({id,uid:id,up:false})))).join(''),
