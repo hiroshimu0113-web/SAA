@@ -1,6 +1,8 @@
 import json,html,pathlib
 r=pathlib.Path(__file__).resolve().parents[1]
 data=json.loads((r/'knowledge/game-supplement.json').read_text())['characterCardAllocation']
+for c in data['candidates']:
+ if c.get('stsEffectProposal',{}).get('revision')==2:c['cardDesign']['acquisition']=c['stsEffectProposal']['acquisition'][:]
 candidates=data['candidates']; builds=data['builds']; by={c['termId']:c for c in candidates}
 (r/'public/design/card-build-allocation.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
 e=lambda v:html.escape(str(v))

@@ -95,3 +95,9 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 - public/design/card-effects-proposal.html。全180候補へ種類・コスト・通常/強化・条件・代償・意味の対応・STS機能IDを設定。旧cardDesignは保持、stsEffectProposalに別案保存。元235所属と追跡IDは維持。
 - 指定sts-migration.htmlはWebツールで取得不可。同パスのローカル資料M001〜M101を読み、SHA256をstsEffectResearchへ記録。ライブ版との一致は未確認。34効果分類を参照。
 - 分類concept-card-sts-semantic-effectsはdraft/candidate。配置・タグ・記録・予約等は未実装。イベント専用の入手先整合、独立意味監査、8階層の試遊は未実施。現行ゲームの性能や保存は変更しない。検証と公開は後記。
+
+
+## 5指摘を反映したカード案・改訂2
+- 同じcard-effects-proposal.htmlを更新。180名称を維持、EC2処理/配置で181形態案。新共通スターター5枚は処理1・配置1・SG2・CloudWatch1。全キャラ専用3枚と合わせて8枚。
+- 使用可能判定による自動終了、設備の配置/表示/状態、25敵行動案との対応、仕事/試行/部分成果の重複防止、指定データだけの復元、個別base/upgradeOverride、イベント専用21案の排出整理。
+- 全案のliveEligible=false。共通機能待ち177・意味再検討3。6つの設計契約テストは模型のみで現行エンジン未接続。分類concept-card-sts-semantic-effectsはdraft/candidate。実装・独立監査・8階層試遊は未実施。検証と公開は後記。

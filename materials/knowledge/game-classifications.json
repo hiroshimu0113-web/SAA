@@ -55923,6 +55923,10 @@
         {
           "path": "public/design/card-effects-proposal.html",
           "locator": "180カードのSTS型戦闘効果案"
+        },
+        {
+          "path": "scripts/card-proposal-contract-model.mjs",
+          "locator": "設計契約の実行例。ゲーム未接続。"
         }
       ],
       "domains": [
@@ -55952,7 +55956,7 @@
         "キー一覧をAWS構成の十分条件や全カード必須と扱わない。"
       ],
       "content": {
-        "principle": "処理進行を攻撃、観測を選択・ドロー、蓄積を保留、再試行を未完了札の予約回収、構成再現を条件付きコピーにする。",
+        "principle": "改訂2：使用可能判定・設備ID・脅威タグ・仕事/データ記録・個別強化と入手先を契約として定義する。180名称/EC2分離で181形態案。",
         "applicable_when": [
           "個別効果の設計とSTS機能移植を検討するとき。"
         ],
@@ -55995,7 +55999,7 @@
       },
       "import_status": "candidate",
       "open_questions": [
-        "ライブ参照資料との同一性、独立内容監査、効果処理順、入手先整合、8階層の試遊。"
+        "共通機能の本体導入、保存移行、独立意味監査、8階層試遊と強化バランス。"
       ]
     }
   ]
