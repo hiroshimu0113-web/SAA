@@ -923,3 +923,5 @@
 ## 検証レポートのGitHub Pages公開
 - ユーザーがGitHubの非公開リポジトリリンクを開けないため、design/card-effects-review.htmlへ同じレポートを公開。バランス検証へのリンク、スマホ向け表スクロール、Markdown保存を追加。ゲーム効果は変更なし。
 - progress:update/check、build成功。公開確認を続行。
+
+- 公開確認完了：b7091b2 / Actions 38341508255成功。https://hiroshimu0113-web.github.io/SAA/design/card-effects-review.html と全文Markdownを未認証HTTP取得し、配信内容のSHA256一致を確認。ローカルWebKitは取得先403で未実行、HTMLリンク/原稿一致/build検証は成功。CIの既存Safari回帰は成功（新レポートの画面検査は含まない）。
