@@ -988,3 +988,6 @@
 - 追加のローカルChromiumタッチ/既存ゲーム回帰も全成功（終了コード0）。オフライン保存、詳細長押し、320px操作、各既存機能を確認。GitHub認証復旧待ちのため公開完了は未確認、上記の認証状況と本追記はローカルのみ。
 
 - 公開再開：GitHub認証復旧。前回CIの失敗は旧ゲームSafari検査でターン終了ボタンが固定ヘッダーに隠れたため。実操作にも適用されるscroll-marginを追加し、公開CIで再検証する。
+
+- 公開完了：c5d5ec3 / Actions 38378647757が成功。前回失敗したSafariタッチ検査を含む全build/deploy/公開照合が成功。ローカルChromiumタッチ回帰も成功。motifs.htmlとindex.htmlを未認証HTTPで取得し、HTTP200・ローカルdistとのSHA256一致を確認。GitHub認証障害・公開待ちは解消。
+- 確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html 。シリンダーはモチーフ、上部/戦闘は立ち絵、マップ現在地は選択キャラのモチーフ。次はユーザーの操作・見た目のフィードバックへ対応。
