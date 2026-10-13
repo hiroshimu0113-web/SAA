@@ -35,3 +35,8 @@
 - Chromiumで6系統、地図初期位置、30カード一覧、長押し/Enter詳細、旧保存維持、強化/報酬/購入、交換所5枠、復元、再読込、320/390/1024pxを検査。画面確認で戦闘HP表示の既存CSSとの衝突を発見し、新モードで修正。
 - progress/knowledge/生成教材の照合・ビルド成功。最終ブラウザー・公開CI結果はCHECKPOINT/TASKSに記録。
 - 分類`concept-card-sts-semantic-effects`と`combo-build-lab-*`の実装参照を更新。draft/candidateを維持し、独立内容監査や本人の理解済み状態へ変更しない。
+
+## 公開結果
+- f5f5680 / Actions 38361814748成功。全157テスト・新旧ゲームのWebKit回帰・公開後検証に成功。
+- https://hiroshimu0113-web.github.io/SAA/tower/builds.html を未認証HTTPで取得しSHA256一致。従来ゲームと資料#balance3からも開ける。
+- 初回CIの旧メニュー期待値を、新しい入口と旧保存維持の検査へ更新して解消。
