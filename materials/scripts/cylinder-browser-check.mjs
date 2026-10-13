@@ -3,14 +3,16 @@ import {createServer} from 'node:http';
 import {chromium,webkit} from '@playwright/test';
 import assert from 'node:assert/strict';
 import {SAVE_KEY} from '../public/tower/build-adventure-engine.mjs';
-const html=await readFile('dist/tower/index.html'),server=createServer((req,res)=>{res.setHeader('Content-Type','text/html;charset=utf-8');res.end(html);});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+const atlas=await readFile('dist/tower/portraits/serious-atlas-v1.png');
+const html=await readFile('dist/tower/index.html'),server=createServer((req,res)=>{if(req.url?.endsWith('/portraits/serious-atlas-v1.png')){res.setHeader('Content-Type','image/png');res.end(atlas);return;}res.setHeader('Content-Type','text/html;charset=utf-8');res.end(html);});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
 try{
  browser=await(process.env.BROWSER==='webkit'?webkit:chromium).launch(process.env.BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true}),p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port+'/tower/index.html');
+ await p.evaluate(async()=>{const img=new Image();img.src='./portraits/serious-atlas-v1.png';await img.decode();if(img.naturalWidth!==1536||img.naturalHeight!==1024)throw Error('Missing portrait atlas');});
  const wheel=p.locator('.hero-cylinder'),chosen=()=>wheel.getAttribute('data-selected');assert.equal(await chosen(),'random');assert.equal(await p.locator('.chamber').count(),7);
  for(const width of [320,390,1024]){await p.setViewportSize({width,height:844});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));const b=await p.locator('.cylinder-start').boundingBox();assert.ok(b.width>=44&&b.height>=44);}
  await p.setViewportSize({width:390,height:844});await p.screenshot({path:'/tmp/cylinder-selection.png',fullPage:true});
- for(const [i,id] of ['random','guardian','tuner','accelerator','commander','builder','restorer'].entries()){await p.locator('[data-chamber="'+i+'"]').tap();assert.equal(await chosen(),id);assert.equal(await p.locator('.chamber[aria-pressed=true]').count(),1);}
+ for(const [i,id] of ['random','guardian','tuner','accelerator','commander','builder','restorer'].entries()){await p.locator('[data-chamber="'+i+'"]').tap();assert.equal(await chosen(),id);assert.equal(await p.locator('.chamber[aria-pressed=true]').count(),1);await p.waitForTimeout(250);await p.locator('.hero-stage').screenshot({path:'/tmp/portrait-'+id+'.png'});}
  await wheel.focus();await p.keyboard.press('Home');await p.keyboard.press('ArrowRight');assert.equal(await chosen(),'guardian');await p.keyboard.press('ArrowLeft');assert.equal(await chosen(),'random');
  // A real pointer travels clockwise twice, crossing the atan2 seam both times.
  const box=await wheel.boundingBox(),cx=box.x+box.width/2,cy=box.y+box.height/2,r=box.width*.43;
