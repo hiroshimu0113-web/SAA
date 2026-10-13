@@ -94,3 +94,10 @@ await writeFile('dist/tower/role-seams.html',html);
 const labResult=await build({configFile:false,publicDir:false,logLevel:'error',build:{write:false,target:'safari14',minify:'esbuild',lib:{entry:'public/tower/build-lab-app.mjs',formats:['iife'],name:'BuildLab'},rollupOptions:{output:{inlineDynamicImports:true}}}});
 const labOutput=(Array.isArray(labResult)?labResult[0].output:labResult.output).find(x=>x.type==='chunk').code.replace(/<\/script/gi,'<\\/script');
 let labHTML=await readFile('public/tower/build-lab.html','utf8');labHTML=labHTML.replace('<script type="module" src="./build-lab-app.mjs"></script>','<script>'+labOutput+'</script>');await writeFile('dist/tower/build-lab.html',labHTML);
+
+const adventureResult=await build({configFile:false,publicDir:false,logLevel:'error',build:{write:false,target:'safari14',minify:'esbuild',lib:{entry:'public/tower/build-adventure-app.mjs',formats:['iife'],name:'BuildAdventure'},rollupOptions:{output:{inlineDynamicImports:true}}}});
+const adventureJS=(Array.isArray(adventureResult)?adventureResult[0].output:adventureResult.output).find(x=>x.type==='chunk').code.replace(/<\/script/gi,'<\\/script');
+let adventureHTML=await readFile('public/tower/builds.html','utf8');
+const adventureCSS=(await readFile('public/tower/build-adventure.css','utf8')).replace(/<\/style/gi,'<\\/style');
+adventureHTML=adventureHTML.replace('<link rel="stylesheet" href="./style.css">','<style>'+css+'</style>').replace('<link rel="stylesheet" href="./build-adventure.css">','<style>'+adventureCSS+'</style>').replace('<script type="module" src="./build-adventure-app.mjs"></script>','<script>'+adventureJS+'</script>');
+await writeFile('dist/tower/builds.html',adventureHTML);

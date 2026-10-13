@@ -71,6 +71,12 @@ jobs:
         run: node scripts/build-lab-browser-check.mjs
         env:
           BROWSER: webkit
+      - name: Verify revision 3 adventure in Safari
+        run: |
+          node scripts/export-build-adventure.mjs --check
+          node scripts/build-adventure-browser-check.mjs
+        env:
+          BROWSER: webkit
       - name: Verify card build allocation in Safari
         run: pnpm exec tsx scripts/card-build-allocation-browser-check.mjs
         env:

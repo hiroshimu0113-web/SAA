@@ -120,3 +120,7 @@ AWS構築手法からビルドへの調査設計：[単一HTML](../public/design
 
 - 改訂3公開完了：98305dc / Actions 38348036813。148テスト・新資料/独立試作/既存仕分けを含む全WebKit回帰・build/deploy成功。公開HTML/JSONは未認証HTTP200・生成物SHA256一致をCIで確認。https://hiroshimu0113-web.github.io/SAA/design/card-effects-proposal.html#balance3 ／ https://hiroshimu0113-web.github.io/SAA/tower/build-lab.html 。GitHub同期済み。
 - この依頼の180名称の改訂・30形態の独立試作・公開は完了。全181形態の正式導入、独立意味監査、レリックあり、人手試遊は保留。次の着手点：加速者優位と復旧者の停止時の弱さを人手/複数方策で比較し、役・報酬・初動の調整へつなぐ。
+
+## 改訂3の冒険
+- public/tower/builds.html：カード効果改訂3の30形態を使う6系統・8階層の冒険。既存ゲームからリンク。交換所・休憩・教材クイズ・4レリックを接続。旧冒険の保存を維持。
+- 詳細docs/BUILD_ADVENTURE_RELEASE.md。教材補足はscripts/export-build-adventure.mjsで生成し、分類concept-card-sts-semantic-effects / combo-build-lab-*はdraft/candidate。全181形態や独立監査の完了ではない。

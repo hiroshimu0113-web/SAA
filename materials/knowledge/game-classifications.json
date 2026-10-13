@@ -55996,12 +55996,15 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs（30形態のみ）"
+          "public/tower/build-lab-engine.mjs（30形態のみ）",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
-        "共通機能の本体導入、保存移行、独立意味監査、8階層試遊と強化バランス。"
+        "共通機能の本体導入、保存移行、独立意味監査、8階層試遊と強化バランス。",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56090,14 +56093,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56186,14 +56192,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56282,14 +56291,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56378,14 +56390,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56474,14 +56489,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     },
     {
@@ -56570,14 +56588,17 @@
           "参照資料の対応可能表示を、新カード実装済みと誤解する。"
         ],
         "implementation_refs": [
-          "public/tower/build-lab-engine.mjs:role"
+          "public/tower/build-lab-engine.mjs:role",
+          "public/tower/build-adventure-engine.mjs（改訂3の冒険。30形態はbuild-lab-engine.mjsを再利用）",
+          "public/tower/build-adventure-app.mjs（手札・設備・役・交換所・クイズの試遊UI）"
         ]
       },
       "import_status": "candidate",
       "open_questions": [
         "独立意味監査",
         "正式レリックとの相互作用",
-        "人手試遊"
+        "人手試遊",
+        "改訂3の冒険の寄り道・獲得レリックありでの人手バランス評価。独立試作の完走率を転用しない。"
       ]
     }
   ]

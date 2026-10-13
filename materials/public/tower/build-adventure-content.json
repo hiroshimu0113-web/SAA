@@ -1,0 +1,186 @@
+{
+  "revision": 3,
+  "scope": "試遊用30形態。全181形態の実装ではない。",
+  "notes": {
+    "ec2-burst": {
+      "termId": "ec2",
+      "meaning": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+      "mechanism": "基本処理を単発攻撃に置き換える。",
+      "limit": "EC2性能を6という数値で保証しない。"
+    },
+    "ec2-deploy": {
+      "termId": "ec2",
+      "meaning": "要件に合わせてCPU・メモリ・I/O等を選ぶ仮想サーバー。ゲストOS保守は利用者が担う。",
+      "mechanism": "基本処理を単発攻撃に置き換える。",
+      "limit": "EC2性能を6という数値で保証しない。"
+    },
+    "security-group": {
+      "termId": "security-group",
+      "meaning": "許可ルールを使うステートフルな通信制御。明示的Denyは設定しない。",
+      "mechanism": "通信の許可境界を基本防御に置き換える。",
+      "limit": "ブロック値は比喩。明示的Denyを設定する機能ではない。"
+    },
+    "cloudwatch": {
+      "termId": "cloudwatch",
+      "meaning": "メトリクス、ログ、アラーム等の可観測性サービス。",
+      "mechanism": "観測により判断材料が増えることをドローで表す。自動修復はしない。",
+      "limit": "ドローは情報取得の比喩でAWSの性能増強ではない。"
+    },
+    "az": {
+      "termId": "az",
+      "meaning": "リージョン内の独立した場所。複数AZへの構成で、1つのAZの障害に備える。",
+      "mechanism": "独立した配置を一回の停止回避で表す。単なる火力の分身ではない。",
+      "limit": "AZ分離だけでデータ到達性や残存容量を保証しない。"
+    },
+    "rds-multi-az": {
+      "termId": "rds-multi-az",
+      "meaning": "複数AZでDBの可用性を設計する方式。単一スタンバイ配置とDBクラスターを区別する。",
+      "mechanism": "継戦を主力と待機の交代にする。平時の火力を倍増しない。",
+      "limit": "クラスター方式との違いをカード詳細に残す。"
+    },
+    "placement-group": {
+      "termId": "placement-group",
+      "meaning": "低遅延や障害分離等の要件に合わせEC2の配置を制御する。",
+      "mechanism": "配置方式ごとの目的を選ぶ。障害分離はホスト故障の波及を抑え、AZ全停止を無効化しない。",
+      "limit": "全プレイスメント方式を同じ防御として扱わない。"
+    },
+    "auto-scaling": {
+      "termId": "auto-scaling",
+      "meaning": "需要や健全性に応じインスタンス数を維持・調整する。下流の容量も考慮する。",
+      "mechanism": "台数増加を処理カード生成で表す。生成札の使用コストは払う。",
+      "limit": "台数調整の比喩であり下流上限を消さない。"
+    },
+    "lambda": {
+      "termId": "lambda",
+      "meaning": "イベントに応じてコードを動かすサーバーレスサービス。",
+      "mechanism": "必要時の単発処理。起動や同時実行の制約は残る。",
+      "limit": "無制限の即時実行とは表現しない。"
+    },
+    "instance-family": {
+      "termId": "instance-family",
+      "meaning": "CPU・メモリ・ストレージ等の特性に応じたEC2の分類。実測で選ぶ。",
+      "mechanism": "実測で合う特性への限定強化。全攻撃筋力ではない。",
+      "limit": "サイズや名前だけで最適性能が決まらない。"
+    },
+    "cloudfront": {
+      "termId": "cloudfront",
+      "meaning": "エッジで HTTP/HTTPS コンテンツを配信する CDN。",
+      "mechanism": "配信と内容の再利用を同じカードに含める。",
+      "limit": "キャッシュ不能処理や書込みの高速化ではない。"
+    },
+    "cache": {
+      "termId": "cache",
+      "meaning": "再利用可能なデータを速く取得できる場所へ一時保存する仕組み。",
+      "mechanism": "初回取得込みの複合札。異なる要求や最新値必須には割引しない。",
+      "limit": "キャッシュの初回取得と更新を含めた複合札。"
+    },
+    "read-replica": {
+      "termId": "read-replica",
+      "meaning": "読取りを分散するDBレプリカ。非同期複製では遅延を考慮する。",
+      "mechanism": "読取り分散だけを強化。入口札は元DB参照とレプリカを含む。",
+      "limit": "最新値が必要な読取りには別判断が必要。"
+    },
+    "sqs": {
+      "termId": "sqs",
+      "meaning": "非同期処理の作業待ちメッセージを保持するキュー。",
+      "mechanism": "仕事の蓄積を手札保留へ置換する。保留だけではダメージなし。",
+      "limit": "メッセージ受理を業務完了として扱わない。"
+    },
+    "idempotency": {
+      "termId": "idempotency",
+      "meaning": "同じ要求を繰り返しても業務上の結果が重複しない性質。",
+      "mechanism": "初回処理を含む複合札。冪等性だけが攻撃するわけではない。",
+      "limit": "4ダメージは初回の業務処理分。冪等性そのものが仕事を実行するわけではない。記録・保持条件は別途必要。"
+    },
+    "spot": {
+      "termId": "spot",
+      "meaning": "中断の可能性があるEC2の購入方式。中断しても再開できる処理などでコスト削減を検討する。",
+      "mechanism": "中断可能な戦力として召喚型の持続攻撃を使う。瞬殺や毒ではない。",
+      "limit": "確率の瞬殺ではなく安価な中断可能戦力の比喩。"
+    },
+    "iam-role": {
+      "termId": "iam-role",
+      "meaning": "人やサービスが引き受ける権限のまとまり。信頼ポリシーで誰が引き受けるか、権限ポリシーで何ができるかを定める。",
+      "mechanism": "権限設定を利用可能な行動への支援にする。操作自体の処理能力は増やさない。",
+      "limit": "ロールだけで経路や万能権限を得ない。"
+    },
+    "vpc-endpoint": {
+      "termId": "vpc-endpoint",
+      "meaning": "対応サービスへの専用経路やプライベート接続。接続とIAM認可は別。",
+      "mechanism": "専用経路の準備。IAM許可は別。",
+      "limit": "接続と認可は別。全サービスへ万能ではない。"
+    },
+    "cloudformation": {
+      "termId": "cloudformation",
+      "meaning": "テンプレートからAWSリソースをスタックとして作成・更新・管理するサービス。",
+      "mechanism": "基本VPC・サブネット・SGの複合札。防御はSG分、展開機能自体の防壁ではない。",
+      "limit": "4ブロックは同梱した通信制御を表す。CloudFormation自体が防壁になるわけではなく、業務データも復元しない。"
+    },
+    "backup": {
+      "termId": "backup",
+      "meaning": "誤更新や障害から戻すための復元可能なデータの複製。",
+      "mechanism": "保存と復元を段階化する。任意のHP全快にはしない。",
+      "limit": "保存だけでHPが回復するカードにしない。"
+    },
+    "pilot-light": {
+      "termId": "pilot-light",
+      "meaning": "復旧先でキーだけを維持し、障害時に残りを起動する戦略。",
+      "mechanism": "低い準備量と立上げの待ちを持つ復旧。",
+      "limit": "用意しただけで全構成が常時稼働するわけではない。"
+    },
+    "cloudwatch-alarm": {
+      "termId": "cloudwatch-alarm",
+      "meaning": "メトリクス等の条件を評価し、通知や対応アクションへつなげる仕組み。",
+      "mechanism": "通知から対応に接続する。対処札なしでは通知のみ。",
+      "limit": "全アラームでEC2・Auto Scaling操作が可能とはしない。"
+    },
+    "checkpoint": {
+      "termId": "checkpoint",
+      "meaning": "処理途中の進捗を保存し、中断後に保存地点から再開できるようにする仕組み。",
+      "mechanism": "処理再開の回収。保存以後の進捗は失う。",
+      "limit": "AMIや単なるスナップショットとは別。"
+    },
+    "health-check": {
+      "termId": "health-check",
+      "meaning": "ヘルスチェックは処理先の応答を定期的に確認します。異常検出には時間がかかり、全ターゲット異常時にはALBのフェイルオープンという例外もあります。",
+      "mechanism": "正常先を調べることを確認・選別へ対応させる。修復はしない。",
+      "limit": "全ターゲット異常時のALB例外を残す。"
+    },
+    "restore-test": {
+      "termId": "restore-test",
+      "meaning": "バックアップから起動・整合性・所要時間を検証する試験。",
+      "mechanism": "試験の結果を必要札へのアクセスにする。将来成功の保証ではない。",
+      "limit": "テスト1回で将来の復旧を保証しない。"
+    },
+    "target-tracking": {
+      "termId": "target-tracking",
+      "meaning": "1台当たりの負荷等が目標に近づくよう容量を調整する方式。",
+      "mechanism": "指標を使った需要追随。指標と下流限界は残る。",
+      "limit": "CPUだけで全ボトルネックを測れない。"
+    },
+    "rds-proxy": {
+      "termId": "rds-proxy",
+      "meaning": "DB接続をプールし再利用するサービス。SQL結果キャッシュとは別。",
+      "mechanism": "接続プールでありSQL結果をコピーしない。",
+      "limit": "結果キャッシュと接続プールを区別する。"
+    },
+    "visibility-timeout": {
+      "termId": "visibility-timeout",
+      "meaning": "受信済みメッセージをほかの受信者から一時的に隠す期間。",
+      "mechanism": "一時的不可視と再配信。削除・完全な重複防止ではない。",
+      "limit": "削除や業務全体の重複防止ではない。"
+    },
+    "remaining-capacity": {
+      "termId": "remaining-capacity",
+      "meaning": "各AZが100件/秒、需要が160件/秒なら、片方のAZ停止後は60件/秒不足します。障害後に残る側の容量も設計します（教材の仮定値）。",
+      "mechanism": "残存能力の評価。確認だけで能力は増えない。",
+      "limit": "稼働台数だけで必要量を満たすとはしない。"
+    },
+    "change-set": {
+      "termId": "change-set",
+      "meaning": "スタック更新で追加・変更・削除や置換の予定を、実行前に確認する仕組み。",
+      "mechanism": "更新前の選択。確認で成功保証や無料復旧は得ない。",
+      "limit": "確認しても実行成功を保証しない。"
+    }
+  }
+}

@@ -940,3 +940,7 @@
 
 - 改訂3公開完了：98305dc / Actions 38348036813。148テスト・新資料/独立試作/既存仕分けを含む全WebKit回帰・build/deploy成功。公開HTML/JSONは未認証HTTP200・生成物SHA256一致をCIで確認。https://hiroshimu0113-web.github.io/SAA/design/card-effects-proposal.html#balance3 ／ https://hiroshimu0113-web.github.io/SAA/tower/build-lab.html 。GitHub同期済み。
 - この依頼の180名称の改訂・30形態の独立試作・公開は完了。全181形態の正式導入、独立意味監査、レリックあり、人手試遊は保留。次の着手点：加速者優位と復旧者の停止時の弱さを人手/複数方策で比較し、役・報酬・初動の調整へつなぐ。
+
+## 改訂3のカードを冒険へ接続（2026-10-13）
+- ユーザー依頼により30形態・6系統をtower/builds.htmlへ実装。独立試作の戦闘効果を再利用し、8階層の分岐進路、交換所/休憩/クイズ、4レリック、扇形手札、長押し説明、保存/バックアップを接続。従来ゲームと設計資料から入口を追加。
+- 全157テスト、6系統×10シードの全操作保存検証、Chromium操作/320・390・1024pxを検査。HP表示の既存CSS衝突を修正。最終画面確認と公開CIを続行。詳細docs/BUILD_ADVENTURE_RELEASE.md。分類draft/candidate維持、全181形態・独立意味監査・最終バランスは未完了。

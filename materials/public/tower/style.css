@@ -232,3 +232,6 @@ body{background:#111c28}
 .role-seam-key{display:block;width:100px;margin:10px 0}
 .card-preview .role-seam,.options-card-detail .role-seam{height:12px}
 .options-cards .role-seam,.shop-shelf .role-seam,.scene .cards-grid .role-seam{height:7px}
+
+.build-adventure-link{display:block;text-align:center;margin:10px 0;padding:12px;border:1px solid #b69b65;border-radius:10px;background:#1a3038;color:#eddbb4;font-size:13px}
+.in-battle>.build-adventure-link{font-size:11px;padding:6px}
