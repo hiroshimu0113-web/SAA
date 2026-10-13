@@ -48,7 +48,7 @@ function remove(c,uid){for(const pile of ['deck','hand','draw','discard'])c[pile
 function finishCamp(s){s.campUsed=true;s.screen='map';}
 function grantRelic(s){const pool=Object.keys(RELICS).filter(x=>!s.relics.includes(x));if(pool.length){const id=pool[Math.floor(random(s.combat)*pool.length)];s.relics.push(id);return id;}return null;}
 function syncBattle(s,before){const c=s.combat;if(c.phase==='lost')s.screen='lost';if(['reward','won'].includes(c.phase)&&s.rewardPaid!==c.floor){s.rewardPaid=c.floor;if(c.phase==='reward'&&s.path[s.path.length-1]?.scenario==='elite')c.offers=eliteOffers(s);if(s.relics.includes('runbook'))c.hp=Math.min(72,c.hp+6);if(s.relics.includes('bounty'))c.coins+=30;s.screen=c.phase;}return s;}
-export function transition(input,a,questions={}){
+export function transition(input,a,questions={},emit=()=>{}){
  // Revision guards reject stale taps, repeated quiz answers, and repeated purchases.
  if(a.revision!==undefined&&a.revision!==input.revision)return input;
  const s=clone(input),c=s.combat;
@@ -60,14 +60,14 @@ export function transition(input,a,questions={}){
   s.path.push({floor:c.floor,scenario:a.scenario});s.screen='battle';
  }else if(s.screen==='battle'){
   // Retire is optional; a free dismantle action should not force the player to end manually every turn.
-  s.combat=combatAct(c,a);
+  s.combat=combatAct(c,a,emit);
   if(JSON.stringify(s.combat)===JSON.stringify(c))return input;
-  if(s.combat.phase==='battle'&&s.combat.turn===c.turn&&!legalActions(s.combat).some(x=>x.kind!=='retire'))s.combat=combatAct(s.combat,{kind:'end'});
+  if(s.combat.phase==='battle'&&s.combat.turn===c.turn&&!legalActions(s.combat).some(x=>x.kind!=='retire'))s.combat=combatAct(s.combat,{kind:'end'},emit);
   syncBattle(s,c);
  }else if(s.screen==='reward'&&a.kind==='upgrade'){
-  s.combat=combatAct(c,a);
+  s.combat=combatAct(c,a,emit);
  }else if(s.screen==='reward'&&a.kind==='reward'&&(!a.id||c.offers.includes(a.id))){
-  s.combat=combatAct(c,a);s.screen='camp';s.campUsed=false;s.shop=null;s.quiz=null;
+  s.combat=combatAct(c,a,emit);s.screen='camp';s.campUsed=false;s.shop=null;s.quiz=null;
  }else if(s.screen==='camp'&&a.kind==='camp'){
   if(a.id==='skip')finishCamp(s);
   if(a.id==='rest')s.screen='rest';

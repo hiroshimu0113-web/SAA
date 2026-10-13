@@ -995,3 +995,6 @@
 - 立ち絵非表示の報告へ対応：配信PNGはHTTP200で取得可能。端末での原因は未確定のため表示方式をSVG image/clipPathから通常のHTML img/CSS切り抜きに変更。6人の選択/戦闘画像のdecode検査を追加。Chromium選択回帰・画面確認成功、公開Safari検査へ進む。
 
 - 立ち絵表示方式の修正版を公開：3aa210d / Actions 38380446300成功。旧SVGを前提にした単体検査も更新し163件成功、ChromiumとSafariで6人の選択/戦闘imgの実読み込み検査成功。motifs.html/index.html?v=3aa210dをHTTP取得しdistとのSHA256一致確認。端末での元の非表示原因は未確定、表示方式変更後のユーザー確認待ち。確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html?v=3aa210d 。
+
+- 設備行動ポップアップ追加：主人公操作後、Equipment Turn（設備の行動）→各設備の実ダメージ/攻撃不可理由→Enemy Turn→Your Turnを各0.5秒表示。設備撃破時は敵/自分ターンを表示せず報酬へ。通知は一時コールバックで保存形式・戦闘結果を変更せず、最終結果を先に保存して演出中操作をロック。
+- ローカル既存163テスト、新規3テスト（結果一致、設備撃破、停止/破損、自動終了）・ビルド・Chromium冒険回帰成功。画面で通常順序/撃破時の敵ターン省略を検査。公開Safari検査・配信確認へ進む。

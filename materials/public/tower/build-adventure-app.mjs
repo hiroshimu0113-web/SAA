@@ -64,7 +64,21 @@ function render(){const previous=root.querySelector('.hand'),key=state?state.com
 }
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function banner(text){const el=document.createElement('aside');el.className='turn-banner';el.textContent=text;el.setAttribute('role','status');document.body.append(el);await pause(500);el.remove();}
-async function dispatch(a){if(busy)return;const before=state;state=transition(state,a,catalog.quizzes);if(state===before)return;selection='';save();const turn=before.screen==='battle'&&(state.combat.turn!==before.combat.turn||a.kind==='end');busy=true;try{if(turn){await banner('Enemy Turn');render();if(state.combat.hp<before.combat.hp&&!matchMedia('(prefers-reduced-motion: reduce)').matches){root.classList.add('build-hit');await pause(250);root.classList.remove('build-hit');}if(state.screen==='battle')await banner('Your Turn');}if(state.combat.metrics.roles>before.combat.metrics.roles)await banner('役成立：'+ROLES[state.combat.hero].name);}finally{busy=false;render();}}
+async function dispatch(a){
+ if(busy)return;const before=state;let equipment=null;
+ state=transition(state,a,catalog.quizzes,event=>{if(event.kind==='equipment')equipment=event;});
+ if(state===before)return;selection='';save();busy=true;root.setAttribute('aria-busy','true');
+ try{
+  if(equipment){
+   await banner('Equipment Turn・設備の行動');
+   for(const action of equipment.actions){const name=action.spot?'Spot EC2':({ec2:'EC2',rds:'RDS',replica:'リードレプリカ'}[action.kind]||action.kind);await banner(name+'：'+(action.reason?action.reason+'（攻撃なし）':action.damage+'ダメージ'));}
+   if(!equipment.actions.length)await banner('攻撃設備なし');
+   const final=state;state={...final,screen:'battle',combat:equipment.combat};render();state=final;
+   if(!equipment.defeated){await banner('Enemy Turn');render();if(state.combat.hp<before.combat.hp&&!matchMedia('(prefers-reduced-motion: reduce)').matches){root.classList.add('build-hit');await pause(250);root.classList.remove('build-hit');}if(state.screen==='battle')await banner('Your Turn');}
+  }
+  if(state.combat.metrics.roles>before.combat.metrics.roles)await banner('役成立：'+ROLES[state.combat.hero].name);
+ }finally{busy=false;render();}
+}
 root.addEventListener('pointerdown',e=>{if(busy||document.querySelector('.options-overlay'))return;const b=e.target.closest('.card');if(!b||e.button!==0)return;pointer={x:e.clientX,y:e.clientY,el:b};hold=setTimeout(()=>{const c=findCard(b);inspect(c);suppressUntil=Date.now()+700;pointer=null;},450);},{passive:true});
 root.addEventListener('pointermove',e=>{if(pointer&&(Math.abs(e.clientX-pointer.x)>12||Math.abs(e.clientY-pointer.y)>12)){clearTimeout(hold);pointer=null;suppressUntil=Date.now()+400;}},{passive:true});
 for(const event of ['pointerup','pointercancel','blur'])window.addEventListener(event,()=>{clearTimeout(hold);pointer=null;});
