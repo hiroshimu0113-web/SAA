@@ -5,7 +5,7 @@ import {chromium,webkit} from '@playwright/test';
 import {newJourney,transition,SAVE_KEY,validateJourney,HEROES} from '../public/tower/build-adventure-engine.mjs';
 import {policy} from './build-lab-balance.mjs';
 const html=await readFile('dist/tower/index.html'),legacy=await readFile('dist/tower/legacy.html');assert.ok(!html.toString().includes('type="module"'));
-for(const entry of ['builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
+for(const entry of ['build-colours','builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
 const server=createServer((req,res)=>{res.setHeader('Content-Type','text/html;charset=utf-8');res.end(req.url?.includes('legacy.html')?legacy:html);});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
 try{

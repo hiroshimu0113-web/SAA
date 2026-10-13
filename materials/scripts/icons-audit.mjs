@@ -9,7 +9,7 @@ const server=await preview({preview:{host:'127.0.0.1',port:4189,strictPort:true}
 try{
  await mkdir('artifacts/icon-audit',{recursive:true});
  for(const width of [320,390,1000]){
-  const c=await browser.newContext({viewport:{width,height:844}}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:4189/tower/icons.html');
+  const c=await browser.newContext({viewport:{width,height:844}}),p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:4189/tower/legacy.html');
   async function audit(name){assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),name+' overflow at '+width);const hud=await p.locator('.battle-hud').count()?await p.locator('.battle-hud').boundingBox():null,meta=await p.locator('.battle-meta').count()?await p.locator('.battle-meta').boundingBox():null;if(hud&&meta&&name==='battle')assert.ok(hud.y+hud.height<=meta.y+1,'HUD must not overlap state row');assert.ok(await p.locator('svg.ui-icon:not([aria-hidden=true]),svg.ui-icon:not([focusable=false])').count()===0);await p.screenshot({path:'artifacts/icon-audit/'+name+'-'+width+'.png',fullPage:true});report.push({name,width,status:'pass'});}
   for(const [name,type] of [['map','map'],['battle','battle'],['shop','shop'],['rest','rest']]){await load(p,fixture(type));await audit(name);}
   for(const [name,view] of [['deck','デッキ'],['relics','所持レリック'],['cards','コレクション'],['roles','役一覧']]){await load(p,fixture());const before=await p.evaluate(k=>localStorage.getItem(k),KEY);await openMenu(p,view);await audit(name);await p.keyboard.press('Escape');assert.equal(await p.evaluate(k=>localStorage.getItem(k),KEY),before,'read-only '+view);}
