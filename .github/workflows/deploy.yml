@@ -75,6 +75,7 @@ jobs:
         run: |
           node scripts/export-build-adventure.mjs --check
           node scripts/build-adventure-browser-check.mjs
+          node scripts/cylinder-browser-check.mjs
         env:
           BROWSER: webkit
       - name: Verify card build allocation in Safari

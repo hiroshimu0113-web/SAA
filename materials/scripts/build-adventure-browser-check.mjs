@@ -5,7 +5,7 @@ import {chromium,webkit} from '@playwright/test';
 import {newJourney,transition,SAVE_KEY,validateJourney,HEROES} from '../public/tower/build-adventure-engine.mjs';
 import {policy} from './build-lab-balance.mjs';
 const html=await readFile('dist/tower/index.html'),legacy=await readFile('dist/tower/legacy.html');assert.ok(!html.toString().includes('type="module"'));
-for(const entry of ['build-colours','builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
+for(const entry of ['cylinder','build-colours','builds','options','role-seams','fan','menu'])assert.deepEqual(await readFile('dist/tower/'+entry+'.html'),html,'promoted bookmark '+entry);
 const server=createServer((req,res)=>{res.setHeader('Content-Type','text/html;charset=utf-8');res.end(req.url?.includes('legacy.html')?legacy:html);});
 await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
 try{
@@ -15,7 +15,7 @@ try{
  await page.evaluate(()=>localStorage.setItem('saa-tower-run-v1','legacy-sentinel'));
  const saved=()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)),SAVE_KEY);
  const load=async s=>{validateJourney(s);await page.evaluate(([key,s])=>localStorage.setItem(key,JSON.stringify(s)),[SAVE_KEY,s]);await page.reload();};
- await page.selectOption('#hero-choice','builder');await page.click('[data-action="new"]');assert.equal((await saved()).combat.hero,'builder');await page.waitForTimeout(3100);
+ assert.equal(await page.locator('.hero-cylinder').getAttribute('data-selected'),'random');await page.locator('[data-chamber="5"]').click();await page.click('[data-action="new"]');assert.equal((await saved()).combat.hero,'builder');await page.waitForTimeout(3100);
  assert.ok(await page.locator('.build-floor.current').evaluate(e=>{const r=e.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;}));await page.click('.build-floor.current [data-action="enter"]');assert.ok(await page.locator('.resources>strong').isVisible());assert.match(await page.locator('.resources>strong').textContent(),/72/);
  await page.locator('.hand .card:not([aria-disabled])').first().click();await page.waitForFunction(()=>document.querySelector('#game').getAttribute('aria-busy')!=='true');assert.ok((await saved()).combat.metrics.plays>0);const turnBefore=(await saved()).combat.turn;await page.click('[data-action="end"]');await page.waitForTimeout(1300);assert.equal((await saved()).combat.turn,turnBefore+1);
  await page.click('[data-action="options"]');await page.click('[data-view="コレクション"]');assert.equal(await page.locator('.options-cards article').count(),30);

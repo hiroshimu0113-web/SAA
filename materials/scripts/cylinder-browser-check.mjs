@@ -1,0 +1,28 @@
+import {readFile} from 'node:fs/promises';
+import {createServer} from 'node:http';
+import {chromium,webkit} from '@playwright/test';
+import assert from 'node:assert/strict';
+import {SAVE_KEY} from '../public/tower/build-adventure-engine.mjs';
+const html=await readFile('dist/tower/index.html'),server=createServer((req,res)=>{res.setHeader('Content-Type','text/html;charset=utf-8');res.end(html);});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+try{
+ browser=await(process.env.BROWSER==='webkit'?webkit:chromium).launch(process.env.BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+ const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true}),p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto('http://127.0.0.1:'+server.address().port+'/tower/index.html');
+ const wheel=p.locator('.hero-cylinder'),chosen=()=>wheel.getAttribute('data-selected');assert.equal(await chosen(),'random');assert.equal(await p.locator('.chamber').count(),7);
+ for(const width of [320,390,1024]){await p.setViewportSize({width,height:844});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));const b=await p.locator('.cylinder-start').boundingBox();assert.ok(b.width>=44&&b.height>=44);}
+ await p.setViewportSize({width:390,height:844});await p.screenshot({path:'/tmp/cylinder-selection.png',fullPage:true});
+ for(const [i,id] of ['random','guardian','tuner','accelerator','commander','builder','restorer'].entries()){await p.locator('[data-chamber="'+i+'"]').tap();assert.equal(await chosen(),id);assert.equal(await p.locator('.chamber[aria-pressed=true]').count(),1);}
+ await wheel.focus();await p.keyboard.press('Home');await p.keyboard.press('ArrowRight');assert.equal(await chosen(),'guardian');await p.keyboard.press('ArrowLeft');assert.equal(await chosen(),'random');
+ // A real pointer travels clockwise twice, crossing the atan2 seam both times.
+ const box=await wheel.boundingBox(),cx=box.x+box.width/2,cy=box.y+box.height/2,r=box.width*.43;
+ await p.mouse.move(cx,cy-r);await p.mouse.down();for(let i=1;i<=56;i++){const a=-Math.PI/2+i/56*4*Math.PI;await p.mouse.move(cx+r*Math.cos(a),cy+r*Math.sin(a));if(i===4){assert.equal(await chosen(),'restorer');assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}}await p.mouse.up();assert.equal(await chosen(),'random');assert.equal(await p.evaluate(k=>localStorage.getItem(k),SAVE_KEY),null);
+ await p.waitForTimeout(400);
+ // A cancelled drag cannot activate the ratchet, and crossing the centre does not jump angles.
+ await p.mouse.move(cx,cy-r);await p.mouse.down();await p.mouse.move(cx+r,cy);const beforeCentre=await chosen();await p.mouse.move(cx,cy);assert.equal(await chosen(),beforeCentre);await wheel.dispatchEvent('pointercancel',{pointerId:1});await p.locator('.cylinder-start').evaluate(b=>b.click());assert.equal(await p.evaluate(k=>localStorage.getItem(k),SAVE_KEY),null);await p.mouse.up();
+ await p.waitForTimeout(400);await wheel.focus();await p.keyboard.press('Home');
+ if(process.env.BROWSER!=='webkit'){const cdp=await context.newCDPSession(p);const point=a=>({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point(-Math.PI/2)]});for(let i=1;i<=8;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[point(-Math.PI/2+i/8*2*Math.PI/7)]});await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});assert.equal(await chosen(),'restorer');await cdp.detach();await p.waitForTimeout(400);}
+ await p.locator('[data-chamber="3"]').tap();assert.equal(await chosen(),'accelerator');await p.waitForTimeout(300);const selectedBox=await p.locator('.chamber.selected').boundingBox();assert.ok(Math.abs(selectedBox.x+selectedBox.width/2-cx)<3);assert.ok(selectedBox.y+selectedBox.height/2<cy-box.height*.25);assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'/tmp/cylinder-accelerator.png',fullPage:true});
+ await p.locator('.cylinder-start').tap();await p.locator('.hero-arrival').waitFor();assert.equal(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).combat.hero,SAVE_KEY),'accelerator');await p.waitForTimeout(3100);
+ const before=await p.evaluate(k=>localStorage.getItem(k),SAVE_KEY);await p.locator('[data-action=options]').tap();await p.getByRole('button',{name:'はじめから',exact:true}).tap();assert.equal(await chosen(),'random');assert.equal(await p.evaluate(k=>localStorage.getItem(k),SAVE_KEY),before);await p.locator('.cylinder-resume').tap();assert.equal(await wheel.count(),0);assert.equal(await p.evaluate(k=>localStorage.getItem(k),SAVE_KEY),before);
+ await p.locator('[data-action=options]').tap();await p.getByRole('button',{name:'はじめから',exact:true}).tap();await wheel.focus();await p.keyboard.press('ArrowRight');assert.equal(await chosen(),'guardian');await p.keyboard.press('Home');await p.locator('.cylinder-start').tap();assert.ok(['guardian','tuner','accelerator','commander','builder','restorer'].includes(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).combat.hero,SAVE_KEY)));assert.deepEqual(errors,[]);
+ console.log('PASS cylinder: seven slots, default random, six portraits, tap/keyboard/two rotations, no accidental start, character start, return without save mutation, widths, random start.');
+}finally{await browser?.close();await new Promise(r=>server.close(r));}
