@@ -182,5 +182,115 @@
       "mechanism": "更新前の選択。確認で成功保証や無料復旧は得ない。",
       "limit": "確認しても実行成功を保証しない。"
     }
-  }
+  },
+  "builds": [
+    {
+      "id": "multi-az",
+      "characterId": "guardian",
+      "name": "分散要塞",
+      "gameplay": "分散した戦力を残して攻撃を継続する。残存容量とデータ到達性が必要。"
+    },
+    {
+      "id": "rds-ha",
+      "characterId": "guardian",
+      "name": "継承",
+      "gameplay": "主力停止後に待機系へ交代する。単一スタンバイは平時の読取り攻撃に使わない。"
+    },
+    {
+      "id": "isolation",
+      "characterId": "guardian",
+      "name": "隔離",
+      "gameplay": "妨害の波及を抑える。配置・流量制御・失敗隔離は別の仕組みであり万能な遮断ではない。"
+    },
+    {
+      "id": "autoscaling",
+      "characterId": "tuner",
+      "name": "増援",
+      "gameplay": "負荷に応じ戦力を追加する。起動待ちと下流の容量が弱点。"
+    },
+    {
+      "id": "serverless",
+      "characterId": "tuner",
+      "name": "即応",
+      "gameplay": "必要時に処理を起動する。同時実行上限や接続先の限界を消せない。"
+    },
+    {
+      "id": "rightsizing",
+      "characterId": "tuner",
+      "name": "精鋭",
+      "gameplay": "能力と維持費を調整する。契約割引は性能強化や容量確保とは別。"
+    },
+    {
+      "id": "cdn",
+      "characterId": "accelerator",
+      "name": "配信",
+      "gameplay": "繰り返し配信を効率化する。Global Acceleratorは経路改善でありキャッシュではない。"
+    },
+    {
+      "id": "cache",
+      "characterId": "accelerator",
+      "name": "記憶",
+      "gameplay": "同じ要求の結果を再利用する。TTLだけで最新性は保証できず、DynamoDB TTLはキャッシュ失効と別。"
+    },
+    {
+      "id": "read-replica",
+      "characterId": "accelerator",
+      "name": "読取分散",
+      "gameplay": "参照処理を分担する。GSIは別キー索引の代替案で、RDSのレプリカではない。"
+    },
+    {
+      "id": "queue",
+      "characterId": "commander",
+      "name": "蓄積",
+      "gameplay": "仕事を蓄えて順次処理する。受理と完了を区別し、期限と滞留に注意。"
+    },
+    {
+      "id": "safe-retry",
+      "characterId": "commander",
+      "name": "再挑戦",
+      "gameplay": "失敗した作業を制限付きで再試行する。トランザクションやFIFOだけで業務全体の冪等性は保証しない。"
+    },
+    {
+      "id": "spot",
+      "characterId": "commander",
+      "name": "機会活用",
+      "gameplay": "安い臨時戦力を使い、中断後は保存済みの進捗から再開する。スナップショットだけでアプリの進捗保存は完成しない。"
+    },
+    {
+      "id": "least-privilege",
+      "characterId": "builder",
+      "name": "権限設計",
+      "gameplay": "必要な行動を許可し、不要な操作を防ぐ。上限やDenyは操作権限を付与しない。"
+    },
+    {
+      "id": "private-access",
+      "characterId": "builder",
+      "name": "閉域接続",
+      "gameplay": "経路と通信許可を整える。接続方式ごとの範囲を区別し、IAM認可も必要。"
+    },
+    {
+      "id": "iac",
+      "characterId": "builder",
+      "name": "再現構築",
+      "gameplay": "構成を設計図として保存し、検証して展開・再構築する。IaCとCloudFormationをキー候補に追加。AMIは起動イメージ、Configは設定評価であり別の役割。定義の誤りも再現するため、変更影響とデータ保護を確認する。"
+    },
+    {
+      "id": "backup",
+      "characterId": "restorer",
+      "name": "保存",
+      "gameplay": "保存した正常状態から復旧する。保存以降の進捗損失と復元待ち時間がある。"
+    },
+    {
+      "id": "disaster-recovery",
+      "characterId": "restorer",
+      "name": "待機",
+      "gameplay": "別拠点の準備量で復旧時間と維持費を調整する。複製は誤更新へのバックアップとは別。"
+    },
+    {
+      "id": "observability",
+      "characterId": "restorer",
+      "name": "観測",
+      "gameplay": "異常を発見して対処を選ぶ。監視・監査・脅威検出は対象が異なり、発見だけでは回復しない。"
+    }
+  ]
 }

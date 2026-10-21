@@ -1008,3 +1008,9 @@
 
 - 設備オブジェクト公開完了：3121c00 / Actions 38390696945成功。166テスト・Safari設備対象/状態/同一アイコン検査・既存回帰・build/deploy/配信照合成功。motifs.html/index.html?v=3121c00をHTTP200で取得しdistとのSHA256一致確認。初回38390263250の冒険検査は停止したが詳細ログ取得不能。CIに詳細エラー注釈を追加した再実行では再現せず通過。再発時は注釈で原因調査する。
 - 確認URL：https://hiroshimu0113-web.github.io/SAA/tower/motifs.html?v=3121c00 。設備欄/ポップアップの共通シルエット、敵予告の対象アイコン、点線枠、稼働/停止/破損印を公開済み。次は見やすさのフィードバックへ対応。
+
+
+## オプションのビルド案内（2026-10-22 JST）
+- ユーザー依頼：オプションに「ビルド」を1項目追加し、現在のキャラの3ビルド名と狙いを表示。既存characterCardAllocation.buildsの18案を正本から抽出し、公開ゲームの選択キャラIDで絞り込む。新しい教材・ビルド定義・戦闘ルールは追加しない。
+- ソース：build-adventure-app.mjs/options-ui.mjs/build-adventure.css、export-build-adventure.mjsとbuild-adventure-content.json。6キャラ各3件の生成時検査、6キャラのメニュー/表示・マップ/戦闘・戻る/閉じる・保存不変・320/390/1024pxを公開CIで検証する。
+- 管理環境が起動待ちのためGitHub連携で変更をまとめた。ローカル検査は未実施。公開CI・Safari相当検査・実配信照合は続行。分類の新設や内容監査状態の変更はない。

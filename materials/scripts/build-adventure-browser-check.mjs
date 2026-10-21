@@ -16,6 +16,33 @@ try{
  await page.evaluate(()=>localStorage.setItem('saa-tower-run-v1','legacy-sentinel'));
  const saved=()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)),SAVE_KEY);
  const load=async s=>{validateJourney(s);await page.evaluate(([key,s])=>localStorage.setItem(key,JSON.stringify(s)),[SAVE_KEY,s]);await page.reload();};
+
+ // Options show exactly the selected hero's three design builds on both map and battle.
+ const expectedBuilds={"guardian":["分散要塞","継承","隔離"],"tuner":["増援","即応","精鋭"],"accelerator":["配信","記憶","読取分散"],"commander":["蓄積","再挑戦","機会活用"],"builder":["権限設計","閉域接続","再現構築"],"restorer":["保存","待機","観測"]};
+ for(const hero of Object.keys(HEROES)){
+  await load(newJourney(hero,123));
+  const before=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);
+  await page.click('[data-action="options"]');
+  assert.equal(await page.locator('[data-view="ビルド"]').count(),1);
+  await page.click('[data-view="ビルド"]');
+  const guide=page.locator('.character-build-guide');
+  assert.equal(await guide.getAttribute('data-character'),hero);
+  assert.deepEqual(await guide.locator('article h3').allTextContents(),expectedBuilds[hero].map((n,i)=>(i+1)+'. '+n));
+  assert.equal(await guide.locator('article').count(),3);
+  for(const width of [320,390,1024]){await page.setViewportSize({width,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.ok(await page.getByRole('dialog').evaluate(e=>e.scrollWidth<=e.clientWidth));}
+  await page.setViewportSize({width:390,height:844});
+  await page.click('[data-menu="back"]');assert.ok(await page.locator('[data-view="ビルド"]').isVisible());
+  await page.click('[data-menu="close"]');
+  assert.equal(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY),before);
+  assert.ok(await page.locator('[data-action="options"]').evaluate(e=>e===document.activeElement));
+ }
+ let buildBattle=transition(newJourney('guardian',123),{kind:'enter',scenario:'attack'});
+ await load(buildBattle);await page.click('[data-action="options"]');await page.click('[data-view="ビルド"]');
+ assert.deepEqual(await page.locator('.character-build-guide article h3').allTextContents(),expectedBuilds.guardian.map((n,i)=>(i+1)+'. '+n));
+ await page.setViewportSize({width:320,height:844});await page.screenshot({path:'/tmp/build-guide-mobile.png',fullPage:true});await page.keyboard.press('Escape');
+ assert.equal((await saved()).screen,'battle');
+ await page.evaluate(k=>localStorage.removeItem(k),SAVE_KEY);await page.reload();await page.setViewportSize({width:390,height:844});
+
  assert.equal(await page.locator('.hero-cylinder').getAttribute('data-selected'),'random');await page.locator('[data-chamber="5"]').click();await page.click('[data-action="new"]');assert.equal((await saved()).combat.hero,'builder');await page.waitForTimeout(3100);
  assert.ok(await page.locator('.build-floor.current').evaluate(e=>{const r=e.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0;}));await page.click('.build-floor.current [data-action="enter"]');assert.ok(await page.locator('.resources>strong').isVisible());assert.match(await page.locator('.resources>strong').textContent(),/72/);
  await page.locator('.hand .card:not([aria-disabled])').first().click();await page.waitForFunction(()=>document.querySelector('#game').getAttribute('aria-busy')!=='true');assert.ok((await saved()).combat.metrics.plays>0);const turnBefore=(await saved()).combat.turn;await page.evaluate(()=>{window.turnPopups=[];new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)if(n.nodeType===1&&n.classList.contains('turn-banner'))window.turnPopups.push(n.textContent);}).observe(document.body,{childList:true});});await page.click('[data-action="end"]');await page.locator('#game[aria-busy="false"]').waitFor();assert.equal((await saved()).combat.turn,turnBefore+1);assert.deepEqual(await page.evaluate(()=>window.turnPopups),['Equipment Turn・設備の行動','EC2：3ダメージ','Enemy Turn','Your Turn']);
@@ -41,5 +68,5 @@ try{
  assert.equal(await page.locator('.equipment-grid [data-threatened=true]').count(),1);assert.equal(await page.locator('.equipment-grid [data-object-kind=ec2]').count(),2);assert.equal(await page.locator('.intent [data-equipment-symbol=az]').count(),1);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'/tmp/equipment-targets.png',fullPage:true});
  await page.locator('[data-action=end]').click();await page.getByRole('status').filter({hasText:'EC2：3ダメージ'}).waitFor();assert.equal(await page.locator('.build-turn-banner [data-object-kind=ec2]').count(),1);await page.locator('#game[aria-busy="false"]').waitFor();assert.equal(await page.locator('.equipment-grid [data-status=stopped]').count(),1);
  visual.combat.data.healthy=false;await load(visual);assert.equal(await page.locator('.equipment-grid [data-status=corrupt]').count(),2);assert.equal(await page.locator('.equipment-data [data-equipment-symbol=corrupt]').count(),1);
- console.log('PASS revised adventure: 6 heroes, map, 30-card collection, details, legacy-save preservation, reward, upgrades, shop purchase, five slots, restore, reload, widths, promoted entry/bookmarks, build colours, elite reward/reload.');
+ console.log('PASS revised adventure: 6 heroes, selected-character 3-build guide on map/battle, unchanged guide save/focus, map, 30-card collection, details, legacy-save preservation, reward, upgrades, shop purchase, five slots, restore, reload, widths, promoted entry/bookmarks, build colours, elite reward/reload.');
 }finally{await browser?.close();await new Promise(r=>server.close(r));}

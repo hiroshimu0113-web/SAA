@@ -1,5 +1,5 @@
 import {icon} from './icons.mjs';
-const menuIcons={'デッキ':'cards','所持レリック':'choice','マップ':'map','役一覧':'combo','コレクション':'cards'};
+const menuIcons={'デッキ':'cards','所持レリック':'choice','マップ':'map','ビルド':'cards','役一覧':'combo','コレクション':'cards'};
 export function openOptions(root,views,actions={},title='冒険者',initialView=''){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
