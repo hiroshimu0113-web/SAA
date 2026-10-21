@@ -28,9 +28,13 @@ try{
   const guide=page.locator('.character-build-guide');
   assert.equal(await guide.getAttribute('data-character'),hero);
   assert.deepEqual(await guide.locator('article h3').allTextContents(),expectedBuilds[hero].map((n,i)=>(i+1)+'. '+n));
-  assert.equal(await guide.locator('article').count(),3);
+  assert.equal(await guide.locator(':scope > article').count(),3);
+  const expected=JSON.parse(await readFile('public/tower/build-adventure-content.json','utf8')).builds.filter(b=>b.characterId===hero);
+  for(const build of expected){const item=guide.locator('[data-build-id="'+build.id+'"]');assert.deepEqual(await item.locator('[data-inspect]').evaluateAll(es=>es.map(e=>e.dataset.id)),['キー','オプション','コネクション'].flatMap(role=>build.cards.filter(c=>c.role===role).map(c=>c.cardId)));assert.ok(await item.locator('[data-role="キー"] [data-inspect]').count()>0);}
+  const beforeDetail=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY),first=guide.locator('[data-inspect]').first();await first.focus();await page.keyboard.press('Enter');assert.ok(await page.locator('.options-card-detail').isVisible());await page.keyboard.press('Escape');assert.ok(await guide.isVisible());assert.equal(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY),beforeDetail);
   for(const width of [320,390,1024]){await page.setViewportSize({width,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.ok(await page.getByRole('dialog').evaluate(e=>e.scrollWidth<=e.clientWidth));}
   await page.setViewportSize({width:390,height:844});
+  const small=await guide.locator('.card').first().boundingBox();assert.ok(small.width>=44&&small.width<130);
   await page.click('[data-menu="back"]');assert.ok(await page.locator('[data-view="ビルド"]').isVisible());
   await page.click('[data-menu="close"]');
   assert.equal(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY),before);
@@ -39,7 +43,7 @@ try{
  let buildBattle=transition(newJourney('guardian',123),{kind:'enter',scenario:'attack'});
  await load(buildBattle);await page.click('[data-action="options"]');await page.click('[data-view="ビルド"]');
  assert.deepEqual(await page.locator('.character-build-guide article h3').allTextContents(),expectedBuilds.guardian.map((n,i)=>(i+1)+'. '+n));
- await page.setViewportSize({width:320,height:844});await page.screenshot({path:'/tmp/build-guide-mobile.png',fullPage:true});await page.keyboard.press('Escape');
+ await page.setViewportSize({width:320,height:844});const mini=page.locator('.character-build-guide [data-inspect]').first();await mini.scrollIntoViewIfNeeded();await mini.dispatchEvent('pointerdown',{pointerId:77,clientX:80,clientY:300,button:0});await page.waitForTimeout(550);await page.evaluate(()=>window.dispatchEvent(new PointerEvent('pointerup',{pointerId:77})));assert.ok(await page.locator('.options-card-detail').isVisible());await page.waitForTimeout(550);await page.keyboard.press('Escape');assert.ok(await page.locator('.character-build-guide').isVisible());await page.screenshot({path:'/tmp/build-guide-mobile.png',fullPage:true});await page.keyboard.press('Escape');
  assert.equal((await saved()).screen,'battle');
  await page.evaluate(k=>localStorage.removeItem(k),SAVE_KEY);await page.reload();await page.setViewportSize({width:390,height:844});
 

@@ -24,3 +24,5 @@ body{overflow-wrap:anywhere}#game{max-width:960px}select{font:inherit;max-width:
 
 /* Character build guide inside the shared options dialog. */
 .character-build-guide{overflow-wrap:anywhere}.character-build-guide>article{margin:14px 0;padding:14px;background:#142732;border:1px solid #445d68;border-left:4px solid var(--build-colour);border-radius:10px}.character-build-guide h3{margin:0 0 8px;font-size:18px;line-height:1.5}.character-build-guide article p{margin:0;line-height:1.8}
+
+.character-build-guide .build-card-group{margin-top:12px}.character-build-guide h4{font-size:13px;margin:0 0 7px;color:#cad8dc}.character-build-guide .options-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.character-build-guide .options-cards .card{min-height:112px}.character-build-guide .options-cards .card-title{font-size:11px;line-height:1.4}.character-build-guide .card-badges{font-size:11px}.character-build-guide .card-badges .ui-icon{width:14px;height:14px}
