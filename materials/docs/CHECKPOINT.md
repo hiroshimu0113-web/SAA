@@ -1014,3 +1014,7 @@
 - ユーザー依頼：オプションに「ビルド」を1項目追加し、現在のキャラの3ビルド名と狙いを表示。既存characterCardAllocation.buildsの18案を正本から抽出し、公開ゲームの選択キャラIDで絞り込む。新しい教材・ビルド定義・戦闘ルールは追加しない。
 - ソース：build-adventure-app.mjs/options-ui.mjs/build-adventure.css、export-build-adventure.mjsとbuild-adventure-content.json。6キャラ各3件の生成時検査、6キャラのメニュー/表示・マップ/戦闘・戻る/閉じる・保存不変・320/390/1024pxを公開CIで検証する。
 - 管理環境が起動待ちのためGitHub連携で変更をまとめた。ローカル検査は未実施。公開CI・Safari相当検査・実配信照合は続行。分類の新設や内容監査状態の変更はない。
+
+- 公開完了：d7712e7 / Actions 39691918658（再実行）で166テスト・新しい6キャラ各3ビルドのWebKit検査・全既存回帰・build/deploy/実配信照合に成功。tower/index.htmlとビルド説明JSONを含む公開ファイルのHTTP200・SHA256一致をCIで確認。https://hiroshimu0113-web.github.io/SAA/tower/index.html?v=d7712e7 。
+- 環境起動後にmainへ同期。ローカルbuild・生成JSON/progress照合・Chromium冒険回帰も成功。320pxのビルド画面を目視確認。初回CIは旧演出検査の10秒待ち時間超過で停止したが、局所Chromium検証と公開WebKitの再実行では再現せず通過。演出コードは変更していない。
+- 今回のメニュー追加・選択キャラの3ビルド表示・公開は完了。新しい教材/分類/戦闘ルール/セーブ形式の変更なし。
