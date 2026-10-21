@@ -7,7 +7,9 @@ export async function checkImpact(browser,base){
   const s=act(fixedRun(1),{type:'node',lane:0});s.hp=50;s.battle.enemy='noise';s.battle.hp=s.battle.maxHp=32;s.battle.playerBlock=block;s.battle.energy=energy;s.deck.find(c=>c.uid===s.battle.hand[0]).id='strike';
   await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key,s});await p.reload();await p.evaluate(()=>{window.impacts=[];document.addEventListener('animationstart',e=>{if(e.animationName==='screen-impact'||e.animationName==='screen-fixed-impact')window.impacts.push({name:e.animationName,target:e.target.id||e.target.className,hud:document.querySelector('.battle-hud').getBoundingClientRect().top,toast:document.querySelector('.combat-toast')?.getBoundingClientRect().top});});});
  };
- const idle=()=>p.locator('#game[aria-busy="false"]').waitFor();
+ // Rendering the full legacy catalogue can delay WebKit timers on shared CI runners.
+ // Keep the normal 30-second browser budget while retaining all timing/frame/state assertions.
+ const idle=async()=>{try{await p.locator('#game[aria-busy="false"]').waitFor({timeout:30000});}catch(error){const status=await p.evaluate(key=>({busy:document.querySelector('#game')?.getAttribute('aria-busy'),visibility:document.visibilityState,banners:[...document.querySelectorAll('.turn-banner')].map(e=>e.textContent),phase:JSON.parse(localStorage.getItem(key)||'null')?.phase}),key).catch(()=>({page:'unavailable'}));throw new Error('Impact presentation did not settle: '+JSON.stringify(status),{cause:error});}};
  const read=()=>p.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
  try{
  await p.goto(base+'tower/legacy.html');await load({block:3});await p.locator('.end-turn').tap();await idle();let hits=await p.evaluate(()=>window.impacts);
