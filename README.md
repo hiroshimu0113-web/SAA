@@ -2,6 +2,8 @@
 
 AWS Certified Solutions Architect – Associate（SAA-C03）を、日本語の教材と小さな設計ゲームで学ぶプロジェクトです。
 
+**開発・運用の引継ぎ： [包括引継書（2026-10-31）](materials/docs/HANDOVER.md)** — 最新の構成、完了範囲、残課題、次の作業、検証・公開手順。以下には初期段階の説明も残るため、現在の数量とゲーム状態は引継書・生成進捗表を参照してください。
+
 ## ここから始める
 
 **[学習アプリ・設計クエストを開く](https://hiroshimu0113-web.github.io/SAA/)** — iPhoneのSafariで開き、ホームの「設計クエストを遊ぶ」を選びます。
