@@ -1,0 +1,25 @@
+# Secrets and credentials (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+credentials*.json
+*.secret
+.aws/
+
+# Dependencies and build output
+node_modules/
+materials/node_modules/
+materials/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

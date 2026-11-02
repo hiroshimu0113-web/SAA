@@ -17,3 +17,4 @@
 - 2026-10-31：プッシュ先は `main` ブランチ。プロジェクトの入口は `materials/docs/HANDOVER.md`。
 - 2026-10-31：セッション間で会話の記憶は引き継がれない。引継ぎはリポジトリの記録（本ファイル、HANDOVER、CHECKPOINT、TASKS）で行う。
 - 作業環境では Chromium/Playwright で手元ビルドを起動して自動確認できる。iPhone 実機での操作感・表示の確認はユーザーに依頼する。
+- 2026-11-02：セキュリティ強化を実施。`.gitignore`・`SECURITY.md`・`.github/dependabot.yml` を追加。鍵や `.env` はコミットしない。GitHub 設定画面側の対策（`main` の force push／削除禁止、シークレットスキャンとプッシュ保護、Dependabot セキュリティ更新）はユーザーが実施予定。
