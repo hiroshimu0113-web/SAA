@@ -110,7 +110,7 @@ export default function App() {
   return <div className={`app ${largeText ? 'large-text' : ''}`}>
     <header className="site-header"><button className="brand" onClick={() => go('home')} aria-label="今日の学習へ"><span className="brand-mark">S</span><span>SAA 学習ノート<small>ひとつずつ、設計できる自分へ。</small></span></button><span className="edition">{release.label}</span></header>
     {saveError && <div className="banner error" role="alert">{saveError}<button onClick={downloadBackup}>記録を書き出す</button></div>}
-    {notice && <div className="banner" role="status">{notice}<button aria-label="お知らせを閉じる" onClick={() => setNotice('')}>×</button></div>}
+    {notice && <div className="banner" role="status"><button aria-label="お知らせを閉じる" onClick={() => setNotice('')}>×</button>{notice}</div>}
     <main id="main-content">
       {page === 'home' && <>
         <section className="hero"><div><p className="eyebrow">YOUR DAILY LEARNING</p><h1>今日の一歩が、<br />設計の力になる。</h1><p>読む、考える、振り返る。<br />1日25分のAWS学習を、ここから。</p><button className="primary" onClick={() => { go('text'); setLessonId(allLessons.find(l => !progress.readLessons.includes(l.id))?.id ?? allLessons[0]?.id ?? null); }}>今日のテキストを読む <span>→</span></button></div><div className="hero-art" aria-hidden="true"><span className="cloud">☁</span><div className="architecture"><i>AZ 1</i><i>AZ 2</i></div><div className="architecture-line" /><b>AWS ARCHITECTURE</b></div></section>

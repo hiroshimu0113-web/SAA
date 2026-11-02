@@ -23,7 +23,7 @@ export function openStudy(root){
  let pack=chooseStudyCatalog(bundled,localStorage),p,error='',broken=false;
  try{p=loadStudy(localStorage);}catch(e){p=emptyStudy();error=e.message;broken=true;}
  const focus=document.activeElement,overflow=document.body.style.overflow,hidden=root.getAttribute('aria-hidden');
- const overlay=document.createElement('div');overlay.className='options-overlay study-overlay';overlay.innerHTML='<section class="study-dialog" role="dialog" aria-modal="true" aria-labelledby="study-title"><header><h2 id="study-title">学習室</h2><button data-study="close" aria-label="学習室を閉じる">×</button></header><div class="study-body"></div></section>';
+ const overlay=document.createElement('div');overlay.className='options-overlay study-overlay';overlay.innerHTML='<section class="study-dialog" role="dialog" aria-modal="true" aria-labelledby="study-title"><header><button data-study="close" aria-label="学習室を閉じる">×</button><h2 id="study-title">学習室</h2></header><div class="study-body"></div></section>';
  const body=overlay.querySelector('.study-body');let filter='all',domain='all',skill='all',level='all',page=0,view='home';
  root.inert=true;root.setAttribute('aria-hidden','true');document.body.style.overflow='hidden';document.body.append(overlay);
  const button=(text,action,attrs='')=>'<button data-study="'+action+'" '+attrs+'>'+text+'</button>';

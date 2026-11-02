@@ -3,7 +3,7 @@ const menuIcons={'デッキ':'cards','所持レリック':'choice','マップ':'
 export function openOptions(root,views,actions={},title='冒険者',initialView=''){
  const focus=document.activeElement,overflow=document.body.style.overflow;
  const overlay=document.createElement('div');overlay.className='options-overlay';
- overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="back" hidden>戻る</button><h2 id="options-title"></h2><button data-menu="close" aria-label="オプションを閉じる"><span aria-hidden="true">×</span></button></header><div class="options-content"></div></section>';
+ overlay.innerHTML='<section class="options-dialog" role="dialog" aria-modal="true" aria-labelledby="options-title"><header><button data-menu="close" aria-label="オプションを閉じる"><span aria-hidden="true">×</span></button><h2 id="options-title"></h2><button data-menu="back" hidden>戻る</button></header><div class="options-content"></div></section>';
  const content=overlay.querySelector('.options-content'),heading=overlay.querySelector('h2'),back=overlay.querySelector('[data-menu=back]'),panel=overlay.querySelector('.options-dialog');
  const priorHidden=root.getAttribute('aria-hidden');root.setAttribute('aria-hidden','true');root.inert=true;document.body.style.overflow='hidden';
  let view='',detail=null,hold=null,pointer=null,suppressUntil=0;
