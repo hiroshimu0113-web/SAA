@@ -14,6 +14,7 @@ const scenarios={attack:'通信攻撃',equipment:'設備停止',data:'データ�
 const colours=BUILD_COLOURS;
 let choosing=false,disposeCylinder=null;
 let state=null,error='',busy=false,disposeFan=null,lastScreen='',selection='',pointer=null,hold=null,suppressUntil=0;
+try{if(sessionStorage.getItem('saa-build-adventure-open-chooser')){sessionStorage.removeItem('saa-build-adventure-open-chooser');choosing=true;}}catch{}
 try{const raw=localStorage.getItem(SAVE_KEY);if(raw)state=validateJourney(JSON.parse(raw));}catch{error='保存を読み込めません。元の記録を上書きせず保管しています。新しく始める場合は下のボタンを押してください。';}
 const btn=(label,kind,attrs='',disabled=false)=>`<button data-action="${kind}" ${attrs} ${disabled?'disabled':''}>${label}</button>`;
 const relicName=id=>catalog.vocabulary.relics[id]?.name||id;
@@ -38,7 +39,29 @@ function options(){const c=state.combat;openOptions(root,{
  'デッキ':()=>collection(c.deck),'所持レリック':()=>state.relics.length?state.relics.map(id=>`<p><b>${icon(id)}${esc(relicName(id))}</b><br>${RELICS[id].text}</p>`).join(''):'<p>まだ所持していません。交換所や？マスで獲得できます。</p>',
  'マップ':()=>mapHTML(false),'ビルド':()=>buildGuide(c.hero),'役一覧':()=>Object.entries(ROLES).map(([h,r])=>`<h3>${r.name}（${HEROES[h].name}）</h3><p>${r.condition} 同じ戦闘で3種類を使用し、状態成立で1回発動。${r.damage}攻撃・${r.block}防御。</p>`+collection(HEROES[h].dedicated.map(id=>({id,uid:id,up:false})))).join(''),
  'コレクション':()=>'<div class="build-legend">'+Object.entries(colours).map(([h,color])=>'<span style="--build-colour:'+color+'">'+(HEROES[h]?.name||'共通')+'</span>').join('')+'</div>'+collection(allCards())
- },{'はじめから':()=>{choosing=true;render();return true;},'記録を保存':()=>{download();return false;},'従来の冒険':()=>{location.href='./legacy.html';return true;}},HEROES[c.hero].name);}
+ },{'はじめから':()=>{restart();return true;},'設定・更新':()=>{location.href=settingsURL;return true;},'記録を保存':()=>{download();return false;},'従来の冒険':()=>{location.href='./legacy.html';return true;}},HEROES[c.hero].name);}
+const CHOOSER_FLAG='saa-build-adventure-open-chooser';
+const settingsURL=new URL('../?page=settings',location.href).href;
+function waitFor(promise,ms){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),ms))]);}
+function swMessage(worker,type){return waitFor(new Promise(resolve=>{const ch=new MessageChannel();ch.port1.onmessage=e=>{ch.port1.close();resolve(e.data);};worker.postMessage({type},[ch.port2]);}),15000);}
+function updateStatus(text){let el=document.querySelector('.update-status');if(!text){el?.remove();return;}if(!el){el=document.createElement('aside');el.className='turn-banner build-turn-banner update-status';el.setAttribute('role','status');document.body.append(el);}el.innerHTML='<span>'+esc(text)+'</span>';}
+// 「はじめから」で新しい版があれば取得・適用して再読込する。失敗時は現行版のまま続行する。
+async function applyUpdateIfAvailable(){
+ if(!('serviceWorker'in navigator)||!navigator.onLine||!navigator.serviceWorker.controller)return false;
+ const reg=await navigator.serviceWorker.getRegistration().catch(()=>null);if(!reg)return false;
+ updateStatus('更新を確認しています…');
+ try{
+  await waitFor(reg.update(),10000);
+  if(reg.installing){updateStatus('新しい版を取得しています…');const w=reg.installing;await waitFor(new Promise((resolve,reject)=>{const check=()=>{if(w.state==='installed'||w.state==='activated')resolve();else if(w.state==='redundant')reject(Error('redundant'));};w.addEventListener('statechange',check);check();}),60000);}
+  const waiting=reg.waiting;if(!waiting)return false;
+  if(!(await swMessage(waiting,'VERIFY'))?.ok)return false;
+  updateStatus('新しい版に切り替えています…');
+  await waitFor(new Promise(resolve=>{navigator.serviceWorker.addEventListener('controllerchange',resolve,{once:true});waiting.postMessage({type:'ACTIVATE'});}),15000);
+  return true;
+ }catch{return false;}finally{updateStatus('');}
+}
+let restarting=false;
+async function restart(){if(restarting)return;restarting=true;busy=true;try{if(await applyUpdateIfAvailable()){try{sessionStorage.setItem(CHOOSER_FLAG,'1');}catch{}location.reload();return;}}finally{busy=false;restarting=false;}choosing=true;render();}
 function download(){const url=URL.createObjectURL(new Blob([JSON.stringify(state)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='saa-build-adventure.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function start(hero){choosing=false;const seed=crypto.getRandomValues(new Uint32Array(1))[0];state=newJourney(hero,seed);state.catalogVersion=catalog.version;selection='';lastScreen='';save();render();const popup=document.createElement('aside');popup.className='hero-arrival';popup.innerHTML=buildPortrait(state.combat.hero)+`<small>今回の主人公</small><strong>${HEROES[state.combat.hero].name}</strong><p>基本EC2・正常データを携えて出発</p>`;document.body.append(popup);setTimeout(()=>popup.remove(),3000);}
 const EQUIPMENT_NOTES={ec2:'Amazon EC2：AWS上の仮想サーバー。1つのAZで動くため、そのAZが止まると影響を受けます。',spot:'スポットインスタンス：空き容量を割安に使う代わりに、AWS側の都合で中断されることがあります。',rds:'Amazon RDS マルチAZ：別のAZに待機系を置き、障害時に自動で切り替えます。',replica:'リードレプリカ：読取りを分散する複製。書込みは主DBが担当し、反映に遅れが出ることがあります。',sqs:'Amazon SQS：仕事をキューにためて、受付側と処理側を切り離します。','pilot-light':'パイロットライト：最小限の中核だけを常時動かし、災害時に本番規模へ広げる復旧方式です。'};
@@ -69,7 +92,7 @@ function render(){const previous=root.querySelector('.hand'),key=state?state.com
  if(choosing||!state){root.innerHTML=cylinderHTML(Boolean(state))+`${error?'<p class="warning">'+esc(error)+'</p>':''}<footer><a href="./legacy.html">旧カードの冒険・保存記録</a></footer>`;disposeCylinder=mountCylinder(root,{onStart:start,onResume:()=>{choosing=false;render();}});window.scrollTo(0,0);return;}
 
  const c=state.combat,header=`<header class="run-header">${btn(icon('menu'),'options','class="header-options" aria-label="オプション"')}<div class="header-title"><small>REVISION 3</small><h1>${state.screen==='battle'?HEROES[c.hero].name:'クラウドの尖塔'}</h1></div><div class="resources"><strong>${icon('heart')}${c.hp}/72</strong><span>${icon('coin')}${c.coins} ${c.floor}/8 F</span>${state.screen==='battle'?`<span>${icon('energy')}${c.energy} ${icon('shield')}${c.guard}</span>`:''}</div></header>`;
- root.innerHTML=header+`<section class="scene">${scene()}</section><p id="save-notice" role="status">${esc(error||'自動保存済み')}</p><details class="log"><summary>直近の処理</summary>${c.logs.map(t=>`<p>${esc(t)}</p>`).join('')}</details><footer><a href="../design/card-effects-proposal.html#balance3">カード案・ルール</a> <a href="./legacy.html">従来の冒険</a><label class="import">記録を読み込む<input id="import-build" type="file" accept=".json"></label></footer>`;
+ root.innerHTML=header+`<section class="scene">${scene()}</section><p id="save-notice" role="status">${esc(error||'自動保存済み')}</p><details class="log"><summary>直近の処理</summary>${c.logs.map(t=>`<p>${esc(t)}</p>`).join('')}</details><footer><a href="../design/card-effects-proposal.html#balance3">カード案・ルール</a> <a href="./legacy.html">従来の冒険</a> <a href="${settingsURL}">設定・更新</a><label class="import">記録を読み込む<input id="import-build" type="file" accept=".json"></label></footer>`;
  const hand=root.querySelector('.hand');if(hand){hand.dataset.turnKey=key;disposeFan=mountFanHand(hand,{scrollLeft:offset});}
  if(state.screen==='map'&&lastScreen!=='map')requestAnimationFrame(()=>root.querySelector('.build-floor.current')?.scrollIntoView({block:'end'}));
  if(lastScreen!==state.screen&&state.screen!=='map')window.scrollTo(0,0);lastScreen=state.screen;root.setAttribute('aria-busy',String(busy));
@@ -98,6 +121,6 @@ for(const event of ['pointerup','pointercancel','blur'])window.addEventListener(
 function findCard(b){return state?.combat.hand.concat(state.combat.deck).find(c=>c.uid===b.dataset.uid)||{id:b.dataset.id,uid:b.dataset.uid,up:false};}
 root.addEventListener('contextmenu',e=>{const b=e.target.closest('.card');if(b){e.preventDefault();if(!busy)inspect(findCard(b));}});
 root.addEventListener('keydown',e=>{if(e.key==='ContextMenu'||(e.shiftKey&&e.key==='F10')){const b=e.target.closest('.card');if(b){e.preventDefault();inspect(findCard(b));}}});
-root.addEventListener('click',e=>{if(root.querySelector('.hero-cylinder'))return;if(busy||Date.now()<suppressUntil||document.querySelector('.options-overlay'))return;const pet=e.target.closest('[data-companion]');if(pet){openCompanion();return;}const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const kind=b.dataset.action;if(kind==='new'){choosing=true;render();return;}if(kind==='options'){options();return;}if(kind==='select'){selection=selection===b.dataset.id?'':b.dataset.id;render();return;}if(b.getAttribute('aria-disabled')==='true'){inspect(findCard(b));return;}dispatch({kind,id:b.dataset.id,uid:b.dataset.uid,snapshot:b.dataset.snapshot,scenario:b.dataset.scenario,choice:b.dataset.choice===undefined?undefined:Number(b.dataset.choice),revision:Number(b.dataset.revision)});});
+root.addEventListener('click',e=>{if(root.querySelector('.hero-cylinder'))return;if(busy||Date.now()<suppressUntil||document.querySelector('.options-overlay'))return;const pet=e.target.closest('[data-companion]');if(pet){openCompanion();return;}const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const kind=b.dataset.action;if(kind==='new'){restart();return;}if(kind==='options'){options();return;}if(kind==='select'){selection=selection===b.dataset.id?'':b.dataset.id;render();return;}if(b.getAttribute('aria-disabled')==='true'){inspect(findCard(b));return;}dispatch({kind,id:b.dataset.id,uid:b.dataset.uid,snapshot:b.dataset.snapshot,scenario:b.dataset.scenario,choice:b.dataset.choice===undefined?undefined:Number(b.dataset.choice),revision:Number(b.dataset.revision)});});
 root.addEventListener('change',async e=>{if(e.target.id!=='import-build'||busy)return;const f=e.target.files?.[0];if(!f)return;try{if(f.size>2000000)throw Error('ファイルが大きすぎます');const next=validateJourney(JSON.parse(await f.text()));state=next;save();lastScreen='';render();}catch(err){error='読込失敗：'+err.message;render();}});
 render();

@@ -47,7 +47,7 @@ export default function App() {
     try { const value = await loadProgress(); current.current = value; setProgress(value); setLoaded(true); }
     catch { setLoadError('学習記録を読み込めませんでした。保存領域の設定を確認し、再試行してください。'); }
   }
-  useEffect(() => { void initialize(); const id = new URLSearchParams(location.search).get('practice'); const target = questions.find(q => q.id === id && !q.exam); if (target) { setPage('quiz'); openQuestion(target); setUnsure(true); } }, []);
+  useEffect(() => { void initialize(); const params = new URLSearchParams(location.search); if (params.get('page') === 'settings') setPage('settings'); const id = params.get('practice'); const target = questions.find(q => q.id === id && !q.exam); if (target) { setPage('quiz'); openQuestion(target); setUnsure(true); } }, []);
   function update(change: (value: Progress) => Progress) {
     const next = change(current.current); current.current = next; setProgress(next);
     unsaved.current = true;
