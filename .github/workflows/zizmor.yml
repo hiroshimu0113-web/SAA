@@ -1,0 +1,28 @@
+name: zizmor
+
+# GitHub Actions の workflow 自体の脆弱な書き方 (権限過多・インジェクション等) を静的検査する
+# 既定は advanced-security: false (結果をログに出し、指摘があれば失敗)。どのプランでも動く。
+# public リポジトリで Security タブに結果を出したい場合は advanced-security を true にし、
+# job の permissions に security-events: write を追加する。
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/**"]
+  pull_request:
+    paths: [".github/workflows/**"]
+
+permissions: {}
+
+jobs:
+  zizmor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1
+        with:
+          advanced-security: false
