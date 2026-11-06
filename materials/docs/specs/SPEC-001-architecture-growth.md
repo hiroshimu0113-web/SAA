@@ -1,6 +1,6 @@
 # SPEC-001 設備の見直し：「構成」を育てる冒険へ
 
-- 状態：**提案（ユーザー判断待ち）**。実装には未着手。
+- 状態：**却下（2026-11-06）**。ユーザー判断：ローグライクとして毎回弱い状態から育てる方針であり、引き継ぎはキャラ変更時のずれも生む。面白さの課題は仕組みの複雑さにある。後継は [SPEC-002](SPEC-002-combat-simplification.md)。本書は経緯として残す。
 - 作成：2026-11-06 JST（設計担当チャット）。別モデルのレビュー1回を反映済み（§11）。
 - 対象：カード冒険（`tower/index.html`、改訂3・30形態・6系統）
 - 関連：[BUILD_ADVENTURE_RELEASE.md](../BUILD_ADVENTURE_RELEASE.md)、[CARD_EFFECTS_REVISION3_RESPONSE.md](../CARD_EFFECTS_REVISION3_RESPONSE.md)、`public/tower/build-lab-engine.mjs`、`build-adventure-engine.mjs`、`build-adventure-app.mjs`

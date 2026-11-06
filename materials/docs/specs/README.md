@@ -4,4 +4,5 @@
 
 | 番号 | 題名 | 状態 |
 |---|---|---|
-| [SPEC-001](SPEC-001-architecture-growth.md) | 設備の見直し：「構成」を育てる冒険へ | 提案（ユーザー判断待ち） |
+| [SPEC-001](SPEC-001-architecture-growth.md) | 設備の見直し：「構成」を育てる冒険へ | 却下（後継SPEC-002） |
+| [SPEC-002](SPEC-002-combat-simplification.md) | 戦闘ルールの簡素化 | 方針の提案（ユーザーの選択待ち） |
